@@ -26,8 +26,12 @@
           <option name="url" value="http://github.com" />
           <option name="userName" value="kareem_chehab@hotmail.com" />
         </UrlAndUserName>
+        <UrlAndUserName>
+          <option name="url" value="https://github.com/Karim94/MacroTracker.git" />
+          <option name="userName" value="" />
+        </UrlAndUserName>
       </list>
     </option>
-    <option name="cloneParentDir" value="C:\Users\Kareem\AndroidStudioProjects\Enqath" />
+    <option name="cloneParentDir" value="C:\Users\Kareem\AndroidStudioProjects" />
   </component>
 </application>
