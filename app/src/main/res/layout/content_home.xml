@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.kareem.macrotracker.HomeActivity"
+    tools:showIn="@layout/activity_home">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="C"
+                    android:id="@+id/Label_Carbs"
+                    android:textStyle="bold"
+                    android:textColor="#f9e01e"
+                    android:layout_weight="1"
+                    android:layout_column="1"
+                    android:layout_marginLeft="20dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="P"
+                    android:id="@+id/Label_Protein"
+                    android:textStyle="bold"
+                    android:textColor="#d42727"
+                    android:layout_weight="1"
+                    android:layout_column="2" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="F"
+                    android:id="@+id/Label_Fat"
+                    android:textStyle="bold"
+                    android:textColor="#17a900"
+                    android:layout_weight="1"
+                    android:layout_column="3" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Goal"
+                    android:id="@+id/Label_Goal"
+                    android:layout_gravity="left|center"
+                    android:textStyle="bold"
+                    android:layout_column="0" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:id="@+id/Text_CarbsGoal"
+                    android:text="100"
+                    android:layout_weight="1"
+                    android:layout_column="1"
+                    android:layout_marginLeft="20dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:id="@+id/Text_ProteinGoal"
+                    android:text="100"
+                    android:layout_weight="1"
+                    android:layout_column="2" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:id="@+id/Text_FatGoal"
+                    android:text="100"
+                    android:layout_weight="1"
+                    android:layout_column="3" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Left"
+                    android:id="@+id/Label_Left"
+                    android:layout_gravity="left|center"
+                    android:textColor="#009dff"
+                    android:textStyle="bold"
+                    android:layout_column="0" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:id="@+id/Text_CarbsLeft"
+                    android:text="100"
+                    android:textColor="#f9e01e"
+                    android:layout_weight="1"
+                    android:layout_column="1"
+                    android:layout_marginLeft="20dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:id="@+id/Text_ProteinLeft"
+                    android:text="100"
+                    android:textColor="#d42727"
+                    android:layout_weight="1"
+                    android:layout_column="2" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:id="@+id/Text_FatLeft"
+                    android:text="100"
+                    android:textColor="#17a900"
+                    android:layout_weight="1"
+                    android:layout_column="3" />
+            </TableRow>
+        </TableLayout>
+
+        <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="365dp"
+            android:id="@+id/ListView_Meals"
+            android:fastScrollEnabled="false" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Add Saved Meal"
+                android:id="@+id/Button_AddSavedMeal"
+                android:layout_weight="1" />
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Add New Meal"
+                android:id="@+id/Button_AddNewMeal"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</RelativeLayout>
