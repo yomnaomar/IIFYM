@@ -21,6 +21,10 @@
             android:title="Fat"
             android:inputType="number"
             android:defaultValue="@string/FatPreferenceDefault"/>
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:title="Daily Notifications"
+            android:key="check_box_preference_1" />
 
     </PreferenceCategory>
 </PreferenceScreen>

@@ -10,6 +10,34 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <Button
+            android:text="Finish"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/button"
+            tools:layout_constraintRight_creator="1"
+            tools:layout_constraintBottom_creator="1"
+            android:layout_marginStart="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintRight_toRightOf="parent"
+            tools:layout_constraintLeft_creator="1"
+            android:layout_marginBottom="6dp"
+            app:layout_constraintLeft_toLeftOf="parent" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="10"
+            android:id="@+id/editText"
+            tools:layout_constraintBottom_creator="1"
+            app:layout_constraintBottom_toTopOf="@+id/editText2"
+            tools:layout_constraintLeft_creator="1"
+            android:layout_marginBottom="7dp"
+            app:layout_constraintLeft_toLeftOf="@+id/editText2"
+            android:hint="00%" />
+
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -84,31 +112,11 @@
             android:id="@+id/textView6"
             android:textAlignment="textEnd"
             android:layout_width="0dp"
-            tools:layout_constraintRight_creator="1"
             android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintRight_toRightOf="@+id/editText"
             app:layout_constraintBaseline_toBaselineOf="@+id/editText2"
             tools:layout_constraintBaseline_creator="1"
             tools:layout_constraintLeft_creator="1"
             app:layout_constraintLeft_toLeftOf="parent" />
-
-        <EditText
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:inputType="number"
-            android:ems="10"
-            android:id="@+id/editText"
-            android:hint="00%"
-            tools:layout_constraintTop_creator="1"
-            tools:layout_constraintBottom_creator="1"
-            android:layout_marginStart="66dp"
-            app:layout_constraintBottom_toBottomOf="@+id/textView6"
-            android:layout_marginTop="75dp"
-            tools:layout_constraintLeft_creator="1"
-            android:layout_marginBottom="77dp"
-            app:layout_constraintLeft_toLeftOf="@+id/goalSpinner"
-            app:layout_constraintTop_toTopOf="@+id/goalSpinner" />
 
         <TextView
             android:text="% Carbs"
@@ -118,10 +126,12 @@
             android:textAlignment="textEnd"
             tools:layout_constraintRight_creator="1"
             app:layout_constraintRight_toRightOf="@+id/textView7"
-            app:layout_constraintBaseline_toBaselineOf="@+id/editText"
-            tools:layout_constraintBaseline_creator="1"
             tools:layout_constraintLeft_creator="1"
-            app:layout_constraintLeft_toLeftOf="@+id/textView6" />
+            app:layout_constraintLeft_toLeftOf="@+id/textView6"
+            app:layout_constraintHorizontal_bias="0.0"
+            tools:layout_constraintBottom_creator="1"
+            app:layout_constraintBottom_toBottomOf="@+id/editText"
+            android:layout_marginBottom="11dp" />
 
         <Spinner
             android:layout_width="0dp"
