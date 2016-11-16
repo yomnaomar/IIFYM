@@ -5,7 +5,7 @@ import com.example.kareem.macrotracker.ViewComponents.User;
 
 public interface myFragEventListerner {
     //insert methods
-    void insertUser(User user);
+    void insertUser(User user);//
 
 
 
