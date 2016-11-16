@@ -8,6 +8,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 
 import com.example.kareem.macrotracker.R;
 
@@ -20,18 +22,30 @@ import com.example.kareem.macrotracker.R;
  * Use the {@link Signupfrag#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Signupfrag extends Fragment {
+public class Signupfrag extends Fragment implements View.OnClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    private myFragEventListerner listener;
+    private myFragEventListener listener;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+
+
+    //GUI vars ----------------------------------
+    View myView;
+    EditText username,pass;
+    Button login,register;
+
+
+
+
+
+    //GUI vars ----------------------------------
 
     public Signupfrag() {
         // Required empty public constructor
@@ -67,8 +81,42 @@ public class Signupfrag extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        myView = inflater.inflate(R.layout.fragment_sublogin1, container, false);
         // Inflate the layout for this fragment
+        username = (EditText)myView.findViewById(R.id.usernamefield);
+        pass = (EditText)myView.findViewById(R.id.passfield);
+        login = (Button)myView.findViewById(R.id.loginbtn);
+        register = (Button)myView.findViewById(R.id.registerbtn);
+
+        login.setOnClickListener(this);
+        register.setOnClickListener(this);
+
+
+
+
+
+
+
+
+
+
+
+
         return inflater.inflate(R.layout.fragment_sublogin1, container, false);
+
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.loginbtn:
+                listener.userLogin(username.getText().toString(),pass.getText().toString());
+                break;
+            case R.id.registerbtn:
+                listener.userReg(username.getText().toString(),pass.getText().toString());
+                break;
+        }
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -82,8 +130,8 @@ public class Signupfrag extends Fragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        if(activity instanceof myFragEventListerner) {
-            listener = (myFragEventListerner) activity;
+        if(activity instanceof myFragEventListener) {
+            listener = (myFragEventListener) activity;
         } else {
             Log.d("FragmentEvent","Activity not attached to fragment");
         }

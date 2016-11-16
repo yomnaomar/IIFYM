@@ -11,7 +11,7 @@
         android:layout_height="match_parent">
 
         <Button
-            android:text="Register"
+            android:text="New User"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/registerbtn"
@@ -78,6 +78,7 @@
         android:textSize="30sp"
         android:textStyle="normal|bold"
         android:textAlignment="center"
-        android:typeface="sans" />
+        android:typeface="sans"
+        android:id="@+id/title_login1" />
 
 </FrameLayout>

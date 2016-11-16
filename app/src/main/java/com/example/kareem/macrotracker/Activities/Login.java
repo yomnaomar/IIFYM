@@ -10,10 +10,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.kareem.macrotracker.Database.DatabaseConnector;
+import com.example.kareem.macrotracker.Database.DatabaseHelper;
 import com.example.kareem.macrotracker.R;
+import com.example.kareem.macrotracker.ViewComponents.LockableViewPager;
 import com.example.kareem.macrotracker.ViewComponents.User;
 
-public class Login extends AppCompatActivity implements myFragEventListerner {
+public class Login extends AppCompatActivity implements myFragEventListener {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -28,7 +31,8 @@ public class Login extends AppCompatActivity implements myFragEventListerner {
     /**
      * The {@link ViewPager} that will host the section contents.
      */
-    private ViewPager mViewPager;
+    private LockableViewPager mViewPager;
+    private DatabaseConnector My_DB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,11 +48,12 @@ public class Login extends AppCompatActivity implements myFragEventListerner {
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-
         // Set up the ViewPager with the sections adapter.
-        mViewPager = (ViewPager) findViewById(R.id.container);
+        mViewPager = (LockableViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
+        mViewPager.setSwipeable(false); //disable swiping with gestures ( this will lock the view and restrict moving to buttons only)
 
+        My_DB = new DatabaseConnector(getApplicationContext());
 
     }
 
@@ -165,16 +170,20 @@ public class Login extends AppCompatActivity implements myFragEventListerner {
 
     //TODO (Abdulwahab) : all listener functions for user signup fragments ---------------------
 
-
     @Override
     public void insertUser(User user) {
         //get all user details and send to DB
     }
 
-
-
-
-
+    @Override
+    public void userLogin(String username, String password) {
+        //check if user exists when trying to login (check credentials)
+        My_DB.getUser(username);
+    }
+    @Override
+    public void userReg(String username,String password) {
+        //first check if user exists , if not , proceed with method and create new User. If User exists then log them in by calling userLogin.
+    }
 
 
 

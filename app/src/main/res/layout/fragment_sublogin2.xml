@@ -17,7 +17,7 @@
             android:textAlignment="center"
             android:textSize="30sp"
             android:textStyle="normal|bold"
-            android:id="@+id/textView4"
+            android:id="@+id/title_login2"
             tools:layout_constraintTop_creator="1"
             tools:layout_constraintRight_creator="1"
             app:layout_constraintRight_toRightOf="parent"
@@ -90,7 +90,7 @@
             tools:layout_constraintLeft_creator="1"
             android:layout_marginBottom="4dp"
             app:layout_constraintLeft_toLeftOf="@+id/lnamefield"
-            app:layout_constraintTop_toBottomOf="@+id/textView4" />
+            app:layout_constraintTop_toBottomOf="@+id/title_login2" />
 
         <Spinner
             android:layout_width="0dp"

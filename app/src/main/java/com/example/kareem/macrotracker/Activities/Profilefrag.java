@@ -25,7 +25,7 @@ public class Profilefrag extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    private myFragEventListerner listener;
+    private myFragEventListener listener;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -82,8 +82,8 @@ public class Profilefrag extends Fragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        if(activity instanceof myFragEventListerner) {
-            listener = (myFragEventListerner) activity;
+        if(activity instanceof myFragEventListener) {
+            listener = (myFragEventListener) activity;
         } else {
             Log.d("FragmentEvent","Activity not attached to fragment");
         }
