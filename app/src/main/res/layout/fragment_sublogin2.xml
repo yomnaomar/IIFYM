@@ -6,191 +6,198 @@
     tools:context="com.example.kareem.macrotracker.Activities.Profilefrag">
 
     <!-- TODO: Update blank fragment layout -->
-    <android.support.constraint.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:id="@+id/scrollview">
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="47dp"
-            android:text="@string/frag2text"
-            android:textAlignment="center"
-            android:textSize="30sp"
-            android:textStyle="normal|bold"
-            android:id="@+id/title_login2"
-            tools:layout_constraintTop_creator="1"
-            tools:layout_constraintRight_creator="1"
-            app:layout_constraintRight_toRightOf="parent"
-            android:layout_marginTop="7dp"
-            tools:layout_constraintLeft_creator="1"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <Button
-            android:text="Next"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/nextbtn"
-            android:textAlignment="center"
-            tools:layout_constraintTop_creator="1"
-            tools:layout_constraintRight_creator="1"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintRight_toRightOf="parent"
-            android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="parent"
-            tools:layout_constraintLeft_creator="1"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintBottom_toBottomOf="@+id/emailfield" />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:text="@string/frag2text"
+                android:textAlignment="center"
+                android:textSize="30sp"
+                android:textStyle="normal|bold"
+                android:id="@+id/title_login2"
+                tools:layout_constraintTop_creator="1"
+                tools:layout_constraintRight_creator="1"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginTop="7dp"
+                tools:layout_constraintLeft_creator="1"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"
-            android:ems="10"
-            android:id="@+id/emailfield"
-            android:hint="Email"
-            tools:layout_constraintRight_creator="1"
-            tools:layout_constraintBottom_creator="1"
-            android:layout_marginStart="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintRight_toRightOf="@+id/unit_weight"
-            tools:layout_constraintLeft_creator="1"
-            android:layout_marginBottom="56dp"
-            app:layout_constraintLeft_toLeftOf="@+id/nextbtn" />
+            <Button
+                android:text="Next"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/nextbtn"
+                android:textAlignment="center"
+                tools:layout_constraintTop_creator="1"
+                tools:layout_constraintRight_creator="1"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="parent"
+                tools:layout_constraintLeft_creator="1"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/emailfield" />
 
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:ems="10"
-            android:id="@+id/lnamefield"
-            android:hint="Last Name"
-            tools:layout_constraintRight_creator="1"
-            tools:layout_constraintBottom_creator="1"
-            app:layout_constraintBottom_toTopOf="@+id/dobfield"
-            app:layout_constraintRight_toRightOf="@+id/dobfield"
-            tools:layout_constraintLeft_creator="1"
-            android:layout_marginBottom="112dp"
-            app:layout_constraintLeft_toLeftOf="@+id/dobfield"
-            app:layout_constraintHorizontal_bias="0.0" />
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:ems="10"
+                android:id="@+id/emailfield"
+                android:hint="Email"
+                tools:layout_constraintRight_creator="1"
+                tools:layout_constraintBottom_creator="1"
+                android:layout_marginStart="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintRight_toRightOf="@+id/unit_weight"
+                tools:layout_constraintLeft_creator="1"
+                android:layout_marginBottom="56dp"
+                app:layout_constraintLeft_toLeftOf="@+id/nextbtn" />
 
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:ems="10"
-            android:id="@+id/fnamefield"
-            android:hint="First Name"
-            tools:layout_constraintRight_creator="1"
-            tools:layout_constraintBottom_creator="1"
-            app:layout_constraintBottom_toTopOf="@+id/lnamefield"
-            app:layout_constraintRight_toRightOf="@+id/lnamefield"
-            tools:layout_constraintLeft_creator="1"
-            android:layout_marginBottom="4dp"
-            app:layout_constraintLeft_toLeftOf="@+id/lnamefield"
-            app:layout_constraintTop_toBottomOf="@+id/title_login2" />
-
-        <Spinner
-            android:layout_width="0dp"
-            android:layout_height="41dp"
-            android:id="@+id/unit_height"
-            tools:layout_constraintRight_creator="1"
-            tools:layout_constraintBottom_creator="1"
-            app:layout_constraintBottom_toTopOf="@+id/unit_weight"
-            app:layout_constraintRight_toRightOf="@+id/unit_weight"
-            tools:layout_constraintLeft_creator="1"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintLeft_toLeftOf="@+id/unit_weight"
-            app:layout_constraintHorizontal_bias="0.0" />
-
-        <Spinner
-            android:layout_width="97dp"
-            android:layout_height="0dp"
-            android:id="@+id/unit_weight"
-            tools:layout_constraintTop_creator="1"
-            tools:layout_constraintBottom_creator="1"
-            app:layout_constraintBottom_toTopOf="@+id/emailfield"
-            android:layout_marginStart="16dp"
-            tools:layout_constraintLeft_creator="1"
-            app:layout_constraintTop_toTopOf="@+id/weightfield"
-            app:layout_constraintLeft_toRightOf="@+id/weightfield"
-            app:layout_constraintVertical_bias="0.0"
-            android:layout_marginBottom="24dp" />
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="numberDecimal"
-            android:ems="10"
-            android:id="@+id/heightfield"
-            android:hint="height"
-            tools:layout_constraintBottom_creator="1"
-            app:layout_constraintBottom_toTopOf="@+id/weightfield"
-            android:layout_marginStart="16dp"
-            tools:layout_constraintLeft_creator="1"
-            android:layout_marginBottom="12dp"
-            app:layout_constraintLeft_toLeftOf="parent" />
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="numberDecimal"
-            android:ems="10"
-            android:id="@+id/weightfield"
-            android:hint="weight"
-            tools:layout_constraintRight_creator="1"
-            tools:layout_constraintBottom_creator="1"
-            app:layout_constraintBottom_toTopOf="@+id/emailfield"
-            app:layout_constraintRight_toRightOf="@+id/heightfield"
-            tools:layout_constraintLeft_creator="1"
-            android:layout_marginBottom="24dp"
-            app:layout_constraintLeft_toLeftOf="@+id/heightfield"
-            app:layout_constraintHorizontal_bias="1.0" />
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="date"
-            android:ems="10"
-            android:id="@+id/dobfield"
-            android:hint="DOB"
-            tools:layout_constraintRight_creator="1"
-            tools:layout_constraintBottom_creator="1"
-            app:layout_constraintBottom_toTopOf="@+id/heightfield"
-            app:layout_constraintRight_toRightOf="@+id/heightfield"
-            tools:layout_constraintLeft_creator="1"
-            android:layout_marginBottom="6dp"
-            app:layout_constraintLeft_toLeftOf="@+id/heightfield" />
-
-        <RadioGroup
-            android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:orientation='horizontal'
-            tools:layout_constraintTop_creator="1"
-            tools:layout_constraintBottom_creator="1"
-            app:layout_constraintBottom_toBottomOf="@+id/heightfield"
-            android:layout_marginTop="134dp"
-            tools:layout_constraintLeft_creator="1"
-            android:layout_marginBottom="133dp"
-            app:layout_constraintLeft_toLeftOf="@+id/dobfield"
-            app:layout_constraintTop_toTopOf="@+id/fnamefield">
-
-            <RadioButton
-                android:text="Male"
+            <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/radioButton2"
-                android:layout_weight="1" />
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:id="@+id/lnamefield"
+                android:hint="Last Name"
+                tools:layout_constraintRight_creator="1"
+                tools:layout_constraintBottom_creator="1"
+                app:layout_constraintBottom_toTopOf="@+id/dobfield"
+                app:layout_constraintRight_toRightOf="@+id/dobfield"
+                tools:layout_constraintLeft_creator="1"
+                android:layout_marginBottom="112dp"
+                app:layout_constraintLeft_toLeftOf="@+id/dobfield"
+                app:layout_constraintHorizontal_bias="0.0" />
 
-            <RadioButton
-                android:text="Female"
+            <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/radioButton"
-                android:layout_weight="1" />
-        </RadioGroup>
-    </android.support.constraint.ConstraintLayout>
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:id="@+id/fnamefield"
+                android:hint="First Name"
+                tools:layout_constraintRight_creator="1"
+                tools:layout_constraintBottom_creator="1"
+                app:layout_constraintBottom_toTopOf="@+id/lnamefield"
+                app:layout_constraintRight_toRightOf="@+id/lnamefield"
+                tools:layout_constraintLeft_creator="1"
+                android:layout_marginBottom="4dp"
+                app:layout_constraintLeft_toLeftOf="@+id/lnamefield"
+                app:layout_constraintTop_toBottomOf="@+id/title_login2" />
+
+            <Spinner
+                android:id="@+id/unit_height"
+                tools:layout_constraintRight_creator="1"
+                tools:layout_constraintBottom_creator="1"
+                app:layout_constraintBottom_toTopOf="@+id/unit_weight"
+                app:layout_constraintRight_toRightOf="@+id/unit_weight"
+                tools:layout_constraintLeft_creator="1"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintLeft_toLeftOf="@+id/unit_weight"
+                app:layout_constraintHorizontal_bias="0.0"
+                android:layout_height="40dp"
+                android:layout_width="110dp" />
+
+            <Spinner
+                android:id="@+id/unit_weight"
+                tools:layout_constraintTop_creator="1"
+                tools:layout_constraintBottom_creator="1"
+                app:layout_constraintBottom_toTopOf="@+id/emailfield"
+                android:layout_marginStart="16dp"
+                tools:layout_constraintLeft_creator="1"
+                app:layout_constraintTop_toTopOf="@+id/weightfield"
+                app:layout_constraintLeft_toRightOf="@+id/weightfield"
+                app:layout_constraintVertical_bias="0.0"
+                android:layout_marginBottom="24dp"
+                android:layout_height="40dp"
+                android:layout_width="110dp" />
+
+            <EditText
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:ems="10"
+                android:id="@+id/heightfield"
+                android:hint="height"
+                tools:layout_constraintBottom_creator="1"
+                app:layout_constraintBottom_toTopOf="@+id/weightfield"
+                android:layout_marginStart="16dp"
+                tools:layout_constraintLeft_creator="1"
+                android:layout_marginBottom="12dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_width="200dp" />
+
+            <EditText
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:ems="10"
+                android:id="@+id/weightfield"
+                android:hint="weight"
+                tools:layout_constraintRight_creator="1"
+                tools:layout_constraintBottom_creator="1"
+                app:layout_constraintBottom_toTopOf="@+id/emailfield"
+                app:layout_constraintRight_toRightOf="@+id/heightfield"
+                tools:layout_constraintLeft_creator="1"
+                android:layout_marginBottom="24dp"
+                app:layout_constraintLeft_toLeftOf="@+id/heightfield"
+                app:layout_constraintHorizontal_bias="1.0"
+                android:layout_width="200dp" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="date"
+                android:ems="10"
+                android:id="@+id/dobfield"
+                android:hint="DOB"
+                tools:layout_constraintRight_creator="1"
+                tools:layout_constraintBottom_creator="1"
+                app:layout_constraintBottom_toTopOf="@+id/heightfield"
+                app:layout_constraintRight_toRightOf="@+id/heightfield"
+                tools:layout_constraintLeft_creator="1"
+                android:layout_marginBottom="6dp"
+                app:layout_constraintLeft_toLeftOf="@+id/heightfield" />
+
+            <RadioGroup
+                android:layout_height="20dp"
+                android:orientation='horizontal'
+                tools:layout_constraintTop_creator="1"
+                tools:layout_constraintBottom_creator="1"
+                app:layout_constraintBottom_toBottomOf="@+id/heightfield"
+                android:layout_marginTop="134dp"
+                tools:layout_constraintLeft_creator="1"
+                android:layout_marginBottom="133dp"
+                app:layout_constraintLeft_toLeftOf="@+id/dobfield"
+                app:layout_constraintTop_toTopOf="@+id/fnamefield"
+                android:layout_width="200dp"
+                android:id="@+id/genderRadio">
+
+                <RadioButton
+                    android:text="Male"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/radioButton2"
+                    android:layout_weight="1" />
+
+                <RadioButton
+                    android:text="Female"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/radioButton"
+                    android:layout_weight="1" />
+            </RadioGroup>
+        </android.support.constraint.ConstraintLayout>
+    </ScrollView>
 
 </FrameLayout>

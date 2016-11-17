@@ -22,8 +22,9 @@
             android:layout_marginEnd="8dp"
             app:layout_constraintRight_toRightOf="parent"
             tools:layout_constraintLeft_creator="1"
-            android:layout_marginBottom="6dp"
-            app:layout_constraintLeft_toLeftOf="parent" />
+            android:layout_marginBottom="88dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintHorizontal_bias="0.66" />
 
         <EditText
             android:layout_width="wrap_content"
@@ -56,11 +57,11 @@
             android:layout_height="wrap_content"
             android:id="@+id/textView8"
             tools:layout_constraintBottom_creator="1"
-            android:layout_marginStart="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             tools:layout_constraintLeft_creator="1"
-            android:layout_marginBottom="109dp"
-            app:layout_constraintLeft_toLeftOf="parent" />
+            android:layout_marginBottom="192dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginStart="8dp" />
 
         <TextView
             android:text="% Fat"
@@ -84,12 +85,10 @@
             android:ems="10"
             android:id="@+id/fatfield"
             android:hint="00%"
-            tools:layout_constraintRight_creator="1"
             tools:layout_constraintBottom_creator="1"
             app:layout_constraintBottom_toTopOf="@+id/textView8"
-            app:layout_constraintRight_toRightOf="@+id/proteinfield"
             tools:layout_constraintLeft_creator="1"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="11dp"
             app:layout_constraintLeft_toLeftOf="@+id/proteinfield" />
 
         <EditText
@@ -101,9 +100,9 @@
             android:hint="00%"
             tools:layout_constraintBottom_creator="1"
             app:layout_constraintBottom_toTopOf="@+id/fatfield"
-            android:layout_marginStart="7dp"
+            android:layout_marginStart="9dp"
             tools:layout_constraintLeft_creator="1"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="12dp"
             app:layout_constraintLeft_toRightOf="@+id/textView6" />
 
         <TextView
@@ -142,7 +141,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             app:layout_constraintRight_toRightOf="parent"
-            android:layout_marginTop="149dp"
+            android:layout_marginTop="80dp"
             tools:layout_constraintLeft_creator="1"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

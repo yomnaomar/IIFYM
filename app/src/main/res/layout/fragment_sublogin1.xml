@@ -21,7 +21,9 @@
             app:layout_constraintRight_toRightOf="@+id/loginbtn"
             tools:layout_constraintLeft_creator="1"
             android:layout_marginBottom="106dp"
-            app:layout_constraintLeft_toLeftOf="@+id/loginbtn" />
+            app:layout_constraintLeft_toLeftOf="@+id/loginbtn"
+            android:visibility="invisible"
+            android:enabled="false" />
 
         <EditText
             android:layout_width="0dp"
@@ -58,7 +60,7 @@
             app:layout_constraintLeft_toLeftOf="parent" />
 
         <Button
-            android:text="Login"
+            android:text="Login / Register"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/loginbtn"

@@ -67,11 +67,7 @@
     <string name="FatPreferenceDefault">50</string>
     <string name="macropreference_file_key">MacroPreferenceFile</string>
 
-    <string-array name="weight_units_array">
-        <item>Grams (g)</item>
-        <item>Ounces (oz)</item>
-        <item>Milliliter (ml)</item>
-    </string-array>
+
 
     <!-- login fragments-->
     <string name="frag1text">Signup</string>
@@ -81,10 +77,21 @@
 
     <!-- spinners-->
 
+    <string-array name="weight_units_array">
+        <item>Grams (g)</item>
+        <item>Ounces (oz)</item>
+        <item>Milliliter (ml)</item>
+    </string-array>
 
-    <string-array name="height_unit">
+    <string-array name="height_units_array">
         <item>feet/inches</item>
         <item>cm</item>
+    </string-array>
+
+    <string-array name="goals_array">
+        <item>Lose</item>
+        <item>Maintain</item>
+        <item>Gain</item>
     </string-array>
 
 </resources>

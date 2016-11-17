@@ -6,6 +6,8 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -15,6 +17,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.kareem.macrotracker.Database.DatabaseConnector;
 import com.example.kareem.macrotracker.R;
@@ -46,12 +49,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Portion_Type portion = null;
     boolean is_daily = false;
 
+    private String user_name;
+    private int user_id;
+    private CoordinatorLayout coordinatorLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        coordinatorLayout = (CoordinatorLayout) findViewById(R.id.main_content);
 
         //Declaring
         Text_CarbsGoal = (TextView) findViewById(R.id.Text_CarbsGoal);
@@ -73,6 +82,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Meals_ListView.setOnItemClickListener(this);
 
         My_DB = new DatabaseConnector(getApplicationContext());
+
+        //TODO:(Abdulwahab) get user_name and user_id here
+        user_name = "Unknown User";
+        user_id = 0;
+
+
+//        Snackbar snackbar = Snackbar
+//                .make(coordinatorLayout, "Welcome "+ user_name, Snackbar.LENGTH_SHORT);
+//        snackbar.show();
+        Toast.makeText(this,"Welcome "+ user_name,Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -131,6 +150,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onResume() {
         super.onResume();
+
         UpdateArrayList();
         UpdateMacros();
     }

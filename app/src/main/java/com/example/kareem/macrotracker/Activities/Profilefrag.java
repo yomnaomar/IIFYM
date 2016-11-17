@@ -8,6 +8,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.kareem.macrotracker.R;
 
@@ -20,11 +27,12 @@ import com.example.kareem.macrotracker.R;
  * Use the {@link Profilefrag#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Profilefrag extends Fragment {
+public class Profilefrag extends Fragment implements View.OnClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private RadioButton radioButton;
     private myFragEventListener listener;
 
     // TODO: Rename and change types of parameters
@@ -32,6 +40,18 @@ public class Profilefrag extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+
+    //GUI vars ----------------------------------
+    View myView;
+    EditText fname,lname,dob,weight,height,email;
+    Button next;
+    RadioGroup radiogrp;
+    Spinner weight_spinner,height_spinner;
+
+
+
+
+    //GUI vars ----------------------------------
 
     public Profilefrag() {
         // Required empty public constructor
@@ -67,8 +87,34 @@ public class Profilefrag extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        myView = inflater.inflate(R.layout.fragment_sublogin2, container, false);
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_sublogin2, container, false);
+
+        weight_spinner = (Spinner)myView.findViewById(R.id.unit_weight);
+        height_spinner= (Spinner)myView.findViewById(R.id.unit_height);
+
+        ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(myView.getContext(),
+                R.array.weight_units_array, android.R.layout.simple_spinner_item);
+        adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(myView.getContext(),
+                R.array.height_units_array, android.R.layout.simple_spinner_item);
+        adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        weight_spinner.setAdapter(adapter1);
+        height_spinner.setAdapter(adapter2);
+
+        radiogrp = (RadioGroup)myView.findViewById(R.id.genderRadio);
+
+        next = (Button)myView.findViewById(R.id.nextbtn);
+        next.setOnClickListener(this);
+
+        //TODO(Abdulwahab): get text field data and send to newUser in Login Activity
+
+
+
+
+        return myView;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -95,6 +141,17 @@ public class Profilefrag extends Fragment {
         mListener = null;
     }
 
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.nextbtn:
+                //storedata then switch fragment
+                listener.switchFrag(2);
+                break;
+        }
+
+    }
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -108,5 +165,13 @@ public class Profilefrag extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    private String getGender() //get gender from radiogroup
+    {
+        int selectedId = radiogrp.getCheckedRadioButtonId();
+        // find the radiobutton by returned id
+        radioButton = (RadioButton) myView.findViewById(selectedId);
+        return radioButton.getText().toString();
     }
 }

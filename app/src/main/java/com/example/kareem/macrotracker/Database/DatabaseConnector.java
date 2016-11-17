@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.kareem.macrotracker.ViewComponents.Meal;
 import com.example.kareem.macrotracker.ViewComponents.Portion_Type;
@@ -452,8 +453,14 @@ public class DatabaseConnector {
     }
     public Cursor getUser(String username)
     {
-        Cursor C = database.rawQuery("SELECT * FROM " + Table_User + " WHERE name = '" + username + "'", null);
-        Log.i("User Retrieved", "Name: " + username + " Retrieved");
+
+        Cursor C = null;
+        try {
+            C = database.rawQuery("SELECT * FROM " + Table_User + " WHERE name = '" + username + "'", null);
+            Log.i("User Retrieved", "Name: " + username + " Retrieved");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return C;
 
     }
@@ -471,5 +478,65 @@ public class DatabaseConnector {
         return C;
 
     }
-    //
+    public boolean validateLogin(String userName, String userPass, Context context) {
+
+        //SELECT
+        String[] columns = {"user_id"};
+
+        //WHERE clause
+        String selection = "user_name=? AND password=?";
+
+        //WHERE clause arguments
+        String[] selectionArgs = {userName, userPass};
+        Cursor c = null;
+
+        try{
+            //SELECT userId FROM login WHERE username=userName AND password=userPass
+            c = database.query(Table_User, columns, selection, selectionArgs, null, null, null);
+            c.moveToFirst();
+
+            int i = c.getCount();
+            c.close();
+            if(i <= 0){
+                Toast.makeText(context, "Incorrect Login..\nTry Again", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+
+            return true;
+        }catch(Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }//validate Login
+
+    public int fetchUserID(String userName, String userPass, Context context) {
+
+        //SELECT
+        String[] columns = {"user_id"};
+
+        //WHERE clause
+        String selection = "user_name=? AND password=?";
+
+        //WHERE clause arguments
+        String[] selectionArgs = {userName, userPass};
+        Cursor c = null;
+
+        try{
+            //SELECT userId FROM login WHERE username=userName AND password=userPass
+            c = database.query(Table_User, columns, selection, selectionArgs, null, null, null);
+            c.moveToFirst();
+
+            int i = c.getCount();
+            //c.close();
+            if(i <= 0){
+                Toast.makeText(context, "Incorrect Login..\nTry Again", Toast.LENGTH_SHORT).show();
+                return 0;
+            }
+
+            return c.getInt(0);
+        }catch(Exception e){
+            e.printStackTrace();
+            return 0;
+        }
+    }//validate Login
 }

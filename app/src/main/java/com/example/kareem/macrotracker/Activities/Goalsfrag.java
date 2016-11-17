@@ -1,6 +1,7 @@
 package com.example.kareem.macrotracker.Activities;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,6 +9,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RadioGroup;
+import android.widget.Spinner;
 
 import com.example.kareem.macrotracker.R;
 
@@ -20,7 +26,7 @@ import com.example.kareem.macrotracker.R;
  * Use the {@link Goalsfrag#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Goalsfrag extends Fragment {
+public class Goalsfrag extends Fragment implements  View.OnClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -31,7 +37,17 @@ public class Goalsfrag extends Fragment {
     private String mParam1;
     private String mParam2;
 
+
     private OnFragmentInteractionListener mListener;
+    //GUI vars ----------------------------------
+    View myView;
+    Button finish;
+    Spinner goal_spinner;
+
+
+
+
+    //GUI vars ----------------------------------
 
     public Goalsfrag() {
         // Required empty public constructor
@@ -67,8 +83,21 @@ public class Goalsfrag extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        myView = inflater.inflate(R.layout.fragment_sublogin3, container, false);
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_sublogin3, container, false);
+
+        goal_spinner= (Spinner)myView.findViewById(R.id.goalSpinner);
+
+        ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(myView.getContext(),
+                R.array.goals_array, android.R.layout.simple_spinner_item);
+        adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        goal_spinner.setAdapter(adapter1);
+
+
+        finish=(Button)myView.findViewById(R.id.finishregBtn);
+        finish.setOnClickListener(this);
+
+        return myView;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -76,6 +105,17 @@ public class Goalsfrag extends Fragment {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
         }
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.finishregBtn:
+                //store data and finish reg
+                listener.openHome();
+                break;
+        }
+
     }
 
     @SuppressWarnings("deprecation")

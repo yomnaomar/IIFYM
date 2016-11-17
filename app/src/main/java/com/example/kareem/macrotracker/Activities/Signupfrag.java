@@ -92,17 +92,7 @@ public class Signupfrag extends Fragment implements View.OnClickListener {
         register.setOnClickListener(this);
 
 
-
-
-
-
-
-
-
-
-
-
-        return inflater.inflate(R.layout.fragment_sublogin1, container, false);
+        return myView;
 
     }
 
@@ -113,6 +103,7 @@ public class Signupfrag extends Fragment implements View.OnClickListener {
                 listener.userLogin(username.getText().toString(),pass.getText().toString());
                 break;
             case R.id.registerbtn:
+                Log.d("DEBUG", "Register Button Clicked");
                 listener.userReg(username.getText().toString(),pass.getText().toString());
                 break;
         }

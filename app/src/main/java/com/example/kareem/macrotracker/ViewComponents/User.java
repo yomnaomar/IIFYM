@@ -10,19 +10,21 @@ public class User {
     String user_name;
     String password;
     String dob;
-    float weight;
-    float height;
-    int workout_freq;
-    String gender;
-    int age;
-    int goal; //Goal.fromInteger(0 or 1 or 2)
     String fname;
     String lname;
     String email;
+    String gender;
+    float weight;
+    float height;
+    int workout_freq;
+    int age;
+    int goal; //Goal.fromInteger(0 or 1 or 2)
     int percent_carbs;
     int percent_protein;
     int percent_fat;
+    public User() {
 
+    }
     public User(String user_name, String password, String dob, String gender, String fname, String lname, String email) {
 
     }

@@ -1,12 +1,16 @@
 package com.example.kareem.macrotracker.Activities;
 
+import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -33,6 +37,7 @@ public class Login extends AppCompatActivity implements myFragEventListener {
      */
     private LockableViewPager mViewPager;
     private DatabaseConnector My_DB;
+    User newUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +59,7 @@ public class Login extends AppCompatActivity implements myFragEventListener {
         mViewPager.setSwipeable(false); //disable swiping with gestures ( this will lock the view and restrict moving to buttons only)
 
         My_DB = new DatabaseConnector(getApplicationContext());
-
+        newUser = new User(); //instantiate user
     }
 
 
@@ -168,23 +173,93 @@ public class Login extends AppCompatActivity implements myFragEventListener {
         }
     }
 
-    //TODO (Abdulwahab) : all listener functions for user signup fragments ---------------------
+    //TODO (Abdulwahab) : all listener functions for user Login/Sign Up fragments ---------------------
 
     @Override
     public void insertUser(User user) {
-        //get all user details and send to DB
+        //get all user details and send to DB (called when user sign up is finished)
+
     }
 
     @Override
     public void userLogin(String username, String password) {
         //check if user exists when trying to login (check credentials)
-        My_DB.getUser(username);
+        Cursor mCursor = My_DB.getUser(username);
+        if (mCursor==null || !(mCursor.moveToFirst()) || mCursor.getCount() == 0) {
+            //user does not exist
+            userReg(username,password);
+        }
+        else
+        {
+            if(My_DB.validateLogin(username,password,getApplicationContext()))
+            {
+                //open home page here (main activity) and send user_id
+                Intent intent = new Intent(this, MainActivity.class);
+                intent.putExtra("user_id", My_DB.fetchUserID(username,password,getApplicationContext())); //get user_id
+                startActivity(intent);
+            }
+            else
+            {
+                //login failed - message will be displayed by validateLogin()
+            }
+        }
+
+
     }
     @Override
     public void userReg(String username,String password) {
-        //first check if user exists , if not , proceed with method and create new User. If User exists then log them in by calling userLogin.
+        //star creating new User
+        Log.d("DEBUG", "Switch To Profile Fragment");
+        newUser.setUser_name(username);
+        newUser.setPassword(password);
+        switchFrag(1); //store username and pass and switch to next page. (fragment switching does not lose value instances)
+
     }
 
+    @Override
+    public void switchFrag(int pos) {
+              mViewPager.setCurrentItem(pos);
+    }
+
+
+    //methods used for signing up a new user -----------------------
+    @Override
+    public void storeuserIntdata(int... params) { //int workout_freq; / int age; / int goal; Goal.fromInteger(0 or 1 or 2) / int percent_carbs; / int percent_protein; / int percent_fat; (in this order)
+
+        //any param not applicable will be set to null till sign up is fully complete
+        newUser.setWorkout_freq(params[0]);
+        newUser.setAge(params[1]);
+        newUser.setGoal(params[2]);
+        newUser.setGoal(params[3]);
+        newUser.setPercent_carbs(params[4]);
+        newUser.setPercent_protein(params[5]);
+        newUser.setPercent_fat(params[6]);
+
+    }
+    @Override
+    public void storeuserStringdata(String... params) { // String dob;String fname;String lname;String email;String gender;(in this order)
+
+        newUser.setDob(params[0]);
+        newUser.setFname(params[1]);
+        newUser.setLname(params[2]);
+        newUser.setEmail(params[3]);
+        newUser.setGender(params[4]);
+    }
+
+    @Override
+    public void storeuserFloatdata(float... params) { //float weight; float height;(in this order)
+
+        newUser.setWeight(params[0]);
+        newUser.setHeight(params[1]);
+    }
+    //methods used for signing up a new user -----------------------
+
+    public void openHome() //TEST method
+    {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
 
 
 }
