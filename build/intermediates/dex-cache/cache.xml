@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="D:\Uni\Fall 2016\Database System\Projectz\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\23.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="de4db3785756bfb0915a9f59a9b3f2fea7407be4">
+        <dex dex="D:\Uni\Fall 2016\Database System\Projectz\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-animated-vector-drawable-23.4.0_5c119464e37ca876457d1e766292a096a2dc74c3\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\Uni\Fall 2016\Database System\Projectz\app\build\intermediates\exploded-aar\com.android.support\design\23.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="5326d9a850d491714fef8cbfaa9ea3416f0bf0d2">
+        <dex dex="D:\Uni\Fall 2016\Database System\Projectz\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-design-23.4.0_51fd281386ffc8eca601d0cd9e0e8bda6ecbc6f5\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\Uni\Fall 2016\Database System\Projectz\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="d415fcb9e77d615ab93b18d2950ac5112ae0af23">
+        <dex dex="D:\Uni\Fall 2016\Database System\Projectz\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_a3d7a57e5c0092c9088869ebb06bdbfc730c3914\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\Uni\Fall 2016\Database System\Projectz\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="67bd36ee9340ec7c254108936ad16b24bed160cc">
+        <dex dex="D:\Uni\Fall 2016\Database System\Projectz\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-v4-23.4.0_1d5f52858cccb29c1b0530e765db3b4d501a66d7\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Mina\AppData\Local\Android\sdk\extras\m2repository\com\android\support\constraint\constraint-layout-solver\1.0.0-beta4\constraint-layout-solver-1.0.0-beta4.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="0a9cb567dc008f570c28531720168f19148da965">
+        <dex dex="D:\Uni\Fall 2016\Database System\Projectz\app\build\intermediates\transforms\dex\debug\folders\1000\10\constraint-layout-solver-1.0.0-beta4_48c95682a4440a16b6c0eaaf4a348ae867a507fe\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\Uni\Fall 2016\Database System\Projectz\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="548f06de403a9409f00554b3ee12a9fdea0e236c">
+        <dex dex="D:\Uni\Fall 2016\Database System\Projectz\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-appcompat-v7-23.4.0_1c866c24c73fae2dab9ba64d2594418c1c553390\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\Uni\Fall 2016\Database System\Projectz\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="c2c594cace5d83a3227b2b6e658ecbfd586d3ed9">
+        <dex dex="D:\Uni\Fall 2016\Database System\Projectz\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-vector-drawable-23.4.0_815b45b7bf413b2d4aec89cdc2ba9e9b4937a69c\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Mina\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\23.4.0\support-annotations-23.4.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="ffbe55fdb2bb456b1485831706a9eac3300bb6b8">
+        <dex dex="D:\Uni\Fall 2016\Database System\Projectz\app\build\intermediates\transforms\dex\debug\folders\1000\10\support-annotations-23.4.0_38415abcce2e72875042549c576e2914fcb6f62e\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\Uni\Fall 2016\Database System\Projectz\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\23.4.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="ec75036c3c52e451d0cde50a5aedaf5fd32354a0">
+        <dex dex="D:\Uni\Fall 2016\Database System\Projectz\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-recyclerview-v7-23.4.0_b96ded4f602d7de9e96140464269e91d90bc7337\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\Uni\Fall 2016\Database System\Projectz\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="b5bcf830ddac19d95ba1d9819482ffaf13750961">
+        <dex dex="D:\Uni\Fall 2016\Database System\Projectz\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_8a60e7b8623310d2b58824be3592002b3b46c927\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\Uni\Fall 2016\Database System\Projectz\app\build\intermediates\exploded-aar\com.android.support.constraint\constraint-layout\1.0.0-beta4\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="662d7533b25a666c649c10a16b42edfb95f25a4f">
+        <dex dex="D:\Uni\Fall 2016\Database System\Projectz\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support.constraint-constraint-layout-1.0.0-beta4_e479b5ecad3dcfe74f2faaf4f6088f0f4f424243\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="D:\Uni\Fall 2016\Database System\Projectz\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.4.0\jars\libs\internal_impl-23.4.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="ea3c07504d2c8f4b13aa17c45c1b68ed9c1c3674">
+        <dex dex="D:\Uni\Fall 2016\Database System\Projectz\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-23.4.0_151fe02b3adb955e3033ac56bb4510d56b85cd00\classes.dex" />
+    </item>
+
+</items>

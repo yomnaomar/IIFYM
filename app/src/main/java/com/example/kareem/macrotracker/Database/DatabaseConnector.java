@@ -59,6 +59,39 @@ public class DatabaseConnector {
     }
 
     //------------------------------------------------------------------------------
+    /* Mina Functions (TO DO LIST)*/
+
+    // Composed of Functionality
+    public  Cursor getComposedMealID(long meal_id)
+    {
+        Cursor C = database.rawQuery("SELECT FROM "+Table_Composed_Of+" Where meal_id = "+meal_id , null);
+        Log.i("Composed Meal Retrieved","ID: "+meal_id+" Retrieved");
+        return C;
+    }
+    public  Cursor getComposedComplexID(long complex_id)
+    {
+        Cursor C = database.rawQuery("SELECT FROM "+Table_Composed_Of+" Where meal_id = "+complex_id , null);
+        Log.i("Composed Meal Retrieved","ID: "+complex_id+" Retrieved");
+        return C;
+    }
+    public void deleteComposedMealID(long meal_id)
+    {
+        database.rawQuery("DELETE FROM"+Table_Composed_Of+"WHERE meal_id ="+meal_id,null);
+        Log.i("Deleted","ID : "+meal_id+" Deleted Successfully");
+    }
+    public void deleteComposedComplexID(long complex_id)
+    {
+        database.rawQuery("DELETE FROM"+Table_Composed_Of+"WHERE complex_id ="+complex_id,null);
+        Log.i("Deleted","ID : "+complex_id+" Deleted Successfully");
+    }
+    public boolean insertComposedOf (long meal_id, long complex_id)
+    {
+        database.rawQuery("Insert Into "+Table_Composed_Of+"(meal_id,complex_id) Values ("+meal_id+","+complex_id+");",null);
+        Log.i("Inserted","Data Inserted Successfully");
+        return true;
+    }
+
+
     //Returns a Cursor containing all entries with specified name
     public Cursor getAllSavedMeals(String name)
     {
