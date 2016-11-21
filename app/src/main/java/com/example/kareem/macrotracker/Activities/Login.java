@@ -13,10 +13,13 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.kareem.macrotracker.Database.DatabaseConnector;
 import com.example.kareem.macrotracker.Database.DatabaseHelper;
 import com.example.kareem.macrotracker.R;
+import com.example.kareem.macrotracker.ViewComponents.Body_Height_Unit;
+import com.example.kareem.macrotracker.ViewComponents.Body_Weight_Unit;
 import com.example.kareem.macrotracker.ViewComponents.LockableViewPager;
 import com.example.kareem.macrotracker.ViewComponents.User;
 
@@ -38,6 +41,9 @@ public class Login extends AppCompatActivity implements myFragEventListener {
     private LockableViewPager mViewPager;
     private DatabaseConnector My_DB;
     User newUser;
+    Body_Weight_Unit bodyweight;
+    Body_Height_Unit bodyheight;
+    float weightunit,heightunit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +65,9 @@ public class Login extends AppCompatActivity implements myFragEventListener {
         mViewPager.setSwipeable(false); //disable swiping with gestures ( this will lock the view and restrict moving to buttons only)
 
         My_DB = new DatabaseConnector(getApplicationContext());
+
+        My_DB.openReadableDB();
+        My_DB.openWriteableDB();
         newUser = new User(); //instantiate user
     }
 
@@ -176,33 +185,35 @@ public class Login extends AppCompatActivity implements myFragEventListener {
     //TODO (Abdulwahab) : all listener functions for user Login/Sign Up fragments ---------------------
 
     @Override
-    public void insertUser(User user) {
+    public void insertUser() {
         //get all user details and send to DB (called when user sign up is finished)
 
+        try {
+            My_DB.insertUser(newUser);
+        } catch (Exception e) {
+            Toast.makeText(getApplicationContext(),"DB Error Occurred" +e.getMessage(),Toast.LENGTH_LONG).show();
+            Log.d("DB ERROR", e.getMessage());
+        }
+        openHome(); //open main activity
     }
 
     @Override
     public void userLogin(String username, String password) {
         //check if user exists when trying to login (check credentials)
-        Cursor mCursor = My_DB.getUser(username);
-        if (mCursor==null || !(mCursor.moveToFirst()) || mCursor.getCount() == 0) {
-            //user does not exist
-            userReg(username,password);
-        }
-        else
-        {
-            if(My_DB.validateLogin(username,password,getApplicationContext()))
+        //Cursor mCursor = My_DB.getUser(username);
+        if(My_DB.validateLogin(username,password,getApplicationContext()))
             {
                 //open home page here (main activity) and send user_id
                 Intent intent = new Intent(this, MainActivity.class);
-                intent.putExtra("user_id", My_DB.fetchUserID(username,password,getApplicationContext())); //get user_id
+                intent.putExtra("user_id", My_DB.fetchUserID(username,getApplicationContext())); //get user_id
                 startActivity(intent);
             }
             else
             {
+                userReg(username,password);
                 //login failed - message will be displayed by validateLogin()
             }
-        }
+
 
 
     }
@@ -217,48 +228,45 @@ public class Login extends AppCompatActivity implements myFragEventListener {
     }
 
     @Override
+    public void storeuserProfile(String fname, String lname, String dob, String email, String gender, float weight, float height, int age, int weightunit, int heightunit) {
+
+        newUser.setFname(fname);
+        newUser.setLname(lname);
+        newUser.setDob(dob);
+        newUser.setEmail(email);
+        newUser.setGender(gender);
+        newUser.setWeight(weight);
+        newUser.setHeight(height);
+        newUser.setAge(age);
+        newUser.setWeight_unit(weightunit);
+        newUser.setHeight_unit(heightunit);
+
+    }
+
+    @Override
+    public void storeuserGoals(int goal, int pcarbs, int pfat, int pprotein, int workout_freq) {
+        newUser.setGoal(goal);
+        newUser.setPercent_carbs(pcarbs);
+        newUser.setPercent_fat(pfat);
+        newUser.setPercent_protein(pprotein);
+        newUser.setWorkout_freq(workout_freq);
+        newUser.setUser_id(-1);
+    }
+
+
+    @Override
     public void switchFrag(int pos) {
               mViewPager.setCurrentItem(pos);
     }
 
 
-    //methods used for signing up a new user -----------------------
-    @Override
-    public void storeuserIntdata(int... params) { //int workout_freq; / int age; / int goal; Goal.fromInteger(0 or 1 or 2) / int percent_carbs; / int percent_protein; / int percent_fat; (in this order)
-
-        //any param not applicable will be set to null till sign up is fully complete
-        newUser.setWorkout_freq(params[0]);
-        newUser.setAge(params[1]);
-        newUser.setGoal(params[2]);
-        newUser.setGoal(params[3]);
-        newUser.setPercent_carbs(params[4]);
-        newUser.setPercent_protein(params[5]);
-        newUser.setPercent_fat(params[6]);
-
-    }
-    @Override
-    public void storeuserStringdata(String... params) { // String dob;String fname;String lname;String email;String gender;(in this order)
-
-        newUser.setDob(params[0]);
-        newUser.setFname(params[1]);
-        newUser.setLname(params[2]);
-        newUser.setEmail(params[3]);
-        newUser.setGender(params[4]);
-    }
-
-    @Override
-    public void storeuserFloatdata(float... params) { //float weight; float height;(in this order)
-
-        newUser.setWeight(params[0]);
-        newUser.setHeight(params[1]);
-    }
-    //methods used for signing up a new user -----------------------
-
-    public void openHome() //TEST method
+    public void openHome() //final method before opening main activity
     {
+        Log.d("LOGIN","Signup Complete: User: "+ newUser.toString());
         Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-        finish();
+        intent.putExtra("user_name", newUser.getUser_name()); //get user_name
+        startActivity(intent); //open main activity
+        finish(); //disable going back to login with BACK button
     }
 
 

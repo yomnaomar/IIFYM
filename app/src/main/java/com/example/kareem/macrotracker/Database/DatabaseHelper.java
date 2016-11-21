@@ -3,6 +3,7 @@ package com.example.kareem.macrotracker.Database;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 /**
  * Created by Kareem on 9/4/2016.
@@ -42,6 +43,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     // TS: this is called from  open()->getWritableDatabase(). Only if the database does not exist
     @Override
     public void onCreate(SQLiteDatabase db) {
+        Log.d("DBHELPER","onCreate Called");
         // Query to create a new table named SavedMeals
         String createTable_SM = "CREATE TABLE " + Table_SavedMeals + " " +
                 "(_id integer primary key autoincrement," +

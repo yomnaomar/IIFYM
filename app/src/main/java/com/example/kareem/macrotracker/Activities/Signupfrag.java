@@ -100,7 +100,15 @@ public class Signupfrag extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.loginbtn:
-                listener.userLogin(username.getText().toString(),pass.getText().toString());
+                if(validate(new EditText[]{username,pass})) {
+
+                    listener.userLogin(username.getText().toString(), pass.getText().toString());
+                }
+                else
+                {
+                    username.setError("Both fields Required");
+                    pass.setError("Both fields Required");
+                }
                 break;
             case R.id.registerbtn:
                 Log.d("DEBUG", "Register Button Clicked");
@@ -147,5 +155,14 @@ public class Signupfrag extends Fragment implements View.OnClickListener {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+    private boolean validate(EditText[] fields){
+        for(int i=0; i<fields.length; i++){
+            EditText currentField=fields[i];
+            if(currentField.getText().toString().length()<=0){
+                return false;
+            }
+        }
+        return true;
     }
 }

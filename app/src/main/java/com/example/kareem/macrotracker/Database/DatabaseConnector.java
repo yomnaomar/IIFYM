@@ -367,7 +367,7 @@ public class DatabaseConnector {
     }
 
 
-//----------------TODO: User Insert /Delete/Update (Abdulwahab)------------------
+//----------------TODO: User Insert /Delete/Update + Registration/Login methods (Abdulwahab)------------------
 
     //Insert
     public boolean insertUser(User M)
@@ -383,9 +383,9 @@ public class DatabaseConnector {
             newUser.put("age", M.getAge());
             newUser.put("weight", M.getWeight());
             newUser.put("height", M.getHeight());
-            newUser.put("pCarbs", M.getPercent_carbs());
-            newUser.put("pFat", M.getPercent_fat());
-            newUser.put("pProtein", M.getPercent_protein());
+            newUser.put("percent_carbs", M.getPercent_carbs());
+            newUser.put("percent_fat", M.getPercent_fat());
+            newUser.put("percent_protein", M.getPercent_protein());
             newUser.put("gender", M.getGender());
             newUser.put("goal", M.getGoal());
             newUser.put("workout_freq", M.getWorkout_freq());
@@ -395,7 +395,7 @@ public class DatabaseConnector {
             return true;
         }
         else {
-            Log.i("SavedMeal Insert Fail", "SavedMeal duplicate found: " + M.getUser_name());
+            Log.i("User Insert Fail", "User duplicate found: " + M.getUser_name());
             return false;
         }
 
@@ -423,9 +423,9 @@ public class DatabaseConnector {
             editUser.put("age", age);
             editUser.put("weight",weight );
             editUser.put("height", height);
-            editUser.put("pCarbs", pcarbs);
-            editUser.put("pFat",pfat );
-            editUser.put("pProtein", pprotein);
+            editUser.put("percent_carbs", pcarbs);
+            editUser.put("percent_fat",pfat );
+            editUser.put("percent_protein", pprotein);
             editUser.put("gender",gender );
             editUser.put("goal", goal);
             editUser.put("workout_freq",workoutfreq);
@@ -454,15 +454,15 @@ public class DatabaseConnector {
     }
     public Cursor getAllUsers(String username)
     {
-        Cursor C = database.rawQuery("SELECT * FROM " + Table_User + " WHERE name = '" + username + "'", null);
-        Log.i("DailyMeal Retrieved", username + " Retrieved");
+        Cursor C = database.rawQuery("SELECT * FROM " + Table_User, null);
+        Log.i("Users Retrieved", username + " Retrieved");
         return C;
 
     }
     public Cursor getAllUsers()
     {
         Cursor C = database.rawQuery("SELECT * FROM " + Table_User, null);
-        Log.i("DailyMeals Retrieved", "All DailyMeals Retrieved");
+        Log.i("Users Retrieved", "All Users Retrieved");
         return C;
 
     }
@@ -486,7 +486,7 @@ public class DatabaseConnector {
             int i = c.getCount();
             c.close();
             if(i <= 0){
-                Toast.makeText(context, "Incorrect Login..\nTry Again", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Looks Like You're New !", Toast.LENGTH_SHORT).show();
                 return false;
             }
 
@@ -497,16 +497,16 @@ public class DatabaseConnector {
         }
     }//validate Login
 
-    public int fetchUserID(String userName, String userPass, Context context) {
+    public int fetchUserID(String userName, Context context) {
 
         //SELECT
         String[] columns = {"user_id"};
 
         //WHERE clause
-        String selection = "user_name=? AND password=?";
+        String selection = "user_name=?";
 
         //WHERE clause arguments
-        String[] selectionArgs = {userName, userPass};
+        String[] selectionArgs = {userName};
         Cursor c = null;
 
         try{
@@ -517,7 +517,7 @@ public class DatabaseConnector {
             int i = c.getCount();
             //c.close();
             if(i <= 0){
-                Toast.makeText(context, "Incorrect Login..\nTry Again", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "UserID Not Found in DB", Toast.LENGTH_SHORT).show();
                 return 0;
             }
 

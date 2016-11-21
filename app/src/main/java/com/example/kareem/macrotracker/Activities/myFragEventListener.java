@@ -10,15 +10,16 @@ public interface myFragEventListener {
     void openHome();
 
     //TODO: signup-----------------------------------------------------
-    void storeuserIntdata(int ... params);
-    void storeuserStringdata(String ... params);
-    void storeuserFloatdata(float ... params);
+
     void userReg(String user_name, String password);
+
+    void storeuserProfile(String fname,String lname,String dob,String email,String gender, float weight,float height, int age,int weightunit,int heightunit);
+    void storeuserGoals(int goal, int pcarbs,int pfat,int pprotein, int workout_freq);
 
    //TODO: login-------------------------------------------------------
     void userLogin(String user_name, String password);
 
     //TODO: insert methods---------------------------------------------
-    void insertUser(User user);
+    void insertUser();
 
 }

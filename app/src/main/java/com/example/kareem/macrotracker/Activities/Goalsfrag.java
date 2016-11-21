@@ -41,8 +41,9 @@ public class Goalsfrag extends Fragment implements  View.OnClickListener {
     private OnFragmentInteractionListener mListener;
     //GUI vars ----------------------------------
     View myView;
-    Button finish;
-    Spinner goal_spinner;
+    Button finish,back;
+    Spinner goal_spinner,workout_spinner;
+    EditText pcarbs,pfat,pprotein;
 
 
 
@@ -86,16 +87,31 @@ public class Goalsfrag extends Fragment implements  View.OnClickListener {
         myView = inflater.inflate(R.layout.fragment_sublogin3, container, false);
         // Inflate the layout for this fragment
 
+        pcarbs = (EditText)myView.findViewById(R.id.carbsfield);
+        pfat = (EditText)myView.findViewById(R.id.fatfield);
+        pprotein = (EditText)myView.findViewById(R.id.proteinfield);
+
+
+
         goal_spinner= (Spinner)myView.findViewById(R.id.goalSpinner);
+        workout_spinner=(Spinner)myView.findViewById(R.id.workout_freq_spinner);
 
         ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(myView.getContext(),
                 R.array.goals_array, android.R.layout.simple_spinner_item);
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(myView.getContext(),
+                R.array.workfreq_array, android.R.layout.simple_spinner_item);
+        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
         goal_spinner.setAdapter(adapter1);
+        workout_spinner.setAdapter(adapter2);
 
 
+        back = (Button)myView.findViewById(R.id.backbtn) ;
         finish=(Button)myView.findViewById(R.id.finishregBtn);
         finish.setOnClickListener(this);
+        back.setOnClickListener(this);
 
         return myView;
     }
@@ -112,7 +128,24 @@ public class Goalsfrag extends Fragment implements  View.OnClickListener {
         switch (view.getId()) {
             case R.id.finishregBtn:
                 //store data and finish reg
-                listener.openHome();
+                if(validate(new EditText[]{pcarbs, pfat,pprotein}))
+                {
+
+                    listener.storeuserGoals(goal_spinner.getSelectedItemPosition(),Integer.parseInt(pcarbs.getText().toString()),Integer.parseInt(pfat.getText().toString()),Integer.parseInt(pprotein.getText().toString()),workout_spinner.getSelectedItemPosition());
+
+                    listener.insertUser(); //inserts user to DB
+                }
+                else
+                {
+
+                    pcarbs.setError("All Fields Required");
+                    pfat.setError("All Fields Required");
+                    pprotein.setError("All Fields Required");
+                }
+
+                break;
+            case R.id.backbtn:
+                listener.switchFrag(1);
                 break;
         }
 
@@ -148,5 +181,15 @@ public class Goalsfrag extends Fragment implements  View.OnClickListener {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    private boolean validate(EditText[] fields){
+        for(int i=0; i<fields.length; i++){
+            EditText currentField=fields[i];
+            if(currentField.getText().toString().length()<=0){
+                return false;
+            }
+        }
+        return true;
     }
 }

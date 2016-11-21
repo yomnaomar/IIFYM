@@ -6,81 +6,87 @@
     tools:context="com.example.kareem.macrotracker.Activities.Signupfrag">
 
     <!-- TODO: Update blank fragment layout -->
-    <android.support.constraint.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <Button
-            android:text="New User"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/registerbtn"
-            tools:layout_constraintRight_creator="1"
-            tools:layout_constraintBottom_creator="1"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintRight_toRightOf="@+id/loginbtn"
-            tools:layout_constraintLeft_creator="1"
-            android:layout_marginBottom="106dp"
-            app:layout_constraintLeft_toLeftOf="@+id/loginbtn"
-            android:visibility="invisible"
-            android:enabled="false" />
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="520dp">
 
-        <EditText
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:ems="10"
-            android:id="@+id/usernamefield"
-            android:hint="username"
-            tools:layout_constraintRight_creator="1"
-            tools:layout_constraintBottom_creator="1"
-            app:layout_constraintBottom_toTopOf="@+id/passfield"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintRight_toRightOf="parent"
-            tools:layout_constraintLeft_creator="1"
-            android:layout_marginBottom="12dp"
-            app:layout_constraintLeft_toLeftOf="parent" />
+            <TextView
+                android:layout_width="368dp"
+                android:layout_height="wrap_content"
+                android:text="@string/frag1text"
+                android:textSize="30sp"
+                android:textStyle="normal|bold"
+                android:textAlignment="center"
+                android:typeface="sans"
+                android:id="@+id/title_login1"
+                tools:layout_editor_absoluteY="8dp"
+                tools:layout_editor_absoluteX="8dp" />
 
-        <EditText
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:ems="10"
-            android:id="@+id/passfield"
-            android:hint="password"
-            tools:layout_constraintRight_creator="1"
-            tools:layout_constraintBottom_creator="1"
-            app:layout_constraintBottom_toTopOf="@+id/loginbtn"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintRight_toRightOf="parent"
-            tools:layout_constraintLeft_creator="1"
-            android:layout_marginBottom="119dp"
-            app:layout_constraintLeft_toLeftOf="parent" />
+            <Button
+                android:text="New User"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/registerbtn"
+                tools:layout_constraintRight_creator="1"
+                tools:layout_constraintBottom_creator="1"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="@+id/loginbtn"
+                tools:layout_constraintLeft_creator="1"
+                app:layout_constraintLeft_toLeftOf="@+id/loginbtn"
+                android:visibility="invisible"
+                android:enabled="false" />
 
-        <Button
-            android:text="Login / Register"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/loginbtn"
-            tools:layout_constraintRight_creator="1"
-            tools:layout_constraintBottom_creator="1"
-            app:layout_constraintBottom_toTopOf="@+id/registerbtn"
-            app:layout_constraintRight_toRightOf="@+id/passfield"
-            tools:layout_constraintLeft_creator="1"
-            android:layout_marginBottom="5dp"
-            app:layout_constraintLeft_toLeftOf="@+id/passfield" />
-    </android.support.constraint.ConstraintLayout>
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:id="@+id/usernamefield"
+                android:hint="username"
+                tools:layout_constraintRight_creator="1"
+                tools:layout_constraintBottom_creator="1"
+                app:layout_constraintBottom_toTopOf="@+id/passfield"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintRight_toRightOf="parent"
+                tools:layout_constraintLeft_creator="1"
+                android:layout_marginBottom="12dp"
+                app:layout_constraintLeft_toLeftOf="parent" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/frag1text"
-        android:textSize="30sp"
-        android:textStyle="normal|bold"
-        android:textAlignment="center"
-        android:typeface="sans"
-        android:id="@+id/title_login1" />
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:ems="10"
+                android:id="@+id/passfield"
+                android:hint="password"
+                tools:layout_constraintRight_creator="1"
+                tools:layout_constraintBottom_creator="1"
+                app:layout_constraintBottom_toTopOf="@+id/loginbtn"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintRight_toRightOf="parent"
+                tools:layout_constraintLeft_creator="1"
+                android:layout_marginBottom="119dp"
+                app:layout_constraintLeft_toLeftOf="parent" />
+
+            <Button
+                android:text="Login / Register"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/loginbtn"
+                tools:layout_constraintRight_creator="1"
+                tools:layout_constraintBottom_creator="1"
+                app:layout_constraintBottom_toTopOf="@+id/registerbtn"
+                app:layout_constraintRight_toRightOf="@+id/passfield"
+                tools:layout_constraintLeft_creator="1"
+                android:layout_marginBottom="5dp"
+                app:layout_constraintLeft_toLeftOf="@+id/passfield" />
+        </android.support.constraint.ConstraintLayout>
+    </ScrollView>
 
 </FrameLayout>

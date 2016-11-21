@@ -84,8 +84,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         My_DB = new DatabaseConnector(getApplicationContext());
 
         //TODO:(Abdulwahab) get user_name and user_id here
-        user_name = "Unknown User";
-        user_id = 0;
+        Intent intent = getIntent();
+        user_name = intent.getStringExtra("user_name");
+        user_id = intent.getIntExtra("user_id",My_DB.fetchUserID(user_name,getApplicationContext()));
 
 
 //        Snackbar snackbar = Snackbar

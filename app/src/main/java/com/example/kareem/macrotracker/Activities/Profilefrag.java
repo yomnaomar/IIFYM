@@ -14,9 +14,13 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.example.kareem.macrotracker.R;
+
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 
 /**
@@ -46,8 +50,9 @@ public class Profilefrag extends Fragment implements View.OnClickListener {
     EditText fname,lname,dob,weight,height,email;
     Button next;
     RadioGroup radiogrp;
-    Spinner weight_spinner,height_spinner;
-
+    RadioButton btn1,btn2;
+    Spinner weight_unit_spinner, height_unit_spinner;
+    int age;
 
 
 
@@ -90,19 +95,33 @@ public class Profilefrag extends Fragment implements View.OnClickListener {
         myView = inflater.inflate(R.layout.fragment_sublogin2, container, false);
         // Inflate the layout for this fragment
 
-        weight_spinner = (Spinner)myView.findViewById(R.id.unit_weight);
-        height_spinner= (Spinner)myView.findViewById(R.id.unit_height);
+        fname = (EditText)myView.findViewById(R.id.fnamefield);
+        lname = (EditText)myView.findViewById(R.id.lnamefield);
+        dob = (EditText)myView.findViewById(R.id.dobfield);
+        weight = (EditText)myView.findViewById(R.id.weightfield);
+        height=(EditText)myView.findViewById(R.id.heightfield);
+        email = (EditText)myView.findViewById(R.id.emailfield);
+        btn1 = (RadioButton)myView.findViewById(R.id.radioButton);
+        btn2 = (RadioButton)myView.findViewById(R.id.radioButton2);
+
+
+        weight_unit_spinner = (Spinner)myView.findViewById(R.id.unit_weight);
+        height_unit_spinner = (Spinner)myView.findViewById(R.id.unit_height);
+
 
         ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(myView.getContext(),
-                R.array.weight_units_array, android.R.layout.simple_spinner_item);
+                R.array.bodyweight_units_array, android.R.layout.simple_spinner_item);
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(myView.getContext(),
                 R.array.height_units_array, android.R.layout.simple_spinner_item);
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        weight_spinner.setAdapter(adapter1);
-        height_spinner.setAdapter(adapter2);
+
+
+        weight_unit_spinner.setAdapter(adapter1);
+        height_unit_spinner.setAdapter(adapter2);
+
 
         radiogrp = (RadioGroup)myView.findViewById(R.id.genderRadio);
 
@@ -141,12 +160,34 @@ public class Profilefrag extends Fragment implements View.OnClickListener {
         mListener = null;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.nextbtn:
-                //storedata then switch fragment
-                listener.switchFrag(2);
+                //storedata then switch fragment - check if all field are filled
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                try {
+                    java.util.Date d = sdf.parse(dob.getText().toString());
+                    age =Calendar.getInstance().get(Calendar.YEAR)- d.getYear();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                boolean fieldsOk = validate(new EditText[]{fname, lname, email,dob,weight,height});
+                if(fieldsOk)
+                {
+                    listener.storeuserProfile(dob.getText().toString(),fname.getText().toString(),lname.getText().toString(),email.getText().toString(),getGender(),Float.parseFloat(weight.getText().toString()),Float.parseFloat(height.getText().toString()),age,weight_unit_spinner.getSelectedItemPosition(),height_unit_spinner.getSelectedItemPosition());
+                    listener.switchFrag(2);
+                }
+                else
+                {
+                    fname.setError("All Fields Required");
+                    lname.setError("All Fields Required");
+                    email.setError("All Fields Required");
+                    dob.setError("All Fields Required");
+                    weight.setError("All Fields Required");
+                    height.setError("All Fields Required");
+                }
                 break;
         }
 
@@ -173,5 +214,15 @@ public class Profilefrag extends Fragment implements View.OnClickListener {
         // find the radiobutton by returned id
         radioButton = (RadioButton) myView.findViewById(selectedId);
         return radioButton.getText().toString();
+    }
+
+    private boolean validate(EditText[] fields){
+        for(int i=0; i<fields.length; i++){
+            EditText currentField=fields[i];
+            if(currentField.getText().toString().length()<=0 || (!btn1.isChecked() && !btn2.isChecked())){
+                return false;
+            }
+        }
+        return true;
     }
 }

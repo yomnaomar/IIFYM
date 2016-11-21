@@ -22,6 +22,25 @@ public class User {
     int percent_carbs;
     int percent_protein;
     int percent_fat;
+    int weight_unit;
+    int height_unit;
+
+    public int getWeight_unit() {
+        return weight_unit;
+    }
+
+    public void setWeight_unit(int weight_unit) {
+        this.weight_unit = weight_unit;
+    }
+
+    public int getHeight_unit() {
+        return height_unit;
+    }
+
+    public void setHeight_unit(int height_unit) {
+        this.height_unit = height_unit;
+    }
+
     public User() {
 
     }
@@ -155,6 +174,30 @@ public class User {
 
     public void setPercent_fat(int percent_fat) {
         this.percent_fat = percent_fat;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "user_id=" + user_id +
+                ", user_name='" + user_name + '\'' +
+                ", password='" + password + '\'' +
+                ", dob='" + dob + '\'' +
+                ", fname='" + fname + '\'' +
+                ", lname='" + lname + '\'' +
+                ", email='" + email + '\'' +
+                ", gender='" + gender + '\'' +
+                ", weight=" + weight +
+                ", height=" + height +
+                ", workout_freq=" + workout_freq +
+                ", age=" + age +
+                ", goal=" + goal +
+                ", percent_carbs=" + percent_carbs +
+                ", percent_protein=" + percent_protein +
+                ", percent_fat=" + percent_fat +
+                ", weight_unit=" + weight_unit +
+                ", height_unit=" + height_unit +
+                '}';
     }
 }
 
