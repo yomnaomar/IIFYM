@@ -56,40 +56,42 @@ public class DatabaseConnector {
     }
 
     //------------------------------------------------------------------------------
-    /* Mina Functions (TO DO LIST)*/
+    //TODO: Mina Functions
 
     // Composed of Functionality
-    public  Cursor getComposedMealID(long meal_id)
+    public Cursor getComposed_SimpleID(int meal_id)
     {
-        Cursor C = database.rawQuery("SELECT FROM "+Table_Composed_Of+" Where meal_id = "+meal_id , null);
-        Log.i("Composed Meal Retrieved","ID: "+meal_id+" Retrieved");
+        Cursor C = database.rawQuery("SELECT FROM "+ Table_Composed_Of +" WHERE meal_id = " + meal_id , null);
+        Log.i("Simple Meal Retrieved","ID: "+ meal_id +" Retrieved");
         return C;
     }
-    public  Cursor getComposedComplexID(long complex_id)
+    public Cursor getComposed_ComplexID(int complex_id)
     {
-        Cursor C = database.rawQuery("SELECT FROM "+Table_Composed_Of+" Where meal_id = "+complex_id , null);
-        Log.i("Composed Meal Retrieved","ID: "+complex_id+" Retrieved");
+        Cursor C = database.rawQuery("SELECT FROM " + Table_Composed_Of + " WHERE meal_id = " + complex_id, null);
+        Log.i("Complex Meal Retrieved","ID: "+ complex_id +" Retrieved");
         return C;
     }
-    public void deleteComposedMealID(long meal_id)
+    public boolean deleteComposed_MealID(int meal_id)
     {
-        database.rawQuery("DELETE FROM"+Table_Composed_Of+"WHERE meal_id ="+meal_id,null);
-        Log.i("Deleted","ID : "+meal_id+" Deleted Successfully");
+        database.rawQuery("DELETE FROM " + Table_Composed_Of + " WHERE meal_id = " + meal_id, null);
+        Log.i("Deleted","ID : "+meal_id+" Deleted successfully");
+        return true;
     }
-    public void deleteComposedComplexID(long complex_id)
+    public boolean deleteComposed_ComplexID(int complex_id)
     {
         database.rawQuery("DELETE FROM"+Table_Composed_Of+"WHERE complex_id ="+complex_id,null);
-        Log.i("Deleted","ID : "+complex_id+" Deleted Successfully");
+        Log.i("Deleted","ID : " + complex_id + " Deleted successfully");
+        return true;
     }
-    public boolean insertComposedOf (long meal_id, long complex_id)
+    public boolean insertComposedOf(int meal_id, int complex_id)
     {
-        database.rawQuery("Insert Into "+Table_Composed_Of+"(meal_id,complex_id) Values ("+meal_id+","+complex_id+");",null);
-        Log.i("Inserted","Data Inserted Successfully");
+        database.rawQuery("INSERT INTO " + Table_Composed_Of + "(meal_id,complex_id) VALUES ("+meal_id+","+complex_id+");", null);
+        Log.i("Inserted","ComposedOf meal_id(" + meal_id + ") and complex_id(" + complex_id + ") Inserted successfully");
         return true;
     }
 
     //---------------------------------
-    //NEW DATABASE HELPER FUNCTIONS
+    //TODO: KARIM DATABASE HELPER FUNCTIONS
 
     //Checks Meal table for duplicate of M using 'meal_name' as the key
     //If duplicate exists, makes no changes to the DB, else insert Meal M into Meal table
