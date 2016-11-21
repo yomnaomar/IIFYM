@@ -200,7 +200,7 @@ public class DatabaseConnector {
         return M;
     }
 
-    //Return a Cursor containing all entries where is_daily is true (1)
+    //Return a Cursor containing all entries where is_daily is true(1)
     public Cursor getAllDailyMeals()
     {
        /* openReadableDB();*/
@@ -209,11 +209,20 @@ public class DatabaseConnector {
         return C;
     }
 
-    //Return a Cursor containing all entries where is_daily is true (1)
+    //Return a Cursor containing all entries
     public Cursor getAllMeals()
     {
        /* openReadableDB();*/
         Cursor C = database.rawQuery("SELECT * FROM " + Table_Meal, null);
+        Log.i("Meals Retrieved", "All Meals Retrieved");
+        return C;
+    }
+
+    //Return a Cursor containing all entries
+    public Cursor getAllMealsSorted()
+    {
+       /* openReadableDB();*/
+        Cursor C = database.rawQuery("SELECT * FROM " + Table_Meal + "ORDER BY ASC", null);
         Log.i("Meals Retrieved", "All Meals Retrieved");
         return C;
     }
