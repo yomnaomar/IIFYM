@@ -23,9 +23,6 @@ import com.example.kareem.macrotracker.ViewComponents.Weight;
 
 public class DatabaseConnector {
 
-    private static final String Table_SavedMeals = "SavedMeals";
-    private static final String Table_DailyMeals = "DailyMeals";
-
     private static final String Table_Meal = "Meal";
     private static final String Table_Weight = "Weight";
     private static final String Table_Serving = "Serving";
@@ -89,68 +86,6 @@ public class DatabaseConnector {
         database.rawQuery("Insert Into "+Table_Composed_Of+"(meal_id,complex_id) Values ("+meal_id+","+complex_id+");",null);
         Log.i("Inserted","Data Inserted Successfully");
         return true;
-    }
-
-
-    //Returns a Cursor containing all entries with specified name
-    public Cursor getAllSavedMeals(String name)
-    {
-        Cursor C = database.rawQuery("SELECT * FROM " + Table_SavedMeals + " WHERE name = '" + name + "'", null);
-        Log.i("SavedMeal Retrieved", "ID: " + name + " Retrieved");
-        return C;
-    }
-
-    //Returns a Cursor containing all entries
-    public Cursor getAllSavedMeals()
-    {
-        Cursor C = database.rawQuery("SELECT * FROM " + Table_SavedMeals, null);
-        Log.i("SavedMeals Retrieved", "All SavedMeals Retrieved");
-        return C;
-    }
-
-    //Returns a Cursor containing all entries sorted by "name"
-    public Cursor getAllSavedMealsSorted()
-    {
-        Cursor C = database.rawQuery("SELECT * FROM " + Table_SavedMeals + " ORDER BY name ASC", null);
-        Log.i("SavedMeals Retrieved", "All SavedMeals Retrieved");
-        return C;
-    }
-
-
-    //Deletes the Meal specified by the given String name
-    public void deleteSavedMeal(String name)
-    {
-        database.delete(Table_SavedMeals, "name = '" + name + "'", null);
-        Log.i("One SavedMeal Deleted", "SavedMeal with name '" + name + "' Deleted");
-    }
-
-    //Deletes all entries from SavedMeals Table
-    public void deleteAllSavedMeals(){
-        database.rawQuery("DELETE FROM " + Table_SavedMeals, null);
-        Log.i("SavedMeals Cleared", "SavedMeals Table Cleared");
-    }
-
-    // Get a Cursor containing all information about the DailyMeal specified by the given id
-    public Cursor getOneDailyMeal_id(long id)
-    {
-        /*openReadableDB();*/
-        Cursor C = database.rawQuery("SELECT * FROM " + Table_DailyMeals + " WHERE _id = " + String.valueOf(id)  , null);
-        Log.i("DailyMeal Retrieved", "ID: " + id + " Retrieved");
-        return C;
-    }
-
-    //Return a Cursor containing all entries with specified name
-    public Cursor getAllDailyMeals(String name)
-    {
-//        openReadableDB();
-        Cursor C = database.rawQuery("SELECT * FROM " + Table_DailyMeals + " WHERE name = '" + name + "'", null);
-        Log.i("DailyMeal Retrieved", name + " Retrieved");
-        return C;
-    }
-
-    public void deleteAllDailyMeals(){
-        database.rawQuery("DELETE FROM " + Table_DailyMeals, null);
-        Log.i("DailyMeals Cleared", "DailyMeals Table Cleared");
     }
 
     //---------------------------------
@@ -223,7 +158,7 @@ public class DatabaseConnector {
 
     //Returns a meal using meal_name as the key
     public Meal GetMeal(String Meal_Name){
-        Cursor C = database.rawQuery("SELECT * FROM " + Table_SavedMeals + " WHERE meal_name = '" + Meal_Name + "'", null);
+        Cursor C = database.rawQuery("SELECT * FROM " + Table_Meal + " WHERE meal_name = '" + Meal_Name + "'", null);
         C.moveToFirst();
         int     meal_id         = C.getInt(0);      //meal)id
         String  meal_name       = C.getString(1);   //meal_name
@@ -244,7 +179,7 @@ public class DatabaseConnector {
 
     //Returns a meal using meal_id as the key
     public Meal GetMeal(int ID){
-        Cursor C = database.rawQuery("SELECT * FROM " + Table_SavedMeals + " WHERE meal_name = '" + ID + "'", null);
+        Cursor C = database.rawQuery("SELECT * FROM " + Table_Meal + " WHERE meal_name = '" + ID + "'", null);
         C.moveToFirst();
         int     meal_id         = C.getInt(0);      //meal)id
         String  meal_name       = C.getString(1);   //meal_name
