@@ -33,6 +33,8 @@ public class AddNewMealActivity extends AppCompatActivity implements View.OnClic
     private CheckBox CheckBox_SaveMeal;
     private Button Button_Enter, Button_Cancel;
 
+    private View MyView;
+
     private DatabaseConnector My_DB;
 
     private int Weight_Unit_Selected = 0;
@@ -85,6 +87,17 @@ public class AddNewMealActivity extends AppCompatActivity implements View.OnClic
             }
         });
 
+        //setup views
+        Label_PortionType.setVisibility(View.GONE);
+        RadioButton_Serving.setVisibility(View.GONE);
+        RadioButton_Weight.setVisibility(View.GONE);
+        Label_ServingNumber.setVisibility(View.GONE);
+        EditText_ServingNumber.setVisibility(View.GONE);
+        Label_Unit.setVisibility(View.GONE);
+        Spinner_Unit.setVisibility(View.GONE);
+        Label_Amount.setVisibility(View.GONE);
+        EditText_Amount.setVisibility(View.GONE);
+
         My_DB = new DatabaseConnector(getApplicationContext());
     }
 
@@ -101,16 +114,16 @@ public class AddNewMealActivity extends AppCompatActivity implements View.OnClic
                 if (RadioButton_Serving.isChecked()){
                     Label_ServingNumber.setVisibility(View.VISIBLE);
                     EditText_ServingNumber.setVisibility(View.VISIBLE);
-                    Label_Unit.setVisibility(View.GONE);
-                    Spinner_Unit.setVisibility(View.GONE);
-                    Label_Amount.setVisibility(View.GONE);
-                    EditText_Amount.setVisibility(View.GONE);
+                    Label_Unit.setVisibility(View.INVISIBLE);
+                    Spinner_Unit.setVisibility(View.INVISIBLE);
+                    Label_Amount.setVisibility(View.INVISIBLE);
+                    EditText_Amount.setVisibility(View.INVISIBLE);
                 }
                 break;
             case R.id.RadioButton_Weight:
                 if (RadioButton_Weight.isChecked()){
-                    Label_ServingNumber.setVisibility(View.GONE);
-                    EditText_ServingNumber.setVisibility(View.GONE);
+                    Label_ServingNumber.setVisibility(View.INVISIBLE);
+                    EditText_ServingNumber.setVisibility(View.INVISIBLE);
                     Label_Unit.setVisibility(View.VISIBLE);
                     Spinner_Unit.setVisibility(View.VISIBLE);
                     Label_Amount.setVisibility(View.VISIBLE);
@@ -129,14 +142,14 @@ public class AddNewMealActivity extends AppCompatActivity implements View.OnClic
             if (RadioButton_Serving.isChecked()){
                 Label_ServingNumber.setVisibility(View.VISIBLE);
                 EditText_ServingNumber.setVisibility(View.VISIBLE);
-                Label_Unit.setVisibility(View.GONE);
-                Spinner_Unit.setVisibility(View.GONE);
-                Label_Amount.setVisibility(View.GONE);
-                EditText_Amount.setVisibility(View.GONE);
+                Label_Unit.setVisibility(View.INVISIBLE);
+                Spinner_Unit.setVisibility(View.INVISIBLE);
+                Label_Amount.setVisibility(View.INVISIBLE);
+                EditText_Amount.setVisibility(View.INVISIBLE);
             }
             if (RadioButton_Weight.isChecked()){
-                Label_ServingNumber.setVisibility(View.GONE);
-                EditText_ServingNumber.setVisibility(View.GONE);
+                Label_ServingNumber.setVisibility(View.INVISIBLE);
+                EditText_ServingNumber.setVisibility(View.INVISIBLE);
                 Label_Unit.setVisibility(View.VISIBLE);
                 Spinner_Unit.setVisibility(View.VISIBLE);
                 Label_Amount.setVisibility(View.VISIBLE);
@@ -144,15 +157,15 @@ public class AddNewMealActivity extends AppCompatActivity implements View.OnClic
             }
         }
         else {
-            Label_PortionType.setVisibility(View.GONE);
-            RadioButton_Serving.setVisibility(View.GONE);
-            RadioButton_Weight.setVisibility(View.GONE);
-            Label_ServingNumber.setVisibility(View.GONE);
-            EditText_ServingNumber.setVisibility(View.GONE);
-            Label_Unit.setVisibility(View.GONE);
-            Spinner_Unit.setVisibility(View.GONE);
-            Label_Amount.setVisibility(View.GONE);
-            EditText_Amount.setVisibility(View.GONE);
+            Label_PortionType.setVisibility(View.INVISIBLE);
+            RadioButton_Serving.setVisibility(View.INVISIBLE);
+            RadioButton_Weight.setVisibility(View.INVISIBLE);
+            Label_ServingNumber.setVisibility(View.INVISIBLE);
+            EditText_ServingNumber.setVisibility(View.INVISIBLE);
+            Label_Unit.setVisibility(View.INVISIBLE);
+            Spinner_Unit.setVisibility(View.INVISIBLE);
+            Label_Amount.setVisibility(View.INVISIBLE);
+            EditText_Amount.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -273,6 +286,6 @@ public class AddNewMealActivity extends AppCompatActivity implements View.OnClic
     @Override
     protected void onResume() {
         super.onResume();
-
+        //UpdateViews();
     }
 }

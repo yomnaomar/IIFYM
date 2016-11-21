@@ -52,7 +52,7 @@
         jumboMode="true"
         optimize="true"
         revision="24.0.2"
-        sha1="f08bf52fcaf6a4c02ceee8cb7229d3f233721187">
+        sha1="cd295dccd118536c63611814a7a97d40d58c2d00">
         <dex dex="C:\Users\Kareem\AndroidStudioProjects\MacroTracker\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_a731626e34e34258ac5ea00ae031409a4f8cd03f\classes.dex" />
     </item>
     <item
@@ -70,7 +70,7 @@
         jumboMode="true"
         optimize="true"
         revision="24.0.2"
-        sha1="94319fa8d31ae248fa9a6903ad532e9750b18141">
+        sha1="955b5bba31fca96def52c9225f41683f3af55497">
         <dex dex="C:\Users\Kareem\AndroidStudioProjects\MacroTracker\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_b7f20b9c23fe60e77d13dbb1b072454ffa63add2\classes.dex" />
     </item>
     <item
