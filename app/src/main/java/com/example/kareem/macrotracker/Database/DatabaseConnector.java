@@ -205,6 +205,15 @@ public class DatabaseConnector {
     {
        /* openReadableDB();*/
         Cursor C = database.rawQuery("SELECT * FROM " + Table_Meal + " where is_daily = 1", null);
+        Log.i("Meals Retrieved", "All Daily Meals Retrieved");
+        return C;
+    }
+
+    //Return a Cursor containing all entries where is_daily is true (1)
+    public Cursor getAllMeals()
+    {
+       /* openReadableDB();*/
+        Cursor C = database.rawQuery("SELECT * FROM " + Table_Meal, null);
         Log.i("Meals Retrieved", "All Meals Retrieved");
         return C;
     }
