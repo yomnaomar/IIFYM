@@ -61,7 +61,7 @@
         jumboMode="true"
         optimize="true"
         revision="24.0.2"
-        sha1="527a0ac086bcd830d9ef9d96225563370bf1f16a">
+        sha1="3c392ee2a48e808de88fb66c61efdd1a96822d38">
         <dex dex="C:\Users\GIGABYTE\Downloads\MacroTracker\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_da9653e3425d705c19c4c422b13dd32e74d3376b\classes.dex" />
     </item>
     <item
@@ -79,7 +79,7 @@
         jumboMode="true"
         optimize="true"
         revision="24.0.2"
-        sha1="27cf26f579c175d46f738188e5a1d054a469d6ef">
+        sha1="1bbba439fe2c2e9650188c464c657a6addaf8e2f">
         <dex dex="C:\Users\GIGABYTE\Downloads\MacroTracker\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_9c20507d7a416f7e9c66278a6e416c9a85598353\classes.dex" />
     </item>
     <item

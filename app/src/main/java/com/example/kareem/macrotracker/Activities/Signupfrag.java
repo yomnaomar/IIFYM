@@ -1,6 +1,7 @@
 package com.example.kareem.macrotracker.Activities;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -39,7 +40,7 @@ public class Signupfrag extends Fragment implements View.OnClickListener {
     //GUI vars ----------------------------------
     View myView;
     EditText username,pass;
-    Button login,register;
+    Button login,register,skip;
 
 
 
@@ -87,10 +88,11 @@ public class Signupfrag extends Fragment implements View.OnClickListener {
         pass = (EditText)myView.findViewById(R.id.passfield);
         login = (Button)myView.findViewById(R.id.loginbtn);
         register = (Button)myView.findViewById(R.id.registerbtn);
+        skip=(Button)myView.findViewById(R.id.skipbtn);
 
         login.setOnClickListener(this);
         register.setOnClickListener(this);
-
+        skip.setOnClickListener(this);
 
         return myView;
 
@@ -110,10 +112,14 @@ public class Signupfrag extends Fragment implements View.OnClickListener {
                     pass.setError("Both fields Required");
                 }
                 break;
-            case R.id.registerbtn:
-                Log.d("DEBUG", "Register Button Clicked");
-                listener.userReg(username.getText().toString(),pass.getText().toString());
+//            case R.id.registerbtn:
+//                Log.d("DEBUG", "Register Button Clicked");
+//                listener.userReg(username.getText().toString(),pass.getText().toString());
+//                break;
+            case R.id.skipbtn:
+                listener.openHome();
                 break;
+
         }
 
     }

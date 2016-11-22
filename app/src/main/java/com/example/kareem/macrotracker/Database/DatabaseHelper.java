@@ -16,7 +16,7 @@ import android.util.Log;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    private static final String DATABASE_NAME = "My_Meals";
+    private static final String DATABASE_NAME = "MacroTrackerDB";
     private static final String Table_SavedMeals = "SavedMeals";
     private static final String Table_DailyMeals = "DailyMeals";
 
@@ -92,7 +92,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         //ON UPDATE is not needed because meal_id will never be updated, it is hidden from the user
 
         String createTable_User = "CREATE TABLE " + Table_User + " " +
-                "(user_id           INTEGER PRIMARY KEY, " +
+                "(_id               INTEGER PRIMARY KEY, " +
                 "user_name          TEXT UNIQUE, " +
                 "password           TEXT, " +
                 "dob                TEXT, " +
@@ -107,7 +107,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "email              TEXT, " +
                 "percent_carbs      INTEGER, " +
                 "percent_protein    INTEGER, " +
-                "percent_fat        INTEGER);";
+                "percent_fat        INTEGER, " +
+                "weight_unit        INTEGER, " +
+                "height_unit        INTEGER); ";
 
         String createTable_Composed_Of = "CREATE TABLE " + Table_Composed_Of + " " +
                 "(meal_id       INTEGER, " +
@@ -126,6 +128,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(createTable_Weight);
         db.execSQL(createTable_Serving);
         db.execSQL(createTable_User);
+        Log.d("UserTABLE", "user table created ");
         db.execSQL(createTable_Composed_Of);
     }
 

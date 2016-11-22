@@ -70,7 +70,7 @@
 
 
     <!-- login fragments-->
-    <string name="frag1text">Signup</string>
+    <string name="frag1text">Welcome</string>
     <string name="frag2text">Profile</string>
     <string name="frag3text">Goals and Preferences</string>
     <string name="title_activity_login">Login</string>

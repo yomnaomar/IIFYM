@@ -40,6 +40,8 @@ public class DatabaseConnector {
         databaseHelper = DatabaseHelper.getInstance(context);
         openReadableDB();
         openWriteableDB();
+        Log.d("DBNAME", String.valueOf(context.getDatabasePath(databaseHelper.getDatabaseName())));
+
     }
 
     public void openReadableDB() {
@@ -230,7 +232,7 @@ public class DatabaseConnector {
     //Returns true if an entry with the same name as Meal M exists
     //Returns false otherwise
     private boolean isDuplicateName(Meal M){
-        Cursor C = database.rawQuery("SELECT * FROM " + Table_Meal + " WHERE name = '" + M.getMeal_name() + "'", null);
+        Cursor C = database.rawQuery("SELECT * FROM " + Table_Meal + " WHERE meal_name = '" + M.getMeal_name() + "'", null);
         Log.i("Meal Retrieved", "ID: " + M.getMeal_name() + " Retrieved");
         C.moveToFirst();
         if (C.getCount() == 0) {
@@ -238,6 +240,7 @@ public class DatabaseConnector {
         }
         return true;
     }
+
 
     //Checks Weight table for duplicate of M using 'meal_name' as the key
     //If duplicate exists, makes no changes to the DB, else insert W_U and W_A into Weight table
@@ -369,12 +372,32 @@ public class DatabaseConnector {
 
 //----------------TODO: User Insert /Delete/Update + Registration/Login methods (Abdulwahab)------------------
 
+    private boolean isDuplicateUserName(User M){
+        Cursor C = database.rawQuery("SELECT * FROM " + Table_User + " WHERE user_name = '" + M.getUser_name() + "'", null);
+        Log.i("User Retrieved", "user_name: " + M.getUser_name() + " Retrieved");
+        C.moveToFirst();
+        if (C.getCount() == 0) {
+            return false;
+        }
+        return true;
+    }
+
+//    private boolean checkLogin(String username, String password){
+//        Cursor C = database.rawQuery("SELECT * FROM " +Table_User + " WHERE user_name = ? AND password = ?", new String[] {username, password});
+//        Log.i("User Retrieved", "user_name: " + username + " Retrieved");
+//        C.moveToFirst();
+//        if (C.getCount() == 0) {
+//            return false; //no such user
+//        }
+//        return true; //found user
+//    }
     //Insert
     public boolean insertUser(User M)
     {
-        Cursor C = getAllUsers(M.getUser_name());
-        C.moveToFirst();
-        if(C.getCount() == 0) {
+        if (isDuplicateUserName(M)) {
+            Log.i("User insert failed:", "User with duplicate name found: " + M.getUser_name());
+            return false;
+        }
             ContentValues newUser = new ContentValues();
             newUser.put("user_name", M.getUser_name());
             newUser.put("fname", M.getFname());
@@ -389,15 +412,12 @@ public class DatabaseConnector {
             newUser.put("gender", M.getGender());
             newUser.put("goal", M.getGoal());
             newUser.put("workout_freq", M.getWorkout_freq());
+            newUser.put("weight_unit",M.getWeight_unit());
+            newUser.put("height_unit",M.getHeight_unit());
 
             database.insert(Table_User, null, newUser);
-            Log.i("User Inserted", "User inserted: " + M.getUser_name() + " " + M.getFname() + " " + M.getLname() + " " + M.getDob() + " " + M.getWeight() + " " + M.getHeight());
+            Log.i("User Inserted", "User inserted: " + M.toString());
             return true;
-        }
-        else {
-            Log.i("User Insert Fail", "User duplicate found: " + M.getUser_name());
-            return false;
-        }
 
     }
 
@@ -410,7 +430,7 @@ public class DatabaseConnector {
 
     //Update
 
-    public boolean updateUser(long id,String username,String fname,String lname,String dob,int age,int weight, int height,int pcarbs, int pfat, int pprotein, String gender, int goal, int workoutfreq )
+    public boolean updateUser(long id,String username,String fname,String lname,String dob,int age,int weight, int height,int pcarbs, int pfat, int pprotein, String gender, int goal, int workoutfreq,int weightunit,int heightunit )
     {
         Cursor C = getAllUsers(username);
         C.moveToFirst();
@@ -429,6 +449,8 @@ public class DatabaseConnector {
             editUser.put("gender",gender );
             editUser.put("goal", goal);
             editUser.put("workout_freq",workoutfreq);
+            editUser.put("weight_unit",weightunit);
+            editUser.put("height_unit",heightunit);
 
             database.update(Table_User,editUser, "user_name"+username, null );
             return true;
@@ -468,39 +490,43 @@ public class DatabaseConnector {
     }
     public boolean validateLogin(String userName, String userPass, Context context) {
 
+        openWriteableDB();
         //SELECT
-        String[] columns = {"user_id"};
+        String[] columns = {"_id"};
 
         //WHERE clause
-        String selection = "user_name=? AND password=?";
+        String selection = "user_name = ? AND password = ?";
 
         //WHERE clause arguments
         String[] selectionArgs = {userName, userPass};
         Cursor c = null;
 
         try{
-            //SELECT userId FROM login WHERE username=userName AND password=userPass
+            //SELECT userId FROM login WHERE user_name=userName AND password=userPass
             c = database.query(Table_User, columns, selection, selectionArgs, null, null, null);
             c.moveToFirst();
 
             int i = c.getCount();
-            c.close();
+            Log.d("CursorCount","count: "+i);
             if(i <= 0){
                 Toast.makeText(context, "Looks Like You're New !", Toast.LENGTH_SHORT).show();
+                Log.d("VALIDATE","NEW USER FOUND" );
                 return false;
             }
 
             return true;
         }catch(Exception e){
-            e.printStackTrace();
+            Log.d("VALIDATE", e.getMessage());
             return false;
+        }finally {
+            c.close();
         }
     }//validate Login
 
     public int fetchUserID(String userName, Context context) {
 
         //SELECT
-        String[] columns = {"user_id"};
+        String[] columns = {"_id"};
 
         //WHERE clause
         String selection = "user_name=?";
@@ -518,6 +544,7 @@ public class DatabaseConnector {
             //c.close();
             if(i <= 0){
                 Toast.makeText(context, "UserID Not Found in DB", Toast.LENGTH_SHORT).show();
+                Log.d("FETCHUID","UserID Not Found in DB" );
                 return 0;
             }
 
@@ -527,4 +554,21 @@ public class DatabaseConnector {
             return 0;
         }
     }//validate Login
+
+    public boolean ValidateLogin(String username, String pwd,Context context ) {
+        String[] selectionArgs = {username, pwd};
+        String[] columns = {"user_name", "password"};
+        Cursor cursor = database.query(Table_User, columns, "user_name=? and password=?", selectionArgs, null, null, null);
+
+        if (cursor.moveToNext()) {
+            //Success
+            return true;
+        } else {
+            //Failure
+            Toast.makeText(context, "Looks Like You're New !", Toast.LENGTH_SHORT).show();
+        }
+        cursor.close();
+        return false;
+    }
+
 }

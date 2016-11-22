@@ -214,8 +214,6 @@ public class Login extends AppCompatActivity implements myFragEventListener {
                 //login failed - message will be displayed by validateLogin()
             }
 
-
-
     }
     @Override
     public void userReg(String username,String password) {

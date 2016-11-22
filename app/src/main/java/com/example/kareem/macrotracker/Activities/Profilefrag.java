@@ -169,14 +169,15 @@ public class Profilefrag extends Fragment implements View.OnClickListener {
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                 try {
                     java.util.Date d = sdf.parse(dob.getText().toString());
-                    age =Calendar.getInstance().get(Calendar.YEAR)- d.getYear();
+                   // age = Calendar.getInstance().get(Calendar.YEAR)- d.getYear(); //TODO: fix age calculation
+                    age=0;
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
                 boolean fieldsOk = validate(new EditText[]{fname, lname, email,dob,weight,height});
                 if(fieldsOk)
                 {
-                    listener.storeuserProfile(dob.getText().toString(),fname.getText().toString(),lname.getText().toString(),email.getText().toString(),getGender(),Float.parseFloat(weight.getText().toString()),Float.parseFloat(height.getText().toString()),age,weight_unit_spinner.getSelectedItemPosition(),height_unit_spinner.getSelectedItemPosition());
+                    listener.storeuserProfile(fname.getText().toString(),lname.getText().toString(),dob.getText().toString(),email.getText().toString(),getGender(),Float.parseFloat(weight.getText().toString()),Float.parseFloat(height.getText().toString()),age,weight_unit_spinner.getSelectedItemPosition(),height_unit_spinner.getSelectedItemPosition());
                     listener.switchFrag(2);
                 }
                 else

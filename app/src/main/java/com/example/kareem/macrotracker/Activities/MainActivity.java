@@ -92,7 +92,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //        Snackbar snackbar = Snackbar
 //                .make(coordinatorLayout, "Welcome "+ user_name, Snackbar.LENGTH_SHORT);
 //        snackbar.show();
-        Toast.makeText(this,"Welcome "+ user_name,Toast.LENGTH_SHORT).show();
+
+        Toast.makeText(this,"Welcome "+ user_name +"ID: "+user_id,Toast.LENGTH_SHORT).show(); //TODO: call only once
     }
 
     @Override
@@ -120,6 +121,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Intent intent = new Intent();
             intent.setClassName(this, "com.example.kareem.macrotracker.Activities.ViewSavedMealsActivity");
             startActivity(intent);
+            return true;
+        }
+        if(id==R.id.logout_menu_btn)
+        {
+            finish();
+            // session.isUserLoggedIn()== false;
+            Intent in = new Intent(getApplicationContext(), Login.class);
+            startActivity(in);
             return true;
         }
         return super.onOptionsItemSelected(item);
