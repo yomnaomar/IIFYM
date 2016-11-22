@@ -65,33 +65,58 @@ public class DatabaseConnector {
     public  Cursor getComposedMealID(long meal_id)
     {
         Cursor C = database.rawQuery("SELECT FROM "+Table_Composed_Of+" Where meal_id = "+meal_id , null);
-        Log.i("Composed Meal Retrieved","ID: "+meal_id+" Retrieved");
+        Log.i("Mina","ID: "+meal_id+" Retrieved");
         return C;
     }
     public  Cursor getComposedComplexID(long complex_id)
     {
         Cursor C = database.rawQuery("SELECT FROM "+Table_Composed_Of+" Where meal_id = "+complex_id , null);
-        Log.i("Composed Meal Retrieved","ID: "+complex_id+" Retrieved");
+        Log.i("Mina","ID: "+complex_id+" Retrieved");
         return C;
     }
     public void deleteComposedMealID(long meal_id)
     {
         database.rawQuery("DELETE FROM"+Table_Composed_Of+"WHERE meal_id ="+meal_id,null);
-        Log.i("Deleted","ID : "+meal_id+" Deleted Successfully");
+        Log.i("Mina","ID : "+meal_id+" Deleted Successfully");
     }
     public void deleteComposedComplexID(long complex_id)
     {
         database.rawQuery("DELETE FROM"+Table_Composed_Of+"WHERE complex_id ="+complex_id,null);
-        Log.i("Deleted","ID : "+complex_id+" Deleted Successfully");
+        Log.i("Mina","ID : "+complex_id+" Deleted Successfully");
     }
     public boolean insertComposedOf (long meal_id, long complex_id)
     {
         database.rawQuery("Insert Into "+Table_Composed_Of+"(meal_id,complex_id) Values ("+meal_id+","+complex_id+");",null);
-        Log.i("Inserted","Data Inserted Successfully");
+        Log.i("Mina","Data Inserted Successfully");
         return true;
     }
 
-
+    // Return All Meals Where is Daily = true
+    public Cursor getAllIsDailyMeals(){
+        Cursor C = database.rawQuery("Select * From "+Table_Meal+"Where is_daily = 1",null);
+        Log.i("Mina","All Daily Meals Retrieved");
+        return C;
+    }
+    // Change all is_daily to false -> integer 0 in meals table
+    public boolean setAllIsDailyToFalse()
+    {
+        database.rawQuery("UPDATE Meal SET is_daily = 0",null);
+        Log.i("Mina","All is_daily Column is set to 0");
+        return true;
+    }
+    // Change all is_daily to True -> integer 1 in meals table
+    public boolean setAllIsDailyToTrue()
+    {
+        database.rawQuery("UPDATE Meal SET is_daily = 1",null);
+        Log.i("Mina","All is_daily Column is set to 1");
+        return true;
+    }
+    public Cursor getWeightTuple(long meal_id)
+    {
+        Cursor C = database.rawQuery("Select * From "+Table_Weight+"Where meal_id = "+meal_id,null);
+        Log.i("Mina","Weight Tuple is Retrieved Correctly");
+        return C;
+    }
     //Returns a Cursor containing all entries with specified name
     public Cursor getAllSavedMeals(String name)
     {
