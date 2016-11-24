@@ -31,10 +31,10 @@
         <activity android:name=".Activities.AddNewMealActivity"
             android:screenOrientation="portrait"
             />
-        <activity android:name=".Activities.ViewSavedMealsActivity"
+      <!--  <activity android:name=".Activities.ViewSavedMealsActivity"
             android:screenOrientation="portrait"
             />
-        <activity android:name=".Activities.ViewSavedMealActivity"></activity>
+        <activity android:name=".Activities.ViewSavedMealActivity"></activity>-->
         <activity
             android:name=".Activities.Login"
             android:label="@string/app_name"
