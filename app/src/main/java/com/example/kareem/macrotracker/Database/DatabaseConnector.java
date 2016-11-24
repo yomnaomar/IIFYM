@@ -61,35 +61,60 @@ public class DatabaseConnector {
     //TODO: Mina Functions
 
     // Composed of Functionality
-    public Cursor getComposed_SimpleID(int meal_id)
+    public  Cursor getComposedMealID(long meal_id)
     {
-        Cursor C = database.rawQuery("SELECT FROM "+ Table_Composed_Of +" WHERE meal_id = " + meal_id , null);
-        Log.i("Simple Meal Retrieved","ID: "+ meal_id +" Retrieved");
+        Cursor C = database.rawQuery("SELECT FROM "+Table_Composed_Of+" Where meal_id = "+meal_id , null);
+        Log.i("Mina","ID: "+meal_id+" Retrieved");
         return C;
     }
-    public Cursor getComposed_ComplexID(int complex_id)
+    public  Cursor getComposedComplexID(long complex_id)
     {
-        Cursor C = database.rawQuery("SELECT FROM " + Table_Composed_Of + " WHERE meal_id = " + complex_id, null);
-        Log.i("Complex Meal Retrieved","ID: "+ complex_id +" Retrieved");
+        Cursor C = database.rawQuery("SELECT FROM "+Table_Composed_Of+" Where meal_id = "+complex_id , null);
+        Log.i("Mina","ID: "+complex_id+" Retrieved");
         return C;
     }
-    public boolean deleteComposed_MealID(int meal_id)
+    public void deleteComposedMealID(long meal_id)
     {
-        database.rawQuery("DELETE FROM " + Table_Composed_Of + " WHERE meal_id = " + meal_id, null);
-        Log.i("Deleted","ID : "+meal_id+" Deleted successfully");
-        return true;
+        database.rawQuery("DELETE FROM"+Table_Composed_Of+"WHERE meal_id ="+meal_id,null);
+        Log.i("Mina","ID : "+meal_id+" Deleted Successfully");
     }
-    public boolean deleteComposed_ComplexID(int complex_id)
+    public void deleteComposedComplexID(long complex_id)
     {
         database.rawQuery("DELETE FROM"+Table_Composed_Of+"WHERE complex_id ="+complex_id,null);
-        Log.i("Deleted","ID : " + complex_id + " Deleted successfully");
+        Log.i("Mina","ID : "+complex_id+" Deleted Successfully");
+    }
+    public boolean insertComposedOf (long meal_id, long complex_id)
+    {
+        database.rawQuery("Insert Into "+Table_Composed_Of+"(meal_id,complex_id) Values ("+meal_id+","+complex_id+");",null);
+        Log.i("Mina","Data Inserted Successfully");
         return true;
     }
-    public boolean insertComposedOf(int meal_id, int complex_id)
+
+    // Return All Meals Where is Daily = true
+    public Cursor getAllIsDailyMeals(){
+        Cursor C = database.rawQuery("Select * From "+Table_Meal+"Where is_daily = 1",null);
+        Log.i("Mina","All Daily Meals Retrieved");
+        return C;
+    }
+    // Change all is_daily to false -> integer 0 in meals table
+    public boolean setAllIsDailyToFalse()
     {
-        database.rawQuery("INSERT INTO " + Table_Composed_Of + "(meal_id,complex_id) VALUES ("+meal_id+","+complex_id+");", null);
-        Log.i("Inserted","ComposedOf meal_id(" + meal_id + ") and complex_id(" + complex_id + ") Inserted successfully");
+        database.rawQuery("UPDATE Meal SET is_daily = 0",null);
+        Log.i("Mina","All is_daily Column is set to 0");
         return true;
+    }
+    // Change all is_daily to True -> integer 1 in meals table
+    public boolean setAllIsDailyToTrue()
+    {
+        database.rawQuery("UPDATE Meal SET is_daily = 1",null);
+        Log.i("Mina","All is_daily Column is set to 1");
+        return true;
+    }
+    public Cursor getWeightTuple(long meal_id)
+    {
+        Cursor C = database.rawQuery("Select * From "+Table_Weight+"Where meal_id = "+meal_id,null);
+        Log.i("Mina","Weight Tuple is Retrieved Correctly");
+        return C;
     }
 
     //---------------------------------
