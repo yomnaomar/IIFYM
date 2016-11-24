@@ -52,7 +52,7 @@ public class DatabaseConnector {
         database = databaseHelper.getWritableDatabase();
     }
 
-    public void close() {
+    public void close() { //TODO: being used on logout currently
         if (database != null)
             database.close();
     }
@@ -208,7 +208,7 @@ public class DatabaseConnector {
 
     //Returns a meal using meal_id as the key
     public Meal GetMeal(int ID){
-        Cursor C = database.rawQuery("SELECT * FROM " + Table_Meal + " WHERE meal_name = '" + ID + "'", null);
+        Cursor C = database.rawQuery("SELECT * FROM " + Table_Meal + " WHERE meal_id = '" + ID + "'", null);
         C.moveToFirst();
         int     meal_id         = C.getInt(0);      //meal)id
         String  meal_name       = C.getString(1);   //meal_name
@@ -450,14 +450,14 @@ public class DatabaseConnector {
 
     public void deleteUser(String username)
     {
-        database.delete(Table_User, "username = '" + username + "'", null);
+        database.delete(Table_User, "user_name = '" + username + "'", null);
     }
 
     //Update
 
     public boolean updateUser(long id,String username,String fname,String lname,String dob,int age,int weight, int height,int pcarbs, int pfat, int pprotein, String gender, int goal, int workoutfreq,int weightunit,int heightunit )
     {
-        Cursor C = getAllUsers(username);
+        Cursor C = getAllUsers();
         C.moveToFirst();
         if(C.getCount() == 0) {
             ContentValues editUser = new ContentValues();
@@ -499,23 +499,17 @@ public class DatabaseConnector {
         return C;
 
     }
-    public Cursor getAllUsers(String username)
-    {
-        Cursor C = database.rawQuery("SELECT * FROM " + Table_User, null);
-        Log.i("Users Retrieved", username + " Retrieved");
-        return C;
-
-    }
     public Cursor getAllUsers()
     {
         Cursor C = database.rawQuery("SELECT * FROM " + Table_User, null);
-        Log.i("Users Retrieved", "All Users Retrieved");
+        Log.i("Users Retrieved", " Retrieved");
         return C;
 
     }
+
     public boolean validateLogin(String userName, String userPass, Context context) {
 
-        openWriteableDB();
+        //openWriteableDB();
         //SELECT
         String[] columns = {"_id"};
 
@@ -528,7 +522,10 @@ public class DatabaseConnector {
 
         try{
             //SELECT userId FROM login WHERE user_name=userName AND password=userPass
-            c = database.query(Table_User, columns, selection, selectionArgs, null, null, null);
+            //c = database.query(Table_User, columns, selection, selectionArgs, null, null, null);
+            //c = database.rawQuery("SELECT _id FROM User WHERE user_name like ? AND password like ?", selectionArgs);
+            String sql = "SELECT * FROM User WHERE user_name = '" + userName + "' AND password = '" + userPass + "'";
+            c= database.rawQuery(sql, null);
             c.moveToFirst();
 
             int i = c.getCount();

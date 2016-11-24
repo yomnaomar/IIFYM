@@ -125,8 +125,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         if(id==R.id.logout_menu_btn)
         {
+            My_DB.close();
             finish();
-            // session.isUserLoggedIn()== false;
             Intent in = new Intent(getApplicationContext(), Login.class);
             startActivity(in);
             return true;

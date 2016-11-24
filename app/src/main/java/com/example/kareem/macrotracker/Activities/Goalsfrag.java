@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.InputFilter;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,7 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 
 import com.example.kareem.macrotracker.R;
+import com.example.kareem.macrotracker.ViewComponents.InputFilterMinMax;
 
 
 /**
@@ -91,7 +93,9 @@ public class Goalsfrag extends Fragment implements  View.OnClickListener {
         pfat = (EditText)myView.findViewById(R.id.fatfield);
         pprotein = (EditText)myView.findViewById(R.id.proteinfield);
 
-
+        pcarbs.setFilters(new InputFilter[]{ new InputFilterMinMax("0", "100")});
+        pfat.setFilters(new InputFilter[]{ new InputFilterMinMax("0", "100")});
+        pprotein.setFilters(new InputFilter[]{ new InputFilterMinMax("0", "100")});
 
         goal_spinner= (Spinner)myView.findViewById(R.id.goalSpinner);
         workout_spinner=(Spinner)myView.findViewById(R.id.workout_freq_spinner);

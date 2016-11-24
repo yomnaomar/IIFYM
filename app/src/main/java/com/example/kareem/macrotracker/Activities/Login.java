@@ -53,6 +53,7 @@ public class Login extends AppCompatActivity implements myFragEventListener {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        My_DB = new DatabaseConnector(getApplicationContext());
         // Specify that tabs should be displayed in the action bar.
 
 
@@ -64,10 +65,10 @@ public class Login extends AppCompatActivity implements myFragEventListener {
         mViewPager.setAdapter(mSectionsPagerAdapter);
         mViewPager.setSwipeable(false); //disable swiping with gestures ( this will lock the view and restrict moving to buttons only)
 
-        My_DB = new DatabaseConnector(getApplicationContext());
 
-        My_DB.openReadableDB();
-        My_DB.openWriteableDB();
+
+        //My_DB.openReadableDB();
+        //My_DB.openWriteableDB();
         newUser = new User(); //instantiate user
     }
 
@@ -75,7 +76,7 @@ public class Login extends AppCompatActivity implements myFragEventListener {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_login, menu);
+        //getMenuInflater().inflate(R.menu.menu_login, menu);
         return true;
     }
 
@@ -158,7 +159,7 @@ public class Login extends AppCompatActivity implements myFragEventListener {
                     Goalsfrag frag3 = new Goalsfrag();
                     return frag3;
                 default:
-                  return null;
+                    return null;
             }
         }
 
@@ -202,17 +203,17 @@ public class Login extends AppCompatActivity implements myFragEventListener {
         //check if user exists when trying to login (check credentials)
         //Cursor mCursor = My_DB.getUser(username);
         if(My_DB.validateLogin(username,password,getApplicationContext()))
-            {
-                //open home page here (main activity) and send user_id
-                Intent intent = new Intent(this, MainActivity.class);
-                intent.putExtra("user_id", My_DB.fetchUserID(username,getApplicationContext())); //get user_id
-                startActivity(intent);
-            }
-            else
-            {
-                userReg(username,password);
-                //login failed - message will be displayed by validateLogin()
-            }
+        {
+            //open home page here (main activity) and send user_id
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.putExtra("user_id", My_DB.fetchUserID(username,getApplicationContext())); //get user_id
+            startActivity(intent);
+        }
+        else
+        {
+            userReg(username,password);
+            //login failed - message will be displayed by validateLogin()
+        }
 
     }
     @Override
@@ -254,7 +255,7 @@ public class Login extends AppCompatActivity implements myFragEventListener {
 
     @Override
     public void switchFrag(int pos) {
-              mViewPager.setCurrentItem(pos);
+        mViewPager.setCurrentItem(pos);
     }
 
 

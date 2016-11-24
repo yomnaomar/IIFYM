@@ -48,7 +48,7 @@ public class Profilefrag extends Fragment implements View.OnClickListener {
     //GUI vars ----------------------------------
     View myView;
     EditText fname,lname,dob,weight,height,email;
-    Button next;
+    Button next,cancel;
     RadioGroup radiogrp;
     RadioButton btn1,btn2;
     Spinner weight_unit_spinner, height_unit_spinner;
@@ -126,7 +126,9 @@ public class Profilefrag extends Fragment implements View.OnClickListener {
         radiogrp = (RadioGroup)myView.findViewById(R.id.genderRadio);
 
         next = (Button)myView.findViewById(R.id.nextbtn);
+        cancel=(Button)myView.findViewById(R.id.cancelBtn);
         next.setOnClickListener(this);
+        cancel.setOnClickListener(this);
 
         //TODO(Abdulwahab): get text field data and send to newUser in Login Activity
 
@@ -189,6 +191,9 @@ public class Profilefrag extends Fragment implements View.OnClickListener {
                     weight.setError("All Fields Required");
                     height.setError("All Fields Required");
                 }
+                break;
+            case R.id.cancelBtn:
+                listener.switchFrag(0);
                 break;
         }
 
