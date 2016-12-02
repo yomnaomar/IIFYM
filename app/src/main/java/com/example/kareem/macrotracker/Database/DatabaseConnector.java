@@ -8,10 +8,10 @@ import android.database.sqlite.SQLiteException;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.example.kareem.macrotracker.ViewComponents.Meal;
-import com.example.kareem.macrotracker.ViewComponents.Portion_Type;
-import com.example.kareem.macrotracker.ViewComponents.User;
-import com.example.kareem.macrotracker.ViewComponents.Weight;
+import com.example.kareem.macrotracker.Custom_Objects.Meal;
+import com.example.kareem.macrotracker.Custom_Objects.Portion_Type;
+import com.example.kareem.macrotracker.Custom_Objects.User;
+import com.example.kareem.macrotracker.Custom_Objects.Weight;
 
 /**
  * Created by Kareem on 8/5/2016.

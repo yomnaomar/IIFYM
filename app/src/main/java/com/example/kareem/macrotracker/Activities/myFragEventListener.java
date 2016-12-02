@@ -1,7 +1,5 @@
 package com.example.kareem.macrotracker.Activities;
 
-import com.example.kareem.macrotracker.ViewComponents.User;
-
 //This listener is used to listen to fragment function calls (events), the methods are then called from Activity classes (e.g. Login) through this listener
 public interface myFragEventListener {
 

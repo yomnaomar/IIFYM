@@ -8,9 +8,9 @@ import android.widget.TextView;
 
 import com.example.kareem.macrotracker.Database.DatabaseConnector;
 import com.example.kareem.macrotracker.R;
-import com.example.kareem.macrotracker.ViewComponents.Meal;
-import com.example.kareem.macrotracker.ViewComponents.Portion_Type;
-import com.example.kareem.macrotracker.ViewComponents.Weight;
+import com.example.kareem.macrotracker.Custom_Objects.Meal;
+import com.example.kareem.macrotracker.Custom_Objects.Portion_Type;
+import com.example.kareem.macrotracker.Custom_Objects.Weight;
 
 public class ViewMealActivity extends AppCompatActivity implements View.OnClickListener {
     private TextView Text_MealName, Text_Portion, Text_Carbs, Text_Protein, Text_Fat;

@@ -21,7 +21,7 @@ import android.widget.Toast;
 
 import com.example.kareem.macrotracker.Database.DatabaseConnector;
 import com.example.kareem.macrotracker.R;
-import com.example.kareem.macrotracker.ViewComponents.Meal;
+import com.example.kareem.macrotracker.Custom_Objects.Meal;
 
 public class AddNewMealActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener{
 

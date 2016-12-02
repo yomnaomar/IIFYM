@@ -13,12 +13,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.example.kareem.macrotracker.Database.DatabaseConnector;
-import com.example.kareem.macrotracker.R;
 import com.example.kareem.macrotracker.Custom_Objects.Body_Height_Unit;
 import com.example.kareem.macrotracker.Custom_Objects.Body_Weight_Unit;
-import com.example.kareem.macrotracker.View_Components.LockableViewPager;
 import com.example.kareem.macrotracker.Custom_Objects.User;
+import com.example.kareem.macrotracker.Database.DatabaseConnector;
+import com.example.kareem.macrotracker.R;
+import com.example.kareem.macrotracker.ViewComponents.LockableViewPager;
 
 public class Login extends AppCompatActivity implements myFragEventListener {
 
