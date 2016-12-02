@@ -9,6 +9,7 @@ import android.preference.PreferenceManager;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,12 +19,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.kareem.macrotracker.Custom_Objects.Meal;
+import com.example.kareem.macrotracker.Custom_Objects.Portion_Type;
 import com.example.kareem.macrotracker.Database.DatabaseConnector;
 import com.example.kareem.macrotracker.R;
-import com.example.kareem.macrotracker.Custom_Objects.Meal;
 import com.example.kareem.macrotracker.ViewComponents.MealAdapter;
 import com.example.kareem.macrotracker.ViewComponents.OnListItemDeletedListener;
-import com.example.kareem.macrotracker.Custom_Objects.Portion_Type;
 
 import java.util.ArrayList;
 
@@ -86,13 +87,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Intent intent = getIntent();
         user_name = intent.getStringExtra("user_name");
         user_id = intent.getIntExtra("user_id",My_DB.fetchUserID(user_name,getApplicationContext()));
-
+        Toast.makeText(this,"Welcome "+ user_name +" ID: "+ user_id, Toast.LENGTH_SHORT).show();
 
 //        Snackbar snackbar = Snackbar
 //                .make(coordinatorLayout, "Welcome "+ user_name, Snackbar.LENGTH_SHORT);
 //        snackbar.show();
 
-        Toast.makeText(this,"Welcome "+ user_name +"ID: "+user_id,Toast.LENGTH_SHORT).show(); //TODO: call only once
+        //TODO KILL DUMMEIS
+//        User DummyBoy = new User();
+//        //DummyBoy = My_DB.getUser_ReturnsUser("DummyBoy");
+//        DummyBoy = My_DB.getUser_ReturnsUser("DebuggerDummy");
+//        Toast.makeText(this,"Welcome "+ DummyBoy.getUser_name() +" ID: "+DummyBoy.getUser_id(),Toast.LENGTH_SHORT).show(); //TODO: call only once
     }
 
     @Override
@@ -124,7 +129,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         if(id==R.id.logout_menu_btn)
         {
-            My_DB.close();
+            //My_DB.close();
             finish();
             Intent in = new Intent(getApplicationContext(), Login.class);
             startActivity(in);
@@ -232,6 +237,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 else    {is_daily = false;}
                 int     user_id         = C.getInt(8);      //user_id
                 Meal M = new Meal(meal_id,meal_name,carbs,protein,fat,portion,is_daily,user_id);
+                Log.d("Meal Retrieved:", "Name: " + M.getMeal_name() + " " + M.getMeal_id() + " "
+                + M.getCarbs() + " " + M.getProtein() + " " + M.getFat());
                 My_MealAdapter.add(M);
             }
         }

@@ -43,9 +43,9 @@ public class MealAdapter extends ArrayAdapter<Meal> {
 
         // Populate the data into the template view using the data object
         name.setText(M.getMeal_name());
-        carbs.setText(M.getCarbs());
-        protein.setText(M.getProtein());
-        fat.setText(M.getFat());
+        carbs.setText(String.valueOf(M.getCarbs()));
+        protein.setText(String.valueOf(M.getProtein()));
+        fat.setText(String.valueOf(M.getFat()));
         portion.setText(M.getPortion().getPortionString());
         //TODO USE My_DB to retrieve and display weight/serving properties
         /*if (M.getPortion() == Portion_Type.Serving) {

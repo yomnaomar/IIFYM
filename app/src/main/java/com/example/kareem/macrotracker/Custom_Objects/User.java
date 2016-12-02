@@ -8,7 +8,6 @@ public class User {
 
     int user_id; //autoincrement
     String user_name;
-    String password;
     String dob;
     String fname;
     String lname;
@@ -62,14 +61,6 @@ public class User {
 
     public void setUser_name(String user_name) {
         this.user_name = user_name;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getDob() {
@@ -181,7 +172,6 @@ public class User {
         return "User{" +
                 "user_id= autoincrement"+
                 ", user_name='" + user_name + '\'' +
-                ", password='" + password + '\'' +
                 ", dob='" + dob + '\'' +
                 ", fname='" + fname + '\'' +
                 ", lname='" + lname + '\'' +

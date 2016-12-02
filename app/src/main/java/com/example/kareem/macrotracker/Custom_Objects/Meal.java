@@ -128,6 +128,14 @@ public class Meal {
         this.is_daily = is_daily;
     }
 
+    public int getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
+    }
+
     //Returns today's date
     public String getToday() {
         Calendar c = Calendar.getInstance();

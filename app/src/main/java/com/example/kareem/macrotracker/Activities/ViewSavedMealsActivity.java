@@ -16,7 +16,7 @@ import com.example.kareem.macrotracker.Custom_Objects.Portion_Type;
 
 import java.util.ArrayList;
 
-public class ViewMealsActivity extends AppCompatActivity implements AdapterView.OnItemClickListener{
+public class ViewSavedMealsActivity extends AppCompatActivity implements AdapterView.OnItemClickListener{
 
     private ArrayList<Meal> ArrayList_SavedMeals;
     private MealAdapter My_MealAdapter;

@@ -1,7 +1,6 @@
 package com.example.kareem.macrotracker.Activities;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -39,7 +38,7 @@ public class Signupfrag extends Fragment implements View.OnClickListener {
 
     //GUI vars ----------------------------------
     View myView;
-    EditText username,pass;
+    EditText username;
     Button login,register,skip;
 
 
@@ -85,7 +84,6 @@ public class Signupfrag extends Fragment implements View.OnClickListener {
         myView = inflater.inflate(R.layout.fragment_sublogin1, container, false);
         // Inflate the layout for this fragment
         username = (EditText)myView.findViewById(R.id.usernamefield);
-        pass = (EditText)myView.findViewById(R.id.passfield);
         login = (Button)myView.findViewById(R.id.loginbtn);
         register = (Button)myView.findViewById(R.id.registerbtn);
         skip=(Button)myView.findViewById(R.id.skipbtn);
@@ -102,14 +100,12 @@ public class Signupfrag extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.loginbtn:
-                if(validate(new EditText[]{username,pass})) {
-
-                    listener.userLogin(username.getText().toString(), pass.getText().toString());
+                if(validate(new EditText[]{username})) {
+                    listener.userLogin(username.getText().toString());
                 }
                 else
                 {
                     username.setError("Both fields Required");
-                    pass.setError("Both fields Required");
                 }
                 break;
 //            case R.id.registerbtn:

@@ -150,7 +150,8 @@
                 android:text="Portion:"
                 android:id="@+id/Label_PortionType"
                 android:gravity="center_vertical"
-                android:layout_weight="0.46" />
+                android:layout_weight="0.46"
+                android:textColor="@color/black" />
 
             <RadioGroup
                 android:layout_width="236dp"
@@ -164,15 +165,15 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/RadioButton_Serving"
                     android:layout_weight="0.18"
-                    android:enabled="false"
-                    android:layout_width="wrap_content" />
+                    android:layout_width="wrap_content"
+                    android:checked="true"
+                    android:enabled="true" />
 
                 <RadioButton
                     android:layout_height="wrap_content"
                     android:text="Weight"
                     android:id="@+id/RadioButton_Weight"
                     android:layout_weight="0.13"
-                    android:enabled="false"
                     android:layout_width="wrap_content" />
 
             </RadioGroup>
@@ -189,7 +190,8 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/Label_ServingNumber"
                 android:layout_weight="1"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:textColor="@color/black" />
 
             <EditText
                 android:layout_width="98dp"
@@ -212,7 +214,6 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/Label_Unit"
                 android:textColor="@color/text_color_selector"
-                android:enabled="false"
                 android:textSize="18sp" />
 
             <Spinner
@@ -235,7 +236,6 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="Amount:"
                 android:id="@+id/Label_Amount"
-                android:enabled="false"
                 android:textColor="@color/text_color_selector"
                 android:layout_weight="0.10" />
 

@@ -68,7 +68,6 @@
     <string name="macropreference_file_key">MacroPreferenceFile</string>
 
 
-
     <!-- login fragments-->
     <string name="frag1text">Welcome</string>
     <string name="frag2text">Profile</string>

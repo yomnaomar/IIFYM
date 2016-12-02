@@ -187,6 +187,11 @@ public class Login extends AppCompatActivity implements myFragEventListener {
         //get all user details and send to DB (called when user sign up is finished)
 
         try {
+            //TODO KILL DUMMY
+            /*User DummyBoy = new User();
+            DummyBoy.setUser_id(123);
+            DummyBoy.setUser_name("DummyTest");
+            My_DB.insertUser(DummyBoy);*/
             My_DB.insertUser(newUser);
         } catch (Exception e) {
             Toast.makeText(getApplicationContext(),"DB Error Occurred" +e.getMessage(),Toast.LENGTH_LONG).show();
@@ -196,29 +201,29 @@ public class Login extends AppCompatActivity implements myFragEventListener {
     }
 
     @Override
-    public void userLogin(String username, String password) {
+    public void userLogin(String username) {
         //check if user exists when trying to login (check credentials)
         //Cursor mCursor = My_DB.getUser(username);
-        if(My_DB.validateLogin(username,password,getApplicationContext()))
+        if(My_DB.validateLogin(username,getApplicationContext()))
         {
             //open home page here (main activity) and send user_id
             Intent intent = new Intent(this, MainActivity.class);
+            intent.putExtra("user_name", username);
             intent.putExtra("user_id", My_DB.fetchUserID(username,getApplicationContext())); //get user_id
             startActivity(intent);
         }
         else
         {
-            userReg(username,password);
+            userReg(username);
             //login failed - message will be displayed by validateLogin()
         }
 
     }
     @Override
-    public void userReg(String username,String password) {
+    public void userReg(String username) {
         //star creating new User
         Log.d("DEBUG", "Switch To Profile Fragment");
         newUser.setUser_name(username);
-        newUser.setPassword(password);
         switchFrag(1); //store username and pass and switch to next page. (fragment switching does not lose value instances)
 
     }
@@ -258,6 +263,8 @@ public class Login extends AppCompatActivity implements myFragEventListener {
 
     public void openHome() //final method before opening main activity
     {
+        //insertUser();
+
         Log.d("LOGIN","Signup Complete: User: "+ newUser.toString());
         Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra("user_name", newUser.getUser_name()); //get user_name

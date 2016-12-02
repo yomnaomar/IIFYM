@@ -10,21 +10,16 @@ import android.util.Log;
  */
 
 //Database Helper class which ensures only one instance of the database is initialized
-//Initializes the tables:
-//Table1: SavedMeals
-//Table2: DailyMeals
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "MacroTrackerDB";
-    private static final String Table_SavedMeals = "SavedMeals";
-    private static final String Table_DailyMeals = "DailyMeals";
 
-    private static final String Table_Meal = "Meal";
-    private static final String Table_Weight = "Weight";
-    private static final String Table_Serving = "Serving";
-    private static final String Table_User = "User";
-    private static final String Table_Composed_Of = "Composed_Of";
+    private static final String Table_Meal          = "Meal";
+    private static final String Table_Weight        = "Weight";
+    private static final String Table_Serving       = "Serving";
+    private static final String Table_User          = "User";
+    private static final String Table_Composed_Of   = "Composed_Of";
 
     private static DatabaseHelper sInstance;
 
@@ -39,29 +34,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, 1);
     }
 
-    // Creates the SavedMeals and DailyMeals tables when the Database is created
-    // TS: this is called from  open()->getWritableDatabase(). Only if the database does not exist
     @Override
     public void onCreate(SQLiteDatabase db) {
         Log.d("DBHELPER","onCreate Called");
-        // Query to create a new table named SavedMeals
-        String createTable_SM = "CREATE TABLE " + Table_SavedMeals + " " +
-                "(_id integer primary key autoincrement," +
-                "name TEXT, " +
-                "carbs TEXT, " +
-                "protein TEXT, " +
-                "fat TEXT, " +
-                "portionType INTEGER, " +
-                "weight INTEGER);";
 
-        // Query to create a new table named DailyMeals
-        String createTable_DM = "CREATE TABLE " + Table_DailyMeals + " " +
-                "(_id integer primary key autoincrement," +
-                "name TEXT, " +
-                "carbs TEXT, " +
-                "protein TEXT, " +
-                "fat TEXT);";
+        /*String createTable_Meal = "CREATE TABLE " + Table_Meal + " " +
+                "(meal_id       INTEGER PRIMARY KEY autoincrement, " +
+                "meal_name      TEXT UNIQUE, " +
+                "date_created   TEXT, " +
+                "carbs          INTEGER, " +
+                "protein        INTEGER, " +
+                "fat            INTEGER, " +
+                "portion        INTEGER, " +     //enum, 0 - Serving, 1 - Weight, 2 - None
+                "is_daily       INTEGER, " +     //boolean, processed in code
+                "user_id        INTEGER, " +
 
+                "CONSTRAINT user_id_fk FOREIGN KEY(user_id) REFERENCES User(user_id) ON DELETE CASCADE ON UPDATE CASCADE);";*/
 
         String createTable_Meal = "CREATE TABLE " + Table_Meal + " " +
                 "(meal_id       INTEGER PRIMARY KEY autoincrement, " +
@@ -70,11 +58,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "carbs          INTEGER, " +
                 "protein        INTEGER, " +
                 "fat            INTEGER, " +
-                "portion        INTEGER, " +     //enum, 0 - Serving, 1 - Weight
+                "portion        INTEGER, " +     //enum, 0 - Serving, 1 - Weight, 2 - None
                 "is_daily       INTEGER, " +     //boolean, processed in code
-                "user_id        INTEGER, " +
-
-                "CONSTRAINT user_id_fk FOREIGN KEY(user_id) REFERENCES User(user_id) ON DELETE CASCADE ON UPDATE CASCADE);";
+                "user_id        INTEGER);";
 
         String createTable_Weight = "CREATE TABLE " + Table_Weight + " " +
                 "(meal_id       INTEGER PRIMARY KEY, " +
@@ -92,9 +78,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         //ON UPDATE is not needed because meal_id will never be updated, it is hidden from the user
 
         String createTable_User = "CREATE TABLE " + Table_User + " " +
-                "(_id               INTEGER PRIMARY KEY, " +
+                "(user_id           INTEGER PRIMARY KEY autoincrement, " +
                 "user_name          TEXT UNIQUE, " +
-                "password           TEXT, " +
                 "dob                TEXT, " +
                 "weight             REAL, " +
                 "height             REAL, " +
@@ -121,9 +106,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         //ON UPDATE is not needed because meal_id will never be updated, it is hidden from the user
 
         //Create tables
-        db.execSQL(createTable_SM);
-        db.execSQL(createTable_DM);
-
         db.execSQL(createTable_Meal);
         db.execSQL(createTable_Weight);
         db.execSQL(createTable_Serving);
