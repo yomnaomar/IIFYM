@@ -15,6 +15,7 @@ public class Weight {
 
     public Weight(int weight_amount, int weight_unit) {
         this.weight_amount = weight_amount;
+        this.weight_unit = Weight_Unit.Grams;
         this.weight_unit = this.weight_unit.fromInteger(weight_unit);
     }
 

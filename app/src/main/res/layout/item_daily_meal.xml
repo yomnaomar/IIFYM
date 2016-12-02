@@ -21,10 +21,6 @@
                 android:id="@+id/Text_MealName"
                 android:textColor="@color/abc_primary_text_disable_only_material_light" />
 
-            <Space
-                android:layout_width="500px"
-                android:layout_height="20px" />
-
             <Button
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="30dp"

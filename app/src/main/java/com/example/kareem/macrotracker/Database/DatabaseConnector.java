@@ -276,33 +276,33 @@ public class DatabaseConnector {
     //Checks Weight table for duplicate of M using 'meal_name' as the key
     //If duplicate exists, makes no changes to the DB, else insert W_U and W_A into Weight table
     //TODO USE SQLERROR TRY CATCH INSTEAD OF isDuplicateName()
-    public boolean insertWeight(Meal M, int W_U, int W_A) {
+    public boolean insertWeight(Meal M, int W_A, int W_U) {
         if (hasDuplicateWeight(M)) {
             Log.i("Weight insert failed:", "Weight with duplicate ID found: " + M.getMeal_id() + " " + M.getMeal_name());
             return false;
         }
         ContentValues newWeight = new ContentValues();
         newWeight.put("meal_id", M.getMeal_id());
-        newWeight.put("weight_unit", W_U);
         newWeight.put("weight_amount", W_A);
+        newWeight.put("weight_unit", W_U);
 
         database.insert(Table_Weight, null, newWeight);
         Log.i("Weight inserted:",
                 M.getMeal_id() + " " +
-                        W_U + " " +
-                        W_A);
+                        W_A + " " +
+                        W_U);
         return true;
     }
 
     //Searches Weight table using 'meal_id' as the key
     //Updates all attributes accordingly
-    public boolean updateWeight(Meal M, int W_U, int W_A) {
+    public boolean updateWeight(Meal M, int W_A, int W_U) {
         Cursor C = database.rawQuery("SELECT * FROM " + Table_Weight + " WHERE meal_id = '" + M.getMeal_id() + "'", null);
         Log.i("Weight Retrieved", "ID: " + M.getMeal_id() + " Retrieved");
         C.moveToFirst();
         ContentValues updateWeight = new ContentValues();
-        updateWeight.put("weight_unit", C.getInt(1));
-        updateWeight.put("weight_amount", C.getInt(2));
+        updateWeight.put("weight_amount", C.getInt(1));
+        updateWeight.put("weight_unit", C.getInt(2));
 
         database.update(Table_Weight, updateWeight, "meal_id = '" + M.getMeal_id() + "'", null);
         Log.i("Weight Updated", "ID: " + M.getMeal_id() + " Updated");
@@ -323,11 +323,12 @@ public class DatabaseConnector {
 
     //Returns the weight of the meal with 'meal_id' as the key
     public Weight getWeight(int meal_id) {
-        Cursor C = database.rawQuery("SELECT * FROM " + Table_Weight + " WHERE meal_name = '" + meal_id + "'", null);
+        Cursor C = database.rawQuery("SELECT * FROM " + Table_Weight + " WHERE meal_id = '" + meal_id + "'", null);
         C.moveToFirst();
-        int weight_unit = C.getInt(1);      //weight_unit
-        int weight_amount = C.getInt(2);      //weight_amount
-        Weight w = new Weight(weight_unit, weight_amount);
+        int weight_amount = C.getInt(1);      //weight_amount
+        int weight_unit = C.getInt(2);      //weight_unit
+        Weight w = new Weight(weight_amount, weight_unit);
+        Log.d("Weight Retrieved: ", "ID: " + meal_id + " Weight_amount: " + weight_amount + " Weight_Unit: " + weight_unit);
         return w;
     }
 
@@ -350,7 +351,7 @@ public class DatabaseConnector {
         newServing.put("meal_id", M.getMeal_id());
         newServing.put("serving_number", S_N);
 
-        database.insert(Table_Weight, null, newServing);
+        database.insert(Table_Serving, null, newServing);
         Log.i("newServing inserted:",
                 M.getMeal_id() + " " +
                         S_N);
@@ -382,10 +383,12 @@ public class DatabaseConnector {
 
     //Returns the weight of the meal with 'meal_id' as the key
     public int getServing(int meal_id) {
-        Cursor C = database.rawQuery("SELECT * FROM " + Table_Serving + " WHERE meal_name = '" + meal_id + "'", null);
-        C.moveToFirst();
-        int serving_number = C.getInt(1); //serving_number
-        return serving_number;
+        Cursor C = database.rawQuery("SELECT * FROM " + Table_Serving + " WHERE meal_id = '" + meal_id + "'", null);
+        if (C != null && C.moveToFirst()) {
+            int serving_number = C.getInt(1); //serving_number
+            return serving_number;
+        }
+        return 0;
     }
 
     private boolean hasDuplicateServing(Meal M) {
