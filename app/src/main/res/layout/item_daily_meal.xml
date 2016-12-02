@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" >
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Meal Name"
+                android:id="@+id/Text_MealName"
+                android:textColor="@color/abc_primary_text_disable_only_material_light" />
+
+            <Space
+                android:layout_width="500px"
+                android:layout_height="20px" />
+
+            <Button
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:text="-"
+                android:id="@+id/Button_DeleteMeal"
+                android:background="#f40800"
+                android:clickable="true"
+                android:textStyle="bold"
+                android:textSize="20dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Carbs"
+                android:id="@+id/Text_Carbs"
+                android:layout_weight="1"
+                android:textColor="#f9e01e" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Protein"
+                android:id="@+id/Text_Protein"
+                android:layout_weight="1"
+                android:textColor="#d42727" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Fat"
+                android:id="@+id/Text_Fat"
+                android:layout_weight="1"
+                android:textColor="#17a900" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
