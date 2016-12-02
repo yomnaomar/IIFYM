@@ -500,7 +500,7 @@ public class DatabaseConnector {
     }
 
     //TODO FINISH THIS IMPLEMENTATION
-    public User getUser_ReturnsUser(String username) {
+    public User getUserObject(String username) {
         User U = new User();
         Cursor C = null;
         try {
@@ -512,6 +512,21 @@ public class DatabaseConnector {
         if(C.moveToFirst() && C != null){
             U.setUser_id(C.getInt(0));
             U.setUser_name(C.getString(1));
+            U.setDob(C.getString(2));
+            U.setWeight(C.getFloat(3));
+            U.setHeight(C.getFloat(4));
+            U.setWorkout_freq(C.getInt(5));
+            U.setGender(C.getString(6));
+            U.setAge(C.getInt(7));
+            U.setGoal(C.getInt(8));
+            U.setFname(C.getString(9));
+            U.setLname(C.getString(10));
+            U.setEmail(C.getString(11));
+            U.setPercent_carbs(C.getInt(12));
+            U.setPercent_protein(C.getInt(13));
+            U.setPercent_fat(C.getInt(14));
+            U.setWeight_unit(C.getInt(15));
+            U.setHeight_unit(C.getInt(16));
         }
         else {
             U.setUser_id(-1);

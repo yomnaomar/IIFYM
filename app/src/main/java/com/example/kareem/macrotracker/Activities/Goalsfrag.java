@@ -48,6 +48,8 @@ public class Goalsfrag extends Fragment implements  View.OnClickListener {
     EditText pcarbs,pfat,pprotein;
 
 
+    int carbs,fat,protein;
+
 
 
     //GUI vars ----------------------------------
@@ -132,12 +134,23 @@ public class Goalsfrag extends Fragment implements  View.OnClickListener {
         switch (view.getId()) {
             case R.id.finishregBtn:
                 //store data and finish reg
-                if(validate(new EditText[]{pcarbs, pfat,pprotein}))
+                if(validate(new EditText[]{pcarbs, pfat,pprotein}) )
                 {
+                    carbs = Integer.parseInt(pcarbs.getText().toString());
+                    protein = Integer.parseInt(pprotein.getText().toString());
+                    fat = Integer.parseInt(pfat.getText().toString());
+                    if(carbs+protein+fat==100)
+                    {
+                        listener.storeuserGoals(goal_spinner.getSelectedItemPosition(),Integer.parseInt(pcarbs.getText().toString()),Integer.parseInt(pfat.getText().toString()),Integer.parseInt(pprotein.getText().toString()),workout_spinner.getSelectedItemPosition());
+                        listener.insertUser(); //inserts user to DB
+                    }
+                    else
+                    {
+                        pcarbs.setError("Make sure total is 100%");
+                        pfat.setError("Make sure total is 100%");
+                        pprotein.setError("Make sure total is 100%");
+                    }
 
-                    listener.storeuserGoals(goal_spinner.getSelectedItemPosition(),Integer.parseInt(pcarbs.getText().toString()),Integer.parseInt(pfat.getText().toString()),Integer.parseInt(pprotein.getText().toString()),workout_spinner.getSelectedItemPosition());
-
-                    listener.insertUser(); //inserts user to DB
                 }
                 else
                 {

@@ -17,9 +17,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <TextView
+            android:text="TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txt_username"
+            android:textStyle="normal|bold"
+            android:textAllCaps="true" />
+
         <TableLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
 
             <TableRow
                 android:layout_width="match_parent"
@@ -153,14 +162,14 @@
 
         <ListView
             android:layout_width="wrap_content"
-            android:layout_height="365dp"
             android:id="@+id/ListView_Meals"
-            android:fastScrollEnabled="false" />
+            android:fastScrollEnabled="false"
+            android:layout_height="300dp" />
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <Button
                 android:layout_width="fill_parent"

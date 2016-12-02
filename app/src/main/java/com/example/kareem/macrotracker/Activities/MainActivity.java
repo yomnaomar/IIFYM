@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -21,16 +22,20 @@ import android.widget.Toast;
 
 import com.example.kareem.macrotracker.Custom_Objects.Meal;
 import com.example.kareem.macrotracker.Custom_Objects.Portion_Type;
+import com.example.kareem.macrotracker.Custom_Objects.User;
 import com.example.kareem.macrotracker.Database.DatabaseConnector;
 import com.example.kareem.macrotracker.R;
 import com.example.kareem.macrotracker.ViewComponents.MealAdapter;
 import com.example.kareem.macrotracker.ViewComponents.OnListItemDeletedListener;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener, OnListItemDeletedListener {
 
     private TextView Text_CarbsGoal, Text_ProteinGoal, Text_FatGoal, Text_CarbsLeft, Text_ProteinLeft, Text_FatLeft;
+    private TextView usernameview;
     private Button Button_AddSavedMeal, Button_AddNewMeal;
 
     private ArrayList<Meal> ArrayList_Meals;
@@ -40,18 +45,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static final String CarbsPrefKey = "EditTextPrefCarbsGoal";
     public static final String ProteinPrefKey = "EditTextPrefProteinGoal";
     public static final String FatPrefKey = "EditTextPrefFatGoal";
-    public static final int CarbsDefault = 250;
-    public static final int ProteinDefault = 150;
-    public static final int FatDefault = 60;
+    public  int CarbsDefault ;
+    public  int ProteinDefault ;
+    public  int FatDefault ;
 
     private DatabaseConnector My_DB;
 
     Portion_Type portion = null;
     boolean is_daily = false;
+    boolean isLogged;
 
     private String user_name;
     private int user_id;
     private CoordinatorLayout coordinatorLayout;
+
+    View parentLayout;
+
+    SharedPreferences settings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +80,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Text_ProteinLeft = (TextView) findViewById(R.id.Text_ProteinLeft);
         Text_FatLeft = (TextView) findViewById(R.id.Text_FatLeft);
 
+        usernameview=(TextView)findViewById(R.id.txt_username);
+
         Button_AddSavedMeal = (Button) findViewById(R.id.Button_AddSavedMeal);
         Button_AddSavedMeal.setOnClickListener(this);
         Button_AddNewMeal = (Button) findViewById(R.id.Button_AddNewMeal);
@@ -82,16 +94,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Meals_ListView.setOnItemClickListener(this);
 
         My_DB = new DatabaseConnector(getApplicationContext());
-
+        parentLayout = findViewById(R.id.root_view);
         //TODO:(Abdulwahab) get user_name and user_id here
         Intent intent = getIntent();
-        user_name = intent.getStringExtra("user_name");
-        user_id = intent.getIntExtra("user_id",My_DB.fetchUserID(user_name,getApplicationContext()));
-        Toast.makeText(this,"Welcome "+ user_name +" ID: "+ user_id, Toast.LENGTH_SHORT).show();
+        isLogged = intent.getBooleanExtra("logged",false);
+        getActiveUser(isLogged,intent);
 
-//        Snackbar snackbar = Snackbar
-//                .make(coordinatorLayout, "Welcome "+ user_name, Snackbar.LENGTH_SHORT);
-//        snackbar.show();
+        setPrefMacros(); // puts preferred macro in shared prefs
 
         //TODO KILL DUMMEIS
 //        User DummyBoy = new User();
@@ -171,6 +180,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     protected void onPause() {
+
+        settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putString("user_name", user_name); // here string is the value you want to save
+        editor.commit();
+
+
         super.onPause();
     }
 
@@ -238,7 +254,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 int     user_id         = C.getInt(8);      //user_id
                 Meal M = new Meal(meal_id,meal_name,carbs,protein,fat,portion,is_daily,user_id);
                 Log.d("Meal Retrieved:", "Name: " + M.getMeal_name() + " " + M.getMeal_id() + " "
-                + M.getCarbs() + " " + M.getProtein() + " " + M.getFat());
+                        + M.getCarbs() + " " + M.getProtein() + " " + M.getFat());
                 My_MealAdapter.add(M);
             }
         }
@@ -253,4 +269,45 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         onItemDeleted();
     }
+
+    private void getActiveUser(boolean logged, Intent intent)
+    {
+        if(logged)
+        {
+            user_name = intent.getStringExtra("user_name");
+            user_id = intent.getIntExtra("user_id",My_DB.fetchUserID(user_name,getApplicationContext()));
+            Snackbar snackbar = Snackbar
+                    .make(parentLayout, "Welcome "+ user_name +" ID: "+ user_id, Snackbar.LENGTH_SHORT);
+            snackbar.show();
+            isLogged=false;
+        }
+        else {
+            SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+            user_name = settings.getString("user_name", "");
+        }
+        usernameview.setText(user_name);
+    }
+
+    private void setPrefMacros()
+    {
+        User user = My_DB.getUserObject(user_name);
+
+        //Prefs defaults from database
+        CarbsDefault = user.getPercent_carbs();
+        FatDefault = user.getPercent_fat();
+        ProteinDefault = user.getPercent_protein();
+
+
+        settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        SharedPreferences.Editor editor = settings.edit();
+
+
+        editor.putString("pref_Carbs", user.getPercent_carbs() + "");
+        editor.putString("pref_Protein",  user.getPercent_protein() + "");
+        editor.putString("pref_Fat",  user.getPercent_fat() + "");
+        editor.commit();
+
+
+    }
+
 }

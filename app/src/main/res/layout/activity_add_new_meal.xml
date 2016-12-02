@@ -13,9 +13,9 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:id="@+id/LinearLayout"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/LinearLayout">
+        android:layout_alignParentStart="true">
 
         <TextView
             android:layout_width="fill_parent"
@@ -43,9 +43,9 @@
                 android:layout_width="215dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/EditText_MealName"
-                android:text="Meal name"
                 android:selectAllOnFocus="true"
-                android:textColor="#525252" />
+                android:textColor="#525252"
+                android:hint="Meal Name" />
 
         </LinearLayout>
 
@@ -71,8 +71,8 @@
                 android:layout_alignParentTop="true"
                 android:layout_toEndOf="@+id/textView2"
                 android:textColor="#797979"
-                android:text="0"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:hint="0" />
 
         </LinearLayout>
 
@@ -99,7 +99,7 @@
                 android:layout_toEndOf="@+id/textView"
                 android:textColor="#797979"
                 android:textAlignment="center"
-                android:text="0" />
+                android:hint="0" />
 
         </LinearLayout>
 
@@ -126,7 +126,7 @@
                 android:layout_toEndOf="@+id/textView3"
                 android:textColor="#797979"
                 android:textAlignment="center"
-                android:text="0" />
+                android:hint="0" />
 
         </LinearLayout>
 
@@ -199,8 +199,9 @@
                 android:inputType="number"
                 android:ems="5"
                 android:id="@+id/EditText_ServingNumber"
-                android:text="1"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:hint="1"
+                android:text="1" />
         </LinearLayout>
 
         <LinearLayout
@@ -248,9 +249,10 @@
                 android:layout_alignParentTop="true"
                 android:layout_toEndOf="@+id/textView2"
                 android:textColor="#000000"
-                android:text="100"
                 android:textAlignment="center"
-                android:enabled="false" />
+                android:enabled="false"
+                android:hint="100"
+                android:text="100" />
 
         </LinearLayout>
 

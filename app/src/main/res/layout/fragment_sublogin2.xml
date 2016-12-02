@@ -169,7 +169,6 @@
                 android:inputType="date"
                 android:ems="10"
                 android:id="@+id/dobfield"
-                android:hint="DOB"
                 tools:layout_constraintRight_creator="1"
                 tools:layout_constraintBottom_creator="1"
                 app:layout_constraintBottom_toTopOf="@+id/heightfield"
@@ -177,7 +176,8 @@
                 tools:layout_constraintLeft_creator="1"
                 android:layout_marginBottom="8dp"
                 app:layout_constraintLeft_toLeftOf="@+id/heightfield"
-                app:layout_constraintHorizontal_bias="0.13" />
+                app:layout_constraintHorizontal_bias="0.13"
+                android:hint="DOB: dd/MM/YYYY" />
 
             <RadioGroup
                 android:layout_height="20dp"

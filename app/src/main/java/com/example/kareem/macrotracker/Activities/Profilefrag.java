@@ -171,8 +171,11 @@ public class Profilefrag extends Fragment implements View.OnClickListener {
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                 try {
                     java.util.Date d = sdf.parse(dob.getText().toString());
-                   // age = Calendar.getInstance().get(Calendar.YEAR)- d.getYear(); //TODO: fix age calculation
-                    age=0;
+                    int currentyear = Calendar.getInstance().get(Calendar.YEAR);
+                    Calendar calendar = Calendar.getInstance();
+                    calendar.setTime(d);
+                    age = currentyear - calendar.get(Calendar.YEAR); //TODO: fix age calculation
+
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }

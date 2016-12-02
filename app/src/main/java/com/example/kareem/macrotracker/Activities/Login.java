@@ -209,6 +209,7 @@ public class Login extends AppCompatActivity implements myFragEventListener {
             //open home page here (main activity) and send user_id
             Intent intent = new Intent(this, MainActivity.class);
             intent.putExtra("user_name", username);
+            intent.putExtra("logged",true);
             intent.putExtra("user_id", My_DB.fetchUserID(username,getApplicationContext())); //get user_id
             startActivity(intent);
         }
@@ -268,6 +269,7 @@ public class Login extends AppCompatActivity implements myFragEventListener {
         Log.d("LOGIN","Signup Complete: User: "+ newUser.toString());
         Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra("user_name", newUser.getUser_name()); //get user_name
+        intent.putExtra("logged",true);
         startActivity(intent); //open main activity
         finish(); //disable going back to login with BACK button
     }

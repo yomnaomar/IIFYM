@@ -72,7 +72,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         String createTable_Serving = "CREATE TABLE " + Table_Serving + " " +
                 "(meal_id       INTEGER PRIMARY KEY, " +
-                "serving_number TEXT, " +
+                "serving_number INTEGER, " +
 
                 "CONSTRAINT meal_id_fk FOREIGN KEY(meal_id) REFERENCES Meal(meal_id) ON DELETE CASCADE);";
         //ON UPDATE is not needed because meal_id will never be updated, it is hidden from the user
@@ -110,8 +110,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(createTable_Weight);
         db.execSQL(createTable_Serving);
         db.execSQL(createTable_User);
-        Log.d("UserTABLE", "user table created ");
         db.execSQL(createTable_Composed_Of);
+        Log.d("TABLES", "DB tables created ");
     }
 
     @Override

@@ -4,7 +4,9 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -19,6 +21,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.kareem.macrotracker.Custom_Objects.User;
 import com.example.kareem.macrotracker.Database.DatabaseConnector;
 import com.example.kareem.macrotracker.R;
 import com.example.kareem.macrotracker.Custom_Objects.Meal;
@@ -39,6 +42,8 @@ public class AddNewMealActivity extends AppCompatActivity implements View.OnClic
 
     private int Weight_Unit_Selected = 0;
 
+    String user_name;
+    User user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,6 +97,11 @@ public class AddNewMealActivity extends AppCompatActivity implements View.OnClic
         UpdateGUI();
 
         My_DB = new DatabaseConnector(getApplicationContext());
+
+        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        user_name = settings.getString("user_name", "");
+
+        user = My_DB.getUserObject(user_name);
     }
 
     @Override
@@ -135,9 +145,10 @@ public class AddNewMealActivity extends AppCompatActivity implements View.OnClic
             InsertDailyMeal(meal_name, carbs, protein, fat, indexofPortionType, is_daily);
         }
     }
+    //TODO(Abdulwahab): now uses logged in user ID instead of dummy
 
     private void InsertDailyMeal(String meal_name, int carbs, int protein, int fat, int indexofPortionType, boolean is_daily) {
-        Meal NewMeal = new Meal(meal_name, carbs, protein, fat, indexofPortionType, is_daily, 123); //DUMMY (last parameter)
+        Meal NewMeal = new Meal(meal_name, carbs, protein, fat, indexofPortionType, is_daily, user.getUser_id());
 
         if (My_DB.insertMeal(NewMeal)) {
             Meal NewMeal_WithID = My_DB.GetMeal(meal_name);//meal needs to be retrieved because ID is initialized in the DB
@@ -156,8 +167,7 @@ public class AddNewMealActivity extends AppCompatActivity implements View.OnClic
 
     private void InsertSavedMeal(String meal_name, int carbs, int protein, int fat, int indexofPortionType, boolean is_daily) {
         //Initializing Meal to be inserted in Database
-        //TODO REMOVE DUMMIES
-        Meal NewMeal = new Meal(meal_name, carbs, protein, fat, indexofPortionType, is_daily, 123); //DUMMY (last parameter)
+        Meal NewMeal = new Meal(meal_name, carbs, protein, fat, indexofPortionType, is_daily, user.getUser_id());
 
         if (My_DB.insertMeal(NewMeal)) {
             Meal NewMeal_WithID = My_DB.GetMeal(meal_name);//meal needs to be retrieved because ID is initialized in the DB
