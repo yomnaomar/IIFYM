@@ -1,12 +1,10 @@
 package com.example.kareem.macrotracker.Activities;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -16,12 +14,11 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.kareem.macrotracker.Database.DatabaseConnector;
-import com.example.kareem.macrotracker.Database.DatabaseHelper;
 import com.example.kareem.macrotracker.R;
-import com.example.kareem.macrotracker.ViewComponents.Body_Height_Unit;
-import com.example.kareem.macrotracker.ViewComponents.Body_Weight_Unit;
-import com.example.kareem.macrotracker.ViewComponents.LockableViewPager;
-import com.example.kareem.macrotracker.ViewComponents.User;
+import com.example.kareem.macrotracker.Custom_Objects.Body_Height_Unit;
+import com.example.kareem.macrotracker.Custom_Objects.Body_Weight_Unit;
+import com.example.kareem.macrotracker.View_Components.LockableViewPager;
+import com.example.kareem.macrotracker.Custom_Objects.User;
 
 public class Login extends AppCompatActivity implements myFragEventListener {
 
