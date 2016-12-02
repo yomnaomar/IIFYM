@@ -30,4 +30,16 @@ public enum Weight_Unit {
     public int getWeightInt (){
         return this.ordinal();
     }
+
+    public String Abbreviate(){
+        switch(this.name()) {
+            case "Grams":
+                return "g";
+            case "Ounces":
+                return "Oz";
+            case "mL":
+                return "mL";
+        }
+        return null;
+    }
 }

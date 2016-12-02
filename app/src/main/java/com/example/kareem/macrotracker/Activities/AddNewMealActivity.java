@@ -172,7 +172,7 @@ public class AddNewMealActivity extends AppCompatActivity implements View.OnClic
                 }
             } else if (indexofPortionType == 1) { //Meal is measured by weight
                 int Weight_Amount = Integer.parseInt(EditText_Amount.getText().toString());
-                if (My_DB.insertWeight(NewMeal_WithID, Weight_Unit_Selected, Weight_Amount)) {
+                if (My_DB.insertWeight(NewMeal_WithID, Weight_Amount, Weight_Unit_Selected)) {
                     Toast.makeText(this, "Weight added", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(this, "Failed to insert Weight", Toast.LENGTH_SHORT).show();

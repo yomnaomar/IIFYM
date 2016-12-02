@@ -57,11 +57,12 @@ public class ViewSavedMealsActivity extends AppCompatActivity implements Adapter
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        //TODO USER MEAL_ID
         Meal M = (Meal) parent.getItemAtPosition(position);
-        String M_Name = M.getMeal_name();
+        int M_ID = M.getMeal_id();
 
         Intent intent = new Intent(getBaseContext(), ViewMealActivity.class);
-        intent.putExtra("MealName", M_Name);
+        intent.putExtra("Meal_ID", M_ID);
         startActivity(intent);
     }
 
@@ -74,6 +75,7 @@ public class ViewSavedMealsActivity extends AppCompatActivity implements Adapter
         int count = C.getCount();
         if (count > 0) {
             for (int i = 0; i < count; i++) {
+                C.moveToNext();
                 int     meal_id         = C.getInt(0);      //meal)id
                 String  meal_name       = C.getString(1);   //meal_name
                 String  date_created    = C.getString(2);   //date_created

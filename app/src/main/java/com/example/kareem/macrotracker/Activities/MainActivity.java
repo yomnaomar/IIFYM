@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.example.kareem.macrotracker.Custom_Objects.Meal;
 import com.example.kareem.macrotracker.Custom_Objects.Portion_Type;
+import com.example.kareem.macrotracker.Custom_Objects.User;
 import com.example.kareem.macrotracker.Database.DatabaseConnector;
 import com.example.kareem.macrotracker.R;
 import com.example.kareem.macrotracker.ViewComponents.MealAdapter;
@@ -83,21 +84,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         My_DB = new DatabaseConnector(getApplicationContext());
 
-        //TODO:(Abdulwahab) get user_name and user_id here
-        Intent intent = getIntent();
-        user_name = intent.getStringExtra("user_name");
-        user_id = intent.getIntExtra("user_id",My_DB.fetchUserID(user_name,getApplicationContext()));
-        Toast.makeText(this,"Welcome "+ user_name +" ID: "+ user_id, Toast.LENGTH_SHORT).show();
+//        //TODO:(Abdulwahab) get user_name and user_id here
+//        Intent intent = getIntent();
+//        user_name = intent.getStringExtra("user_name");
+//        user_id = intent.getIntExtra("user_id",My_DB.fetchUserID(user_name,getApplicationContext()));
+//        Toast.makeText(this,"Welcome "+ user_name +" ID: "+ user_id, Toast.LENGTH_SHORT).show();
 
 //        Snackbar snackbar = Snackbar
 //                .make(coordinatorLayout, "Welcome "+ user_name, Snackbar.LENGTH_SHORT);
 //        snackbar.show();
 
         //TODO KILL DUMMEIS
-//        User DummyBoy = new User();
-//        //DummyBoy = My_DB.getUser_ReturnsUser("DummyBoy");
-//        DummyBoy = My_DB.getUser_ReturnsUser("DebuggerDummy");
-//        Toast.makeText(this,"Welcome "+ DummyBoy.getUser_name() +" ID: "+DummyBoy.getUser_id(),Toast.LENGTH_SHORT).show(); //TODO: call only once
+        User DummyBoy = new User();
+        DummyBoy.setUser_name("DummyBoy");
+        DummyBoy.setUser_id(123);
+        Toast.makeText(this,"Welcome "+ DummyBoy.getUser_name() +" ID: "+DummyBoy.getUser_id(),Toast.LENGTH_SHORT).show(); //TODO: call only once
     }
 
     @Override

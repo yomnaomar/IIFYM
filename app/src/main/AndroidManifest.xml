@@ -52,6 +52,7 @@
         <activity android:name=".Activities.ViewSavedMealActivity"></activity>
         -->
         <activity android:name=".Activities.ViewSavedMealsActivity" />
+        <activity android:name=".Activities.ViewMealActivity" />
     </application>
 
 </manifest>
