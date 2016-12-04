@@ -16,7 +16,7 @@ import com.example.kareem.macrotracker.ViewComponents.MealAdapter;
 
 import java.util.ArrayList;
 
-public class ViewSavedMealsActivity extends AppCompatActivity implements AdapterView.OnItemClickListener{
+public class ViewSavedMealsActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     private ArrayList<Meal> ArrayList_SavedMeals;
     private MealAdapter My_MealAdapter;
@@ -59,18 +59,16 @@ public class ViewSavedMealsActivity extends AppCompatActivity implements Adapter
         if (count > 0) {
             for (int i = 0; i < count; i++) {
                 C.moveToNext();
-                int     meal_id         = C.getInt(0);      //meal)id
-                String  meal_name       = C.getString(1);   //meal_name
-                String  date_created    = C.getString(2);   //date_created
-                int     carbs           = C.getInt(3);      //carbs
-                int     protein         = C.getInt(4);      //protein
-                int     fat             = C.getInt(5);      //fat
+                int meal_id = C.getInt(0);      //meal)id
+                String meal_name = C.getString(1);   //meal_name
+                String date_created = C.getString(2);   //date_created
+                int carbs = C.getInt(3);      //carbs
+                int protein = C.getInt(4);      //protein
+                int fat = C.getInt(5);      //fat
                 portion = portion.values()[C.getInt(6)];    //portion
-                if(C.getInt(7) != 0)                        //is_daily
-                {is_daily = true;}
-                else    {is_daily = false;}
-                int     user_id         = C.getInt(8);      //user_id
-                Meal M = new Meal(meal_id,meal_name,carbs,protein,fat,portion,is_daily,user_id);
+                int daily_consumption = C.getInt(7);    //daily_consumption
+                int user_id = C.getInt(8);      //user_id
+                Meal M = new Meal(meal_id, meal_name, carbs, protein, fat, portion, daily_consumption, user_id);
                 My_MealAdapter.add(M);
             }
         }

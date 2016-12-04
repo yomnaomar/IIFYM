@@ -130,25 +130,22 @@ public class AddQuickMealActivity extends AppCompatActivity implements View.OnCl
         int carbs = Integer.parseInt(EditText_Carbs.getText().toString());
         int protein = Integer.parseInt(EditText_Protein.getText().toString());
         int fat = Integer.parseInt(EditText_Fat.getText().toString());
+        int daily_consumption = 1;
 
-        //Check for is_daily
-        boolean is_daily = false;
         if (CheckBox_SaveMeal.isChecked()) {
-            is_daily = true;
             //Get PortionType
             int radioButtonID = RadioGroup_PortionType.getCheckedRadioButtonId();
             View radioButton = RadioGroup_PortionType.findViewById(radioButtonID);
             int indexofPortionType = RadioGroup_PortionType.indexOfChild(radioButton);
-            InsertSavedMeal(meal_name, carbs, protein, fat, indexofPortionType, is_daily);
+            InsertSavedMeal(meal_name, carbs, protein, fat, indexofPortionType, daily_consumption);
         } else {
             int indexofPortionType = 2; //other
-            InsertDailyMeal(meal_name, carbs, protein, fat, indexofPortionType, is_daily);
+            InsertDailyMeal(meal_name, carbs, protein, fat, indexofPortionType, daily_consumption);
         }
     }
-    //TODO(Abdulwahab): now uses logged in user ID instead of dummy
 
-    private void InsertDailyMeal(String meal_name, int carbs, int protein, int fat, int indexofPortionType, boolean is_daily) {
-        Meal NewMeal = new Meal(meal_name, carbs, protein, fat, indexofPortionType, is_daily, user.getUser_id());
+    private void InsertDailyMeal(String meal_name, int carbs, int protein, int fat, int indexofPortionType, int daily_consumption) {
+        Meal NewMeal = new Meal(meal_name, carbs, protein, fat, indexofPortionType, daily_consumption, user.getUser_id());
 
         if (My_DB.insertMeal(NewMeal)) {
             Meal NewMeal_WithID = My_DB.GetMeal(meal_name);//meal needs to be retrieved because ID is initialized in the DB
@@ -165,9 +162,9 @@ public class AddQuickMealActivity extends AppCompatActivity implements View.OnCl
     }
 
 
-    private void InsertSavedMeal(String meal_name, int carbs, int protein, int fat, int indexofPortionType, boolean is_daily) {
+    private void InsertSavedMeal(String meal_name, int carbs, int protein, int fat, int indexofPortionType, int daily_consumption) {
         //Initializing Meal to be inserted in Database
-        Meal NewMeal = new Meal(meal_name, carbs, protein, fat, indexofPortionType, is_daily, user.getUser_id());
+        Meal NewMeal = new Meal(meal_name, carbs, protein, fat, indexofPortionType, daily_consumption, user.getUser_id());
 
         if (My_DB.insertMeal(NewMeal)) {
             Meal NewMeal_WithID = My_DB.GetMeal(meal_name);//meal needs to be retrieved because ID is initialized in the DB

@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private DatabaseConnector My_DB;
 
     Portion_Type portion = null;
-    boolean is_daily = false;
+    int daily_consumption;
     boolean isLogged;
 
     private String user_name;
@@ -248,11 +248,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 int     protein         = C.getInt(4);      //protein
                 int     fat             = C.getInt(5);      //fat
                 portion = portion.values()[C.getInt(6)];    //portion
-                if(C.getInt(7) != 0)                        //is_daily
-                {is_daily = true;}
-                else    {is_daily = false;}
+                int   daily_consumption = C.getInt(7);      //daily_consumption
                 int     user_id         = C.getInt(8);      //user_id
-                Meal M = new Meal(meal_id,meal_name,carbs,protein,fat,portion,is_daily,user_id);
+                Meal M = new Meal(meal_id,meal_name,carbs,protein,fat,portion,daily_consumption,user_id);
                 Log.d("Meal Retrieved:", "Name: " + M.getMeal_name() + " " + M.getMeal_id() + " "
                         + M.getCarbs() + " " + M.getProtein() + " " + M.getFat());
                 My_MealAdapter.add(M);

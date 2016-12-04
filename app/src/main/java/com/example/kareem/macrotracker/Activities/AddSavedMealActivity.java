@@ -1,6 +1,5 @@
 package com.example.kareem.macrotracker.Activities;
 
-import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -40,15 +39,11 @@ public class AddSavedMealActivity extends AppCompatActivity implements AdapterVi
         My_DB = new DatabaseConnector(getApplicationContext());
     }
 
+    //TODO IMPLEMENT THIS FUNCTION CORRECTLY
+    //OnClick, increment daily_consumption for selected meal and go back to main activity
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-        Meal M = (Meal) parent.getItemAtPosition(position);
-        int M_ID = M.getMeal_id();
-
-        Intent intent = new Intent(getBaseContext(), MainActivity.class);
-        intent.putExtra("Meal_ID", M_ID);
-        startActivity(intent);
     }
 
     //Updates My_MealAdapter
@@ -67,11 +62,9 @@ public class AddSavedMealActivity extends AppCompatActivity implements AdapterVi
                 int     protein         = C.getInt(4);      //protein
                 int     fat             = C.getInt(5);      //fat
                 portion = portion.values()[C.getInt(6)];    //portion
-                if(C.getInt(7) != 0)                        //is_daily
-                {is_daily = true;}
-                else    {is_daily = false;}
+                int   daily_consumption = C.getInt(7);    //daily_consumption
                 int     user_id         = C.getInt(8);      //user_id
-                Meal M = new Meal(meal_id,meal_name,carbs,protein,fat,portion,is_daily,user_id);
+                Meal M = new Meal(meal_id,meal_name,carbs,protein,fat,portion,daily_consumption,user_id);
                 getFullMealNutrients(M);
                 My_MealAdapter.add(M);
             }
@@ -90,6 +83,7 @@ public class AddSavedMealActivity extends AppCompatActivity implements AdapterVi
         UpdateArrayList();
     }
 
+    //TODO USE THIS FUCNTION IN OTHER ACTIVITIES
     //Takes a meal "My_Meal" and retrieves the full nutrient calculation of that meal from the database
     //by traversing through the meals which compose My_Meal and cumulatively adds the nutrients of each simple meal
     private Meal getFullMealNutrients(Meal My_Meal){
@@ -110,7 +104,7 @@ public class AddSavedMealActivity extends AppCompatActivity implements AdapterVi
                 fat += simple_meal.getFat() + getFullMealNutrients(simple_meal).getFat();
             }
         }
-        Meal M = new Meal(meal_id,My_Meal.getMeal_name(),carbs,protein,fat,My_Meal.getPortion(),My_Meal.is_daily(),My_Meal.getUser_id());
+        Meal M = new Meal(meal_id,My_Meal.getMeal_name(),carbs,protein,fat,My_Meal.getPortion(),My_Meal.getDaily_consumption(),My_Meal.getUser_id());
         return M;
     }
 }

@@ -52,15 +52,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "CONSTRAINT user_id_fk FOREIGN KEY(user_id) REFERENCES User(user_id) ON DELETE CASCADE ON UPDATE CASCADE);";*/
 
         String createTable_Meal = "CREATE TABLE " + Table_Meal + " " +
-                "(meal_id       INTEGER PRIMARY KEY autoincrement, " +
-                "meal_name      TEXT UNIQUE, " +
-                "date_created   TEXT, " +
-                "carbs          INTEGER, " +
-                "protein        INTEGER, " +
-                "fat            INTEGER, " +
-                "portion        INTEGER, " +     //enum, 0 - Serving, 1 - Weight, 2 - None
-                "is_daily       INTEGER, " +     //boolean, processed in code
-                "user_id        INTEGER);";
+                "(meal_id           INTEGER PRIMARY KEY autoincrement, " +
+                "meal_name          TEXT UNIQUE, " +
+                "date_created       TEXT, " +
+                "carbs              INTEGER, " +
+                "protein            INTEGER, " +
+                "fat                INTEGER, " +
+                "portion            INTEGER, " +     //enum, 0 - Serving, 1 - Weight, 2 - None
+                "daily_consumption  INTEGER, " +     //boolean, processed in code
+                "user_id            INTEGER);";
 
         String createTable_Weight = "CREATE TABLE " + Table_Weight + " " +
                 "(meal_id       INTEGER PRIMARY KEY, " +

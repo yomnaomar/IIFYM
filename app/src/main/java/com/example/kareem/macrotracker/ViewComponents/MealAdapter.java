@@ -25,8 +25,9 @@ public class MealAdapter extends ArrayAdapter<Meal> {
 
     int serving_number;
     Weight weight;
+
     public MealAdapter(Context context, ArrayList<Meal> meals) {
-        super(context, 0,meals);
+        super(context, 0, meals);
     }
 
     @Override
@@ -52,20 +53,17 @@ public class MealAdapter extends ArrayAdapter<Meal> {
         protein.setText(String.valueOf(M.getProtein()));
         fat.setText(String.valueOf(M.getFat()));
 
-        if (M.is_daily()) {
-            if (M.getPortion() == Portion_Type.Serving) {
-                serving_number = My_DB.getServing(M.getMeal_id());
-                if (serving_number == 1) {
-                    portion.setText(serving_number + " Serving");
-                }
-                else {
-                    portion.setText(serving_number + " Servings");
-                }
-            } else if (M.getPortion() == Portion_Type.Weight) {
-                weight = My_DB.getWeight(M.getMeal_id());
-                Log.d("Weight Retrieved: ", "ID: " + M.getMeal_id() + " Weight_amount: " + weight.getWeight_amount() + " Weight_Unit: " + weight.getWeight_unit());
-                portion.setText(weight.getWeight_amount() + " " + weight.getWeight_unit().Abbreviate());
+        if (M.getPortion() == Portion_Type.Serving) {
+            serving_number = My_DB.getServing(M.getMeal_id());
+            if (serving_number == 1) {
+                portion.setText(serving_number + " Serving");
+            } else {
+                portion.setText(serving_number + " Servings");
             }
+        } else if (M.getPortion() == Portion_Type.Weight) {
+            weight = My_DB.getWeight(M.getMeal_id());
+            Log.d("Weight Retrieved: ", "ID: " + M.getMeal_id() + " Weight_amount: " + weight.getWeight_amount() + " Weight_Unit: " + weight.getWeight_unit());
+            portion.setText(weight.getWeight_amount() + " " + weight.getWeight_unit().Abbreviate());
         }
 
         // Return the completed view to render on screen
