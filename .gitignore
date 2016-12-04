@@ -5,7 +5,10 @@
 # IntelliJ project files
 .idea
 *.iml
+/local.properties
+/.idea/workspace.xml
 out
 gen
 .gitignore
 .idea/shelf/
+build/generated/mockable-android-25.jar

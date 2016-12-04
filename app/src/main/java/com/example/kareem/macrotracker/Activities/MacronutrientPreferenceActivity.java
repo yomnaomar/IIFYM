@@ -60,7 +60,7 @@ public class MacronutrientPreferenceActivity extends PreferenceActivity implemen
     }
 
     @Override
-    protected void onPause() { //TODO(Abdulwahab): update DB when user changes prefs
+    protected void onPause() { //TODO(Abdulwahab): update DB when currentUser changes prefs
         Log.d("PAUSE", "PrefsPaused");
         Carb_Percent = Float.parseFloat(prefs.getString("pref_Carbs", "50"));
         Protein_Percent = Float.parseFloat(prefs.getString("pref_Protein", "25"));
@@ -90,20 +90,22 @@ public class MacronutrientPreferenceActivity extends PreferenceActivity implemen
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        if(key.equals("Carbs")) {
-            Carb_Percent = Float.parseFloat(prefs.getString("pref_Carbs", "50"));
-            Toast toast1 = Toast.makeText(this, "Carb ratio changed to " + Carb_Percent, Toast.LENGTH_SHORT);
-            toast1.show();
-        }
-        else if (key.equals("Protein")) {
-            Protein_Percent = Float.parseFloat(prefs.getString("pref_Protein", "25"));
-            Toast toast2 = Toast.makeText(this, "Protein ratio changed to " + Protein_Percent, Toast.LENGTH_SHORT);
-            toast2.show();
-        }
-        else if (key.equals("Fat")) {
-            Fat_Percent = Float.parseFloat(prefs.getString("pref_Fat", "25"));
-            Toast toast3 = Toast.makeText(this, "Fat ratio changed to " + Fat_Percent, Toast.LENGTH_SHORT);
-            toast3.show();
+        switch (key) {
+            case "Carbs":
+                Carb_Percent = Float.parseFloat(prefs.getString("pref_Carbs", "50"));
+                Toast toast1 = Toast.makeText(this, "Carb ratio changed to " + Carb_Percent, Toast.LENGTH_SHORT);
+                toast1.show();
+                break;
+            case "Protein":
+                Protein_Percent = Float.parseFloat(prefs.getString("pref_Protein", "25"));
+                Toast toast2 = Toast.makeText(this, "Protein ratio changed to " + Protein_Percent, Toast.LENGTH_SHORT);
+                toast2.show();
+                break;
+            case "Fat":
+                Fat_Percent = Float.parseFloat(prefs.getString("pref_Fat", "25"));
+                Toast toast3 = Toast.makeText(this, "Fat ratio changed to " + Fat_Percent, Toast.LENGTH_SHORT);
+                toast3.show();
+                break;
         }
     }
 }

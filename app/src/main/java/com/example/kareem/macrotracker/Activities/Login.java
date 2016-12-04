@@ -66,7 +66,7 @@ public class Login extends AppCompatActivity implements myFragEventListener {
 
         //My_DB.openReadableDB();
         //My_DB.openWriteableDB();
-        newUser = new User(); //instantiate user
+        newUser = new User(); //instantiate currentUser
     }
 
 
@@ -180,11 +180,11 @@ public class Login extends AppCompatActivity implements myFragEventListener {
         }
     }
 
-    //TODO (Abdulwahab) : all listener functions for user Login/Sign Up fragments ---------------------
+    //TODO (Abdulwahab) : all listener functions for currentUser Login/Sign Up fragments ---------------------
 
     @Override
     public void insertUser() {
-        //get all user details and send to DB (called when user sign up is finished)
+        //get all currentUser details and send to DB (called when currentUser sign up is finished)
 
         try {
             //TODO KILL DUMMY
@@ -202,7 +202,7 @@ public class Login extends AppCompatActivity implements myFragEventListener {
 
     @Override
     public void userLogin(String username) {
-        //check if user exists when trying to login (check credentials)
+        //check if currentUser exists when trying to login (check credentials)
         //Cursor mCursor = My_DB.getUser(username);
         if(My_DB.validateLogin(username,getApplicationContext()))
         {

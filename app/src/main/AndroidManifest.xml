@@ -53,7 +53,9 @@
         -->
         <activity android:name=".Activities.ViewSavedMealsActivity" />
         <activity android:name=".Activities.ViewMealActivity" />
-        <activity android:name=".Activities.AddSavedMealActivity"></activity>
+        <activity android:name=".Activities.AddSavedMealActivity" />
+        <activity android:name=".Activities.MacroSettings" />
+        <activity android:name=".Activities.ProfileSettings"></activity>
     </application>
 
 </manifest>

@@ -142,7 +142,7 @@ public class Goalsfrag extends Fragment implements  View.OnClickListener {
                     if(carbs+protein+fat==100)
                     {
                         listener.storeuserGoals(goal_spinner.getSelectedItemPosition(),Integer.parseInt(pcarbs.getText().toString()),Integer.parseInt(pfat.getText().toString()),Integer.parseInt(pprotein.getText().toString()),workout_spinner.getSelectedItemPosition());
-                        listener.insertUser(); //inserts user to DB
+                        listener.insertUser(); //inserts currentUser to DB
                     }
                     else
                     {

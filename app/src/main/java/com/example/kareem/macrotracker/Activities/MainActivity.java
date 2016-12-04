@@ -56,9 +56,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private int user_id;
     private CoordinatorLayout coordinatorLayout;
 
+    private User currentUser;
+
     View parentLayout;
 
     SharedPreferences settings;
+
+    int Carbs_Val,Protein_Val,Fat_Val;
+    int userBMR;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,14 +97,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         My_DB = new DatabaseConnector(getApplicationContext());
         parentLayout = findViewById(R.id.root_view);
-        //TODO:(Abdulwahab) get user_name and user_id here
-        Intent intent = getIntent();
-        isLogged = intent.getBooleanExtra("logged",false);
-        getActiveUser(isLogged,intent);
 
+        //TODO:(Abdulwahab) get current currentUser here
+        Intent intent = getIntent();
+        isLogged = intent.getBooleanExtra("logged",false);//checks if user just logged in
+        getActiveUser(isLogged,intent); //get current user
+        userBMR = getBMR(); // BMR fetched here
         setPrefMacros(); // puts preferred macro in shared prefs
 
-        //TODO KILL DUMMEIS
+        //TODO KILL DUMMIES
 //        User DummyBoy = new User();
 //        //DummyBoy = My_DB.getUser_ReturnsUser("DummyBoy");
 //        DummyBoy = My_DB.getUser_ReturnsUser("DebuggerDummy");
@@ -138,6 +144,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             //My_DB.close();
             finish();
             Intent in = new Intent(getApplicationContext(), Login.class);
+            startActivity(in);
+            return true;
+        }
+        if(id==R.id.profile_menu_btn)
+        {
+            //Intent in = new Intent(getApplicationContext(), );
+            //startActivity(in);
+            return true;
+        }
+        if(id==R.id.macro_settings_btn)
+        {
+            Intent in = new Intent(getApplicationContext(),MacroSettings.class );
             startActivity(in);
             return true;
         }
@@ -284,28 +302,96 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             user_name = settings.getString("user_name", "");
         }
         usernameview.setText(user_name);
+        currentUser = My_DB.getUserObject(user_name);
     }
 
     private void setPrefMacros()
     {
-        User user = My_DB.getUserObject(user_name);
-
         //Prefs defaults from database
-        CarbsDefault = user.getPercent_carbs();
-        FatDefault = user.getPercent_fat();
-        ProteinDefault = user.getPercent_protein();
-
+        CarbsDefault =Carbs_Val;
+        FatDefault =Fat_Val;
+        ProteinDefault = Protein_Val;
 
         settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         SharedPreferences.Editor editor = settings.edit();
 
-
-        editor.putString("pref_Carbs", user.getPercent_carbs() + "");
-        editor.putString("pref_Protein",  user.getPercent_protein() + "");
-        editor.putString("pref_Fat",  user.getPercent_fat() + "");
+        editor.putString("pref_Carbs", currentUser.getPercent_carbs() + "");
+        editor.putString("pref_Protein",  currentUser.getPercent_protein() + "");
+        editor.putString("pref_Fat",  currentUser.getPercent_fat() + "");
         editor.commit();
+    }
+    //TODO: get macro percent from DB and other info to get macro values
+    //MEN: BMR = (10 x weight in kg) + (6.25 x height in cm) – (5 x age in years) + 5
+    //WOMEN: BMR = (10 x weight in kg) + (6.25 x height in cm)  – (5 x age in years) -161
+    private int getBMR()
+    {
+        int BMR; // b/w 1000 - 3000
+        //get all user data height, weight ,age:
+        float Weight_Val = currentUser.getWeight();
+        float Height_Val = currentUser.getHeight();
+        String gender = currentUser.getGender();
+        int Age_Val = currentUser.getAge();
+        double Caloric_Intake;
+        int Carb_Percent,Protein_Percent,Fat_Percent;
 
+        if(currentUser.getWeight_unit()!= 0) //not kg - convert from lbs to kg
+        {
+            Weight_Val = Weight_Val/2.2046f;
+        }
+        if(currentUser.getHeight_unit()!=1)//not cm - convert from feet to cm
+        {
+            Height_Val = Height_Val/0.032808f;
+        }
+        if (gender.startsWith("M")) {
+            BMR = (int) (10*Weight_Val + 6.25*Height_Val + 5*Age_Val + 5.0); //Male
+        }
+        else
+        {
+            BMR = (int) (10*Weight_Val + 6.25*Height_Val + 5*Age_Val - 161.0); //Female
+        }
 
+        //Activity Factor Multiplier
+        //Sedentary
+        if (currentUser.getWorkout_freq() == 0) {
+            Caloric_Intake = BMR * 1.2;
+        }
+        //Lightly Active
+        else if (currentUser.getWorkout_freq() == 1) {
+            Caloric_Intake = BMR * 1.35;
+        }
+        //Moderately Active
+        else if (currentUser.getWorkout_freq() == 2) {
+            Caloric_Intake = BMR * 1.5;
+        }
+        //Very Active
+        else if (currentUser.getWorkout_freq() ==3) {
+            Caloric_Intake = BMR * 1.7;
+        }
+        else
+        {
+            Caloric_Intake = BMR * 1.9;
+        }
+
+        //Weight goals
+        if (currentUser.getGoal() == 0) { //lose
+            Caloric_Intake -= 250.0;
+        }
+        else if (currentUser.getGoal()== 1) { //maintain
+            //Do nothing
+        }
+        else { //maintain
+            Caloric_Intake += 250.0;
+        }
+        //Macronutrient ratio calculation
+        Carb_Percent = currentUser.getPercent_carbs();
+        Protein_Percent = currentUser.getPercent_protein();
+        Fat_Percent = currentUser.getPercent_fat();
+
+        Carbs_Val = (int) ((Carb_Percent * Caloric_Intake) /4.0); //carbs = 4kcal/g
+        Protein_Val = (int) ((Protein_Percent * Caloric_Intake) / 4.0); //protein = 4kcal/g
+        Fat_Val = (int) ((Fat_Percent * Caloric_Intake)/ 9.0); //fat = 9kcal/g
+
+        return BMR;
     }
 
 }

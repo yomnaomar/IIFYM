@@ -43,7 +43,7 @@ public class AddQuickMealActivity extends AppCompatActivity implements View.OnCl
     private int Weight_Unit_Selected = 0;
 
     String user_name;
-    User user;
+    User currentUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,7 +101,7 @@ public class AddQuickMealActivity extends AppCompatActivity implements View.OnCl
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         user_name = settings.getString("user_name", "");
 
-        user = My_DB.getUserObject(user_name);
+        currentUser = My_DB.getUserObject(user_name);
     }
 
     @Override
@@ -145,7 +145,7 @@ public class AddQuickMealActivity extends AppCompatActivity implements View.OnCl
     }
 
     private void InsertDailyMeal(String meal_name, int carbs, int protein, int fat, int indexofPortionType, int daily_consumption) {
-        Meal NewMeal = new Meal(meal_name, carbs, protein, fat, indexofPortionType, daily_consumption, user.getUser_id());
+        Meal NewMeal = new Meal(meal_name, carbs, protein, fat, indexofPortionType, daily_consumption, currentUser.getUser_id());
 
         if (My_DB.insertMeal(NewMeal)) {
             Meal NewMeal_WithID = My_DB.GetMeal(meal_name);//meal needs to be retrieved because ID is initialized in the DB
@@ -164,7 +164,7 @@ public class AddQuickMealActivity extends AppCompatActivity implements View.OnCl
 
     private void InsertSavedMeal(String meal_name, int carbs, int protein, int fat, int indexofPortionType, int daily_consumption) {
         //Initializing Meal to be inserted in Database
-        Meal NewMeal = new Meal(meal_name, carbs, protein, fat, indexofPortionType, daily_consumption, user.getUser_id());
+        Meal NewMeal = new Meal(meal_name, carbs, protein, fat, indexofPortionType, daily_consumption, currentUser.getUser_id());
 
         if (My_DB.insertMeal(NewMeal)) {
             Meal NewMeal_WithID = My_DB.GetMeal(meal_name);//meal needs to be retrieved because ID is initialized in the DB
