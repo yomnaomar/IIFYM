@@ -51,11 +51,20 @@
             />
         <activity android:name=".Activities.ViewSavedMealActivity"></activity>
         -->
-        <activity android:name=".Activities.ViewSavedMealsActivity" />
-        <activity android:name=".Activities.ViewMealActivity" />
-        <activity android:name=".Activities.AddSavedMealActivity" />
-        <activity android:name=".Activities.MacroSettings" />
-        <activity android:name=".Activities.ProfileSettings"></activity>
+        <activity android:name=".Activities.ViewSavedMealsActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Activities.ViewMealActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Activities.AddSavedMealActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Activities.MacroSettings"
+            android:label="Macro Settings"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan"
+            />
+        <activity android:name=".Activities.ProfileSettings">
+
+        </activity>
     </application>
 
 </manifest>

@@ -64,6 +64,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     int Carbs_Val,Protein_Val,Fat_Val;
     int userBMR;
+    double userCalories;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -315,9 +316,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         SharedPreferences.Editor editor = settings.edit();
 
-        editor.putString("pref_Carbs", currentUser.getPercent_carbs() + "");
-        editor.putString("pref_Protein",  currentUser.getPercent_protein() + "");
-        editor.putString("pref_Fat",  currentUser.getPercent_fat() + "");
+        editor.putInt("pref_Carbs", currentUser.getPercent_carbs());
+        editor.putInt("pref_Protein",  currentUser.getPercent_protein());
+        editor.putInt("pref_Fat",  currentUser.getPercent_fat());
+        editor.putInt("user_carbs", CarbsDefault);
+        editor.putInt("user_fat", FatDefault);
+        editor.putInt("user_protein", ProteinDefault);
+        editor.putInt("cals", (int) userCalories);
+        editor.putInt("BMR", userBMR);
         editor.commit();
     }
     //TODO: get macro percent from DB and other info to get macro values
@@ -325,39 +331,46 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //WOMEN: BMR = (10 x weight in kg) + (6.25 x height in cm)  – (5 x age in years) -161
     private int getBMR()
     {
-        int BMR; // b/w 1000 - 3000
+        double BMR; // b/w 1000 - 3000
         //get all user data height, weight ,age:
         float Weight_Val = currentUser.getWeight();
         float Height_Val = currentUser.getHeight();
         String gender = currentUser.getGender();
         int Age_Val = currentUser.getAge();
         double Caloric_Intake;
-        int Carb_Percent,Protein_Percent,Fat_Percent;
+        double Carb_Percent,Protein_Percent,Fat_Percent;
 
+        Log.d("BMRINFO", ""+ Weight_Val+ " "+ Height_Val+" "+gender+" "+Age_Val);
         if(currentUser.getWeight_unit()!= 0) //not kg - convert from lbs to kg
         {
-            Weight_Val = Weight_Val/2.2046f;
+            Weight_Val = (Weight_Val/2.2046f);
+            Log.d("WEIGHT", ""+Weight_Val);
         }
         if(currentUser.getHeight_unit()!=1)//not cm - convert from feet to cm
         {
-            Height_Val = Height_Val/0.032808f;
+            Height_Val = (Height_Val/0.032808f);
+            Log.d("HEIGHT", ""+Height_Val);
         }
         if (gender.startsWith("M")) {
-            BMR = (int) (10*Weight_Val + 6.25*Height_Val + 5*Age_Val + 5.0); //Male
+            BMR = (10*Weight_Val + 6.25*Height_Val + 5*Age_Val + 5.0); //Male
+            Log.d("BMRMALE", ""+BMR);
         }
         else
         {
-            BMR = (int) (10*Weight_Val + 6.25*Height_Val + 5*Age_Val - 161.0); //Female
+            BMR = (10*Weight_Val + 6.25*Height_Val + 5*Age_Val - 161.0); //Female
+            Log.d("BMRFEMALE", ""+BMR);
         }
 
         //Activity Factor Multiplier
         //Sedentary
         if (currentUser.getWorkout_freq() == 0) {
             Caloric_Intake = BMR * 1.2;
+
         }
         //Lightly Active
         else if (currentUser.getWorkout_freq() == 1) {
             Caloric_Intake = BMR * 1.35;
+            Log.d("WORKOUT", ""+Caloric_Intake);
         }
         //Moderately Active
         else if (currentUser.getWorkout_freq() == 2) {
@@ -383,15 +396,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Caloric_Intake += 250.0;
         }
         //Macronutrient ratio calculation
-        Carb_Percent = currentUser.getPercent_carbs();
-        Protein_Percent = currentUser.getPercent_protein();
-        Fat_Percent = currentUser.getPercent_fat();
+        Carb_Percent = currentUser.getPercent_carbs()/100.0;
+        Protein_Percent = currentUser.getPercent_protein()/100.0;
+        Fat_Percent = currentUser.getPercent_fat()/100.0;
+
 
         Carbs_Val = (int) ((Carb_Percent * Caloric_Intake) /4.0); //carbs = 4kcal/g
         Protein_Val = (int) ((Protein_Percent * Caloric_Intake) / 4.0); //protein = 4kcal/g
         Fat_Val = (int) ((Fat_Percent * Caloric_Intake)/ 9.0); //fat = 9kcal/g
 
-        return BMR;
+
+        userCalories = Caloric_Intake;
+        return (int) BMR;
     }
 
 }
