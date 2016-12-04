@@ -61,24 +61,33 @@ public class DatabaseConnector {
 
     // Composed of Functionality
     public Cursor getComposedMealID(long meal_id) {
-        Cursor C = database.rawQuery("SELECT FROM " + Table_Composed_Of + " Where meal_id = " + meal_id, null);
+        Cursor C = database.rawQuery("SELECT * FROM " + Table_Composed_Of + " Where meal_id = " + meal_id, null);
         Log.i("Mina", "ID: " + meal_id + " Retrieved");
         return C;
     }
 
-    public Cursor getComposedComplexID(long complex_id) {
-        Cursor C = database.rawQuery("SELECT FROM " + Table_Composed_Of + " Where meal_id = " + complex_id, null);
+    //Returns an array of ints which correspond to all meals which compose a complex meal with ID complex_id
+    //Check for error conditions
+    public int[] getSimpleMealList(long complex_id) {
+        Cursor C = database.rawQuery("SELECT * FROM " + Table_Composed_Of + " Where meal_id = " + complex_id, null);
         Log.i("Mina", "ID: " + complex_id + " Retrieved");
-        return C;
+        int[] Meal_ID_List = new int[C.getCount()];
+        if(C.moveToFirst()){
+            for (int i =0; i<C.getCount();i++){
+                Meal_ID_List[i] = C.getInt(0);
+                C.moveToNext();
+            }
+        }
+        return Meal_ID_List;
     }
 
     public void deleteComposedMealID(long meal_id) {
-        database.rawQuery("DELETE FROM" + Table_Composed_Of + "WHERE meal_id =" + meal_id, null);
+        database.rawQuery("DELETE * FROM" + Table_Composed_Of + "WHERE meal_id =" + meal_id, null);
         Log.i("Mina", "ID : " + meal_id + " Deleted Successfully");
     }
 
     public void deleteComposedComplexID(long complex_id) {
-        database.rawQuery("DELETE FROM" + Table_Composed_Of + "WHERE complex_id =" + complex_id, null);
+        database.rawQuery("DELETE * FROM" + Table_Composed_Of + "WHERE complex_id =" + complex_id, null);
         Log.i("Mina", "ID : " + complex_id + " Deleted Successfully");
     }
 

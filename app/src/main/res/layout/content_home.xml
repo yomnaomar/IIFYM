@@ -15,7 +15,9 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
 
         <TextView
             android:text="TextView"
@@ -174,15 +176,15 @@
             <Button
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="Add Saved Meal"
-                android:id="@+id/Button_AddSavedMeal"
+                android:text="Add Quick Meal"
+                android:id="@+id/Button_AddQuickMeal"
                 android:layout_weight="1" />
 
             <Button
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="Add New Meal"
-                android:id="@+id/Button_AddNewMeal"
+                android:text="Add Saved Meal"
+                android:id="@+id/Button_AddSavedMeal"
                 android:layout_weight="1" />
 
         </LinearLayout>

@@ -18,7 +18,6 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.kareem.macrotracker.Custom_Objects.Meal;
 import com.example.kareem.macrotracker.Custom_Objects.Portion_Type;
@@ -28,15 +27,13 @@ import com.example.kareem.macrotracker.R;
 import com.example.kareem.macrotracker.ViewComponents.MealAdapter;
 import com.example.kareem.macrotracker.ViewComponents.OnListItemDeletedListener;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener, OnListItemDeletedListener {
 
     private TextView Text_CarbsGoal, Text_ProteinGoal, Text_FatGoal, Text_CarbsLeft, Text_ProteinLeft, Text_FatLeft;
     private TextView usernameview;
-    private Button Button_AddSavedMeal, Button_AddNewMeal;
+    private Button Button_AddSavedMeal, Button_AddQuickMeal;
 
     private ArrayList<Meal> ArrayList_Meals;
     private MealAdapter My_MealAdapter;
@@ -84,8 +81,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         Button_AddSavedMeal = (Button) findViewById(R.id.Button_AddSavedMeal);
         Button_AddSavedMeal.setOnClickListener(this);
-        Button_AddNewMeal = (Button) findViewById(R.id.Button_AddNewMeal);
-        Button_AddNewMeal.setOnClickListener(this);
+        Button_AddQuickMeal = (Button) findViewById(R.id.Button_AddQuickMeal);
+        Button_AddQuickMeal.setOnClickListener(this);
 
         ArrayList_Meals = new ArrayList<Meal>();
         My_MealAdapter = new MealAdapter(this, ArrayList_Meals);
@@ -153,20 +150,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.Button_AddSavedMeal:
                 AddSavedMeal();
                 break;
-            case R.id.Button_AddNewMeal:
-                AddNewMeal();
+            case R.id.Button_AddQuickMeal:
+                AddQuickMeal();
                 break;
         }
     }
 
     private void AddSavedMeal() {
-
-    }
-
-    private void AddNewMeal() {
         Context context = getApplicationContext();
         Intent intent = new Intent();
-        intent.setClass(context,AddNewMealActivity.class);
+        intent.setClass(context,AddSavedMealActivity.class);
+        startActivity(intent);
+    }
+
+    private void AddQuickMeal() {
+        Context context = getApplicationContext();
+        Intent intent = new Intent();
+        intent.setClass(context,AddQuickMealActivity.class);
         startActivity(intent);
     }
 

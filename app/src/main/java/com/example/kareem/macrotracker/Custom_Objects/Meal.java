@@ -15,15 +15,16 @@ public class Meal {
     private int carbs;
     private int protein;
     private int fat;
+    private int daily_consumption;
 
     private Portion_Type portion;
-    private boolean is_daily;
+
 
     private int user_id; //TODO To keep user_id or not, depending on implementation
 
     //Constructor
     //Portion is of type INT
-    public Meal(int meal_id, String meal_name, int carbs, int fat, int protein, int portion, boolean is_daily,int user_id) {
+    public Meal(int meal_id, String meal_name, int carbs, int protein, int fat, int daily_consumption, int portion,int user_id) {
         this.meal_id = meal_id;
         this.meal_name = meal_name;
         this.date_created = getToday();
@@ -32,14 +33,14 @@ public class Meal {
         this.protein = protein;
         Portion_Type P = Portion_Type.Serving;
         this.portion = P.fromInteger(portion);
-        this.is_daily = is_daily;
+        this.daily_consumption = daily_consumption;
         this.user_id = user_id;
     }
 
     //Constructor
     //Meal_id is not a requried parameter
     //Portion is of type INT
-    public Meal(String meal_name, int carbs, int protein, int fat, int portion, boolean is_daily, int user_id) {
+    public Meal(String meal_name, int carbs, int protein, int fat, int daily_consumption, int portion, int user_id) {
         this.meal_name = meal_name;
         this.date_created = getToday();
         this.carbs = carbs;
@@ -47,12 +48,12 @@ public class Meal {
         this.fat = fat;
         Portion_Type P = Portion_Type.Serving;
         this.portion = P.fromInteger(portion);
-        this.is_daily = is_daily;
+        this.daily_consumption = daily_consumption;
         this.user_id = user_id;
     }
 
     //Constructor which initializes all fields
-    public Meal(int meal_id, String meal_name, int carbs, int protein, int fat, Portion_Type portion, boolean is_daily, int user_id) {
+    public Meal(int meal_id, String meal_name, int carbs, int protein, int fat, int daily_consumption, Portion_Type portion, int user_id) {
         this.meal_id = meal_id;
         this.date_created = getToday();
         this.meal_name = meal_name;
@@ -60,7 +61,7 @@ public class Meal {
         this.protein = protein;
         this.fat = fat;
         this.portion = portion;
-        this.is_daily = is_daily;
+        this.daily_consumption = daily_consumption;
         this.user_id = user_id;
     }
 
@@ -120,12 +121,12 @@ public class Meal {
         this.portion = portion;
     }
 
-    public boolean is_daily() {
-        return is_daily;
+    public int is_daily() {
+        return daily_consumption;
     }
 
     public void setIs_daily(boolean is_daily) {
-        this.is_daily = is_daily;
+        this.daily_consumption = daily_consumption;
     }
 
     public int getUser_id() {

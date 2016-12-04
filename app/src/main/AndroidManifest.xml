@@ -43,7 +43,7 @@
             android:label="Preferences"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activities.AddNewMealActivity"
+            android:name=".Activities.AddQuickMealActivity"
             android:screenOrientation="portrait" />
         <!--
         <activity android:name=".Activities.ViewSavedMealsActivity"
@@ -53,6 +53,7 @@
         -->
         <activity android:name=".Activities.ViewSavedMealsActivity" />
         <activity android:name=".Activities.ViewMealActivity" />
+        <activity android:name=".Activities.AddSavedMealActivity"></activity>
     </application>
 
 </manifest>

@@ -8,11 +8,11 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.example.kareem.macrotracker.Custom_Objects.Meal;
+import com.example.kareem.macrotracker.Custom_Objects.Portion_Type;
 import com.example.kareem.macrotracker.Database.DatabaseConnector;
 import com.example.kareem.macrotracker.R;
-import com.example.kareem.macrotracker.Custom_Objects.Meal;
 import com.example.kareem.macrotracker.ViewComponents.MealAdapter;
-import com.example.kareem.macrotracker.Custom_Objects.Portion_Type;
 
 import java.util.ArrayList;
 
@@ -22,9 +22,6 @@ public class ViewSavedMealsActivity extends AppCompatActivity implements Adapter
     private MealAdapter My_MealAdapter;
     private ListView Meals_ListView;
     private DatabaseConnector My_DB;
-
-    private final String Portion_Type_Serving = "Serving";
-    private final String Portion_Type_Weight = "Weight";
 
     Portion_Type portion = null;
     boolean is_daily = false;
@@ -44,20 +41,7 @@ public class ViewSavedMealsActivity extends AppCompatActivity implements Adapter
     }
 
     @Override
-    protected void onPause() {
-
-        super.onPause();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        UpdateArrayList();
-    }
-
-    @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        //TODO USER MEAL_ID
         Meal M = (Meal) parent.getItemAtPosition(position);
         int M_ID = M.getMeal_id();
 
@@ -66,7 +50,6 @@ public class ViewSavedMealsActivity extends AppCompatActivity implements Adapter
         startActivity(intent);
     }
 
-    //TODO Re-evaluate this function
     //Updates My_MealAdapter
     private void UpdateArrayList() {
         My_MealAdapter.clear();
@@ -91,5 +74,17 @@ public class ViewSavedMealsActivity extends AppCompatActivity implements Adapter
                 My_MealAdapter.add(M);
             }
         }
+    }
+
+    @Override
+    protected void onPause() {
+
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        UpdateArrayList();
     }
 }
