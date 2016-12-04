@@ -33,7 +33,6 @@ public class DatabaseConnector {
     private DatabaseHelper databaseHelper;
 
     Portion_Type portion = null;
-    boolean is_daily = false;
 
     public DatabaseConnector(Context context) {
         databaseHelper = DatabaseHelper.getInstance(context);
@@ -99,22 +98,22 @@ public class DatabaseConnector {
 
     // Return All Meals Where is Daily = true
     public Cursor getAllIsDailyMeals() {
-        Cursor C = database.rawQuery("Select * From " + Table_Meal + "Where is_daily = 1", null);
+        Cursor C = database.rawQuery("Select * From " + Table_Meal + "Where daily_consumption > 0", null);
         Log.i("Mina", "All Daily Meals Retrieved");
         return C;
     }
 
     // Change all is_daily to false -> integer 0 in meals table
     public boolean setAllIsDailyToFalse() {
-        database.rawQuery("UPDATE Meal SET is_daily = 0", null);
-        Log.i("Mina", "All is_daily Column is set to 0");
+        database.rawQuery("UPDATE Meal SET daily_consumption = 0", null);
+        Log.i("Mina", "All daily_consumption Column is set to 0");
         return true;
     }
 
     // Change all is_daily to True -> integer 1 in meals table
     public boolean setAllIsDailyToTrue() {
-        database.rawQuery("UPDATE Meal SET is_daily = 1", null);
-        Log.i("Mina", "All is_daily Column is set to 1");
+        database.rawQuery("UPDATE Meal SET daily_consumption = 1", null);
+        Log.i("Mina", "All daily_consumption Column is set to 1");
         return true;
     }
 
@@ -142,7 +141,7 @@ public class DatabaseConnector {
         newMeal.put("protein", M.getProtein());
         newMeal.put("fat", M.getFat());
         newMeal.put("portion", M.getPortion().getPortionInt());
-        newMeal.put("is_daily", M.is_daily());
+        newMeal.put("is_daily", M.getDaily_consumption());
         newMeal.put("user_id", M.getUser_id());
 
         database.insert(Table_Meal, null, newMeal);
@@ -153,7 +152,7 @@ public class DatabaseConnector {
                         M.getProtein() + "p " +
                         M.getFat() + "f " +
                         M.getPortion().getPortionString() + " " +
-                        M.is_daily() + " " +
+                        M.getDaily_consumption() + " " +
                         M.getUser_id());
         return true;
     }
@@ -173,7 +172,7 @@ public class DatabaseConnector {
         updateMeal.put("protein", C.getInt(4));
         updateMeal.put("fat", C.getInt(5));
         updateMeal.put("portion", C.getInt(6));
-        updateMeal.put("is_daily", C.getInt(7));
+        updateMeal.put("daily_consumption", C.getInt(7));
         //updateMeal.put("user_name", C.getString(8));
 
         database.update(Table_Meal, updateMeal, "meal_id = '" + M.getMeal_id() + "'", null);
@@ -204,15 +203,10 @@ public class DatabaseConnector {
             int protein = C.getInt(4);      //protein
             int fat = C.getInt(5);      //fat
             portion = portion.values()[C.getInt(6)];    //portion
-            if (C.getInt(7) != 0)                        //is_daily
-            {
-                is_daily = true;
-            } else {
-                is_daily = false;
-            }
+            int daily_consumption = C.getInt(7); //daily_consumption
             int user_id = C.getInt(8);      //user_id
 
-            Meal M = new Meal(meal_id, meal_name, carbs, protein, fat, portion, is_daily, user_id);
+            Meal M = new Meal(meal_id, meal_name, carbs, protein, fat, portion, daily_consumption, user_id);
             Log.i("Meal Retrieved", "ID: " + meal_id + " Retrieved");
             return M;
         } else {
@@ -232,15 +226,10 @@ public class DatabaseConnector {
         int protein = C.getInt(4);      //protein
         int fat = C.getInt(5);      //fat
         portion = portion.values()[C.getInt(6)];    //portion
-        if (C.getInt(7) != 0)                        //is_daily
-        {
-            is_daily = true;
-        } else {
-            is_daily = false;
-        }
+        int daily_consumption = C.getInt(7);    //daily_consumption
         int user_id = C.getInt(8);      //user_id
 
-        Meal M = new Meal(meal_id, meal_name, carbs, protein, fat, portion, is_daily, user_id);
+        Meal M = new Meal(meal_id, meal_name, carbs, protein, fat, portion, daily_consumption, user_id);
         Log.i("Meal Retrieved", "ID: " + meal_id + " Retrieved");
         return M;
     }
@@ -248,7 +237,7 @@ public class DatabaseConnector {
     //Return a Cursor containing all entries where is_daily is true(1)
     public Cursor getAllDailyMeals() {
        /* openReadableDB();*/
-        Cursor C = database.rawQuery("SELECT * FROM " + Table_Meal + " WHERE is_daily = 1", null);
+        Cursor C = database.rawQuery("SELECT * FROM " + Table_Meal + " WHERE daily_consumption > 0", null);
         Log.i("Meals Retrieved", "All Daily Meals Retrieved");
         return C;
     }

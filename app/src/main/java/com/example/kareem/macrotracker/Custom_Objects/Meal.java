@@ -24,7 +24,7 @@ public class Meal {
 
     //Constructor
     //Portion is of type INT
-    public Meal(int meal_id, String meal_name, int carbs, int protein, int fat, int daily_consumption, int portion,int user_id) {
+    public Meal(int meal_id, String meal_name, int carbs, int protein, int fat, int portion, int daily_consumption, int user_id) {
         this.meal_id = meal_id;
         this.meal_name = meal_name;
         this.date_created = getToday();
@@ -40,7 +40,7 @@ public class Meal {
     //Constructor
     //Meal_id is not a requried parameter
     //Portion is of type INT
-    public Meal(String meal_name, int carbs, int protein, int fat, int daily_consumption, int portion, int user_id) {
+    public Meal(String meal_name, int carbs, int protein, int fat,  int portion, int daily_consumption, int user_id) {
         this.meal_name = meal_name;
         this.date_created = getToday();
         this.carbs = carbs;
@@ -53,7 +53,7 @@ public class Meal {
     }
 
     //Constructor which initializes all fields
-    public Meal(int meal_id, String meal_name, int carbs, int protein, int fat, int daily_consumption, Portion_Type portion, int user_id) {
+    public Meal(int meal_id, String meal_name, int carbs, int protein, int fat, Portion_Type portion, int daily_consumption, int user_id) {
         this.meal_id = meal_id;
         this.date_created = getToday();
         this.meal_name = meal_name;
@@ -121,11 +121,20 @@ public class Meal {
         this.portion = portion;
     }
 
-    public int is_daily() {
+    public int getDaily_consumption() {
         return daily_consumption;
     }
 
-    public void setIs_daily(boolean is_daily) {
+    public boolean isDaily(){
+        if(daily_consumption > 0) {
+            return true;
+        }
+        else {
+        return false;
+        }
+    }
+
+    public void setDaily_consumption(int daily_consumption) {
         this.daily_consumption = daily_consumption;
     }
 
