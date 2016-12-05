@@ -272,7 +272,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Meal M = new Meal(meal_id,meal_name,carbs,protein,fat,portion,daily_consumption,user_id);
                 Log.d("Meal Retrieved:", "Name: " + M.getMeal_name() + " " + M.getMeal_id() + " "
                         + M.getCarbs() + " " + M.getProtein() + " " + M.getFat());
-                My_MealAdapter.add(M);
+                for (int j=0;j<daily_consumption;j++) {
+                    My_MealAdapter.add(M);
+                }
             }
         }
     }

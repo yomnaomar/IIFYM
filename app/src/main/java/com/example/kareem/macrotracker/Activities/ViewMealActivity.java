@@ -40,7 +40,7 @@ public class ViewMealActivity extends AppCompatActivity implements View.OnClickL
         int Meal_ID = getIntent().getIntExtra("Meal_ID", 0);
         My_DB = new DatabaseConnector(getApplicationContext());
 
-        Meal M = My_DB.GetMeal(Meal_ID);
+        Meal M = My_DB.getMeal(Meal_ID);
         int calories = M.getCarbs() * 4 + M.getProtein() * 4 + M.getFat() * 9;
 
         Text_MealName.setText(M.getMeal_name());

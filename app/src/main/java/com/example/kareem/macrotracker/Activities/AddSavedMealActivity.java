@@ -1,5 +1,7 @@
 package com.example.kareem.macrotracker.Activities;
 
+import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -43,7 +45,12 @@ public class AddSavedMealActivity extends AppCompatActivity implements AdapterVi
     //OnClick, increment daily_consumption for selected meal and go back to main activity
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+        Meal M = (Meal)parent.getItemAtPosition(position);
+        My_DB.incrementDailyConsumption(M);
+        Context context = getApplicationContext();
+        Intent intent = new Intent();
+        intent.setClass(context, MainActivity.class);
+        startActivity(intent);
     }
 
     //Updates My_MealAdapter
@@ -98,7 +105,7 @@ public class AddSavedMealActivity extends AppCompatActivity implements AdapterVi
         if (simple_meal_list.length != 0) {
             for (int i = 0; i < simple_meal_list.length; i++) {
                 simple_id = simple_meal_list[i];
-                Meal simple_meal = My_DB.GetMeal(simple_id);
+                Meal simple_meal = My_DB.getMeal(simple_id);
                 carbs += simple_meal.getCarbs() + getFullMealNutrients(simple_meal).getCarbs();
                 protein += simple_meal.getProtein() + getFullMealNutrients(simple_meal).getProtein();
                 fat += simple_meal.getFat() + getFullMealNutrients(simple_meal).getFat();
