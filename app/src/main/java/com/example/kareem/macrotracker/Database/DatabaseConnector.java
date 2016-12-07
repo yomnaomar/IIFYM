@@ -193,7 +193,7 @@ public class DatabaseConnector {
     }
 
     //Returns a meal using meal_name as the key
-    public Meal GetMeal(String Meal_Name) {
+    public Meal getMeal(String Meal_Name) {
         Cursor C = database.rawQuery("SELECT * FROM " + Table_Meal + " WHERE meal_name = '" + Meal_Name + "'", null);
         if (C != null && C.moveToFirst()) {
             int meal_id             = C.getInt(0);       //meal)id
@@ -216,7 +216,7 @@ public class DatabaseConnector {
     }
 
     //Returns a meal using meal_id as the key
-    public Meal GetMeal(int ID) {
+    public Meal getMeal(int ID) {
         Cursor C = database.rawQuery("SELECT * FROM " + Table_Meal + " WHERE meal_id = '" + ID + "'", null);
         C.moveToFirst();
         int meal_id             = C.getInt(0);      //meal)id
@@ -232,6 +232,13 @@ public class DatabaseConnector {
         Meal M = new Meal(meal_id, meal_name, carbs, protein, fat, portion, daily_consumption, user_id);
         Log.i("Meal Retrieved", "ID: " + meal_id + " Retrieved");
         return M;
+    }
+
+    public boolean incrementDailyConsumption(Meal M){
+        ContentValues updateMeal = new ContentValues();
+        updateMeal.put("daily_consumption", (M.getDaily_consumption()+1));
+        database.update(Table_Meal, updateMeal, "meal_id = '" + M.getMeal_id() + "'", null);
+        return true;
     }
 
     //Return a Cursor containing all entries where is_daily is true(1)

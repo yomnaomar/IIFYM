@@ -148,7 +148,7 @@ public class AddQuickMealActivity extends AppCompatActivity implements View.OnCl
         Meal NewMeal = new Meal(meal_name, carbs, protein, fat, indexofPortionType, daily_consumption, currentUser.getUser_id());
 
         if (My_DB.insertMeal(NewMeal)) {
-            Meal NewMeal_WithID = My_DB.GetMeal(meal_name);//meal needs to be retrieved because ID is initialized in the DB
+            Meal NewMeal_WithID = My_DB.getMeal(meal_name);//meal needs to be retrieved because ID is initialized in the DB
             Log.i("Meal Inserted", "ID: " + NewMeal_WithID.getMeal_id() + " Name:" + " " + NewMeal.getMeal_name());
 
             Toast.makeText(this, "Meal added", Toast.LENGTH_SHORT).show();
@@ -167,7 +167,7 @@ public class AddQuickMealActivity extends AppCompatActivity implements View.OnCl
         Meal NewMeal = new Meal(meal_name, carbs, protein, fat, indexofPortionType, daily_consumption, currentUser.getUser_id());
 
         if (My_DB.insertMeal(NewMeal)) {
-            Meal NewMeal_WithID = My_DB.GetMeal(meal_name);//meal needs to be retrieved because ID is initialized in the DB
+            Meal NewMeal_WithID = My_DB.getMeal(meal_name);//meal needs to be retrieved because ID is initialized in the DB
             Log.i("Meal Inserted", "ID: " + NewMeal_WithID.getMeal_id() + " Name:" + " " + NewMeal.getMeal_name());
 
             if (indexofPortionType == 0) { //Meal is measured by servings
