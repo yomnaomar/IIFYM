@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     Portion_Type portion = null;
     int daily_consumption;
-    boolean isLogged;
+    boolean isLogged ;
 
     private String user_name;
     private int user_id;
@@ -65,6 +65,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     int Carbs_Val,Protein_Val,Fat_Val;
     int userBMR;
     double userCalories;
+
+    Intent mainintent = getIntent();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,11 +102,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         parentLayout = findViewById(R.id.root_view);
 
         //TODO:(Abdulwahab) get current currentUser here
-        Intent intent = getIntent();
-        isLogged = intent.getBooleanExtra("logged",false);//checks if user just logged in
-        getActiveUser(isLogged,intent); //get current user
-        userBMR = getBMR(); // BMR fetched here
-        setPrefMacros(); // puts preferred macro in shared prefs
+        mainintent = getIntent();
+        isLogged = mainintent.getBooleanExtra("logged",false);//checks if user just logged in
+
+
 
         //TODO KILL DUMMIES
 //        User DummyBoy = new User();
@@ -129,9 +130,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_MacroSettings) {
-            Intent intent = new Intent();
-            intent.setClassName(this, "com.example.kareem.macrotracker.Activities.MacronutrientPreferenceActivity");
-            startActivity(intent);
+            Intent in = new Intent(getApplicationContext(),MacroSettings.class );
+            startActivity(in);
             return true;
         }
         if (id == R.id.action_MealSettings) {
@@ -152,12 +152,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         {
             //Intent in = new Intent(getApplicationContext(), );
             //startActivity(in);
-            return true;
-        }
-        if(id==R.id.macro_settings_btn)
-        {
-            Intent in = new Intent(getApplicationContext(),MacroSettings.class );
-            startActivity(in);
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -192,6 +186,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onResume() {
         super.onResume();
+
+        getActiveUser(isLogged,mainintent); //get current user
+        userBMR = getBMR(); // BMR fetched here
+        Log.d("oncreatemain","oncreate update bmr");
+        setPrefMacros(); // puts preferred macro in shared prefs
+        Log.d("oncreatemain","oncreate upodate macros");
 
         UpdateArrayList();
         UpdateMacros();
@@ -289,17 +289,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void getActiveUser(boolean logged, Intent intent)
     {
+        user_name = intent.getStringExtra("user_name");
+        user_id = intent.getIntExtra("user_id",My_DB.fetchUserID(user_name,getApplicationContext()));
         if(logged)
         {
-            user_name = intent.getStringExtra("user_name");
-            user_id = intent.getIntExtra("user_id",My_DB.fetchUserID(user_name,getApplicationContext()));
             Snackbar snackbar = Snackbar
                     .make(parentLayout, "Welcome "+ user_name +" ID: "+ user_id, Snackbar.LENGTH_SHORT);
             snackbar.show();
             isLogged=false;
         }
         else {
-            SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+            SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()); //get stored username
             user_name = settings.getString("user_name", "");
         }
         usernameview.setText(user_name);

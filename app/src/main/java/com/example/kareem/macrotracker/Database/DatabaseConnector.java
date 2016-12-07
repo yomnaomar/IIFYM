@@ -458,28 +458,31 @@ public class DatabaseConnector {
 
     //Update
 
-    public boolean updateUser(long id, String username, String fname, String lname, String dob, int age, int weight, int height, int pcarbs, int pfat, int pprotein, String gender, int goal, int workoutfreq, int weightunit, int heightunit) {
+    public boolean updateUser( User user) {
+       // Cursor C = database.rawQuery("SELECT * FROM " + Table_User + " WHERE user_id = '" + user.getUser_id()+ "'", null);
         Cursor C = getAllUsers();
         C.moveToFirst();
-        if (C.getCount() == 0) {
+        Log.i("UserC", "C: " + C.getCount() + "");
+        if (C.getCount() != 0) {
             ContentValues editUser = new ContentValues();
-            editUser.put("user_name", username);
-            editUser.put("fname", fname);
-            editUser.put("lname", lname);
-            editUser.put("dob", dob);
-            editUser.put("age", age);
-            editUser.put("weight", weight);
-            editUser.put("height", height);
-            editUser.put("percent_carbs", pcarbs);
-            editUser.put("percent_fat", pfat);
-            editUser.put("percent_protein", pprotein);
-            editUser.put("gender", gender);
-            editUser.put("goal", goal);
-            editUser.put("workout_freq", workoutfreq);
-            editUser.put("weight_unit", weightunit);
-            editUser.put("height_unit", heightunit);
+            editUser.put("user_name", user.getUser_name());
+            editUser.put("fname", user.getFname());
+            editUser.put("lname", user.getLname());
+            editUser.put("dob", user.getDob());
+            editUser.put("age", user.getAge());
+            editUser.put("weight", user.getWeight());
+            editUser.put("height", user.getHeight());
+            editUser.put("percent_carbs", user.getPercent_carbs());
+            editUser.put("percent_fat", user.getPercent_fat());
+            editUser.put("percent_protein", user.getPercent_protein());
+            editUser.put("gender", user.getGender());
+            editUser.put("goal", user.getGoal());
+            editUser.put("workout_freq", user.getWorkout_freq());
+            editUser.put("weight_unit", user.getWeight_unit());
+            editUser.put("height_unit", user.getHeight_unit());
 
-            database.update(Table_User, editUser, "user_name" + username, null);
+            database.update(Table_User, editUser, "user_id = " + user.getUser_id(), null);
+            Log.i("User Updated", "ID: " + user.getUser_id() + " Updated");
             return true;
         } else {
             return false;

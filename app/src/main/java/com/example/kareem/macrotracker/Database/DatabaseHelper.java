@@ -59,7 +59,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "protein            INTEGER, " +
                 "fat                INTEGER, " +
                 "portion            INTEGER, " +     //enum, 0 - Serving, 1 - Weight, 2 - None
-                "daily_consumption  INTEGER, " +     //boolean, processed in code
+                "daily_consumption  INTEGER, " +     //int, processed in code
                 "user_id            INTEGER);";
 
         String createTable_Weight = "CREATE TABLE " + Table_Weight + " " +
