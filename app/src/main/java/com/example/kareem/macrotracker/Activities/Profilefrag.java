@@ -110,17 +110,19 @@ public class Profilefrag extends Fragment implements View.OnClickListener {
 
 
         ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(myView.getContext(),
-                R.array.bodyweight_units_array, android.R.layout.simple_spinner_item);
+                R.array.bodyweight_units_array, R.layout.spinner_row);
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(myView.getContext(),
-                R.array.height_units_array, android.R.layout.simple_spinner_item);
+                R.array.height_units_array, R.layout.spinner_row);
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
 
 
         weight_unit_spinner.setAdapter(adapter1);
         height_unit_spinner.setAdapter(adapter2);
+
+        height_unit_spinner.setSelection(1);
 
 
         radiogrp = (RadioGroup)myView.findViewById(R.id.genderRadio);

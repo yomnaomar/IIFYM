@@ -83,7 +83,7 @@
     </string-array>
 
     <string-array name="bodyweight_units_array">
-        <item>KiloGrams (kg)</item>
+        <item>Kilograms (kg)</item>
         <item>Pounds (lbs)</item>
     </string-array>
 
@@ -93,9 +93,9 @@
     </string-array>
 
     <string-array name="goals_array">
-        <item>Lose</item>
-        <item>Maintain</item>
-        <item>Gain</item>
+        <item>Fat Loss</item>
+        <item>Maintenance</item>
+        <item>Muscle Gain</item>
     </string-array>
 
     <string-array name="workfreq_array">
