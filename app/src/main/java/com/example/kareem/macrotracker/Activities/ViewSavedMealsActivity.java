@@ -12,14 +12,14 @@ import com.example.kareem.macrotracker.Custom_Objects.Meal;
 import com.example.kareem.macrotracker.Custom_Objects.Portion_Type;
 import com.example.kareem.macrotracker.Database.DatabaseConnector;
 import com.example.kareem.macrotracker.R;
-import com.example.kareem.macrotracker.ViewComponents.MealAdapter;
+import com.example.kareem.macrotracker.ViewComponents.SavedMealAdapter;
 
 import java.util.ArrayList;
 
 public class ViewSavedMealsActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     private ArrayList<Meal> ArrayList_SavedMeals;
-    private MealAdapter My_MealAdapter;
+    private SavedMealAdapter My_SavedMealAdapter;
     private ListView Meals_ListView;
     private DatabaseConnector My_DB;
 
@@ -32,9 +32,9 @@ public class ViewSavedMealsActivity extends AppCompatActivity implements Adapter
         setContentView(R.layout.activity_view_saved_meals);
 
         ArrayList_SavedMeals = new ArrayList<Meal>();
-        My_MealAdapter = new MealAdapter(this, ArrayList_SavedMeals);
+        My_SavedMealAdapter = new SavedMealAdapter(this, ArrayList_SavedMeals);
         Meals_ListView = (ListView) findViewById(R.id.ListView_SavedMeals);
-        Meals_ListView.setAdapter(My_MealAdapter);
+        Meals_ListView.setAdapter(My_SavedMealAdapter);
         Meals_ListView.setOnItemClickListener(this);
 
         My_DB = new DatabaseConnector(getApplicationContext());
@@ -52,8 +52,8 @@ public class ViewSavedMealsActivity extends AppCompatActivity implements Adapter
 
     //Updates My_MealAdapter
     private void UpdateArrayList() {
-        My_MealAdapter.clear();
-        Cursor C = My_DB.getAllMeals();
+        My_SavedMealAdapter.clear();
+        Cursor C = My_DB.getAllSavedMeals();
 
         int count = C.getCount();
         if (count > 0) {
@@ -68,8 +68,8 @@ public class ViewSavedMealsActivity extends AppCompatActivity implements Adapter
                 portion = portion.values()[C.getInt(6)];    //portion
                 int daily_consumption = C.getInt(7);    //daily_consumption
                 int user_id = C.getInt(8);      //user_id
-                Meal M = new Meal(meal_id, meal_name, carbs, protein, fat, portion, daily_consumption, user_id);
-                My_MealAdapter.add(M);
+                Meal M = new Meal(meal_id, meal_name, carbs, protein, fat, portion, user_id);
+                My_SavedMealAdapter.add(M);
             }
         }
     }

@@ -23,11 +23,12 @@ import com.example.kareem.macrotracker.Custom_Objects.Weight;
 
 public class DatabaseConnector {
 
-    private static final String Table_Meal = "Meal";
-    private static final String Table_Weight = "Weight";
-    private static final String Table_Serving = "Serving";
-    private static final String Table_User = "User";
-    private static final String Table_Composed_Of = "Composed_Of";
+    private static final String Table_Meal          = "Meals";
+    private static final String Table_Weight        = "Weight";
+    private static final String Table_Serving       = "Serving";
+    private static final String Table_Daily_Meals   = "Daily_Meals";
+    private static final String Table_Composed_Of   = "Composed_Of";
+    private static final String Table_User          = "User";
 
     private SQLiteDatabase database;
     private DatabaseHelper databaseHelper;
@@ -55,81 +56,13 @@ public class DatabaseConnector {
             database.close();
     }
 
-    //------------------------------------------------------------------------------
-    //TODO: Mina Functions
-
-    // Composed of Functionality
-    public Cursor getComposedMealID(long meal_id) {
-        Cursor C = database.rawQuery("SELECT * FROM " + Table_Composed_Of + " Where meal_id = " + meal_id, null);
-        Log.i("Mina", "ID: " + meal_id + " Retrieved");
-        return C;
-    }
-
-    //Returns an array of ints which correspond to all meals which compose a complex meal with ID complex_id
-    //Check for error conditions
-    public int[] getSimpleMealList(long complex_id) {
-        Cursor C = database.rawQuery("SELECT * FROM " + Table_Composed_Of + " Where meal_id = " + complex_id, null);
-        Log.i("Mina", "ID: " + complex_id + " Retrieved");
-        int[] Meal_ID_List = new int[C.getCount()];
-        if(C.moveToFirst()){
-            for (int i =0; i<C.getCount();i++){
-                Meal_ID_List[i] = C.getInt(0);
-                C.moveToNext();
-            }
-        }
-        return Meal_ID_List;
-    }
-
-    public void deleteComposedMealID(long meal_id) {
-        database.rawQuery("DELETE * FROM" + Table_Composed_Of + "WHERE meal_id =" + meal_id, null);
-        Log.i("Mina", "ID : " + meal_id + " Deleted Successfully");
-    }
-
-    public void deleteComposedComplexID(long complex_id) {
-        database.rawQuery("DELETE * FROM" + Table_Composed_Of + "WHERE complex_id =" + complex_id, null);
-        Log.i("Mina", "ID : " + complex_id + " Deleted Successfully");
-    }
-
-    public boolean insertComposedOf(long meal_id, long complex_id) {
-        database.rawQuery("Insert Into " + Table_Composed_Of + "(meal_id,complex_id) Values (" + meal_id + "," + complex_id + ");", null);
-        Log.i("Mina", "Data Inserted Successfully");
-        return true;
-    }
-
-    // Return All Meals Where is Daily = true
-    public Cursor getAllIsDailyMeals() {
-        Cursor C = database.rawQuery("Select * From " + Table_Meal + "Where daily_consumption > 0", null);
-        Log.i("Mina", "All Daily Meals Retrieved");
-        return C;
-    }
-
-    // Change all is_daily to false -> integer 0 in meals table
-    public boolean setAllIsDailyToFalse() {
-        database.rawQuery("UPDATE Meal SET daily_consumption = 0", null);
-        Log.i("Mina", "All daily_consumption Column is set to 0");
-        return true;
-    }
-
-    // Change all is_daily to True -> integer 1 in meals table
-    public boolean setAllIsDailyToTrue() {
-        database.rawQuery("UPDATE Meal SET daily_consumption = 1", null);
-        Log.i("Mina", "All daily_consumption Column is set to 1");
-        return true;
-    }
-
-    public Cursor getWeightTuple(long meal_id) {
-        Cursor C = database.rawQuery("Select * From " + Table_Weight + "Where meal_id = " + meal_id, null);
-        Log.i("Mina", "Weight Tuple is Retrieved Correctly");
-        return C;
-    }
-
-    //---------------------------------
-    //TODO: KARIM DATABASE HELPER FUNCTIONS
+    //MEALs TABLE FUNCTIONS-------------------------------------------------------------------------
 
     //Checks Meal table for duplicate of M using 'meal_name' as the key
     //If duplicate exists, makes no changes to the DB, else insert Meal M into Meal table
     //TODO USE SQLERROR TRY CATCH INSTEAD OF isDuplicateName()
-    public boolean insertMeal(Meal M) {
+    //TODO REDESIGN THIS NONSENSE
+    public boolean insertQuickMeal(Meal M) {
         if (isDuplicateName(M)) {
             Log.i("Meal insert failed:", "Meal with duplicate name found: " + M.getMeal_name());
             return false;
@@ -141,8 +74,8 @@ public class DatabaseConnector {
         newMeal.put("protein", M.getProtein());
         newMeal.put("fat", M.getFat());
         newMeal.put("portion", M.getPortion().getPortionInt());
-        newMeal.put("daily_consumption", M.getDaily_consumption());
         newMeal.put("user_id", M.getUser_id());
+        newMeal.put("is_quick", 1); //TODO REDESIGN THIS NONSENSE
 
         database.insert(Table_Meal, null, newMeal);
         Log.i("Meal inserted:",
@@ -152,8 +85,37 @@ public class DatabaseConnector {
                         M.getProtein() + "p " +
                         M.getFat() + "f " +
                         M.getPortion().getPortionString() + " " +
-                        M.getDaily_consumption() + " " +
-                        M.getUser_id());
+                        M.getUser_id() + " " +
+                        "1"); //TODO REDESIGN THIS NONSENSE
+        return true;
+    }
+
+    //TODO REDESIGN THIS NONSENSE
+    public boolean insertSavedMeal(Meal M) {
+        if (isDuplicateName(M)) {
+            Log.i("Meal insert failed:", "Meal with duplicate name found: " + M.getMeal_name());
+            return false;
+        }
+        ContentValues newMeal = new ContentValues();
+        newMeal.put("meal_name", M.getMeal_name());
+        newMeal.put("date_created", M.getDate_created());
+        newMeal.put("carbs", M.getCarbs());
+        newMeal.put("protein", M.getProtein());
+        newMeal.put("fat", M.getFat());
+        newMeal.put("portion", M.getPortion().getPortionInt());
+        newMeal.put("user_id", M.getUser_id());
+        newMeal.put("is_quick", 0); //TODO REDESIGN THIS NONSENSE
+
+        database.insert(Table_Meal, null, newMeal);
+        Log.i("Meal inserted:",
+                M.getMeal_name() + " " +
+                        M.getDate_created() + " " +
+                        M.getCarbs() + "c " +
+                        M.getProtein() + "p " +
+                        M.getFat() + "f " +
+                        M.getPortion().getPortionString() + " " +
+                        M.getUser_id() + " " +
+                        "0"); //TODO REDESIGN THIS NONSENSE
         return true;
     }
 
@@ -172,7 +134,6 @@ public class DatabaseConnector {
         updateMeal.put("protein", C.getInt(4));
         updateMeal.put("fat", C.getInt(5));
         updateMeal.put("portion", C.getInt(6));
-        updateMeal.put("daily_consumption", C.getInt(7));
         //updateMeal.put("user_name", C.getString(8));
 
         database.update(Table_Meal, updateMeal, "meal_id = '" + M.getMeal_id() + "'", null);
@@ -192,6 +153,18 @@ public class DatabaseConnector {
         }
     }
 
+    //TODO REDESIGN THIS NONSENSE
+    public boolean deleteAllQuickMeals() {
+        try {
+            database.delete(Table_Meal, "is_quick = 1", null);
+            Log.i("All QuickMeals Deleted:", "All QuickMeals deleted");
+            return true;
+        } catch (SQLiteException E) {
+            Log.i("ERROR: ", E.getMessage());
+            return false;
+        }
+    }
+
     //Returns a meal using meal_name as the key
     public Meal getMeal(String Meal_Name) {
         Cursor C = database.rawQuery("SELECT * FROM " + Table_Meal + " WHERE meal_name = '" + Meal_Name + "'", null);
@@ -203,10 +176,9 @@ public class DatabaseConnector {
             int protein             = C.getInt(4);      //protein
             int fat                 = C.getInt(5);      //fat
             portion = portion.values()[C.getInt(6)];    //portion
-            int daily_consumption   = C.getInt(7);      //daily_consumption
             int user_id             = C.getInt(8);      //user_id
 
-            Meal M = new Meal(meal_id, meal_name, carbs, protein, fat, portion, daily_consumption, user_id);
+            Meal M = new Meal(meal_id, meal_name, carbs, protein, fat, portion, user_id);
             Log.i("Meal Retrieved", "ID: " + meal_id + " Retrieved");
             return M;
         } else {
@@ -226,33 +198,17 @@ public class DatabaseConnector {
         int protein             = C.getInt(4);      //protein
         int fat                 = C.getInt(5);      //fat
         portion = portion.values()[C.getInt(6)];    //portion
-        int daily_consumption   = C.getInt(7);      //daily_consumption
         int user_id             = C.getInt(8);      //user_id
 
-        Meal M = new Meal(meal_id, meal_name, carbs, protein, fat, portion, daily_consumption, user_id);
+        Meal M = new Meal(meal_id, meal_name, carbs, protein, fat, portion, user_id);
         Log.i("Meal Retrieved", "ID: " + meal_id + " Retrieved");
         return M;
     }
 
-    public boolean incrementDailyConsumption(Meal M){
-        ContentValues updateMeal = new ContentValues();
-        updateMeal.put("daily_consumption", (M.getDaily_consumption()+1));
-        database.update(Table_Meal, updateMeal, "meal_id = '" + M.getMeal_id() + "'", null);
-        return true;
-    }
-
-    //Return a Cursor containing all entries where is_daily is true(1)
-    public Cursor getAllDailyMeals() {
-       /* openReadableDB();*/
-        Cursor C = database.rawQuery("SELECT * FROM " + Table_Meal + " WHERE daily_consumption > 0", null);
-        Log.i("Meals Retrieved", "All Daily Meals Retrieved");
-        return C;
-    }
-
     //Return a Cursor containing all entries
-    public Cursor getAllMeals() {
+    public Cursor getAllSavedMeals() {
        /* openReadableDB();*/
-        Cursor C = database.rawQuery("SELECT * FROM " + Table_Meal, null);
+        Cursor C = database.rawQuery("SELECT * FROM " + Table_Meal + " WHERE is_quick = 0", null); // //TODO REDESIGN THIS NONSENSE
         Log.i("Meals Retrieved", "All Meals Retrieved");
         return C;
     }
@@ -260,7 +216,7 @@ public class DatabaseConnector {
     //Return a Cursor containing all entries
     public Cursor getAllMealsSorted() {
        /* openReadableDB();*/
-        Cursor C = database.rawQuery("SELECT * FROM " + Table_Meal + "ORDER BY ASC", null);
+        Cursor C = database.rawQuery("SELECT * FROM " + Table_Meal + "ORDER BY meal_id ASC", null);
         Log.i("Meals Retrieved", "All Meals Retrieved");
         return C;
     }
@@ -277,6 +233,7 @@ public class DatabaseConnector {
         return true;
     }
 
+    //WEIGHT TABLE FUNCTIONS-------------------------------------------------------------------------
 
     //Checks Weight table for duplicate of M using 'meal_name' as the key
     //If duplicate exists, makes no changes to the DB, else insert W_U and W_A into Weight table
@@ -347,6 +304,8 @@ public class DatabaseConnector {
         return true;
     }
 
+    //SERVING TABLE FUNCTIONS-------------------------------------------------------------------------
+
     public boolean insertServing(Meal M, int S_N) {
         if (hasDuplicateServing(M)) {
             Log.i("Serving insert failed:", "Serving with duplicate ID found: " + M.getMeal_id() + " " + M.getMeal_name());
@@ -406,6 +365,106 @@ public class DatabaseConnector {
         return true;
     }
 
+    //DAILY_MEALS TABLE FUNCTIONS-------------------------------------------------------------------------
+
+    public boolean insertDailyMeal(int meal_id, int multiplier) {
+        ContentValues newDailyMeal = new ContentValues();
+        newDailyMeal.put("meal_id", meal_id);
+        newDailyMeal.put("multiplier", multiplier);
+
+        database.insert(Table_Daily_Meals, null, newDailyMeal);
+        Log.i("newServing inserted:",
+                "meal_id: " + meal_id + " " +
+                "multiplier: " + multiplier);
+        return true;
+    }
+
+    //TODO: IMPLEMENT LATER: ALLOW USERS TO UPDATE DAILY MEAL
+    /*public boolean updateDailyMeal(Meal M) {
+        Cursor C = database.rawQuery("SELECT * FROM " + Table_Serving + " WHERE meal_id = '" + M.getMeal_id() + "'", null);
+        Log.i("Serving Retrieved", "ID: " + M.getMeal_id() + " Retrieved");
+        C.moveToFirst();
+        ContentValues updateServing = new ContentValues();
+        updateServing.put("serving_number", C.getInt(1));
+
+        database.update(Table_Daily_Meals, updateServing, "meal_id = '" + M.getMeal_id() + "'", null);
+        Log.i("Serving Updated", "ID: " + M.getMeal_id() + " Updated");
+        return true;
+    }*/
+
+    public boolean deleteDailyMeal(int position) {
+        try {
+            database.delete(Table_Daily_Meals, "position = '" + position + "'", null);
+            Log.i("Daily_meal Deleted:", "Daily_meal with position: " + position + " deleted");
+            return true;
+        } catch (SQLiteException E) {
+            Log.i("ERROR: ", E.getMessage());
+            return false;
+        }
+    }
+
+    //Return a Cursor containing all Daily Meals
+    public Cursor getAllDailyMeals() {
+       /* openReadableDB();*/
+        Cursor C = database.rawQuery("SELECT * FROM " + Table_Daily_Meals + " ORDER BY position ASC", null);
+        Log.i("Meals Retrieved", "All Daily Meals Retrieved");
+        return C;
+    }
+
+    public int getMultiplier(int meal_id, int position) {
+        Cursor C = database.rawQuery("SELECT multiplier FROM " + Table_Daily_Meals +
+                " WHERE meal_id = " + meal_id + " AND position = " + position, null);
+        int multiplier = C.getInt(2);
+        Log.i("Multiplier Retrieved", "Retrieved multiplier: " + multiplier +
+                " of Daily Meal with meal_id: " + meal_id + " and position: " + position + " ");
+        return multiplier;
+    }
+
+    //COMPOSED_OF TABLE FUNCTIONS-------------------------------------------------------------------------
+
+    // Composed of Functionality
+    public Cursor getComposedMealID(long meal_id) {
+        Cursor C = database.rawQuery("SELECT * FROM " + Table_Composed_Of + " Where meal_id = " + meal_id, null);
+        Log.i("Mina", "ID: " + meal_id + " Retrieved");
+        return C;
+    }
+
+    //Returns an array of ints which correspond to all meals which compose a complex meal with ID complex_id
+    //Check for error conditions
+    public int[] getSimpleMealList(long complex_id) {
+        Cursor C = database.rawQuery("SELECT * FROM " + Table_Composed_Of + " Where meal_id = " + complex_id, null);
+        Log.i("Mina", "ID: " + complex_id + " Retrieved");
+        int[] Meal_ID_List = new int[C.getCount()];
+        if(C.moveToFirst()){
+            for (int i =0; i<C.getCount();i++){
+                Meal_ID_List[i] = C.getInt(0);
+                C.moveToNext();
+            }
+        }
+        return Meal_ID_List;
+    }
+
+    public void deleteComposedMealID(long meal_id) {
+        database.rawQuery("DELETE * FROM" + Table_Composed_Of + "WHERE meal_id =" + meal_id, null);
+        Log.i("Mina", "ID : " + meal_id + " Deleted Successfully");
+    }
+
+    public void deleteComposedComplexID(long complex_id) {
+        database.rawQuery("DELETE * FROM" + Table_Composed_Of + "WHERE complex_id =" + complex_id, null);
+        Log.i("Mina", "ID : " + complex_id + " Deleted Successfully");
+    }
+
+    public boolean insertComposedOf(long meal_id, long complex_id) {
+        database.rawQuery("Insert Into " + Table_Composed_Of + "(meal_id,complex_id) Values (" + meal_id + "," + complex_id + ");", null);
+        Log.i("Mina", "Data Inserted Successfully");
+        return true;
+    }
+
+    public Cursor getWeightTuple(long meal_id) {
+        Cursor C = database.rawQuery("Select * From " + Table_Weight + "Where meal_id = " + meal_id, null);
+        Log.i("Mina", "Weight Tuple is Retrieved Correctly");
+        return C;
+    }
 
 //----------------TODO: User Insert /Delete/Update + Registration/Login methods (Abdulwahab)------------------
 
@@ -633,5 +692,4 @@ public class DatabaseConnector {
         cursor.close();
         return false;
     }
-
 }

@@ -15,11 +15,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "MacroTrackerDB";
 
-    private static final String Table_Meal          = "Meal";
+    private static final String Table_Meal          = "Meals";
     private static final String Table_Weight        = "Weight";
     private static final String Table_Serving       = "Serving";
-    private static final String Table_User          = "User";
+    private static final String Table_Daily_Meals   = "Daily_Meals";
     private static final String Table_Composed_Of   = "Composed_Of";
+    private static final String Table_User          = "User";
 
     private static DatabaseHelper sInstance;
 
@@ -59,8 +60,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "protein            INTEGER, " +
                 "fat                INTEGER, " +
                 "portion            INTEGER, " +     //enum, 0 - Serving, 1 - Weight, 2 - None
-                "daily_consumption  INTEGER, " +     //boolean, processed in code
-                "user_id            INTEGER);";
+                "user_id            INTEGER, " +
+                "is_quick           INTEGER);"; //TODO REDESIGN THIS NONSENSE
 
         String createTable_Weight = "CREATE TABLE " + Table_Weight + " " +
                 "(meal_id       INTEGER PRIMARY KEY, " +
@@ -75,6 +76,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "serving_number INTEGER, " +
 
                 "CONSTRAINT meal_id_fk FOREIGN KEY(meal_id) REFERENCES Meal(meal_id) ON DELETE CASCADE);";
+        //ON UPDATE is not needed because meal_id will never be updated, it is hidden from the user
+
+        String createTable_Daily_Meals = "CREATE TABLE " + Table_Daily_Meals + " " +
+                "(position              INTEGER PRIMARY KEY autoincrement, " +
+                "meal_id                INTEGER, " +
+                "multiplier             INTEGER, " +
+
+                "CONSTRAINT meal_id_fk FOREIGN KEY(meal_id) REFERENCES Meal(meal_id) ON DELETE CASCADE);";
+
+        String createTable_Composed_Of = "CREATE TABLE " + Table_Composed_Of + " " +
+                "(meal_id       INTEGER, " +
+                "complex_id     INTEGER, " +
+
+                "CONSTRAINT complex_id_pk PRIMARY KEY(meal_id, complex_id), " +
+                "CONSTRAINT meal_id_fk FOREIGN KEY(meal_id) REFERENCES Meal(meal_id), " +
+                "CONSTRAINT complex_id_fk FOREIGN KEY(complex_id) REFERENCES Meal(meal_id) ON DELETE CASCADE);";
         //ON UPDATE is not needed because meal_id will never be updated, it is hidden from the user
 
         String createTable_User = "CREATE TABLE " + Table_User + " " +
@@ -96,21 +113,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "weight_unit        INTEGER, " +
                 "height_unit        INTEGER); ";
 
-        String createTable_Composed_Of = "CREATE TABLE " + Table_Composed_Of + " " +
-                "(meal_id       INTEGER, " +
-                "complex_id     INTEGER, " +
-
-                "CONSTRAINT complex_id_pk PRIMARY KEY(meal_id, complex_id), " +
-                "CONSTRAINT meal_id_fk FOREIGN KEY(meal_id) REFERENCES Meal(meal_id), " +
-                "CONSTRAINT complex_id_fk FOREIGN KEY(complex_id) REFERENCES Meal(meal_id) ON DELETE CASCADE);";
-        //ON UPDATE is not needed because meal_id will never be updated, it is hidden from the user
 
         //Create tables
         db.execSQL(createTable_Meal);
         db.execSQL(createTable_Weight);
         db.execSQL(createTable_Serving);
-        db.execSQL(createTable_User);
+        db.execSQL(createTable_Daily_Meals);
         db.execSQL(createTable_Composed_Of);
+        db.execSQL(createTable_User);
         Log.d("TABLES", "DB tables created ");
     }
 

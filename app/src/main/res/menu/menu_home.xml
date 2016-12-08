@@ -4,8 +4,6 @@
     tools:context="com.example.kareem.macrotracker.HomeActivity">
     <item android:title="Logout"
         android:id="@+id/logout_menu_btn" />
-    <item android:title="Macro Settings"
-        android:id="@+id/macro_settings_btn" />
 
     <item
         android:id="@+id/action_MacroSettings"

@@ -19,12 +19,13 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.kareem.macrotracker.Custom_Objects.DailyMeal;
 import com.example.kareem.macrotracker.Custom_Objects.Meal;
 import com.example.kareem.macrotracker.Custom_Objects.Portion_Type;
 import com.example.kareem.macrotracker.Custom_Objects.User;
 import com.example.kareem.macrotracker.Database.DatabaseConnector;
 import com.example.kareem.macrotracker.R;
-import com.example.kareem.macrotracker.ViewComponents.MealAdapter;
+import com.example.kareem.macrotracker.ViewComponents.DailyMealAdapter;
 import com.example.kareem.macrotracker.ViewComponents.OnListItemDeletedListener;
 
 import java.util.ArrayList;
@@ -35,8 +36,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView usernameview;
     private Button Button_AddSavedMeal, Button_AddQuickMeal;
 
-    private ArrayList<Meal> ArrayList_Meals;
-    private MealAdapter My_MealAdapter;
+    private ArrayList<DailyMeal> ArrayList_DailyMeals;
+    private DailyMealAdapter My_DailyMealAdapter;
     private ListView Meals_ListView;
 
     public static final String CarbsPrefKey = "EditTextPrefCarbsGoal";
@@ -90,10 +91,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button_AddQuickMeal = (Button) findViewById(R.id.Button_AddQuickMeal);
         Button_AddQuickMeal.setOnClickListener(this);
 
-        ArrayList_Meals = new ArrayList<Meal>();
-        My_MealAdapter = new MealAdapter(this, ArrayList_Meals);
+        ArrayList_DailyMeals = new ArrayList<DailyMeal>();
+        My_DailyMealAdapter = new DailyMealAdapter(this, ArrayList_DailyMeals);
         Meals_ListView = (ListView) findViewById(R.id.ListView_Meals);
-        Meals_ListView.setAdapter(My_MealAdapter);
+        Meals_ListView.setAdapter(My_DailyMealAdapter);
         Meals_ListView.setOnItemClickListener(this);
 
         My_DB = new DatabaseConnector(getApplicationContext());
@@ -128,12 +129,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_MacroSettings) {
-            Intent intent = new Intent();
-            intent.setClassName(this, "com.example.kareem.macrotracker.Activities.MacronutrientPreferenceActivity");
-            startActivity(intent);
-            return true;
-        }
         if (id == R.id.action_MealSettings) {
             Intent intent = new Intent();
             intent.setClassName(this, "com.example.kareem.macrotracker.Activities.ViewSavedMealsActivity");
@@ -154,7 +149,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             //startActivity(in);
             return true;
         }
-        if(id==R.id.macro_settings_btn)
+        if(id==R.id.action_MacroSettings)
         {
             Intent in = new Intent(getApplicationContext(),MacroSettings.class );
             startActivity(in);
@@ -178,7 +173,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void AddSavedMeal() {
         Context context = getApplicationContext();
         Intent intent = new Intent();
-        intent.setClass(context,AddSavedMealActivity.class);
+        intent.setClass(context,SelectSavedMealActivity.class);
         startActivity(intent);
     }
 
@@ -213,7 +208,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         SharedPreferences prefs =
                 PreferenceManager.getDefaultSharedPreferences(this);
 
-        int NumberOfMeals = My_MealAdapter.getCount();
+        int NumberOfMeals = My_DailyMealAdapter.getCount();
 
         int CarbGoals = Integer.parseInt(prefs.getString(CarbsPrefKey, CarbsDefault + ""));
         int ProteinGoals = Integer.parseInt(prefs.getString(ProteinPrefKey, ProteinDefault + ""));
@@ -232,7 +227,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         int FatLeft = 0;
 
         for (int i = 0; i < NumberOfMeals; i++) {
-            Meal TempMeal = My_MealAdapter.getItem(i);
+            DailyMeal TempMeal = My_DailyMealAdapter.getItem(i);
             int carbs = TempMeal.getCarbs();
             int protein = TempMeal.getProtein();
             int fat = TempMeal.getFat();
@@ -254,27 +249,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //Updates My_MealAdapter
     //TODO: TEST AFTER IMPLEMENTING DATABASE
     private void UpdateArrayList() {
-        My_MealAdapter.clear();
-        Cursor C = My_DB.getAllDailyMeals();
-        int count = C.getCount();
+        My_DailyMealAdapter.clear();
+        Cursor AllDailyMeals_Cursor = My_DB.getAllDailyMeals();
+        int count = AllDailyMeals_Cursor.getCount();
         if (count > 0) {
             for (int i = 0; i < count; i++) {
-                C.moveToNext();
-                int     meal_id         = C.getInt(0);      //meal)id
-                String  meal_name       = C.getString(1);   //meal_name
-                String  date_created    = C.getString(2);   //date_created
-                int     carbs           = C.getInt(3);      //carbs
-                int     protein         = C.getInt(4);      //protein
-                int     fat             = C.getInt(5);      //fat
-                portion = portion.values()[C.getInt(6)];    //portion
-                int   daily_consumption = C.getInt(7);      //daily_consumption
-                int     user_id         = C.getInt(8);      //user_id
-                Meal M = new Meal(meal_id,meal_name,carbs,protein,fat,portion,daily_consumption,user_id);
-                Log.d("Meal Retrieved:", "Name: " + M.getMeal_name() + " " + M.getMeal_id() + " "
-                        + M.getCarbs() + " " + M.getProtein() + " " + M.getFat());
-                for (int j=0;j<daily_consumption;j++) {
-                    My_MealAdapter.add(M);
-                }
+                AllDailyMeals_Cursor.moveToNext();
+
+                int     daily_meal_id       = AllDailyMeals_Cursor.getInt(1);      //meal_id
+                int     daily_position      = AllDailyMeals_Cursor.getInt(2);      //position
+                int     daily_multiplier    = AllDailyMeals_Cursor.getInt(3);      //multiplier
+
+                Meal M = My_DB.getMeal(daily_meal_id);
+
+                String M_name            = M.getMeal_name();
+                int M_carbs              = M.getCarbs()*daily_multiplier;
+                int M_protein            = M.getProtein()*daily_multiplier;
+                int M_fat                = M.getFat()*daily_multiplier;
+                Portion_Type M_portion   = M.getPortion();
+
+                DailyMeal DM = new DailyMeal(M_name,daily_meal_id,M_carbs,M_protein,M_fat,M_portion,daily_position,daily_multiplier);
+                My_DailyMealAdapter.add(DM);
+
+                Log.d("DailyMeal Added:", "Name: "
+                        + M.getMeal_name() + " " + M.getMeal_id() + " "
+                        + M_carbs + " " + M_protein + " " + M_fat + " multiplier: " + daily_multiplier);
             }
         }
     }

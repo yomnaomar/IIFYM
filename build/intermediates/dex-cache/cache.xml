@@ -3,111 +3,210 @@
 
     <item
         is-multidex="true"
-        jar="C:\Users\Kareem\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\23.4.0\support-annotations-23.4.0.jar"
+        jar="C:\Users\Kareem\AndroidStudioProjects\MacroTracker\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\25.0.1\jars\classes.jar"
         jumboMode="true"
         optimize="true"
-        revision="24.0.2"
-        sha1="ffbe55fdb2bb456b1485831706a9eac3300bb6b8">
-        <dex dex="C:\Users\Kareem\AndroidStudioProjects\MacroTracker\app\build\intermediates\transforms\dex\debug\folders\1000\10\support-annotations-23.4.0_83505e39e6a51de3d73558e11b0a5a8cd63bde74\classes.dex" />
+        revision="24.0.3"
+        sha1="f7ac4b327fdb9e2ee386f5adc46164927658de4b">
+        <dex dex="C:\Users\Kareem\AndroidStudioProjects\MacroTracker\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-appcompat-v7-25.0.1_7ff9fff429623aead5510e98f40b10e27de265c5\classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\Kareem\AndroidStudioProjects\MacroTracker\app\build\intermediates\exploded-aar\com.android.support.constraint\constraint-layout\1.0.0-beta4\jars\classes.jar"
+        jar="C:\Users\Kareem\AndroidStudioProjects\MacroTracker\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\25.0.1\jars\classes.jar"
         jumboMode="true"
         optimize="true"
-        revision="24.0.2"
-        sha1="662d7533b25a666c649c10a16b42edfb95f25a4f">
-        <dex dex="C:\Users\Kareem\AndroidStudioProjects\MacroTracker\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support.constraint-constraint-layout-1.0.0-beta4_9246dc3d7ad104d0e16509846f7e2f9aaddf7c75\classes.dex" />
+        revision="24.0.3"
+        sha1="bc7e99e8d0fc279a05aa91378530f467ad62d443">
+        <dex dex="C:\Users\Kareem\AndroidStudioProjects\MacroTracker\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-core-ui-25.0.1_a1f31db3139cbd63d5e6208799fcc0a58294b3a5\classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\Kareem\AndroidStudioProjects\MacroTracker\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\23.4.0\jars\classes.jar"
+        jar="C:\Users\Kareem\AndroidStudioProjects\MacroTracker\app\build\intermediates\exploded-aar\com.android.support\support-fragment\25.0.1\jars\libs\internal_impl-25.0.1.jar"
         jumboMode="true"
         optimize="true"
-        revision="24.0.2"
-        sha1="de4db3785756bfb0915a9f59a9b3f2fea7407be4">
-        <dex dex="C:\Users\Kareem\AndroidStudioProjects\MacroTracker\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-animated-vector-drawable-23.4.0_7c20fb1358316755ac963072d76894f49ba6cbb9\classes.dex" />
+        revision="24.0.3"
+        sha1="c0bd6ffb002a85b5e7cad29f8558d1cc59539679">
+        <dex dex="C:\Users\Kareem\AndroidStudioProjects\MacroTracker\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-25.0.1_43998f05defa86cba83a6fefa831aa8e28e091ea\classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\Kareem\AndroidStudioProjects\MacroTracker\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.4.0\jars\classes.jar"
+        jar="C:\Users\Kareem\AndroidStudioProjects\MacroTracker\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\25.0.1\jars\classes.jar"
         jumboMode="true"
         optimize="true"
-        revision="24.0.2"
-        sha1="c2c594cace5d83a3227b2b6e658ecbfd586d3ed9">
-        <dex dex="C:\Users\Kareem\AndroidStudioProjects\MacroTracker\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-vector-drawable-23.4.0_61494f748f8a0724050bd152e5e613caf8bd7f1d\classes.dex" />
+        revision="24.0.3"
+        sha1="b24e1c688744078e1fa833ffadf696794761bbe5">
+        <dex dex="C:\Users\Kareem\AndroidStudioProjects\MacroTracker\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-vector-drawable-25.0.1_a309468a8afde6658f655b90d0d5c82e054dcdfd\classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\Kareem\AppData\Local\Android\sdk\extras\m2repository\com\android\support\constraint\constraint-layout-solver\1.0.0-beta4\constraint-layout-solver-1.0.0-beta4.jar"
+        jar="C:\Users\Kareem\AndroidStudioProjects\MacroTracker\app\build\intermediates\exploded-aar\com.android.support\support-fragment\25.0.1\jars\classes.jar"
         jumboMode="true"
         optimize="true"
-        revision="24.0.2"
-        sha1="0a9cb567dc008f570c28531720168f19148da965">
-        <dex dex="C:\Users\Kareem\AndroidStudioProjects\MacroTracker\app\build\intermediates\transforms\dex\debug\folders\1000\10\constraint-layout-solver-1.0.0-beta4_b75259f81435573585916263cf652b692aa1f4cc\classes.dex" />
+        revision="24.0.3"
+        sha1="26c6eef571592c91f29e56fda0bac73321de0c92">
+        <dex dex="C:\Users\Kareem\AndroidStudioProjects\MacroTracker\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-fragment-25.0.1_7f418a6b63cd4527b251a22c5129d20087357ebb\classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\Kareem\AndroidStudioProjects\MacroTracker\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jar="C:\Users\Kareem\AndroidStudioProjects\MacroTracker\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\25.0.1\jars\classes.jar"
         jumboMode="true"
         optimize="true"
-        revision="24.0.2"
-        sha1="58fc8b62122ea8d795254684ca037fd93909ffa5">
-        <dex dex="C:\Users\Kareem\AndroidStudioProjects\MacroTracker\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_a731626e34e34258ac5ea00ae031409a4f8cd03f\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Kareem\AndroidStudioProjects\MacroTracker\app\build\intermediates\exploded-aar\com.android.support\design\23.4.0\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="5326d9a850d491714fef8cbfaa9ea3416f0bf0d2">
-        <dex dex="C:\Users\Kareem\AndroidStudioProjects\MacroTracker\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-design-23.4.0_ea45ad9322be486c66cda27d74ac36997c3a0944\classes.dex" />
+        revision="24.0.3"
+        sha1="6a1479afe9f1b3645e1cd9a87318976893472818">
+        <dex dex="C:\Users\Kareem\AndroidStudioProjects\MacroTracker\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-media-compat-25.0.1_5cba419347935234dbfad3d5c074c9da7e478ac3\classes.dex" />
     </item>
     <item
         is-multidex="true"
         jar="C:\Users\Kareem\AndroidStudioProjects\MacroTracker\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
         jumboMode="true"
         optimize="true"
-        revision="24.0.2"
-        sha1="a14703bcce3a1fdfcba5ac6cb40ef63e9cbfd398">
+        revision="24.0.3"
+        sha1="ece9706d4eb5709a032c8982a269f843e5c5f969">
         <dex dex="C:\Users\Kareem\AndroidStudioProjects\MacroTracker\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_b7f20b9c23fe60e77d13dbb1b072454ffa63add2\classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\Kareem\AndroidStudioProjects\MacroTracker\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.4.0\jars\classes.jar"
+        jar="C:\Users\Kareem\AndroidStudioProjects\MacroTracker\app\build\intermediates\exploded-aar\com.android.support\support-v4\25.0.1\jars\classes.jar"
         jumboMode="true"
         optimize="true"
-        revision="24.0.2"
-        sha1="67bd36ee9340ec7c254108936ad16b24bed160cc">
-        <dex dex="C:\Users\Kareem\AndroidStudioProjects\MacroTracker\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-v4-23.4.0_17d720555034aa1238abd9d42aac80a92d8ef9c1\classes.dex" />
+        revision="24.0.3"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="C:\Users\Kareem\AndroidStudioProjects\MacroTracker\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-v4-25.0.1_70d1ca7b37d6d6eef05baf3b502478e1ae2496b3\classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\Kareem\AndroidStudioProjects\MacroTracker\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\23.4.0\jars\classes.jar"
+        jar="C:\Users\Kareem\AndroidStudioProjects\MacroTracker\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\25.0.1\jars\libs\internal_impl-25.0.1.jar"
         jumboMode="true"
         optimize="true"
-        revision="24.0.2"
-        sha1="ec75036c3c52e451d0cde50a5aedaf5fd32354a0">
-        <dex dex="C:\Users\Kareem\AndroidStudioProjects\MacroTracker\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-recyclerview-v7-23.4.0_d792639696062eb85bd98423d30f5f5f08413c2f\classes.dex" />
+        revision="24.0.3"
+        sha1="f83b00041ecfba705603fec40363416c7de69719">
+        <dex dex="C:\Users\Kareem\AndroidStudioProjects\MacroTracker\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-25.0.1_2ae1923c2720cc9a26388287ba8a25133e5a007c\classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\Kareem\AndroidStudioProjects\MacroTracker\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.4.0\jars\classes.jar"
+        jar="C:\Users\Kareem\AndroidStudioProjects\MacroTracker\app\build\intermediates\exploded-aar\com.android.support\design\25.0.1\jars\classes.jar"
         jumboMode="true"
         optimize="true"
-        revision="24.0.2"
-        sha1="548f06de403a9409f00554b3ee12a9fdea0e236c">
-        <dex dex="C:\Users\Kareem\AndroidStudioProjects\MacroTracker\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-appcompat-v7-23.4.0_61465c480405f0fe2e1046af5bae4c37f361c84f\classes.dex" />
+        revision="24.0.3"
+        sha1="3b236883e0df6002cabb01ce57d00a5b1e5de610">
+        <dex dex="C:\Users\Kareem\AndroidStudioProjects\MacroTracker\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-design-25.0.1_0c0cccac4dafc191bcd22c5e2a47dd11d18af319\classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\Kareem\AndroidStudioProjects\MacroTracker\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.4.0\jars\libs\internal_impl-23.4.0.jar"
+        jar="C:\Users\Kareem\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\25.0.1\support-annotations-25.0.1.jar"
         jumboMode="true"
         optimize="true"
-        revision="24.0.2"
-        sha1="ea3c07504d2c8f4b13aa17c45c1b68ed9c1c3674">
-        <dex dex="C:\Users\Kareem\AndroidStudioProjects\MacroTracker\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-23.4.0_57a9b535f9d882f08ab1462f5f54569403366b4b\classes.dex" />
+        revision="24.0.3"
+        sha1="a09194311f8f89c3e6db09d79f50897a889d615e">
+        <dex dex="C:\Users\Kareem\AndroidStudioProjects\MacroTracker\app\build\intermediates\transforms\dex\debug\folders\1000\10\support-annotations-25.0.1_93ca04a5a987a8e0b4647bfb974014544961c780\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Kareem\AndroidStudioProjects\MacroTracker\app\build\intermediates\exploded-aar\com.android.support\transition\25.0.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="c1b6ab157e8e12cb08b9ee82bb5e3c5d22632eb3">
+        <dex dex="C:\Users\Kareem\AndroidStudioProjects\MacroTracker\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-transition-25.0.1_1588a2d82ac87bbc1294795631de465a920f796c\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Kareem\AndroidStudioProjects\MacroTracker\app\build\intermediates\exploded-aar\com.android.support.constraint\constraint-layout\1.0.0-beta4\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="662d7533b25a666c649c10a16b42edfb95f25a4f">
+        <dex dex="C:\Users\Kareem\AndroidStudioProjects\MacroTracker\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support.constraint-constraint-layout-1.0.0-beta4_9246dc3d7ad104d0e16509846f7e2f9aaddf7c75\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Kareem\AndroidStudioProjects\MacroTracker\app\build\intermediates\exploded-aar\com.github.lecho\hellocharts-library\1.5.8\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="56c6a22c42588628903e9dda5d8f3aa1c1b4372f">
+        <dex dex="C:\Users\Kareem\AndroidStudioProjects\MacroTracker\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.github.lecho-hellocharts-library-1.5.8_c475e3a6b28b8ad1373c3eff3424260763a6ccad\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Kareem\AndroidStudioProjects\MacroTracker\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="2a16d169b59840366aa9a7b1dadb82f8df9b71ab">
+        <dex dex="C:\Users\Kareem\AndroidStudioProjects\MacroTracker\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_a731626e34e34258ac5ea00ae031409a4f8cd03f\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Kareem\AppData\Local\Android\sdk\extras\m2repository\com\android\support\constraint\constraint-layout-solver\1.0.0-beta4\constraint-layout-solver-1.0.0-beta4.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="0a9cb567dc008f570c28531720168f19148da965">
+        <dex dex="C:\Users\Kareem\AndroidStudioProjects\MacroTracker\app\build\intermediates\transforms\dex\debug\folders\1000\10\constraint-layout-solver-1.0.0-beta4_b75259f81435573585916263cf652b692aa1f4cc\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Kareem\AndroidStudioProjects\MacroTracker\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\25.0.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="00d4c8eebf2b681073c72a26bd0849549e51c7cb">
+        <dex dex="C:\Users\Kareem\AndroidStudioProjects\MacroTracker\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-core-utils-25.0.1_cc4e316c09cee1ab203d10cc854251824ad366fb\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Kareem\AndroidStudioProjects\MacroTracker\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\25.0.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="772bed2d992b67b9d0327f766cc95cd63031dcd3">
+        <dex dex="C:\Users\Kareem\AndroidStudioProjects\MacroTracker\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-animated-vector-drawable-25.0.1_419d733de4406cf17e690c9f3f1d5f9cc020bff5\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Kareem\AndroidStudioProjects\MacroTracker\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\25.0.1\jars\libs\internal_impl-25.0.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="e5343c9d19cb19ff55f6b268c7f3fe8c9d224f6f">
+        <dex dex="C:\Users\Kareem\AndroidStudioProjects\MacroTracker\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-25.0.1_0fd9167907e985c1aa73f71972fcb505fce04cbd\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Kareem\AndroidStudioProjects\MacroTracker\app\build\intermediates\exploded-aar\com.android.support\support-compat\25.0.1\jars\libs\internal_impl-25.0.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="3af8cc51ef7088e56f132780da8c0bd858b6a6ad">
+        <dex dex="C:\Users\Kareem\AndroidStudioProjects\MacroTracker\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-25.0.1_95ede37487201e404692d00ea4ce919ab6eb2e92\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Kareem\AndroidStudioProjects\MacroTracker\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\25.0.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="297d4bcf6ed4e747a1bf7d0d094a2d911a8d3a8e">
+        <dex dex="C:\Users\Kareem\AndroidStudioProjects\MacroTracker\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-recyclerview-v7-25.0.1_b194de1638d8fed84822b0f7b7827fea85f89379\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Kareem\AndroidStudioProjects\MacroTracker\app\build\intermediates\exploded-aar\com.android.support\support-compat\25.0.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="51eba4a4dd73044f90a9d58dd7ca34adbebfcf4e">
+        <dex dex="C:\Users\Kareem\AndroidStudioProjects\MacroTracker\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-compat-25.0.1_df0fd106ae17b496c8d88af62fa8bef5d394bd3b\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Kareem\AndroidStudioProjects\MacroTracker\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\25.0.1\jars\libs\internal_impl-25.0.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="c5b7145fb34779b6639147b8f2f8dd77c0db771b">
+        <dex dex="C:\Users\Kareem\AndroidStudioProjects\MacroTracker\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-25.0.1_719695748a1cdebe7e807048ca86bbdd13a3ca02\classes.dex" />
     </item>
 
 </items>

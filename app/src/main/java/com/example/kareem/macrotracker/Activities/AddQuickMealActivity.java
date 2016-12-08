@@ -137,21 +137,25 @@ public class AddQuickMealActivity extends AppCompatActivity implements View.OnCl
             int radioButtonID = RadioGroup_PortionType.getCheckedRadioButtonId();
             View radioButton = RadioGroup_PortionType.findViewById(radioButtonID);
             int indexofPortionType = RadioGroup_PortionType.indexOfChild(radioButton);
-            InsertSavedMeal(meal_name, carbs, protein, fat, indexofPortionType, daily_consumption);
+            InsertSavedMeal(meal_name, carbs, protein, fat, indexofPortionType);
         } else {
             int indexofPortionType = 2; //other
-            InsertDailyMeal(meal_name, carbs, protein, fat, indexofPortionType, daily_consumption);
+            InsertQuickMeal(meal_name, carbs, protein, fat, indexofPortionType);
         }
     }
 
-    private void InsertDailyMeal(String meal_name, int carbs, int protein, int fat, int indexofPortionType, int daily_consumption) {
-        Meal NewMeal = new Meal(meal_name, carbs, protein, fat, indexofPortionType, daily_consumption, currentUser.getUser_id());
+    private void InsertQuickMeal(String meal_name, int carbs, int protein, int fat, int indexofPortionType) {
+        Meal NewMeal = new Meal(meal_name, carbs, protein, fat, indexofPortionType, currentUser.getUser_id());
 
-        if (My_DB.insertMeal(NewMeal)) {
+        if (My_DB.insertQuickMeal(NewMeal)) { //TODO USE ANOTHER FUNCTION AFTER RE-IMPLEMENTATION
             Meal NewMeal_WithID = My_DB.getMeal(meal_name);//meal needs to be retrieved because ID is initialized in the DB
             Log.i("Meal Inserted", "ID: " + NewMeal_WithID.getMeal_id() + " Name:" + " " + NewMeal.getMeal_name());
 
             Toast.makeText(this, "Meal added", Toast.LENGTH_SHORT).show();
+
+            if(My_DB.insertDailyMeal(NewMeal_WithID.getMeal_id(),1)) { //Insert new daily meal with multiplier = 1
+                Log.i("DailyMeal Inserted", "ID: " + NewMeal_WithID.getMeal_id() + " multiplier: 1");
+            }
             Context context = getApplicationContext();
             Intent intent = new Intent();
             intent.setClass(context, MainActivity.class);
@@ -162,11 +166,11 @@ public class AddQuickMealActivity extends AppCompatActivity implements View.OnCl
     }
 
 
-    private void InsertSavedMeal(String meal_name, int carbs, int protein, int fat, int indexofPortionType, int daily_consumption) {
+    private void InsertSavedMeal(String meal_name, int carbs, int protein, int fat, int indexofPortionType) {
         //Initializing Meal to be inserted in Database
-        Meal NewMeal = new Meal(meal_name, carbs, protein, fat, indexofPortionType, daily_consumption, currentUser.getUser_id());
+        Meal NewMeal = new Meal(meal_name, carbs, protein, fat, indexofPortionType, currentUser.getUser_id());
 
-        if (My_DB.insertMeal(NewMeal)) {
+        if (My_DB.insertSavedMeal(NewMeal)) {
             Meal NewMeal_WithID = My_DB.getMeal(meal_name);//meal needs to be retrieved because ID is initialized in the DB
             Log.i("Meal Inserted", "ID: " + NewMeal_WithID.getMeal_id() + " Name:" + " " + NewMeal.getMeal_name());
 
@@ -197,7 +201,6 @@ public class AddQuickMealActivity extends AppCompatActivity implements View.OnCl
 
     //Returns to MainActivity without making any changes
     private void Cancel() {
-        //TODO: Check that this works
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Are you sure?")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
