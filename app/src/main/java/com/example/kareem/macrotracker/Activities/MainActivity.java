@@ -112,6 +112,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //        //DummyBoy = My_DB.getUser_ReturnsUser("DummyBoy");
 //        DummyBoy = My_DB.getUser_ReturnsUser("DebuggerDummy");
 //        Toast.makeText(this,"Welcome "+ DummyBoy.getUser_name() +" ID: "+DummyBoy.getUser_id(),Toast.LENGTH_SHORT).show(); //TODO: call only once
+
     }
 
     @Override
