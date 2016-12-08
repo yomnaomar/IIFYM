@@ -145,8 +145,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         if(id==R.id.profile_menu_btn)
         {
-            //Intent in = new Intent(getApplicationContext(), );
-            //startActivity(in);
+            Intent intent = new Intent(getApplicationContext(),UserProfile.class);
+            intent.putExtra("username",user_name);
+            startActivity(intent);
             return true;
         }
         if(id==R.id.action_MacroSettings)
