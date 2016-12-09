@@ -56,6 +56,7 @@ public class DailyMealAdapter extends ArrayAdapter<DailyMeal>{
         TextView fat = (TextView) convertView.findViewById(R.id.Text_Fat);
         TextView portion = (TextView) convertView.findViewById(R.id.Text_PortionDetails);
 
+        //TODO IMPLEMENT MULTIPLER
         // Populate the data into the template view using the data object
         name.setText(DM.getMeal_name());
         carbs.setText(String.valueOf(DM.getCarbs()) + " c");
