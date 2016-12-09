@@ -189,11 +189,6 @@ public class Login extends AppCompatActivity implements myFragEventListener {
         //get all currentUser details and send to DB (called when currentUser sign up is finished)
 
         try {
-            //TODO KILL DUMMY
-            /*User DummyBoy = new User();
-            DummyBoy.setUser_id(123);
-            DummyBoy.setUser_name("DummyTest");
-            My_DB.insertUser(DummyBoy);*/
             My_DB.insertUser(newUser);
         } catch (Exception e) {
             Toast.makeText(getApplicationContext(),"DB Error Occurred" +e.getMessage(),Toast.LENGTH_LONG).show();
@@ -214,6 +209,7 @@ public class Login extends AppCompatActivity implements myFragEventListener {
             intent.putExtra("logged",true);
             intent.putExtra("user_id", My_DB.fetchUserID(username,getApplicationContext())); //get user_id
             startActivity(intent);
+            finish();
         }
         else
         {

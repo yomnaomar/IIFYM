@@ -71,24 +71,44 @@ public class MacroSettings extends AppCompatActivity implements View.OnFocusChan
 
     private Animation animation;
     TourGuide mTourGuideHandler;
+    private TextView psym1,psym2,psym3;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_macro_settings);
         settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        //tour guide
+        ToolTip toolTip = new ToolTip()
+                .setTitle("Quick Edit")
+                .setDescription("Click here to edit your macro settings, click again to save")
+                .setTextColor(Color.parseColor("#bdc3c7"))
+                .setBackgroundColor(Color.parseColor("#e74c3c"))
+                .setShadow(true)
+                .setGravity(Gravity.TOP | Gravity.LEFT)
+                .setEnterAnimation(animation);
+        mTourGuideHandler = TourGuide.init(this).with(TourGuide.Technique.Click)
+                .setPointer(new Pointer())
+                .setToolTip(toolTip)
+                .setOverlay(new Overlay());
+        //tour guide
+
         edit_fab = (FloatingActionButton)findViewById(R.id.edit_fab);
         edit_fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(!isEnabled) {
-                    mTourGuideHandler.cleanUp();
+                    dismissTourguide();
                     enableFields();
+                    edit_fab.setImageDrawable(getResources().getDrawable(R.drawable.ic_done_black_24dp));
                 }
                 else {
+                    edit_fab.setImageDrawable(getResources().getDrawable(R.drawable.ic_mode_edit_black_24dp));
                     saveData();
                 }
             }
         });
+
+
         parentLayout = findViewById(R.id.activity_macro_settings);
 
         My_DB = new DatabaseConnector(getApplicationContext());
@@ -104,6 +124,9 @@ public class MacroSettings extends AppCompatActivity implements View.OnFocusChan
         calories = (EditText)findViewById(R.id.txt_cal);
         bmr = (EditText)findViewById(R.id.txt_BMR);
         age = (EditText)findViewById(R.id.txt_age);
+        psym1=(TextView)findViewById(R.id.percentsym1);
+        psym2=(TextView)findViewById(R.id.percentsym2);
+        psym3=(TextView)findViewById(R.id.percentsym3);
 
         age.setOnFocusChangeListener(this);
         gender.setOnFocusChangeListener(this);
@@ -311,71 +334,6 @@ public class MacroSettings extends AppCompatActivity implements View.OnFocusChan
 
                 break;
 
-//            case R.id.txt_carbs:
-//
-//                if(b)
-//                {
-//                    new MaterialDialog.Builder(this)
-//                            .title("Carbohydrates")
-//                            .content("Enter new percentage %")
-//                            .cancelable(true)
-//                            .inputType(InputType.TYPE_CLASS_NUMBER)
-//                            .input(carbs.getText().toString(), "", new MaterialDialog.InputCallback() {
-//                                @Override
-//                                public void onInput(MaterialDialog dialog, CharSequence input) {
-//                                    // Do something
-//                                    currentUser.setPercent_carbs(Integer.parseInt(input.toString()));
-//                                    carbs.setText(input);
-//                                    carbs.clearFocus();
-//                                }
-//                            }).show();
-//                }
-//
-//                break;
-//
-//            case R.id.txt_protein:
-//
-//                if(b)
-//                {
-//                    new MaterialDialog.Builder(this)
-//                            .title("Protein")
-//                            .content("Enter new percentage %")
-//                            .cancelable(true)
-//                            .inputType(InputType.TYPE_CLASS_NUMBER)
-//                            .input(prot.getText().toString(), "", new MaterialDialog.InputCallback() {
-//                                @Override
-//                                public void onInput(MaterialDialog dialog, CharSequence input) {
-//                                    // Do something
-//                                    currentUser.setPercent_protein(Integer.parseInt(input.toString()));
-//                                    prot.setText(input);
-//                                    prot.clearFocus();
-//                                }
-//                            }).show();
-//                }
-//
-//                break;
-//
-//            case R.id.txt_fat:
-//
-//                if(b)
-//                {
-//                    new MaterialDialog.Builder(this)
-//                            .title("Fat")
-//                            .content("Enter new percentage %")
-//                            .cancelable(true)
-//                            .inputType(InputType.TYPE_CLASS_NUMBER)
-//                            .input(fat.getText().toString(), "", new MaterialDialog.InputCallback() {
-//                                @Override
-//                                public void onInput(MaterialDialog dialog, CharSequence input) {
-//                                    // Do something
-//                                    currentUser.setPercent_fat(Integer.parseInt(input.toString()));
-//                                    fat.setText(input);
-//                                    fat.clearFocus();
-//                                }
-//                            }).show();
-//                }
-//
-//                break;
 
         }
 
@@ -530,6 +488,9 @@ public class MacroSettings extends AppCompatActivity implements View.OnFocusChan
         height.setEnabled(true);
         age.setEnabled(true);
         isEnabled=true;
+        psym1.setVisibility(View.VISIBLE);
+        psym2.setVisibility(View.VISIBLE);
+        psym3.setVisibility(View.VISIBLE);
         //convert macros to percent in edittext fields
         carbs.setText(""+currentUser.getPercent_carbs());
         prot.setText(""+currentUser.getPercent_protein());
@@ -556,6 +517,9 @@ public class MacroSettings extends AppCompatActivity implements View.OnFocusChan
 
         if(carbsint+protint+fatint==100) {
 
+            psym1.setVisibility(View.INVISIBLE);
+            psym2.setVisibility(View.INVISIBLE);
+            psym3.setVisibility(View.INVISIBLE);
             goal.setEnabled(false);
             gender.setEnabled(false);
             carbs.setEnabled(false);
@@ -584,11 +548,11 @@ public class MacroSettings extends AppCompatActivity implements View.OnFocusChan
             My_DB.updateUser(currentUser);
 
             //refresh graphs and fields
-            bmr.setText(""+getBMR());
+            bmr.setText("BMR: "+getBMR());
             carbs.setText(""+Carbs_Val);
             prot.setText(""+Protein_Val);
             fat.setText(""+Fat_Val);
-            calories.setText(""+(int)userCalories);
+            calories.setText("Cals: "+(int)userCalories);
             generateData(String.valueOf(currentUser.getPercent_carbs()), String.valueOf(currentUser.getPercent_protein()), String.valueOf(currentUser.getPercent_fat()));
 
             carbs.setError(null);
@@ -728,25 +692,19 @@ public class MacroSettings extends AppCompatActivity implements View.OnFocusChan
         if(settings.getBoolean("isnewtomacroSettings",true))
         {
 
-            ToolTip toolTip = new ToolTip()
-                    .setTitle("Quick Edit")
-                    .setDescription("Click here to edit your macro settings, click again to save")
-                    .setTextColor(Color.parseColor("#bdc3c7"))
-                    .setBackgroundColor(Color.parseColor("#e74c3c"))
-                    .setShadow(true)
-                    .setGravity(Gravity.TOP | Gravity.RIGHT)
-                    .setEnterAnimation(animation);
-
-             mTourGuideHandler = TourGuide.init(this).with(TourGuide.Technique.Click)
-                    .setPointer(new Pointer())
-                    .setToolTip(toolTip)
-                    .setOverlay(new Overlay())
-                    .playOn(edit_fab);
+            mTourGuideHandler.playOn(edit_fab);
 
             SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
             SharedPreferences.Editor editor = settings.edit();
             editor.putBoolean("isnewtomacroSettings", false); // here string is the value you want to save
             editor.commit();
         }
+    }
+    public void dismissTourguide(){
+        try{
+            if(null != mTourGuideHandler){
+                mTourGuideHandler.cleanUp();
+            }
+        }catch (Exception e){}
     }
 }
