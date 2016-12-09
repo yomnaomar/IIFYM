@@ -175,7 +175,10 @@ public class MacroSettings extends AppCompatActivity implements View.OnFocusChan
                                 @Override
                                 public void onInput(MaterialDialog dialog, CharSequence input) {
                                     // Do something
-                                    age.setText(input);
+                                    if(input.length()>0)
+                                        age.setText(input);
+                                    else
+                                        age.setText(age.getText().toString());
                                     try {
                                         currentUser.setAge(Integer.parseInt(input.toString()));
                                     } catch (NumberFormatException e) {
@@ -195,7 +198,10 @@ public class MacroSettings extends AppCompatActivity implements View.OnFocusChan
                                 @Override
                                 public boolean onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
                                     try {
-                                        gender.setText(text);
+                                        if(which>=0)
+                                            gender.setText(text);
+                                        else
+                                            gender.setText(gender.getText().toString());
                                         currentUser.setGender(text.toString());
                                     } catch (Exception e) {
                                         e.printStackTrace();
@@ -225,16 +231,22 @@ public class MacroSettings extends AppCompatActivity implements View.OnFocusChan
                                     switch (currentUser.getHeight_unit())
                                     {
                                         case 0 :
-                                            height.setText(input+" ft");
+                                            if(input.length()>0)
+                                                height.setText(input+" ft");
+                                            else
+                                                height.setText(height.getText().toString());
                                             break;
                                         case 1:
-                                            height.setText(input+" cm");
+                                            if(input.length()>0)
+                                                height.setText(input+" cm");
+                                            else
+                                                height.setText(height.getText().toString());
                                             break;
                                     }
                                     try {
                                         currentUser.setHeight(Float.parseFloat(input.toString()));
                                     } catch (NumberFormatException e) {
-                                        e.printStackTrace();
+
                                     }
                                     height.clearFocus();
 
@@ -247,7 +259,7 @@ public class MacroSettings extends AppCompatActivity implements View.OnFocusChan
             case R.id.txt_weight:
                 if(b) {
                     new MaterialDialog.Builder(this)
-                            .title("Weight60")
+                            .title("Weight")
                             .content("")
                             .cancelable(true)
                             .inputType(InputType.TYPE_CLASS_NUMBER)
@@ -257,16 +269,23 @@ public class MacroSettings extends AppCompatActivity implements View.OnFocusChan
                                     // Do something
                                     switch (currentUser.getWeight_unit()) {
                                         case 0:
-                                            weight.setText(input + " kg");
+                                            if(input.length()>0)
+                                                weight.setText(input + " kg");
+                                            else
+                                                weight.setText(weight.getText().toString());
                                             break;
                                         case 1:
-                                            weight.setText(input + " lbs");
+                                            if(input.length()>0)
+                                                weight.setText(input + " lbs");
+                                            else
+                                                weight.setText(weight.getText().toString());
                                             break;
                                     }
                                     try {
                                         currentUser.setWeight(Float.parseFloat(input.toString()));
                                     } catch (NumberFormatException e) {
-                                        e.printStackTrace();
+
+
                                     }
                                     weight.clearFocus();
 
@@ -307,6 +326,10 @@ public class MacroSettings extends AppCompatActivity implements View.OnFocusChan
                                                 workoutfreq.setText("Very High");
                                                 currentUser.setWorkout_freq(4);
                                                 break;
+                                            default:
+                                                workoutfreq.setText(workoutfreq.getText().toString());
+                                                currentUser.setWorkout_freq(currentUser.getWorkout_freq());
+                                                break;
                                         }
                                     } catch (Exception e) {
                                         e.printStackTrace();
@@ -344,6 +367,10 @@ public class MacroSettings extends AppCompatActivity implements View.OnFocusChan
                                             case 2://gain
                                                 goal.setText("Gain");
                                                 currentUser.setGoal(2);
+                                                break;
+                                            default:
+                                                goal.setText(goal.getText().toString());
+                                                currentUser.setGoal(currentUser.getGoal());
                                                 break;
                                         }
                                     } catch (Exception e) {

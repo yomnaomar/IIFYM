@@ -207,9 +207,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onResume() {
         super.onResume();
+
         getActiveUser(isLogged,intent); //get current user
         userBMR = getBMR(); // BMR fetched here
         setPrefMacros(); // puts preferred macro in shared prefs
+
         UpdateArrayList();
         UpdateMacros();
     }
