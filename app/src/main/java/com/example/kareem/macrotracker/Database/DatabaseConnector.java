@@ -152,6 +152,16 @@ public class DatabaseConnector {
             return false;
         }
     }
+    public boolean deleteMealbyID(int mealid) {
+        try {
+            database.delete(Table_Meal, "meal_id = '" + mealid + "'", null);
+            Log.i("One Meal Deleted:", "Meal with ID: " + mealid + " deleted");
+            return true;
+        } catch (SQLiteException E) {
+            Log.i("ERROR: ", E.getMessage());
+            return false;
+        }
+    }
 
     //TODO REDESIGN THIS NONSENSE
     public boolean deleteAllQuickMeals() {

@@ -105,7 +105,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button_AddQuickMeal.setOnClickListener(this);
 
         ArrayList_DailyMeals = new ArrayList<DailyMeal>();
-        My_DailyMealAdapter = new DailyMealAdapter(this, ArrayList_DailyMeals);
+        My_DailyMealAdapter = new DailyMealAdapter(this, ArrayList_DailyMeals,this);
         Meals_ListView = (ListView) findViewById(R.id.ListView_Meals);
         Meals_ListView.setAdapter(My_DailyMealAdapter);
         Meals_ListView.setOnItemClickListener(this);
@@ -268,7 +268,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     //Updates My_MealAdapter
     //TODO: TEST AFTER IMPLEMENTING DATABASE
-    private void UpdateArrayList() {
+    public void UpdateArrayList() {
         My_DailyMealAdapter.clear();
         Cursor AllDailyMeals_Cursor = My_DB.getAllDailyMeals();
         int count = AllDailyMeals_Cursor.getCount();
@@ -305,15 +305,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void removeMealHandler(View v) {
-        DailyMeal itemToRemove = (DailyMeal)v.getTag();
-        My_DailyMealAdapter.remove(itemToRemove);
-        UpdateArrayList();
-        UpdateMacros();
+//        DailyMeal itemToRemove = (DailyMeal)v.getTag();
+//        My_DailyMealAdapter.remove(itemToRemove);
+//        UpdateArrayList();
+//        UpdateMacros();
     }
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+    public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
         //onItemDeleted();
-
+        //Meals_ListView.removeViewAt(position);
+        //My_DailyMealAdapter.notifyDataSetChanged();
     }
 
     private void getActiveUser(boolean logged, Intent intent)

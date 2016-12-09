@@ -6,9 +6,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.kareem.macrotracker.Activities.MainActivity;
 import com.example.kareem.macrotracker.Custom_Objects.DailyMeal;
+import com.example.kareem.macrotracker.Custom_Objects.Meal;
 import com.example.kareem.macrotracker.Custom_Objects.Portion_Type;
 import com.example.kareem.macrotracker.Custom_Objects.Weight;
 import com.example.kareem.macrotracker.Database.DatabaseConnector;
@@ -25,17 +28,21 @@ public class DailyMealAdapter extends ArrayAdapter<DailyMeal>{
     int serving_number;
     Weight weight;
     int multiplier;
+    int pos;
+    DailyMeal DM;
+    OnListItemDeletedListener listener;
 
-    public DailyMealAdapter(Context context, ArrayList<DailyMeal> meals) {
+    public DailyMealAdapter(Context context, ArrayList<DailyMeal> meals, OnListItemDeletedListener listener) {
         super(context, 0, meals);
-
+        this.listener=listener;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         My_DB = new DatabaseConnector(getContext());
         // Get the data item for this position
-        DailyMeal DM = getItem(position);
+        pos = position;
+        DM = getItem(position);
 
         //TODO RE-EVALUATE BELOW
         int meal_id = DM.getMeal_id();
@@ -71,7 +78,23 @@ public class DailyMealAdapter extends ArrayAdapter<DailyMeal>{
             portion.setText(weight.getWeight_amount() + " " + weight.getWeight_unit().Abbreviate());
         }
 
+        Button imageView = (Button) convertView.findViewById(R.id.Button_DeleteMeal);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DailyMealAdapter.this.remove(getItem(pos));
+                DailyMealAdapter.this.notifyDataSetChanged();
+
+                My_DB.deleteDailyMeal(DM.getPosition());
+                My_DB.deleteMealbyID(DM.getMeal_id());
+                updateGUI();
+            }
+        });
         // Return the completed view to render on screen
         return convertView;
+    }
+
+    public void updateGUI() {
+        listener.onItemDeleted();
     }
 }
