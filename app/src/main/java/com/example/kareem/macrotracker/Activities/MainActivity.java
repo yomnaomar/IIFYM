@@ -76,6 +76,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     int userBMR;
     double userCalories;
 
+    Intent intent;
+
     private Animation mEnterAnimation, mExitAnimation;
 
     @Override
@@ -86,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setSupportActionBar(toolbar);
 
         coordinatorLayout = (CoordinatorLayout) findViewById(R.id.main_content);
-
+        settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         //Declaring
         Text_CarbsGoal = (TextView) findViewById(R.id.Text_CarbsGoal);
         Text_ProteinGoal = (TextView) findViewById(R.id.Text_ProteinGoal);
@@ -112,17 +114,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         parentLayout = findViewById(R.id.root_view);
 
         //TODO:(Abdulwahab) get current currentUser here
-        Intent intent = getIntent();
+        intent = getIntent();
         isLogged = intent.getBooleanExtra("logged",false);//checks if user just logged in
-        getActiveUser(isLogged,intent); //get current user
-        userBMR = getBMR(); // BMR fetched here
-        setPrefMacros(); // puts preferred macro in shared prefs
 
-        //TODO KILL DUMMIES
-//        User DummyBoy = new User();
-//        //DummyBoy = My_DB.getUser_ReturnsUser("DummyBoy");
-//        DummyBoy = My_DB.getUser_ReturnsUser("DebuggerDummy");
-//        Toast.makeText(this,"Welcome "+ DummyBoy.getUser_name() +" ID: "+DummyBoy.getUser_id(),Toast.LENGTH_SHORT).show(); //TODO: call only once
+
+
 
           /* setup enter and exit animation */
         mEnterAnimation = new AlphaAnimation(0f, 1f);
@@ -209,7 +205,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onResume() {
         super.onResume();
-
+        getActiveUser(isLogged,intent); //get current user
+        userBMR = getBMR(); // BMR fetched here
+        setPrefMacros(); // puts preferred macro in shared prefs
         UpdateArrayList();
         UpdateMacros();
     }
@@ -306,17 +304,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         UpdateMacros();
     }
 
+    public void removeMealHandler(View v) {
+        DailyMeal itemToRemove = (DailyMeal)v.getTag();
+        My_DailyMealAdapter.remove(itemToRemove);
+        UpdateArrayList();
+        UpdateMacros();
+    }
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        onItemDeleted();
+        //onItemDeleted();
+
     }
 
     private void getActiveUser(boolean logged, Intent intent)
     {
+        user_name = intent.getStringExtra("user_name");
+        user_id = intent.getIntExtra("user_id",My_DB.fetchUserID(user_name,getApplicationContext()));
         if(logged)
         {
-            user_name = intent.getStringExtra("user_name");
-            user_id = intent.getIntExtra("user_id",My_DB.fetchUserID(user_name,getApplicationContext()));
             Snackbar snackbar = Snackbar
                     .make(parentLayout, "Welcome "+ user_name +" ID: "+ user_id, Snackbar.LENGTH_SHORT);
             snackbar.show();

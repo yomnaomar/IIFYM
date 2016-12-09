@@ -60,7 +60,7 @@ public class Profilefrag extends Fragment implements View.OnClickListener, View.
     int age;
 
     private DatePickerDialog datePickerDialog;
-    android.icu.text.SimpleDateFormat dateFormat;
+    SimpleDateFormat dateFormat;
 
 
     //GUI vars ----------------------------------
@@ -96,7 +96,7 @@ public class Profilefrag extends Fragment implements View.OnClickListener, View.
         }
     }
 
-    @TargetApi(Build.VERSION_CODES.N)
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -112,7 +112,7 @@ public class Profilefrag extends Fragment implements View.OnClickListener, View.
         btn1 = (RadioButton)myView.findViewById(R.id.radioButton);
         btn2 = (RadioButton)myView.findViewById(R.id.radioButton2);
 
-        dateFormat = new android.icu.text.SimpleDateFormat("dd-MM-yyyy", Locale.US);
+        dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         dob.setOnFocusChangeListener(this);
         setDateTimeField();
 

@@ -77,6 +77,10 @@ public class MacroSettings extends AppCompatActivity implements View.OnFocusChan
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_macro_settings);
         settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        animation = new TranslateAnimation(0f, 0f, 200f, 0f);
+        animation.setDuration(1000);
+        animation.setFillAfter(true);
+        animation.setInterpolator(new BounceInterpolator());
         //tour guide
         ToolTip toolTip = new ToolTip()
                 .setTitle("Quick Edit")
@@ -150,10 +154,7 @@ public class MacroSettings extends AppCompatActivity implements View.OnFocusChan
         generateData(String.valueOf(currentUser.getPercent_carbs()),String.valueOf(currentUser.getPercent_protein()),String.valueOf(currentUser.getPercent_fat()));
         settextData();
 
-        animation = new TranslateAnimation(0f, 0f, 200f, 0f);
-        animation.setDuration(1000);
-        animation.setFillAfter(true);
-        animation.setInterpolator(new BounceInterpolator());
+
 
         showtipOverlay();//UI guide
 
@@ -175,7 +176,11 @@ public class MacroSettings extends AppCompatActivity implements View.OnFocusChan
                                 public void onInput(MaterialDialog dialog, CharSequence input) {
                                     // Do something
                                     age.setText(input);
-                                    currentUser.setAge(Integer.parseInt(input.toString()));
+                                    try {
+                                        currentUser.setAge(Integer.parseInt(input.toString()));
+                                    } catch (NumberFormatException e) {
+                                        e.printStackTrace();
+                                    }
                                     age.clearFocus();
                                 }
                             }).show();
@@ -189,8 +194,12 @@ public class MacroSettings extends AppCompatActivity implements View.OnFocusChan
                             .itemsCallbackSingleChoice(-1, new MaterialDialog.ListCallbackSingleChoice() {
                                 @Override
                                 public boolean onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
-                                    gender.setText(text);
-                                    currentUser.setGender(text.toString());
+                                    try {
+                                        gender.setText(text);
+                                        currentUser.setGender(text.toString());
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
                                     gender.clearFocus();
                                     return true;
                                 }
@@ -222,7 +231,11 @@ public class MacroSettings extends AppCompatActivity implements View.OnFocusChan
                                             height.setText(input+" cm");
                                             break;
                                     }
-                                    currentUser.setHeight(Float.parseFloat(input.toString()));
+                                    try {
+                                        currentUser.setHeight(Float.parseFloat(input.toString()));
+                                    } catch (NumberFormatException e) {
+                                        e.printStackTrace();
+                                    }
                                     height.clearFocus();
 
                                 }
@@ -250,7 +263,11 @@ public class MacroSettings extends AppCompatActivity implements View.OnFocusChan
                                             weight.setText(input + " lbs");
                                             break;
                                     }
-                                    currentUser.setWeight(Float.parseFloat(input.toString()));
+                                    try {
+                                        currentUser.setWeight(Float.parseFloat(input.toString()));
+                                    } catch (NumberFormatException e) {
+                                        e.printStackTrace();
+                                    }
                                     weight.clearFocus();
 
                                 }
@@ -267,28 +284,32 @@ public class MacroSettings extends AppCompatActivity implements View.OnFocusChan
                             .itemsCallbackSingleChoice(-1, new MaterialDialog.ListCallbackSingleChoice() {
                                 @Override
                                 public boolean onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
-                                    switch(which)
-                                    {
-                                        case 0:
-                                            workoutfreq.setText("None");
-                                            currentUser.setWorkout_freq(0);
-                                            break;
-                                        case 1:
-                                            workoutfreq.setText("Low");
-                                            currentUser.setWorkout_freq(1);
-                                            break;
-                                        case 2:
-                                            workoutfreq.setText("Medium");
-                                            currentUser.setWorkout_freq(2);
-                                            break;
-                                        case 3:
-                                            workoutfreq.setText("High");
-                                            currentUser.setWorkout_freq(3);
-                                            break;
-                                        case 4:
-                                            workoutfreq.setText("Very High");
-                                            currentUser.setWorkout_freq(4);
-                                            break;
+                                    try {
+                                        switch(which)
+                                        {
+                                            case 0:
+                                                workoutfreq.setText("None");
+                                                currentUser.setWorkout_freq(0);
+                                                break;
+                                            case 1:
+                                                workoutfreq.setText("Low");
+                                                currentUser.setWorkout_freq(1);
+                                                break;
+                                            case 2:
+                                                workoutfreq.setText("Medium");
+                                                currentUser.setWorkout_freq(2);
+                                                break;
+                                            case 3:
+                                                workoutfreq.setText("High");
+                                                currentUser.setWorkout_freq(3);
+                                                break;
+                                            case 4:
+                                                workoutfreq.setText("Very High");
+                                                currentUser.setWorkout_freq(4);
+                                                break;
+                                        }
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
                                     }
                                     workoutfreq.clearFocus();
                                     return true;
@@ -308,21 +329,25 @@ public class MacroSettings extends AppCompatActivity implements View.OnFocusChan
                             .itemsCallbackSingleChoice(-1, new MaterialDialog.ListCallbackSingleChoice() {
                                 @Override
                                 public boolean onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
-                                    switch(which)
-                                    {
-                                        case 0://lose
-                                            goal.setText("Lose");
-                                            currentUser.setGoal(0);
-                                            break;
-                                        case 1://maintain
-                                            goal.setText("Maintain");
-                                            currentUser.setGoal(1);
-                                            break;
+                                    try {
+                                        switch(which)
+                                        {
+                                            case 0://lose
+                                                goal.setText("Lose");
+                                                currentUser.setGoal(0);
+                                                break;
+                                            case 1://maintain
+                                                goal.setText("Maintain");
+                                                currentUser.setGoal(1);
+                                                break;
 
-                                        case 2://gain
-                                            goal.setText("Gain");
-                                            currentUser.setGoal(2);
-                                            break;
+                                            case 2://gain
+                                                goal.setText("Gain");
+                                                currentUser.setGoal(2);
+                                                break;
+                                        }
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
                                     }
                                     goal.clearFocus();
                                     return true;

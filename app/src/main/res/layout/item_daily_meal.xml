@@ -22,6 +22,7 @@
                 android:id="@+id/Button_DeleteMeal"
                 android:background="#f40800"
                 android:clickable="true"
+                android:onClick="removeMealHandler"
                 android:textStyle="bold"
                 android:textSize="20dp" />
 
