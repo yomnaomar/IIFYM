@@ -60,7 +60,7 @@ public class DailyMealAdapter extends ArrayAdapter<DailyMeal>{
         name.setText(DM.getMeal_name());
         carbs.setText(String.valueOf(DM.getCarbs()) + " c");
         protein.setText(String.valueOf(DM.getProtein()) + " p");
-        fat.setText(String.valueOf(DM.getFat()) + " f");
+        fat.setText(String.valueOf(DM.getFat()) + " f");//suck
 
         if (DM.getPortion_type() == Portion_Type.Serving) {
             serving_number = My_DB.getServing(meal_id);
