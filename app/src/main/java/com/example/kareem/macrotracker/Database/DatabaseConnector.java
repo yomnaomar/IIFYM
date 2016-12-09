@@ -23,10 +23,10 @@ import com.example.kareem.macrotracker.Custom_Objects.Weight;
 
 public class DatabaseConnector {
 
-    private static final String Table_Meal          = "Meals";
+    private static final String Table_Meal          = "Meal";
     private static final String Table_Weight        = "Weight";
     private static final String Table_Serving       = "Serving";
-    private static final String Table_Daily_Meals   = "Daily_Meals";
+    private static final String Table_Daily_Meals   = "Daily_Meal";
     private static final String Table_Composed_Of   = "Composed_Of";
     private static final String Table_User          = "User";
 
@@ -176,7 +176,7 @@ public class DatabaseConnector {
             int protein             = C.getInt(4);      //protein
             int fat                 = C.getInt(5);      //fat
             portion = portion.values()[C.getInt(6)];    //portion
-            int user_id             = C.getInt(8);      //user_id
+            int user_id             = C.getInt(7);      //user_id
 
             Meal M = new Meal(meal_id, meal_name, carbs, protein, fat, portion, user_id);
             Log.i("Meal Retrieved", "ID: " + meal_id + " Retrieved");
@@ -198,7 +198,7 @@ public class DatabaseConnector {
         int protein             = C.getInt(4);      //protein
         int fat                 = C.getInt(5);      //fat
         portion = portion.values()[C.getInt(6)];    //portion
-        int user_id             = C.getInt(8);      //user_id
+        int user_id             = C.getInt(7);      //user_id
 
         Meal M = new Meal(meal_id, meal_name, carbs, protein, fat, portion, user_id);
         Log.i("Meal Retrieved", "ID: " + meal_id + " Retrieved");
@@ -373,9 +373,11 @@ public class DatabaseConnector {
         newDailyMeal.put("multiplier", multiplier);
 
         database.insert(Table_Daily_Meals, null, newDailyMeal);
-        Log.i("newServing inserted:",
+
+        Log.i("DailyMeal inserted:",
                 "meal_id: " + meal_id + " " +
                 "multiplier: " + multiplier);
+
         return true;
     }
 
@@ -405,8 +407,8 @@ public class DatabaseConnector {
 
     //Return a Cursor containing all Daily Meals
     public Cursor getAllDailyMeals() {
-       /* openReadableDB();*/
-        Cursor C = database.rawQuery("SELECT * FROM " + Table_Daily_Meals + " ORDER BY position ASC", null);
+        Cursor C = database.rawQuery("SELECT * FROM " + Table_Daily_Meals, null);
+        Log.i("Daily Meals Count", C.getCount() + "");
         Log.i("Meals Retrieved", "All Daily Meals Retrieved");
         return C;
     }

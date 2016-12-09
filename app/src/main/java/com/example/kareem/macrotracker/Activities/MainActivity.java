@@ -274,13 +274,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         My_DailyMealAdapter.clear();
         Cursor AllDailyMeals_Cursor = My_DB.getAllDailyMeals();
         int count = AllDailyMeals_Cursor.getCount();
+        Log.i("Count","Count = " + count);
         if (count > 0) {
             for (int i = 0; i < count; i++) {
                 AllDailyMeals_Cursor.moveToNext();
 
+                int     daily_position      = AllDailyMeals_Cursor.getInt(0);      //position
                 int     daily_meal_id       = AllDailyMeals_Cursor.getInt(1);      //meal_id
-                int     daily_position      = AllDailyMeals_Cursor.getInt(2);      //position
-                int     daily_multiplier    = AllDailyMeals_Cursor.getInt(3);      //multiplier
+                int     daily_multiplier    = AllDailyMeals_Cursor.getInt(2);      //multiplier
 
                 Meal M = My_DB.getMeal(daily_meal_id);
 

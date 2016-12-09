@@ -19,9 +19,8 @@ import java.util.ArrayList;
 /**
  * Created by Kareem on 9/13/2016.
  */
-public class DailyMealAdapter extends ArrayAdapter<DailyMeal> {
+public class DailyMealAdapter extends ArrayAdapter<DailyMeal>{
     private DatabaseConnector My_DB;
-    private OnListItemDeletedListener mListener;
 
     int serving_number;
     Weight weight;
@@ -29,6 +28,7 @@ public class DailyMealAdapter extends ArrayAdapter<DailyMeal> {
 
     public DailyMealAdapter(Context context, ArrayList<DailyMeal> meals) {
         super(context, 0, meals);
+
     }
 
     @Override
@@ -53,9 +53,9 @@ public class DailyMealAdapter extends ArrayAdapter<DailyMeal> {
 
         // Populate the data into the template view using the data object
         name.setText(DM.getMeal_name());
-        carbs.setText(String.valueOf(DM.getCarbs()));
-        protein.setText(String.valueOf(DM.getProtein()));
-        fat.setText(String.valueOf(DM.getFat()));
+        carbs.setText(String.valueOf(DM.getCarbs()) + " c");
+        protein.setText(String.valueOf(DM.getProtein()) + " p");
+        fat.setText(String.valueOf(DM.getFat()) + " f");
 
         if (DM.getPortion_type() == Portion_Type.Serving) {
             serving_number = My_DB.getServing(meal_id);

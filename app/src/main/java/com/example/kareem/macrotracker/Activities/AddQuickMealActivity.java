@@ -130,7 +130,6 @@ public class AddQuickMealActivity extends AppCompatActivity implements View.OnCl
         int carbs = Integer.parseInt(EditText_Carbs.getText().toString());
         int protein = Integer.parseInt(EditText_Protein.getText().toString());
         int fat = Integer.parseInt(EditText_Fat.getText().toString());
-        int daily_consumption = 1;
 
         if (CheckBox_SaveMeal.isChecked()) {
             //Get PortionType
@@ -139,7 +138,7 @@ public class AddQuickMealActivity extends AppCompatActivity implements View.OnCl
             int indexofPortionType = RadioGroup_PortionType.indexOfChild(radioButton);
             InsertSavedMeal(meal_name, carbs, protein, fat, indexofPortionType);
         } else {
-            int indexofPortionType = 2; //other
+            int indexofPortionType = 2; //None
             InsertQuickMeal(meal_name, carbs, protein, fat, indexofPortionType);
         }
     }
@@ -154,7 +153,7 @@ public class AddQuickMealActivity extends AppCompatActivity implements View.OnCl
             Toast.makeText(this, "Meal added", Toast.LENGTH_SHORT).show();
 
             if(My_DB.insertDailyMeal(NewMeal_WithID.getMeal_id(),1)) { //Insert new daily meal with multiplier = 1
-                Log.i("DailyMeal Inserted", "ID: " + NewMeal_WithID.getMeal_id() + " multiplier: 1");
+            //TODO perform error checking
             }
             Context context = getApplicationContext();
             Intent intent = new Intent();

@@ -6,7 +6,8 @@ package com.example.kareem.macrotracker.Custom_Objects;
 public enum Portion_Type
 {
     Serving,
-    Weight;
+    Weight,
+    None;
 
     public Portion_Type fromInteger(int x) {
         switch(x) {
@@ -14,6 +15,8 @@ public enum Portion_Type
                 return Serving;
             case 1:
                 return Weight;
+            case 2:
+                return None;
         }
         return null;
     }
