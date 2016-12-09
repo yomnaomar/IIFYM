@@ -509,6 +509,7 @@ public class DatabaseConnector {
         newUser.put("user_name", M.getUser_name());
         newUser.put("fname", M.getFname());
         newUser.put("lname", M.getLname());
+        newUser.put("email",M.getEmail());
         newUser.put("dob", M.getDob());
         newUser.put("age", M.getAge());
         newUser.put("weight", M.getWeight());
@@ -546,6 +547,7 @@ public class DatabaseConnector {
             editUser.put("user_name", user.getUser_name());
             editUser.put("fname", user.getFname());
             editUser.put("lname", user.getLname());
+            editUser.put("email",user.getEmail());
             editUser.put("dob", user.getDob());
             editUser.put("age", user.getAge());
             editUser.put("weight", user.getWeight());
