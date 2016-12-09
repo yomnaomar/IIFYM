@@ -32,8 +32,14 @@
 
         <ListView
             android:layout_width="wrap_content"
+            android:id="@+id/ListView_SavedMeals"
+            android:layout_height="400dp" />
+
+        <Button
+            android:text="Add New Meal"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/ListView_SavedMeals" />
+            android:id="@+id/btn_addnewmeal" />
     </LinearLayout>
 
 </RelativeLayout>
