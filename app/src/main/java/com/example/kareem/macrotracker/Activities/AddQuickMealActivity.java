@@ -137,11 +137,11 @@ public class AddQuickMealActivity extends AppCompatActivity implements View.OnCl
     //Alerts the User if a Meal with the same meal_name already exists and makes no changes
     private void Enter() {
         fieldsOk = validate(new EditText[]{EditText_MealName, EditText_Carbs, EditText_Protein,EditText_Fat});
+        if(fieldsOk) {
         String meal_name = EditText_MealName.getText().toString();
         int carbs = Integer.parseInt(EditText_Carbs.getText().toString());
         int protein = Integer.parseInt(EditText_Protein.getText().toString());
         int fat = Integer.parseInt(EditText_Fat.getText().toString());
-        if(fieldsOk) {
             if (CheckBox_SaveMeal.isChecked()) {
                 //Get PortionType
                 int radioButtonID = RadioGroup_PortionType.getCheckedRadioButtonId();
@@ -171,7 +171,7 @@ public class AddQuickMealActivity extends AppCompatActivity implements View.OnCl
 
             Toast.makeText(this, "Meal added", Toast.LENGTH_SHORT).show();
 
-            if(My_DB.insertDailyMeal(NewMeal_WithID.getMeal_id(),1)) { //Insert new daily meal with multiplier = 1
+            if(My_DB.insertDailyMeal(NewMeal_WithID.getMeal_id(),1.0f)) { //Insert new daily meal with multiplier = 1
                 //TODO perform error checking
             }
 //            Context context = getApplicationContext();
@@ -207,6 +207,9 @@ public class AddQuickMealActivity extends AppCompatActivity implements View.OnCl
                 } else {
                     Toast.makeText(this, "Failed to insert Weight", Toast.LENGTH_SHORT).show();
                 }
+            }
+            if(My_DB.insertDailyMeal(NewMeal_WithID.getMeal_id(),1.0f)) { //Insert new daily meal with multiplier = 1
+                //TODO perform error checking
             }
             Toast.makeText(this, "Meal added", Toast.LENGTH_SHORT).show();
             Context context = getApplicationContext();

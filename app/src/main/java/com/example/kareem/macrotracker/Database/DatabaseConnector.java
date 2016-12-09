@@ -215,6 +215,18 @@ public class DatabaseConnector {
         return M;
     }
 
+    public boolean isQuickMeal(int ID){
+        Cursor C = database.rawQuery("SELECT is_quick FROM " + Table_Meal + " WHERE meal_id = '" + ID + "'", null);
+        C.moveToFirst();
+        int is_quick = C.getInt(0);
+        if (is_quick == 0){
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+
     //Return a Cursor containing all entries
     public Cursor getAllSavedMeals() {
        /* openReadableDB();*/
@@ -377,7 +389,7 @@ public class DatabaseConnector {
 
     //DAILY_MEALS TABLE FUNCTIONS-------------------------------------------------------------------------
 
-    public boolean insertDailyMeal(int meal_id, int multiplier) {
+    public boolean insertDailyMeal(int meal_id, float multiplier) {
         ContentValues newDailyMeal = new ContentValues();
         newDailyMeal.put("meal_id", meal_id);
         newDailyMeal.put("multiplier", multiplier);
@@ -423,10 +435,10 @@ public class DatabaseConnector {
         return C;
     }
 
-    public int getMultiplier(int meal_id, int position) {
+    public float getMultiplier(int meal_id, int position) {
         Cursor C = database.rawQuery("SELECT multiplier FROM " + Table_Daily_Meals +
                 " WHERE meal_id = " + meal_id + " AND position = " + position, null);
-        int multiplier = C.getInt(2);
+        float multiplier = C.getFloat(2);
         Log.i("Multiplier Retrieved", "Retrieved multiplier: " + multiplier +
                 " of Daily Meal with meal_id: " + meal_id + " and position: " + position + " ");
         return multiplier;

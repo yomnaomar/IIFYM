@@ -81,7 +81,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String createTable_Daily_Meals = "CREATE TABLE " + Table_Daily_Meals + " " +
                 "(position              INTEGER PRIMARY KEY autoincrement, " +
                 "meal_id                INTEGER, " +
-                "multiplier             INTEGER, " +
+                "multiplier             REAL, " +
 
                 "CONSTRAINT meal_id_fk FOREIGN KEY(meal_id) REFERENCES " + Table_Meal + " (meal_id) ON DELETE CASCADE);";
 

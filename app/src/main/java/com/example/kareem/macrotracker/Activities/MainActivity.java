@@ -87,6 +87,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        My_DB = new DatabaseConnector(getApplicationContext());
+
         coordinatorLayout = (CoordinatorLayout) findViewById(R.id.main_content);
         settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         //Declaring
@@ -110,7 +112,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Meals_ListView.setAdapter(My_DailyMealAdapter);
         Meals_ListView.setOnItemClickListener(this);
 
-        My_DB = new DatabaseConnector(getApplicationContext());
+
         parentLayout = findViewById(R.id.root_view);
 
         //TODO:(Abdulwahab) get current currentUser here

@@ -36,7 +36,7 @@ public enum Weight_Unit {
             case "Grams":
                 return "g";
             case "Ounces":
-                return "Oz";
+                return "oz";
             case "mL":
                 return "mL";
         }
