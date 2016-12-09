@@ -12,7 +12,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.BounceInterpolator;
+import android.view.animation.TranslateAnimation;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,6 +36,12 @@ import lecho.lib.hellocharts.model.PieChartData;
 import lecho.lib.hellocharts.model.SliceValue;
 import lecho.lib.hellocharts.util.ChartUtils;
 import lecho.lib.hellocharts.view.PieChartView;
+import tourguide.tourguide.ChainTourGuide;
+import tourguide.tourguide.Overlay;
+import tourguide.tourguide.Pointer;
+import tourguide.tourguide.Sequence;
+import tourguide.tourguide.ToolTip;
+import tourguide.tourguide.TourGuide;
 
 public class MacroSettings extends AppCompatActivity implements View.OnFocusChangeListener{
 
@@ -57,6 +68,9 @@ public class MacroSettings extends AppCompatActivity implements View.OnFocusChan
     private int Carbs_Val,Protein_Val,Fat_Val;
     private double userCalories;
 
+
+    private Animation animation;
+    TourGuide mTourGuideHandler;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +81,7 @@ public class MacroSettings extends AppCompatActivity implements View.OnFocusChan
             @Override
             public void onClick(View v) {
                 if(!isEnabled) {
+                    mTourGuideHandler.cleanUp();
                     enableFields();
                 }
                 else {
@@ -112,7 +127,12 @@ public class MacroSettings extends AppCompatActivity implements View.OnFocusChan
         generateData(String.valueOf(currentUser.getPercent_carbs()),String.valueOf(currentUser.getPercent_protein()),String.valueOf(currentUser.getPercent_fat()));
         settextData();
 
+        animation = new TranslateAnimation(0f, 0f, 200f, 0f);
+        animation.setDuration(1000);
+        animation.setFillAfter(true);
+        animation.setInterpolator(new BounceInterpolator());
 
+        showtipOverlay();//UI guide
 
     }
 
@@ -701,5 +721,32 @@ public class MacroSettings extends AppCompatActivity implements View.OnFocusChan
 
         userCalories = Caloric_Intake;
         return (int) BMR;
+    }
+
+    private void showtipOverlay()
+    {
+        if(settings.getBoolean("isnewtomacroSettings",true))
+        {
+
+            ToolTip toolTip = new ToolTip()
+                    .setTitle("Quick Edit")
+                    .setDescription("Click here to edit your macro settings, click again to save")
+                    .setTextColor(Color.parseColor("#bdc3c7"))
+                    .setBackgroundColor(Color.parseColor("#e74c3c"))
+                    .setShadow(true)
+                    .setGravity(Gravity.TOP | Gravity.RIGHT)
+                    .setEnterAnimation(animation);
+
+             mTourGuideHandler = TourGuide.init(this).with(TourGuide.Technique.Click)
+                    .setPointer(new Pointer())
+                    .setToolTip(toolTip)
+                    .setOverlay(new Overlay())
+                    .playOn(edit_fab);
+
+            SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+            SharedPreferences.Editor editor = settings.edit();
+            editor.putBoolean("isnewtomacroSettings", false); // here string is the value you want to save
+            editor.commit();
+        }
     }
 }

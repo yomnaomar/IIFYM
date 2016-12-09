@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.CoordinatorLayout;
@@ -11,9 +12,12 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
@@ -29,6 +33,11 @@ import com.example.kareem.macrotracker.ViewComponents.DailyMealAdapter;
 import com.example.kareem.macrotracker.ViewComponents.OnListItemDeletedListener;
 
 import java.util.ArrayList;
+
+import tourguide.tourguide.ChainTourGuide;
+import tourguide.tourguide.Overlay;
+import tourguide.tourguide.Sequence;
+import tourguide.tourguide.ToolTip;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener, OnListItemDeletedListener {
 
@@ -66,6 +75,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     int Carbs_Val,Protein_Val,Fat_Val;
     int userBMR;
     double userCalories;
+
+    private Animation mEnterAnimation, mExitAnimation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,6 +124,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //        DummyBoy = My_DB.getUser_ReturnsUser("DebuggerDummy");
 //        Toast.makeText(this,"Welcome "+ DummyBoy.getUser_name() +" ID: "+DummyBoy.getUser_id(),Toast.LENGTH_SHORT).show(); //TODO: call only once
 
+          /* setup enter and exit animation */
+        mEnterAnimation = new AlphaAnimation(0f, 1f);
+        mEnterAnimation.setDuration(600);
+        mEnterAnimation.setFillAfter(true);
+
+        mExitAnimation = new AlphaAnimation(1f, 0f);
+        mExitAnimation.setDuration(600);
+        mExitAnimation.setFillAfter(true);
+
+        showtipOverlay();//UI guide
     }
 
     @Override
@@ -410,6 +431,58 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         userCalories = Caloric_Intake;
         return (int) BMR;
+    }
+
+    //UI tooltips will be shown to guide user around  - launched only once
+    private void showtipOverlay()
+    {
+        if(settings.getBoolean("isnewUser",false))
+        {
+            ChainTourGuide tourGuide1 = ChainTourGuide.init(this)
+                    .setToolTip(new ToolTip()
+                            .setTitle("Quick Meals")
+                            .setDescription("Use this to quickly add a meal to your daily list")
+                            .setGravity(Gravity.TOP)
+                    )
+                    .setOverlay(new Overlay()
+                            .setBackgroundColor(Color.parseColor("#EE2c3e50"))
+                            .setEnterAnimation(mEnterAnimation)
+                            .setExitAnimation(mExitAnimation)
+                    )
+                    // note that there is no Overlay here, so the default one will be used
+                    .playLater(Button_AddQuickMeal);
+
+            ChainTourGuide tourGuide2 = ChainTourGuide.init(this)
+                    .setToolTip(new ToolTip()
+                            .setTitle("Saved Meals")
+                            .setDescription("Use this to select a meal from your list of saved meals")
+                            .setGravity(Gravity.TOP | Gravity.LEFT)
+                            .setBackgroundColor(Color.parseColor("#c0392b"))
+                    )
+                    .setOverlay(new Overlay()
+                            .setBackgroundColor(Color.parseColor("#EE2c3e50"))
+                            .setEnterAnimation(mEnterAnimation)
+                            .setExitAnimation(mExitAnimation)
+                    )
+                    .playLater(Button_AddSavedMeal);
+
+            Sequence sequence = new Sequence.SequenceBuilder()
+                    .add(tourGuide1, tourGuide2)
+                    .setDefaultOverlay(new Overlay()
+                            .setEnterAnimation(mEnterAnimation)
+                            .setExitAnimation(mExitAnimation)
+                    )
+                    .setDefaultPointer(null)
+                    .setContinueMethod(Sequence.ContinueMethod.Overlay)
+                    .build();
+
+
+            ChainTourGuide.init(this).playInSequence(sequence);
+            SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+            SharedPreferences.Editor editor = settings.edit();
+            editor.putBoolean("isnewUser", false); // here string is the value you want to save
+            editor.commit();
+        }
     }
 
 }
