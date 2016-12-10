@@ -2,6 +2,15 @@
 <items version="2" >
 
     <item
+        is-multidex="false"
+        jar="/home/mina/MacroTracker/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/25.0.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.3"
+        sha1="b24e1c688744078e1fa833ffadf696794761bbe5">
+        <dex dex="/home/mina/MacroTracker/app/build/intermediates/pre-dexed/debug/com.android.support-support-vector-drawable-25.0.1_99d9621cc3ccdd6d27e76d59bc95c29f1f4e2ed1.jar" />
+    </item>
+    <item
         is-multidex="true"
         jar="/home/mina/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/25.0.1/support-annotations-25.0.1.jar"
         jumboMode="true"
@@ -25,8 +34,35 @@
         jumboMode="true"
         optimize="true"
         revision="24.0.3"
-        sha1="ead01f4a35f21b2d096daefac7a3c804949ec433">
+        sha1="dc913cc8b69c02f4cef372ab8d68f35a7b3676f2">
         <dex dex="/home/mina/MacroTracker/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_0ddc3237e87af6451ccaabf31e58908b6c033fa9/classes.dex" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/mina/MacroTracker/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/25.0.1/jars/libs/internal_impl-25.0.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.3"
+        sha1="e5343c9d19cb19ff55f6b268c7f3fe8c9d224f6f">
+        <dex dex="/home/mina/MacroTracker/app/build/intermediates/pre-dexed/debug/internal_impl-25.0.1_fb9cf06288b33a7baf675b943ed65b4f2ba9542a.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/mina/MacroTracker/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/25.0.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.3"
+        sha1="00d4c8eebf2b681073c72a26bd0849549e51c7cb">
+        <dex dex="/home/mina/MacroTracker/app/build/intermediates/pre-dexed/debug/com.android.support-support-core-utils-25.0.1_3e6f8c75299105af516aa37be7120233681619b8.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/mina/MacroTracker/app/build/intermediates/exploded-aar/com.android.support/support-v13/25.0.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.3"
+        sha1="6ac094121e75b4b87432beb9305d70c68ec6dcab">
+        <dex dex="/home/mina/MacroTracker/app/build/intermediates/pre-dexed/debug/com.android.support-support-v13-25.0.0_f677200f9c9dc428984501d47bb6d0f6c887166f.jar" />
     </item>
     <item
         is-multidex="true"
@@ -47,6 +83,15 @@
         <dex dex="/home/mina/MacroTracker/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-25.0.1_064eb2ad1b46b814131074d8d12f24d8b04d63d7/classes.dex" />
     </item>
     <item
+        is-multidex="false"
+        jar="/home/mina/MacroTracker/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.0.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.3"
+        sha1="f7ac4b327fdb9e2ee386f5adc46164927658de4b">
+        <dex dex="/home/mina/MacroTracker/app/build/intermediates/pre-dexed/debug/com.android.support-appcompat-v7-25.0.1_324b5f0d1cc0d756bdabffdd5744966f22a03a34.jar" />
+    </item>
+    <item
         is-multidex="true"
         jar="/home/mina/MacroTracker/app/build/intermediates/exploded-aar/me.zhanghai.android.materialprogressbar/library/1.3.0/jars/classes.jar"
         jumboMode="true"
@@ -65,6 +110,78 @@
         <dex dex="/home/mina/MacroTracker/app/build/intermediates/transforms/dex/debug/folders/1000/10/constraint-layout-solver-1.0.0-beta4_a9f3c9f690473c0c37a8c306a9c08f021ac8b97c/classes.dex" />
     </item>
     <item
+        is-multidex="false"
+        jar="/home/mina/MacroTracker/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/25.0.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.3"
+        sha1="6a1479afe9f1b3645e1cd9a87318976893472818">
+        <dex dex="/home/mina/MacroTracker/app/build/intermediates/pre-dexed/debug/com.android.support-support-media-compat-25.0.1_421991e52beaa02b3508e6083f42de9815fb3e07.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/mina/MacroTracker/app/build/intermediates/exploded-aar/com.android.support/support-fragment/25.0.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.3"
+        sha1="26c6eef571592c91f29e56fda0bac73321de0c92">
+        <dex dex="/home/mina/MacroTracker/app/build/intermediates/pre-dexed/debug/com.android.support-support-fragment-25.0.1_f034849434776db8b1d7140558f449609183907e.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/mina/MacroTracker/app/build/intermediates/exploded-aar/com.android.support/support-v4/25.0.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.3"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="/home/mina/MacroTracker/app/build/intermediates/pre-dexed/debug/com.android.support-support-v4-25.0.1_7cf8464d9a44f1d156b59fb557db1f79440ad05f.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/mina/MacroTracker/app/build/intermediates/exploded-aar/com.android.support/design/25.0.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.3"
+        sha1="3b236883e0df6002cabb01ce57d00a5b1e5de610">
+        <dex dex="/home/mina/MacroTracker/app/build/intermediates/pre-dexed/debug/com.android.support-design-25.0.1_e21a0e47beacaf998c7224b8156ff06226e7b2be.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/mina/MacroTracker/app/build/intermediates/exploded-aar/com.android.support/transition/25.0.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.3"
+        sha1="c1b6ab157e8e12cb08b9ee82bb5e3c5d22632eb3">
+        <dex dex="/home/mina/MacroTracker/app/build/intermediates/pre-dexed/debug/com.android.support-transition-25.0.1_98278a1918b4872e5f9694f102f0941b3a9eba26.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/mina/MacroTracker/app/build/intermediates/exploded-aar/com.android.support/support-compat/25.0.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.3"
+        sha1="51eba4a4dd73044f90a9d58dd7ca34adbebfcf4e">
+        <dex dex="/home/mina/MacroTracker/app/build/intermediates/pre-dexed/debug/com.android.support-support-compat-25.0.1_5f81eee9323d9fdc2eab961b1a1bc67e8f789909.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/mina/MacroTracker/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/25.0.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.3"
+        sha1="297d4bcf6ed4e747a1bf7d0d094a2d911a8d3a8e">
+        <dex dex="/home/mina/MacroTracker/app/build/intermediates/pre-dexed/debug/com.android.support-recyclerview-v7-25.0.1_991e1881e59ad91967ade5ca0fbd9208852ce29d.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/mina/MacroTracker/app/build/intermediates/exploded-aar/com.android.support/support-v13/25.0.0/jars/libs/internal_impl-25.0.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.3"
+        sha1="67355078cd30daae43f62ba47a4663ee6edb976e">
+        <dex dex="/home/mina/MacroTracker/app/build/intermediates/pre-dexed/debug/internal_impl-25.0.0_d56f423df627fe08efbed5ed653b39968f2492bf.jar" />
+    </item>
+    <item
         is-multidex="true"
         jar="/home/mina/MacroTracker/app/build/intermediates/exploded-aar/com.android.support/support-fragment/25.0.1/jars/libs/internal_impl-25.0.1.jar"
         jumboMode="true"
@@ -72,6 +189,15 @@
         revision="24.0.3"
         sha1="c0bd6ffb002a85b5e7cad29f8558d1cc59539679">
         <dex dex="/home/mina/MacroTracker/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-25.0.1_f9e8e6b85bd9cc527a88c178e3555924ef470baa/classes.dex" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/mina/MacroTracker/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/25.0.1/jars/libs/internal_impl-25.0.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.3"
+        sha1="f83b00041ecfba705603fec40363416c7de69719">
+        <dex dex="/home/mina/MacroTracker/app/build/intermediates/pre-dexed/debug/internal_impl-25.0.1_5ffad6720480ab51c9df7929b9de9fe4e63f833a.jar" />
     </item>
     <item
         is-multidex="true"
@@ -90,6 +216,33 @@
         revision="24.0.3"
         sha1="56c6a22c42588628903e9dda5d8f3aa1c1b4372f">
         <dex dex="/home/mina/MacroTracker/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.github.lecho-hellocharts-library-1.5.8_2f0e41249ea8eac31ec37d1faae4411f7ff8c330/classes.dex" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/mina/MacroTracker/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/25.0.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.3"
+        sha1="772bed2d992b67b9d0327f766cc95cd63031dcd3">
+        <dex dex="/home/mina/MacroTracker/app/build/intermediates/pre-dexed/debug/com.android.support-animated-vector-drawable-25.0.1_02ad20a5aa54a7e4eebfcb034210b48bdbbf231a.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/mina/MacroTracker/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/25.0.1/jars/libs/internal_impl-25.0.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.3"
+        sha1="c5b7145fb34779b6639147b8f2f8dd77c0db771b">
+        <dex dex="/home/mina/MacroTracker/app/build/intermediates/pre-dexed/debug/internal_impl-25.0.1_73e45c8396a4fc39e077c04c4c05c56cb00d825f.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/mina/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/25.0.1/support-annotations-25.0.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.3"
+        sha1="a09194311f8f89c3e6db09d79f50897a889d615e">
+        <dex dex="/home/mina/MacroTracker/app/build/intermediates/pre-dexed/debug/support-annotations-25.0.1_bfaf0c55705a8b4b19febb04837bd1741b966f3d.jar" />
     </item>
     <item
         is-multidex="true"
@@ -119,6 +272,15 @@
         <dex dex="/home/mina/MacroTracker/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-core-utils-25.0.1_3e6f8c75299105af516aa37be7120233681619b8/classes.dex" />
     </item>
     <item
+        is-multidex="false"
+        jar="/home/mina/MacroTracker/app/build/intermediates/exploded-aar/com.android.support.constraint/constraint-layout/1.0.0-beta4/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.3"
+        sha1="662d7533b25a666c649c10a16b42edfb95f25a4f">
+        <dex dex="/home/mina/MacroTracker/app/build/intermediates/pre-dexed/debug/com.android.support.constraint-constraint-layout-1.0.0-beta4_f3e1c624053c9392cdd0f68b82f1658016578cb1.jar" />
+    </item>
+    <item
         is-multidex="true"
         jar="/home/mina/MacroTracker/app/build/intermediates/exploded-aar/com.android.support/support-v13/25.0.0/jars/classes.jar"
         jumboMode="true"
@@ -126,6 +288,15 @@
         revision="24.0.3"
         sha1="6ac094121e75b4b87432beb9305d70c68ec6dcab">
         <dex dex="/home/mina/MacroTracker/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-v13-25.0.0_f677200f9c9dc428984501d47bb6d0f6c887166f/classes.dex" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/mina/MacroTracker/app/build/intermediates/exploded-aar/com.android.support/support-compat/25.0.1/jars/libs/internal_impl-25.0.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.3"
+        sha1="3af8cc51ef7088e56f132780da8c0bd858b6a6ad">
+        <dex dex="/home/mina/MacroTracker/app/build/intermediates/pre-dexed/debug/internal_impl-25.0.1_064eb2ad1b46b814131074d8d12f24d8b04d63d7.jar" />
     </item>
     <item
         is-multidex="true"
@@ -146,6 +317,15 @@
         <dex dex="/home/mina/MacroTracker/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.afollestad.material-dialogs-core-0.9.1.0_a83d2a39999ca1cef6044d5d5122e2dda95103ea/classes.dex" />
     </item>
     <item
+        is-multidex="false"
+        jar="/home/mina/MacroTracker/app/build/intermediates/exploded-aar/me.zhanghai.android.materialprogressbar/library/1.3.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.3"
+        sha1="a846ddbf5bf88dee5f89d4dffe22c864f576d9b0">
+        <dex dex="/home/mina/MacroTracker/app/build/intermediates/pre-dexed/debug/me.zhanghai.android.materialprogressbar-library-1.3.0_3848348b2b6bdad7acf5dd46d78712e5286fba94.jar" />
+    </item>
+    <item
         is-multidex="true"
         jar="/home/mina/MacroTracker/app/build/intermediates/exploded-aar/com.androidadvance/topsnackbar/1.1.1/jars/classes.jar"
         jumboMode="true"
@@ -155,6 +335,24 @@
         <dex dex="/home/mina/MacroTracker/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.androidadvance-topsnackbar-1.1.1_48d6486eccfd00cea6aa5f9fc874fafdf1c64f21/classes.dex" />
     </item>
     <item
+        is-multidex="false"
+        jar="/home/mina/MacroTracker/app/build/intermediates/exploded-aar/com.androidadvance/topsnackbar/1.1.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.3"
+        sha1="cb3cf97748344da6fad1deb830c7c479a7c53645">
+        <dex dex="/home/mina/MacroTracker/app/build/intermediates/pre-dexed/debug/com.androidadvance-topsnackbar-1.1.1_48d6486eccfd00cea6aa5f9fc874fafdf1c64f21.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/mina/Android/Sdk/extras/m2repository/com/android/support/constraint/constraint-layout-solver/1.0.0-beta4/constraint-layout-solver-1.0.0-beta4.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.3"
+        sha1="0a9cb567dc008f570c28531720168f19148da965">
+        <dex dex="/home/mina/MacroTracker/app/build/intermediates/pre-dexed/debug/constraint-layout-solver-1.0.0-beta4_a9f3c9f690473c0c37a8c306a9c08f021ac8b97c.jar" />
+    </item>
+    <item
         is-multidex="true"
         jar="/home/mina/MacroTracker/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/25.0.1/jars/classes.jar"
         jumboMode="true"
@@ -162,6 +360,15 @@
         revision="24.0.3"
         sha1="6a1479afe9f1b3645e1cd9a87318976893472818">
         <dex dex="/home/mina/MacroTracker/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-media-compat-25.0.1_421991e52beaa02b3508e6083f42de9815fb3e07/classes.dex" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/mina/MacroTracker/app/build/intermediates/exploded-aar/com.afollestad.material-dialogs/core/0.9.1.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.3"
+        sha1="16795a75616fe3ba9df9ae4af09202145e3a26dc">
+        <dex dex="/home/mina/MacroTracker/app/build/intermediates/pre-dexed/debug/com.afollestad.material-dialogs-core-0.9.1.0_a83d2a39999ca1cef6044d5d5122e2dda95103ea.jar" />
     </item>
     <item
         is-multidex="true"
@@ -180,6 +387,15 @@
         revision="24.0.3"
         sha1="f83b00041ecfba705603fec40363416c7de69719">
         <dex dex="/home/mina/MacroTracker/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-25.0.1_5ffad6720480ab51c9df7929b9de9fe4e63f833a/classes.dex" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/mina/MacroTracker/app/build/intermediates/exploded-aar/com.github.lecho/hellocharts-library/1.5.8/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.3"
+        sha1="56c6a22c42588628903e9dda5d8f3aa1c1b4372f">
+        <dex dex="/home/mina/MacroTracker/app/build/intermediates/pre-dexed/debug/com.github.lecho-hellocharts-library-1.5.8_2f0e41249ea8eac31ec37d1faae4411f7ff8c330.jar" />
     </item>
     <item
         is-multidex="true"
@@ -207,6 +423,24 @@
         revision="24.0.3"
         sha1="3b236883e0df6002cabb01ce57d00a5b1e5de610">
         <dex dex="/home/mina/MacroTracker/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-design-25.0.1_e21a0e47beacaf998c7224b8156ff06226e7b2be/classes.dex" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/mina/MacroTracker/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/25.0.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.3"
+        sha1="bc7e99e8d0fc279a05aa91378530f467ad62d443">
+        <dex dex="/home/mina/MacroTracker/app/build/intermediates/pre-dexed/debug/com.android.support-support-core-ui-25.0.1_0498962168b11214730ce8f4160051dfcc842e72.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/mina/MacroTracker/app/build/intermediates/exploded-aar/com.android.support/support-fragment/25.0.1/jars/libs/internal_impl-25.0.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.3"
+        sha1="c0bd6ffb002a85b5e7cad29f8558d1cc59539679">
+        <dex dex="/home/mina/MacroTracker/app/build/intermediates/pre-dexed/debug/internal_impl-25.0.1_f9e8e6b85bd9cc527a88c178e3555924ef470baa.jar" />
     </item>
     <item
         is-multidex="true"

@@ -509,6 +509,7 @@ public class DatabaseConnector {
         newUser.put("workout_freq", M.getWorkout_freq());
         newUser.put("weight_unit", M.getWeight_unit());
         newUser.put("height_unit", M.getHeight_unit());
+        
 
         database.insert(Table_User, null, newUser);
         Log.i("User Inserted", "User inserted: " + M.toString());
@@ -555,6 +556,20 @@ public class DatabaseConnector {
         }
 
 
+    }
+    public boolean updateuserdata(String id , String uname, String dob, String fname, String lname, String email)
+    {
+       // database.rawQuery("Update "+Table_User+" SET  dob = '"+dob+"', fname = '"+fname+"', lname = '"+lname+"', email = '"+email+"' where user_name = '"+uname+"' ",null);
+
+        ContentValues editUser = new ContentValues();
+        editUser.put("dob",dob);
+        editUser.put("fname",fname);
+        editUser.put("lname",lname);
+        editUser.put("email",email);
+        editUser.put("user_id",id);
+        database.update(Table_User,editUser,"user_name = '"+uname+"'",null);
+        Log.i("Updated",uname);
+        return true;
     }
 
     public Cursor getUser(String username) {

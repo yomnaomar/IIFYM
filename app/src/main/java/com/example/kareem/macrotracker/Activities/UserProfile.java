@@ -39,21 +39,25 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
         email= (TextView) findViewById(R.id.EmailTV);
         edit= (Button) findViewById(R.id.EditBTN);
         edit.setOnClickListener(this);
-        Intent intent = getIntent();
-        user_name = new String();
-        user_name = intent.getStringExtra("username");
-        Log.i("Username",user_name);
+
         DB = new DatabaseConnector(getApplicationContext());
     }
 
     @Override
     public void onClick(View view) {
 
+        Intent i = new Intent(getApplicationContext(),EditProfile.class);
+        i.putExtra("username",user_name);
+        startActivity(i);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        Intent intent = getIntent();
+        user_name = new String();
+        user_name = intent.getStringExtra("username");
+        Log.i("Username",user_name);
         Cursor C = DB.getUser(user_name);
         if(C.moveToFirst()) {
             userid.setText(C.getString(0));
@@ -62,7 +66,7 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
             fname.setText(C.getString(9));
             lname.setText(C.getString(10));
             email.setText(C.getString(11));
-            Log.i("Email",C.getString(11));
+            //Log.i("Email",C.getString(11));
         }
         else
         {
