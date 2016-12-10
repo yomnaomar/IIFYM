@@ -284,7 +284,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 int     daily_position      = AllDailyMeals_Cursor.getInt(0);      //position
                 int     daily_meal_id       = AllDailyMeals_Cursor.getInt(1);      //meal_id
-                int     daily_multiplier    = AllDailyMeals_Cursor.getInt(2);      //multiplier
+                float   daily_multiplier    = AllDailyMeals_Cursor.getFloat(2);      //multiplier
                 Log.i("meal_id", daily_meal_id + "");
                 Log.i("position", daily_position + "");
                 Log.i("multiplier", daily_multiplier + "");
@@ -292,17 +292,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Meal M = My_DB.getMeal(daily_meal_id);
 
                 String M_name            = M.getMeal_name();
-                int M_carbs              = M.getCarbs()*daily_multiplier;
-                int M_protein            = M.getProtein()*daily_multiplier;
-                int M_fat                = M.getFat()*daily_multiplier;
+                int M_carbs              = Math.round(M.getCarbs()*daily_multiplier);
+                int M_protein            = Math.round(M.getProtein()*daily_multiplier);
+                int M_fat                = Math.round(M.getFat()*daily_multiplier);
                 Portion_Type M_portion   = M.getPortion();
 
                 DailyMeal DM = new DailyMeal(M_name,daily_meal_id,M_carbs,M_protein,M_fat,M_portion,daily_position,daily_multiplier);
                 My_DailyMealAdapter.add(DM);
 
-                Log.d("DailyMeal Added:", "Name: "
+                Log.i("DailyMeal Added:", "Name: "
                         + M.getMeal_name() + " " + M.getMeal_id() + " "
-                        + M_carbs + " " + M_protein + " " + M_fat + " multiplier: " + daily_multiplier);
+                        + M_carbs + " " + M_protein + " " + M_fat + " position: " + daily_position + " multiplier: " + daily_multiplier);
             }
         }
     }
@@ -347,8 +347,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void setPrefMacros()
     {
         //Prefs defaults from database
-        CarbsDefault =Carbs_Val;
-        FatDefault =Fat_Val;
+        CarbsDefault = Carbs_Val;
+        FatDefault = Fat_Val;
         ProteinDefault = Protein_Val;
 
         settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
