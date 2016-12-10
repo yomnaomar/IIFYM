@@ -525,14 +525,14 @@ public class MacroSettings extends AppCompatActivity implements View.OnFocusChan
     {
         //enable all edittext fields
         goal.setEnabled(true);
-        gender.setEnabled(true);
+        //gender.setEnabled(true);
         carbs.setEnabled(true);
         prot.setEnabled(true);
         fat.setEnabled(true);
         workoutfreq.setEnabled(true);
         weight.setEnabled(true);
         height.setEnabled(true);
-        age.setEnabled(true);
+        //age.setEnabled(true);
         isEnabled=true;
         psym1.setVisibility(View.VISIBLE);
         psym2.setVisibility(View.VISIBLE);

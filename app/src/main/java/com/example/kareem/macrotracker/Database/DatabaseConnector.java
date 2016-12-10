@@ -425,7 +425,6 @@ public class DatabaseConnector {
                 Log.i("updatePos", ""+j);
             }
         }
-
     }
 
     //TODO: IMPLEMENT LATER: ALLOW USERS TO UPDATE DAILY MEAL

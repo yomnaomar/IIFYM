@@ -304,6 +304,7 @@ public class AddQuickMealActivity extends AppCompatActivity implements View.OnCl
         Spinner_Unit.setVisibility(View.VISIBLE);
         Label_Amount.setVisibility(View.VISIBLE);
         EditText_Amount.setVisibility(View.VISIBLE);
+        EditText_Amount.setEnabled(true);
     }
 
     private void HideWeight() {

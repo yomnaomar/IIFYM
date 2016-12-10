@@ -108,6 +108,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         ArrayList_DailyMeals = new ArrayList<DailyMeal>();
         My_DailyMealAdapter = new DailyMealAdapter(this, ArrayList_DailyMeals,this);
+
         Meals_ListView = (ListView) findViewById(R.id.ListView_Meals);
         Meals_ListView.setAdapter(My_DailyMealAdapter);
         Meals_ListView.setOnItemClickListener(this);

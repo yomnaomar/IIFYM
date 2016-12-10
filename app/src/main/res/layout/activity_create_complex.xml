@@ -46,19 +46,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="21dp"
-        android:id="@+id/txt_totalcals"
+        android:id="@+id/txt_totalcarbs"
         android:layout_marginLeft="-100dp"
         android:layout_alignTop="@+id/textView21"
         android:layout_toStartOf="@+id/textView20" />
-
-    <TextView
-        android:text="Protein: ###"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/txt_totalprotein"
-        android:layout_above="@+id/cancel_btn"
-        android:layout_alignEnd="@+id/edittxt_mealname"
-        android:layout_marginRight="5dp" />
 
     <TextView
         android:text="Fat: ###"
@@ -66,7 +57,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/txt_totalfat"
         android:layout_above="@+id/cancel_btn"
-        android:layout_toEndOf="@+id/textView20" />
+        android:layout_toEndOf="@+id/textView20"
+        android:layout_alignTop="@+id/txt_totalprotein" />
 
     <Button
         android:text="Cancel"
@@ -74,7 +66,7 @@
         android:id="@+id/cancel_btn"
         android:layout_width="wrap_content"
         android:layout_marginTop="12dp"
-        android:layout_below="@+id/txt_totalcals"
+        android:layout_below="@+id/txt_totalcarbs"
         android:layout_alignParentStart="true" />
 
     <Button
@@ -230,9 +222,21 @@
 
     <Button
         android:text="Edit/Add"
-        android:id="@+id/button3"
+        android:id="@+id/btn_editadd"
         android:layout_marginTop="180dp"
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_marginLeft="240dp" />
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="240dp"
+        android:layout_marginRight="10dp"
+        android:textSize="12sp" />
+
+    <TextView
+        android:text="Protein: ###"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txt_totalprotein"
+        android:layout_marginRight="20dp"
+        android:layout_alignBaseline="@+id/txt_totalcarbs"
+        android:layout_alignBottom="@+id/txt_totalcarbs"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>

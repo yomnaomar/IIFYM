@@ -44,6 +44,7 @@ public class EditProfile extends AppCompatActivity implements View.OnClickListen
         update = (Button) findViewById(R.id.UpdateBTN);
         user_name = "";
         user_name = settings.getString("user_name",null);
+        userid.setEnabled(false);
 
 //        Intent i = getIntent();
 //        user_name = i.getStringExtra("username");

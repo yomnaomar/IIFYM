@@ -87,6 +87,7 @@ public class DailyMealAdapter extends ArrayAdapter<DailyMeal>{
                     My_DB.deleteMealbyID(meal_id);
                 }
                 //TODO: update position after deleting
+                Log.d("beforedeleteposition",""+position+" "+DM.getPosition());
                 if(position<DM.getPosition())
                 {
                     Log.i("deleteposition",""+position+"<"+DM.getPosition());
