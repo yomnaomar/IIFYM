@@ -15,10 +15,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "MacroTrackerDB";
 
-    private static final String Table_Meal          = "Meals";
+    private static final String Table_Meal          = "Meal";
     private static final String Table_Weight        = "Weight";
     private static final String Table_Serving       = "Serving";
-    private static final String Table_Daily_Meals   = "Daily_Meals";
+    private static final String Table_Daily_Meals   = "Daily_Meal";
     private static final String Table_Composed_Of   = "Composed_Of";
     private static final String Table_User          = "User";
 
@@ -68,30 +68,30 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "weight_amount  INTEGER, " +
                 "weight_unit    INTEGER, " +
 
-                "CONSTRAINT meal_id_fk FOREIGN KEY(meal_id) REFERENCES Meal(meal_id) ON DELETE CASCADE);";
+                "CONSTRAINT meal_id_fk FOREIGN KEY(meal_id) REFERENCES " + Table_Meal + " (meal_id) ON DELETE CASCADE);";
         //ON UPDATE is not needed because meal_id will never be updated, it is hidden from the user
 
         String createTable_Serving = "CREATE TABLE " + Table_Serving + " " +
                 "(meal_id       INTEGER PRIMARY KEY, " +
                 "serving_number INTEGER, " +
 
-                "CONSTRAINT meal_id_fk FOREIGN KEY(meal_id) REFERENCES Meal(meal_id) ON DELETE CASCADE);";
+                "CONSTRAINT meal_id_fk FOREIGN KEY(meal_id) REFERENCES " + Table_Meal + " (meal_id) ON DELETE CASCADE);";
         //ON UPDATE is not needed because meal_id will never be updated, it is hidden from the user
 
         String createTable_Daily_Meals = "CREATE TABLE " + Table_Daily_Meals + " " +
                 "(position              INTEGER PRIMARY KEY autoincrement, " +
                 "meal_id                INTEGER, " +
-                "multiplier             INTEGER, " +
+                "multiplier             REAL, " +
 
-                "CONSTRAINT meal_id_fk FOREIGN KEY(meal_id) REFERENCES Meal(meal_id) ON DELETE CASCADE);";
+                "CONSTRAINT meal_id_fk FOREIGN KEY(meal_id) REFERENCES " + Table_Meal + " (meal_id) ON DELETE CASCADE);";
 
         String createTable_Composed_Of = "CREATE TABLE " + Table_Composed_Of + " " +
                 "(meal_id       INTEGER, " +
                 "complex_id     INTEGER, " +
 
                 "CONSTRAINT complex_id_pk PRIMARY KEY(meal_id, complex_id), " +
-                "CONSTRAINT meal_id_fk FOREIGN KEY(meal_id) REFERENCES Meal(meal_id), " +
-                "CONSTRAINT complex_id_fk FOREIGN KEY(complex_id) REFERENCES Meal(meal_id) ON DELETE CASCADE);";
+                "CONSTRAINT meal_id_fk FOREIGN KEY(meal_id) REFERENCES " + Table_Meal + " (meal_id), " +
+                "CONSTRAINT complex_id_fk FOREIGN KEY(complex_id) REFERENCES " + Table_Meal + "(meal_id) ON DELETE CASCADE);";
         //ON UPDATE is not needed because meal_id will never be updated, it is hidden from the user
 
         String createTable_User = "CREATE TABLE " + Table_User + " " +

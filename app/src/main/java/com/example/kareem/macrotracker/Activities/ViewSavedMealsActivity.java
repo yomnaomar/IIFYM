@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.kareem.macrotracker.Custom_Objects.Meal;
@@ -16,7 +17,7 @@ import com.example.kareem.macrotracker.ViewComponents.SavedMealAdapter;
 
 import java.util.ArrayList;
 
-public class ViewSavedMealsActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
+public class ViewSavedMealsActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, View.OnClickListener {
 
     private ArrayList<Meal> ArrayList_SavedMeals;
     private SavedMealAdapter My_SavedMealAdapter;
@@ -26,10 +27,14 @@ public class ViewSavedMealsActivity extends AppCompatActivity implements Adapter
     Portion_Type portion = null;
     boolean is_daily = false;
 
+    Button addmeal;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_saved_meals);
+
+        My_DB = new DatabaseConnector(getApplicationContext());
+
 
         ArrayList_SavedMeals = new ArrayList<Meal>();
         My_SavedMealAdapter = new SavedMealAdapter(this, ArrayList_SavedMeals);
@@ -37,7 +42,10 @@ public class ViewSavedMealsActivity extends AppCompatActivity implements Adapter
         Meals_ListView.setAdapter(My_SavedMealAdapter);
         Meals_ListView.setOnItemClickListener(this);
 
-        My_DB = new DatabaseConnector(getApplicationContext());
+
+        addmeal=(Button)findViewById(R.id.btn_addnewmeal);
+        addmeal.setOnClickListener(this);
+
     }
 
     @Override
@@ -84,5 +92,15 @@ public class ViewSavedMealsActivity extends AppCompatActivity implements Adapter
     protected void onResume() {
         super.onResume();
         UpdateArrayList();
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch(view.getId())
+        {
+            case R.id.btn_addnewmeal:
+                startActivity(new Intent(this,CreateComplex.class));
+                break;
+        }
     }
 }

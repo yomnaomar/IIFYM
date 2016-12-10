@@ -19,26 +19,26 @@ import java.util.ArrayList;
 
 public class SelectSavedMealActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
+    //private EditText EditText_MealSearch;
     private ArrayList<Meal> ArrayList_SavedMeals;
     private SavedMealAdapter My_SavedMealAdapter;
     private ListView Meals_ListView;
     private DatabaseConnector My_DB;
 
     Portion_Type portion = null;
-    boolean is_daily = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_saved_meal);
 
+        My_DB = new DatabaseConnector(getApplicationContext());
+
         ArrayList_SavedMeals = new ArrayList<Meal>();
         My_SavedMealAdapter = new SavedMealAdapter(this, ArrayList_SavedMeals);
         Meals_ListView = (ListView) findViewById(R.id.ListView_AddSavedMeals);
         Meals_ListView.setAdapter(My_SavedMealAdapter);
         Meals_ListView.setOnItemClickListener(this);
-
-        My_DB = new DatabaseConnector(getApplicationContext());
     }
 
     //TODO IMPLEMENT THIS FUNCTION CORRECTLY
@@ -49,7 +49,7 @@ public class SelectSavedMealActivity extends AppCompatActivity implements Adapte
 
         Context context = getApplicationContext();
         Intent intent = new Intent();
-        intent.setClass(context, MainActivity.class);
+        intent.setClass(context, AddSavedMealActivity.class);
         intent.putExtra("meal_id",meal_id);
         startActivity(intent);
     }

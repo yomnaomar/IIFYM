@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.CoordinatorLayout;
@@ -11,9 +12,12 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
@@ -29,6 +33,11 @@ import com.example.kareem.macrotracker.ViewComponents.DailyMealAdapter;
 import com.example.kareem.macrotracker.ViewComponents.OnListItemDeletedListener;
 
 import java.util.ArrayList;
+
+import tourguide.tourguide.ChainTourGuide;
+import tourguide.tourguide.Overlay;
+import tourguide.tourguide.Sequence;
+import tourguide.tourguide.ToolTip;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener, OnListItemDeletedListener {
 
@@ -67,6 +76,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     int userBMR;
     double userCalories;
 
+    Intent intent;
+
+    private Animation mEnterAnimation, mExitAnimation;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,8 +87,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        coordinatorLayout = (CoordinatorLayout) findViewById(R.id.main_content);
+        My_DB = new DatabaseConnector(getApplicationContext());
 
+        coordinatorLayout = (CoordinatorLayout) findViewById(R.id.main_content);
+        settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         //Declaring
         Text_CarbsGoal = (TextView) findViewById(R.id.Text_CarbsGoal);
         Text_ProteinGoal = (TextView) findViewById(R.id.Text_ProteinGoal);
@@ -92,26 +107,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button_AddQuickMeal.setOnClickListener(this);
 
         ArrayList_DailyMeals = new ArrayList<DailyMeal>();
-        My_DailyMealAdapter = new DailyMealAdapter(this, ArrayList_DailyMeals);
+        My_DailyMealAdapter = new DailyMealAdapter(this, ArrayList_DailyMeals,this);
         Meals_ListView = (ListView) findViewById(R.id.ListView_Meals);
         Meals_ListView.setAdapter(My_DailyMealAdapter);
         Meals_ListView.setOnItemClickListener(this);
 
-        My_DB = new DatabaseConnector(getApplicationContext());
+
         parentLayout = findViewById(R.id.root_view);
 
         //TODO:(Abdulwahab) get current currentUser here
-        Intent intent = getIntent();
+        intent = getIntent();
         isLogged = intent.getBooleanExtra("logged",false);//checks if user just logged in
-        getActiveUser(isLogged,intent); //get current user
-        userBMR = getBMR(); // BMR fetched here
-        setPrefMacros(); // puts preferred macro in shared prefs
 
-        //TODO KILL DUMMIES
-//        User DummyBoy = new User();
-//        //DummyBoy = My_DB.getUser_ReturnsUser("DummyBoy");
-//        DummyBoy = My_DB.getUser_ReturnsUser("DebuggerDummy");
-//        Toast.makeText(this,"Welcome "+ DummyBoy.getUser_name() +" ID: "+DummyBoy.getUser_id(),Toast.LENGTH_SHORT).show(); //TODO: call only once
+
+
+
+          /* setup enter and exit animation */
+        mEnterAnimation = new AlphaAnimation(0f, 1f);
+        mEnterAnimation.setDuration(600);
+        mEnterAnimation.setFillAfter(true);
+
+        mExitAnimation = new AlphaAnimation(1f, 0f);
+        mExitAnimation.setDuration(600);
+        mExitAnimation.setFillAfter(true);
+
+        showtipOverlay();//UI guide
     }
 
     @Override
@@ -189,6 +209,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onResume() {
         super.onResume();
 
+        getActiveUser(isLogged,intent); //get current user
+        userBMR = getBMR(); // BMR fetched here
+        setPrefMacros(); // puts preferred macro in shared prefs
+
         UpdateArrayList();
         UpdateMacros();
     }
@@ -249,17 +273,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     //Updates My_MealAdapter
     //TODO: TEST AFTER IMPLEMENTING DATABASE
-    private void UpdateArrayList() {
+    public void UpdateArrayList() {
         My_DailyMealAdapter.clear();
         Cursor AllDailyMeals_Cursor = My_DB.getAllDailyMeals();
         int count = AllDailyMeals_Cursor.getCount();
+        Log.i("Count","Count = " + count);
         if (count > 0) {
             for (int i = 0; i < count; i++) {
                 AllDailyMeals_Cursor.moveToNext();
 
+                int     daily_position      = AllDailyMeals_Cursor.getInt(0);      //position
                 int     daily_meal_id       = AllDailyMeals_Cursor.getInt(1);      //meal_id
-                int     daily_position      = AllDailyMeals_Cursor.getInt(2);      //position
-                int     daily_multiplier    = AllDailyMeals_Cursor.getInt(3);      //multiplier
+                int     daily_multiplier    = AllDailyMeals_Cursor.getInt(2);      //multiplier
 
                 Meal M = My_DB.getMeal(daily_meal_id);
 
@@ -284,17 +309,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         UpdateMacros();
     }
 
+    public void removeMealHandler(View v) {
+//        DailyMeal itemToRemove = (DailyMeal)v.getTag();
+//        My_DailyMealAdapter.remove(itemToRemove);
+//        UpdateArrayList();
+//        UpdateMacros();
+    }
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        onItemDeleted();
+    public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+        //onItemDeleted();
+        //Meals_ListView.removeViewAt(position);
+        //My_DailyMealAdapter.notifyDataSetChanged();
     }
 
     private void getActiveUser(boolean logged, Intent intent)
     {
+        user_name = intent.getStringExtra("user_name");
+        user_id = intent.getIntExtra("user_id",My_DB.fetchUserID(user_name,getApplicationContext()));
         if(logged)
         {
-            user_name = intent.getStringExtra("user_name");
-            user_id = intent.getIntExtra("user_id",My_DB.fetchUserID(user_name,getApplicationContext()));
             Snackbar snackbar = Snackbar
                     .make(parentLayout, "Welcome "+ user_name +" ID: "+ user_id, Snackbar.LENGTH_SHORT);
             snackbar.show();
@@ -410,6 +443,58 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         userCalories = Caloric_Intake;
         return (int) BMR;
+    }
+
+    //UI tooltips will be shown to guide user around  - launched only once
+    private void showtipOverlay()
+    {
+        if(settings.getBoolean("isnewUser",false))
+        {
+            ChainTourGuide tourGuide1 = ChainTourGuide.init(this)
+                    .setToolTip(new ToolTip()
+                            .setTitle("Quick Meals")
+                            .setDescription("Use this to quickly add a meal to your daily list")
+                            .setGravity(Gravity.TOP)
+                    )
+                    .setOverlay(new Overlay()
+                            .setBackgroundColor(Color.parseColor("#EE2c3e50"))
+                            .setEnterAnimation(mEnterAnimation)
+                            .setExitAnimation(mExitAnimation)
+                    )
+                    // note that there is no Overlay here, so the default one will be used
+                    .playLater(Button_AddQuickMeal);
+
+            ChainTourGuide tourGuide2 = ChainTourGuide.init(this)
+                    .setToolTip(new ToolTip()
+                            .setTitle("Saved Meals")
+                            .setDescription("Use this to select a meal from your list of saved meals")
+                            .setGravity(Gravity.TOP | Gravity.LEFT)
+                            .setBackgroundColor(Color.parseColor("#c0392b"))
+                    )
+                    .setOverlay(new Overlay()
+                            .setBackgroundColor(Color.parseColor("#EE2c3e50"))
+                            .setEnterAnimation(mEnterAnimation)
+                            .setExitAnimation(mExitAnimation)
+                    )
+                    .playLater(Button_AddSavedMeal);
+
+            Sequence sequence = new Sequence.SequenceBuilder()
+                    .add(tourGuide1, tourGuide2)
+                    .setDefaultOverlay(new Overlay()
+                            .setEnterAnimation(mEnterAnimation)
+                            .setExitAnimation(mExitAnimation)
+                    )
+                    .setDefaultPointer(null)
+                    .setContinueMethod(Sequence.ContinueMethod.Overlay)
+                    .build();
+
+
+            ChainTourGuide.init(this).playInSequence(sequence);
+            SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+            SharedPreferences.Editor editor = settings.edit();
+            editor.putBoolean("isnewUser", false); // here string is the value you want to save
+            editor.commit();
+        }
     }
 
 }

@@ -18,6 +18,12 @@ android {
         }
     }
 }
+repositories {
+    mavenCentral()
+    maven(){
+        url "https://oss.sonatype.org/content/repositories/snapshots"
+    }
+}
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
@@ -29,4 +35,7 @@ dependencies {
     compile 'com.github.lecho:hellocharts-library:1.5.8@aar'
     compile 'com.afollestad.material-dialogs:core:0.9.1.0'
     compile 'com.androidadvance:topsnackbar:1.1.1'
+    compile ('com.github.worker8:tourguide:1.0.17-SNAPSHOT@aar'){
+        transitive=true
+    }
 }

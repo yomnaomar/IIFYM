@@ -1,7 +1,9 @@
 package com.example.kareem.macrotracker.Activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -187,11 +189,6 @@ public class Login extends AppCompatActivity implements myFragEventListener {
         //get all currentUser details and send to DB (called when currentUser sign up is finished)
 
         try {
-            //TODO KILL DUMMY
-            /*User DummyBoy = new User();
-            DummyBoy.setUser_id(123);
-            DummyBoy.setUser_name("DummyTest");
-            My_DB.insertUser(DummyBoy);*/
             My_DB.insertUser(newUser);
         } catch (Exception e) {
             Toast.makeText(getApplicationContext(),"DB Error Occurred" +e.getMessage(),Toast.LENGTH_LONG).show();
@@ -212,6 +209,7 @@ public class Login extends AppCompatActivity implements myFragEventListener {
             intent.putExtra("logged",true);
             intent.putExtra("user_id", My_DB.fetchUserID(username,getApplicationContext())); //get user_id
             startActivity(intent);
+            finish();
         }
         else
         {
@@ -265,6 +263,11 @@ public class Login extends AppCompatActivity implements myFragEventListener {
     public void openHome() //final method before opening main activity
     {
         //insertUser();
+        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putBoolean("isnewUser", true); // here string is the value you want to save
+        editor.commit();
+
 
         Log.d("LOGIN","Signup Complete: User: "+ newUser.toString());
         Intent intent = new Intent(this, MainActivity.class);

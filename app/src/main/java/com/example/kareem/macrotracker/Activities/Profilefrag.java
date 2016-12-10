@@ -1,7 +1,10 @@
 package com.example.kareem.macrotracker.Activities;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -10,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -21,6 +25,7 @@ import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Locale;
 
 
 /**
@@ -31,7 +36,7 @@ import java.util.Calendar;
  * Use the {@link Profilefrag#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Profilefrag extends Fragment implements View.OnClickListener {
+public class Profilefrag extends Fragment implements View.OnClickListener, View.OnFocusChangeListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -54,6 +59,8 @@ public class Profilefrag extends Fragment implements View.OnClickListener {
     Spinner weight_unit_spinner, height_unit_spinner;
     int age;
 
+    private DatePickerDialog datePickerDialog;
+    SimpleDateFormat dateFormat;
 
 
     //GUI vars ----------------------------------
@@ -89,6 +96,7 @@ public class Profilefrag extends Fragment implements View.OnClickListener {
         }
     }
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -103,6 +111,10 @@ public class Profilefrag extends Fragment implements View.OnClickListener {
         email = (EditText)myView.findViewById(R.id.emailfield);
         btn1 = (RadioButton)myView.findViewById(R.id.radioButton);
         btn2 = (RadioButton)myView.findViewById(R.id.radioButton2);
+
+        dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        dob.setOnFocusChangeListener(this);
+        setDateTimeField();
 
 
         weight_unit_spinner = (Spinner)myView.findViewById(R.id.unit_weight);
@@ -138,6 +150,21 @@ public class Profilefrag extends Fragment implements View.OnClickListener {
 
 
         return myView;
+    }
+    private void setDateTimeField() {
+
+        Calendar newCalendar = Calendar.getInstance();
+        datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+
+            @TargetApi(Build.VERSION_CODES.N)
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                Calendar newDate = Calendar.getInstance();
+                newDate.set(year, monthOfYear, dayOfMonth);
+                dob.setText(dateFormat.format(newDate.getTime()));
+            }
+
+        }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -202,6 +229,23 @@ public class Profilefrag extends Fragment implements View.OnClickListener {
                 break;
         }
 
+    }
+
+    @Override
+    public void onFocusChange(View view, boolean b) {
+        switch(view.getId())
+        {
+            case R.id.dobfield:
+
+                if(b)
+                {
+                    datePickerDialog.show();
+                    dob.clearFocus();
+                }
+
+                break;
+
+        }
     }
 
     /**

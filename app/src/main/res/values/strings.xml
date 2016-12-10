@@ -105,5 +105,6 @@
         <item>High (6-7 days/week)</item>
         <item>Very High (physical job or 7+ times/week)</item>
     </string-array>
+    <string name="title_activity_enter_saved_meal_amount">EnterSavedMealAmount</string>
 
 </resources>

@@ -23,10 +23,10 @@ import com.example.kareem.macrotracker.Custom_Objects.Weight;
 
 public class DatabaseConnector {
 
-    private static final String Table_Meal          = "Meals";
+    private static final String Table_Meal          = "Meal";
     private static final String Table_Weight        = "Weight";
     private static final String Table_Serving       = "Serving";
-    private static final String Table_Daily_Meals   = "Daily_Meals";
+    private static final String Table_Daily_Meals   = "Daily_Meal";
     private static final String Table_Composed_Of   = "Composed_Of";
     private static final String Table_User          = "User";
 
@@ -152,6 +152,16 @@ public class DatabaseConnector {
             return false;
         }
     }
+    public boolean deleteMealbyID(int mealid) {
+        try {
+            database.delete(Table_Meal, "meal_id = '" + mealid + "'", null);
+            Log.i("One Meal Deleted:", "Meal with ID: " + mealid + " deleted");
+            return true;
+        } catch (SQLiteException E) {
+            Log.i("ERROR: ", E.getMessage());
+            return false;
+        }
+    }
 
     //TODO REDESIGN THIS NONSENSE
     public boolean deleteAllQuickMeals() {
@@ -176,7 +186,7 @@ public class DatabaseConnector {
             int protein             = C.getInt(4);      //protein
             int fat                 = C.getInt(5);      //fat
             portion = portion.values()[C.getInt(6)];    //portion
-            int user_id             = C.getInt(8);      //user_id
+            int user_id             = C.getInt(7);      //user_id
 
             Meal M = new Meal(meal_id, meal_name, carbs, protein, fat, portion, user_id);
             Log.i("Meal Retrieved", "ID: " + meal_id + " Retrieved");
@@ -198,11 +208,23 @@ public class DatabaseConnector {
         int protein             = C.getInt(4);      //protein
         int fat                 = C.getInt(5);      //fat
         portion = portion.values()[C.getInt(6)];    //portion
-        int user_id             = C.getInt(8);      //user_id
+        int user_id             = C.getInt(7);      //user_id
 
         Meal M = new Meal(meal_id, meal_name, carbs, protein, fat, portion, user_id);
         Log.i("Meal Retrieved", "ID: " + meal_id + " Retrieved");
         return M;
+    }
+
+    public boolean isQuickMeal(int ID){
+        Cursor C = database.rawQuery("SELECT is_quick FROM " + Table_Meal + " WHERE meal_id = '" + ID + "'", null);
+        C.moveToFirst();
+        int is_quick = C.getInt(0);
+        if (is_quick == 0){
+            return false;
+        }
+        else {
+            return true;
+        }
     }
 
     //Return a Cursor containing all entries
@@ -367,15 +389,17 @@ public class DatabaseConnector {
 
     //DAILY_MEALS TABLE FUNCTIONS-------------------------------------------------------------------------
 
-    public boolean insertDailyMeal(int meal_id, int multiplier) {
+    public boolean insertDailyMeal(int meal_id, float multiplier) {
         ContentValues newDailyMeal = new ContentValues();
         newDailyMeal.put("meal_id", meal_id);
         newDailyMeal.put("multiplier", multiplier);
 
         database.insert(Table_Daily_Meals, null, newDailyMeal);
-        Log.i("newServing inserted:",
+
+        Log.i("DailyMeal inserted:",
                 "meal_id: " + meal_id + " " +
                 "multiplier: " + multiplier);
+
         return true;
     }
 
@@ -405,16 +429,16 @@ public class DatabaseConnector {
 
     //Return a Cursor containing all Daily Meals
     public Cursor getAllDailyMeals() {
-       /* openReadableDB();*/
-        Cursor C = database.rawQuery("SELECT * FROM " + Table_Daily_Meals + " ORDER BY position ASC", null);
+        Cursor C = database.rawQuery("SELECT * FROM " + Table_Daily_Meals, null);
+        Log.i("Daily Meals Count", C.getCount() + "");
         Log.i("Meals Retrieved", "All Daily Meals Retrieved");
         return C;
     }
 
-    public int getMultiplier(int meal_id, int position) {
+    public float getMultiplier(int meal_id, int position) {
         Cursor C = database.rawQuery("SELECT multiplier FROM " + Table_Daily_Meals +
                 " WHERE meal_id = " + meal_id + " AND position = " + position, null);
-        int multiplier = C.getInt(2);
+        float multiplier = C.getFloat(2);
         Log.i("Multiplier Retrieved", "Retrieved multiplier: " + multiplier +
                 " of Daily Meal with meal_id: " + meal_id + " and position: " + position + " ");
         return multiplier;
@@ -497,6 +521,7 @@ public class DatabaseConnector {
         newUser.put("user_name", M.getUser_name());
         newUser.put("fname", M.getFname());
         newUser.put("lname", M.getLname());
+        newUser.put("email",M.getEmail());
         newUser.put("dob", M.getDob());
         newUser.put("age", M.getAge());
         newUser.put("weight", M.getWeight());
@@ -535,6 +560,7 @@ public class DatabaseConnector {
             editUser.put("user_name", user.getUser_name());
             editUser.put("fname", user.getFname());
             editUser.put("lname", user.getLname());
+            editUser.put("email",user.getEmail());
             editUser.put("dob", user.getDob());
             editUser.put("age", user.getAge());
             editUser.put("weight", user.getWeight());

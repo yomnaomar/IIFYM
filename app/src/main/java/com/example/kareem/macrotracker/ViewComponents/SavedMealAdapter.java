@@ -19,9 +19,8 @@ import java.util.ArrayList;
 /**
  * Created by Kareem on 9/13/2016.
  */
-public class SavedMealAdapter extends ArrayAdapter<Meal> {
+public class SavedMealAdapter extends ArrayAdapter<Meal>{
     private DatabaseConnector My_DB;
-    private OnListItemDeletedListener mListener;
 
     int serving_number;
     Weight weight;
