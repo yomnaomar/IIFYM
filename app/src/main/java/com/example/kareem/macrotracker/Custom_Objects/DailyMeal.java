@@ -14,9 +14,9 @@ public class DailyMeal{
     Portion_Type    portion_type;       //weight or serving
 
     int position;
-    int multiplier;
+    float multiplier;
 
-    public DailyMeal(String meal_name, int meal_id, int carbs, int protein, int fat, Portion_Type portion_type, int position, int multiplier) {
+    public DailyMeal(String meal_name, int meal_id, int carbs, int protein, int fat, Portion_Type portion_type, int position, float multiplier) {
         this.meal_name = meal_name;
         this.meal_id = meal_id;
         this.carbs = carbs;
@@ -83,11 +83,11 @@ public class DailyMeal{
         this.position = position;
     }
 
-    public int getMultiplier() {
+    public float getMultiplier() {
         return multiplier;
     }
 
-    public void setMultiplier(int multiplier) {
+    public void setMultiplier(float multiplier) {
         this.multiplier = multiplier;
     }
 }

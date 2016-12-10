@@ -1,26 +1,22 @@
 package com.example.kareem.macrotracker.Activities;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.annotation.IntegerRes;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
-import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.BounceInterpolator;
 import android.view.animation.TranslateAnimation;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.androidadvance.topsnackbar.TSnackbar;
@@ -36,10 +32,8 @@ import lecho.lib.hellocharts.model.PieChartData;
 import lecho.lib.hellocharts.model.SliceValue;
 import lecho.lib.hellocharts.util.ChartUtils;
 import lecho.lib.hellocharts.view.PieChartView;
-import tourguide.tourguide.ChainTourGuide;
 import tourguide.tourguide.Overlay;
 import tourguide.tourguide.Pointer;
-import tourguide.tourguide.Sequence;
 import tourguide.tourguide.ToolTip;
 import tourguide.tourguide.TourGuide;
 
@@ -523,7 +517,7 @@ public class MacroSettings extends AppCompatActivity implements View.OnFocusChan
                 height.setText(String.valueOf(currentUser.getHeight())+" cm");
                 break;
         }
-        calories.setText("Cals: " + String.valueOf(settings.getInt("cals",-1)));
+        calories.setText("Calories: " + String.valueOf(settings.getInt("cals",-1)));
         bmr.setText("BMR: " +String.valueOf(settings.getInt("BMR",-1)));
     }
 
@@ -604,7 +598,7 @@ public class MacroSettings extends AppCompatActivity implements View.OnFocusChan
             carbs.setText(""+Carbs_Val);
             prot.setText(""+Protein_Val);
             fat.setText(""+Fat_Val);
-            calories.setText("Cals: "+(int)userCalories);
+            calories.setText("Calories: "+(int)userCalories);
             generateData(String.valueOf(currentUser.getPercent_carbs()), String.valueOf(currentUser.getPercent_protein()), String.valueOf(currentUser.getPercent_fat()));
 
             carbs.setError(null);

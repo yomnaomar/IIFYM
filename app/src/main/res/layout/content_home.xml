@@ -43,7 +43,7 @@
                     android:text="C"
                     android:id="@+id/Label_Carbs"
                     android:textStyle="bold"
-                    android:textColor="#f9e01e"
+                    android:textColor="@color/DarkOrange"
                     android:layout_weight="1"
                     android:layout_column="1"
                     android:layout_marginLeft="20dp" />
@@ -135,7 +135,7 @@
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:id="@+id/Text_CarbsLeft"
                     android:text="100"
-                    android:textColor="#f9e01e"
+                    android:textColor="@color/DarkOrange"
                     android:layout_weight="1"
                     android:layout_column="1"
                     android:layout_marginLeft="20dp" />

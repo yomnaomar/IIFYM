@@ -79,7 +79,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         //ON UPDATE is not needed because meal_id will never be updated, it is hidden from the user
 
         String createTable_Daily_Meals = "CREATE TABLE " + Table_Daily_Meals + " " +
-                "(position              INTEGER PRIMARY KEY autoincrement, " +
+                "(position              INTEGER PRIMARY KEY, " +
                 "meal_id                INTEGER, " +
                 "multiplier             REAL, " +
 

@@ -390,16 +390,19 @@ public class DatabaseConnector {
     //DAILY_MEALS TABLE FUNCTIONS-------------------------------------------------------------------------
 
     public boolean insertDailyMeal(int meal_id, float multiplier) {
+        Cursor C = this.getAllDailyMeals();
+        int position = C.getCount();
+
         ContentValues newDailyMeal = new ContentValues();
+        newDailyMeal.put("position", position);
         newDailyMeal.put("meal_id", meal_id);
         newDailyMeal.put("multiplier", multiplier);
 
         database.insert(Table_Daily_Meals, null, newDailyMeal);
-
         Log.i("DailyMeal inserted:",
+                "position: " + position + " " +
                 "meal_id: " + meal_id + " " +
                 "multiplier: " + multiplier);
-
         return true;
     }
 
@@ -435,13 +438,18 @@ public class DatabaseConnector {
         return C;
     }
 
-    public float getMultiplier(int meal_id, int position) {
+    //TODO PERFORM CORRECT ERROR CHECKING
+    public float getMultiplier(int position, int meal_id) {
         Cursor C = database.rawQuery("SELECT multiplier FROM " + Table_Daily_Meals +
-                " WHERE meal_id = " + meal_id + " AND position = " + position, null);
-        float multiplier = C.getFloat(2);
-        Log.i("Multiplier Retrieved", "Retrieved multiplier: " + multiplier +
-                " of Daily Meal with meal_id: " + meal_id + " and position: " + position + " ");
-        return multiplier;
+                " WHERE meal_id = " + meal_id + " AND position = " + position, null); //position = position + 1 because dailymealadapater positions start at 0, where as DB positions start at 1
+        if (C.moveToFirst()) {
+            float multiplier = C.getFloat(0);
+            Log.i("Multiplier Retrieved", "Retrieved multiplier: " + multiplier +
+                    " of Daily Meal with meal_id: " + meal_id + " and position: " + position + " ");
+            return multiplier;
+        }
+        Log.i("getMultiplier", "Empty Cursor, retrieved default multiplier = 1");
+        return 1;
     }
 
     //COMPOSED_OF TABLE FUNCTIONS-------------------------------------------------------------------------

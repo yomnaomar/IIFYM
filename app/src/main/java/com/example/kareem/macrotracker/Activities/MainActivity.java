@@ -285,6 +285,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 int     daily_position      = AllDailyMeals_Cursor.getInt(0);      //position
                 int     daily_meal_id       = AllDailyMeals_Cursor.getInt(1);      //meal_id
                 int     daily_multiplier    = AllDailyMeals_Cursor.getInt(2);      //multiplier
+                Log.i("meal_id", daily_meal_id + "");
+                Log.i("position", daily_position + "");
+                Log.i("multiplier", daily_multiplier + "");
 
                 Meal M = My_DB.getMeal(daily_meal_id);
 

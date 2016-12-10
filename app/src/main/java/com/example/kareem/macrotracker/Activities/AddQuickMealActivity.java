@@ -36,8 +36,6 @@ public class AddQuickMealActivity extends AppCompatActivity implements View.OnCl
     private CheckBox CheckBox_SaveMeal;
     private Button Button_Enter, Button_Cancel;
 
-    private View MyView;
-
     private DatabaseConnector My_DB;
 
     private int Weight_Unit_Selected = 0;
@@ -174,10 +172,6 @@ public class AddQuickMealActivity extends AppCompatActivity implements View.OnCl
             if(My_DB.insertDailyMeal(NewMeal_WithID.getMeal_id(),1.0f)) { //Insert new daily meal with multiplier = 1
                 //TODO perform error checking
             }
-//            Context context = getApplicationContext();
-//            Intent intent = new Intent();
-//            intent.setClass(context, MainActivity.class);
-//            startActivity(intent);
             finish();
         } else {
             Toast.makeText(this, "Meal with the same name already exists", Toast.LENGTH_SHORT).show();

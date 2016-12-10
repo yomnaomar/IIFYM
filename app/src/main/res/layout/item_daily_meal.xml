@@ -18,14 +18,14 @@
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:text="-"
+                android:text="x"
                 android:id="@+id/Button_DeleteMeal"
-                android:background="#f40800"
+                android:background="@drawable/delete_button_daily_meal_activity"
                 android:clickable="true"
                 android:onClick="removeMealHandler"
                 android:tag="paramValue2"
                 android:textStyle="bold"
-                android:textSize="20dp" />
+                android:textSize="14sp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -62,7 +62,7 @@
                 android:text="Carbs"
                 android:id="@+id/Text_Carbs"
                 android:layout_weight="1"
-                android:textColor="#f9e01e" />
+                android:textColor="@color/DarkOrange" />
 
             <TextView
                 android:layout_width="wrap_content"

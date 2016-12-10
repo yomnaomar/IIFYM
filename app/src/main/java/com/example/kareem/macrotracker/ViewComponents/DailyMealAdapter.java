@@ -1,6 +1,7 @@
 package com.example.kareem.macrotracker.ViewComponents;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,10 +23,6 @@ import java.util.ArrayList;
 public class DailyMealAdapter extends ArrayAdapter<DailyMeal>{
     private DatabaseConnector My_DB;
 
-    int serving_number;
-    Weight weight;
-    float multiplier;
-    int pos;
     DailyMeal DM;
     OnListItemDeletedListener listener;
 
@@ -35,15 +32,16 @@ public class DailyMealAdapter extends ArrayAdapter<DailyMeal>{
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         My_DB = new DatabaseConnector(getContext());
         // Get the data item for this position
-        pos = position;
         DM = getItem(position);
 
         //TODO RE-EVALUATE BELOW
         final int meal_id = DM.getMeal_id();
-        multiplier = DM.getMultiplier();
+        float multiplier = DM.getMultiplier();
+        Log.i("dailymeal adapter","position: " + position + " meal id: " + meal_id);
+        Log.i("dailymeal adapter","multiplier: " + multiplier + " meal id: " + meal_id);
 
         // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
@@ -59,22 +57,22 @@ public class DailyMealAdapter extends ArrayAdapter<DailyMeal>{
         //TODO IMPLEMENT MULTIPLER
         // Populate the data into the template view using the data object
         name.setText(DM.getMeal_name());
-        carbs.setText(String.valueOf(DM.getCarbs()) + " c");
-        protein.setText(String.valueOf(DM.getProtein()) + " p");
-        fat.setText(String.valueOf(DM.getFat()) + " f");//suck
+        carbs.setText(String.valueOf(DM.getCarbs() + " c "));
+        protein.setText(String.valueOf(DM.getProtein() + " p "));
+        fat.setText(String.valueOf(DM.getFat() + " f "));
 
         if (DM.getPortion_type() == Portion_Type.Serving) {
-            serving_number = My_DB.getServing(meal_id);
-            int new_serving_number = Math.round(serving_number*multiplier);
-            if (new_serving_number == 1) {
-                portion.setText(new_serving_number + " Serving");
+            int serving_number = My_DB.getServing(meal_id);
+            int serving_post_multiplication = Math.round(serving_number*multiplier);
+            if (serving_post_multiplication == 1) {
+                portion.setText(serving_post_multiplication + " Serving");
             } else {
-                portion.setText(new_serving_number + " Servings");
+                portion.setText(serving_post_multiplication + " Servings");
             }
         } else if (DM.getPortion_type() == Portion_Type.Weight) {
-            weight = My_DB.getWeight(meal_id);
-            int new_weight = Math.round(weight.getWeight_amount()*multiplier);
-            weight.setWeight_amount(new_weight);
+            Weight weight = My_DB.getWeight(meal_id);
+            int weight_post_multiplication = Math.round(weight.getWeight_amount()*multiplier);
+            weight.setWeight_amount(weight_post_multiplication);
             portion.setText(weight.getWeight_amount() + " " + weight.getWeight_unit().Abbreviate());
         }
 
@@ -82,7 +80,7 @@ public class DailyMealAdapter extends ArrayAdapter<DailyMeal>{
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DailyMealAdapter.this.remove(getItem(pos));
+                DailyMealAdapter.this.remove(getItem(position));
                 DailyMealAdapter.this.notifyDataSetChanged();
 
                 My_DB.deleteDailyMeal(DM.getPosition());

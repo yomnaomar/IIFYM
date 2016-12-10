@@ -62,12 +62,9 @@
             android:label="Macro Settings"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
-<<<<<<< HEAD
         <activity android:name=".Activities.ProfileSettings" />
         <activity android:name=".Activities.UserProfile" />
         <activity android:name=".Activities.EditProfile"></activity>
-=======
-        <activity android:name=".Activities.ProfileSettings"></activity>
         <activity
             android:name=".Activities.SelectSavedMealActivity"
             android:screenOrientation="portrait"
