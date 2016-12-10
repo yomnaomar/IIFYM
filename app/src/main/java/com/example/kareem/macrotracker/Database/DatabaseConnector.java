@@ -219,6 +219,7 @@ public class DatabaseConnector {
         Cursor C = database.rawQuery("SELECT is_quick FROM " + Table_Meal + " WHERE meal_id = '" + ID + "'", null);
         C.moveToFirst();
         int is_quick = C.getInt(0);
+        Log.d("isQuickDB",""+is_quick);
         if (is_quick == 0){
             return false;
         }
@@ -391,7 +392,8 @@ public class DatabaseConnector {
 
     public boolean insertDailyMeal(int meal_id, float multiplier) {
         Cursor C = this.getAllDailyMeals();
-        int position = C.getCount();
+
+        int position = C.getCount(); //insert to next position
 
         ContentValues newDailyMeal = new ContentValues();
         newDailyMeal.put("position", position);
@@ -405,6 +407,25 @@ public class DatabaseConnector {
                 "multiplier: " + multiplier);
         return true;
     }
+    public void updatePositions(int deletedpos)
+    {
+        Cursor C = this.getAllDailyMeals();
+        int count = C.getCount();
+        Log.i("updatePositionsC", "C: " + count + "");
+        C.moveToPosition(deletedpos);
+        if (C.getCount() != 0) {
+            for(int j= deletedpos; j < count; j++ )
+            {
+                ContentValues editDailyMeal = new ContentValues();
+                editDailyMeal.put("position",C.getInt(0)-1);
+                database.update(Table_Daily_Meals, editDailyMeal, "position = '" + C.getInt(0) + "'", null);
+                C.moveToNext();
+                Log.i("updatePos", ""+j);
+            }
+        }
+
+    }
+
 
     //TODO: IMPLEMENT LATER: ALLOW USERS TO UPDATE DAILY MEAL
     /*public boolean updateDailyMeal(Meal M) {

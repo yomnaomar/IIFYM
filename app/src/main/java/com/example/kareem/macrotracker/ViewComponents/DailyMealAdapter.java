@@ -83,9 +83,16 @@ public class DailyMealAdapter extends ArrayAdapter<DailyMeal>{
                 DailyMealAdapter.this.remove(getItem(position));
                 DailyMealAdapter.this.notifyDataSetChanged();
 
-                My_DB.deleteDailyMeal(DM.getPosition());
+                My_DB.deleteDailyMeal(position);
                 if(My_DB.isQuickMeal(meal_id)){
+                    Log.d("isQuickDailyAdapter",""+ My_DB.isQuickMeal(meal_id));
                     My_DB.deleteMealbyID(meal_id);
+                }
+                //TODO: update position after deleting
+                if(position<DM.getPosition())
+                {
+                    Log.d("deleteposition",""+position+"<"+DM.getPosition());
+                    My_DB.updatePositions(position);
                 }
                 updateGUI();
             }

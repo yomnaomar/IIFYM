@@ -1,7 +1,9 @@
 package com.example.kareem.macrotracker.Activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,10 +27,14 @@ public class EditProfile extends AppCompatActivity implements View.OnClickListen
     Button update;
     String user_name;
     DatabaseConnector DB;
+
+    SharedPreferences settings;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
+        settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+
         userid = (EditText) findViewById(R.id.UserIdET);
         username = (TextView) findViewById(R.id.UsernameTV2);
         dob = (EditText) findViewById(R.id.DOBET);
@@ -36,14 +42,18 @@ public class EditProfile extends AppCompatActivity implements View.OnClickListen
         lname = (EditText) findViewById(R.id.LNameET);
         email = (EditText) findViewById(R.id.EmailET);
         update = (Button) findViewById(R.id.UpdateBTN);
-        user_name = new String();
-        Intent i = getIntent();
-        user_name = i.getStringExtra("username");
+        user_name = "";
+        user_name = settings.getString("user_name",null);
+
+//        Intent i = getIntent();
+//        user_name = i.getStringExtra("username");
         Log.i("username",user_name);
 
         update.setOnClickListener(this);
 
         DB = new DatabaseConnector(getApplication());
+
+
     }
 
     @Override
@@ -82,9 +92,10 @@ public class EditProfile extends AppCompatActivity implements View.OnClickListen
 
                if( DB.updateuserdata(id,user_name,dateofbirth,fn,ln,em)) {
                    Toast.makeText(getApplication(), "Profile Updated", Toast.LENGTH_LONG).show();
-                   Intent i = new Intent(getApplicationContext(), UserProfile.class);
-                   i.putExtra("username", user_name);
-                   startActivity(i);
+//                   Intent i = new Intent(getApplicationContext(), UserProfile.class);
+//                   i.putExtra("username", user_name);
+//                   startActivity(i);
+                   finish();
                    break;
                }
                 else {

@@ -2,7 +2,9 @@ package com.example.kareem.macrotracker.Activities;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -27,10 +29,13 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
     TextView email;
     Button edit;
     String user_name; // Receiving The Username From the Calling Intent
+    SharedPreferences settings;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
+        settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+
         userid =(TextView) findViewById(R.id.UserIDTV);
         username = (TextView) findViewById(R.id.UsernameTV);
         dob  = (TextView) findViewById(R.id.DOBTV);
@@ -41,13 +46,14 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
         edit.setOnClickListener(this);
 
         DB = new DatabaseConnector(getApplicationContext());
+
     }
 
     @Override
     public void onClick(View view) {
 
         Intent i = new Intent(getApplicationContext(),EditProfile.class);
-        i.putExtra("username",user_name);
+        //i.putExtra("username",user_name);
         startActivity(i);
     }
 
@@ -55,8 +61,9 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
     protected void onResume() {
         super.onResume();
         Intent intent = getIntent();
-        user_name = new String();
-        user_name = intent.getStringExtra("username");
+        user_name = "";
+        user_name = settings.getString("user_name",null);
+       // user_name = intent.getStringExtra("username");
         Log.i("Username",user_name);
         Cursor C = DB.getUser(user_name);
         if(C.moveToFirst()) {
