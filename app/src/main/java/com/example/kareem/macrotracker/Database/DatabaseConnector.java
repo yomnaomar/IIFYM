@@ -407,17 +407,19 @@ public class DatabaseConnector {
                 "multiplier: " + multiplier);
         return true;
     }
+
     public void updatePositions(int deletedpos)
     {
         Cursor C = this.getAllDailyMeals();
         int count = C.getCount();
-        Log.i("updatePositionsC", "C: " + count + "");
-        C.moveToPosition(deletedpos);
+        Log.i("updatePositionsC", "Count: " + count + "");
         if (C.getCount() != 0) {
+            C.moveToPosition(deletedpos);
             for(int j= deletedpos; j < count; j++ )
             {
                 ContentValues editDailyMeal = new ContentValues();
                 editDailyMeal.put("position",C.getInt(0)-1);
+                Log.i("updatePositions","position: " + j + " being updated to: " + (C.getInt(0)-1));
                 database.update(Table_Daily_Meals, editDailyMeal, "position = '" + C.getInt(0) + "'", null);
                 C.moveToNext();
                 Log.i("updatePos", ""+j);
@@ -425,7 +427,6 @@ public class DatabaseConnector {
         }
 
     }
-
 
     //TODO: IMPLEMENT LATER: ALLOW USERS TO UPDATE DAILY MEAL
     /*public boolean updateDailyMeal(Meal M) {

@@ -80,20 +80,20 @@ public class DailyMealAdapter extends ArrayAdapter<DailyMeal>{
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DailyMealAdapter.this.remove(getItem(position));
-                DailyMealAdapter.this.notifyDataSetChanged();
 
                 My_DB.deleteDailyMeal(position);
                 if(My_DB.isQuickMeal(meal_id)){
-                    Log.d("isQuickDailyAdapter",""+ My_DB.isQuickMeal(meal_id));
+                    Log.i("isQuickDailyAdapter", "deleted quick meal with ID: "+ My_DB.isQuickMeal(meal_id));
                     My_DB.deleteMealbyID(meal_id);
                 }
                 //TODO: update position after deleting
                 if(position<DM.getPosition())
                 {
-                    Log.d("deleteposition",""+position+"<"+DM.getPosition());
+                    Log.i("deleteposition",""+position+"<"+DM.getPosition());
                     My_DB.updatePositions(position);
                 }
+                DailyMealAdapter.this.remove(getItem(position));
+                DailyMealAdapter.this.notifyDataSetChanged();
                 updateGUI();
             }
         });
