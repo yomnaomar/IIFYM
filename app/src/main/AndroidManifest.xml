@@ -64,22 +64,29 @@
             android:windowSoftInputMode="adjustPan" />
         <activity android:name=".Activities.ProfileSettings" />
         <activity android:name=".Activities.UserProfile" />
-        <activity android:name=".Activities.EditProfile"></activity>
+        <activity android:name=".Activities.EditProfile" />
         <activity
             android:name=".Activities.SelectSavedMealActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
-
-        <activity android:name=".Activities.CreateComplex"
+        <activity
+            android:name=".Activities.CreateComplexMealActivity"
             android:label="Add Complex Meal"
-            android:windowSoftInputMode="adjustPan"
             android:screenOrientation="portrait"
-        />
             android:windowSoftInputMode="adjustPan" />
+        android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".Activities.AddSavedMealActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        >>>>>>> master
+        <activity
+            android:name=".Activities.SelectMealTypeActivity"
+            android:label="@string/title_activity_select_meal_type"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Activities.CreateSimpleMealActivity"
+            android:label="@string/title_activity_create_simple_meal"
             android:theme="@style/AppTheme.NoActionBar"></activity>
->>>>>>> master
     </application>
 
 </manifest>

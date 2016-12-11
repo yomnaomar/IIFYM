@@ -123,17 +123,14 @@ public class DatabaseConnector {
     //Updates all attributes accordingly
     //TODO CHECK IF NEED TO KEEP THE LINES BELOW COMMENTED
     public boolean updateMeal(Meal M) {
-        Cursor C = database.rawQuery("SELECT * FROM " + Table_Meal + " WHERE meal_id = '" + M.getMeal_id() + "'", null);
-        Log.i("SavedMeal Retrieved", "ID: " + M.getMeal_id() + " Retrieved");
-        C.moveToFirst();
         ContentValues updateMeal = new ContentValues();
         //updateMeal.put("meal_id", C.getInt(0));
-        updateMeal.put("meal_name", C.getString(1));
+        updateMeal.put("meal_name", M.getMeal_name());
         //updateMeal.put("date_created", C.getString(2));
-        updateMeal.put("carbs", C.getInt(3));
-        updateMeal.put("protein", C.getInt(4));
-        updateMeal.put("fat", C.getInt(5));
-        updateMeal.put("portion", C.getInt(6));
+        updateMeal.put("carbs", M.getCarbs());
+        updateMeal.put("protein", M.getProtein());
+        updateMeal.put("fat", M.getFat());
+        updateMeal.put("portion", M.getPortion().getPortionInt());
         //updateMeal.put("user_name", C.getString(8));
 
         database.update(Table_Meal, updateMeal, "meal_id = '" + M.getMeal_id() + "'", null);
@@ -246,9 +243,19 @@ public class DatabaseConnector {
 
     //Returns true if an entry with the same name as Meal M exists
     //Returns false otherwise
-    private boolean isDuplicateName(Meal M) {
+    public boolean isDuplicateName(Meal M) {
         Cursor C = database.rawQuery("SELECT * FROM " + Table_Meal + " WHERE meal_name = '" + M.getMeal_name() + "'", null);
-        Log.i("Meal Retrieved", "ID: " + M.getMeal_name() + " Retrieved");
+        Log.i("Found duplicate", "ID: " + M.getMeal_name() + " Retrieved");
+        C.moveToFirst();
+        if (C.getCount() == 0) {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean isDuplicateName(String MealName) {
+        Cursor C = database.rawQuery("SELECT * FROM " + Table_Meal + " WHERE meal_name = '" + MealName + "'", null);
+        Log.i("Found duplicate", "ID: " + MealName + " Retrieved");
         C.moveToFirst();
         if (C.getCount() == 0) {
             return false;
@@ -282,12 +289,9 @@ public class DatabaseConnector {
     //Searches Weight table using 'meal_id' as the key
     //Updates all attributes accordingly
     public boolean updateWeight(Meal M, int W_A, int W_U) {
-        Cursor C = database.rawQuery("SELECT * FROM " + Table_Weight + " WHERE meal_id = '" + M.getMeal_id() + "'", null);
-        Log.i("Weight Retrieved", "ID: " + M.getMeal_id() + " Retrieved");
-        C.moveToFirst();
         ContentValues updateWeight = new ContentValues();
-        updateWeight.put("weight_amount", C.getInt(1));
-        updateWeight.put("weight_unit", C.getInt(2));
+        updateWeight.put("weight_amount", W_A);
+        updateWeight.put("weight_unit", W_U);
 
         database.update(Table_Weight, updateWeight, "meal_id = '" + M.getMeal_id() + "'", null);
         Log.i("Weight Updated", "ID: " + M.getMeal_id() + " Updated");
@@ -345,12 +349,9 @@ public class DatabaseConnector {
         return true;
     }
 
-    public boolean updateServing(Meal M) {
-        Cursor C = database.rawQuery("SELECT * FROM " + Table_Serving + " WHERE meal_id = '" + M.getMeal_id() + "'", null);
-        Log.i("Serving Retrieved", "ID: " + M.getMeal_id() + " Retrieved");
-        C.moveToFirst();
+    public boolean updateServing(Meal M, int S_N) {
         ContentValues updateServing = new ContentValues();
-        updateServing.put("serving_number", C.getInt(1));
+        updateServing.put("serving_number", S_N);
 
         database.update(Table_Serving, updateServing, "meal_id = '" + M.getMeal_id() + "'", null);
         Log.i("Serving Updated", "ID: " + M.getMeal_id() + " Updated");

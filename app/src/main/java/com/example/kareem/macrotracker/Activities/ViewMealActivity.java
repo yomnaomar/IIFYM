@@ -1,74 +1,241 @@
 package com.example.kareem.macrotracker.Activities;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.example.kareem.macrotracker.Database.DatabaseConnector;
-import com.example.kareem.macrotracker.R;
 import com.example.kareem.macrotracker.Custom_Objects.Meal;
 import com.example.kareem.macrotracker.Custom_Objects.Portion_Type;
 import com.example.kareem.macrotracker.Custom_Objects.Weight;
+import com.example.kareem.macrotracker.Database.DatabaseConnector;
+import com.example.kareem.macrotracker.R;
 
-public class ViewMealActivity extends AppCompatActivity implements View.OnClickListener {
-    private TextView Text_MealName, Text_PortionDetails, Text_Calories, Text_Carbs, Text_Protein, Text_Fat;
-    private Button Button_Edit;
+public class ViewMealActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+    private EditText EditText_Meal_Name, EditText_Portion_Amount, EditText_Carbs, EditText_Protein, EditText_Fat;
+    private TextView Label_Serving, Label_Calories;
+    private Spinner Spinner_Unit;
 
+    FloatingActionButton edit_fab, delete_fab;
+    private boolean isEnabled = false;
+
+    int Meal_ID;
+    Meal thisMeal;
     int serving_number;
     Weight weight;
+    private int Weight_Unit_Selected;
 
     private DatabaseConnector My_DB;
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_saved_meal);
-
-        Text_MealName = (TextView) findViewById(R.id.Text_MealName);
-        Text_PortionDetails = (TextView) findViewById(R.id.Text_PortionDetails);
-        Text_Calories = (TextView) findViewById(R.id.Text_Calories);
-        Text_Carbs = (TextView) findViewById(R.id.Text_Carbs);
-        Text_Protein = (TextView) findViewById(R.id.Text_Protein);
-        Text_Fat = (TextView) findViewById(R.id.Text_Fat);
-
-        Button_Edit = (Button) findViewById(R.id.Button_Edit);
-        Button_Edit.setOnClickListener(this);
-
-        int Meal_ID = getIntent().getIntExtra("Meal_ID", 0);
+        setContentView(R.layout.activity_view_meal);
+        context = ViewMealActivity.this;
         My_DB = new DatabaseConnector(getApplicationContext());
+        Meal_ID = getIntent().getIntExtra("Meal_ID", 0);
+        thisMeal = My_DB.getMeal(Meal_ID);
+        initializeFields();
+        populateGUI();
+    }
 
-        Meal M = My_DB.getMeal(Meal_ID);
-        int calories = M.getCarbs() * 4 + M.getProtein() * 4 + M.getFat() * 9;
+    private void initializeFields() {
+        //EditText
+        EditText_Meal_Name = (EditText) findViewById(R.id.EditText_Meal_Name);
+        EditText_Portion_Amount = (EditText) findViewById(R.id.EditText_Portion_Amount);
+        EditText_Carbs = (EditText) findViewById(R.id.EditText_Carbs);
+        EditText_Protein = (EditText) findViewById(R.id.EditText_Protein);
+        EditText_Fat = (EditText) findViewById(R.id.EditText_Fat);
 
-        Text_MealName.setText(M.getMeal_name());
-        Text_Calories.setText(calories + " calories");
-        Text_Carbs.setText(M.getCarbs() + "c");
-        Text_Protein.setText(M.getProtein() + "p");
-        Text_Fat.setText(M.getFat() + "f");
+        //Label
+        Label_Serving = (TextView) findViewById(R.id.Label_Serving);
+        Label_Calories = (TextView) findViewById(R.id.Label_Calories);
 
-        if (M.getPortion() == Portion_Type.Serving) {
-            serving_number = My_DB.getServing(M.getMeal_id());
-            if (serving_number == 1) {
-                Text_PortionDetails.setText(serving_number + " Serving");
-            } else {
-                Text_PortionDetails.setText(serving_number + " Servings");
+        //Spinner
+        Spinner_Unit = (Spinner) findViewById(R.id.Spinner_Unit);
+        ArrayAdapter<CharSequence> Spinner_Unit_Adapter = ArrayAdapter.createFromResource(this, R.array.weight_units_array, android.R.layout.simple_spinner_item);
+        Spinner_Unit_Adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        Spinner_Unit.setAdapter(Spinner_Unit_Adapter);
+        Spinner_Unit.setOnItemSelectedListener(this);
+
+        //Floating Action Buttons
+        edit_fab = (FloatingActionButton) findViewById(R.id.edit_fab);
+        delete_fab = (FloatingActionButton) findViewById(R.id.delete_fab);
+
+        edit_fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!isEnabled) {
+                    enableFields();
+                    edit_fab.setImageDrawable(getResources().getDrawable(R.drawable.ic_done_black_24dp));
+                } else {
+                    edit_fab.setImageDrawable(getResources().getDrawable(R.drawable.ic_mode_edit_black_24dp));
+                    saveData();
+                }
             }
-        } else if (M.getPortion() == Portion_Type.Weight) {
-            weight = My_DB.getWeight(M.getMeal_id());
-            Log.d("Weight Retrieved: ", "ID: " + M.getMeal_id() + " Weight_amount: " + weight.getWeight_amount() + " Weight_Unit: " + weight.getWeight_unit());
-            Text_PortionDetails.setText(weight.getWeight_amount() + " " + weight.getWeight_unit().Abbreviate());
+        });
+        delete_fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setMessage("Are you sure you want to delete this meal?")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                // User clicked Yes button
+                                My_DB.deleteMeal(thisMeal);
+                                switch (thisMeal.getPortion().getPortionInt()) {
+                                    case (0):
+                                        My_DB.deleteServing(thisMeal);
+                                        break;
+                                    case (1):
+                                        My_DB.deleteWeight(thisMeal);
+                                        break;
+                                }
+                                finish();
+                            }
+                        });
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // User cancelled the dialog
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+        });
+    }
+
+    private void populateGUI() {
+        //Populating GUI
+        //initially disabled (view mode)
+        disableFields();
+        //Meal Name
+        EditText_Meal_Name.setText(thisMeal.getMeal_name());
+
+        //Portion_Amount and Serving_Label/Spinner_Unit
+        if (thisMeal.getPortion() == Portion_Type.Serving) {
+            Spinner_Unit.setVisibility(View.INVISIBLE); // Hide Weight_Unit Spinner
+            serving_number = My_DB.getServing(thisMeal.getMeal_id());
+            if (serving_number == 1) {
+                EditText_Portion_Amount.setText(serving_number + "");
+                Label_Serving.setText("Serving");
+            } else {
+                EditText_Portion_Amount.setText(serving_number + "");
+                Label_Serving.setText("Servings");
+            }
+        } else if (thisMeal.getPortion() == Portion_Type.Weight) {
+            Label_Serving.setVisibility(View.INVISIBLE); //Hide Serving Label
+            weight = My_DB.getWeight(thisMeal.getMeal_id());
+            Log.d("Weight Retrieved: ", "ID: " + thisMeal.getMeal_id() + " Weight_amount: " + weight.getWeight_amount() + " Weight_Unit: " + weight.getWeight_unit());
+            Spinner_Unit.setSelection(weight.getWeight_unit().getWeightInt()); //set spinner selection value
+            Weight_Unit_Selected = Spinner_Unit.getSelectedItemPosition();
+            EditText_Portion_Amount.setText(weight.getWeight_amount() + "");
+        }
+
+        //Macronutrients
+        EditText_Carbs.setText(thisMeal.getCarbs() + "");
+        EditText_Protein.setText(thisMeal.getProtein() + "");
+        EditText_Fat.setText(thisMeal.getFat() + "");
+        int calories = thisMeal.getCarbs() * 4 + thisMeal.getProtein() * 4 + thisMeal.getFat() * 9;
+        Label_Calories.setText(calories + "");
+    }
+
+    private void enableFields() {
+        isEnabled = true;
+        EditText_Meal_Name.setEnabled(true);
+        EditText_Portion_Amount.setEnabled(true);
+        Spinner_Unit.setEnabled(true);
+        EditText_Carbs.setEnabled(true);
+        EditText_Protein.setEnabled(true);
+        EditText_Fat.setEnabled(true);
+    }
+
+    private void disableFields() {
+        isEnabled = false;
+        EditText_Meal_Name.setEnabled(false);
+        EditText_Portion_Amount.setEnabled(false);
+        Spinner_Unit.setEnabled(false);
+        EditText_Carbs.setEnabled(false);
+        EditText_Protein.setEnabled(false);
+        EditText_Fat.setEnabled(false);
+    }
+
+
+    private void saveData() {
+        isEnabled = false;
+
+        EditText_Meal_Name.setEnabled(false);
+        EditText_Portion_Amount.setEnabled(false);
+        Spinner_Unit.setEnabled(false);
+        EditText_Carbs.setEnabled(false);
+        EditText_Protein.setEnabled(false);
+        EditText_Fat.setEnabled(false);
+
+        String check_newMealName = EditText_Meal_Name.getText().toString();
+
+        if (check_newMealName.compareTo(thisMeal.getMeal_name()) == 1) { //checks if meal_name has been changed by user
+            if (My_DB.isDuplicateName(check_newMealName)) { //duplicate
+                //TODO handle invalid meal_name change
+                Toast.makeText(this, "Meal with the same name already exists", Toast.LENGTH_SHORT).show();
+            }
+        } else { //non-duplicate
+            String newMealName = EditText_Meal_Name.getText().toString();
+            int newPortion_Amount = Integer.parseInt(EditText_Portion_Amount.getText().toString());
+            int newCarbs = Integer.parseInt(EditText_Carbs.getText().toString());
+            int newProtein = Integer.parseInt(EditText_Protein.getText().toString());
+            int newFat = Integer.parseInt(EditText_Fat.getText().toString());
+
+            thisMeal.setMeal_name(newMealName);
+            thisMeal.setCarbs(newCarbs);
+            thisMeal.setProtein(newProtein);
+            thisMeal.setFat(newFat);
+            My_DB.updateMeal(thisMeal);
+            switch (thisMeal.getPortion().getPortionInt()) {
+                case (0):
+                    My_DB.updateServing(thisMeal, newPortion_Amount);
+                    break;
+                case (1):
+                    My_DB.updateWeight(thisMeal, newPortion_Amount, Weight_Unit_Selected);
+                    break;
+            }
+        }
+
+        //Append text_views
+        EditText_Carbs.setText(EditText_Carbs.getText().toString());
+        EditText_Protein.setText(EditText_Protein.getText().toString());
+        EditText_Fat.setText(EditText_Fat.getText().toString());
+        int calories = thisMeal.getCarbs() * 4 + thisMeal.getProtein() * 4 + thisMeal.getFat() * 9;
+        Label_Calories.setText(calories + "");
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
+        switch (position) {
+            case (0):
+                Weight_Unit_Selected = 0;
+                break;
+            case (1):
+                Weight_Unit_Selected = 1;
+                break;
+            case (2):
+                Weight_Unit_Selected = 2;
+
         }
     }
 
     @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.Button_Edit:
+    public void onNothingSelected(AdapterView<?> adapterView) {
 
-                break;
-        }
     }
 }

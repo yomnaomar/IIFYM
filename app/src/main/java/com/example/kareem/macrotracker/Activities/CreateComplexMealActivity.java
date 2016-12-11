@@ -26,7 +26,7 @@ import com.example.kareem.macrotracker.ViewComponents.ComplexMealComponentAdapte
 
 import java.util.ArrayList;
 
-public class CreateComplex extends AppCompatActivity implements  View.OnClickListener, AdapterView.OnItemSelectedListener, AdapterView.OnItemClickListener {
+public class CreateComplexMealActivity extends AppCompatActivity implements  View.OnClickListener, AdapterView.OnItemSelectedListener, AdapterView.OnItemClickListener {
 
     private TextView Label_PortionType, Label_ServingNumber, Label_Unit, Label_Amount;
     private EditText EditText_MealName, EditText_Carbs, EditText_Protein, EditText_Fat, EditText_ServingNumber, EditText_Amount;
@@ -53,7 +53,7 @@ public class CreateComplex extends AppCompatActivity implements  View.OnClickLis
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_complex);
+        setContentView(R.layout.activity_create_complex_meal);
 
         My_DB = new DatabaseConnector(getApplicationContext());
 

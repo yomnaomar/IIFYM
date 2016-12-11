@@ -11,7 +11,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.kareem.macrotracker.Activities.AddSavedMealActivity"
-    tools:showIn="@layout/activity_add_saved_meal_activity">
+    tools:showIn="@layout/activity_add_saved_meal">
 
     <LinearLayout
         android:orientation="vertical"

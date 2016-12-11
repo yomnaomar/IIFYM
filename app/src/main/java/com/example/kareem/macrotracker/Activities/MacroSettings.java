@@ -136,8 +136,6 @@ public class MacroSettings extends AppCompatActivity implements View.OnFocusChan
         height.setOnFocusChangeListener(this);
         goal.setOnFocusChangeListener(this);
 
-
-
         chart = (PieChartView)findViewById(R.id.macro_chart);
         chart.setOnValueTouchListener(new ValueTouchListener());
 
@@ -461,7 +459,6 @@ public class MacroSettings extends AppCompatActivity implements View.OnFocusChan
 
     private void settextData()
     {
-
         switch(currentUser.getGoal())
         {
             case 0://lose
@@ -477,7 +474,6 @@ public class MacroSettings extends AppCompatActivity implements View.OnFocusChan
         }
         switch(currentUser.getWorkout_freq())
         {
-
             case 0:
                 workoutfreq.setText("None");
                 break;

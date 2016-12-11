@@ -106,5 +106,7 @@
         <item>Very High (Physical job or 7+ times/week)</item>
     </string-array>
     <string name="title_activity_enter_saved_meal_amount">EnterSavedMealAmount</string>
+    <string name="title_activity_select_meal_type">SelectMealTypeActivity</string>
+    <string name="title_activity_create_simple_meal">CreateSimpleMealActivity</string>
 
 </resources>

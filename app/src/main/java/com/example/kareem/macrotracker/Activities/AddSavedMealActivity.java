@@ -10,7 +10,6 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -39,7 +38,7 @@ public class AddSavedMealActivity extends AppCompatActivity implements View.OnCl
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_saved_meal_activity);
+        setContentView(R.layout.activity_add_saved_meal);
 
         Label_Meal_Name = (TextView)findViewById(R.id.Label_Meal_Name);
         Label_Carbs = (TextView)findViewById(R.id.Label_Carbs);

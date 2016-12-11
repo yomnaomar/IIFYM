@@ -99,7 +99,7 @@ public class ViewSavedMealsActivity extends AppCompatActivity implements Adapter
         switch(view.getId())
         {
             case R.id.btn_addnewmeal:
-                startActivity(new Intent(this,CreateComplex.class));
+                startActivity(new Intent(this,SelectMealTypeActivity.class));
                 break;
         }
     }
