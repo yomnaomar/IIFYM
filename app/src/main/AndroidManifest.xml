@@ -86,7 +86,7 @@
         <activity
             android:name=".Activities.CreateSimpleMealActivity"
             android:label="@string/title_activity_create_simple_meal"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

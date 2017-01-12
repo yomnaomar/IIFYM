@@ -42,7 +42,6 @@ import tourguide.tourguide.ToolTip;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener, OnListItemDeletedListener {
 
     private TextView Text_CarbsGoal, Text_ProteinGoal, Text_FatGoal, Text_CarbsLeft, Text_ProteinLeft, Text_FatLeft;
-    private TextView usernameview;
     private Button Button_AddSavedMeal, Button_AddQuickMeal;
 
     private ArrayList<DailyMeal> ArrayList_DailyMeals;
@@ -98,8 +97,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Text_CarbsLeft = (TextView) findViewById(R.id.Text_CarbsLeft);
         Text_ProteinLeft = (TextView) findViewById(R.id.Text_ProteinLeft);
         Text_FatLeft = (TextView) findViewById(R.id.Text_FatLeft);
-
-        usernameview=(TextView)findViewById(R.id.txt_username);
 
         Button_AddSavedMeal = (Button) findViewById(R.id.Button_AddSavedMeal);
         Button_AddSavedMeal.setOnClickListener(this);
@@ -342,7 +339,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
             user_name = settings.getString("user_name", "");
         }
-        usernameview.setText(user_name);
         currentUser = My_DB.getUserObject(user_name);
     }
 

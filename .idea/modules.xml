@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Macro-Tracker.iml" filepath="$PROJECT_DIR$/Macro-Tracker.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MacroTracker.iml" filepath="$PROJECT_DIR$/MacroTracker.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ProgressBar_Library/ProgressBar_Library.iml" filepath="$PROJECT_DIR$/ProgressBar_Library/ProgressBar_Library.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

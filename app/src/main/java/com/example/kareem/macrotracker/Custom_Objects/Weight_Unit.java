@@ -21,7 +21,7 @@ public enum Weight_Unit {
             return null;
         }
 
-    //Return the String Value of the Weight_Unit, eg. Grams, Ounces
+        //Return the String Value of the Weight_Unit, eg. Grams, Ounces
     public String getWeightString(){
         return this.name();
     }
