@@ -236,7 +236,7 @@ public class DatabaseConnector {
     //Return a Cursor containing all entries
     public Cursor getAllMealsSorted() {
        /* openReadableDB();*/
-        Cursor C = database.rawQuery("SELECT * FROM " + Table_Meal + "ORDER BY meal_id ASC", null);
+        Cursor C = database.rawQuery("SELECT * FROM " + Table_Meal + " ORDER BY meal_name ASC", null);
         Log.i("Meals Retrieved", "All Meals Retrieved");
         return C;
     }

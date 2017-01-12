@@ -61,7 +61,7 @@ public class ViewSavedMealsActivity extends AppCompatActivity implements Adapter
     //Updates My_MealAdapter
     private void UpdateArrayList() {
         My_SavedMealAdapter.clear();
-        Cursor C = My_DB.getAllSavedMeals();
+        Cursor C = My_DB.getAllMealsSorted();
 
         int count = C.getCount();
         if (count > 0) {

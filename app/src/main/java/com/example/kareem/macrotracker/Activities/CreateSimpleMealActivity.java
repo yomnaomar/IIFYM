@@ -162,6 +162,7 @@ public class CreateSimpleMealActivity extends AppCompatActivity implements View.
         fieldsOk = validate(new EditText[]{EditText_MealName, EditText_Carbs, EditText_Protein,EditText_Fat});
         if(fieldsOk) {
             String meal_name = EditText_MealName.getText().toString();
+            meal_name = meal_name.substring(0,1).toUpperCase() + meal_name.substring(1).toLowerCase();
             int carbs = Integer.parseInt(EditText_Carbs.getText().toString());
             int protein = Integer.parseInt(EditText_Protein.getText().toString());
             int fat = Integer.parseInt(EditText_Fat.getText().toString());
