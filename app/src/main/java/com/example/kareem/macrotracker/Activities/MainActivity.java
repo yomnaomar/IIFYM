@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public  int FatDefault ;
 
     private DatabaseConnector My_DB;
-
+    //TODO remove this comment (push purposes)
     Portion_Type portion = null;
     int daily_consumption;
     boolean isLogged;
