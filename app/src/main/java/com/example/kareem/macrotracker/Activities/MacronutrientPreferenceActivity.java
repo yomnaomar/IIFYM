@@ -91,19 +91,19 @@ public class MacronutrientPreferenceActivity extends PreferenceActivity implemen
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         switch (key) {
-            case "Carbs":
+            case "carbs":
                 Carb_Percent = Float.parseFloat(prefs.getString("pref_Carbs", "50"));
                 Toast toast1 = Toast.makeText(this, "Carb ratio changed to " + Carb_Percent, Toast.LENGTH_SHORT);
                 toast1.show();
                 break;
-            case "Protein":
+            case "protein":
                 Protein_Percent = Float.parseFloat(prefs.getString("pref_Protein", "25"));
-                Toast toast2 = Toast.makeText(this, "Protein ratio changed to " + Protein_Percent, Toast.LENGTH_SHORT);
+                Toast toast2 = Toast.makeText(this, "protein ratio changed to " + Protein_Percent, Toast.LENGTH_SHORT);
                 toast2.show();
                 break;
-            case "Fat":
+            case "fat":
                 Fat_Percent = Float.parseFloat(prefs.getString("pref_Fat", "25"));
-                Toast toast3 = Toast.makeText(this, "Fat ratio changed to " + Fat_Percent, Toast.LENGTH_SHORT);
+                Toast toast3 = Toast.makeText(this, "fat ratio changed to " + Fat_Percent, Toast.LENGTH_SHORT);
                 toast3.show();
                 break;
         }

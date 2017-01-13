@@ -10,4 +10,10 @@
     <color name="black">#000000</color>
     <color name="black_light">#333</color>
     <color name="grey_light">#A1A1A1</color>
+    <color name="CarbProgressColor">#ffb74d</color>
+    <color name="CarbSecondaryProgressColor">#f57c00</color>
+    <color name="ProteinProgessColor">#f44336</color>
+    <color name="ProteinSecondaryProgressColor">#cc0000</color>
+    <color name="FatProgessColor">#66bb6a</color>
+    <color name="FatSecondaryProgressColor">#2e7d32</color>
 </resources>
