@@ -400,13 +400,13 @@ public class MacroSettings extends AppCompatActivity implements View.OnFocusChan
         List<SliceValue> values = new ArrayList<>();
 
         SliceValue sliceValue_prot = new SliceValue((float)currentUser.getPercent_protein(), Color.parseColor("#FF4081"));
-        sliceValue_prot.setLabel("Protein: "+prot+"%");
+        sliceValue_prot.setLabel("protein: "+prot+"%");
         values.add(sliceValue_prot);
         SliceValue sliceValue_carbs = new SliceValue((float)currentUser.getPercent_carbs(), Color.parseColor("#FFFFEB3B"));
-        sliceValue_carbs.setLabel("Carbs: "+carbs+"%");
+        sliceValue_carbs.setLabel("carbs: "+carbs+"%");
         values.add(sliceValue_carbs);
         SliceValue sliceValue_fat = new SliceValue((float)currentUser.getPercent_fat(), Color.parseColor("#FF689F38"));
-        sliceValue_fat.setLabel("Fat: "+fat+"%");
+        sliceValue_fat.setLabel("fat: "+fat+"%");
         values.add(sliceValue_fat);
 
         data = new PieChartData(values);
@@ -621,7 +621,7 @@ public class MacroSettings extends AppCompatActivity implements View.OnFocusChan
             {
                 case 0://P
                     Snackbar snackbar = Snackbar
-                            .make(parentLayout, "Protein is essential for growth and the building of new tissue as well as the repair of broken down tissue - like what happens when you work out.", Snackbar.LENGTH_LONG);
+                            .make(parentLayout, "protein is essential for growth and the building of new tissue as well as the repair of broken down tissue - like what happens when you work out.", Snackbar.LENGTH_LONG);
                     snackbar.show();
                     break;
                 case 1://C
