@@ -22,7 +22,7 @@ import java.util.ArrayList;
 public class SavedMealAdapter extends ArrayAdapter<Meal>{
     private DatabaseConnector My_DB;
 
-    int serving_number;
+    float serving_number;
     Weight weight;
     int multiplier;
 
@@ -56,7 +56,7 @@ public class SavedMealAdapter extends ArrayAdapter<Meal>{
 
         if (M.getPortion() == Portion_Type.Serving) {
             serving_number = My_DB.getServing(meal_id);
-            if (serving_number == 1) {
+            if (serving_number == 1.0f) {
                 portion.setText(serving_number + " Serving");
             } else {
                 portion.setText(serving_number + " Servings");

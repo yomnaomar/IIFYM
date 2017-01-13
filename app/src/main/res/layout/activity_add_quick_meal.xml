@@ -65,7 +65,7 @@
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="number"
+                android:inputType="numberDecimal"
                 android:ems="5"
                 android:id="@+id/EditText_Carbs"
                 android:layout_alignParentTop="true"
@@ -92,14 +92,14 @@
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="number"
                 android:ems="5"
                 android:id="@+id/EditText_Protein"
                 android:layout_alignParentTop="true"
                 android:layout_toEndOf="@+id/textView"
                 android:textColor="#797979"
                 android:textAlignment="center"
-                android:hint="0" />
+                android:hint="0"
+                android:inputType="numberDecimal" />
 
         </LinearLayout>
 
@@ -119,14 +119,14 @@
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="number"
                 android:ems="5"
                 android:id="@+id/EditText_Fat"
                 android:layout_alignParentTop="true"
                 android:layout_toEndOf="@+id/textView3"
                 android:textColor="#797979"
                 android:textAlignment="center"
-                android:hint="0" />
+                android:hint="0"
+                android:inputType="numberDecimal" />
 
         </LinearLayout>
 

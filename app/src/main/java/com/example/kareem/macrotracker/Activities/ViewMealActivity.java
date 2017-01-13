@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -31,7 +32,7 @@ public class ViewMealActivity extends AppCompatActivity implements AdapterView.O
 
     int Meal_ID;
     Meal thisMeal;
-    int serving_number;
+    float serving_number;
     Weight weight;
     private int Weight_Unit_Selected;
 
@@ -127,7 +128,8 @@ public class ViewMealActivity extends AppCompatActivity implements AdapterView.O
         if (thisMeal.getPortion() == Portion_Type.Serving) {
             Spinner_Unit.setVisibility(View.INVISIBLE); // Hide Weight_Unit Spinner
             serving_number = My_DB.getServing(thisMeal.getMeal_id());
-            if (serving_number == 1) {
+            if (serving_number == 1.0f) {
+                EditText_Portion_Amount.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
                 EditText_Portion_Amount.setText(serving_number + "");
                 Label_Serving.setText("Serving");
             } else {
@@ -135,6 +137,7 @@ public class ViewMealActivity extends AppCompatActivity implements AdapterView.O
                 Label_Serving.setText("Servings");
             }
         } else if (thisMeal.getPortion() == Portion_Type.Weight) {
+            EditText_Portion_Amount.setInputType(InputType.TYPE_CLASS_NUMBER);
             Label_Serving.setVisibility(View.INVISIBLE); //Hide Serving Label
             weight = My_DB.getWeight(thisMeal.getMeal_id());
             Log.d("Weight Retrieved: ", "ID: " + thisMeal.getMeal_id() + " Weight_amount: " + weight.getWeight_amount() + " Weight_Unit: " + weight.getWeight_unit());
@@ -147,7 +150,7 @@ public class ViewMealActivity extends AppCompatActivity implements AdapterView.O
         EditText_Carbs.setText(thisMeal.getCarbs() + "");
         EditText_Protein.setText(thisMeal.getProtein() + "");
         EditText_Fat.setText(thisMeal.getFat() + "");
-        int calories = thisMeal.getCarbs() * 4 + thisMeal.getProtein() * 4 + thisMeal.getFat() * 9;
+        int calories = Math.round(thisMeal.getCarbs() * 4 + thisMeal.getProtein() * 4 + thisMeal.getFat() * 9);
         Label_Calories.setText(calories + "");
     }
 
@@ -191,31 +194,34 @@ public class ViewMealActivity extends AppCompatActivity implements AdapterView.O
             }
         } else { //non-duplicate
             String newMealName = EditText_Meal_Name.getText().toString();
-            int newPortion_Amount = Integer.parseInt(EditText_Portion_Amount.getText().toString());
-            int newCarbs = Integer.parseInt(EditText_Carbs.getText().toString());
-            int newProtein = Integer.parseInt(EditText_Protein.getText().toString());
-            int newFat = Integer.parseInt(EditText_Fat.getText().toString());
+            float newCarbs = Float.parseFloat(EditText_Carbs.getText().toString());
+            float newProtein = Float.parseFloat(EditText_Protein.getText().toString());
+            float newFat = Float.parseFloat(EditText_Fat.getText().toString());
 
             thisMeal.setMeal_name(newMealName);
             thisMeal.setCarbs(newCarbs);
             thisMeal.setProtein(newProtein);
             thisMeal.setFat(newFat);
-            My_DB.updateMeal(thisMeal);
+
             switch (thisMeal.getPortion().getPortionInt()) {
                 case (0):
-                    My_DB.updateServing(thisMeal, newPortion_Amount);
+                    float newServing_Amount = Float.parseFloat(EditText_Portion_Amount.getText().toString());
+                    My_DB.updateServing(thisMeal, newServing_Amount);
                     break;
                 case (1):
-                    My_DB.updateWeight(thisMeal, newPortion_Amount, Weight_Unit_Selected);
+                    int newWeight_Amount = Integer.parseInt(EditText_Portion_Amount.getText().toString());
+                    My_DB.updateWeight(thisMeal, newWeight_Amount, Weight_Unit_Selected);
                     break;
             }
+
+            My_DB.updateMeal(thisMeal);
         }
 
         //Append text_views
         EditText_Carbs.setText(EditText_Carbs.getText().toString());
         EditText_Protein.setText(EditText_Protein.getText().toString());
         EditText_Fat.setText(EditText_Fat.getText().toString());
-        int calories = thisMeal.getCarbs() * 4 + thisMeal.getProtein() * 4 + thisMeal.getFat() * 9;
+        int calories = Math.round(thisMeal.getCarbs() * 4 + thisMeal.getProtein() * 4 + thisMeal.getFat() * 9);
         Label_Calories.setText(calories + "");
     }
 

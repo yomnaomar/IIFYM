@@ -178,10 +178,10 @@ public class DatabaseConnector {
         if (C != null && C.moveToFirst()) {
             int meal_id             = C.getInt(0);       //meal)id
             String meal_name        = C.getString(1);    //meal_name
-            //String  date_created    = C.getString(2);   //date_created
-            int carbs               = C.getInt(3);      //carbs
-            int protein             = C.getInt(4);      //protein
-            int fat                 = C.getInt(5);      //fat
+            //String  date_created  = C.getString(2);   //date_created
+            float carbs             = C.getFloat(3);      //carbs
+            float protein           = C.getFloat(4);      //protein
+            float fat               = C.getFloat(5);      //fat
             portion = portion.values()[C.getInt(6)];    //portion
             int user_id             = C.getInt(7);      //user_id
 
@@ -201,9 +201,9 @@ public class DatabaseConnector {
         int meal_id             = C.getInt(0);      //meal)id
         String meal_name        = C.getString(1);   //meal_name
         //String  date_created  = C.getString(2);   //date_created
-        int carbs               = C.getInt(3);      //carbs
-        int protein             = C.getInt(4);      //protein
-        int fat                 = C.getInt(5);      //fat
+        float carbs             = C.getFloat(3);      //carbs
+        float protein           = C.getFloat(4);      //protein
+        float fat               = C.getFloat(5);      //fat
         portion = portion.values()[C.getInt(6)];    //portion
         int user_id             = C.getInt(7);      //user_id
 
@@ -333,7 +333,7 @@ public class DatabaseConnector {
 
     //SERVING TABLE FUNCTIONS-------------------------------------------------------------------------
 
-    public boolean insertServing(Meal M, int S_N) {
+    public boolean insertServing(Meal M, float S_N) {
         if (hasDuplicateServing(M)) {
             Log.i("Serving insert failed:", "Serving with duplicate ID found: " + M.getMeal_id() + " " + M.getMeal_name());
             return false;
@@ -349,7 +349,7 @@ public class DatabaseConnector {
         return true;
     }
 
-    public boolean updateServing(Meal M, int S_N) {
+    public boolean updateServing(Meal M, float S_N) {
         ContentValues updateServing = new ContentValues();
         updateServing.put("serving_number", S_N);
 
@@ -370,10 +370,10 @@ public class DatabaseConnector {
     }
 
     //Returns the weight of the meal with 'meal_id' as the key
-    public int getServing(int meal_id) {
+    public float getServing(int meal_id) {
         Cursor C = database.rawQuery("SELECT * FROM " + Table_Serving + " WHERE meal_id = '" + meal_id + "'", null);
         if (C != null && C.moveToFirst()) {
-            int serving_number = C.getInt(1); //serving_number
+            float serving_number = C.getFloat(1); //serving_number
             return serving_number;
         }
         return 0;

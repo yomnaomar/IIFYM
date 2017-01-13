@@ -105,7 +105,7 @@ public class CreateSimpleMealActivity extends AppCompatActivity implements View.
         return true;
     }
 
-    private void InsertSimpleMeal(String meal_name, int carbs, int protein, int fat, int indexofPortionType) {
+    private void InsertSimpleMeal(String meal_name, float carbs, float protein, float fat, int indexofPortionType) {
         //Initializing Meal to be inserted in Database
         Meal NewMeal = new Meal(meal_name, carbs, protein, fat, indexofPortionType, currentUser.getUser_id());
 
@@ -114,7 +114,7 @@ public class CreateSimpleMealActivity extends AppCompatActivity implements View.
             Log.i("Meal Inserted", "ID: " + NewMeal_WithID.getMeal_id() + " Name:" + " " + NewMeal.getMeal_name());
 
             if (indexofPortionType == 0) { //Meal is measured by servings
-                int Serving_Number = Integer.parseInt(EditText_ServingNumber.getText().toString());
+                float Serving_Number = Float.parseFloat(EditText_ServingNumber.getText().toString());
                 if (My_DB.insertServing(NewMeal_WithID, Serving_Number)) {
                     Log.i("Serving Inserted", "ID: " + NewMeal_WithID.getMeal_id() + " Name:" + " " + NewMeal.getMeal_name() + " Serving #: " + Serving_Number);
                 } else {
@@ -162,10 +162,10 @@ public class CreateSimpleMealActivity extends AppCompatActivity implements View.
         fieldsOk = validate(new EditText[]{EditText_MealName, EditText_Carbs, EditText_Protein,EditText_Fat});
         if(fieldsOk) {
             String meal_name = EditText_MealName.getText().toString();
-            meal_name = meal_name.substring(0,1).toUpperCase() + meal_name.substring(1).toLowerCase();
-            int carbs = Integer.parseInt(EditText_Carbs.getText().toString());
-            int protein = Integer.parseInt(EditText_Protein.getText().toString());
-            int fat = Integer.parseInt(EditText_Fat.getText().toString());
+            meal_name = meal_name.substring(0,1).toUpperCase() + meal_name.substring(1);
+            float carbs = Float.parseFloat(EditText_Carbs.getText().toString());
+            float protein = Float.parseFloat(EditText_Protein.getText().toString());
+            float fat = Float.parseFloat(EditText_Fat.getText().toString());
             //Get PortionType
             int radioButtonID = RadioGroup_PortionType.getCheckedRadioButtonId();
             View radioButton = RadioGroup_PortionType.findViewById(radioButtonID);

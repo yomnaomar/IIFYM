@@ -66,9 +66,9 @@ public class SelectSavedMealActivity extends AppCompatActivity implements Adapte
                 int     meal_id         = C.getInt(0);      //meal)id
                 String  meal_name       = C.getString(1);   //meal_name
                 String  date_created    = C.getString(2);   //date_created
-                int     carbs           = C.getInt(3);      //carbs
-                int     protein         = C.getInt(4);      //protein
-                int     fat             = C.getInt(5);      //fat
+                float   carbs           = C.getFloat(3);      //carbs
+                float   protein         = C.getFloat(4);      //protein
+                float   fat             = C.getFloat(5);      //fat
                 portion = portion.values()[C.getInt(6)];    //portion
                 int     user_id         = C.getInt(8);      //user_id
                 Meal M = new Meal(meal_id,meal_name,carbs,protein,fat,portion,user_id);
@@ -95,7 +95,8 @@ public class SelectSavedMealActivity extends AppCompatActivity implements Adapte
     //by traversing through the meals which compose My_Meal and cumulatively adds the nutrients of each simple meal
     private Meal getFullMealNutrients(Meal My_Meal){
         int meal_id = My_Meal.getMeal_id();
-        int simple_id, carbs, protein, fat;
+        int simple_id;
+        float carbs, protein, fat;
         carbs = My_Meal.getCarbs();
         protein = My_Meal.getProtein();
         fat = My_Meal.getFat();

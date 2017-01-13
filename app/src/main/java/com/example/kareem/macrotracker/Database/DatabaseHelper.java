@@ -56,9 +56,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "(meal_id           INTEGER PRIMARY KEY autoincrement, " +
                 "meal_name          TEXT UNIQUE, " +
                 "date_created       TEXT, " +
-                "carbs              INTEGER, " +
-                "protein            INTEGER, " +
-                "fat                INTEGER, " +
+                "carbs              REAL, " +
+                "protein            REAL, " +
+                "fat                REAL, " +
                 "portion            INTEGER, " +     //enum, 0 - Serving, 1 - Weight, 2 - None
                 "user_id            INTEGER, " +
                 "is_quick           INTEGER);"; //TODO REDESIGN THIS NONSENSE
@@ -73,7 +73,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         String createTable_Serving = "CREATE TABLE " + Table_Serving + " " +
                 "(meal_id       INTEGER PRIMARY KEY, " +
-                "serving_number INTEGER, " +
+                "serving_number REAL, " +
 
                 "CONSTRAINT meal_id_fk FOREIGN KEY(meal_id) REFERENCES " + Table_Meal + " (meal_id) ON DELETE CASCADE);";
         //ON UPDATE is not needed because meal_id will never be updated, it is hidden from the user

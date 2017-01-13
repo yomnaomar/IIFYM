@@ -8,15 +8,15 @@ public class DailyMeal{
 
     String          meal_name;
     int             meal_id;
-    int             carbs;
-    int             protein;
-    int             fat;
+    float           carbs;
+    float           protein;
+    float           fat;
     Portion_Type    portion_type;       //weight or serving
 
     int position;
     float multiplier;
 
-    public DailyMeal(String meal_name, int meal_id, int carbs, int protein, int fat, Portion_Type portion_type, int position, float multiplier) {
+    public DailyMeal(String meal_name, int meal_id, float carbs, float protein, float fat, Portion_Type portion_type, int position, float multiplier) {
         this.meal_name = meal_name;
         this.meal_id = meal_id;
         this.carbs = carbs;
@@ -43,7 +43,7 @@ public class DailyMeal{
         this.meal_id = meal_id;
     }
 
-    public int getCarbs() {
+    public float getCarbs() {
         return carbs;
     }
 
@@ -51,7 +51,7 @@ public class DailyMeal{
         this.carbs = carbs;
     }
 
-    public int getProtein() {
+    public float getProtein() {
         return protein;
     }
 
@@ -59,7 +59,7 @@ public class DailyMeal{
         this.protein = protein;
     }
 
-    public int getFat() {
+    public float getFat() {
         return fat;
     }
 

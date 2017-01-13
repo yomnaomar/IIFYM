@@ -65,11 +65,11 @@
                 <EditText
                     android:layout_width="75dp"
                     android:layout_height="wrap_content"
-                    android:inputType="number"
                     android:ems="2"
                     android:id="@+id/EditText_Carbs"
                     android:text="Carbs:"
-                    android:layout_weight="0.05" />
+                    android:layout_weight="0.05"
+                    android:inputType="numberDecimal" />
 
                 <TextView
                     android:text="c"
@@ -86,7 +86,7 @@
 
                 <EditText
                     android:layout_height="wrap_content"
-                    android:inputType="number"
+                    android:inputType="numberDecimal"
                     android:ems="2"
                     android:id="@+id/EditText_Protein"
                     android:text="Protein:"
@@ -109,12 +109,12 @@
 
                 <EditText
                     android:layout_height="wrap_content"
-                    android:inputType="number"
                     android:ems="2"
                     android:id="@+id/EditText_Fat"
                     android:text="Fat:"
                     android:layout_weight="0.05"
-                    android:layout_width="75dp" />
+                    android:layout_width="75dp"
+                    android:inputType="numberDecimal" />
 
                 <TextView
                     android:text="f"

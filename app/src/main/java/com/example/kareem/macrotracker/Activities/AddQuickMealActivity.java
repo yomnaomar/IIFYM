@@ -137,10 +137,10 @@ public class AddQuickMealActivity extends AppCompatActivity implements View.OnCl
         fieldsOk = validate(new EditText[]{EditText_MealName, EditText_Carbs, EditText_Protein,EditText_Fat});
         if(fieldsOk) {
         String meal_name = EditText_MealName.getText().toString();
-        meal_name = meal_name.substring(0,1).toUpperCase() + meal_name.substring(1).toLowerCase();
-        int carbs = Integer.parseInt(EditText_Carbs.getText().toString());
-        int protein = Integer.parseInt(EditText_Protein.getText().toString());
-        int fat = Integer.parseInt(EditText_Fat.getText().toString());
+        meal_name = meal_name.substring(0,1).toUpperCase() + meal_name.substring(1);
+        float carbs = Float.parseFloat(EditText_Carbs.getText().toString());
+        float protein = Float.parseFloat(EditText_Protein.getText().toString());
+        float fat = Float.parseFloat(EditText_Fat.getText().toString());
             if (CheckBox_SaveMeal.isChecked()) {
                 //Get PortionType
                 int radioButtonID = RadioGroup_PortionType.getCheckedRadioButtonId();
@@ -161,7 +161,7 @@ public class AddQuickMealActivity extends AppCompatActivity implements View.OnCl
         }
     }
 
-    private void InsertQuickMeal(String meal_name, int carbs, int protein, int fat, int indexofPortionType) {
+    private void InsertQuickMeal(String meal_name, float carbs, float protein, float fat, int indexofPortionType) {
         Meal NewMeal = new Meal(meal_name, carbs, protein, fat, indexofPortionType, currentUser.getUser_id());
 
         if (My_DB.insertQuickMeal(NewMeal)) { //TODO USE ANOTHER FUNCTION AFTER RE-IMPLEMENTATION
@@ -180,7 +180,7 @@ public class AddQuickMealActivity extends AppCompatActivity implements View.OnCl
     }
 
 
-    private void InsertSavedMeal(String meal_name, int carbs, int protein, int fat, int indexofPortionType) {
+    private void InsertSavedMeal(String meal_name, float carbs, float protein, float fat, int indexofPortionType) {
         //Initializing Meal to be inserted in Database
         Meal NewMeal = new Meal(meal_name, carbs, protein, fat, indexofPortionType, currentUser.getUser_id());
 

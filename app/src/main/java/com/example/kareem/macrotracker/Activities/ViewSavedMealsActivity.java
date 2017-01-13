@@ -45,7 +45,6 @@ public class ViewSavedMealsActivity extends AppCompatActivity implements Adapter
 
         addmeal=(Button)findViewById(R.id.btn_addnewmeal);
         addmeal.setOnClickListener(this);
-
     }
 
     @Override
@@ -70,9 +69,9 @@ public class ViewSavedMealsActivity extends AppCompatActivity implements Adapter
                 int meal_id = C.getInt(0);      //meal)id
                 String meal_name = C.getString(1);   //meal_name
                 String date_created = C.getString(2);   //date_created
-                int carbs = C.getInt(3);      //carbs
-                int protein = C.getInt(4);      //protein
-                int fat = C.getInt(5);      //fat
+                float carbs = C.getFloat(3);      //carbs
+                float protein = C.getFloat(4);      //protein
+                float fat = C.getFloat(5);      //fat
                 portion = portion.values()[C.getInt(6)];    //portion
                 int daily_consumption = C.getInt(7);    //daily_consumption
                 int user_id = C.getInt(8);      //user_id
@@ -84,7 +83,6 @@ public class ViewSavedMealsActivity extends AppCompatActivity implements Adapter
 
     @Override
     protected void onPause() {
-
         super.onPause();
     }
 

@@ -62,9 +62,9 @@ public class DailyMealAdapter extends ArrayAdapter<DailyMeal>{
         fat.setText(String.valueOf(DM.getFat() + " f "));
 
         if (DM.getPortion_type() == Portion_Type.Serving) {
-            int serving_number = My_DB.getServing(meal_id);
-            int serving_post_multiplication = Math.round(serving_number*multiplier);
-            if (serving_post_multiplication == 1) {
+            float serving_number = My_DB.getServing(meal_id);
+            float serving_post_multiplication = serving_number*multiplier;
+            if (serving_post_multiplication == 1.0f) {
                 portion.setText(serving_post_multiplication + " Serving");
             } else {
                 portion.setText(serving_post_multiplication + " Servings");

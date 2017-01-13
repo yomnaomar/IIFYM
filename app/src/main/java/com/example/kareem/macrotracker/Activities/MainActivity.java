@@ -251,9 +251,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         for (int i = 0; i < NumberOfMeals; i++) {
             DailyMeal TempMeal = My_DailyMealAdapter.getItem(i);
-            int carbs = TempMeal.getCarbs();
-            int protein = TempMeal.getProtein();
-            int fat = TempMeal.getFat();
+            int carbs = Math.round(TempMeal.getCarbs());
+            int protein = Math.round(TempMeal.getProtein());
+            int fat = Math.round(TempMeal.getFat());
 
             CarbsCurrent    += carbs;
             ProteinCurrent  += protein;

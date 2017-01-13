@@ -12,9 +12,9 @@ public class Meal {
     private String meal_name;
     private String date_created;
 
-    private int carbs;
-    private int protein;
-    private int fat;
+    private float carbs;
+    private float protein;
+    private float fat;
 
     private Portion_Type portion;
 
@@ -23,7 +23,7 @@ public class Meal {
 
     //Constructor
     //Portion is of type INT
-    public Meal(int meal_id, String meal_name, int carbs, int protein, int fat, int portion, int user_id) {
+    public Meal(int meal_id, String meal_name, float carbs, float protein, float fat, int portion, int user_id) {
         this.meal_id = meal_id;
         this.meal_name = meal_name;
         this.date_created = getToday();
@@ -38,7 +38,7 @@ public class Meal {
     //Constructor
     //Meal_id is not a requried parameter
     //Portion is of type INT
-    public Meal(String meal_name, int carbs, int protein, int fat,  int portion, int user_id) {
+    public Meal(String meal_name, float carbs, float protein, float fat,  int portion, int user_id) {
         this.meal_name = meal_name;
         this.date_created = getToday();
         this.carbs = carbs;
@@ -50,7 +50,7 @@ public class Meal {
     }
 
     //Constructor which initializes all fields
-    public Meal(int meal_id, String meal_name, int carbs, int protein, int fat, Portion_Type portion, int user_id) {
+    public Meal(int meal_id, String meal_name, float carbs, float protein, float fat, Portion_Type portion, int user_id) {
         this.meal_id = meal_id;
         this.date_created = getToday();
         this.meal_name = meal_name;
@@ -85,27 +85,27 @@ public class Meal {
         this.date_created = date_created;
     }
 
-    public int getCarbs() {
+    public float getCarbs() {
         return carbs;
     }
 
-    public void setCarbs(int carbs) {
+    public void setCarbs(float carbs) {
         this.carbs = carbs;
     }
 
-    public int getProtein() {
+    public float getProtein() {
         return protein;
     }
 
-    public void setProtein(int protein) {
+    public void setProtein(float protein) {
         this.protein = protein;
     }
 
-    public int getFat() {
+    public float getFat() {
         return fat;
     }
 
-    public void setFat(int fat) {
+    public void setFat(float fat) {
         this.fat = fat;
     }
 
