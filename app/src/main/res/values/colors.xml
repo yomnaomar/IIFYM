@@ -16,4 +16,5 @@
     <color name="ProteinSecondaryProgressColor">#cc0000</color>
     <color name="FatProgessColor">#66bb6a</color>
     <color name="FatSecondaryProgressColor">#2e7d32</color>
+    <color name="Progress_Bar_Background">#e0e0e0</color>
 </resources>
