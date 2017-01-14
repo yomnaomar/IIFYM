@@ -28,8 +28,8 @@ import java.util.ArrayList;
 
 public class CreateComplexMealActivity extends AppCompatActivity implements  View.OnClickListener, AdapterView.OnItemSelectedListener, AdapterView.OnItemClickListener {
 
-    private TextView Label_PortionType, Label_ServingNumber, Label_Unit, Label_Amount;
-    private EditText EditText_MealName, EditText_Carbs, EditText_Protein, EditText_Fat, EditText_ServingNumber, EditText_Amount;
+    private TextView Label_PortionType, Label_ServingNumber, Label_Unit, Label_Quantity;
+    private EditText EditText_MealName, EditText_Carbs, EditText_Protein, EditText_Fat, EditText_ServingNumber, EditText_Quantity;
     private RadioButton RadioButton_Serving, RadioButton_Weight;
     private RadioGroup RadioGroup_PortionType;
     private Spinner Spinner_Unit;
@@ -65,7 +65,7 @@ public class CreateComplexMealActivity extends AppCompatActivity implements  Vie
         Label_PortionType = (TextView) findViewById(R.id.Label_PortionType);
         Label_ServingNumber = (TextView) findViewById(R.id.Label_ServingNumber);
         Label_Unit = (TextView) findViewById(R.id.Label_Unit);
-        Label_Amount = (TextView) findViewById(R.id.Label_Amount);
+        Label_Quantity = (TextView) findViewById(R.id.Label_Quantity);
 
         //EditTexts
         EditText_MealName = (EditText) findViewById(R.id.edittxt_mealname);
@@ -73,7 +73,7 @@ public class CreateComplexMealActivity extends AppCompatActivity implements  Vie
         EditText_Protein = (EditText) findViewById(R.id.EditText_Protein);
         EditText_Fat = (EditText) findViewById(R.id.EditText_Fat);
         EditText_ServingNumber = (EditText) findViewById(R.id.EditText_ServingNumber);
-        EditText_Amount = (EditText) findViewById(R.id.EditText_Amount);
+        EditText_Quantity = (EditText) findViewById(R.id.EditText_Quantity);
 
         //Buttons
         Button_Enter = (Button) findViewById(R.id.enter_btn);
@@ -143,16 +143,16 @@ public class CreateComplexMealActivity extends AppCompatActivity implements  Vie
     private void ShowWeight() {
         Label_Unit.setVisibility(View.VISIBLE);
         Spinner_Unit.setVisibility(View.VISIBLE);
-        Label_Amount.setVisibility(View.VISIBLE);
-        EditText_Amount.setVisibility(View.VISIBLE);
-        EditText_Amount.setEnabled(true);
+        Label_Quantity.setVisibility(View.VISIBLE);
+        EditText_Quantity.setVisibility(View.VISIBLE);
+        EditText_Quantity.setEnabled(true);
     }
 
     private void HideWeight() {
         Label_Unit.setVisibility(View.INVISIBLE);
         Spinner_Unit.setVisibility(View.INVISIBLE);
-        Label_Amount.setVisibility(View.INVISIBLE);
-        EditText_Amount.setVisibility(View.INVISIBLE);
+        Label_Quantity.setVisibility(View.INVISIBLE);
+        EditText_Quantity.setVisibility(View.INVISIBLE);
     }
 
     private void UpdateGUI() {

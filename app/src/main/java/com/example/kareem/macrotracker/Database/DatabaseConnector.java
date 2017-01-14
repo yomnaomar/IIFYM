@@ -236,7 +236,7 @@ public class DatabaseConnector {
     //Return a Cursor containing all entries
     public Cursor getAllMealsSorted() {
        /* openReadableDB();*/
-        Cursor C = database.rawQuery("SELECT * FROM " + Table_Meal + " ORDER BY meal_name ASC", null);
+        Cursor C = database.rawQuery("SELECT * FROM " + Table_Meal + " ORDER BY meal_name COLLATE NOCASE ASC", null);
         Log.i("Meals Retrieved", "All Meals Retrieved");
         return C;
     }
@@ -275,7 +275,7 @@ public class DatabaseConnector {
         }
         ContentValues newWeight = new ContentValues();
         newWeight.put("meal_id", M.getMeal_id());
-        newWeight.put("weight_amount", W_A);
+        newWeight.put("weight_quantity", W_A);
         newWeight.put("weight_unit", W_U);
 
         database.insert(Table_Weight, null, newWeight);
@@ -290,7 +290,7 @@ public class DatabaseConnector {
     //Updates all attributes accordingly
     public boolean updateWeight(Meal M, int W_A, int W_U) {
         ContentValues updateWeight = new ContentValues();
-        updateWeight.put("weight_amount", W_A);
+        updateWeight.put("weight_quantity", W_A);
         updateWeight.put("weight_unit", W_U);
 
         database.update(Table_Weight, updateWeight, "meal_id = '" + M.getMeal_id() + "'", null);
@@ -314,10 +314,10 @@ public class DatabaseConnector {
     public Weight getWeight(int meal_id) {
         Cursor C = database.rawQuery("SELECT * FROM " + Table_Weight + " WHERE meal_id = '" + meal_id + "'", null);
         C.moveToFirst();
-        int weight_amount = C.getInt(1);      //weight_amount
+        int weight_quantity = C.getInt(1);      //weight_quantity
         int weight_unit = C.getInt(2);      //weight_unit
-        Weight w = new Weight(weight_amount, weight_unit);
-        Log.d("Weight Retrieved: ", "ID: " + meal_id + " Weight_amount: " + weight_amount + " Weight_Unit: " + weight_unit);
+        Weight w = new Weight(weight_quantity, weight_unit);
+        Log.d("Weight Retrieved: ", "ID: " + meal_id + " Weight_quantity: " + weight_quantity + " Weight_Unit: " + weight_unit);
         return w;
     }
 

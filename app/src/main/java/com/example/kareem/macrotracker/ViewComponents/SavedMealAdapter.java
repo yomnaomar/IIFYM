@@ -63,8 +63,8 @@ public class SavedMealAdapter extends ArrayAdapter<Meal>{
             }
         } else if (M.getPortion() == Portion_Type.Weight) {
             weight = My_DB.getWeight(meal_id);
-            Log.d("Weight Retrieved: ", "ID: " + meal_id + " Weight_amount: " + weight.getWeight_amount() + " Weight_Unit: " + weight.getWeight_unit());
-            portion.setText(weight.getWeight_amount() + " " + weight.getWeight_unit().Abbreviate());
+            Log.d("Weight Retrieved: ", "ID: " + meal_id + " Weight_quantity: " + weight.getWeight_quantity() + " Weight_Unit: " + weight.getWeight_unit());
+            portion.setText(weight.getWeight_quantity() + " " + weight.getWeight_unit().Abbreviate());
         }
 
         // Return the completed view to render on screen

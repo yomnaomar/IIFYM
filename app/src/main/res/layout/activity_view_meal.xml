@@ -38,9 +38,9 @@
                     android:layout_width="90dp"
                     android:layout_height="wrap_content"
                     android:ems="2"
-                    android:id="@+id/EditText_Portion_Amount"
+                    android:id="@+id/EditText_Portion_Quantity"
                     android:inputType="number|numberDecimal"
-                    android:text="Portion_Amount" />
+                    android:text="Portion_Quantity" />
 
                 <TextView
                     android:text="Servings"

@@ -23,7 +23,7 @@ import com.example.kareem.macrotracker.Database.DatabaseConnector;
 import com.example.kareem.macrotracker.R;
 
 public class ViewMealActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
-    private EditText EditText_Meal_Name, EditText_Portion_Amount, EditText_Carbs, EditText_Protein, EditText_Fat;
+    private EditText EditText_Meal_Name, EditText_Portion_Quantity, EditText_Carbs, EditText_Protein, EditText_Fat;
     private TextView Label_Serving, Label_Calories;
     private Spinner Spinner_Unit;
 
@@ -54,7 +54,7 @@ public class ViewMealActivity extends AppCompatActivity implements AdapterView.O
     private void initializeFields() {
         //EditText
         EditText_Meal_Name = (EditText) findViewById(R.id.EditText_Meal_Name);
-        EditText_Portion_Amount = (EditText) findViewById(R.id.EditText_Portion_Amount);
+        EditText_Portion_Quantity = (EditText) findViewById(R.id.EditText_Portion_Quantity);
         EditText_Carbs = (EditText) findViewById(R.id.EditText_Carbs);
         EditText_Protein = (EditText) findViewById(R.id.EditText_Protein);
         EditText_Fat = (EditText) findViewById(R.id.EditText_Fat);
@@ -124,26 +124,26 @@ public class ViewMealActivity extends AppCompatActivity implements AdapterView.O
         //Meal Name
         EditText_Meal_Name.setText(thisMeal.getMeal_name());
 
-        //Portion_Amount and Serving_Label/Spinner_Unit
+        //Portion_Quantity and Serving_Label/Spinner_Unit
         if (thisMeal.getPortion() == Portion_Type.Serving) {
             Spinner_Unit.setVisibility(View.INVISIBLE); // Hide Weight_Unit Spinner
             serving_number = My_DB.getServing(thisMeal.getMeal_id());
             if (serving_number == 1.0f) {
-                EditText_Portion_Amount.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
-                EditText_Portion_Amount.setText(serving_number + "");
+                EditText_Portion_Quantity.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
+                EditText_Portion_Quantity.setText(serving_number + "");
                 Label_Serving.setText("Serving");
             } else {
-                EditText_Portion_Amount.setText(serving_number + "");
+                EditText_Portion_Quantity.setText(serving_number + "");
                 Label_Serving.setText("Servings");
             }
         } else if (thisMeal.getPortion() == Portion_Type.Weight) {
-            EditText_Portion_Amount.setInputType(InputType.TYPE_CLASS_NUMBER);
+            EditText_Portion_Quantity.setInputType(InputType.TYPE_CLASS_NUMBER);
             Label_Serving.setVisibility(View.INVISIBLE); //Hide Serving Label
             weight = My_DB.getWeight(thisMeal.getMeal_id());
-            Log.d("Weight Retrieved: ", "ID: " + thisMeal.getMeal_id() + " Weight_amount: " + weight.getWeight_amount() + " Weight_Unit: " + weight.getWeight_unit());
+            Log.d("Weight Retrieved: ", "ID: " + thisMeal.getMeal_id() + " Weight_quantity: " + weight.getWeight_quantity() + " Weight_Unit: " + weight.getWeight_unit());
             Spinner_Unit.setSelection(weight.getWeight_unit().getWeightInt()); //set spinner selection value
             Weight_Unit_Selected = Spinner_Unit.getSelectedItemPosition();
-            EditText_Portion_Amount.setText(weight.getWeight_amount() + "");
+            EditText_Portion_Quantity.setText(weight.getWeight_quantity() + "");
         }
 
         //Macronutrients
@@ -157,7 +157,7 @@ public class ViewMealActivity extends AppCompatActivity implements AdapterView.O
     private void enableFields() {
         isEnabled = true;
         EditText_Meal_Name.setEnabled(true);
-        EditText_Portion_Amount.setEnabled(true);
+        EditText_Portion_Quantity.setEnabled(true);
         Spinner_Unit.setEnabled(true);
         EditText_Carbs.setEnabled(true);
         EditText_Protein.setEnabled(true);
@@ -167,7 +167,7 @@ public class ViewMealActivity extends AppCompatActivity implements AdapterView.O
     private void disableFields() {
         isEnabled = false;
         EditText_Meal_Name.setEnabled(false);
-        EditText_Portion_Amount.setEnabled(false);
+        EditText_Portion_Quantity.setEnabled(false);
         Spinner_Unit.setEnabled(false);
         EditText_Carbs.setEnabled(false);
         EditText_Protein.setEnabled(false);
@@ -179,7 +179,7 @@ public class ViewMealActivity extends AppCompatActivity implements AdapterView.O
         isEnabled = false;
 
         EditText_Meal_Name.setEnabled(false);
-        EditText_Portion_Amount.setEnabled(false);
+        EditText_Portion_Quantity.setEnabled(false);
         Spinner_Unit.setEnabled(false);
         EditText_Carbs.setEnabled(false);
         EditText_Protein.setEnabled(false);
@@ -205,12 +205,12 @@ public class ViewMealActivity extends AppCompatActivity implements AdapterView.O
 
             switch (thisMeal.getPortion().getPortionInt()) {
                 case (0):
-                    float newServing_Amount = Float.parseFloat(EditText_Portion_Amount.getText().toString());
-                    My_DB.updateServing(thisMeal, newServing_Amount);
+                    float newServing_Quantity = Float.parseFloat(EditText_Portion_Quantity.getText().toString());
+                    My_DB.updateServing(thisMeal, newServing_Quantity);
                     break;
                 case (1):
-                    int newWeight_Amount = Integer.parseInt(EditText_Portion_Amount.getText().toString());
-                    My_DB.updateWeight(thisMeal, newWeight_Amount, Weight_Unit_Selected);
+                    int newWeight_Quantity = Integer.parseInt(EditText_Portion_Quantity.getText().toString());
+                    My_DB.updateWeight(thisMeal, newWeight_Quantity, Weight_Unit_Selected);
                     break;
             }
 
