@@ -57,9 +57,9 @@ public class DailyMealAdapter extends ArrayAdapter<DailyMeal>{
         //TODO IMPLEMENT MULTIPLER
         // Populate the data into the template view using the data object
         name.setText(DM.getMeal_name());
-        carbs.setText(String.valueOf(DM.getCarbs() + " c "));
-        protein.setText(String.valueOf(DM.getProtein() + " p "));
-        fat.setText(String.valueOf(DM.getFat() + " f "));
+        carbs.setText(String.valueOf(Math.round(DM.getCarbs()) + " c "));
+        protein.setText(String.valueOf(Math.round(DM.getProtein()) + " p "));
+        fat.setText(String.valueOf(Math.round(DM.getFat()) + " f "));
 
         if (DM.getPortion_type() == Portion_Type.Serving) {
             float serving_number = My_DB.getServing(meal_id);

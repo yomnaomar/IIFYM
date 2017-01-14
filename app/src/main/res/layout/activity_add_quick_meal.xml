@@ -196,12 +196,12 @@
             <EditText
                 android:layout_width="98dp"
                 android:layout_height="wrap_content"
-                android:inputType="number"
                 android:ems="5"
                 android:id="@+id/EditText_ServingNumber"
                 android:textAlignment="center"
                 android:hint="1"
-                android:text="1" />
+                android:text="1"
+                android:inputType="numberDecimal" />
         </LinearLayout>
 
         <LinearLayout

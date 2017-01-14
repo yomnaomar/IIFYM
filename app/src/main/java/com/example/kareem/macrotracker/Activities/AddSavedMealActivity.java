@@ -224,7 +224,7 @@ public class AddSavedMealActivity extends AppCompatActivity implements View.OnCl
         settings.getBoolean("isServing",isServing);
         if (isServing){
             float prev_serving = settings.getFloat("serving_amount", base_serving);
-            float prev_meal_id = settings.getFloat("id", meal_id);
+            int prev_meal_id = settings.getInt("id", meal_id);
             if(prev_meal_id == meal_id){
                 UpdateServingViews(prev_serving);
                 EditText_Serving_Quantity.setText(prev_serving + "");
@@ -236,7 +236,7 @@ public class AddSavedMealActivity extends AppCompatActivity implements View.OnCl
         }
         else {
             int prev_weight_amount = settings.getInt("weight_amount", base_weight_amount);
-            float prev_meal_id = settings.getFloat("id", meal_id);
+            int prev_meal_id = settings.getInt("id", meal_id);
             if(prev_meal_id == meal_id){
                 UpdateWeightViews(prev_weight_amount);
                 EditText_Weight_Quantity.setText(prev_weight_amount + "");

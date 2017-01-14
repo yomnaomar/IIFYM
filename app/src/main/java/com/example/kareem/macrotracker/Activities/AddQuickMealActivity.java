@@ -189,7 +189,7 @@ public class AddQuickMealActivity extends AppCompatActivity implements View.OnCl
             Log.i("Meal Inserted", "ID: " + NewMeal_WithID.getMeal_id() + " Name:" + " " + NewMeal.getMeal_name());
 
             if (indexofPortionType == 0) { //Meal is measured by servings
-                int Serving_Number = Integer.parseInt(EditText_ServingNumber.getText().toString());
+                float Serving_Number = Float.parseFloat(EditText_ServingNumber.getText().toString());
                 if (My_DB.insertServing(NewMeal_WithID, Serving_Number)) {
                     Log.i("Serving Inserted", "ID: " + NewMeal_WithID.getMeal_id() + " Name:" + " " + NewMeal.getMeal_name() + " Serving #: " + Serving_Number);
                 } else {
