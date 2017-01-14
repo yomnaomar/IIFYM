@@ -31,7 +31,7 @@ public class AddSavedMealActivity extends AppCompatActivity implements View.OnCl
     float new_carbs,new_protein,new_fat,new_calories;
 
     float base_serving;
-    int   base_weight_amount;
+    int   base_weight_quantity;
 
     float multiplier;
     Meal M;
@@ -141,8 +141,8 @@ public class AddSavedMealActivity extends AppCompatActivity implements View.OnCl
             ShowWeightViews();
             HideServingViews();
             Weight weight = My_DB.getWeight(meal_id);
-            base_weight_amount = weight.getWeight_amount();
-            EditText_Weight_Quantity.setText(weight.getWeight_amount() + "");
+            base_weight_quantity = weight.getWeight_quantity();
+            EditText_Weight_Quantity.setText(weight.getWeight_quantity() + "");
             Label_Weight_Unit.setText(weight.getWeight_unit().Abbreviate());
         }
     }
@@ -170,9 +170,9 @@ public class AddSavedMealActivity extends AppCompatActivity implements View.OnCl
         }
     }
 
-    private void UpdateWeightViews(int new_weight_amount) {
-        if (new_weight_amount != 0) {
-            multiplier = new_weight_amount / (float)base_weight_amount;
+    private void UpdateWeightViews(int new_weight_quantity) {
+        if (new_weight_quantity != 0) {
+            multiplier = new_weight_quantity / (float)base_weight_quantity;
             new_carbs = multiplier* base_carbs;
             new_protein = multiplier*base_protein;
             new_fat = multiplier*base_fat;
@@ -199,17 +199,17 @@ public class AddSavedMealActivity extends AppCompatActivity implements View.OnCl
         if(isServing) {
             editor.putBoolean("isServing", true);
             if (EditText_Serving_Quantity.getText().length() == 0) {
-                editor.putFloat("serving_amount", 0.0f);
+                editor.putFloat("serving_quantity", 0.0f);
             } else {
-                editor.putFloat("serving_amount", Float.parseFloat(EditText_Serving_Quantity.getText().toString()));
+                editor.putFloat("serving_quantity", Float.parseFloat(EditText_Serving_Quantity.getText().toString()));
             }
         }
         else {
             editor.putBoolean("isServing", false);
             if(EditText_Weight_Quantity.getText().length() == 0){
-                editor.putInt("weight_amount", 0);
+                editor.putInt("weight_quantity", 0);
             } else {
-                editor.putInt("weight_amount", Integer.parseInt(EditText_Weight_Quantity.getText().toString()));
+                editor.putInt("weight_quantity", Integer.parseInt(EditText_Weight_Quantity.getText().toString()));
             }
         }
         editor.putInt("id", meal_id);
@@ -223,7 +223,7 @@ public class AddSavedMealActivity extends AppCompatActivity implements View.OnCl
         super.onResume();
         settings.getBoolean("isServing",isServing);
         if (isServing){
-            float prev_serving = settings.getFloat("serving_amount", base_serving);
+            float prev_serving = settings.getFloat("serving_quantity", base_serving);
             int prev_meal_id = settings.getInt("id", meal_id);
             if(prev_meal_id == meal_id){
                 UpdateServingViews(prev_serving);
@@ -235,15 +235,15 @@ public class AddSavedMealActivity extends AppCompatActivity implements View.OnCl
             }
         }
         else {
-            int prev_weight_amount = settings.getInt("weight_amount", base_weight_amount);
+            int prev_weight_quantity = settings.getInt("weight_quantity", base_weight_quantity);
             int prev_meal_id = settings.getInt("id", meal_id);
             if(prev_meal_id == meal_id){
-                UpdateWeightViews(prev_weight_amount);
-                EditText_Weight_Quantity.setText(prev_weight_amount + "");
+                UpdateWeightViews(prev_weight_quantity);
+                EditText_Weight_Quantity.setText(prev_weight_quantity + "");
             }
             else {
-                UpdateWeightViews(base_weight_amount);
-                EditText_Weight_Quantity.setText(base_weight_amount + "");
+                UpdateWeightViews(base_weight_quantity);
+                EditText_Weight_Quantity.setText(base_weight_quantity + "");
             }
         }
     }

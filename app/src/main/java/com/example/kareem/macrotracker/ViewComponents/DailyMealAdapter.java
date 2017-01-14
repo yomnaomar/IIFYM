@@ -71,9 +71,9 @@ public class DailyMealAdapter extends ArrayAdapter<DailyMeal>{
             }
         } else if (DM.getPortion_type() == Portion_Type.Weight) {
             Weight weight = My_DB.getWeight(meal_id);
-            int weight_post_multiplication = Math.round(weight.getWeight_amount()*multiplier);
-            weight.setWeight_amount(weight_post_multiplication);
-            portion.setText(weight.getWeight_amount() + " " + weight.getWeight_unit().Abbreviate());
+            int weight_post_multiplication = Math.round(weight.getWeight_quantity()*multiplier);
+            weight.setWeight_quantity(weight_post_multiplication);
+            portion.setText(weight.getWeight_quantity() + " " + weight.getWeight_unit().Abbreviate());
         }
 
         Button imageView = (Button) convertView.findViewById(R.id.Button_DeleteMeal);

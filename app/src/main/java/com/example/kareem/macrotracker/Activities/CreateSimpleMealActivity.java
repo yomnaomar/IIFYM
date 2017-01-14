@@ -28,8 +28,8 @@ import com.example.kareem.macrotracker.R;
 
 public class CreateSimpleMealActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
-    private TextView Label_ServingNumber, Label_Unit, Label_Amount;
-    private EditText EditText_MealName, EditText_Carbs, EditText_Protein, EditText_Fat, EditText_ServingNumber, EditText_Amount;
+    private TextView Label_ServingNumber, Label_Unit, Label_Quantity;
+    private EditText EditText_MealName, EditText_Carbs, EditText_Protein, EditText_Fat, EditText_ServingNumber, EditText_Quantity;
     private RadioButton RadioButton_Serving, RadioButton_Weight;
     private RadioGroup RadioGroup_PortionType;
     private Spinner Spinner_Unit;
@@ -53,7 +53,7 @@ public class CreateSimpleMealActivity extends AppCompatActivity implements View.
         //Labels
         Label_ServingNumber = (TextView) findViewById(R.id.Label_ServingNumber);
         Label_Unit = (TextView) findViewById(R.id.Label_Unit);
-        Label_Amount = (TextView) findViewById(R.id.Label_Amount);
+        Label_Quantity = (TextView) findViewById(R.id.Label_Quantity);
 
         //EditTexts
         EditText_MealName = (EditText) findViewById(R.id.EditText_MealName);
@@ -61,7 +61,7 @@ public class CreateSimpleMealActivity extends AppCompatActivity implements View.
         EditText_Protein = (EditText) findViewById(R.id.EditText_Protein);
         EditText_Fat = (EditText) findViewById(R.id.EditText_Fat);
         EditText_ServingNumber = (EditText) findViewById(R.id.EditText_ServingNumber);
-        EditText_Amount = (EditText) findViewById(R.id.EditText_Amount);
+        EditText_Quantity = (EditText) findViewById(R.id.EditText_Quantity);
 
         //Buttons
         Button_Enter = (Button) findViewById(R.id.Button_Enter);
@@ -121,8 +121,8 @@ public class CreateSimpleMealActivity extends AppCompatActivity implements View.
                     Toast.makeText(this, "Failed to insert serving", Toast.LENGTH_SHORT).show();
                 }
             } else if (indexofPortionType == 1) { //Meal is measured by weight
-                int Weight_Amount = Integer.parseInt(EditText_Amount.getText().toString());
-                if (My_DB.insertWeight(NewMeal_WithID, Weight_Amount, Weight_Unit_Selected)) {
+                int Weight_Quantity = Integer.parseInt(EditText_Quantity.getText().toString());
+                if (My_DB.insertWeight(NewMeal_WithID, Weight_Quantity, Weight_Unit_Selected)) {
                     Toast.makeText(this, "Weight added", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(this, "Failed to insert Weight", Toast.LENGTH_SHORT).show();
@@ -162,7 +162,6 @@ public class CreateSimpleMealActivity extends AppCompatActivity implements View.
         fieldsOk = validate(new EditText[]{EditText_MealName, EditText_Carbs, EditText_Protein,EditText_Fat});
         if(fieldsOk) {
             String meal_name = EditText_MealName.getText().toString();
-            meal_name = meal_name.substring(0,1).toUpperCase() + meal_name.substring(1);
             float carbs = Float.parseFloat(EditText_Carbs.getText().toString());
             float protein = Float.parseFloat(EditText_Protein.getText().toString());
             float fat = Float.parseFloat(EditText_Fat.getText().toString());
@@ -250,15 +249,15 @@ public class CreateSimpleMealActivity extends AppCompatActivity implements View.
     private void ShowWeight() {
         Label_Unit.setVisibility(View.VISIBLE);
         Spinner_Unit.setVisibility(View.VISIBLE);
-        Label_Amount.setVisibility(View.VISIBLE);
-        EditText_Amount.setVisibility(View.VISIBLE);
+        Label_Quantity.setVisibility(View.VISIBLE);
+        EditText_Quantity.setVisibility(View.VISIBLE);
     }
 
     private void HideWeight() {
         Label_Unit.setVisibility(View.INVISIBLE);
         Spinner_Unit.setVisibility(View.INVISIBLE);
-        Label_Amount.setVisibility(View.INVISIBLE);
-        EditText_Amount.setVisibility(View.INVISIBLE);
+        Label_Quantity.setVisibility(View.INVISIBLE);
+        EditText_Quantity.setVisibility(View.INVISIBLE);
     }
 
     private void UpdateGUI() {

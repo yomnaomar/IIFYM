@@ -65,7 +65,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         String createTable_Weight = "CREATE TABLE " + Table_Weight + " " +
                 "(meal_id       INTEGER PRIMARY KEY, " +
-                "weight_amount  INTEGER, " +
+                "weight_quantity  INTEGER, " +
                 "weight_unit    INTEGER, " +
 
                 "CONSTRAINT meal_id_fk FOREIGN KEY(meal_id) REFERENCES " + Table_Meal + " (meal_id) ON DELETE CASCADE);";
