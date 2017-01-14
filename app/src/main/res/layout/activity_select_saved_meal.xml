@@ -30,7 +30,8 @@
             android:inputType="textPersonName"
             android:ems="10"
             android:id="@+id/EditText_MealSearch"
-            android:hint="Search Meals ..." />
+            android:hint="Search Meals ..."
+            android:drawableLeft="?android:attr/actionModeWebSearchDrawable" />
 
         <ListView
             android:layout_width="match_parent"

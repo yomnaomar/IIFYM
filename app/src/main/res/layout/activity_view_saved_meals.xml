@@ -26,24 +26,26 @@
             android:inputType="textPersonName"
             android:ems="10"
             android:id="@+id/EditText_MealSearch"
-            android:hint="Search Meals ..." />
+            android:hint="Search Meals ..."
+            android:drawableLeft="?android:attr/actionModeWebSearchDrawable" />
 
         <ListView
         android:layout_width="wrap_content"
         android:id="@+id/ListView_SavedMeals"
-            android:layout_height="match_parent"
-            android:layout_weight="1.03">
+            android:layout_height="354dp"
+            android:layout_weight="1">
         </ListView>
 
         <android.support.design.widget.FloatingActionButton
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:clickable="true"
-            app:fabSize="mini"
-            app:srcCompat="@drawable/carbs"
+            app:srcCompat="@drawable/addnewealicon"
             android:id="@+id/addmeal_fab"
-            app:backgroundTint="@android:color/holo_blue_bright"
-            android:layout_gravity="right" />
+            app:backgroundTint="@android:color/darker_gray"
+            android:layout_gravity="bottom|right"
+            app:rippleColor="@color/LightGrey"
+            app:fabSize="mini"
+            android:layout_width="75dp" />
 
     </LinearLayout>
 
