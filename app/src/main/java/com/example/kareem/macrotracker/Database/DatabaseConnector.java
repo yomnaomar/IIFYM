@@ -228,7 +228,7 @@ public class DatabaseConnector {
     //Return a Cursor containing all entries
     public Cursor getAllSavedMeals() {
        /* openReadableDB();*/
-        Cursor C = database.rawQuery("SELECT * FROM " + Table_Meal + " WHERE is_quick = 0", null); // //TODO REDESIGN THIS NONSENSE
+        Cursor C = database.rawQuery("SELECT * FROM " + Table_Meal + " WHERE is_quick = 0", null); //TODO REDESIGN THIS NONSENSE
         Log.i("Meals Retrieved", "All Meals Retrieved");
         return C;
     }
@@ -236,7 +236,7 @@ public class DatabaseConnector {
     //Return a Cursor containing all entries
     public Cursor getAllMealsSorted() {
        /* openReadableDB();*/
-        Cursor C = database.rawQuery("SELECT * FROM " + Table_Meal + " ORDER BY meal_name COLLATE NOCASE ASC", null);
+        Cursor C = database.rawQuery("SELECT * FROM " + Table_Meal + " WHERE is_quick = 0 ORDER BY meal_name COLLATE NOCASE ASC", null);
         Log.i("Meals Retrieved", "All Meals Retrieved");
         return C;
     }

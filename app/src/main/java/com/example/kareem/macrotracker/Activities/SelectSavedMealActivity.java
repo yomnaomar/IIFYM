@@ -5,8 +5,11 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import com.example.kareem.macrotracker.Custom_Objects.Meal;
@@ -19,7 +22,7 @@ import java.util.ArrayList;
 
 public class SelectSavedMealActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
-    //private EditText EditText_MealSearch;
+    private EditText EditText_MealSearch;
     private ArrayList<Meal> ArrayList_SavedMeals;
     private SavedMealAdapter My_SavedMealAdapter;
     private ListView Meals_ListView;
@@ -35,10 +38,26 @@ public class SelectSavedMealActivity extends AppCompatActivity implements Adapte
         My_DB = new DatabaseConnector(getApplicationContext());
 
         ArrayList_SavedMeals = new ArrayList<Meal>();
+        ConstructArrayList_SavedMeals();
         My_SavedMealAdapter = new SavedMealAdapter(this, ArrayList_SavedMeals);
         Meals_ListView = (ListView) findViewById(R.id.ListView_AddSavedMeals);
         Meals_ListView.setAdapter(My_SavedMealAdapter);
         Meals_ListView.setOnItemClickListener(this);
+
+        EditText_MealSearch = (EditText) findViewById(R.id.EditText_MealSearch);
+        EditText_MealSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
+                // When user changed the Text
+                My_SavedMealAdapter.getFilter().filter(cs);
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) { }
+
+            @Override
+            public void afterTextChanged(Editable arg0) {}
+        });
     }
 
     //TODO IMPLEMENT THIS FUNCTION CORRECTLY
@@ -78,6 +97,29 @@ public class SelectSavedMealActivity extends AppCompatActivity implements Adapte
         }
     }
 
+    //Fills ArrayList_SavedMeals
+    private void ConstructArrayList_SavedMeals() {
+        Cursor C = My_DB.getAllMealsSorted();
+
+        int count = C.getCount();
+        if (count > 0) {
+            for (int i = 0; i < count; i++) {
+                C.moveToNext();
+                int     meal_id         = C.getInt(0);      //meal)id
+                String  meal_name       = C.getString(1);   //meal_name
+                String  date_created    = C.getString(2);   //date_created
+                float   carbs           = C.getFloat(3);      //carbs
+                float   protein         = C.getFloat(4);      //protein
+                float   fat             = C.getFloat(5);      //fat
+                portion = portion.values()[C.getInt(6)];    //portion
+                int     user_id         = C.getInt(8);      //user_id
+                Meal M = new Meal(meal_id,meal_name,carbs,protein,fat,portion,user_id);
+                getFullMealNutrients(M);
+                ArrayList_SavedMeals.add(M);
+            }
+        }
+    }
+
     @Override
     protected void onPause() {
 
@@ -89,6 +131,7 @@ public class SelectSavedMealActivity extends AppCompatActivity implements Adapte
         super.onResume();
         UpdateArrayList();
     }
+
 
     //TODO USE THIS FUCNTION IN OTHER ACTIVITIES
     //Takes a meal "My_Meal" and retrieves the full nutrient calculation of that meal from the database
