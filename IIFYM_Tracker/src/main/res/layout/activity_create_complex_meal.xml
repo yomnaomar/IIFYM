@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_create_complex"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.kareem.IIFYM_Tracker.Activities.CreateComplexMealActivity">
+
+    <TextView
+        android:text="Total Nutrients"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView21"
+        android:layout_marginBottom="80dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="125dp"
+        android:textStyle="normal|bold" />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_below="@+id/textView20"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="5dp"
+        android:layout_height="150dp"
+        android:id="@+id/mealview" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/edittxt_mealname"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:hint="Meal Name"
+        android:layout_height="40dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="-5dp" />
+
+    <TextView
+        android:text="Cals: ###"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="21dp"
+        android:id="@+id/txt_totalcarbs"
+        android:layout_marginLeft="-100dp"
+        android:layout_alignTop="@+id/textView21"
+        android:layout_toStartOf="@+id/textView20" />
+
+    <TextView
+        android:text="Fat: ###"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txt_totalfat"
+        android:layout_above="@+id/cancel_btn"
+        android:layout_toEndOf="@+id/textView20"
+        android:layout_alignTop="@+id/txt_totalprotein" />
+
+    <Button
+        android:text="Cancel"
+        android:layout_height="wrap_content"
+        android:id="@+id/cancel_btn"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_below="@+id/txt_totalcarbs"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:text="Enter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/enter_btn"
+        android:layout_alignParentBottom="true"
+        android:layout_toEndOf="@+id/cancel_btn"
+        android:layout_marginLeft="150dp" />
+
+    <TextView
+        android:text="Meal Components"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="200dp"
+        android:id="@+id/textView20"
+        android:textAlignment="center"
+        android:textStyle="normal|bold"
+        android:layout_centerHorizontal="true" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="1"
+        android:layout_marginTop="35dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="5dp">
+
+        <TextView
+            android:layout_width="73dp"
+            android:layout_height="match_parent"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Portion:"
+            android:id="@+id/Label_PortionType"
+            android:gravity="center_vertical"
+            android:layout_weight="0.46"
+            android:textColor="@color/black" />
+
+        <RadioGroup
+            android:layout_width="236dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/RadioGroup_PortionType"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <RadioButton
+                android:text="Serving"
+                android:layout_height="wrap_content"
+                android:id="@+id/RadioButton_Serving"
+                android:layout_weight="0.18"
+                android:layout_width="wrap_content"
+                android:checked="true"
+                android:enabled="true" />
+
+            <RadioButton
+                android:layout_height="wrap_content"
+                android:text="Weight"
+                android:id="@+id/RadioButton_Weight"
+                android:layout_weight="0.13"
+                android:layout_width="wrap_content" />
+
+        </RadioGroup>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textView20"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="105dp"
+        android:layout_marginLeft="5dp">
+
+        <TextView
+            android:text="Serving #:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/Label_ServingNumber"
+            android:layout_weight="1"
+            android:textSize="18sp"
+            android:textColor="@color/black" />
+
+        <EditText
+            android:layout_width="98dp"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="5"
+            android:id="@+id/EditText_ServingNumber"
+            android:textAlignment="center"
+            android:hint="1"
+            android:text="1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="110dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="5dp">
+
+        <TextView
+            android:text="Unit:"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/Label_Unit"
+            android:textColor="@color/text_color_selector"
+            android:textSize="18sp" />
+
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/Spinner_Unit"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="1"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="135dp"
+        android:layout_marginLeft="5dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Quantity:"
+            android:id="@+id/Label_Quantity"
+            android:textColor="@color/text_color_selector"
+            android:layout_weight="0.10" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="5"
+            android:id="@+id/EditText_Quantity"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/textView2"
+            android:textColor="#000000"
+            android:textAlignment="center"
+            android:enabled="false"
+            android:hint="100"
+            android:text="100" />
+
+    </LinearLayout>
+
+    <Button
+        android:text="Edit/Add"
+        android:id="@+id/btn_editadd"
+        android:layout_marginTop="180dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="240dp"
+        android:layout_marginRight="10dp"
+        android:textSize="12sp" />
+
+    <TextView
+        android:text="Protein: ###"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txt_totalprotein"
+        android:layout_marginRight="20dp"
+        android:layout_alignBaseline="@+id/txt_totalcarbs"
+        android:layout_alignBottom="@+id/txt_totalcarbs"
+        android:layout_centerHorizontal="true" />
+</RelativeLayout>
