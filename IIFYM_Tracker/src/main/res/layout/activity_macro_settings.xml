@@ -12,7 +12,7 @@
     android:descendantFocusability="beforeDescendants"
     android:focusable="true"
     android:focusableInTouchMode="true"
-    tools:context="com.example.kareem.IIFYM_Tracker.Activities.MacroSettings">
+    tools:context="com.example.kareem.IIFYM_Tracker.Activities.Settings.MacroSettings">
 
     <android.support.design.widget.FloatingActionButton
         android:layout_width="wrap_content"

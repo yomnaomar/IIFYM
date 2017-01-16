@@ -10,7 +10,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.kareem.IIFYM_Tracker.Activities.SelectMealTypeActivity"
+    tools:context="com.example.kareem.IIFYM_Tracker.Activities.Main.SelectMealTypeActivity"
     tools:showIn="@layout/activity_select_meal_type">
 
     <android.support.constraint.ConstraintLayout
