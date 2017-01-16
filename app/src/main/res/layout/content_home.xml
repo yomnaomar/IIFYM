@@ -15,7 +15,9 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
 
         <LinearLayout
             android:orientation="horizontal"
@@ -26,14 +28,117 @@
             <RelativeLayout
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.13">
+                android:layout_weight="0.14">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@android:style/TextAppearance.Material.Small"
+                    android:id="@+id/Text_Current"
+                    android:text="Current"
+                    android:gravity="left"
+                    android:layout_gravity="center"
+                    android:textColor="@color/DarkGrayFaded2"/>
 
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.74">
+                android:layout_weight="0.24">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@android:style/TextAppearance.Material.Small"
+                    android:id="@+id/Text_Plus"
+                    android:text="+"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:textColor="@color/DarkGrayFaded2"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.24">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@android:style/TextAppearance.Material.Small"
+                    android:id="@+id/Text_Remaining"
+                    android:text="Remaining"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:textColor="@color/DarkGrayFaded2"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.24">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@android:style/TextAppearance.Material.Small"
+                    android:id="@+id/Text_Equal"
+                    android:text="="
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:textColor="@color/DarkGrayFaded2"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.14">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@android:style/TextAppearance.Material.Small"
+                    android:id="@+id/Text_Goal"
+                    android:text="Goal"
+                    android:gravity="right"
+                    android:layout_gravity="center"
+                    android:textColor="@color/DarkGrayFaded2"/>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="1">
+
+            <RelativeLayout
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.15">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:id="@+id/Text_CarbsCurrent"
+                    android:text="100"
+                    android:textColor="@color/CarbProgressColor"
+                    android:gravity="left"
+                    android:layout_gravity="center" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.70">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -41,14 +146,14 @@
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:id="@+id/Text_CarbsLeft"
                     android:text="100"
-                    android:textColor="@color/DarkOrange"
+                    android:textColor="@color/CarbSecondaryProgressColor"
                     android:gravity="center"
                     android:layout_gravity="center" />
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_height="wrap_content"
-                android:layout_weight="0.13"
+                android:layout_weight="0.15"
                 android:layout_width="0dip">
 
                 <TextView
@@ -97,14 +202,24 @@
             <RelativeLayout
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.13">
+                android:layout_weight="0.15">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:id="@+id/Text_ProteinCurrent"
+                    android:text="100"
+                    android:textColor="@color/ProteinProgessColor"
+                    android:gravity="left"
+                    android:layout_gravity="center" />
 
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.74">
+                android:layout_weight="0.70">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -112,14 +227,14 @@
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:id="@+id/Text_ProteinLeft"
                     android:text="100"
-                    android:textColor="#d42727"
+                    android:textColor="@color/ProteinSecondaryProgressColor"
                     android:gravity="center" />
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.13">
+                android:layout_weight="0.15">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -164,14 +279,24 @@
             <RelativeLayout
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.13">
+                android:layout_weight="0.15">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:id="@+id/Text_FatCurrent"
+                    android:text="100"
+                    android:textColor="@color/FatProgessColor"
+                    android:gravity="left"
+                    android:layout_gravity="center" />
 
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.74">
+                android:layout_weight="0.70">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -179,7 +304,7 @@
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:id="@+id/Text_FatLeft"
                     android:text="100"
-                    android:textColor="#17a900"
+                    android:textColor="@color/FatSecondaryProgressColor"
                     android:layout_weight="1"
                     android:gravity="center" />
             </RelativeLayout>
@@ -187,7 +312,7 @@
             <RelativeLayout
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.13">>
+                android:layout_weight="0.15">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -226,7 +351,7 @@
             android:layout_width="wrap_content"
             android:id="@+id/ListView_Meals"
             android:fastScrollEnabled="false"
-            android:layout_height="250dp" />
+            android:layout_height="233dp" />
 
         <LinearLayout
             android:orientation="horizontal"

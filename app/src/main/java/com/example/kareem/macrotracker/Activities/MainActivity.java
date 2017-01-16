@@ -42,7 +42,9 @@ import tourguide.tourguide.ToolTip;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener, OnListItemDeletedListener {
 
-    private TextView Text_CarbsGoal, Text_ProteinGoal, Text_FatGoal, Text_CarbsLeft, Text_ProteinLeft, Text_FatLeft;
+    private TextView Text_CarbsGoal, Text_ProteinGoal, Text_FatGoal;
+    private TextView Text_CarbsLeft, Text_ProteinLeft, Text_FatLeft;
+    private TextView Text_CarbsCurrent, Text_ProteinCurrent, Text_FatCurrent;
     private Button Button_AddSavedMeal, Button_AddQuickMeal;
 
     private ArrayList<DailyMeal> ArrayList_DailyMeals;
@@ -96,9 +98,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Text_CarbsGoal = (TextView) findViewById(R.id.Text_CarbsGoal);
         Text_ProteinGoal = (TextView) findViewById(R.id.Text_ProteinGoal);
         Text_FatGoal = (TextView) findViewById(R.id.Text_FatGoal);
+
         Text_CarbsLeft = (TextView) findViewById(R.id.Text_CarbsLeft);
         Text_ProteinLeft = (TextView) findViewById(R.id.Text_ProteinLeft);
         Text_FatLeft = (TextView) findViewById(R.id.Text_FatLeft);
+
+        Text_CarbsCurrent = (TextView) findViewById(R.id.Text_CarbsCurrent);
+        Text_ProteinCurrent = (TextView) findViewById(R.id.Text_ProteinCurrent);
+        Text_FatCurrent = (TextView) findViewById(R.id.Text_FatCurrent);
+
         Carb_ProgressBar = (IconRoundCornerProgressBar) findViewById(R.id.Carb_ProgressBar);
         Protein_ProgressBar = (IconRoundCornerProgressBar) findViewById(R.id.Protein_ProgressBar);
         Fat_ProgressBar = (IconRoundCornerProgressBar) findViewById(R.id.Fat_ProgressBar);
@@ -278,11 +286,46 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         FatLeft = FatGoals - FatCurrent;
 
         Text_CarbsLeft.setText(CarbsLeft + "");
-        Carb_ProgressBar.setProgress(100*CarbsCurrent/CarbGoals);
+        Text_CarbsCurrent.setText(CarbsCurrent + "");
+        if(CarbsCurrent <= CarbGoals)
+        {
+            Carb_ProgressBar.setProgress(100 * CarbsCurrent / CarbGoals);
+            Carb_ProgressBar.setSecondaryProgress(0);
+        }
+        else
+        {
+            int CarbsExcess = CarbsCurrent - CarbGoals;
+            Carb_ProgressBar.setProgress(100*((float) CarbGoals)/CarbsCurrent);
+            Carb_ProgressBar.setSecondaryProgress(100);
+        }
+
         Text_ProteinLeft.setText(ProteinLeft + "");
-        Protein_ProgressBar.setProgress(100*ProteinCurrent/ProteinGoals);
+        Text_ProteinCurrent.setText(ProteinCurrent + "");
+        if(ProteinCurrent <= ProteinGoals)
+        {
+            Protein_ProgressBar.setProgress(100 * ProteinCurrent / ProteinGoals);
+            Protein_ProgressBar.setSecondaryProgress(0);
+        }
+        else
+        {
+            int ProteinExcess = ProteinCurrent - ProteinGoals;
+            Protein_ProgressBar.setProgress(100*ProteinGoals/ProteinCurrent);
+            Protein_ProgressBar.setSecondaryProgress(100);
+        }
+
         Text_FatLeft.setText(FatLeft + "");
-        Fat_ProgressBar.setProgress(100*FatCurrent/FatGoals);
+        Text_FatCurrent.setText(FatCurrent + "");
+        if(FatCurrent <= FatGoals)
+        {
+            Fat_ProgressBar.setProgress(100 * FatCurrent / FatGoals);
+            Fat_ProgressBar.setSecondaryProgress(0);
+        }
+        else
+        {
+            int FatExcess = FatCurrent - FatGoals;
+            Fat_ProgressBar.setProgress(100*FatGoals/FatCurrent);
+            Fat_ProgressBar.setSecondaryProgress(100);
+        }
     }
 
     //Updates My_MealAdapter
