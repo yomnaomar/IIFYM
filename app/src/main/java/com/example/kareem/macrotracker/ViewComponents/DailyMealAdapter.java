@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.kareem.macrotracker.Custom_Objects.DailyMeal;
@@ -20,15 +19,13 @@ import java.util.ArrayList;
 /**
  * Created by Kareem on 9/13/2016.
  */
-public class DailyMealAdapter extends ArrayAdapter<DailyMeal>{
+public class DailyMealAdapter extends ArrayAdapter<DailyMeal> {
     private DatabaseConnector My_DB;
 
     DailyMeal DM;
-    OnListItemDeletedListener listener;
 
-    public DailyMealAdapter(Context context, ArrayList<DailyMeal> meals, OnListItemDeletedListener listener) {
+    public DailyMealAdapter(Context context, ArrayList<DailyMeal> meals) {
         super(context, 0, meals);
-        this.listener=listener;
     }
 
     @Override
@@ -40,12 +37,12 @@ public class DailyMealAdapter extends ArrayAdapter<DailyMeal>{
         //TODO RE-EVALUATE BELOW
         final int meal_id = DM.getMeal_id();
         float multiplier = DM.getMultiplier();
-        Log.i("dailymeal adapter","position: " + position + " meal id: " + meal_id);
-        Log.i("dailymeal adapter","multiplier: " + multiplier + " meal id: " + meal_id);
+        Log.i("dailymeal adapter", "position: " + position + " meal id: " + meal_id);
+        Log.i("dailymeal adapter", "multiplier: " + multiplier + " meal id: " + meal_id);
 
         // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_daily_meal, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_meal, parent, false);
         }
         // Lookup view for data population
         TextView name = (TextView) convertView.findViewById(R.id.Text_MealName);
@@ -63,7 +60,7 @@ public class DailyMealAdapter extends ArrayAdapter<DailyMeal>{
 
         if (DM.getPortion_type() == Portion_Type.Serving) {
             float serving_number = My_DB.getServing(meal_id);
-            float serving_post_multiplication = serving_number*multiplier;
+            float serving_post_multiplication = serving_number * multiplier;
             if (serving_post_multiplication == 1.0f) {
                 portion.setText(serving_post_multiplication + " Serving");
             } else {
@@ -71,38 +68,11 @@ public class DailyMealAdapter extends ArrayAdapter<DailyMeal>{
             }
         } else if (DM.getPortion_type() == Portion_Type.Weight) {
             Weight weight = My_DB.getWeight(meal_id);
-            int weight_post_multiplication = Math.round(weight.getWeight_quantity()*multiplier);
+            int weight_post_multiplication = Math.round(weight.getWeight_quantity() * multiplier);
             weight.setWeight_quantity(weight_post_multiplication);
             portion.setText(weight.getWeight_quantity() + " " + weight.getWeight_unit().Abbreviate());
         }
-
-        Button imageView = (Button) convertView.findViewById(R.id.Button_DeleteMeal);
-        imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                My_DB.deleteDailyMeal(position);
-                if(My_DB.isQuickMeal(meal_id)){
-                    Log.i("isQuickDailyAdapter", "deleted quick meal with ID: "+ My_DB.isQuickMeal(meal_id));
-                    My_DB.deleteMealbyID(meal_id);
-                }
-                //TODO: update position after deleting
-                Log.d("beforedeleteposition",""+position+" "+DM.getPosition());
-                if(position<DM.getPosition())
-                {
-                    Log.i("deleteposition",""+position+"<"+DM.getPosition());
-                    My_DB.updatePositions(position);
-                }
-                DailyMealAdapter.this.remove(getItem(position));
-                DailyMealAdapter.this.notifyDataSetChanged();
-                updateGUI();
-            }
-        });
         // Return the completed view to render on screen
         return convertView;
-    }
-
-    public void updateGUI() {
-        listener.onItemDeleted();
     }
 }

@@ -71,6 +71,7 @@ public class ViewSavedMealsActivity extends AppCompatActivity implements Adapter
         });
     }
 
+
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Meal M = (Meal) parent.getItemAtPosition(position);
@@ -78,6 +79,7 @@ public class ViewSavedMealsActivity extends AppCompatActivity implements Adapter
 
         Intent intent = new Intent(getBaseContext(), ViewMealActivity.class);
         intent.putExtra("Meal_ID", M_ID);
+        intent.putExtra("isDaily", false);
         startActivity(intent);
     }
 

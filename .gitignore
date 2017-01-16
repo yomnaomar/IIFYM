@@ -11,4 +11,7 @@ out
 gen
 .gitignore
 .idea/shelf/
-build/generated/mockable-android-25.jar
+/build
+.gradle
+.idea/libraries
+.idea/modules.xml

@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteException;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.kareem.macrotracker.Custom_Objects.DailyMeal;
 import com.example.kareem.macrotracker.Custom_Objects.Meal;
 import com.example.kareem.macrotracker.Custom_Objects.Portion_Type;
 import com.example.kareem.macrotracker.Custom_Objects.User;
@@ -428,18 +429,17 @@ public class DatabaseConnector {
         }
     }
 
-    //TODO: IMPLEMENT LATER: ALLOW USERS TO UPDATE DAILY MEAL
-    /*public boolean updateDailyMeal(Meal M) {
-        Cursor C = database.rawQuery("SELECT * FROM " + Table_Serving + " WHERE meal_id = '" + M.getMeal_id() + "'", null);
-        Log.i("Serving Retrieved", "ID: " + M.getMeal_id() + " Retrieved");
+    public boolean updateDailyMeal(DailyMeal DM) {
+        Cursor C = database.rawQuery("SELECT * FROM " + Table_Daily_Meals + " WHERE meal_id = '" + DM.getMeal_id() + "' AND position = '" + DM.getPosition() + "'", null);
+        Log.i("DailyMeal Retrieved", "ID: " + DM.getMeal_id() + " Retrieved");
         C.moveToFirst();
-        ContentValues updateServing = new ContentValues();
-        updateServing.put("serving_number", C.getInt(1));
+        ContentValues updateDailyMeal = new ContentValues();
+        updateDailyMeal.put("multiplier", DM.getMultiplier());
 
-        database.update(Table_Daily_Meals, updateServing, "meal_id = '" + M.getMeal_id() + "'", null);
-        Log.i("Serving Updated", "ID: " + M.getMeal_id() + " Updated");
+        database.update(Table_Daily_Meals, updateDailyMeal, "meal_id = '" + DM.getMeal_id() + "' AND position = '" + DM.getPosition() + "'", null);
+        Log.i("DailyMeal Updated", "ID: " + DM.getMeal_id() + " Updated");
         return true;
-    }*/
+    }
 
     public boolean deleteDailyMeal(int position) {
         try {

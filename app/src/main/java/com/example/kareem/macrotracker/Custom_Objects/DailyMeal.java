@@ -27,6 +27,17 @@ public class DailyMeal{
         this.multiplier = multiplier;
     }
 
+    public DailyMeal(Meal M, int position, float multiplier){
+        this.meal_name = M.getMeal_name();
+        this.meal_id = M.getMeal_id();
+        this.carbs = M.getCarbs();
+        this.protein = M.getProtein();
+        this.fat = M.getFat();
+        this.portion_type = M.getPortion();
+        this.position = position;
+        this.multiplier = multiplier;
+    }
+
     public String getMeal_name() {
         return meal_name;
     }

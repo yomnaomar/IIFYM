@@ -68,8 +68,6 @@
         <com.akexorcist.roundcornerprogressbar.IconRoundCornerProgressBar
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:rcProgress="40"
-            app:rcSecondaryProgress="70"
             app:rcMax="100"
             app:rcRadius="10dp"
             app:rcBackgroundPadding="1dp"
@@ -138,8 +136,6 @@
         <com.akexorcist.roundcornerprogressbar.IconRoundCornerProgressBar
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:rcProgress="20"
-            app:rcSecondaryProgress="40"
             app:rcMax="100"
             app:rcRadius="10dp"
             app:rcBackgroundPadding="1dp"
@@ -208,8 +204,6 @@
         <com.akexorcist.roundcornerprogressbar.IconRoundCornerProgressBar
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:rcProgress="30"
-            app:rcSecondaryProgress="60"
             app:rcMax="100"
             app:rcRadius="10dp"
             app:rcBackgroundPadding="1dp"

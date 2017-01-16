@@ -149,6 +149,13 @@
         </LinearLayout>
     </LinearLayout>
 
+    <TextView
+        android:text="Label_MealType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/Label_MealType"
+        android:gravity="center" />
+
     <android.support.design.widget.FloatingActionButton
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

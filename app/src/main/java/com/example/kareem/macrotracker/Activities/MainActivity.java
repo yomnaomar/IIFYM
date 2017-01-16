@@ -23,6 +23,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.akexorcist.roundcornerprogressbar.IconRoundCornerProgressBar;
 import com.example.kareem.macrotracker.Custom_Objects.DailyMeal;
 import com.example.kareem.macrotracker.Custom_Objects.Meal;
 import com.example.kareem.macrotracker.Custom_Objects.Portion_Type;
@@ -47,6 +48,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ArrayList<DailyMeal> ArrayList_DailyMeals;
     private DailyMealAdapter My_DailyMealAdapter;
     private ListView Meals_ListView;
+    private IconRoundCornerProgressBar Carb_ProgressBar, Protein_ProgressBar, Fat_ProgressBar;
 
     public static final String CarbsPrefKey = "EditTextPrefCarbsGoal";
     public static final String ProteinPrefKey = "EditTextPrefProteinGoal";
@@ -97,6 +99,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Text_CarbsLeft = (TextView) findViewById(R.id.Text_CarbsLeft);
         Text_ProteinLeft = (TextView) findViewById(R.id.Text_ProteinLeft);
         Text_FatLeft = (TextView) findViewById(R.id.Text_FatLeft);
+        Carb_ProgressBar = (IconRoundCornerProgressBar) findViewById(R.id.Carb_ProgressBar);
+        Protein_ProgressBar = (IconRoundCornerProgressBar) findViewById(R.id.Protein_ProgressBar);
+        Fat_ProgressBar = (IconRoundCornerProgressBar) findViewById(R.id.Fat_ProgressBar);
 
         Button_AddSavedMeal = (Button) findViewById(R.id.Button_AddSavedMeal);
         Button_AddSavedMeal.setOnClickListener(this);
@@ -104,7 +109,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button_AddQuickMeal.setOnClickListener(this);
 
         ArrayList_DailyMeals = new ArrayList<DailyMeal>();
-        My_DailyMealAdapter = new DailyMealAdapter(this, ArrayList_DailyMeals,this);
+        My_DailyMealAdapter = new DailyMealAdapter(this, ArrayList_DailyMeals);
 
         Meals_ListView = (ListView) findViewById(R.id.ListView_Meals);
         Meals_ListView.setAdapter(My_DailyMealAdapter);
@@ -116,9 +121,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //TODO:(Abdulwahab) get current currentUser here
         intent = getIntent();
         isLogged = intent.getBooleanExtra("logged",false);//checks if user just logged in
-
-
-
 
           /* setup enter and exit animation */
         mEnterAnimation = new AlphaAnimation(0f, 1f);
@@ -135,8 +137,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_home, menu);
+        getMenuInflater().inflate(R.menu.menu_home_woman, menu);
         return true;
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        menu.clear();
+        Log.d("currentUser Gender", currentUser.getGender());
+        if (currentUser.getGender().startsWith("M")) { //Male
+            getMenuInflater().inflate(R.menu.menu_home_man, menu);
+        }
+        else {
+            getMenuInflater().inflate(R.menu.menu_home_woman, menu);
+        }
+        return super.onPrepareOptionsMenu(menu);
     }
 
     @Override
@@ -217,7 +232,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     protected void onPause() {
-
         settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         SharedPreferences.Editor editor = settings.edit();
         editor.putString("user_name", user_name); // here string is the value you want to save
@@ -230,8 +244,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void UpdateMacros (){
         SharedPreferences prefs =
                 PreferenceManager.getDefaultSharedPreferences(this);
-
-        int NumberOfMeals = My_DailyMealAdapter.getCount();
 
         int CarbGoals = Integer.parseInt(prefs.getString(CarbsPrefKey, CarbsDefault + ""));
         int ProteinGoals = Integer.parseInt(prefs.getString(ProteinPrefKey, ProteinDefault + ""));
@@ -249,6 +261,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         int ProteinLeft = 0;
         int FatLeft = 0;
 
+        int NumberOfMeals = My_DailyMealAdapter.getCount();
         for (int i = 0; i < NumberOfMeals; i++) {
             DailyMeal TempMeal = My_DailyMealAdapter.getItem(i);
             int carbs = Math.round(TempMeal.getCarbs());
@@ -265,8 +278,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         FatLeft = FatGoals - FatCurrent;
 
         Text_CarbsLeft.setText(CarbsLeft + "");
+        Carb_ProgressBar.setProgress(100*CarbsCurrent/CarbGoals);
         Text_ProteinLeft.setText(ProteinLeft + "");
+        Protein_ProgressBar.setProgress(100*ProteinCurrent/ProteinGoals);
         Text_FatLeft.setText(FatLeft + "");
+        Fat_ProgressBar.setProgress(100*FatCurrent/FatGoals);
     }
 
     //Updates My_MealAdapter
@@ -319,9 +335,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
     @Override
     public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-        //onItemDeleted();
-        //Meals_ListView.removeViewAt(position);
-        //My_DailyMealAdapter.notifyDataSetChanged();
+        DailyMeal DM = (DailyMeal) parent.getItemAtPosition(position);
+        int DM_ID = DM.getMeal_id();
+
+        Intent intent = new Intent(getBaseContext(), ViewMealActivity.class);
+        intent.putExtra("Meal_ID", DM_ID);
+        intent.putExtra("position", position);
+        intent.putExtra("isDaily", true);
+        startActivity(intent);
     }
 
     private void getActiveUser(boolean logged, Intent intent)

@@ -1,0 +1,26 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.kareem.macrotracker.HomeActivity">
+    <item android:title="Logout"
+        android:id="@+id/logout_menu_btn" />
+    <item
+        android:id="@+id/action_MacroSettings"
+        android:orderInCategory="100"
+        android:title="@string/Macro_settings"
+        app:showAsAction="always"
+        android:icon="@drawable/macrosettings_icon"
+        />
+    <item
+        android:id="@+id/action_MealSettings"
+        android:orderInCategory="100"
+        android:title="@string/Meal_settings"
+        app:showAsAction="always"
+        android:icon="@drawable/mealsettings_icon"
+        />
+    <item android:title="Profile"
+        android:id="@+id/profile_menu_btn"
+        app:showAsAction="always"
+        android:icon="@drawable/woman"
+        android:orderInCategory="101" />
+</menu>

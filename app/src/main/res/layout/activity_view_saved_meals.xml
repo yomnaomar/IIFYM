@@ -41,11 +41,12 @@
             android:clickable="true"
             app:srcCompat="@drawable/addnewealicon"
             android:id="@+id/addmeal_fab"
-            app:backgroundTint="@android:color/darker_gray"
+            app:backgroundTint="?attr/colorPrimaryDark"
             android:layout_gravity="bottom|right"
-            app:rippleColor="@color/LightGrey"
             app:fabSize="mini"
-            android:layout_width="75dp" />
+            android:layout_width="75dp"
+            app:elevation="10dp"
+            app:rippleColor="@android:color/black" />
 
     </LinearLayout>
 
