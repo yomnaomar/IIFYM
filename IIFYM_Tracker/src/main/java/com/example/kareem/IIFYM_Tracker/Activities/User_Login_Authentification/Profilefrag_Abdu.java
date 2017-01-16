@@ -29,12 +29,12 @@ import java.util.Calendar;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link Profilefrag.OnFragmentInteractionListener} interface
+ * {@link Profilefrag_Abdu.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link Profilefrag#newInstance} factory method to
+ * Use the {@link Profilefrag_Abdu#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Profilefrag extends Fragment implements View.OnClickListener, View.OnFocusChangeListener {
+public class Profilefrag_Abdu extends Fragment implements View.OnClickListener, View.OnFocusChangeListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -63,7 +63,7 @@ public class Profilefrag extends Fragment implements View.OnClickListener, View.
 
     //GUI vars ----------------------------------
 
-    public Profilefrag() {
+    public Profilefrag_Abdu() {
         // Required empty public constructor
     }
 
@@ -73,11 +73,11 @@ public class Profilefrag extends Fragment implements View.OnClickListener, View.
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment Profilefrag.
+     * @return A new instance of fragment Profilefrag_Abdu.
      */
     // TODO: Rename and change types and number of parameters
-    public static Profilefrag newInstance(String param1, String param2) {
-        Profilefrag fragment = new Profilefrag();
+    public static Profilefrag_Abdu newInstance(String param1, String param2) {
+        Profilefrag_Abdu fragment = new Profilefrag_Abdu();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);

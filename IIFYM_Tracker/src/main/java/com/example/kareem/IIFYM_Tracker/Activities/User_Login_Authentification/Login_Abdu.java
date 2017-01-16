@@ -150,10 +150,10 @@ public class Login_Abdu extends AppCompatActivity implements myFragEventListener
             switch (position)
             {
                 case 0:
-                    Signupfrag frag1 = new Signupfrag();
+                    Signupfrag_Abdu frag1 = new Signupfrag_Abdu();
                     return frag1;
                 case 1:
-                    Profilefrag frag2 = new Profilefrag();
+                    Profilefrag_Abdu frag2 = new Profilefrag_Abdu();
                     return frag2;
                 case 2:
                     Goalsfrag_Abdu frag3 = new Goalsfrag_Abdu();

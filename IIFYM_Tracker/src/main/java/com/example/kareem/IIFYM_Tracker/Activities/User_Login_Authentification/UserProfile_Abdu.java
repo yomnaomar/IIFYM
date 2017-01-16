@@ -16,7 +16,7 @@ import com.example.kareem.IIFYM_Tracker.Activities.Settings.EditProfile;
 import com.example.kareem.IIFYM_Tracker.Database.DatabaseConnector;
 import com.example.kareem.IIFYM_Tracker.R;
 
-public class UserProfile extends AppCompatActivity implements View.OnClickListener{
+public class UserProfile_Abdu extends AppCompatActivity implements View.OnClickListener{
 
     private DatabaseConnector DB;
     TextView username;

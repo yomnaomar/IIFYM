@@ -17,12 +17,12 @@ import com.example.kareem.IIFYM_Tracker.R;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link Signupfrag.OnFragmentInteractionListener} interface
+ * {@link Signupfrag_Abdu.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link Signupfrag#newInstance} factory method to
+ * Use the {@link Signupfrag_Abdu#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Signupfrag extends Fragment implements View.OnClickListener {
+public class Signupfrag_Abdu extends Fragment implements View.OnClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -47,7 +47,7 @@ public class Signupfrag extends Fragment implements View.OnClickListener {
 
     //GUI vars ----------------------------------
 
-    public Signupfrag() {
+    public Signupfrag_Abdu() {
         // Required empty public constructor
     }
 
@@ -57,11 +57,11 @@ public class Signupfrag extends Fragment implements View.OnClickListener {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment Signupfrag.
+     * @return A new instance of fragment Signupfrag_Abdu.
      */
     // TODO: Rename and change types and number of parameters
-    public static Signupfrag newInstance(String param1, String param2) {
-        Signupfrag fragment = new Signupfrag();
+    public static Signupfrag_Abdu newInstance(String param1, String param2) {
+        Signupfrag_Abdu fragment = new Signupfrag_Abdu();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);

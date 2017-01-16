@@ -92,7 +92,7 @@ public class EditProfile extends AppCompatActivity implements View.OnClickListen
 
                if( DB.updateuserdata(id,user_name,dateofbirth,fn,ln,em)) {
                    Toast.makeText(getApplication(), "Profile Updated", Toast.LENGTH_LONG).show();
-//                   Intent i = new Intent(getApplicationContext(), UserProfile.class);
+//                   Intent i = new Intent(getApplicationContext(), UserProfile_Abdu.class);
 //                   i.putExtra("username", user_name);
 //                   startActivity(i);
                    finish();
