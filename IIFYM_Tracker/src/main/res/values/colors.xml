@@ -17,4 +17,7 @@
     <color name="FatProgessColor">#66bb6a</color>
     <color name="FatSecondaryProgressColor">#2e7d32</color>
     <color name="Progress_Bar_Background">#e0e0e0</color>
+    <color name="IIFYM_LoginScreen_Blue">#192d5a</color>
+    <color name="Transparent">#00ffffff</color>
+    <color name="LoginScreen_Backgroud_Blue">#dffdff</color>
 </resources>
