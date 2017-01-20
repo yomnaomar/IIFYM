@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "930699920107-uc08mnl6hlsma6no6171a7bhkp0j4j07.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.kareem.IIFYM_Tracker",
+            "certificate_hash": "5D4BDCE697CE983C80AE31F96C72118698F8DC75"
+          }
+        },
+        {
           "client_id": "930699920107-v0kdja7kq2bdnc74gjbsc4oklgu39lvs.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

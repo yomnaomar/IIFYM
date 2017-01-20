@@ -39,7 +39,7 @@ public class Signupfrag_Abdu extends Fragment implements View.OnClickListener {
     //GUI vars ----------------------------------
     View myView;
     EditText username;
-    Button login,register,skip;
+    Button login,register,skip, firebase;
 
 
 
@@ -87,10 +87,12 @@ public class Signupfrag_Abdu extends Fragment implements View.OnClickListener {
         login = (Button)myView.findViewById(R.id.loginbtn);
         register = (Button)myView.findViewById(R.id.registerbtn);
         skip=(Button)myView.findViewById(R.id.skipbtn);
+        firebase=(Button)myView.findViewById(R.id.Button_Firebase);
 
         login.setOnClickListener(this);
         register.setOnClickListener(this);
         skip.setOnClickListener(this);
+        firebase.setOnClickListener(this);
 
         return myView;
 
@@ -114,6 +116,9 @@ public class Signupfrag_Abdu extends Fragment implements View.OnClickListener {
 //                break;
             case R.id.skipbtn:
                 listener.openHome();
+
+            case R.id.Button_Firebase:
+                listener.GoToFirebase();
                 break;
 
         }

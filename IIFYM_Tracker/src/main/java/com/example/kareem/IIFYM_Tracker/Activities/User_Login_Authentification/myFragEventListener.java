@@ -19,4 +19,5 @@ public interface myFragEventListener {
     //TODO: insert methods---------------------------------------------
     void insertUser();
 
+    void GoToFirebase();
 }

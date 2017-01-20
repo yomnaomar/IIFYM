@@ -108,5 +108,7 @@
     <string name="title_activity_enter_saved_meal_quantity">EnterSavedMealQuantity</string>
     <string name="title_activity_select_meal_type">SelectMealTypeActivity</string>
     <string name="title_activity_create_simple_meal">CreateSimpleMealActivity</string>
+    <string name="emailpassword_status_fmt">Email User: %s</string>
+    <string name="firebase_status_fmt">Firebase User: %s</string>
 
 </resources>

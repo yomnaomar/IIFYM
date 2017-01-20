@@ -48,7 +48,7 @@ public class Login_Abdu extends AppCompatActivity implements myFragEventListener
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_login_abdu);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -272,6 +272,15 @@ public class Login_Abdu extends AppCompatActivity implements myFragEventListener
 
         Log.d("LOGIN","Signup Complete: User: "+ newUser.toString());
         Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("user_name", newUser.getUser_name()); //get user_name
+        intent.putExtra("logged",true);
+        startActivity(intent); //open main activity
+        finish(); //disable going back to login with BACK button
+    }
+
+    @Override
+    public void GoToFirebase(){
+        Intent intent = new Intent(this, Login_Activity.class);
         intent.putExtra("user_name", newUser.getUser_name()); //get user_name
         intent.putExtra("logged",true);
         startActivity(intent); //open main activity
