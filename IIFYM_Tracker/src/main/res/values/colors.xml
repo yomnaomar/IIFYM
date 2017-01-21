@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3f51b5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#1f3972</color>
+    <color name="colorPrimaryDark">#192d5a</color>
+    <color name="colorAccent">#ff888888</color>
     <color name="blue_light">#2D9DC8</color>
     <color name="blue_dark">#314d61</color>
     <color name="white">#FFFFFF</color>
@@ -17,7 +17,6 @@
     <color name="FatProgessColor">#66bb6a</color>
     <color name="FatSecondaryProgressColor">#2e7d32</color>
     <color name="Progress_Bar_Background">#e0e0e0</color>
-    <color name="IIFYM_LoginScreen_Blue">#192d5a</color>
     <color name="Transparent">#00ffffff</color>
-    <color name="LoginScreen_Backgroud_Blue">#dffdff</color>
+    <color name="LoginScreen_Backgroud">#ffffff</color>
 </resources>
