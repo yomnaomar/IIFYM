@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MacroTracker</string>
+    <string name="app_name">IIFYM Tracker</string>
     <string name="action_settings">Settings</string>
     <string name="Macro_settings">Marco Settings</string>
     <string name="Meal_settings">Meal Settings</string>

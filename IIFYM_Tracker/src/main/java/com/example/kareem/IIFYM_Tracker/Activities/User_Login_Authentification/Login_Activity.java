@@ -8,7 +8,6 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.kareem.IIFYM_Tracker.R;
@@ -23,8 +22,8 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     public ProgressDialog mProgressDialog;
-    private TextView mStatusTextView;
-    private TextView mDetailTextView;
+    //private TextView mStatusTextView;
+    //private TextView mDetailTextView;
     private EditText mEmailField;
     private EditText mPasswordField;
 
@@ -40,6 +39,7 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
         if (mAuthListener != null){
             mAuth.removeAuthStateListener(mAuthListener);
         }
+        hideProgressDialog();
     }
 
     @Override
@@ -65,15 +65,15 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
         };
 
         // Views
-        mStatusTextView = (TextView) findViewById(R.id.status);
-        mDetailTextView = (TextView) findViewById(R.id.detail);
-        mEmailField = (EditText) findViewById(R.id.field_email);
-        mPasswordField = (EditText) findViewById(R.id.field_password);
+        //mStatusTextView = (TextView) findViewById(R.id.status);
+        //mDetailTextView = (TextView) findViewById(R.id.detail);
+        mEmailField = (EditText) findViewById(R.id.email_edittext);
+        mPasswordField = (EditText) findViewById(R.id.password_textview);
 
         // Buttons
-        findViewById(R.id.email_sign_in_button).setOnClickListener(this);
-        findViewById(R.id.email_create_account_button).setOnClickListener(this);
-        findViewById(R.id.sign_out_button).setOnClickListener(this);
+        findViewById(R.id.login_button).setOnClickListener(this);
+        findViewById(R.id.register_button).setOnClickListener(this);
+        //findViewById(R.id.sign_out_button).setOnClickListener(this);
     }
 
     private void createAccount(String email, String password) {
@@ -154,9 +154,6 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
                         }
 
                         // [START_EXCLUDE]
-                        if (!task.isSuccessful()) {
-                            mStatusTextView.setText("Authenctication Failed");
-                        }
                         hideProgressDialog();
                         // [END_EXCLUDE]
                     }
@@ -167,32 +164,32 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
     private void updateUI(FirebaseUser user) {
         hideProgressDialog();
         if (user != null) {
-            mStatusTextView.setText(getString(R.string.emailpassword_status_fmt, user.getEmail()));
-            mDetailTextView.setText(getString(R.string.firebase_status_fmt, user.getUid()));
+            //mStatusTextView.setText(getString(R.string.emailpassword_status_fmt, user.getEmail()));
+            //mDetailTextView.setText(getString(R.string.firebase_status_fmt, user.getUid()));
 
-            findViewById(R.id.email_password_buttons).setVisibility(View.GONE);
-            findViewById(R.id.email_password_fields).setVisibility(View.GONE);
-            findViewById(R.id.sign_out_button).setVisibility(View.VISIBLE);
+            //findViewById(R.id.email_password_buttons).setVisibility(View.GONE);
+            //findViewById(R.id.email_password_fields).setVisibility(View.GONE);
+            //findViewById(R.id.sign_out_button).setVisibility(View.VISIBLE);
         } else {
-            mStatusTextView.setText("Signed Out");
-            mDetailTextView.setText(null);
+            //mStatusTextView.setText("Signed Out");
+            //mDetailTextView.setText(null);
 
-            findViewById(R.id.email_password_buttons).setVisibility(View.VISIBLE);
-            findViewById(R.id.email_password_fields).setVisibility(View.VISIBLE);
-            findViewById(R.id.sign_out_button).setVisibility(View.GONE);
+            //findViewById(R.id.email_password_buttons).setVisibility(View.VISIBLE);
+            //findViewById(R.id.email_password_fields).setVisibility(View.VISIBLE);
+            //findViewById(R.id.sign_out_button).setVisibility(View.GONE);
         }
     }
 
     @Override
     public void onClick(View v) {
         int i = v.getId();
-        if (i == R.id.email_create_account_button) {
+        if (i == R.id.register_button) {
             createAccount(mEmailField.getText().toString(), mPasswordField.getText().toString());
-        } else if (i == R.id.email_sign_in_button) {
+        } else if (i == R.id.login_button) {
             signIn(mEmailField.getText().toString(), mPasswordField.getText().toString());
-        } else if (i == R.id.sign_out_button) {
+        } /*else if (i == R.id.sign_out_button) {
             signOut();
-        }
+        }*/
     }
 
     private boolean validateForm() {
