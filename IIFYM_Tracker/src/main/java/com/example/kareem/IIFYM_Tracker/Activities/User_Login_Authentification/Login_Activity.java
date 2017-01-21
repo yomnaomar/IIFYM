@@ -1,8 +1,10 @@
 package com.example.kareem.IIFYM_Tracker.Activities.User_Login_Authentification;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
@@ -63,8 +65,18 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
                     }
                     else {
                         //display that user needs to verify email
-                        Toast.makeText(Login_Activity.this, "Verify email to proceed.",
-                                Toast.LENGTH_SHORT).show();
+                        AlertDialog.Builder builder = new AlertDialog.Builder(Login_Activity.this);
+                        builder.setMessage("Your email must be verified before logging in!").setTitle("Email not verified");
+                        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener()
+                        {
+                            @Override
+                            public void onClick(DialogInterface dialog, int id)
+                            {
+                                dialog.dismiss();
+                            }
+                        });
+                        AlertDialog dialog = builder.create();
+                        dialog.show();
                     }
                 } else {
                     // User is signed out
