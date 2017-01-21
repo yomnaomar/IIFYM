@@ -56,6 +56,16 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
                 if (user != null) {
                     // User is signed in
                     Log.d("User Sign in:", "onAuthStateChanged:signed_in:" + user.getUid());
+                    if(mAuth.getCurrentUser().isEmailVerified()){
+                        Toast.makeText(Login_Activity.this, "Email is verified.",
+                                Toast.LENGTH_SHORT).show();
+                        //move to home acitivty
+                    }
+                    else {
+                        //display that user needs to verify email
+                        Toast.makeText(Login_Activity.this, "Verify email to proceed.",
+                                Toast.LENGTH_SHORT).show();
+                    }
                 } else {
                     // User is signed out
                     Log.d("User Signed out", "onAuthStateChanged:signed_out");
@@ -71,8 +81,8 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
         mPasswordField = (EditText) findViewById(R.id.password_textview);
 
         // Buttons
-        findViewById(R.id.login_button).setOnClickListener(this);
-        findViewById(R.id.register_button).setOnClickListener(this);
+        findViewById(R.id.Button_Login).setOnClickListener(this);
+        findViewById(R.id.Button_Register).setOnClickListener(this);
         //findViewById(R.id.sign_out_button).setOnClickListener(this);
     }
 
@@ -88,16 +98,29 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        Log.d("User created:", "createUserWithEmail:onComplete:" + task.isSuccessful());
+                        if(task.isSuccessful()) {
+                            Log.d("User created:", "createUserWithEmail:onComplete:" + task.isSuccessful());
 
-                        Toast.makeText(Login_Activity.this, "User Created",
-                                Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Login_Activity.this, "User Created",
+                                    Toast.LENGTH_SHORT).show();
 
+                            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+                            user.sendEmailVerification()
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()) {
+                                                Log.d("Auth Email", "Email sent.");
+                                            }
+                                        }
+                                    });
+                        }
                         // If sign in fails, display a message to the user. If sign in succeeds
                         // the auth state listener will be notified and logic to handle the
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
-                            Toast.makeText(Login_Activity.this, "Authentication failed.",
+                            Toast.makeText(Login_Activity.this, "User creation failed.",
                                     Toast.LENGTH_SHORT).show();
                         }
 
@@ -111,18 +134,23 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        Log.d("Sign in complete:", "signInWithEmail:onComplete:" + task.isSuccessful());
-
+                        if(task.isSuccessful()) {
+                            Log.d("tag", "signInWithEmail:onComplete:" + task.isSuccessful());
+                            Toast.makeText(Login_Activity.this, "Sign in with email Success",
+                                    Toast.LENGTH_SHORT).show();
+                        }
                         // If sign in fails, display a message to the user. If sign in succeeds
                         // the auth state listener will be notified and logic to handle the
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
-                            Log.w("Sign in failed:", "signInWithEmail", task.getException());
-                            Toast.makeText(Login_Activity.this, "Authentication failed.",
+                            Log.w("tag", "signInWithEmail:failed", task.getException());
+                            Toast.makeText(Login_Activity.this, "Sign in with email Failed",
                                     Toast.LENGTH_SHORT).show();
                         }
 
-                        // ...
+                        // [START_EXCLUDE]
+                        hideProgressDialog();
+                        // [END_EXCLUDE]
                     }
                 });
     }
@@ -140,16 +168,17 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        Log.d("tag", "signInWithEmail:onComplete:" + task.isSuccessful());
-                        Toast.makeText(Login_Activity.this, "Authenctication Success",
-                                Toast.LENGTH_SHORT).show();
-
+                        if(task.isSuccessful()) {
+                            Log.d("tag", "signInWithEmail:onComplete:" + task.isSuccessful());
+                            Toast.makeText(Login_Activity.this, "Sign in with email Success",
+                                    Toast.LENGTH_SHORT).show();
+                        }
                         // If sign in fails, display a message to the user. If sign in succeeds
                         // the auth state listener will be notified and logic to handle the
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
                             Log.w("tag", "signInWithEmail:failed", task.getException());
-                            Toast.makeText(Login_Activity.this, "Authenctication Failed",
+                            Toast.makeText(Login_Activity.this, "Sign in with email Failed",
                                     Toast.LENGTH_SHORT).show();
                         }
 
@@ -183,9 +212,9 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onClick(View v) {
         int i = v.getId();
-        if (i == R.id.register_button) {
+        if (i == R.id.Button_Register) {
             createAccount(mEmailField.getText().toString(), mPasswordField.getText().toString());
-        } else if (i == R.id.login_button) {
+        } else if (i == R.id.Button_Login) {
             signIn(mEmailField.getText().toString(), mPasswordField.getText().toString());
         } /*else if (i == R.id.sign_out_button) {
             signOut();

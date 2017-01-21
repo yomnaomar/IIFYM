@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.kareem.IIFYM_Tracker.Activities.User_Login_Authentification.Signupfrag_Abdu">
+    tools:context="com.example.kareem.IIFYM_Tracker.Activities.Old_Login.Signupfrag_Abdu">
 
     <!-- TODO: Update blank fragment layout -->
     <ScrollView
