@@ -19,34 +19,16 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".Activities.Main.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
-
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-
-
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
         </activity>
         <activity
             android:name=".Activities.Main.AddQuickMealActivity"
             android:screenOrientation="portrait" />
-        <!--
-        <activity android:name=".Activities.ViewSavedMealsActivity"
-            android:screenOrientation="portrait"
-            />
-        <activity android:name=".Activities.ViewSavedMealActivity"></activity>
-        -->
         <activity
             android:name=".Activities.Main.ViewSavedMealsActivity"
             android:screenOrientation="portrait" />
@@ -82,7 +64,12 @@
             android:name=".Activities.Main.CreateSimpleMealActivity"
             android:label="@string/title_activity_create_simple_meal"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Activities.User_Login_Authentification.Login_Activity"></activity>
+        <activity android:name=".Activities.User_Login_Authentification.Login_Activity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

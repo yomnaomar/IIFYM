@@ -1,7 +1,9 @@
 package com.example.kareem.IIFYM_Tracker.Activities.User_Login_Authentification;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
@@ -12,6 +14,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.kareem.IIFYM_Tracker.Activities.Main.MainActivity;
 import com.example.kareem.IIFYM_Tracker.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -46,7 +49,6 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
         mAuth = FirebaseAuth.getInstance();
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -56,20 +58,21 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
                 if (user != null) {
                     // User is signed in
                     Log.d("User Sign in:", "onAuthStateChanged:signed_in:" + user.getUid());
-                    if(mAuth.getCurrentUser().isEmailVerified()){
-                        Toast.makeText(Login_Activity.this, "Email is verified.",
-                                Toast.LENGTH_SHORT).show();
-                        //move to home acitivty
-                    }
-                    else {
+                    if (mAuth.getCurrentUser().isEmailVerified()) {
+                        Log.d("Email Verification:", "Email IS Verified");
+                        Context context = getApplicationContext();
+                        Intent intent = new Intent();
+                        intent.setClass(context, MainActivity.class);
+                        startActivity(intent);
+                        finish();
+
+                    } else {
                         //display that user needs to verify email
                         AlertDialog.Builder builder = new AlertDialog.Builder(Login_Activity.this);
                         builder.setMessage("Your email must be verified before logging in!").setTitle("Email not verified");
-                        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener()
-                        {
+                        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                             @Override
-                            public void onClick(DialogInterface dialog, int id)
-                            {
+                            public void onClick(DialogInterface dialog, int id) {
                                 dialog.dismiss();
                             }
                         });
@@ -85,15 +88,12 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
         };
 
         // Views
-        //mStatusTextView = (TextView) findViewById(R.id.status);
-        //mDetailTextView = (TextView) findViewById(R.id.detail);
         mEmailField = (EditText) findViewById(R.id.email_edittext);
         mPasswordField = (EditText) findViewById(R.id.password_textview);
 
         // Buttons
         findViewById(R.id.Button_Login).setOnClickListener(this);
         findViewById(R.id.Button_Register).setOnClickListener(this);
-        //findViewById(R.id.sign_out_button).setOnClickListener(this);
     }
 
     private void createAccount(String email, String password) {
