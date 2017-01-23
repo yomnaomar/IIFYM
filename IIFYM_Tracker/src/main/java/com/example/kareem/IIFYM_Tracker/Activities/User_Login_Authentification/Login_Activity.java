@@ -24,8 +24,6 @@ public class Login_Activity extends AppCompatActivity implements View.OnClickLis
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     public ProgressDialog mProgressDialog;
-    //private TextView mStatusTextView;
-    //private TextView mDetailTextView;
     private EditText mEmailField;
     private EditText mPasswordField;
 

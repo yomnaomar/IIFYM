@@ -26,7 +26,7 @@ import android.widget.TextView;
 import com.akexorcist.roundcornerprogressbar.IconRoundCornerProgressBar;
 import com.example.kareem.IIFYM_Tracker.Activities.Settings.MacroSettings;
 import com.example.kareem.IIFYM_Tracker.Activities.Old_Login.Login_Abdu;
-import com.example.kareem.IIFYM_Tracker.Activities.Old_Login.UserProfile_Abdu;
+import com.example.kareem.IIFYM_Tracker.Activities.Settings.UserProfile_Mina;
 import com.example.kareem.IIFYM_Tracker.Custom_Objects.DailyMeal;
 import com.example.kareem.IIFYM_Tracker.Custom_Objects.Meal;
 import com.example.kareem.IIFYM_Tracker.Custom_Objects.Portion_Type;
@@ -189,7 +189,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         if(id==R.id.profile_menu_btn)
         {
-            Intent intent = new Intent(getApplicationContext(),UserProfile_Abdu.class);
+            Intent intent = new Intent(getApplicationContext(),UserProfile_Mina.class);
             intent.putExtra("username",user_name);
             startActivity(intent);
             return true;

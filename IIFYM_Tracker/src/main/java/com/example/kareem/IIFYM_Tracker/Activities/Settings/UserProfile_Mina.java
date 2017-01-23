@@ -1,22 +1,21 @@
-package com.example.kareem.IIFYM_Tracker.Activities.Old_Login;
+package com.example.kareem.IIFYM_Tracker.Activities.Settings;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.kareem.IIFYM_Tracker.Activities.Settings.EditProfile;
 import com.example.kareem.IIFYM_Tracker.Database.DatabaseConnector;
 import com.example.kareem.IIFYM_Tracker.R;
 
-public class UserProfile_Abdu extends AppCompatActivity implements View.OnClickListener{
+public class UserProfile_Mina extends AppCompatActivity implements View.OnClickListener{
 
     private DatabaseConnector DB;
     TextView username;
@@ -50,7 +49,7 @@ public class UserProfile_Abdu extends AppCompatActivity implements View.OnClickL
     @Override
     public void onClick(View view) {
 
-        Intent i = new Intent(getApplicationContext(),EditProfile.class);
+        Intent i = new Intent(getApplicationContext(),EditProfile_Mina.class);
         //i.putExtra("username",user_name);
         startActivity(i);
     }

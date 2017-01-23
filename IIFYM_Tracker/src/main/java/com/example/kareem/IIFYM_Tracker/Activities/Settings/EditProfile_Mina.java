@@ -15,7 +15,7 @@ import android.widget.Toast;
 import com.example.kareem.IIFYM_Tracker.Database.DatabaseConnector;
 import com.example.kareem.IIFYM_Tracker.R;
 
-public class EditProfile extends AppCompatActivity implements View.OnClickListener{
+public class EditProfile_Mina extends AppCompatActivity implements View.OnClickListener{
 
     EditText userid ;
     TextView username;
@@ -92,7 +92,7 @@ public class EditProfile extends AppCompatActivity implements View.OnClickListen
 
                if( DB.updateuserdata(id,user_name,dateofbirth,fn,ln,em)) {
                    Toast.makeText(getApplication(), "Profile Updated", Toast.LENGTH_LONG).show();
-//                   Intent i = new Intent(getApplicationContext(), UserProfile_Abdu.class);
+//                   Intent i = new Intent(getApplicationContext(), UserProfile_Mina.class);
 //                   i.putExtra("username", user_name);
 //                   startActivity(i);
                    finish();
