@@ -27,6 +27,7 @@ import com.akexorcist.roundcornerprogressbar.IconRoundCornerProgressBar;
 import com.example.kareem.IIFYM_Tracker.Activities.Settings.MacroSettings;
 import com.example.kareem.IIFYM_Tracker.Activities.Old_Login.Login_Abdu;
 import com.example.kareem.IIFYM_Tracker.Activities.Settings.UserProfile_Mina;
+import com.example.kareem.IIFYM_Tracker.Activities.User_Login_Authentification.Login_Activity;
 import com.example.kareem.IIFYM_Tracker.Custom_Objects.DailyMeal;
 import com.example.kareem.IIFYM_Tracker.Custom_Objects.Meal;
 import com.example.kareem.IIFYM_Tracker.Custom_Objects.Portion_Type;
@@ -35,6 +36,7 @@ import com.example.kareem.IIFYM_Tracker.Database.DatabaseConnector;
 import com.example.kareem.IIFYM_Tracker.R;
 import com.example.kareem.IIFYM_Tracker.ViewComponents.DailyMealAdapter;
 import com.example.kareem.IIFYM_Tracker.ViewComponents.OnListItemDeletedListener;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 
@@ -85,6 +87,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Intent intent;
 
     private Animation mEnterAnimation, mExitAnimation;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,6 +96,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        mAuth = FirebaseAuth.getInstance();
         My_DB = new DatabaseConnector(getApplicationContext());
 
         coordinatorLayout = (CoordinatorLayout) findViewById(R.id.main_content);
@@ -184,6 +188,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             //My_DB.close();
             finish();
             Intent in = new Intent(getApplicationContext(), Login_Abdu.class);
+            startActivity(in);
+            return true;
+        }
+        if(id==R.id.logout_firbase_menu_btn)
+        {
+            //My_DB.close();
+            signOut();
+            finish();
+            Intent in = new Intent(getApplicationContext(), Login_Activity.class);
             startActivity(in);
             return true;
         }
@@ -563,6 +576,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             editor.putBoolean("isnewUser", false); // here string is the value you want to save
             editor.commit();
         }
+    }
+
+    private void signOut() {
+        mAuth.signOut();
     }
 
 }
