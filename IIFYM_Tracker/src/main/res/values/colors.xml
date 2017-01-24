@@ -5,7 +5,7 @@
     <color name="colorAccent">#1f3972</color>
     <color name="blue_light">#2D9DC8</color>
     <color name="blue_dark">#314d61</color>
-    <color name="white">#FFFFFF</color>
+    <color name="white">#ffffff</color>
     <color name="green_light">#308A24</color>
     <color name="black">#000000</color>
     <color name="black_light">#333</color>
@@ -19,7 +19,7 @@
     <color name="Progress_Bar_Background">#e0e0e0</color>
     <color name="Transparent">#00ffffff</color>
     <color name="LoginScreen_Backgroud">#ffffff</color>
-    <color name="radio_button_selected_color">#ff33b5e5</color>
-    <color name="radio_button_unselected_color">#e0e0e0</color>
-    <color name="SegmentedGroup_sc_unchecked_tint_color">#D3D3D3</color>
+    <color name="radio_button_selected_color">#1f3972</color>
+    <color name="radio_button_unselected_color">#FFFFFF</color>
+    <color name="SegmentedGroup_sc_unchecked_tint_color">#FFFFFF</color>
 </resources>

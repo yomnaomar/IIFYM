@@ -6,7 +6,7 @@
     </string-array>
 
     <string-array name="workfreqarray">
-        <item>None (Little or no exercise)</item>
+        <item>None (little or no exercise)</item>
         <item>Low (1-3 times/week)</item>
         <item>Medium (3-5 days/week)</item>
         <item>High (6-7 days/week)</item>
