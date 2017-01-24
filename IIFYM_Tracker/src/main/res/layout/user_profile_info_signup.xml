@@ -51,7 +51,7 @@
             android:layout_gravity="center_vertical|center_horizontal" />
 
         <TextView
-            android:text="@string/_24_jan_2017"
+            android:text="@string/date_initial"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/lblDateChosen"
@@ -318,7 +318,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/btnCalc"
         android:layout_gravity="center_vertical|center_horizontal"
-        android:background="@drawable/loginbutton"
+        android:background="@drawable/btn_iifym_style"
         android:textColorHint="?attr/colorPrimary"
         android:paddingStart="@dimen/activity_horizontal_margin"
         android:paddingEnd="@dimen/activity_horizontal_margin" />

@@ -39,7 +39,7 @@
         <android.support.design.widget.FloatingActionButton
             android:layout_height="match_parent"
             android:clickable="true"
-            app:srcCompat="@drawable/addnewealicon"
+            app:srcCompat="@drawable/icon_addnewmeal"
             android:id="@+id/addmeal_fab"
             app:backgroundTint="?attr/colorPrimaryDark"
             android:layout_gravity="bottom|right"

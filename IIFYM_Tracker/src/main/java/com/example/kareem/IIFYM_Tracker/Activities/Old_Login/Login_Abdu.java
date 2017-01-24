@@ -16,7 +16,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.kareem.IIFYM_Tracker.Activities.Main.MainActivity;
-import com.example.kareem.IIFYM_Tracker.Activities.User_Login_Authentification.Login_Activity;
+import com.example.kareem.IIFYM_Tracker.Activities.User_Login_Authentification.activityLogin;
 import com.example.kareem.IIFYM_Tracker.Custom_Objects.Body_Height_Unit;
 import com.example.kareem.IIFYM_Tracker.Custom_Objects.Body_Weight_Unit;
 import com.example.kareem.IIFYM_Tracker.Custom_Objects.User;
@@ -281,7 +281,7 @@ public class Login_Abdu extends AppCompatActivity implements myFragEventListener
 
     @Override
     public void GoToFirebase(){
-        Intent intent = new Intent(this, Login_Activity.class);
+        Intent intent = new Intent(this, activityLogin.class);
         intent.putExtra("user_name", newUser.getUser_name()); //get user_name
         intent.putExtra("logged",true);
         startActivity(intent); //open main activity

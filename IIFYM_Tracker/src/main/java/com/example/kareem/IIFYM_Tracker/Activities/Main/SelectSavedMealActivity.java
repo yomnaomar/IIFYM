@@ -85,9 +85,9 @@ public class SelectSavedMealActivity extends AppCompatActivity implements Adapte
                 int     meal_id         = C.getInt(0);      //meal)id
                 String  meal_name       = C.getString(1);   //meal_name
                 String  date_created    = C.getString(2);   //date_created
-                float   carbs           = C.getFloat(3);      //carbs
-                float   protein         = C.getFloat(4);      //protein
-                float   fat             = C.getFloat(5);      //fat
+                float   carbs           = C.getFloat(3);      //icon_carbs
+                float   protein         = C.getFloat(4);      //icon_protein
+                float   fat             = C.getFloat(5);      //icon_fat
                 portion = portion.values()[C.getInt(6)];    //portion
                 int     user_id         = C.getInt(8);      //user_id
                 Meal M = new Meal(meal_id,meal_name,carbs,protein,fat,portion,user_id);
@@ -108,9 +108,9 @@ public class SelectSavedMealActivity extends AppCompatActivity implements Adapte
                 int     meal_id         = C.getInt(0);      //meal)id
                 String  meal_name       = C.getString(1);   //meal_name
                 String  date_created    = C.getString(2);   //date_created
-                float   carbs           = C.getFloat(3);      //carbs
-                float   protein         = C.getFloat(4);      //protein
-                float   fat             = C.getFloat(5);      //fat
+                float   carbs           = C.getFloat(3);      //icon_carbs
+                float   protein         = C.getFloat(4);      //icon_protein
+                float   fat             = C.getFloat(5);      //icon_fat
                 portion = portion.values()[C.getInt(6)];    //portion
                 int     user_id         = C.getInt(8);      //user_id
                 Meal M = new Meal(meal_id,meal_name,carbs,protein,fat,portion,user_id);

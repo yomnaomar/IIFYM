@@ -11,10 +11,10 @@
         android:background="@color/LoginScreen_Backgroud">
 
         <TextView
-            android:text="IIFYM Tracker"
+            android:text="@string/app_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/iifym_tracker_textview"
+            android:id="@+id/lblAppName"
             android:textAppearance="@android:style/TextAppearance.Material.Display1"
             android:layout_marginTop="16dp"
             app:layout_constraintTop_toTopOf="parent"
@@ -25,20 +25,20 @@
             android:textColor="@color/colorPrimary" />
 
         <TextView
-            android:text="If It Fits Your Macros"
+            android:text="@string/app_subtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/iifym_subtitle_textview"
+            android:id="@+id/lblAppSubtitle"
             android:textAppearance="@android:style/TextAppearance.Material.Medium"
             android:layout_marginEnd="16dp"
             app:layout_constraintRight_toRightOf="parent"
             android:layout_marginStart="16dp"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/iifym_tracker_textview"
+            app:layout_constraintTop_toBottomOf="@+id/lblAppName"
             android:textColor="@color/colorPrimary" />
 
         <ImageView
-            app:srcCompat="@drawable/iifym_logo"
+            app:srcCompat="@drawable/image_iifym"
             android:id="@+id/iifym_logo_image"
             android:layout_width="125dp"
             android:layout_marginEnd="16dp"
@@ -46,7 +46,7 @@
             android:layout_marginStart="16dp"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/iifym_subtitle_textview"
+            app:layout_constraintTop_toBottomOf="@+id/lblAppSubtitle"
             android:layout_height="140dp" />
 
         <EditText
@@ -91,7 +91,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/Button_Register"
             android:textColor="#192D5A"
-            android:background="@drawable/loginbutton"
+            android:background="@drawable/btn_iifym_style"
             android:layout_marginTop="8dp"
             app:layout_constraintTop_toBottomOf="@+id/password_textview"
             app:layout_constraintBottom_toTopOf="@+id/signup_textview"
@@ -108,7 +108,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/Button_Login"
             android:textColor="#192D5A"
-            android:background="@drawable/loginbutton"
+            android:background="@drawable/btn_iifym_style"
             android:layout_marginTop="8dp"
             app:layout_constraintTop_toBottomOf="@+id/password_textview"
             app:layout_constraintBottom_toTopOf="@+id/signup_textview"
@@ -132,7 +132,7 @@
             app:layout_constraintLeft_toLeftOf="parent" />
 
         <ImageButton
-            app:srcCompat="@drawable/facebook_icon"
+            app:srcCompat="@drawable/icon_facebook"
             android:id="@+id/facebook_signup_button"
             android:background="@color/Transparent"
             android:scaleType="centerCrop"

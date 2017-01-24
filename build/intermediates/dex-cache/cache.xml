@@ -3,12 +3,12 @@
 
     <item
         is-multidex="true"
-        jar="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\exploded-aar\com.android.support\support-v13\25.0.0\jars\classes.jar"
+        jar="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\10.0.1\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="24.0.3"
-        sha1="6ac094121e75b4b87432beb9305d70c68ec6dcab">
-        <dex dex="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-v13-25.0.0_c84e18d5d71a02e9aab7eb6b278c2c7f90521d95\classes.dex" />
+        sha1="25438f55fc6d906a0e72f30b21487541430ede43">
+        <dex dex="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-base-10.0.1_a3db8cc5808152c187d81c34a0cb60acc478e976\classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -21,21 +21,12 @@
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\exploded-aar\com.android.support\support-media-compat\25.0.1\jars\classes.jar"
+        jar="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\exploded-aar\com.google.firebase\firebase-database\10.0.1\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="24.0.3"
-        sha1="6a1479afe9f1b3645e1cd9a87318976893472818">
-        <dex dex="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-media-compat-25.0.1_6631f6605f6969bba0b9cf3f1f17ed076961d522\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\exploded-aar\net.i2p.android.ext\floatingactionbutton\1.9.0\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.3"
-        sha1="7c5e4db194c6ec3e62b70759ef913381ea4903d1">
-        <dex dex="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\transforms\dex\debug\folders\1000\10\net.i2p.android.ext-floatingactionbutton-1.9.0_8c0e25a5dad429fd6c8ad78fc3d8bda659766a6a\classes.dex" />
+        sha1="8f128aeeb7e31271b28a7adb9dac1f3a6ed9f5e7">
+        <dex dex="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.firebase-firebase-database-10.0.1_64453261919a8c029068cbc4846d76cd660d419f\classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -48,39 +39,12 @@
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\exploded-aar\com.android.support\transition\25.0.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.3"
-        sha1="c1b6ab157e8e12cb08b9ee82bb5e3c5d22632eb3">
-        <dex dex="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-transition-25.0.1_e05a6f60107cdec255f5c440e1e927b21574353c\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\25.0.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.3"
-        sha1="772bed2d992b67b9d0327f766cc95cd63031dcd3">
-        <dex dex="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-animated-vector-drawable-25.0.1_4e86a29ff2b70a0f6bd450a0d3d19681503cd1ad\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
         jar="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\exploded-aar\com.android.support.constraint\constraint-layout\1.0.0-beta4\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="24.0.3"
         sha1="662d7533b25a666c649c10a16b42edfb95f25a4f">
         <dex dex="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support.constraint-constraint-layout-1.0.0-beta4_2e8ce0da65192dcb2285ec8c4a4b65489eeb34c4\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\exploded-aar\com.android.support\design\25.0.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.3"
-        sha1="3b236883e0df6002cabb01ce57d00a5b1e5de610">
-        <dex dex="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-design-25.0.1_b67cc9030aa3d5271f2894f733c07e7f2d2cc761\classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -93,66 +57,174 @@
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\Kareem\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\25.0.1\support-annotations-25.0.1.jar"
+        jar="C:\Users\Kareem\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\25.1.0\support-annotations-25.1.0.jar"
         jumboMode="true"
         optimize="true"
         revision="24.0.3"
-        sha1="a09194311f8f89c3e6db09d79f50897a889d615e">
-        <dex dex="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\transforms\dex\debug\folders\1000\10\support-annotations-25.0.1_93ca04a5a987a8e0b4647bfb974014544961c780\classes.dex" />
+        sha1="64cb6b229a8bdfd907bc8dd46839a0053e4c018d">
+        <dex dex="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\transforms\dex\debug\folders\1000\10\support-annotations-25.1.0_67ee244055b129c217dc98f89642cb0e1dfec245\classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\exploded-aar\com.android.support\support-core-ui\25.0.1\jars\classes.jar"
+        jar="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\exploded-aar\com.google.firebase\firebase-database-connection\10.0.1\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="24.0.3"
-        sha1="bc7e99e8d0fc279a05aa91378530f467ad62d443">
-        <dex dex="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-core-ui-25.0.1_efbee00e1c93ae32be84955fb0d19fdf3abed511\classes.dex" />
+        sha1="8010ae6ed32828a145b25ec97bc07b7a83c6318f">
+        <dex dex="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.firebase-firebase-database-connection-10.0.1_8b0b9f331abef0030ce96b3def02f0ce7780173c\classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\25.0.1\jars\classes.jar"
+        jar="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\exploded-aar\com.android.support\appcompat-v7\25.1.0\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="24.0.3"
-        sha1="297d4bcf6ed4e747a1bf7d0d094a2d911a8d3a8e">
-        <dex dex="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-recyclerview-v7-25.0.1_f2eb8a9dccc2bf3930b643b572ef76ae9d1fa3fe\classes.dex" />
+        sha1="1630658fbc2d222b988603c27b4a4249586fbfe7">
+        <dex dex="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-appcompat-v7-25.1.0_a08bc265db879027f07ef2df8b0b447da91764a0\classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\exploded-aar\com.android.support\support-fragment\25.0.1\jars\libs\internal_impl-25.0.1.jar"
+        jar="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\exploded-aar\com.google.firebase\firebase-common\10.0.1\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="24.0.3"
-        sha1="c0bd6ffb002a85b5e7cad29f8558d1cc59539679">
-        <dex dex="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-25.0.1_82998cadbe13ef5f7ce64d1720cfa57fd6a418da\classes.dex" />
+        sha1="eb0d830e3eabb9deb9ec44869cf7ac7ea1ad794c">
+        <dex dex="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.firebase-firebase-common-10.0.1_324dc31f4fbf58ae344bd811f20bc4efd8b66abc\classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\exploded-aar\com.android.support\support-core-utils\25.0.1\jars\libs\internal_impl-25.0.1.jar"
+        jar="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\exploded-aar\com.android.support\support-fragment\25.1.0\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="24.0.3"
-        sha1="c5b7145fb34779b6639147b8f2f8dd77c0db771b">
-        <dex dex="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-25.0.1_4835cb8be0ba3fda152dc097cd60aaca231d3bc1\classes.dex" />
+        sha1="2a53c4f3518116b8c6aee0e477233f0f7da8616f">
+        <dex dex="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-fragment-25.1.0_98c146ab1381dcbdcf16fa45b642e58574860a35\classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\exploded-aar\com.android.support\support-media-compat\25.0.1\jars\libs\internal_impl-25.0.1.jar"
+        jar="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\exploded-aar\com.android.support\support-v4\25.1.0\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="24.0.3"
-        sha1="f83b00041ecfba705603fec40363416c7de69719">
-        <dex dex="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-25.0.1_d78007473daa65690d4d4bd6b1e596b761f0055b\classes.dex" />
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-v4-25.1.0_dcba87d9f470e1542ec5c2c2845b7baa1995e258\classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\exploded-aar\com.android.support\support-compat\25.0.1\jars\libs\internal_impl-25.0.1.jar"
+        jar="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\exploded-aar\com.android.support\support-media-compat\25.1.0\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="24.0.3"
-        sha1="3af8cc51ef7088e56f132780da8c0bd858b6a6ad">
-        <dex dex="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-25.0.1_d7a67e0421d9b70da8329012127ba907e05be6ed\classes.dex" />
+        sha1="f02263e35e52668dd17b73bf961437e3d562b35f">
+        <dex dex="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-media-compat-25.1.0_02de8d1728ac07a95bd71155a018eba9aa5355d3\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\10.0.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="756f6297eef79784f5e356dcd4f39865028b2bd0">
+        <dex dex="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-basement-10.0.1_167430f03f52a94a348cafda2c8924c3742dc48b\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\exploded-aar\com.android.support\support-compat\25.1.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="ca3c7aa31e2726a400a6e552b93cb9f63c9a1e6d">
+        <dex dex="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-compat-25.1.0_28f0a210c2d18d47a1bb8e3fb2d9260f86b4a729\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\25.1.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="e79aa3d9a16f8c9f16377c0608de70a8f31e5d80">
+        <dex dex="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-vector-drawable-25.1.0_ac33130363b87ccabade7979d490503510b9b018\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\exploded-aar\com.android.support\support-core-ui\25.1.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="aee64634871d88a419d59eb743c1258a60f19700">
+        <dex dex="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-core-ui-25.1.0_16c21d8a5eec8a4882906c0ac84041cb1afc26cd\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\exploded-aar\com.android.support\support-v13\25.0.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="6ac094121e75b4b87432beb9305d70c68ec6dcab">
+        <dex dex="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-v13-25.0.0_c84e18d5d71a02e9aab7eb6b278c2c7f90521d95\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\25.1.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="b266c8faa5af72e579b9da36ef35053ffed6ac64">
+        <dex dex="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-recyclerview-v7-25.1.0_7530096d7c4be6b5a0f28c3720953acb43d40266\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\exploded-aar\net.i2p.android.ext\floatingactionbutton\1.9.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="7c5e4db194c6ec3e62b70759ef913381ea4903d1">
+        <dex dex="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\transforms\dex\debug\folders\1000\10\net.i2p.android.ext-floatingactionbutton-1.9.0_8c0e25a5dad429fd6c8ad78fc3d8bda659766a6a\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\exploded-aar\com.google.android.gms\play-services-tasks\10.0.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="6addaba208e21c6da776d0ca75b6b23a6ccd5499">
+        <dex dex="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-tasks-10.0.1_b6d9f94264db2fa02c671f2a53f8a86c841ee21e\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\exploded-aar\com.google.firebase\firebase-iid\9.0.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="ea4b54dcbfe5ac05efb0a314105f07258118d3a7">
+        <dex dex="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.firebase-firebase-iid-9.0.0_b61b3edb3a56d6e264aa9ac69059792b475f3086\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\exploded-aar\com.google.firebase\firebase-analytics\9.0.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="4ef8ab5fee042023018249474bc93bd4b2b9c17e">
+        <dex dex="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.firebase-firebase-analytics-9.0.0_cfd711f42af37dd130beaf5009f2804ac238b98d\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\exploded-aar\com.android.support\design\25.1.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="30103d98fa5ed824b54af839c85e2111f9bde8ec">
+        <dex dex="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-design-25.1.0_f4019d5f27ed7aba0f606255b508344257c49969\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\exploded-aar\info.hoang8f\android-segmented\1.0.6\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="692a913dff3246e0cc5369c2508f5970ecfeca01">
+        <dex dex="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\transforms\dex\debug\folders\1000\10\info.hoang8f-android-segmented-1.0.6_42e8f8f88448fe50402e3e9cf4d160c6a8a55378\classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -165,21 +237,21 @@
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\exploded-aar\com.android.support\appcompat-v7\25.0.1\jars\classes.jar"
+        jar="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\exploded-aar\com.google.firebase\firebase-analytics-impl\9.0.0\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="24.0.3"
-        sha1="f7ac4b327fdb9e2ee386f5adc46164927658de4b">
-        <dex dex="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-appcompat-v7-25.0.1_5d04bfdd8009dc355ec826d52ca7c57c11b93c06\classes.dex" />
+        sha1="0dc8ab07eeceda5e99b305c8069765056b6e5c9d">
+        <dex dex="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.firebase-firebase-analytics-impl-9.0.0_06ab2c3e56c98abfbf1ab59e8931795df5c81b29\classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\exploded-aar\com.android.support\support-fragment\25.0.1\jars\classes.jar"
+        jar="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\25.1.0\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="24.0.3"
-        sha1="26c6eef571592c91f29e56fda0bac73321de0c92">
-        <dex dex="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-fragment-25.0.1_6f102f2c0e1dee463ea3d054ce796049b30129c0\classes.dex" />
+        sha1="6fb6ac3e8d3b9013819920d9ea11f3803c4c0033">
+        <dex dex="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-animated-vector-drawable-25.1.0_0ad2fcd17ca96cb37bec81c57bf57847d270515e\classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -192,29 +264,11 @@
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\exploded-aar\com.android.support\support-v4\25.0.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.3"
-        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
-        <dex dex="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-v4-25.0.1_ba88078f7497c0f6b3f8d8bda3869ce7de832036\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\exploded-aar\com.android.support\support-core-utils\25.0.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.3"
-        sha1="00d4c8eebf2b681073c72a26bd0849549e51c7cb">
-        <dex dex="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-core-utils-25.0.1_0039d261195874e403676fbdd7f9bcbfbd063028\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
         jar="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
         jumboMode="true"
         optimize="true"
         revision="24.0.3"
-        sha1="3b0efc4652b881415028f8de5eb3917adf027624">
+        sha1="56c338035d395a56c8eb87b589ea6fa28a40a087">
         <dex dex="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_35735d098e7b3c19407428706a6fe92dbb6d8fb5\classes.dex" />
     </item>
     <item
@@ -228,39 +282,21 @@
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\25.0.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.3"
-        sha1="b24e1c688744078e1fa833ffadf696794761bbe5">
-        <dex dex="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-vector-drawable-25.0.1_fd792b781532a362eb4a84f534283964ba5f12cb\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\exploded-aar\com.android.support\support-core-ui\25.0.1\jars\libs\internal_impl-25.0.1.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.3"
-        sha1="e5343c9d19cb19ff55f6b268c7f3fe8c9d224f6f">
-        <dex dex="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-25.0.1_82d7b481ff4d7ff2f863f24bfc40cff91fc15f38\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\exploded-aar\com.android.support\support-compat\25.0.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.3"
-        sha1="51eba4a4dd73044f90a9d58dd7ca34adbebfcf4e">
-        <dex dex="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-compat-25.0.1_945e14f1d1f9631a156a7a5e75c61293ffdf5f29\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
         jar="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
         jumboMode="true"
         optimize="true"
         revision="24.0.3"
-        sha1="f34ff513ff0aa72b09c9d1280db693a81e8ba50f">
+        sha1="7543b0976a43147bfdf80bf5eaad78986d772fb5">
         <dex dex="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_d33f9460c22f45b200646752209366c54c341a8b\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\exploded-aar\com.android.support\support-core-utils\25.1.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="0a0ef86b7fa568a52bf6214a0326ca1f1d618da7">
+        <dex dex="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-core-utils-25.1.0_80dd952f37a3428f98ea26845a99aea3ecec0f48\classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -279,6 +315,24 @@
         revision="24.0.3"
         sha1="cb3cf97748344da6fad1deb830c7c479a7c53645">
         <dex dex="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\transforms\dex\debug\folders\1000\10\com.androidadvance-topsnackbar-1.1.1_954f7998e0edf718976d5656edc98d2af4f69cd6\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\exploded-aar\com.google.firebase\firebase-auth\10.0.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="9cca2818594cc5348806d6662133491e7ea0fa8d">
+        <dex dex="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.firebase-firebase-auth-10.0.1_797f70b6ee765bbc765066dec2e6a226c7797e07\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\exploded-aar\com.android.support\transition\25.1.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="d38084015027549951cbaea5d5f6fb795cc81151">
+        <dex dex="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-transition-25.1.0_5e0532cd1c3f7ba1ba40bdc4d8d12e45d9f5ca71\classes.dex" />
     </item>
 
 </items>

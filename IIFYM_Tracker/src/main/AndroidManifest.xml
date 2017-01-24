@@ -64,7 +64,7 @@
             android:name=".Activities.Main.CreateSimpleMealActivity"
             android:label="@string/title_activity_create_simple_meal"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Activities.User_Login_Authentification.Login_Activity">
+        <activity android:name=".Activities.User_Login_Authentification.activityLogin">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

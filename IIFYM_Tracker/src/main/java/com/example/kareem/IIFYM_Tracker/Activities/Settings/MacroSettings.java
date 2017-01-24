@@ -400,13 +400,13 @@ public class MacroSettings extends AppCompatActivity implements View.OnFocusChan
         List<SliceValue> values = new ArrayList<>();
 
         SliceValue sliceValue_prot = new SliceValue((float)currentUser.getPercent_protein(), Color.parseColor("#FF4081"));
-        sliceValue_prot.setLabel("protein: "+prot+"%");
+        sliceValue_prot.setLabel("icon_protein: "+prot+"%");
         values.add(sliceValue_prot);
         SliceValue sliceValue_carbs = new SliceValue((float)currentUser.getPercent_carbs(), Color.parseColor("#FFFFEB3B"));
-        sliceValue_carbs.setLabel("carbs: "+carbs+"%");
+        sliceValue_carbs.setLabel("icon_carbs: "+carbs+"%");
         values.add(sliceValue_carbs);
         SliceValue sliceValue_fat = new SliceValue((float)currentUser.getPercent_fat(), Color.parseColor("#FF689F38"));
-        sliceValue_fat.setLabel("fat: "+fat+"%");
+        sliceValue_fat.setLabel("icon_fat: "+fat+"%");
         values.add(sliceValue_fat);
 
         data = new PieChartData(values);
@@ -621,7 +621,7 @@ public class MacroSettings extends AppCompatActivity implements View.OnFocusChan
             {
                 case 0://P
                     Snackbar snackbar = Snackbar
-                            .make(parentLayout, "protein is essential for growth and the building of new tissue as well as the repair of broken down tissue - like what happens when you work out.", Snackbar.LENGTH_LONG);
+                            .make(parentLayout, "icon_protein is essential for growth and the building of new tissue as well as the repair of broken down tissue - like what happens when you work out.", Snackbar.LENGTH_LONG);
                     snackbar.show();
                     break;
                 case 1://C
@@ -720,9 +720,9 @@ public class MacroSettings extends AppCompatActivity implements View.OnFocusChan
         Fat_Percent = currentUser.getPercent_fat()/100.0;
 
 
-        Carbs_Val = (int) ((Carb_Percent * Caloric_Intake) /4.0); //carbs = 4kcal/g
-        Protein_Val = (int) ((Protein_Percent * Caloric_Intake) / 4.0); //protein = 4kcal/g
-        Fat_Val = (int) ((Fat_Percent * Caloric_Intake)/ 9.0); //fat = 9kcal/g
+        Carbs_Val = (int) ((Carb_Percent * Caloric_Intake) /4.0); //icon_carbs = 4kcal/g
+        Protein_Val = (int) ((Protein_Percent * Caloric_Intake) / 4.0); //icon_protein = 4kcal/g
+        Fat_Val = (int) ((Fat_Percent * Caloric_Intake)/ 9.0); //icon_fat = 9kcal/g
 
 
         userCalories = Caloric_Intake;

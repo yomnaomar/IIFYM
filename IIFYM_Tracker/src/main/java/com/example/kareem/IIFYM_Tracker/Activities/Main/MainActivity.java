@@ -27,7 +27,7 @@ import com.akexorcist.roundcornerprogressbar.IconRoundCornerProgressBar;
 import com.example.kareem.IIFYM_Tracker.Activities.Settings.MacroSettings;
 import com.example.kareem.IIFYM_Tracker.Activities.Old_Login.Login_Abdu;
 import com.example.kareem.IIFYM_Tracker.Activities.Settings.UserProfile_Mina;
-import com.example.kareem.IIFYM_Tracker.Activities.User_Login_Authentification.Login_Activity;
+import com.example.kareem.IIFYM_Tracker.Activities.User_Login_Authentification.activityLogin;
 import com.example.kareem.IIFYM_Tracker.Custom_Objects.DailyMeal;
 import com.example.kareem.IIFYM_Tracker.Custom_Objects.Meal;
 import com.example.kareem.IIFYM_Tracker.Custom_Objects.Portion_Type;
@@ -196,7 +196,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             //My_DB.close();
             signOut();
             finish();
-            Intent in = new Intent(getApplicationContext(), Login_Activity.class);
+            Intent in = new Intent(getApplicationContext(), activityLogin.class);
             startActivity(in);
             return true;
         }
@@ -517,9 +517,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Fat_Percent = currentUser.getPercent_fat()/100.0;
 
 
-        Carbs_Val = (int) ((Carb_Percent * Caloric_Intake) /4.0); //carbs = 4kcal/g
-        Protein_Val = (int) ((Protein_Percent * Caloric_Intake) / 4.0); //protein = 4kcal/g
-        Fat_Val = (int) ((Fat_Percent * Caloric_Intake)/ 9.0); //fat = 9kcal/g
+        Carbs_Val = (int) ((Carb_Percent * Caloric_Intake) /4.0); //icon_carbs = 4kcal/g
+        Protein_Val = (int) ((Protein_Percent * Caloric_Intake) / 4.0); //icon_protein = 4kcal/g
+        Fat_Val = (int) ((Fat_Percent * Caloric_Intake)/ 9.0); //icon_fat = 9kcal/g
 
 
         userCalories = Caloric_Intake;

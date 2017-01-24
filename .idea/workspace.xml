@@ -5,63 +5,52 @@
       <config />
     </shared>
   </component>
+  <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_LOG_LEVEL" value="debug" />
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="031d0bec-4b7c-4a4b-953f-b4ee49735199" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/IIFYM_Tracker/google-services.json" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/constraint_layout_1_0_0_beta4.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/constraint_layout_solver_1_0_0_beta4.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/hamcrest_core_1_3.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/junit_4_12.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/MacronutrientPreferenceActivity.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/ProfileSettings.java" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/AddQuickMealActivity.java" afterPath="$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Main/AddQuickMealActivity.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/AddSavedMealActivity.java" afterPath="$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Main/AddSavedMealActivity.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/CreateComplexMealActivity.java" afterPath="$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Main/CreateComplexMealActivity.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/CreateSimpleMealActivity.java" afterPath="$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Main/CreateSimpleMealActivity.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/EditProfile.java" afterPath="$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Settings/EditProfile.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Goalsfrag.java" afterPath="$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/User_Login_Authentification/Goalsfrag_Abdu.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Login.java" afterPath="$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/User_Login_Authentification/Login_Abdu.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/MacroSettings.java" afterPath="$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Settings/MacroSettings.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/MainActivity.java" afterPath="$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Main/MainActivity.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Profilefrag.java" afterPath="$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/User_Login_Authentification/Profilefrag.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/SelectMealTypeActivity.java" afterPath="$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Main/SelectMealTypeActivity.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/SelectSavedMealActivity.java" afterPath="$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Main/SelectSavedMealActivity.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Signupfrag.java" afterPath="$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/User_Login_Authentification/Signupfrag.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/UserProfile.java" afterPath="$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/User_Login_Authentification/UserProfile.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/ViewMealActivity.java" afterPath="$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Main/ViewMealActivity.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/ViewSavedMealsActivity.java" afterPath="$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Main/ViewSavedMealsActivity.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/myFragEventListener.java" afterPath="$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/User_Login_Authentification/myFragEventListener.java" />
+    <list default="true" id="5f2b3810-df93-4c64-a0f5-17e0435a1159" name="Default" comment="Added error checking and alert dialogs for Login screen&#10;Renamed some layout files, strings resrouces, and drawables">
+      <change type="MOVED" beforePath="$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/User_Login_Authentification/Login_Activity.java" afterPath="$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/User_Login_Authentification/activityLogin.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/drawable/addnewealicon.png" afterPath="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/drawable/icon_addnewmeal.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/drawable/button_text_color.xml" afterPath="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/drawable/segradio_textcolor.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/drawable/carbs.png" afterPath="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/drawable/icon_carbs.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/drawable/delete_button_daily_meal_activity.xml" afterPath="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/drawable/btn_delete_dailymeal.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/drawable/facebook_icon.png" afterPath="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/drawable/icon_facebook.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/drawable/fat.png" afterPath="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/drawable/icon_fat.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/drawable/iifym_logo.png" afterPath="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/drawable/image_iifym.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/drawable/loginbutton.xml" afterPath="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/drawable/btn_iifym_style.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/drawable/macrosettings_icon.png" afterPath="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/drawable/icon_macrosettings.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/drawable/man.png" afterPath="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/drawable/icon_user_male.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/drawable/mealsettings_icon.png" afterPath="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/drawable/icon_mealsettings.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/drawable/protein.png" afterPath="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/drawable/icon_protein.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/drawable/radio_checked.xml" afterPath="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/drawable/segradio_checked.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/drawable/radio_unchecked.xml" afterPath="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/drawable/segradio_unchecked.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/cache.properties.lock" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/cache.properties.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileHashes.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshots.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshotsToTreeSnapshotsIndex.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshotsToTreeSnapshotsIndex.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/taskArtifacts.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/IIFYM_Tracker/build.gradle" afterPath="$PROJECT_DIR$/IIFYM_Tracker/build.gradle" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/IIFYM_Tracker/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/IIFYM_Tracker/src/main/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/layout/activity_add_quick_meal.xml" afterPath="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/layout/activity_add_quick_meal.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/layout/activity_add_saved_meal.xml" afterPath="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/layout/activity_add_saved_meal.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/layout/activity_create_complex_meal.xml" afterPath="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/layout/activity_create_complex_meal.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/layout/activity_create_simple_meal.xml" afterPath="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/layout/activity_create_simple_meal.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/layout/activity_edit_profile.xml" afterPath="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/layout/activity_edit_profile.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/layout/activity_home.xml" afterPath="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/layout/activity_home.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Main/CreateComplexMealActivity.java" afterPath="$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Main/CreateComplexMealActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Main/MainActivity.java" afterPath="$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Main/MainActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Main/SelectSavedMealActivity.java" afterPath="$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Main/SelectSavedMealActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Main/ViewSavedMealsActivity.java" afterPath="$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Main/ViewSavedMealsActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Old_Login/Login_Abdu.java" afterPath="$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Old_Login/Login_Abdu.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Settings/MacroSettings.java" afterPath="$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Settings/MacroSettings.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Database/DatabaseConnector.java" afterPath="$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Database/DatabaseConnector.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Database/DatabaseHelper.java" afterPath="$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Database/DatabaseHelper.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/ViewComponents/SegmentedGroup.java" afterPath="$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/ViewComponents/SegmentedGroup.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/layout/activity_login.xml" afterPath="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/layout/activity_login.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/layout/activity_macro_settings.xml" afterPath="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/layout/activity_macro_settings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/layout/activity_select_meal_type.xml" afterPath="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/layout/activity_select_meal_type.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/layout/activity_select_saved_meal.xml" afterPath="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/layout/activity_select_saved_meal.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/layout/activity_user_profile.xml" afterPath="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/layout/activity_user_profile.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/layout/activity_view_meal.xml" afterPath="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/layout/activity_view_meal.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/layout/activity_view_saved_meals.xml" afterPath="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/layout/activity_view_saved_meals.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/layout/content_add_saved_meal.xml" afterPath="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/layout/content_add_saved_meal.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/layout/content_create_simple_meal.xml" afterPath="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/layout/content_create_simple_meal.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/layout/content_home.xml" afterPath="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/layout/content_home.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/layout/content_select_meal_type.xml" afterPath="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/layout/content_select_meal_type.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/layout/fragment_sublogin1.xml" afterPath="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/layout/fragment_sublogin1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/layout/fragment_sublogin2.xml" afterPath="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/layout/fragment_sublogin2.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/layout/fragment_sublogin3.xml" afterPath="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/layout/fragment_sublogin3.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/menu/menu_login.xml" afterPath="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/menu/menu_login.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.gradle" afterPath="$PROJECT_DIR$/build.gradle" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/layout/user_profile_info_signup.xml" afterPath="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/layout/user_profile_info_signup.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/menu/menu_home_man.xml" afterPath="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/menu/menu_home_man.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/menu/menu_home_woman.xml" afterPath="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/menu/menu_home_woman.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/values/strings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/values/styles.xml" afterPath="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/values/styles.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/intermediates/dex-cache/cache.xml" afterPath="$PROJECT_DIR$/build/intermediates/dex-cache/cache.xml" />
     </list>
     <ignored path="IIFYM Tracker.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -82,121 +71,68 @@
       <ProjectState />
     </projectState>
   </component>
-  <component name="ExternalProjectsManager">
-    <system id="GRADLE">
-      <state>
-        <projects_view />
-      </state>
-    </system>
-  </component>
   <component name="FavoritesManager">
     <favorites_list name="IIFYM Tracker" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="MacroSettings.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Settings/MacroSettings.java">
+      <file leaf-file-name="activityLogin.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/User_Login_Authentification/activityLogin.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="225">
+              <caret line="110" column="56" selection-start-line="110" selection-start-column="56" selection-end-line="110" selection-end-column="56" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="method#onCreate#0;class#activityLogin#0" expanded="false" />
+                <element signature="e#1448#3479#0" expanded="true" />
+                <element signature="e#3478#3479#0" expanded="true" />
+                <element signature="method#signIn#0;class#activityLogin#0" expanded="false" />
+                <element signature="method#onStop#0;class#activityLogin#0" expanded="false" />
+                <element signature="method#onStart#0;class#activityLogin#0" expanded="false" />
+                <element signature="method#onPause#0;class#activityLogin#0" expanded="false" />
+                <element signature="method#onResume#0;class#activityLogin#0" expanded="false" />
+                <element signature="method#onClick#0;class#activityLogin#0" expanded="false" />
+                <element signature="method#showAlertDialog#0;class#activityLogin#0" expanded="false" />
+                <element signature="e#9512#9697#0" expanded="true" />
+                <element signature="e#9696#9697#0" expanded="true" />
+                <element signature="method#validateForm#0;class#activityLogin#0" expanded="false" />
+                <element signature="method#showProgressDialog#0;class#activityLogin#0" expanded="false" />
+                <element signature="method#hideProgressDialog#0;class#activityLogin#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="menu_home_woman.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/res/menu/menu_home_woman.xml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="68">
-              <caret line="39" column="13" selection-start-line="39" selection-start-column="13" selection-end-line="39" selection-end-column="13" />
+              <caret line="4" column="10" selection-start-line="4" selection-start-column="10" selection-end-line="4" selection-end-column="10" />
               <folding />
             </state>
           </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AddQuickMealActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Main/AddQuickMealActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="28" column="13" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
-              <folding />
-            </state>
+          <provider editor-type-id="android-designer2">
+            <state />
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AddSavedMealActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Main/AddSavedMealActivity.java">
+      <file leaf-file-name="user_profile_info_signup.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/res/layout/user_profile_info_signup.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
+            <state relative-caret-position="628">
+              <caret line="320" column="53" selection-start-line="320" selection-start-column="53" selection-end-line="320" selection-end-column="53" />
               <folding />
             </state>
           </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CreateComplexMealActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Main/CreateComplexMealActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="28" column="13" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CreateSimpleMealActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Main/CreateSimpleMealActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="28" column="13" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Main/MainActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="45" column="13" selection-start-line="45" selection-start-column="13" selection-end-line="45" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SelectMealTypeActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Main/SelectMealTypeActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SelectSavedMealActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Main/SelectSavedMealActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ViewMealActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Main/ViewMealActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="25" column="13" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ViewSavedMealsActivity.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Main/ViewSavedMealsActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="48" column="0" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
-              <folding />
-            </state>
+          <provider editor-type-id="android-designer2">
+            <state />
           </provider>
         </entry>
       </file>
     </leaf>
   </component>
   <component name="Git.Settings">
+    <option name="UPDATE_TYPE" value="MERGE" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GradleLocalSettings">
@@ -253,17 +189,17 @@
                 <option name="name" value="packageReleaseResources" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Prepare com.android.support:transition:25.0.1" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="prepareComAndroidSupportTransition2501Library" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="validateSigningDebugAndroidTest" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="prepareDebugDependencies" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Prepare com.google.firebase:firebase-common:10.0.1" />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="prepareComGoogleFirebaseFirebaseCommon1001Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
@@ -277,11 +213,6 @@
                 <option name="description" value="Creates a version of android.jar that's suitable for unit tests." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="mockableAndroidJar" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Prepare com.google.firebase:firebase-database:9.4.0" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="prepareComGoogleFirebaseFirebaseDatabase940Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
@@ -335,6 +266,11 @@
                 <option name="name" value="components" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
+                <option name="description" value="Prepare com.android.support:animated-vector-drawable:25.1.0" />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="prepareComAndroidSupportAnimatedVectorDrawable2510Library" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
                 <option name="description" value="Prepare com.android.support:support-v13:25.0.0" />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="prepareComAndroidSupportSupportV132500Library" />
@@ -342,6 +278,11 @@
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="processDebugAndroidTestManifest" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Prepare com.google.android.gms:play-services-basement:10.0.1" />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="prepareComGoogleAndroidGmsPlayServicesBasement1001Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
@@ -366,11 +307,6 @@
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="processReleaseUnitTestJavaRes" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Prepare com.android.support:support-core-ui:25.0.1" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="prepareComAndroidSupportSupportCoreUi2501Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="description" value="Uninstalls the Release build." />
@@ -406,11 +342,6 @@
                 <option name="name" value="packageDebugResources" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Prepare com.android.support:support-vector-drawable:25.0.1" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="prepareComAndroidSupportSupportVectorDrawable2501Library" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="mergeReleaseJniLibFolders" />
               </ExternalTaskPojo>
@@ -433,6 +364,11 @@
                 <option name="name" value="mergeDebugAndroidTestAssets" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
+                <option name="description" value="Prepare com.android.support:support-fragment:25.1.0" />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="prepareComAndroidSupportSupportFragment2510Library" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="processReleaseManifest" />
               </ExternalTaskPojo>
@@ -451,9 +387,9 @@
                 <option name="name" value="assemble" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Prepare com.google.firebase:firebase-auth-common:9.4.0" />
+                <option name="description" value="Prepare info.hoang8f:android-segmented:1.0.6" />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="prepareComGoogleFirebaseFirebaseAuthCommon940Library" />
+                <option name="name" value="prepareInfoHoang8fAndroidSegmented106Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
@@ -484,11 +420,6 @@
                 <option name="name" value="processDebugAndroidTestResources" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Prepare com.android.support:animated-vector-drawable:25.0.1" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="prepareComAndroidSupportAnimatedVectorDrawable2501Library" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="validateSigningDebug" />
               </ExternalTaskPojo>
@@ -509,9 +440,14 @@
                 <option name="name" value="mergeReleaseShaders" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Prepare com.android.support:recyclerview-v7:25.0.1" />
+                <option name="description" value="Prepare com.android.support:appcompat-v7:25.1.0" />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="prepareComAndroidSupportRecyclerviewV72501Library" />
+                <option name="name" value="prepareComAndroidSupportAppcompatV72510Library" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Prepare com.android.support:support-core-ui:25.1.0" />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="prepareComAndroidSupportSupportCoreUi2510Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
@@ -599,6 +535,11 @@
                 <option name="name" value="lintRelease" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
+                <option name="description" value="Prepare com.google.firebase:firebase-auth:10.0.1" />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="prepareComGoogleFirebaseFirebaseAuth1001Library" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
                 <option name="description" value="Prepare com.androidadvance:topsnackbar:1.1.1" />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="prepareComAndroidadvanceTopsnackbar111Library" />
@@ -627,6 +568,11 @@
                 <option name="name" value="sourceSets" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
+                <option name="description" value="Prepare com.android.support:recyclerview-v7:25.1.0" />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="prepareComAndroidSupportRecyclerviewV72510Library" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="transformResourcesWithMergeJavaResForDebugUnitTest" />
               </ExternalTaskPojo>
@@ -643,9 +589,24 @@
                 <option name="name" value="prepareDebugUnitTestDependencies" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
+                <option name="description" value="Prepare com.android.support:transition:25.1.0" />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="prepareComAndroidSupportTransition2510Library" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
                 <option name="description" value="Prepare IIFYM Tracker:ProgressBar_Library:unspecified" />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="prepareIIFYMTrackerProgressBar_LibraryUnspecifiedLibrary" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Prepare com.android.support:support-vector-drawable:25.1.0" />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="prepareComAndroidSupportSupportVectorDrawable2510Library" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Prepare com.android.support:support-compat:25.1.0" />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="prepareComAndroidSupportSupportCompat2510Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
@@ -683,23 +644,8 @@
                 <option name="name" value="generateReleaseResValues" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Prepare com.android.support:support-fragment:25.0.1" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="prepareComAndroidSupportSupportFragment2501Library" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="mergeDebugProguardFiles" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Prepare com.android.support:support-v4:25.0.1" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="prepareComAndroidSupportSupportV42501Library" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Prepare com.google.firebase:firebase-common:9.4.0" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="prepareComGoogleFirebaseFirebaseCommon940Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
@@ -803,6 +749,11 @@
                 <option name="name" value="testReleaseUnitTest" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
+                <option name="description" value="Prepare com.google.firebase:firebase-database-connection:10.0.1" />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="prepareComGoogleFirebaseFirebaseDatabaseConnection1001Library" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="mergeDebugShaders" />
               </ExternalTaskPojo>
@@ -811,8 +762,18 @@
                 <option name="name" value="transformNative_libsWithMergeJniLibsForDebugAndroidTest" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
+                <option name="description" value="Prepare com.google.firebase:firebase-database:10.0.1" />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="prepareComGoogleFirebaseFirebaseDatabase1001Library" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="compileReleaseRenderscript" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Prepare com.android.support:support-v4:25.1.0" />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="prepareComAndroidSupportSupportV42510Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="description" value="Prepare com.github.worker8:tourguide:1.0.17-SNAPSHOT" />
@@ -829,14 +790,14 @@
                 <option name="name" value="assembleDebug" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Prepare com.google.firebase:firebase-auth-module:9.4.0" />
+                <option name="description" value="Prepare com.google.android.gms:play-services-base:10.0.1" />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="prepareComGoogleFirebaseFirebaseAuthModule940Library" />
+                <option name="name" value="prepareComGoogleAndroidGmsPlayServicesBase1001Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Prepare com.google.firebase:firebase-auth:9.4.0" />
+                <option name="description" value="Prepare com.google.android.gms:play-services-tasks:10.0.1" />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="prepareComGoogleFirebaseFirebaseAuth940Library" />
+                <option name="name" value="prepareComGoogleAndroidGmsPlayServicesTasks1001Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
@@ -853,11 +814,6 @@
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="prepareReleaseDependencies" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Prepare com.android.support:support-media-compat:25.0.1" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="prepareComAndroidSupportSupportMediaCompat2501Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="description" value="Displays the insight into a specific dependency in root project 'IIFYM Tracker'." />
@@ -888,11 +844,6 @@
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="mergeDebugAssets" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Prepare com.android.support:design:25.0.1" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="prepareComAndroidSupportDesign2501Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="description" value="Uninstall all applications." />
@@ -926,11 +877,6 @@
                 <option name="name" value="generateDebugAndroidTestResValues" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Prepare com.android.support:support-core-utils:25.0.1" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="prepareComAndroidSupportSupportCoreUtils2501Library" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
                 <option name="description" value="Displays the Android dependencies of the project." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="androidDependencies" />
@@ -952,23 +898,8 @@
                 <option name="name" value="compileReleaseJavaWithJavac" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Prepare com.google.firebase:firebase-database-connection:9.4.0" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="prepareComGoogleFirebaseFirebaseDatabaseConnection940Library" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Prepare com.android.support:support-compat:25.0.1" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="prepareComAndroidSupportSupportCompat2501Library" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="jarReleaseClasses" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Prepare com.google.android.gms:play-services-tasks:9.4.0" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="prepareComGoogleAndroidGmsPlayServicesTasks940Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
@@ -1008,14 +939,14 @@
                 <option name="name" value="transformResourcesWithMergeJavaResForDebug" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Prepare com.google.android.gms:play-services-base:9.4.0" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="prepareComGoogleAndroidGmsPlayServicesBase940Library" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
                 <option name="description" value="Assembles and tests this project and all projects that depend on it." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="buildDependents" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Prepare com.android.support:design:25.1.0" />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="prepareComAndroidSupportDesign2510Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
@@ -1026,13 +957,13 @@
                 <option name="name" value="mergeReleaseAssets" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
+                <option name="description" value="Prepare com.android.support:support-core-utils:25.1.0" />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="generateReleaseBuildConfig" />
+                <option name="name" value="prepareComAndroidSupportSupportCoreUtils2510Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Prepare com.google.android.gms:play-services-basement:9.4.0" />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="prepareComGoogleAndroidGmsPlayServicesBasement940Library" />
+                <option name="name" value="generateReleaseBuildConfig" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="description" value="Displays the signing info for each variant." />
@@ -1052,9 +983,9 @@
                 <option name="name" value="clean" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Prepare com.android.support:appcompat-v7:25.0.1" />
+                <option name="description" value="Prepare com.android.support:support-media-compat:25.1.0" />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="prepareComAndroidSupportAppcompatV72501Library" />
+                <option name="name" value="prepareComAndroidSupportSupportMediaCompat2510Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="description" value="Assembles and tests this project." />
@@ -1108,21 +1039,6 @@
                 <option name="name" value="projects" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Prepare com.android.support:support-v4:25.0.1" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/IIFYM_Tracker" />
-                <option name="name" value="prepareComAndroidSupportSupportV42501Library" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Prepare com.android.support:transition:25.0.1" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/IIFYM_Tracker" />
-                <option name="name" value="prepareComAndroidSupportTransition2501Library" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Prepare com.google.firebase:firebase-common:9.4.0" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/IIFYM_Tracker" />
-                <option name="name" value="prepareComGoogleFirebaseFirebaseCommon940Library" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/IIFYM_Tracker" />
                 <option name="name" value="validateSigningDebugAndroidTest" />
               </ExternalTaskPojo>
@@ -1138,6 +1054,11 @@
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/IIFYM_Tracker" />
                 <option name="name" value="prepareDebugDependencies" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Prepare com.google.firebase:firebase-common:10.0.1" />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/IIFYM_Tracker" />
+                <option name="name" value="prepareComGoogleFirebaseFirebaseCommon1001Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="description" value="Prepare com.google.firebase:firebase-iid:9.0.0" />
@@ -1175,11 +1096,6 @@
                 <option name="description" value="Prepare com.afollestad.material-dialogs:core:0.9.1.0" />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/IIFYM_Tracker" />
                 <option name="name" value="prepareComAfollestadMaterialDialogsCore0910Library" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Prepare com.google.firebase:firebase-database:9.4.0" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/IIFYM_Tracker" />
-                <option name="name" value="prepareComGoogleFirebaseFirebaseDatabase940Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="description" value="Displays the tasks runnable from project ':IIFYM_Tracker'." />
@@ -1257,6 +1173,11 @@
                 <option name="name" value="testReleaseUnitTest" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
+                <option name="description" value="Prepare com.google.firebase:firebase-database-connection:10.0.1" />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/IIFYM_Tracker" />
+                <option name="name" value="prepareComGoogleFirebaseFirebaseDatabaseConnection1001Library" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/IIFYM_Tracker" />
                 <option name="name" value="compileDebugAndroidTestShaders" />
               </ExternalTaskPojo>
@@ -1278,13 +1199,28 @@
                 <option name="name" value="components" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
+                <option name="description" value="Prepare com.google.firebase:firebase-database:10.0.1" />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/IIFYM_Tracker" />
+                <option name="name" value="prepareComGoogleFirebaseFirebaseDatabase1001Library" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/IIFYM_Tracker" />
                 <option name="name" value="compileReleaseRenderscript" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Prepare com.android.support:animated-vector-drawable:25.1.0" />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/IIFYM_Tracker" />
+                <option name="name" value="prepareComAndroidSupportAnimatedVectorDrawable2510Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="description" value="Prepare com.android.support:support-v13:25.0.0" />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/IIFYM_Tracker" />
                 <option name="name" value="prepareComAndroidSupportSupportV132500Library" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Prepare com.android.support:support-v4:25.1.0" />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/IIFYM_Tracker" />
+                <option name="name" value="prepareComAndroidSupportSupportV42510Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="description" value="Prepare com.github.worker8:tourguide:1.0.17-SNAPSHOT" />
@@ -1301,17 +1237,17 @@
                 <option name="name" value="processDebugAndroidTestManifest" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
+                <option name="description" value="Prepare com.google.android.gms:play-services-basement:10.0.1" />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/IIFYM_Tracker" />
+                <option name="name" value="prepareComGoogleAndroidGmsPlayServicesBasement1001Library" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/IIFYM_Tracker" />
                 <option name="name" value="compileDebugUnitTestJavaWithJavac" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/IIFYM_Tracker" />
                 <option name="name" value="transformResourcesWithMergeJavaResForReleaseUnitTest" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Prepare com.google.firebase:firebase-auth-module:9.4.0" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/IIFYM_Tracker" />
-                <option name="name" value="prepareComGoogleFirebaseFirebaseAuthModule940Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/IIFYM_Tracker" />
@@ -1326,18 +1262,8 @@
                 <option name="name" value="processDebugAndroidTestJavaRes" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Prepare com.google.firebase:firebase-auth:9.4.0" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/IIFYM_Tracker" />
-                <option name="name" value="prepareComGoogleFirebaseFirebaseAuth940Library" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/IIFYM_Tracker" />
                 <option name="name" value="processReleaseUnitTestJavaRes" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Prepare com.android.support:support-core-ui:25.0.1" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/IIFYM_Tracker" />
-                <option name="name" value="prepareComAndroidSupportSupportCoreUi2501Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="description" value="Uninstalls the Release build." />
@@ -1351,6 +1277,16 @@
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/IIFYM_Tracker" />
                 <option name="name" value="mergeReleaseResources" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Prepare com.google.android.gms:play-services-base:10.0.1" />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/IIFYM_Tracker" />
+                <option name="name" value="prepareComGoogleAndroidGmsPlayServicesBase1001Library" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Prepare com.google.android.gms:play-services-tasks:10.0.1" />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/IIFYM_Tracker" />
+                <option name="name" value="prepareComGoogleAndroidGmsPlayServicesTasks1001Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/IIFYM_Tracker" />
@@ -1371,11 +1307,6 @@
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/IIFYM_Tracker" />
                 <option name="name" value="compileDebugAndroidTestSources" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Prepare com.android.support:support-vector-drawable:25.0.1" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/IIFYM_Tracker" />
-                <option name="name" value="prepareComAndroidSupportSupportVectorDrawable2501Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/IIFYM_Tracker" />
@@ -1404,9 +1335,9 @@
                 <option name="name" value="mergeDebugAndroidTestAssets" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Prepare com.android.support:support-media-compat:25.0.1" />
+                <option name="description" value="Prepare com.android.support:support-fragment:25.1.0" />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/IIFYM_Tracker" />
-                <option name="name" value="prepareComAndroidSupportSupportMediaCompat2501Library" />
+                <option name="name" value="prepareComAndroidSupportSupportFragment2510Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/IIFYM_Tracker" />
@@ -1440,9 +1371,9 @@
                 <option name="name" value="assemble" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Prepare com.google.firebase:firebase-auth-common:9.4.0" />
+                <option name="description" value="Prepare info.hoang8f:android-segmented:1.0.6" />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/IIFYM_Tracker" />
-                <option name="name" value="prepareComGoogleFirebaseFirebaseAuthCommon940Library" />
+                <option name="name" value="prepareInfoHoang8fAndroidSegmented106Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/IIFYM_Tracker" />
@@ -1471,11 +1402,6 @@
                 <option name="name" value="mergeDebugAssets" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Prepare com.android.support:design:25.0.1" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/IIFYM_Tracker" />
-                <option name="name" value="prepareComAndroidSupportDesign2501Library" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
                 <option name="description" value="Runs all device checks on currently connected devices." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/IIFYM_Tracker" />
                 <option name="name" value="connectedCheck" />
@@ -1502,11 +1428,6 @@
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/IIFYM_Tracker" />
                 <option name="name" value="transformNative_libsWithMergeJniLibsForDebug" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Prepare com.android.support:animated-vector-drawable:25.0.1" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/IIFYM_Tracker" />
-                <option name="name" value="prepareComAndroidSupportAnimatedVectorDrawable2501Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="description" value="Prepare com.google.firebase:firebase-analytics:9.0.0" />
@@ -1546,14 +1467,14 @@
                 <option name="name" value="mergeReleaseShaders" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Prepare com.android.support:recyclerview-v7:25.0.1" />
+                <option name="description" value="Prepare com.android.support:appcompat-v7:25.1.0" />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/IIFYM_Tracker" />
-                <option name="name" value="prepareComAndroidSupportRecyclerviewV72501Library" />
+                <option name="name" value="prepareComAndroidSupportAppcompatV72510Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Prepare com.android.support:support-core-utils:25.0.1" />
+                <option name="description" value="Prepare com.android.support:support-core-ui:25.1.0" />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/IIFYM_Tracker" />
-                <option name="name" value="prepareComAndroidSupportSupportCoreUtils2501Library" />
+                <option name="name" value="prepareComAndroidSupportSupportCoreUi2510Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="description" value="Displays the Android dependencies of the project." />
@@ -1601,27 +1522,12 @@
                 <option name="name" value="compileReleaseJavaWithJavac" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Prepare com.google.firebase:firebase-database-connection:9.4.0" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/IIFYM_Tracker" />
-                <option name="name" value="prepareComGoogleFirebaseFirebaseDatabaseConnection940Library" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Prepare com.android.support:support-compat:25.0.1" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/IIFYM_Tracker" />
-                <option name="name" value="prepareComAndroidSupportSupportCompat2501Library" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/IIFYM_Tracker" />
                 <option name="name" value="jarReleaseClasses" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/IIFYM_Tracker" />
                 <option name="name" value="transformResourcesWithMergeJavaResForDebugAndroidTest" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Prepare com.google.android.gms:play-services-tasks:9.4.0" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/IIFYM_Tracker" />
-                <option name="name" value="prepareComGoogleAndroidGmsPlayServicesTasks940Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/IIFYM_Tracker" />
@@ -1709,14 +1615,14 @@
                 <option name="name" value="compileReleaseAidl" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Prepare com.google.android.gms:play-services-base:9.4.0" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/IIFYM_Tracker" />
-                <option name="name" value="prepareComGoogleAndroidGmsPlayServicesBase940Library" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
                 <option name="description" value="Runs lint on the Release build." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/IIFYM_Tracker" />
                 <option name="name" value="lintRelease" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Prepare com.google.firebase:firebase-auth:10.0.1" />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/IIFYM_Tracker" />
+                <option name="name" value="prepareComGoogleFirebaseFirebaseAuth1001Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="description" value="Prepare com.androidadvance:topsnackbar:1.1.1" />
@@ -1738,6 +1644,11 @@
                 <option name="name" value="generateDebugAssets" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
+                <option name="description" value="Prepare com.android.support:design:25.1.0" />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/IIFYM_Tracker" />
+                <option name="name" value="prepareComAndroidSupportDesign2510Library" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
                 <option name="description" value="Displays all buildscript dependencies declared in project ':IIFYM_Tracker'." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/IIFYM_Tracker" />
                 <option name="name" value="buildEnvironment" />
@@ -1756,12 +1667,22 @@
                 <option name="name" value="sourceSets" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
+                <option name="description" value="Prepare com.android.support:recyclerview-v7:25.1.0" />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/IIFYM_Tracker" />
+                <option name="name" value="prepareComAndroidSupportRecyclerviewV72510Library" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/IIFYM_Tracker" />
                 <option name="name" value="transformResourcesWithMergeJavaResForDebugUnitTest" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/IIFYM_Tracker" />
                 <option name="name" value="mergeReleaseAssets" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Prepare com.android.support:support-core-utils:25.1.0" />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/IIFYM_Tracker" />
+                <option name="name" value="prepareComAndroidSupportSupportCoreUtils2510Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/IIFYM_Tracker" />
@@ -1776,9 +1697,24 @@
                 <option name="name" value="prepareDebugUnitTestDependencies" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
+                <option name="description" value="Prepare com.android.support:transition:25.1.0" />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/IIFYM_Tracker" />
+                <option name="name" value="prepareComAndroidSupportTransition2510Library" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
                 <option name="description" value="Prepare IIFYM Tracker:ProgressBar_Library:unspecified" />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/IIFYM_Tracker" />
                 <option name="name" value="prepareIIFYMTrackerProgressBar_LibraryUnspecifiedLibrary" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Prepare com.android.support:support-vector-drawable:25.1.0" />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/IIFYM_Tracker" />
+                <option name="name" value="prepareComAndroidSupportSupportVectorDrawable2510Library" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Prepare com.android.support:support-compat:25.1.0" />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/IIFYM_Tracker" />
+                <option name="name" value="prepareComAndroidSupportSupportCompat2510Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/IIFYM_Tracker" />
@@ -1788,11 +1724,6 @@
                 <option name="description" value="Runs lint on just the fatal issues in the release build." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/IIFYM_Tracker" />
                 <option name="name" value="lintVitalRelease" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Prepare com.google.android.gms:play-services-basement:9.4.0" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/IIFYM_Tracker" />
-                <option name="name" value="prepareComGoogleAndroidGmsPlayServicesBasement940Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="description" value="Uninstalls the Debug build." />
@@ -1818,17 +1749,17 @@
                 <option name="name" value="clean" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
+                <option name="description" value="Prepare com.android.support:support-media-compat:25.1.0" />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/IIFYM_Tracker" />
+                <option name="name" value="prepareComAndroidSupportSupportMediaCompat2510Library" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/IIFYM_Tracker" />
                 <option name="name" value="preDebugBuild" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/IIFYM_Tracker" />
                 <option name="name" value="generateDebugBuildConfig" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Prepare com.android.support:appcompat-v7:25.0.1" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/IIFYM_Tracker" />
-                <option name="name" value="prepareComAndroidSupportAppcompatV72501Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="description" value="Assembles and tests this project." />
@@ -1859,11 +1790,6 @@
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/IIFYM_Tracker" />
                 <option name="name" value="generateReleaseResValues" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Prepare com.android.support:support-fragment:25.0.1" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/IIFYM_Tracker" />
-                <option name="name" value="prepareComAndroidSupportSupportFragment2501Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/IIFYM_Tracker" />
@@ -2497,7 +2423,7 @@
     </option>
     <option name="modificationStamps">
       <map>
-        <entry key="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker" value="5938009576500" />
+        <entry key="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker" value="5938619929130" />
       </map>
     </option>
     <option name="projectBuildClasspath">
@@ -2916,18 +2842,26 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/build.gradle" />
-        <option value="$PROJECT_DIR$/IIFYM_Tracker/build.gradle" />
-        <option value="$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/UserProfile_Abdu.java" />
-        <option value="$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/User_Login_Authentification/Goalsfrag_Abdu.java" />
-        <option value="$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/User_Login_Authentification/Login_Abdu.java" />
-        <option value="$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/User_Login_Authentification/myFragEventListener.java" />
-        <option value="$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/User_Login_Authentification/Profilefrag_Abdu.java" />
         <option value="$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/User_Login_Authentification/Signupfrag_Abdu.java" />
-        <option value="$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/User_Login_Authentification/UserProfile_Abdu.java" />
-        <option value="$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Settings/EditProfile.java" />
-        <option value="$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Settings/MacroSettings.java" />
-        <option value="$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Main/ViewSavedMealsActivity.java" />
+        <option value="$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Old_Login/Goalsfrag_Abdu.java" />
+        <option value="$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Old_Login/Login_Abdu.java" />
+        <option value="$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Old_Login/myFragEventListener.java" />
+        <option value="$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Old_Login/Profilefrag_Abdu.java" />
+        <option value="$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Old_Login/UserProfile_Abdu.java" />
+        <option value="$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Old_Login/Signupfrag_Abdu.java" />
+        <option value="$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Settings/UserProfile_Abdu.java" />
+        <option value="$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Settings/UserProfile_Mina.java" />
+        <option value="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/values/colors.xml" />
+        <option value="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/menu/menu_login.xml" />
+        <option value="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/menu/menu_home_man.xml" />
+        <option value="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/menu/menu_home_woman.xml" />
+        <option value="$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Main/MainActivity.java" />
+        <option value="$PROJECT_DIR$/IIFYM_Tracker/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/layout/activity_login.xml" />
+        <option value="$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/User_Login_Authentification/Login_Activity.java" />
+        <option value="$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/User_Login_Authentification/activityLogin.java" />
+        <option value="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/layout/user_profile_info_signup.xml" />
       </list>
     </option>
   </component>
@@ -2970,49 +2904,326 @@
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
             </PATH_ELEMENT>
           </PATH>
-        </subPane>
-      </pane>
-      <pane id="Scope">
-        <subPane subId="Project Files">
           <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
+            <PATH_ELEMENT>
+              <option name="myItemId" value="IIFYM Tracker" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="IIFYM_Tracker" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="values" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="IIFYM Tracker" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="IIFYM_Tracker" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="IIFYM Tracker" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="IIFYM_Tracker" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="layout" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="IIFYM Tracker" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="IIFYM_Tracker" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="drawable" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="IIFYM Tracker" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="IIFYM_Tracker" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="IIFYM Tracker" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="IIFYM_Tracker" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="IIFYM Tracker" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="IIFYM_Tracker" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="IIFYM_Tracker" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="IIFYM Tracker" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="IIFYM_Tracker" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="IIFYM_Tracker" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Activities" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="User_Login_Authentification" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="IIFYM Tracker" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="IIFYM_Tracker" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="IIFYM_Tracker" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Activities" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="IIFYM Tracker" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="IIFYM_Tracker" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="IIFYM_Tracker" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Activities" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane">
-        <subPane />
-      </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
+      <pane id="ProjectPane" />
       <pane id="Scratches" />
-      <pane id="ProjectPane">
-        <subPane />
-      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="settings.editor.selected.configurable" value="editor.preferences.import" />
+    <property name="settings.editor.selected.configurable" value="android.sdk-updates" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/sdk" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="android.project.structure.last.selected" value="IIFYM_Tracker" />
-    <property name="android.project.structure.proportion" value="0.15" />
-    <property name="device.picker.selection" value="Nexus_5_API_23" />
+    <property name="device.picker.selection" value="Pixel_C_API_23" />
+    <property name="UI_DESIGNER_EDITOR_MODE.NlPaletteManager-NlPreviewForm.SHOW" value="false" />
+    <property name="UI_DESIGNER_EDITOR_MODE.NlPaletteManager-NlEditorPanel.WIDTH" value="220" />
+    <property name="UI_DESIGNER_EDITOR_MODE.NlPropertiesWindowManager-NlEditorPanel.SHOW" value="false" />
+    <property name="last_directory_selection" value="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/drawable" />
   </component>
-  <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker" />
-    </key>
-    <key name="android.template.packageName">
-      <recent name="com.example.kareem.IIFYM_Tracker.Activities" />
-    </key>
-    <key name="android.template.parentActivityClass">
-      <recent name="" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Kareem\AndroidStudioProjects\IIFYM Tracker\IIFYM_Tracker\src" />
-    </key>
+  <component name="RestoreUpdateTree" date="Moments ago" ActionInfo="_Update">
+    <UpdatedFiles>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Updated from server" />
+        <option name="myStatusName" value="Changed on server" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="CHANGED_ON_SERVER" />
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Updated" />
+          <option name="myStatusName" value="Changed" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="UPDATED" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/gradle.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/IIFYM_Tracker/src/main/res/drawable/button_text_color.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/IIFYM_Tracker/src/main/res/values/arrays.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/IIFYM_Tracker/src/main/res/values/colors.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/IIFYM_Tracker/src/main/res/values/strings.xml</PATH>
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Created" />
+          <option name="myStatusName" value="Created" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="CREATED" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Temp.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/IIFYM_Tracker/src/main/res/drawable/calendar.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/IIFYM_Tracker/src/main/res/layout/user_profile_info_signup.xml</PATH>
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Deleted" />
+          <option name="myStatusName" value="Deleted" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="true" />
+          <option name="myId" value="REMOVED_FROM_REPOSITORY" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/IIFYM_Tracker/src/main/res/layout/temp.xml</PATH>
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Restored" />
+          <option name="myStatusName" value="Will be restored" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="RESTORED" />
+        </FILE-GROUP>
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Modified" />
+        <option name="myStatusName" value="Modified" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MODIFIED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Skipped" />
+        <option name="myStatusName" value="Skipped" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="SKIPPED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with conflicts" />
+        <option name="myStatusName" value="Will be merged with conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_CONFLICTS" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with tree conflicts" />
+        <option name="myStatusName" value="Merged with tree conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with property conflicts" />
+        <option name="myStatusName" value="Will be merged with property conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged" />
+        <option name="myStatusName" value="Will be merged" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Not in repository" />
+        <option name="myStatusName" value="Not in repository" />
+        <option name="mySupportsDeletion" value="true" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="UNKNOWN" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Locally added" />
+        <option name="myStatusName" value="Locally added" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="LOCALLY_ADDED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Locally removed" />
+        <option name="myStatusName" value="Locally removed" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="LOCALLY_REMOVED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Switched" />
+        <option name="myStatusName" value="Switched" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="SWITCHED" />
+      </FILE-GROUP>
+    </UpdatedFiles>
   </component>
   <component name="RunManager" selected="Android App.IIFYM_Tracker">
     <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android App">
@@ -3313,49 +3524,72 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="031d0bec-4b7c-4a4b-953f-b4ee49735199" name="Default" comment="" />
-      <created>1484592919165</created>
+      <changelist id="5f2b3810-df93-4c64-a0f5-17e0435a1159" name="Default" comment="" />
+      <created>1485016846674</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1484592919165</updated>
+      <updated>1485016846674</updated>
     </task>
-    <task id="LOCAL-00001" summary="Renamed Project">
-      <created>1484593518428</created>
+    <task id="LOCAL-00001" summary="Changed colors and themes and image">
+      <created>1485017846439</created>
       <option name="number" value="00001" />
       <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
-      <updated>1484593518428</updated>
+      <updated>1485017846439</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Added email verification">
+      <created>1485022687920</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1485022687920</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Changed some layout file names">
+      <created>1485163876993</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1485163876993</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Added login session and firebase logout button">
+      <created>1485206718454</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1485206718454</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28730512" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32516703" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32293987" sideWeight="0.5021322" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33295837" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32739422" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33964366" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17590618" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1881663" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295838" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -3363,7 +3597,7 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32293987" sideWeight="0.4978678" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Thumbnails" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295838" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -3378,88 +3612,171 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Renamed Project" />
-    <MESSAGE value="Added the firebase SDK and dependencies to the project&#10;Refactored some files and activities&#10;Deleted some unused files and activities&#10;Categorized some activites into packages" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added the firebase SDK and dependencies to the project&#10;Refactored some files and activities&#10;Deleted some unused files and activities&#10;Categorized some activites into packages" />
+    <MESSAGE value="Changed colors and themes and image" />
+    <MESSAGE value="Added email verification" />
+    <MESSAGE value="Changed some layout file names" />
+    <MESSAGE value="Added login session and firebase logout button" />
+    <MESSAGE value="Added error checking and alert dialogs for Login screen&#10;Renamed some layout files, strings resrouces, and drawables" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added error checking and alert dialogs for Login screen&#10;Renamed some layout files, strings resrouces, and drawables" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <option name="time" value="10" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Settings/MacroSettings.java">
+    <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/res/layout/content_home.xml">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="3111">
+          <caret line="183" column="34" selection-start-line="183" selection-start-column="34" selection-end-line="183" selection-end-column="34" />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Settings/UserProfile_Mina.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="39" column="13" selection-start-line="39" selection-start-column="13" selection-end-line="39" selection-end-column="13" />
+        <state relative-caret-position="289">
+          <caret line="30" column="3" selection-start-line="30" selection-start-column="3" selection-end-line="30" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/res/values/colors.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="43" selection-start-line="6" selection-start-column="43" selection-end-line="6" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Old_Login/Goalsfrag_Abdu.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="35" column="50" selection-start-line="35" selection-start-column="50" selection-end-line="35" selection-end-column="50" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Main/AddQuickMealActivity.java">
+    <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Old_Login/Signupfrag_Abdu.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="28" column="13" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
+        <state relative-caret-position="153">
+          <caret line="20" column="32" selection-start-line="20" selection-start-column="32" selection-end-line="20" selection-end-column="32" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Main/AddSavedMealActivity.java">
+    <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/res/color/text_color_selector.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Main/CreateComplexMealActivity.java">
+    <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/User_Login_Authentification/activityLogin.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="28" column="13" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
-          <folding />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#onCreate#0;class#activityLogin#0" expanded="false" />
+            <element signature="e#1448#3479#0" expanded="true" />
+            <element signature="e#3478#3479#0" expanded="true" />
+            <element signature="method#signIn#0;class#activityLogin#0" expanded="false" />
+            <element signature="method#onStop#0;class#activityLogin#0" expanded="false" />
+            <element signature="method#onStart#0;class#activityLogin#0" expanded="false" />
+            <element signature="method#onPause#0;class#activityLogin#0" expanded="false" />
+            <element signature="method#onResume#0;class#activityLogin#0" expanded="false" />
+            <element signature="method#onClick#0;class#activityLogin#0" expanded="false" />
+            <element signature="method#showAlertDialog#0;class#activityLogin#0" expanded="false" />
+            <element signature="e#9512#9697#0" expanded="true" />
+            <element signature="e#9696#9697#0" expanded="true" />
+            <element signature="method#validateForm#0;class#activityLogin#0" expanded="false" />
+            <element signature="method#showProgressDialog#0;class#activityLogin#0" expanded="false" />
+            <element signature="method#hideProgressDialog#0;class#activityLogin#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Main/CreateSimpleMealActivity.java">
+    <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/User_Login_Authentification/activityLogin.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="28" column="13" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#onCreate#0;class#activityLogin#0" expanded="false" />
+            <element signature="e#1448#3479#0" expanded="true" />
+            <element signature="e#3478#3479#0" expanded="true" />
+            <element signature="method#signIn#0;class#activityLogin#0" expanded="false" />
+            <element signature="method#onStop#0;class#activityLogin#0" expanded="false" />
+            <element signature="method#onStart#0;class#activityLogin#0" expanded="false" />
+            <element signature="method#onPause#0;class#activityLogin#0" expanded="false" />
+            <element signature="method#onResume#0;class#activityLogin#0" expanded="false" />
+            <element signature="method#onClick#0;class#activityLogin#0" expanded="false" />
+            <element signature="method#showAlertDialog#0;class#activityLogin#0" expanded="false" />
+            <element signature="e#9512#9697#0" expanded="true" />
+            <element signature="e#9696#9697#0" expanded="true" />
+            <element signature="method#validateForm#0;class#activityLogin#0" expanded="false" />
+            <element signature="method#showProgressDialog#0;class#activityLogin#0" expanded="false" />
+            <element signature="method#hideProgressDialog#0;class#activityLogin#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Settings/UserProfile_Mina.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="30" column="3" selection-start-line="30" selection-start-column="3" selection-end-line="30" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/res/values/colors.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="43" selection-start-line="6" selection-start-column="43" selection-end-line="6" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Old_Login/Goalsfrag_Abdu.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="35" column="50" selection-start-line="35" selection-start-column="50" selection-end-line="35" selection-end-column="50" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Main/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="45" column="13" selection-start-line="45" selection-start-column="13" selection-end-line="45" selection-end-column="13" />
+        <state relative-caret-position="2550">
+          <caret line="191" column="63" selection-start-line="191" selection-start-column="63" selection-end-line="191" selection-end-column="63" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Main/SelectMealTypeActivity.java">
+    <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Old_Login/Login_Abdu.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
-          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
-          <folding />
+          <caret line="26" column="13" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Main/SelectSavedMealActivity.java">
+    <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Old_Login/Profilefrag_Abdu.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
-          <folding />
+        <state relative-caret-position="221">
+          <caret line="36" column="13" selection-start-line="36" selection-start-column="13" selection-end-line="36" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Main/ViewMealActivity.java">
+    <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Old_Login/Signupfrag_Abdu.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="25" column="13" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
+        <state relative-caret-position="153">
+          <caret line="20" column="32" selection-start-line="20" selection-start-column="32" selection-end-line="20" selection-end-column="32" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Main/ViewSavedMealsActivity.java">
+    <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/res/color/text_color_selector.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -3467,32 +3784,136 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/google-services.json">
+    <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Old_Login/myFragEventListener.java">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Old_Login/myFragEventListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Old_Login/Profilefrag_Abdu.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="36" column="13" selection-start-line="36" selection-start-column="13" selection-end-line="36" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Old_Login/Login_Abdu.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="26" column="13" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Settings/EditProfile_Mina.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/res/layout/activity_select_saved_meal.xml">
+      <provider editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/build.gradle">
+    <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/res/layout/content_home.xml">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="3111">
+          <caret line="183" column="34" selection-start-line="183" selection-start-column="34" selection-end-line="183" selection-end-column="34" />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Settings/UserProfile_Mina.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="56" selection-start-line="8" selection-start-column="56" selection-end-line="8" selection-end-column="56" />
+        <state relative-caret-position="289">
+          <caret line="30" column="3" selection-start-line="30" selection-start-column="3" selection-end-line="30" selection-end-column="3" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/build.gradle">
+    <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/res/values/colors.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="398">
-          <caret line="40" column="53" selection-start-line="40" selection-start-column="53" selection-end-line="40" selection-end-column="53" />
+        <state relative-caret-position="102">
+          <caret line="6" column="43" selection-start-line="6" selection-start-column="43" selection-end-line="6" selection-end-column="43" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/MacronutrientPreferenceActivity.java" />
+    <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Old_Login/Goalsfrag_Abdu.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="35" column="50" selection-start-line="35" selection-start-column="50" selection-end-line="35" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Old_Login/Signupfrag_Abdu.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="20" column="32" selection-start-line="20" selection-start-column="32" selection-end-line="20" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/res/layout/activity_view_meal.xml">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/res/menu/menu_home_man.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="7" selection-end-column="52" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/res/menu/menu_login.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/res/layout/activity_home.xml">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="60" column="78" selection-start-line="60" selection-start-column="76" selection-end-line="60" selection-end-column="78" />
+        <state relative-caret-position="510">
+          <caret line="30" column="51" selection-start-line="30" selection-start-column="51" selection-end-line="30" selection-end-column="51" />
           <folding />
         </state>
       </provider>
@@ -3500,76 +3921,10 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/User_Login_Authentification/Goalsfrag_Abdu.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="28" column="13" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/User_Login_Authentification/Login_Abdu.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="25" column="13" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/User_Login_Authentification/myFragEventListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="17" selection-start-line="3" selection-start-column="17" selection-end-line="3" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/User_Login_Authentification/Profilefrag.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="36" column="13" selection-start-line="36" selection-start-column="13" selection-end-line="36" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/User_Login_Authentification/Signupfrag.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="24" column="13" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/User_Login_Authentification/UserProfile.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Settings/EditProfile.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Settings/MacroSettings.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="39" column="13" selection-start-line="39" selection-start-column="13" selection-end-line="39" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/ProfileSettings.java" />
-    <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Main/AddQuickMealActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="28" column="13" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/res/drawable/image_iifym.png" />
     <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Main/AddSavedMealActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
+        <state relative-caret-position="-4152">
           <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
           <folding />
         </state>
@@ -3577,58 +3932,176 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Main/CreateComplexMealActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
+        <state relative-caret-position="-2771">
           <caret line="28" column="13" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Main/AddQuickMealActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1245">
+          <caret line="229" column="19" selection-start-line="229" selection-start-column="19" selection-end-line="229" selection-end-column="19" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Main/CreateSimpleMealActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
+        <state relative-caret-position="-3625">
           <caret line="28" column="13" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Main/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="45" column="13" selection-start-line="45" selection-start-column="13" selection-end-line="45" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Main/SelectMealTypeActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
+        <state relative-caret-position="-279">
           <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Main/SelectSavedMealActivity.java">
+    <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/res/layout/activity_login.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
+        <state relative-caret-position="17">
+          <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
           <folding />
         </state>
       </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Main/ViewMealActivity.java">
+    <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/res/color/text_color_selector.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="25" column="13" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Main/ViewSavedMealsActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="48" column="0" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
+        <state relative-caret-position="-1959">
+          <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
           <folding />
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/res/layout/activity_create_simple_meal.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/res/layout/activity_add_saved_meal.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/res/layout/content_add_saved_meal.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1728">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/res/layout/activity_view_saved_meals.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="41" column="37" selection-start-line="41" selection-start-column="37" selection-end-line="41" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/res/drawable/btn_iifym_style.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/Main/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="447">
+          <caret line="478" column="0" selection-start-line="478" selection-start-column="0" selection-end-line="478" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="274">
+          <caret line="116" column="24" selection-start-line="116" selection-start-column="24" selection-end-line="116" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Activities/User_Login_Authentification/activityLogin.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="110" column="56" selection-start-line="110" selection-start-column="56" selection-end-line="110" selection-end-column="56" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#onCreate#0;class#activityLogin#0" expanded="false" />
+            <element signature="e#1448#3479#0" expanded="true" />
+            <element signature="e#3478#3479#0" expanded="true" />
+            <element signature="method#signIn#0;class#activityLogin#0" expanded="false" />
+            <element signature="method#onStop#0;class#activityLogin#0" expanded="false" />
+            <element signature="method#onStart#0;class#activityLogin#0" expanded="false" />
+            <element signature="method#onPause#0;class#activityLogin#0" expanded="false" />
+            <element signature="method#onResume#0;class#activityLogin#0" expanded="false" />
+            <element signature="method#onClick#0;class#activityLogin#0" expanded="false" />
+            <element signature="method#showAlertDialog#0;class#activityLogin#0" expanded="false" />
+            <element signature="e#9512#9697#0" expanded="true" />
+            <element signature="e#9696#9697#0" expanded="true" />
+            <element signature="method#validateForm#0;class#activityLogin#0" expanded="false" />
+            <element signature="method#showProgressDialog#0;class#activityLogin#0" expanded="false" />
+            <element signature="method#hideProgressDialog#0;class#activityLogin#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/res/menu/menu_home_woman.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="10" selection-start-line="4" selection-start-column="10" selection-end-line="4" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/IIFYM_Tracker/src/main/res/layout/user_profile_info_signup.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="628">
+          <caret line="320" column="53" selection-start-line="320" selection-start-column="53" selection-end-line="320" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
       </provider>
     </entry>
   </component>

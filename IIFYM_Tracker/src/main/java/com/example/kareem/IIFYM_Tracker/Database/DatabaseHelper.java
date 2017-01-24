@@ -43,9 +43,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "(meal_id       INTEGER PRIMARY KEY autoincrement, " +
                 "meal_name      TEXT UNIQUE, " +
                 "date_created   TEXT, " +
-                "carbs          INTEGER, " +
-                "protein        INTEGER, " +
-                "fat            INTEGER, " +
+                "icon_carbs          INTEGER, " +
+                "icon_protein        INTEGER, " +
+                "icon_fat            INTEGER, " +
                 "portion        INTEGER, " +     //enum, 0 - Serving, 1 - Weight, 2 - None
                 "is_daily       INTEGER, " +     //boolean, processed in code
                 "user_id        INTEGER, " +
@@ -56,9 +56,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "(meal_id           INTEGER PRIMARY KEY autoincrement, " +
                 "meal_name          TEXT UNIQUE, " +
                 "date_created       TEXT, " +
-                "carbs              REAL, " +
-                "protein            REAL, " +
-                "fat                REAL, " +
+                "icon_carbs              REAL, " +
+                "icon_protein            REAL, " +
+                "icon_fat                REAL, " +
                 "portion            INTEGER, " +     //enum, 0 - Serving, 1 - Weight, 2 - None
                 "user_id            INTEGER, " +
                 "is_quick           INTEGER);"; //TODO REDESIGN THIS NONSENSE

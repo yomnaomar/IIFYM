@@ -71,9 +71,9 @@ public class DatabaseConnector {
         ContentValues newMeal = new ContentValues();
         newMeal.put("meal_name", M.getMeal_name());
         newMeal.put("date_created", M.getDate_created());
-        newMeal.put("carbs", M.getCarbs());
-        newMeal.put("protein", M.getProtein());
-        newMeal.put("fat", M.getFat());
+        newMeal.put("icon_carbs", M.getCarbs());
+        newMeal.put("icon_protein", M.getProtein());
+        newMeal.put("icon_fat", M.getFat());
         newMeal.put("portion", M.getPortion().getPortionInt());
         newMeal.put("user_id", M.getUser_id());
         newMeal.put("is_quick", 1); //TODO REDESIGN THIS NONSENSE
@@ -100,9 +100,9 @@ public class DatabaseConnector {
         ContentValues newMeal = new ContentValues();
         newMeal.put("meal_name", M.getMeal_name());
         newMeal.put("date_created", M.getDate_created());
-        newMeal.put("carbs", M.getCarbs());
-        newMeal.put("protein", M.getProtein());
-        newMeal.put("fat", M.getFat());
+        newMeal.put("icon_carbs", M.getCarbs());
+        newMeal.put("icon_protein", M.getProtein());
+        newMeal.put("icon_fat", M.getFat());
         newMeal.put("portion", M.getPortion().getPortionInt());
         newMeal.put("user_id", M.getUser_id());
         newMeal.put("is_quick", 0); //TODO REDESIGN THIS NONSENSE
@@ -128,9 +128,9 @@ public class DatabaseConnector {
         //updateMeal.put("meal_id", C.getInt(0));
         updateMeal.put("meal_name", M.getMeal_name());
         //updateMeal.put("date_created", C.getString(2));
-        updateMeal.put("carbs", M.getCarbs());
-        updateMeal.put("protein", M.getProtein());
-        updateMeal.put("fat", M.getFat());
+        updateMeal.put("icon_carbs", M.getCarbs());
+        updateMeal.put("icon_protein", M.getProtein());
+        updateMeal.put("icon_fat", M.getFat());
         updateMeal.put("portion", M.getPortion().getPortionInt());
         //updateMeal.put("user_name", C.getString(8));
 
@@ -180,9 +180,9 @@ public class DatabaseConnector {
             int meal_id             = C.getInt(0);       //meal)id
             String meal_name        = C.getString(1);    //meal_name
             //String  date_created  = C.getString(2);   //date_created
-            float carbs             = C.getFloat(3);      //carbs
-            float protein           = C.getFloat(4);      //protein
-            float fat               = C.getFloat(5);      //fat
+            float carbs             = C.getFloat(3);      //icon_carbs
+            float protein           = C.getFloat(4);      //icon_protein
+            float fat               = C.getFloat(5);      //icon_fat
             portion = portion.values()[C.getInt(6)];    //portion
             int user_id             = C.getInt(7);      //user_id
 
@@ -202,9 +202,9 @@ public class DatabaseConnector {
         int meal_id             = C.getInt(0);      //meal)id
         String meal_name        = C.getString(1);   //meal_name
         //String  date_created  = C.getString(2);   //date_created
-        float carbs             = C.getFloat(3);      //carbs
-        float protein           = C.getFloat(4);      //protein
-        float fat               = C.getFloat(5);      //fat
+        float carbs             = C.getFloat(3);      //icon_carbs
+        float protein           = C.getFloat(4);      //icon_protein
+        float fat               = C.getFloat(5);      //icon_fat
         portion = portion.values()[C.getInt(6)];    //portion
         int user_id             = C.getInt(7);      //user_id
 

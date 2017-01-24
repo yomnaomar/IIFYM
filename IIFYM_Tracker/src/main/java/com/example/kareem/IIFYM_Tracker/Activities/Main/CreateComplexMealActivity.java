@@ -114,9 +114,9 @@ public class CreateComplexMealActivity extends AppCompatActivity implements  Vie
         int carbs = 22+26+26+26;
         int protein = 23+60+60+60;
 
-        totalfat.setText("fat: "+fat);
-        totalcarbs.setText("carbs: "+carbs);
-        totalprot.setText("protein: "+protein);
+        totalfat.setText("icon_fat: "+fat);
+        totalcarbs.setText("icon_carbs: "+carbs);
+        totalprot.setText("icon_protein: "+protein);
 
         complexAdapter = new ComplexMealComponentAdapter(this, ArrayList_SimpleMeals);
 
