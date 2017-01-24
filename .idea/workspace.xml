@@ -10,10 +10,8 @@
     </shared>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="031d0bec-4b7c-4a4b-953f-b4ee49735199" name="Default" comment="Added the login user info xml layout and a portion of the code associated with it.">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/IIFYM_Tracker/src/main/res/layout/macro_settings_login_screen.xml" />
+    <list default="true" id="031d0bec-4b7c-4a4b-953f-b4ee49735199" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Temp.java" afterPath="$PROJECT_DIR$/IIFYM_Tracker/src/main/java/com/example/kareem/IIFYM_Tracker/Temp.java" />
     </list>
     <ignored path="IIFYM Tracker.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -3496,7 +3494,14 @@
       <option name="project" value="LOCAL" />
       <updated>1485289419113</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Added the macro profile xml layout.">
+      <created>1485289750712</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1485289750712</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -3554,7 +3559,8 @@
     <MESSAGE value="Added Segmented Group Choice Button" />
     <MESSAGE value="Finished the login user info screen and a protion of the code associated with it." />
     <MESSAGE value="Added the login user info xml layout and a portion of the code associated with it." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added the login user info xml layout and a portion of the code associated with it." />
+    <MESSAGE value="Added the macro profile xml layout." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added the macro profile xml layout." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
