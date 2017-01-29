@@ -31,7 +31,7 @@ import com.example.kareem.IIFYM_Tracker.Activities.User_Login_Authentification.a
 import com.example.kareem.IIFYM_Tracker.Custom_Objects.DailyMeal;
 import com.example.kareem.IIFYM_Tracker.Custom_Objects.Meal;
 import com.example.kareem.IIFYM_Tracker.Custom_Objects.Portion_Type;
-import com.example.kareem.IIFYM_Tracker.Custom_Objects.User;
+import com.example.kareem.IIFYM_Tracker.Custom_Objects.User_Old;
 import com.example.kareem.IIFYM_Tracker.Database.DatabaseConnector;
 import com.example.kareem.IIFYM_Tracker.R;
 import com.example.kareem.IIFYM_Tracker.ViewComponents.DailyMealAdapter;
@@ -45,7 +45,7 @@ import tourguide.tourguide.Overlay;
 import tourguide.tourguide.Sequence;
 import tourguide.tourguide.ToolTip;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener, OnListItemDeletedListener {
+public class activityMain extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener, OnListItemDeletedListener {
 
     private TextView Text_CarbsGoal, Text_ProteinGoal, Text_FatGoal;
     private TextView Text_CarbsLeft, Text_ProteinLeft, Text_FatLeft;
@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private int user_id;
     private CoordinatorLayout coordinatorLayout;
 
-    private User currentUser;
+    private User_Old currentUser;
 
     View parentLayout;
 
@@ -193,7 +193,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         if(id==R.id.logout_firbase_menu_btn)
         {
-            //My_DB.close();
             signOut();
             finish();
             Intent in = new Intent(getApplicationContext(), activityLogin.class);

@@ -23,6 +23,6 @@
     <item android:title="Profile"
         android:id="@+id/profile_menu_btn"
         app:showAsAction="always"
-        android:icon="@drawable/woman"
+        android:icon="@drawable/icon_user_female"
         android:orderInCategory="101" />
 </menu>

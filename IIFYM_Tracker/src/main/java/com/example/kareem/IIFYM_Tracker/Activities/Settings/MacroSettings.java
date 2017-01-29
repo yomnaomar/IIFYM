@@ -20,7 +20,7 @@ import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.androidadvance.topsnackbar.TSnackbar;
-import com.example.kareem.IIFYM_Tracker.Custom_Objects.User;
+import com.example.kareem.IIFYM_Tracker.Custom_Objects.User_Old;
 import com.example.kareem.IIFYM_Tracker.Database.DatabaseConnector;
 import com.example.kareem.IIFYM_Tracker.R;
 
@@ -41,7 +41,7 @@ public class MacroSettings extends AppCompatActivity implements View.OnFocusChan
 
     String user_name;
     DatabaseConnector My_DB;
-    User currentUser;
+    User_Old currentUser;
 
     EditText goal,gender,carbs,prot,fat,workoutfreq,weight,height,calories,bmr,age;
     View parentLayout;

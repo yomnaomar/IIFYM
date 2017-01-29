@@ -27,7 +27,7 @@ public class Signupfrag_Abdu extends Fragment implements View.OnClickListener {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    private myFragEventListener listener;
+    private myFragEventListener_abdu listener;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -136,8 +136,8 @@ public class Signupfrag_Abdu extends Fragment implements View.OnClickListener {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        if(activity instanceof myFragEventListener) {
-            listener = (myFragEventListener) activity;
+        if(activity instanceof myFragEventListener_abdu) {
+            listener = (myFragEventListener_abdu) activity;
         } else {
             Log.d("FragmentEvent","Activity not attached to fragment");
         }

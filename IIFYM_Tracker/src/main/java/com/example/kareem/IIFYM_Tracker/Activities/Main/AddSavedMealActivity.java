@@ -87,7 +87,7 @@ public class AddSavedMealActivity extends AppCompatActivity implements View.OnCl
         My_DB.insertDailyMeal(meal_id,multiplier);
         Context context = getApplicationContext();
         Intent intent = new Intent();
-        intent.setClass(context, MainActivity.class);
+        intent.setClass(context, activityMain.class);
         startActivity(intent);
     }
 
@@ -96,16 +96,16 @@ public class AddSavedMealActivity extends AppCompatActivity implements View.OnCl
         builder.setMessage("Are you sure?")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        // User clicked Yes button
+                        // User_Old clicked Yes button
                         Context context = getApplicationContext();
                         Intent intent = new Intent();
-                        intent.setClass(context, MainActivity.class);
+                        intent.setClass(context, activityMain.class);
                         startActivity(intent);
                     }
                 });
         builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                // User cancelled the dialog
+                // User_Old cancelled the dialog
             }
         });
         AlertDialog dialog = builder.create();

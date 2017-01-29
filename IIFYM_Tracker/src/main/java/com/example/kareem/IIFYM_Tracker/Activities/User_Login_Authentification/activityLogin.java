@@ -14,22 +14,32 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
-import com.example.kareem.IIFYM_Tracker.Activities.Main.MainActivity;
+import com.example.kareem.IIFYM_Tracker.Activities.Main.activityMain;
+import com.example.kareem.IIFYM_Tracker.Custom_Objects.User;
+import com.example.kareem.IIFYM_Tracker.Database.DatabaseConnector;
 import com.example.kareem.IIFYM_Tracker.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class activityLogin extends AppCompatActivity implements View.OnClickListener {
 
     private FirebaseAuth mAuth;
+    private DatabaseReference mDatabase;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private ProgressDialog mProgressDialog;
     private EditText etxtEmail;
     private EditText etxtPassword;
     private SharedPreferences myPrefs;
+    private DatabaseConnector My_DB;
+    private boolean isRegistered;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,22 +47,58 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_login);
 
         mAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        My_DB = new DatabaseConnector(getApplicationContext());
+
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
+                FirebaseUser firebaseuser = firebaseAuth.getCurrentUser();
+
                 // User is signed in
-                if (user != null) {
-                    Log.d("User is Signed In", "onAuthStateChanged: signed_in:" + user.getUid());
+                if (firebaseuser != null) {
+                    Log.d("User is Signed In", "onAuthStateChanged: signed_in:" + firebaseuser.getUid());
+                    final String uid = firebaseuser.getUid();
+                    String email = firebaseuser.getEmail();
+
+                    // Email is verified
                     if (mAuth.getCurrentUser().isEmailVerified()) {
-                        // Email is verified
                         Log.d("Email is verified", "isEmailVerified: verified");
-                        // Go to main activity
-                        Context context = getApplicationContext();
-                        Intent intent = new Intent();
-                        intent.setClass(context, MainActivity.class);
-                        startActivity(intent);
-                        finish();
+
+                        mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                User userPost = dataSnapshot.getValue(User.class);
+                                isRegistered = userPost.isRegistered();
+                                if (isRegistered)
+                                    Log.d("isRegistered", "User with UID " + uid + " is Registered");
+                                else
+                                    Log.d("isRegistered", "User with UID " + uid + " is not Registered");
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
+                        if(isRegistered) {
+                            // Go to main activity
+                            Context context = getApplicationContext();
+                            Intent intent = new Intent();
+                            intent.setClass(context, activityMain.class);
+                            //startActivity(intent);
+                            //finish();
+                        }
+                        else {
+                            Context context = getApplicationContext();
+                            Intent intent = new Intent();
+                            intent.putExtra("uid",uid);
+                            intent.putExtra("email",email);
+                            intent.setClass(context, activityUserInfo.class);
+                            //startActivity(intent);
+                            //finish();
+                        }
+
 
                     } else {
                         // Email is not verified
@@ -90,7 +136,6 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
     }
 
     private void createAccount(String email, String password) {
-        Log.d("Account created", "createAccount: account_created" + email);
         if (!validateForm()) {
             return;
         }
@@ -99,12 +144,19 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        // Sign in Success
+                        // User Created Success
                         if(task.isSuccessful()) {
                             Log.d("User created:", "createUserWithEmail:onComplete:" + task.isSuccessful());
-                            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-                            user.sendEmailVerification()
+                            //Save UID, Email and isRegistered to Firebase and SQLite
+                            FirebaseUser firebaseuser = FirebaseAuth.getInstance().getCurrentUser();
+                            String newUID = firebaseuser.getUid();
+                            String newEmail = firebaseuser.getEmail();
+                            User user = new User(newUID,newEmail,false);
+                            mDatabase.child("users").child(newUID).setValue(user);
+                            My_DB.createUser(user);
+
+                            firebaseuser.sendEmailVerification()
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
@@ -118,30 +170,10 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
                                             }
                                         }
                                     });
-
-                            // TODO: Create flag in Firebase under user name to indicate that registration is incomplete
                         }
                         // Sign in Failed
                         if (!task.isSuccessful()) {
                             showAlertDialog("User Registration Failed","Unable to create user.");
-                        }
-                        hideProgressDialog();
-                    }
-                });
-
-        mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        // Sign in Success
-                        if(task.isSuccessful()) {
-                            Log.d("tag", "signInWithEmail:onComplete:" + task.isSuccessful());
-                        }
-                        // Sign in Failed
-                        if (!task.isSuccessful()) {
-                            Log.w("tag", "signInWithEmail:failed", task.getException());
-                            Log.w("Sign in with Email", "signInWithEmail: failed", task.getException());
-                            showAlertDialog("Sign in failed","Unable to Sign In.");
                         }
                         hideProgressDialog();
                     }

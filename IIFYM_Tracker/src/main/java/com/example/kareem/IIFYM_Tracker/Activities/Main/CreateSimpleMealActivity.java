@@ -22,7 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.kareem.IIFYM_Tracker.Custom_Objects.Meal;
-import com.example.kareem.IIFYM_Tracker.Custom_Objects.User;
+import com.example.kareem.IIFYM_Tracker.Custom_Objects.User_Old;
 import com.example.kareem.IIFYM_Tracker.Database.DatabaseConnector;
 import com.example.kareem.IIFYM_Tracker.R;
 
@@ -40,7 +40,7 @@ public class CreateSimpleMealActivity extends AppCompatActivity implements View.
     private int Weight_Unit_Selected = 0;
 
     String user_name;
-    User currentUser;
+    User_Old currentUser;
     boolean fieldsOk;
 
     @Override
@@ -156,8 +156,8 @@ public class CreateSimpleMealActivity extends AppCompatActivity implements View.
         }
     }
 
-    //Inserts Meal from User input to Meal table in the Database
-    //Alerts the User if a Meal with the same meal_name already exists and makes no changes
+    //Inserts Meal from User_Old input to Meal table in the Database
+    //Alerts the User_Old if a Meal with the same meal_name already exists and makes no changes
     private void Enter() {
         fieldsOk = validate(new EditText[]{EditText_MealName, EditText_Carbs, EditText_Protein,EditText_Fat});
         if(fieldsOk) {
@@ -180,13 +180,13 @@ public class CreateSimpleMealActivity extends AppCompatActivity implements View.
         }
     }
 
-    //Returns to MainActivity without making any changes
+    //Returns to activityMain without making any changes
     private void Cancel() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Are you sure?")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        // User clicked Yes button
+                        // User_Old clicked Yes button
                         Context context = getApplicationContext();
                         Intent intent = new Intent();
                         intent.setClass(context, ViewSavedMealsActivity.class);
@@ -195,7 +195,7 @@ public class CreateSimpleMealActivity extends AppCompatActivity implements View.
                 });
         builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                // User cancelled the dialog
+                // User_Old cancelled the dialog
             }
         });
         AlertDialog dialog = builder.create();

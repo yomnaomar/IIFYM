@@ -1,10 +1,9 @@
 package com.example.kareem.IIFYM_Tracker.Activities.Settings;
 
 import android.content.SharedPreferences;
-import android.database.Cursor;
+import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -59,7 +58,7 @@ public class EditProfile_Mina extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onResume() {
         super.onResume();
-        Cursor C = DB.getUser(user_name);
+        /*Cursor C = DB.getUser(user_name);
         if(C.moveToFirst())
         {
             userid.setText(C.getString(0));
@@ -72,10 +71,10 @@ public class EditProfile_Mina extends AppCompatActivity implements View.OnClickL
         }
         else
         {
-            userid.setText("User is Not Found !!");
-            Toast.makeText(this, "Ooops User is not there", Toast.LENGTH_SHORT).show();
+            userid.setText("User_Old is Not Found !!");
+            Toast.makeText(this, "Ooops User_Old is not there", Toast.LENGTH_SHORT).show();
             Log.i("Error",user_name);
-        }
+        }*/
     }
 
     @Override

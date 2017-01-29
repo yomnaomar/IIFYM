@@ -19,7 +19,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.kareem.IIFYM_Tracker.Custom_Objects.Meal;
-import com.example.kareem.IIFYM_Tracker.Custom_Objects.User;
+import com.example.kareem.IIFYM_Tracker.Custom_Objects.User_Old;
 import com.example.kareem.IIFYM_Tracker.Database.DatabaseConnector;
 import com.example.kareem.IIFYM_Tracker.R;
 import com.example.kareem.IIFYM_Tracker.ViewComponents.ComplexMealComponentAdapter;
@@ -43,7 +43,7 @@ public class CreateComplexMealActivity extends AppCompatActivity implements  Vie
     private int Weight_Unit_Selected = 0;
 
     String user_name;
-    User currentUser;
+    User_Old currentUser;
     boolean fieldsOk;
 
     private ListView Meals_ListView;

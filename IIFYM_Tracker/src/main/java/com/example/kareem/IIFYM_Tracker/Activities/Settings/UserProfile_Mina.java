@@ -62,7 +62,7 @@ public class UserProfile_Mina extends AppCompatActivity implements View.OnClickL
         user_name = settings.getString("user_name",null);
        // user_name = intent.getStringExtra("username");
         Log.i("Username",user_name);
-        Cursor C = DB.getUser(user_name);
+        Cursor C = DB.getUserOld(user_name);
         if(C.moveToFirst()) {
             userid.setText(C.getString(0));
             username.setText(C.getString(1));
@@ -74,8 +74,8 @@ public class UserProfile_Mina extends AppCompatActivity implements View.OnClickL
         }
         else
         {
-            userid.setText("User is Not Found");
-            Toast.makeText(this, "Error Finding User", Toast.LENGTH_SHORT).show();
+            userid.setText("User_Old is Not Found");
+            Toast.makeText(this, "Error Finding User_Old", Toast.LENGTH_SHORT).show();
         }
     }
 }

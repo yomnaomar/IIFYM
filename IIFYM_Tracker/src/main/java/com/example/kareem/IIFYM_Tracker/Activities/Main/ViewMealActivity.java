@@ -114,7 +114,7 @@ public class ViewMealActivity extends AppCompatActivity implements AdapterView.O
                     builder.setMessage("Are you sure you want to remove this meal from your daily list?")
                             .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
-                                    // User clicked Yes button
+                                    // User_Old clicked Yes button
                                     if (isDaily) {
                                         deleteDaily();
                                     } else {
@@ -125,7 +125,7 @@ public class ViewMealActivity extends AppCompatActivity implements AdapterView.O
                             });
                     builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
-                            // User cancelled the dialog
+                            // User_Old cancelled the dialog
                         }
                     });
                     AlertDialog dialog = builder.create();
@@ -136,7 +136,7 @@ public class ViewMealActivity extends AppCompatActivity implements AdapterView.O
                     builder.setMessage("Are you sure you want to remove this meal from your daily list? (It will still be saved in your meal list")
                             .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
-                                    // User clicked Yes button
+                                    // User_Old clicked Yes button
                                     if (isDaily) {
                                         deleteDaily();
                                     } else {
@@ -147,7 +147,7 @@ public class ViewMealActivity extends AppCompatActivity implements AdapterView.O
                             });
                     builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
-                            // User cancelled the dialog
+                            // User_Old cancelled the dialog
                         }
                     });
                     AlertDialog dialog = builder.create();
@@ -180,7 +180,7 @@ public class ViewMealActivity extends AppCompatActivity implements AdapterView.O
                 builder.setMessage("Are you sure you want to permanently delete this meal?")
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                // User clicked Yes button
+                                // User_Old clicked Yes button
                                 if (isDaily){
                                     deleteDaily();
                                 }
@@ -192,7 +192,7 @@ public class ViewMealActivity extends AppCompatActivity implements AdapterView.O
                         });
                 builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        // User cancelled the dialog
+                        // User_Old cancelled the dialog
                     }
                 });
                 AlertDialog dialog = builder.create();

@@ -10,22 +10,20 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="@string/appName"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
             android:name=".Activities.Old_Login.Login_Abdu"
-            android:label="@string/app_name"
+            android:label="@string/appName"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustPan">
-        </activity>
+            android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".Activities.Main.MainActivity"
-            android:label="@string/app_name"
+            android:name=".Activities.Main.activityMain"
+            android:label="@string/appName"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Activities.Main.AddQuickMealActivity"
             android:screenOrientation="portrait" />
@@ -67,9 +65,12 @@
         <activity android:name=".Activities.User_Login_Authentification.activityLogin">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Activities.User_Login_Authentification.activityUserInfo" />
+        <activity android:name=".Activities.User_Login_Authentification.activityUserMacros"></activity>
     </application>
 
 </manifest>

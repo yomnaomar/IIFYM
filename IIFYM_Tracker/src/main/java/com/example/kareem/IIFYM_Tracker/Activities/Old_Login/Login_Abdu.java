@@ -15,16 +15,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.example.kareem.IIFYM_Tracker.Activities.Main.MainActivity;
+import com.example.kareem.IIFYM_Tracker.Activities.Main.activityMain;
 import com.example.kareem.IIFYM_Tracker.Activities.User_Login_Authentification.activityLogin;
-import com.example.kareem.IIFYM_Tracker.Custom_Objects.Body_Height_Unit;
-import com.example.kareem.IIFYM_Tracker.Custom_Objects.Body_Weight_Unit;
-import com.example.kareem.IIFYM_Tracker.Custom_Objects.User;
+import com.example.kareem.IIFYM_Tracker.Custom_Objects.User_Old;
 import com.example.kareem.IIFYM_Tracker.Database.DatabaseConnector;
 import com.example.kareem.IIFYM_Tracker.R;
 import com.example.kareem.IIFYM_Tracker.ViewComponents.LockableViewPager;
 
-public class Login_Abdu extends AppCompatActivity implements myFragEventListener {
+public class Login_Abdu extends AppCompatActivity implements myFragEventListener_abdu {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -41,10 +39,7 @@ public class Login_Abdu extends AppCompatActivity implements myFragEventListener
      */
     private LockableViewPager mViewPager;
     private DatabaseConnector My_DB;
-    User newUser;
-    Body_Weight_Unit bodyweight;
-    Body_Height_Unit bodyheight;
-    float weightunit,heightunit;
+    User_Old newUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +50,6 @@ public class Login_Abdu extends AppCompatActivity implements myFragEventListener
         setSupportActionBar(toolbar);
 
         My_DB = new DatabaseConnector(getApplicationContext());
-        // Specify that tabs should be displayed in the action bar.
 
 
         // Create the adapter that will return a fragment for each of the three
@@ -70,7 +64,7 @@ public class Login_Abdu extends AppCompatActivity implements myFragEventListener
 
         //My_DB.openReadableDB();
         //My_DB.openWriteableDB();
-        newUser = new User(); //instantiate currentUser
+        newUser = new User_Old(); //instantiate currentUser
     }
 
 
@@ -95,43 +89,6 @@ public class Login_Abdu extends AppCompatActivity implements myFragEventListener
 
         return super.onOptionsItemSelected(item);
     }
-
-
-
-//    /**
-//     * A placeholder fragment containing a simple view.
-//     */
-//    public static class PlaceholderFragment extends Fragment {
-//        /**
-//         * The fragment argument representing the section number for this
-//         * fragment.
-//         */
-//        private static final String ARG_SECTION_NUMBER = "section_number";
-//
-//        public PlaceholderFragment() {
-//        }
-//
-//        /**
-//         * Returns a new instance of this fragment for the given section
-//         * number.
-//         */
-//        public static PlaceholderFragment newInstance(int sectionNumber) {
-//            PlaceholderFragment fragment = new PlaceholderFragment();
-//            Bundle args = new Bundle();
-//            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-//            fragment.setArguments(args);
-//            return fragment;
-//        }
-//
-//        @Override
-//        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-//                                 Bundle savedInstanceState) {
-//            View rootView = inflater.inflate(R.layout.fragment_login, container, false);
-//            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-//            textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
-//            return rootView;
-//        }
-//    }
 
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
@@ -191,7 +148,7 @@ public class Login_Abdu extends AppCompatActivity implements myFragEventListener
         //get all currentUser details and send to DB (called when currentUser sign up is finished)
 
         try {
-            My_DB.insertUser(newUser);
+            My_DB.insertUserOld(newUser);
         } catch (Exception e) {
             Toast.makeText(getApplicationContext(),"DB Error Occurred" +e.getMessage(),Toast.LENGTH_LONG).show();
             Log.d("DB ERROR", e.getMessage());
@@ -206,7 +163,7 @@ public class Login_Abdu extends AppCompatActivity implements myFragEventListener
         if(My_DB.validateLogin(username,getApplicationContext()))
         {
             //open home page here (main activity) and send user_id
-            Intent intent = new Intent(this, MainActivity.class);
+            Intent intent = new Intent(this, activityMain.class);
             intent.putExtra("user_name", username);
             intent.putExtra("logged",true);
             intent.putExtra("user_id", My_DB.fetchUserID(username,getApplicationContext())); //get user_id
@@ -222,7 +179,7 @@ public class Login_Abdu extends AppCompatActivity implements myFragEventListener
     }
     @Override
     public void userReg(String username) {
-        //star creating new User
+        //star creating new User_Old
         Log.d("DEBUG", "Switch To Profile Fragment");
         newUser.setUser_name(username);
         switchFrag(1); //store username and pass and switch to next page. (fragment switching does not lose value instances)
@@ -264,15 +221,15 @@ public class Login_Abdu extends AppCompatActivity implements myFragEventListener
 
     public void openHome() //final method before opening main activity
     {
-        //insertUser();
+        //insertUserOld();
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         SharedPreferences.Editor editor = settings.edit();
         editor.putBoolean("isnewUser", true); // here string is the value you want to save
         editor.commit();
 
 
-        Log.d("LOGIN","Signup Complete: User: "+ newUser.toString());
-        Intent intent = new Intent(this, MainActivity.class);
+        Log.d("LOGIN","Signup Complete: User_Old: "+ newUser.toString());
+        Intent intent = new Intent(this, activityMain.class);
         intent.putExtra("user_name", newUser.getUser_name()); //get user_name
         intent.putExtra("logged",true);
         startActivity(intent); //open main activity

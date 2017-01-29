@@ -11,7 +11,7 @@
         android:id="@+id/lblBanner"
         android:textAppearance="@android:style/TextAppearance.Large"
         android:textColor="?attr/colorPrimary"
-        android:text="Help IIFYM achieve your goals!"
+        android:text="@string/userRegistration"
         android:layout_gravity="center_horizontal"
         android:gravity="center_horizontal"
         android:paddingTop="@dimen/activity_vertical_margin"
@@ -24,7 +24,7 @@
         android:ems="10"
         android:id="@+id/etxtName"
         android:hint="@string/name"
-        android:textColorHint="?attr/colorPrimary"
+        android:textColorHint="?android:attr/textColorHint"
         android:textAppearance="@android:style/TextAppearance.Medium"
         android:layout_gravity="center_vertical|center_horizontal"
         android:textColor="?attr/colorPrimary"
@@ -41,7 +41,7 @@
         android:paddingEnd="@dimen/activity_horizontal_margin" >
 
         <TextView
-            android:text="@string/date_of_birth"
+            android:text="@string/dateOfBirth"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/lblDOB"
@@ -51,13 +51,13 @@
             android:layout_gravity="center_vertical|center_horizontal" />
 
         <TextView
-            android:text="@string/date_initial"
+            android:text="@string/dateInitial"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/lblDateChosen"
             android:textAppearance="@android:style/TextAppearance.Medium"
             android:textColor="?attr/colorPrimary"
-            android:drawableLeft="@drawable/calendar"
+            android:drawableLeft="@drawable/icon_calendar"
             android:drawablePadding="2dp"
             android:layout_weight="1"
             android:layout_gravity="center_vertical|center_horizontal" />
@@ -73,7 +73,7 @@
         android:paddingEnd="@dimen/activity_horizontal_margin" >
 
         <TextView
-            android:text="Gender"
+            android:text="@string/gender"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/lblGender"
@@ -83,7 +83,7 @@
             android:textColor="?attr/colorPrimary" />
 
         <info.hoang8f.android.segmented.SegmentedGroup
-            android:id="@+id/segmentlayoutGender"
+            android:id="@+id/seggroupGender"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
@@ -94,7 +94,7 @@
             android:layout_gravity="center_vertical|center_horizontal">
 
             <RadioButton
-                android:id="@+id/rbtnSexMale"
+                android:id="@+id/rbtnGenderMale"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/male"
@@ -103,7 +103,7 @@
                 android:layout_gravity="center_vertical|center_horizontal" />
 
             <RadioButton
-                android:id="@+id/rbtnSexFemale"
+                android:id="@+id/rbtnGenderFemale"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/female"
@@ -124,7 +124,7 @@
         android:paddingEnd="@dimen/activity_horizontal_margin" >
 
         <TextView
-            android:text="Unit System"
+            android:text="@string/unitSystem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/lblUnitSystem"
@@ -134,7 +134,7 @@
             android:textColor="?attr/colorPrimary" />
 
         <info.hoang8f.android.segmented.SegmentedGroup
-            android:id="@+id/segmentlayoutUnitSystem"
+            android:id="@+id/seggroupUnitSystem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
@@ -177,7 +177,7 @@
             android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0.33"
+            android:layout_weight="0.5"
             android:id="@+id/linearlayoutWeight">
 
             <EditText
@@ -187,14 +187,14 @@
                 android:ems="1"
                 android:id="@+id/etxtWeight"
                 android:textAppearance="@android:style/TextAppearance.Medium"
-                android:hint="Weight"
+                android:hint="@string/weight"
                 android:textColor="?attr/colorPrimary"
-                android:textColorHint="?attr/colorPrimary"
+                android:textColorHint="?android:attr/textColorHint"
                 android:layout_weight="0.8"
                 android:layout_gravity="center_vertical|center_horizontal" />
 
             <TextView
-                android:text="kg"
+                android:text="@string/kg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/lblWeightUnit"
@@ -208,7 +208,7 @@
             android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0.67"
+            android:layout_weight="0.5"
             android:id="@+id/linearlayoutHeight">
 
             <EditText
@@ -216,20 +216,20 @@
                 android:inputType="number|numberDecimal"
                 android:ems="1"
                 android:id="@+id/etxtHeightParam1"
-                android:hint="Height"
-                android:textColorHint="?attr/colorPrimary"
+                android:hint="@string/height"
+                android:textColorHint="?android:attr/textColorHint"
                 android:layout_width="wrap_content"
-                android:layout_weight="0.4"
+                android:layout_weight="0.8"
                 android:layout_gravity="center_vertical|center_horizontal" />
 
             <TextView
-                android:text="cm"
+                android:text="@string/cm"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/lblHeightUnit1"
                 android:textAppearance="@android:style/TextAppearance.Small"
                 android:textColor="?attr/colorPrimary"
-                android:layout_weight="0.1"
+                android:layout_weight="0.2"
                 android:layout_gravity="center_vertical|center_horizontal"
                 android:visibility="visible" />
 
@@ -239,9 +239,9 @@
                 android:ems="1"
                 android:id="@+id/etxtHeightParam2"
                 android:hint="Height"
-                android:textColorHint="?attr/colorPrimary"
+                android:textColorHint="?android:attr/textColorHint"
                 android:layout_width="wrap_content"
-                android:layout_weight="0.4"
+                android:layout_weight="0"
                 android:layout_gravity="center_vertical|center_horizontal"
                 android:visibility="gone" />
 
@@ -252,7 +252,7 @@
                 android:id="@+id/lblHeightUnit2"
                 android:textAppearance="@android:style/TextAppearance.Small"
                 android:textColor="?attr/colorPrimary"
-                android:layout_weight="0.1"
+                android:layout_weight="0"
                 android:layout_gravity="center_vertical|center_horizontal"
                 android:visibility="gone" />
 
@@ -269,7 +269,7 @@
         android:paddingEnd="@dimen/activity_horizontal_margin" >
 
         <TextView
-            android:text="Workout Frequency"
+            android:text="@string/workoutFrequency"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/lblWorkFreq"
@@ -295,7 +295,7 @@
         android:paddingEnd="@dimen/activity_horizontal_margin" >
 
         <TextView
-            android:text="Goals"
+            android:text="@string/goals"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/lblGoals"
@@ -313,14 +313,15 @@
     </LinearLayout>
 
     <Button
-        android:text="Calculate"
+        android:text="@string/btnNext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/btnCalc"
+        android:id="@+id/btnNext"
         android:layout_gravity="center_vertical|center_horizontal"
         android:background="@drawable/btn_iifym_style"
         android:textColorHint="?attr/colorPrimary"
         android:paddingStart="@dimen/activity_horizontal_margin"
-        android:paddingEnd="@dimen/activity_horizontal_margin" />
+        android:paddingEnd="@dimen/activity_horizontal_margin"
+        android:textColor="?attr/colorPrimary"/>
 
 </LinearLayout>
