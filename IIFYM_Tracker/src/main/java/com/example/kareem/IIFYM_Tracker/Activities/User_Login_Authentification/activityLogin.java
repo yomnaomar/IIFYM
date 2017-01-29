@@ -57,13 +57,13 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
 
                 // User is signed in
                 if (firebaseuser != null) {
-                    Log.d("User is Signed In", "onAuthStateChanged: signed_in:" + firebaseuser.getUid());
                     final String uid = firebaseuser.getUid();
                     String email = firebaseuser.getEmail();
+                    Log.d("onAuthStateChanged", "User with UID " + uid + " signed_in: " + firebaseuser.getUid());
 
                     // Email is verified
                     if (mAuth.getCurrentUser().isEmailVerified()) {
-                        Log.d("Email is verified", "isEmailVerified: verified");
+                        Log.d("onAuthStateChanged", "User with UID " + uid + " email is verified");
 
                         mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
@@ -71,9 +71,9 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
                                 User userPost = dataSnapshot.getValue(User.class);
                                 isRegistered = userPost.isRegistered();
                                 if (isRegistered)
-                                    Log.d("isRegistered", "User with UID " + uid + " is Registered");
+                                    Log.d("onAuthStateChanged", "User with UID " + uid + " is Registered");
                                 else
-                                    Log.d("isRegistered", "User with UID " + uid + " is not Registered");
+                                    Log.d("onAuthStateChanged", "User with UID " + uid + " is not Registered");
                             }
 
                             @Override
@@ -86,8 +86,8 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
                             Context context = getApplicationContext();
                             Intent intent = new Intent();
                             intent.setClass(context, activityMain.class);
-                            //startActivity(intent);
-                            //finish();
+                            startActivity(intent);
+                            finish();
                         }
                         else {
                             Context context = getApplicationContext();
@@ -95,30 +95,21 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
                             intent.putExtra("uid",uid);
                             intent.putExtra("email",email);
                             intent.setClass(context, activityUserInfo.class);
-                            //startActivity(intent);
-                            //finish();
+                            startActivity(intent);
+                            finish();
                         }
 
 
                     } else {
                         // Email is not verified
                         // Display that user needs to verify email
-                        AlertDialog.Builder builder = new AlertDialog.Builder(activityLogin.this);
-                        builder.setMessage( "An email has been sent to you.\n " +
-                                            "Please verify your email in order to log in.")
-                                            .setTitle("Email Verification");
-                        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int id) {
-                                dialog.dismiss();
-                            }
-                        });
-                        AlertDialog dialog = builder.create();
-                        dialog.show();
+                        Log.d("onAuthStateChanged", "User with UID " + uid + " email is not verified");
+                        showAlertDialog("Email Verification","An email has been sent to you.\n " +
+                                            "Please verify your email in order to log in.");
                     }
                 } else {
                     // User is signed out
-                    Log.d("User is not Signed In", "onAuthStateChanged: signed_out");
+                    Log.d("onAuthStateChanged", "onAuthStateChanged: signed_out");
                 }
             }
         };
@@ -162,8 +153,8 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if (task.isSuccessful()) {
                                                 Log.d("Auth Email", "Email sent.");
-                                                showAlertDialog("Email Verification","An email has been sent to you.\n" +
-                                                                "Please verify your email in order to log in.");
+                                                /*showAlertDialog("Email Verification","An email has been sent to you.\n" +
+                                                                "Please verify your email in order to log in.");*/
                                             }
                                             else {
                                                 showAlertDialog("Oops!","There was an error sending the verification email.");
@@ -171,7 +162,7 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
                                         }
                                     });
                         }
-                        // Sign in Failed
+                        // User Create Failed
                         if (!task.isSuccessful()) {
                             showAlertDialog("User Registration Failed","Unable to create user.");
                         }

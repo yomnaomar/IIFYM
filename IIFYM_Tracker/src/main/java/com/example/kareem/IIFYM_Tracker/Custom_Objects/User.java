@@ -73,7 +73,7 @@ public class User {
         isRegistered = registered;
     }
 
-    public void setRegistered(int registered) { isRegistered = (registered != 0);}
+    public void setRegisteredFromInt(int registered) { isRegistered = (registered != 0);}
 
     public String getEmail() {
         return email;
@@ -107,7 +107,7 @@ public class User {
         this.gender = gender;
     }
 
-    public void setGender(int gender){ this.gender.fromInteger(gender);}
+    public void setGenderFromInt(int gender){ this.gender.fromInteger(gender);}
 
     public UnitSystem getUnitSystem() {
         return unitSystem;
@@ -117,7 +117,7 @@ public class User {
         this.unitSystem = unitSystem;
     }
 
-    public void setUnitSystem(int unitSystem){ this.unitSystem.fromInteger(unitSystem);}
+    public void setUnitSystemFromInt(int unitSystem){ this.unitSystem.fromInteger(unitSystem);}
 
     public float getWeight() {
         return weight;
@@ -175,7 +175,7 @@ public class User {
         isPercent = percent;
     }
 
-    public void setPercent(int percent) { isPercent = (percent != 0);}
+    public void setPercentFromInt(int percent) { isPercent = (percent != 0);}
 
     public int getDailyCarbs() {
         return dailyCarbs;

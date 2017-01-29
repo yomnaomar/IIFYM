@@ -32,7 +32,7 @@ public class DatabaseConnector {
     private static final String Table_Composed_Of   = "Composed_Of";
     private static final String Table_User_Old      = "User_Old";
 
-    private static final String Table_User          = "User_Old";
+    private static final String Table_User          = "User";
 
     private SQLiteDatabase database;
     private DatabaseHelper databaseHelper;
@@ -783,7 +783,7 @@ public class DatabaseConnector {
             Log.d("isExistingUser","User with uid:" + uid + " found.");
             return true;
         }
-        Log.d("isExistingUser","User with uid:" + uid + "not found.");
+        Log.d("isExistingUser","User with uid:" + uid + " not found.");
         return false;
     }
 
@@ -811,11 +811,11 @@ public class DatabaseConnector {
             newUser.put("dailyFat",         U.getDailyFat());
 
             database.insert(Table_User, null, newUser);
-            Log.d("createUser", "User with uid " + U.getUid() + " was created");
+            Log.d("createUser", "User with uid " + U.getUid() + " created");
             return true;
         }
         else {
-            Log.d("createUser", "User with uid " + U.getUid() + " was not found");
+            Log.d("createUser", "User with uid " + U.getUid() + " already exists");
             return false;
         }
     }
@@ -827,27 +827,27 @@ public class DatabaseConnector {
         if (C.moveToFirst() && C != null) {
             User U = new User();
             U.setUid(C.getString(0));
-            U.setRegistered(C.getInt(1));
+            U.setRegisteredFromInt(C.getInt(1));
             U.setEmail(C.getString(2));
             U.setName(C.getString(3));
             U.setDob(C.getString(4));
-            U.setGender(C.getInt(5));
-            U.setUnitSystem(C.getInt(6));
+            U.setGenderFromInt(C.getInt(5));
+            U.setUnitSystemFromInt(C.getInt(6));
             U.setWeight(C.getFloat(7));
             U.setHeight1(C.getInt(8));
             U.setHeight2(C.getInt(9));
             U.setWorkoutFreq(C.getInt(10));
             U.setGoal(C.getInt(11));
             U.setDailyCalories(C.getInt(12));
-            U.setPercent(C.getInt(13));
+            U.setPercentFromInt(C.getInt(13));
             U.setDailyCarbs(C.getInt(14));
             U.setDailyProtein(C.getInt(15));
             U.setDailyFat(C.getInt(16));
-            Log.d("retrieveUser", "User with uid " + uid + " was retrieved");
+            Log.d("retrieveUser", "User with uid " + uid + " retrieved");
             return U;
         }
         else {
-            Log.d("retrieveUser", "User with uid " + uid + " was not found");
+            Log.d("retrieveUser", "User with uid " + uid + " not found");
             return null;
         }
     }
@@ -875,11 +875,11 @@ public class DatabaseConnector {
             updateUser.put("dailyProtein", U.getDailyProtein());
             updateUser.put("dailyFat", U.getDailyFat());
             database.update(Table_User, updateUser, "uid = " + U.getUid(), null);
-            Log.d("updateUser", "User with uid " + U.getUid() + " was updated");
+            Log.d("updateUser", "User with uid " + U.getUid() + " updated");
             return true;
         }
         else {
-            Log.d("updateUser", "User with uid " + U.getUid() + " was not found");
+            Log.d("updateUser", "User with uid " + U.getUid() + " not found");
             return false;
         }
     }
@@ -889,11 +889,11 @@ public class DatabaseConnector {
     public boolean deleteUser(String uid) {
         if (isExistingUser(uid)){
             database.delete(Table_User, "uid = '" + uid + "'", null);
-            Log.d("deleteUser", "User with uid " + uid + " was deleted");
+            Log.d("deleteUser", "User with uid " + uid + " deleted");
             return true;
         }
         else {
-            Log.d("deleteUser", "User with uid " + uid + " was not found");
+            Log.d("deleteUser", "User with uid " + uid + " not found");
             return false;
         }
     }

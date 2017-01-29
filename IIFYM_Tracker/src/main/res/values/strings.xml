@@ -11,7 +11,7 @@
 
     <!--activityUserInfo -->
     <string name="userRegistration">User Registration</string>
-    <string name="name">Name</string>
+    <string name="firstname">Firstname</string>
     <string name="dateOfBirth">Date of Birth</string>
     <string name="dateInitial">01-Jan-2000</string>
     <string name="gender">Gender</string>
