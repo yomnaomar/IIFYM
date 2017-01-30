@@ -24,7 +24,7 @@
     <string name="kg">kg</string>
     <string name="height">Height</string>
     <string name="cm">cm</string>
-    <string name="workoutFrequency">Workout Frequency</string>
+    <string name="workoutFrequency">Workout\nFrequency</string>
     <string name="goals">Goals</string>
     <string name="btnNext">Next</string>
 
@@ -102,20 +102,6 @@
     <string-array name="height_units_array">
         <item>feet/inches</item>
         <item>cm</item>
-    </string-array>
-
-    <string-array name="goals_array">
-        <item>Fat Loss</item>
-        <item>Maintenance</item>
-        <item>Muscle Gain</item>
-    </string-array>
-
-    <string-array name="workfreq_array">
-        <item>None (little or no exercise)</item>
-        <item>Low (1-3 times/week)</item>
-        <item>Medium (3-5 days/week)</item>
-        <item>High (6-7 days/week)</item>
-        <item>Very High (physical job or 7+ times/week)</item>
     </string-array>
 
     <string name="title_activity_enter_saved_meal_quantity">EnterSavedMealQuantity</string>

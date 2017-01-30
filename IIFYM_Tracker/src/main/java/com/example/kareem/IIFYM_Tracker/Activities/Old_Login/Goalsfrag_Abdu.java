@@ -101,11 +101,11 @@ public class Goalsfrag_Abdu extends Fragment implements  View.OnClickListener {
         workout_spinner=(Spinner)myView.findViewById(R.id.workout_freq_spinner);
 
         ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(myView.getContext(),
-                R.array.goals_array, android.R.layout.simple_spinner_item);
+                R.array.array_Goals, android.R.layout.simple_spinner_item);
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(myView.getContext(),
-                R.array.workfreq_array, android.R.layout.simple_spinner_item);
+                R.array.array_WorkoutFreq, android.R.layout.simple_spinner_item);
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         goal_spinner.setAdapter(adapter1);
