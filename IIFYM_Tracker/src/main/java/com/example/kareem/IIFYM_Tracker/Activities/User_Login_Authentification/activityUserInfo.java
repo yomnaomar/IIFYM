@@ -60,18 +60,6 @@ public class activityUserInfo extends AppCompatActivity implements View.OnClickL
         initializeGUI();
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.etxtDateOfBirth:
-                datePickerDialog.show();
-                break;
-            case R.id.btnNext:
-                readUserInput();
-                break;
-        }
-    }
-
     private void readUserInput() {
         if(validateFields()){
             name = etxtName.getText().toString();
@@ -184,6 +172,14 @@ public class activityUserInfo extends AppCompatActivity implements View.OnClickL
         spinnerGoals        = (Spinner)findViewById(R.id.spinnerGoals);
         btnNext             = (Button)findViewById(R.id.btnNext);
 
+        etxtDateOfBirth.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus){
+                    datePickerDialog.show();
+                }
+            }
+        });
         etxtDateOfBirth.setInputType(InputType.TYPE_NULL);
         dateFormatter = new SimpleDateFormat("dd-MM-yyyy");
 
@@ -208,6 +204,18 @@ public class activityUserInfo extends AppCompatActivity implements View.OnClickL
         spinnerGoals.setAdapter(adapterGoals);
 
         btnNext.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.etxtDateOfBirth:
+                datePickerDialog.show();
+                break;
+            case R.id.btnNext:
+                readUserInput();
+                break;
+        }
     }
 
     private void setDateTimeField() {
