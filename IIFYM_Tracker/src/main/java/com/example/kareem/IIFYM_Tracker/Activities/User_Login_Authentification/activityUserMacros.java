@@ -7,6 +7,7 @@ import com.example.kareem.IIFYM_Tracker.R;
 
 public class activityUserMacros extends AppCompatActivity {
 
+    //delete this
     private boolean isRegistered;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
