@@ -173,7 +173,7 @@
             android:ems="1"
             android:id="@+id/etxtFat"
             android:textAppearance="@android:style/TextAppearance.Medium"
-            android:hint="20"
+            android:hint="15"
             android:textColor="?attr/colorPrimary"
             android:textColorHint="?attr/colorPrimary"
             android:layout_weight="0.98"
@@ -194,11 +194,54 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="41dp"
+        android:id="@+id/linearlayoutTotal"
+        android:layout_height="40dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/lblTotal"
+            android:textAppearance="@android:style/TextAppearance.Medium"
+            android:layout_weight="1.28"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:paddingStart="@dimen/activity_horizontal_margin"
+            android:paddingEnd="@dimen/activity_horizontal_margin"
+            android:textSize="14sp"
+            android:textColor="?attr/colorControlNormal"
+            android:text="@string/lblTotal" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="1"
+            android:id="@+id/lblTotalAmount"
+            android:textAppearance="@android:style/TextAppearance.Medium"
+            android:hint="100"
+            android:textColor="?attr/colorControlNormal"
+            android:layout_weight="0.98"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:textSize="14sp" />
+
+        <TextView
+            android:text="@string/percent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/lblPercent4"
+            android:textAppearance="@android:style/TextAppearance.Small"
+            android:textColor="?attr/colorControlNormal"
+            android:layout_weight="1.36"
+            android:layout_gravity="center_vertical|center_horizontal" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
         android:id="@+id/linearlayoutPercentGrams"
         android:layout_gravity="center_vertical|center_horizontal|center"
         android:gravity="center_vertical|center_horizontal|center"
-        android:layout_weight="0.37">
+        android:layout_weight="0.37"
+        android:layout_height="50dp">
 
         <info.hoang8f.android.segmented.SegmentedGroup
             android:id="@+id/seggroupDisplay"
@@ -225,7 +268,8 @@
                 android:layout_height="wrap_content"
                 android:text="@string/radioBtnGrams"
                 style="@style/RadioButton"
-                android:layout_gravity="center_vertical|center_horizontal" />
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:checked="true" />
 
         </info.hoang8f.android.segmented.SegmentedGroup>
 
