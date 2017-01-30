@@ -190,18 +190,40 @@
 
     </LinearLayout>
 
-    <CheckBox
-        android:text="Percent"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:id="@+id/chkbxPercentVals"
-        android:layout_gravity="center_vertical|center_horizontal|center"
-        android:checked="true"
-        android:gravity="center_vertical|center_horizontal|center"
-        android:layout_marginStart="@dimen/activity_horizontal_margin"
-        android:layout_marginEnd="@dimen/activity_horizontal_margin"
-        android:textAppearance="@android:style/TextAppearance.Small"
-        android:textColor="?attr/colorPrimary" />
+    <info.hoang8f.android.segmented.SegmentedGroup
+        android:id="@+id/seggroupUnitSystem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:orientation="horizontal"
+        app:sc_border_width="2dp"
+        app:sc_corner_radius="10dp"
+        android:layout_weight="0.10"
+        android:layout_gravity="center_vertical|center_horizontal" >
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></LinearLayout>
+
+        <RadioButton
+            android:id="@+id/rbtnMetric"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/metric"
+            style="@style/RadioButton"
+            android:checked="true"
+            android:layout_gravity="center_vertical|center_horizontal" />
+
+        <RadioButton
+            android:id="@+id/rbtnImperial"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/imperial"
+            style="@style/RadioButton"
+            android:layout_gravity="center_vertical|center_horizontal" />
+
+    </info.hoang8f.android.segmented.SegmentedGroup>
 
     <TextView
         android:layout_width="wrap_content"
