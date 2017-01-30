@@ -116,15 +116,7 @@ public class activityUserInfo extends AppCompatActivity implements View.OnClickL
         } else {
             etxtName.setError(null);
         }
-
-        String validate_dob = etxtDateOfBirth.getText().toString();
-        if (validate_dob.contains("")) {
-            etxtName.setError("Required.");
-            valid = false;
-        } else {
-            etxtName.setError(null);
-        }
-
+        
         String validate_weight = etxtWeight.getText().toString();
         if (TextUtils.isEmpty(validate_weight)) {
             etxtWeight.setError("Required.");
