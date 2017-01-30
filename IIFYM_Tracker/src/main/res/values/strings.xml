@@ -119,6 +119,10 @@
     <string name="firebase_status_fmt">Firebase User: %s</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="kcal">kcal</string>
+    <string name="percent">%</string>
+    <string name="grams">g</string>
+    <string name="radioBtnGrams">Grams</string>
+    <string name="radioBtnPercent">Percent</string>
 
 </resources>
