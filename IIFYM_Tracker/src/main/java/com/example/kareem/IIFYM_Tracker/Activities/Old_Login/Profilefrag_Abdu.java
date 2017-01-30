@@ -120,11 +120,11 @@ public class Profilefrag_Abdu extends Fragment implements View.OnClickListener, 
 
 
         ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(myView.getContext(),
-                R.array.bodyweight_units_array, R.layout.spinner_row);
+                R.array.bodyweight_units_array, R.layout.spinner_item);
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(myView.getContext(),
-                R.array.height_units_array, R.layout.spinner_row);
+                R.array.height_units_array, R.layout.spinner_item);
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
 

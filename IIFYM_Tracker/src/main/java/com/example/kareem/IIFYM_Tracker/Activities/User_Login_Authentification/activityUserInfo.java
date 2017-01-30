@@ -193,11 +193,11 @@ public class activityUserInfo extends AppCompatActivity implements View.OnClickL
         });
 
         ArrayAdapter<CharSequence> adapterWorkoutFreq = ArrayAdapter.createFromResource(this,
-                R.array.array_WorkoutFreq, android.R.layout.simple_spinner_item);
+                R.array.array_WorkoutFreq, R.layout.spinner_item);
         adapterWorkoutFreq.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         ArrayAdapter<CharSequence> adapterGoals = ArrayAdapter.createFromResource(this,
-                R.array.array_Goals, android.R.layout.simple_spinner_item);
+                R.array.array_Goals, R.layout.spinner_item);
         adapterGoals.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         spinnerWorkoutFreq.setAdapter(adapterWorkoutFreq);
