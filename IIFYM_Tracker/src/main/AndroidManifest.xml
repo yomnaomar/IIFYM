@@ -52,12 +52,9 @@
         android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".Activities.Main.AddSavedMealActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar" /><![CDATA[
         >>>>>>> master
-        <activity
-            android:name=".Activities.Main.SelectMealTypeActivity"
-            android:label="@string/title_activity_select_meal_type"
-            android:theme="@style/AppTheme.NoActionBar" />
+        ]]>
         <activity
             android:name=".Activities.Main.CreateSimpleMealActivity"
             android:label="@string/title_activity_create_simple_meal"

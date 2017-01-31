@@ -3,6 +3,7 @@ package com.example.kareem.IIFYM_Tracker.Activities.User_Login_Authentification;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
@@ -29,6 +30,7 @@ import info.hoang8f.android.segmented.SegmentedGroup;
 
 public class activityUserInfo extends AppCompatActivity implements View.OnClickListener{
 
+    // UI
     private String uid, email;
     private TextView lblWeightUnit, lblHeightUnit1, lblHeightUnit2;
     private EditText etxtName, etxtDateOfBirth, etxtWeight, etxtHeightParam1, etxtHeightParam2;
@@ -37,15 +39,18 @@ public class activityUserInfo extends AppCompatActivity implements View.OnClickL
     private SegmentedGroup seggroupUnitSystem;
     private Spinner spinnerWorkoutFreq, spinnerGoals;
     private Button btnNext;
-
     private DatePickerDialog datePickerDialog;
     private SimpleDateFormat dateFormatter;
 
+    // Vars
     String      name, dob;
     Gender      gender;
     UnitSystem  unitSystem;
     float       weight;
     int         height1, height2, workoutFreq, goal;
+
+    //Storage
+    private SharedPreferences myPrefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,52 +63,74 @@ public class activityUserInfo extends AppCompatActivity implements View.OnClickL
 
         //GUI
         initializeGUI();
+
+        //Storage
+        myPrefs = getPreferences(AppCompatActivity.MODE_PRIVATE);
     }
 
     private void readUserInput() {
-        if(validateFields()){
-            name = etxtName.getText().toString();
+        name = etxtName.getText().toString();
 
-            dob = etxtDateOfBirth.getText().toString();
+        dob = etxtDateOfBirth.getText().toString();
 
-            if (rbtnGenderMale.isChecked()) {
-                gender = Gender.Male;
-            } else {
-                gender = Gender.Female;
-            }
-
-            if (rbtnMetric.isChecked()) {
-                unitSystem = UnitSystem.Metric;
-                weight = Float.parseFloat(etxtWeight.getText().toString());
-                height1 = Integer.parseInt(etxtHeightParam1.getText().toString());
-                height2 = -1;
-            } else {
-                unitSystem = UnitSystem.Imperial;
-                weight = Float.parseFloat(etxtWeight.getText().toString());
-                height1 = Integer.parseInt(etxtHeightParam1.getText().toString());
-                height2 = Integer.parseInt(etxtHeightParam2.getText().toString());
-            }
-
-            workoutFreq = spinnerWorkoutFreq.getSelectedItemPosition();
-            goal = spinnerGoals.getSelectedItemPosition();
-
-            Context context = getApplicationContext();
-            Intent intent = new Intent();
-            intent.putExtra("uid", uid);
-            intent.putExtra("email", email);
-            intent.putExtra("name", name);
-            intent.putExtra("dob", dob);
-            intent.putExtra("gender", gender);
-            intent.putExtra("unitSystem", unitSystem);
-            intent.putExtra("weight", weight);
-            intent.putExtra("height1", height1);
-            intent.putExtra("height2", height2);
-            intent.putExtra("workoutFreq", workoutFreq);
-            intent.putExtra("goal", goal);
-            intent.setClass(context, activityUserMacros.class);
-            startActivity(intent);
-            finish();
+        if (rbtnGenderMale.isChecked()) {
+            gender = Gender.Male;
+        } else {
+            gender = Gender.Female;
         }
+
+        //Metric
+        if (rbtnMetric.isChecked()) {
+            unitSystem = UnitSystem.Metric;
+            if(!etxtWeight.getText().toString().isEmpty())
+                weight = Float.parseFloat(etxtWeight.getText().toString());
+            else
+                weight = 0.0f;
+            if(!etxtHeightParam1.getText().toString().isEmpty())
+            height1 = Integer.parseInt(etxtHeightParam1.getText().toString());
+            else
+            height1 = 0;
+            height2 = -1;
+        }
+
+        //Imperial
+        else {
+            unitSystem = UnitSystem.Imperial;
+            if(!etxtWeight.getText().toString().isEmpty())
+                weight = Float.parseFloat(etxtWeight.getText().toString());
+            else
+                weight = 0.0f;
+            if(!etxtHeightParam1.getText().toString().isEmpty())
+                height1 = Integer.parseInt(etxtHeightParam1.getText().toString());
+            else
+                height1 = 0;
+            if(!etxtHeightParam2.getText().toString().isEmpty())
+                height1 = Integer.parseInt(etxtHeightParam1.getText().toString());
+            else
+                height1 = 0;
+        }
+
+        workoutFreq = spinnerWorkoutFreq.getSelectedItemPosition();
+        goal = spinnerGoals.getSelectedItemPosition();
+    }
+
+    private void goToUserMacros() {
+        Context context = getApplicationContext();
+        Intent intent = new Intent();
+        intent.putExtra("uid", uid);
+        intent.putExtra("email", email);
+        intent.putExtra("name", name);
+        intent.putExtra("dob", dob);
+        intent.putExtra("gender", gender);
+        intent.putExtra("unitSystem", unitSystem);
+        intent.putExtra("weight", weight);
+        intent.putExtra("height1", height1);
+        intent.putExtra("height2", height2);
+        intent.putExtra("workoutFreq", workoutFreq);
+        intent.putExtra("goal", goal);
+        intent.setClass(context, activityUserMacros.class);
+        startActivity(intent);
+        finish();
     }
 
     private boolean validateFields() {
@@ -205,7 +232,10 @@ public class activityUserInfo extends AppCompatActivity implements View.OnClickL
                 datePickerDialog.show();
                 break;
             case R.id.btnNext:
-                readUserInput();
+                if(validateFields()) {
+                    readUserInput();
+                    goToUserMacros();
+                }
                 break;
         }
     }
@@ -264,5 +294,45 @@ public class activityUserInfo extends AppCompatActivity implements View.OnClickL
             etxtHeightParam2.setVisibility(View.VISIBLE);
             lblHeightUnit2.setVisibility(View.VISIBLE);
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        etxtName.setText(myPrefs.getString("temp_name",""));
+        etxtDateOfBirth.setText(myPrefs.getString("temp_name",""));
+        if(myPrefs.getInt("temp_gender",0) == 0) //Imperial
+            rbtnGenderMale.setChecked(true);
+        if(myPrefs.getInt("temp_unitsystem",0) == 0) //Metric
+            rbtnMetric.setChecked(true);
+        etxtWeight.setText(myPrefs.getFloat("temp_weight",0.0f) + "");
+        etxtHeightParam1.setText(myPrefs.getInt("temp_height1",0) + "");
+        etxtHeightParam2.setText(myPrefs.getInt("temp_height2",0) + "");
+        spinnerWorkoutFreq.setSelection(myPrefs.getInt("temp_workoutfreq",0));
+        spinnerGoals.setSelection(myPrefs.getInt("temp_goal",0));
+    }
+
+    @Override
+    protected void onPause() {
+        readUserInput();
+
+        SharedPreferences.Editor editor = myPrefs.edit();
+        editor.putString("temp_name",name);
+        editor.putString("temp_dob",dob);
+        if(rbtnGenderMale.isChecked())
+            editor.putInt("temp_gender",0);// Male
+        else
+            editor.putInt("temp_gender",1);// Female
+        if(rbtnMetric.isChecked())
+            editor.putInt("temp_unitsystem",0);// Metric
+        else
+            editor.putInt("temp_unitsystem",1);// Imperial
+        editor.putFloat("temp_weight",weight);
+        editor.putInt("temp_height1",height1);
+        editor.putInt("temp_height2",height2);
+        editor.putInt("temp_workoutfreq",workoutFreq);
+        editor.putInt("temp_goal",goal);
+        editor.commit();
+        super.onPause();
     }
 }

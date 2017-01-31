@@ -51,7 +51,7 @@ public class ViewSavedMealsActivity extends AppCompatActivity implements Adapter
         addmeal_fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ViewSavedMealsActivity.this,SelectMealTypeActivity.class));
+                startActivity(new Intent(ViewSavedMealsActivity.this,CreateSimpleMealActivity.class));
             }
         });
 
