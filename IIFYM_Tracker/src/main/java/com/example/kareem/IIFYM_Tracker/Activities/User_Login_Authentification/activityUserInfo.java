@@ -30,26 +30,26 @@ import info.hoang8f.android.segmented.SegmentedGroup;
 
 public class activityUserInfo extends AppCompatActivity implements View.OnClickListener{
 
-    // UI
-    private String uid, email;
-    private TextView lblWeightUnit, lblHeightUnit1, lblHeightUnit2;
-    private EditText etxtName, etxtDateOfBirth, etxtWeight, etxtHeightParam1, etxtHeightParam2;
-    private LinearLayout linearlayoutHeight, linearlayoutWeight;
-    private RadioButton rbtnGenderMale, rbtnMetric;
-    private SegmentedGroup seggroupUnitSystem;
-    private Spinner spinnerWorkoutFreq, spinnerGoals;
-    private Button btnNext;
-    private DatePickerDialog datePickerDialog;
-    private SimpleDateFormat dateFormatter;
+    // UI Elements
+    private String              uid, email;
+    private TextView            lblWeightUnit, lblHeightUnit1, lblHeightUnit2;
+    private EditText            etxtName, etxtDateOfBirth, etxtWeight, etxtHeightParam1, etxtHeightParam2;
+    private LinearLayout        linearlayoutHeight, linearlayoutWeight;
+    private RadioButton         rbtnGenderMale, rbtnMetric;
+    private SegmentedGroup      seggroupUnitSystem;
+    private Spinner             spinnerWorkoutFreq, spinnerGoals;
+    private Button              btnNext;
+    private DatePickerDialog    datePickerDialog;
+    private SimpleDateFormat    dateFormatter;
 
-    // Vars
-    String      name, dob;
-    Gender      gender;
-    UnitSystem  unitSystem;
-    float       weight;
-    int         height1, height2, workoutFreq, goal;
+    // Variables
+    private String      name, dob;
+    private Gender      gender;
+    private UnitSystem  unitSystem;
+    private float       weight;
+    private int         height1, height2, workoutFreq, goal;
 
-    //Storage
+    // Storage
     private SharedPreferences myPrefs;
 
     @Override
@@ -57,14 +57,14 @@ public class activityUserInfo extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_info);
 
-        //UID
+        // Data from previous activity
         uid = getIntent().getStringExtra("uid");
         email = getIntent().getStringExtra("email");
 
-        //GUI
+        // GUI
         initializeGUI();
 
-        //Storage
+        // Storage
         myPrefs = getPreferences(AppCompatActivity.MODE_PRIVATE);
     }
 
@@ -79,7 +79,7 @@ public class activityUserInfo extends AppCompatActivity implements View.OnClickL
             gender = Gender.Female;
         }
 
-        //Metric
+        // Metric
         if (rbtnMetric.isChecked()) {
             unitSystem = UnitSystem.Metric;
             if(!etxtWeight.getText().toString().isEmpty())
@@ -93,7 +93,7 @@ public class activityUserInfo extends AppCompatActivity implements View.OnClickL
             height2 = -1;
         }
 
-        //Imperial
+        // Imperial
         else {
             unitSystem = UnitSystem.Imperial;
             if(!etxtWeight.getText().toString().isEmpty())
@@ -255,7 +255,7 @@ public class activityUserInfo extends AppCompatActivity implements View.OnClickL
         }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
     }
 
-    public void unitSystemChange() {
+    private void unitSystemChange() {
         if(rbtnMetric.isChecked())
         {
             linearlayoutHeight.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 0.5f));
@@ -320,13 +320,13 @@ public class activityUserInfo extends AppCompatActivity implements View.OnClickL
         editor.putString("temp_name",name);
         editor.putString("temp_dob",dob);
         if(rbtnGenderMale.isChecked())
-            editor.putInt("temp_gender",0);// Male
+            editor.putInt("temp_gender",0); // Male
         else
-            editor.putInt("temp_gender",1);// Female
+            editor.putInt("temp_gender",1); // Female
         if(rbtnMetric.isChecked())
-            editor.putInt("temp_unitsystem",0);// Metric
+            editor.putInt("temp_unitsystem",0); // Metric
         else
-            editor.putInt("temp_unitsystem",1);// Imperial
+            editor.putInt("temp_unitsystem",1); // Imperial
         editor.putFloat("temp_weight",weight);
         editor.putInt("temp_height1",height1);
         editor.putInt("temp_height2",height2);

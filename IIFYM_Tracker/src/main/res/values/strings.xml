@@ -43,7 +43,7 @@
     </string-array>
 
     <string name="userMacros_FeelFree">Feel free to change your macros to your liking\n(But make sure they add up!)</string>
-    <string name="userMacros_MacroRecommendation">Beginners: IIFYM recommends the following guidelines for your body</string>
+    <string name="userMacros_MacroRecommendation">IIFYM recommends the following daily intake</string>
     <string name="Calories">Calories</string>
     <string name="Carbs">Carbs</string>
     <string name="Protein">Protein</string>
@@ -127,6 +127,7 @@
     <string name="firebase_status_fmt">Firebase User: %s</string>
     <string name="radioBtnCalories">Calories</string>
     <string name="radioBtnMacros">Macros</string>
+    <string name="reset">Reset</string>
 
     <!-- TODO: Remove or change this placeholder text -->
 
