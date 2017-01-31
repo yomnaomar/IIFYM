@@ -56,19 +56,13 @@
             android:layout_weight="0.5"
             android:layout_gravity="center_vertical|center_horizontal" />
 
-        <EditText
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:text="@string/dateInitial"
-            android:ems="3"
-            android:id="@+id/etxtDateOfBirth"
-            android:layout_weight="0.5"
-            android:drawablePadding="10dp"
-            android:textColor="?attr/colorPrimary"
-            android:drawableEnd="@drawable/icon_calendar"
+        <Button
+            android:text="01-01-2000"
             android:layout_width="wrap_content"
-            android:gravity="center_vertical|center|end"
-            android:layout_gravity="end" />
+            android:layout_height="wrap_content"
+            android:id="@+id/btnDOB"
+            android:drawableStart="@drawable/icon_calendar"
+            android:drawablePadding="@dimen/fab_labels_margin" />
 
     </LinearLayout>
 

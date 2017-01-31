@@ -17,6 +17,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.kareem.IIFYM_Tracker.Custom_Objects.Gender;
 import com.example.kareem.IIFYM_Tracker.Custom_Objects.UnitSystem;
@@ -36,7 +37,7 @@ public class activityUserInfo extends AppCompatActivity implements View.OnClickL
     private RadioButton rbtnGenderMale, rbtnMetric;
     private SegmentedGroup seggroupUnitSystem;
     private Spinner spinnerWorkoutFreq, spinnerGoals;
-    private Button btnNext;
+    private Button btnNext, btnDOB;
 
     private DatePickerDialog datePickerDialog;
     private SimpleDateFormat dateFormatter;
@@ -55,6 +56,8 @@ public class activityUserInfo extends AppCompatActivity implements View.OnClickL
         //UID
         uid = getIntent().getStringExtra("uid");
         email = getIntent().getStringExtra("email");
+
+        //DatePickerDialog test
 
         //GUI
         initializeGUI();
@@ -148,7 +151,7 @@ public class activityUserInfo extends AppCompatActivity implements View.OnClickL
 
     private void initializeGUI() {
         etxtName            = (EditText)findViewById(R.id.etxtName);
-        etxtDateOfBirth     = (EditText) findViewById(R.id.etxtDateOfBirth);
+        //etxtDateOfBirth     = (EditText) findViewById(R.id.etxtDateOfBirth);
         etxtWeight          = (EditText)findViewById(R.id.etxtWeight);
         etxtHeightParam1    = (EditText)findViewById(R.id.etxtHeightParam1);
         etxtHeightParam2    = (EditText)findViewById(R.id.etxtHeightParam2);
@@ -163,6 +166,7 @@ public class activityUserInfo extends AppCompatActivity implements View.OnClickL
         spinnerWorkoutFreq  = (Spinner)findViewById(R.id.spinnerWorkoutFreq);
         spinnerGoals        = (Spinner)findViewById(R.id.spinnerGoals);
         btnNext             = (Button)findViewById(R.id.btnNext);
+        btnDOB              = (Button)findViewById(R.id.btnDOB);
 
         etxtDateOfBirth.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -174,6 +178,8 @@ public class activityUserInfo extends AppCompatActivity implements View.OnClickL
         });
         etxtDateOfBirth.setInputType(InputType.TYPE_NULL);
         dateFormatter = new SimpleDateFormat("dd-MM-yyyy");
+
+        btnDOB.setOnClickListener(this);
 
         setDateTimeField();
 
@@ -201,7 +207,14 @@ public class activityUserInfo extends AppCompatActivity implements View.OnClickL
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.etxtDateOfBirth:
+            case R.id.btnDOB:
+                datePickerDialog = new DatePickerDialog(this, 0, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int day) {
+                        String date = day + "/" + (month+1) + "/" + year;
+                        Toast.makeText(activityUserInfo.this, date, Toast.LENGTH_SHORT).show();
+                    }
+                }, 2012, 11, 31);
                 datePickerDialog.show();
                 break;
             case R.id.btnNext:
