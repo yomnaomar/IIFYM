@@ -234,7 +234,8 @@
                 android:layout_weight="0.8"
                 android:layout_gravity="center"
                 android:textAlignment="center"
-                android:gravity="center" />
+                android:gravity="center"
+                android:textColor="?attr/colorPrimary" />
 
             <TextView
                 android:text="@string/cm"

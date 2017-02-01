@@ -297,22 +297,6 @@ public class activityUserInfo extends AppCompatActivity implements View.OnClickL
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        etxtName.setText(myPrefs.getString("temp_name",""));
-        etxtDateOfBirth.setText(myPrefs.getString("temp_name",""));
-        if(myPrefs.getInt("temp_gender",0) == 0) //Imperial
-            rbtnGenderMale.setChecked(true);
-        if(myPrefs.getInt("temp_unitsystem",0) == 0) //Metric
-            rbtnMetric.setChecked(true);
-        etxtWeight.setText(myPrefs.getFloat("temp_weight",0.0f) + "");
-        etxtHeightParam1.setText(myPrefs.getInt("temp_height1",0) + "");
-        etxtHeightParam2.setText(myPrefs.getInt("temp_height2",0) + "");
-        spinnerWorkoutFreq.setSelection(myPrefs.getInt("temp_workoutfreq",0));
-        spinnerGoals.setSelection(myPrefs.getInt("temp_goal",0));
-    }
-
-    @Override
     protected void onPause() {
         readUserInput();
 
@@ -334,5 +318,21 @@ public class activityUserInfo extends AppCompatActivity implements View.OnClickL
         editor.putInt("temp_goal",goal);
         editor.commit();
         super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        etxtName.setText(myPrefs.getString("temp_name",""));
+        etxtDateOfBirth.setText(myPrefs.getString("temp_name",""));
+        if(myPrefs.getInt("temp_gender",0) == 0) // Imperial
+            rbtnGenderMale.setChecked(true);
+        if(myPrefs.getInt("temp_unitsystem",0) == 0) // Metric
+            rbtnMetric.setChecked(true);
+        etxtWeight.setText(myPrefs.getFloat("temp_weight",0.0f) + "");
+        etxtHeightParam1.setText(myPrefs.getInt("temp_height1",0) + "");
+        etxtHeightParam2.setText(myPrefs.getInt("temp_height2",0) + "");
+        spinnerWorkoutFreq.setSelection(myPrefs.getInt("temp_workoutfreq",0));
+        spinnerGoals.setSelection(myPrefs.getInt("temp_goal",0));
     }
 }

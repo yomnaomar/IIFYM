@@ -43,20 +43,22 @@
     </string-array>
 
     <string name="userMacros_FeelFree">Feel free to change your macros to your liking\n(But make sure they add up!)</string>
-    <string name="userMacros_MacroRecommendation">IIFYM recommends the following daily intake</string>
-    <string name="Calories">Calories</string>
-    <string name="Carbs">Carbs</string>
-    <string name="Protein">Protein</string>
-    <string name="Fat">Fat</string>
+    <string name="userMacros_MacroRecommendation">If you are unsure of what your daily intake should be, IIFYM recommends the following</string>
+    <string name="lblCalories">Calories</string>
+    <string name="lblCarbs">Carbs</string>
+    <string name="lblProtein">Protein</string>
+    <string name="lblFat">Fat</string>
+    <string name="lblTotal">Total</string>
     <string name="btnFinish">Finish</string>
 
-    <string name="kcal">kcal</string>
-    <string name="percent">%</string>
-    <string name="grams">g</string>
+    <string name="symbolKcal">kcal</string>
+    <string name="symbolPercent">%</string>
+    <string name="symbolGrams">g</string>
     <string name="radioBtnGrams">Grams</string>
     <string name="radioBtnPercent">Percent</string>
-    <string name="lblTotal">Total</string>
-
+    <string name="radioBtnCalories">Calories</string>
+    <string name="radioBtnMacros">Macros</string>
+    <string name="btnReset">Reset</string>
 
     <!--    &lt;!&ndash; Example settings for Data & Sync &ndash;&gt;
         <string name="pref_header_data_sync">Data &amp; sync</string>
@@ -125,9 +127,7 @@
     <string name="title_activity_create_simple_meal">CreateSimpleMealActivity</string>
     <string name="emailpassword_status_fmt">Email User: %s</string>
     <string name="firebase_status_fmt">Firebase User: %s</string>
-    <string name="radioBtnCalories">Calories</string>
-    <string name="radioBtnMacros">Macros</string>
-    <string name="reset">Reset</string>
+
 
     <!-- TODO: Remove or change this placeholder text -->
 

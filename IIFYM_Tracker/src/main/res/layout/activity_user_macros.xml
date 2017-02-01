@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:weightSum="1">
@@ -15,8 +16,8 @@
         android:paddingStart="25dp"
         android:paddingEnd="25dp"
         android:textColor="?attr/colorPrimary"
-        android:layout_marginTop="15dp"
-        android:layout_height="50dp" />
+        android:layout_marginTop="10dp"
+        android:layout_height="75dp" />
 
     <LinearLayout
         android:orientation="horizontal"
@@ -73,7 +74,7 @@
             android:textColor="?attr/colorPrimary"
             android:layout_gravity="center_vertical|center_horizontal"
             android:gravity="left|center_vertical"
-            android:text="@string/Calories"
+            android:text="@string/lblCalories"
             android:layout_weight="0.25"
             android:paddingStart="@dimen/activity_horizontal_margin" />
 
@@ -92,7 +93,7 @@
             android:layout_weight="0.25" />
 
         <TextView
-            android:text="@string/kcal"
+            android:text="@string/symbolKcal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/lblCalorieUnit"
@@ -103,7 +104,7 @@
             android:layout_weight="0.25" />
 
         <Button
-            android:text="@string/reset"
+            android:text="@string/btnReset"
             android:layout_width="match_parent"
             android:id="@+id/btnReset"
             android:background="@drawable/btn_iifym_style"
@@ -121,7 +122,7 @@
         android:id="@+id/linearlayoutCarbs">
 
         <TextView
-            android:text="@string/Carbs"
+            android:text="@string/lblCarbs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/lblCarbs"
@@ -140,15 +141,15 @@
             android:ems="1"
             android:id="@+id/etxtCarbs"
             android:textAppearance="@android:style/TextAppearance.Medium"
-            android:hint="45"
             android:textColor="?attr/colorPrimary"
-            android:textColorHint="?attr/colorPrimary"
+            android:textColorHint="?android:attr/textColorHint"
             android:layout_weight="0.25"
             android:layout_gravity="center_vertical|center_horizontal"
-            android:gravity="center_vertical|center" />
+            android:gravity="center_vertical|center"
+            android:text="50" />
 
         <TextView
-            android:text="@string/percent"
+            android:text="@string/symbolPercent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/lblUnitCarbs"
@@ -176,7 +177,7 @@
         android:id="@+id/linearlayoutProtein">
 
         <TextView
-            android:text="@string/Protein"
+            android:text="@string/lblProtein"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/lblProtein"
@@ -195,15 +196,15 @@
             android:ems="1"
             android:id="@+id/etxtProtein"
             android:textAppearance="@android:style/TextAppearance.Medium"
-            android:hint="35"
             android:textColor="?attr/colorPrimary"
-            android:textColorHint="?attr/colorPrimary"
+            android:textColorHint="?android:attr/textColorHint"
             android:layout_weight="0.25"
             android:layout_gravity="center_vertical|center_horizontal"
-            android:gravity="center" />
+            android:gravity="center"
+            android:text="25" />
 
         <TextView
-            android:text="@string/percent"
+            android:text="@string/symbolPercent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/lblUnitProtein"
@@ -231,7 +232,7 @@
         android:id="@+id/linearlayoutFat">
 
         <TextView
-            android:text="@string/Fat"
+            android:text="@string/lblFat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/lblFat"
@@ -250,15 +251,15 @@
             android:ems="1"
             android:id="@+id/etxtFat"
             android:textAppearance="@android:style/TextAppearance.Medium"
-            android:hint="15"
             android:textColor="?attr/colorPrimary"
-            android:textColorHint="?attr/colorPrimary"
+            android:textColorHint="?android:attr/textColorHint"
             android:layout_weight="0.25"
             android:layout_gravity="center_vertical|center_horizontal"
-            android:gravity="center_vertical|center" />
+            android:gravity="center_vertical|center"
+            android:text="25" />
 
         <TextView
-            android:text="@string/percent"
+            android:text="@string/symbolPercent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/lblUnitFat"
@@ -313,7 +314,7 @@
             android:gravity="center" />
 
         <TextView
-            android:text="@string/percent"
+            android:text="@string/symbolPercent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/lblPercentTotal"
