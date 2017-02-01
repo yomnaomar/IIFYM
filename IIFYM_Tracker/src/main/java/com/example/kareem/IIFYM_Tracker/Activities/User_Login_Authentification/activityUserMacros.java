@@ -3,6 +3,7 @@ package com.example.kareem.IIFYM_Tracker.Activities.User_Login_Authentification;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -150,69 +151,77 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
 
     private int getBMR()
     {
-        double BMR; // b/w 1000 - 3000
-        //get all user data height, weight ,age
-        float valWeight;
-        int valHeight;
+        // BMR values are between 1000 and 3000 calories
+        double BMR;
+
+        // Get all user data: height, weight, age
+        float valWeight = weight;
+        int valHeight = height1;
+
         if(unitSystem == UnitSystem.Imperial)
         {
             valWeight = (float) (weight / 2.2046226218);
             valHeight = (int) ((30.48 * height1) + (2.54 * height2));
         }
+
         String ageArr[] = dob.split("/");
         int valAge = getAge(Integer.parseInt(ageArr[2]), Integer.parseInt(ageArr[1]), Integer.parseInt(ageArr[0]));
-        double Caloric_Intake;
-        double Carb_Percent,Protein_Percent,Fat_Percent;
-        Log.d("BMRINFO", ""+ valWeight+ " "+ valHeight+" "+gender+" "+valAge);
-        if (gender.startsWith("M")) {
-            BMR = (10*valWeight + 6.25*valHeight + 5*valAge + 5.0); //Male
-            Log.d("BMRMALE", ""+BMR);
+
+        Log.d("BMRINFO", " " + valWeight + " " + valHeight + " " + gender + " " + valAge);
+
+        if (gender == Gender.Male)
+        {
+            BMR = (10*valWeight + 6.25*valHeight + 5*valAge + 5.0);
+            Log.d("BMRMALE", "" + BMR);
         }
         else
         {
-            BMR = (10*valWeight + 6.25*valHeight + 5*valAge - 161.0); //Female
-            Log.d("BMRFEMALE", ""+BMR);
+            BMR = (10*valWeight + 6.25*valHeight + 5*valAge - 161.0);
+            Log.d("BMRFEMALE", "" + BMR);
         }
-        //Activity Factor Multiplier
-        //Sedentary
-        if (currentUser.getWorkout_freq() == 0) {
-            Caloric_Intake = BMR * 1.2;
-        }
-        //Lightly Active
-        else if (currentUser.getWorkout_freq() == 1) {
-            Caloric_Intake = BMR * 1.35;
-            Log.d("WORKOUT", ""+Caloric_Intake);
-        }
-        //Moderately Active
-        else if (currentUser.getWorkout_freq() == 2) {
-            Caloric_Intake = BMR * 1.5;
-        }
-        //Very Active
-        else if (currentUser.getWorkout_freq() ==3) {
-            Caloric_Intake = BMR * 1.7;
-        }
+
+        // Activity Factor Multiplier
+        // None (little or no exercise)
+        if (workoutFreq == 0)
+            calories = (int) (BMR * 1.2);
+
+        // Low (1-3 times/week)
+        else if (workoutFreq == 1)
+            calories = (int) (BMR * 1.35);
+
+        // Medium (3-5 days/week)
+        else if (workoutFreq == 2)
+            calories = (int) (BMR * 1.5);
+
+        // High (6-7 days/week)
+        else if (workoutFreq == 3)
+            calories = (int) (BMR * 1.7);
+
+        // Very High (physical job or 7+ times/week)
         else
+            calories = (int) (BMR * 1.9);
+
+        Log.d("WORKOUT", "" + calories);
+
+        // Weight goals
+        // Lose weight
+        if (goal == 0)
+            calories -= 250.0;
+
+        // Maintain weight
+        else if (calories == 1)
         {
-            Caloric_Intake = BMR * 1.9;
+            // Do nothing
         }
-        //Weight goals
-        if (currentUser.getGoal() == 0) { //lose
-            Caloric_Intake -= 250.0;
-        }
-        else if (currentUser.getGoal()== 1) { //maintain
-            //Do nothing
-        }
-        else { //maintain
-            Caloric_Intake += 250.0;
-        }
-        //Macronutrient ratio calculation
-        Carb_Percent = currentUser.getPercent_carbs()/100.0;
-        Protein_Percent = currentUser.getPercent_protein()/100.0;
-        Fat_Percent = currentUser.getPercent_fat()/100.0;
-        Carbs_Val = (int) ((Carb_Percent * Caloric_Intake) /4.0); //icon_carbs = 4kcal/g
-        Protein_Val = (int) ((Protein_Percent * Caloric_Intake) / 4.0); //icon_protein = 4kcal/g
-        Fat_Val = (int) ((Fat_Percent * Caloric_Intake)/ 9.0); //icon_fat = 9kcal/g
-        userCalories = Caloric_Intake;
+
+        else
+            calories += 250.0;
+
+        // Macronutrient ratio calculation
+        carbsPercent = 50;
+        proteinPercent = 25;
+        fatPercent = 50;
+
         return (int) BMR;
     }
 
