@@ -29,7 +29,7 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
     private Button          btnFinish, btnReset;
 
     // Variables
-    private int             BMR, calories, carbs, protein, fat, carbsPercent, proteinPercent, fatPercent, totalPercent, height1, height2, workoutFreq, goal;
+    private int             BMR, caloriesInitial, calories, carbs, protein, fat, carbsPercent, proteinPercent, fatPercent, totalPercent, height1, height2, workoutFreq, goal;
     private boolean         isRegistered;
     private String          uid, email, name, dob;
     private Gender          gender;
@@ -38,6 +38,37 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
 
     // Storage
     private SharedPreferences myPrefs;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_user_macros);
+
+        // Data from previous activity
+        uid = getIntent().getStringExtra("uid");
+        email = getIntent().getStringExtra("email");
+        name = getIntent().getStringExtra("name");
+        dob = getIntent().getStringExtra("dob");
+        gender = (Gender) getIntent().getSerializableExtra("gender");
+        unitSystem = (UnitSystem) getIntent().getSerializableExtra("unitSystem");
+        weight = getIntent().getFloatExtra("weight", 0.0f);
+        height1 = getIntent().getIntExtra("height1", 0);
+        height2 = getIntent().getIntExtra("height2", 0);
+        workoutFreq = getIntent().getIntExtra("workoutFreq", 0);
+        goal = getIntent().getIntExtra("goal", 0);
+
+        // GUI
+        initializeGUI();
+
+        // Storage
+        myPrefs = getPreferences(AppCompatActivity.MODE_PRIVATE);
+
+        // Calculate values to be displayed
+        getBMR();
+
+        // Display values
+        displayDefaultValues();
+    }
 
     private void initializeGUI()
     {
@@ -71,59 +102,11 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
         btnReset.setOnClickListener(this);
     }
 
-    @Override
-    public void onClick(View v)
-    {
-        switch(v.getId())
-        {
-            case R.id.btnReset:
-                // Reset macro values
-                break;
-            case R.id.btnFinish:
-                isRegistered = true;
-                // Store values in DB
-                break;
-        }
-    }
-
-    private void readUserInput()
-    {
-        calories = Integer.parseInt(etxtCalories.getText().toString());
-        carbs = Integer.parseInt(etxtCarbs.getText().toString());
-        protein = Integer.parseInt(etxtProtein.getText().toString());
-        fat = Integer.parseInt(etxtFat.getText().toString());
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_macros);
-
-        // Data from previous activity
-        uid = getIntent().getStringExtra("uid");
-        email = getIntent().getStringExtra("email");
-        name = getIntent().getStringExtra("name");
-        dob = getIntent().getStringExtra("dob");
-        gender = (Gender) getIntent().getSerializableExtra("gender");
-        unitSystem = (UnitSystem) getIntent().getSerializableExtra("unitSystem");
-        weight = getIntent().getFloatExtra("weight", 0.0f);
-        height1 = getIntent().getIntExtra("height1", 0);
-        height2 = getIntent().getIntExtra("height2", 0);
-        workoutFreq = getIntent().getIntExtra("workoutFreq", 0);
-        goal = getIntent().getIntExtra("goal", 0);
-
-        // GUI
-        initializeGUI();
-
-        // Storage
-        myPrefs = getPreferences(AppCompatActivity.MODE_PRIVATE);
-    }
-
     // MEN: BMR = (10 x weight in kg) + (6.25 x height in cm) – (5 x age in years) + 5
     // WOMEN: BMR = (10 x weight in kg) + (6.25 x height in cm)  – (5 x age in years) -161
     private void getBMR()
     {
-        // Store weight/height in temporary variables in order to perform unit conversion if needed
+        // Store weight/height in local variables in order to perform unit conversion if needed
         float valWeight = weight;
         int valHeight = height1;
 
@@ -150,34 +133,34 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
         // Activity Factor Multiplier
         // None (little or no exercise)
         if (workoutFreq == 0)
-            calories = (int) (BMR * 1.2);
+            caloriesInitial = (int) (BMR * 1.2);
 
         // Low (1-3 times/week)
         else if (workoutFreq == 1)
-            calories = (int) (BMR * 1.35);
+            caloriesInitial = (int) (BMR * 1.35);
 
         // Medium (3-5 days/week)
         else if (workoutFreq == 2)
-            calories = (int) (BMR * 1.5);
+            caloriesInitial = (int) (BMR * 1.5);
 
         // High (6-7 days/week)
         else if (workoutFreq == 3)
-            calories = (int) (BMR * 1.7);
+            caloriesInitial = (int) (BMR * 1.7);
 
         // Very High (physical job or 7+ times/week)
         else
-            calories = (int) (BMR * 1.9);
+            caloriesInitial = (int) (BMR * 1.9);
 
         // Weight goals
         // Lose weight
         if (goal == 0)
-            calories -= 250.0;
+            caloriesInitial -= 250.0;
 
         // Maintain weight
-        else if (calories == 1) {} // Do nothing
+        else if (caloriesInitial == 1) {} // Do nothing
 
         else
-            calories += 250.0;
+            caloriesInitial += 250.0;
 
         // Macronutrient ratio default
         carbsPercent = 50;
@@ -185,28 +168,53 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
         fatPercent = 50;
 
         // Calculate Macro values from ratios
-        carbs = Math.round(carbsPercent*0.01f*calories/4);
-        protein =  Math.round(proteinPercent*0.01f*calories/4);
-        fat =  Math.round(fatPercent*0.01f*calories/9);
+        carbs = Math.round(carbsPercent*0.01f*caloriesInitial/4);
+        protein =  Math.round(proteinPercent*0.01f*caloriesInitial/4);
+        fat =  Math.round(fatPercent*0.01f*caloriesInitial/9);
     }
 
-    public int getAge (int _year, int _month, int _day) {
-        GregorianCalendar cal = new GregorianCalendar();
-        int y, m, d, a;
-
-        y = cal.get(Calendar.YEAR);
-        m = cal.get(Calendar.MONTH);
-        d = cal.get(Calendar.DAY_OF_MONTH);
-        cal.set(_year, _month, _day);
-        a = y - cal.get(Calendar.YEAR);
-        if ((m < cal.get(Calendar.MONTH))
-                || ((m == cal.get(Calendar.MONTH)) && (d < cal
-                .get(Calendar.DAY_OF_MONTH)))) {
-            --a;
+    private void displayValues() {
+        if(rbtnCalories.isChecked()) {
+            etxtCalories.setText(calories);
+            etxtCarbs.setText(carbsPercent);
+            etxtProtein.setText(proteinPercent);
+            etxtFat.setText(fatPercent);
+            lblAmountTotal.setText(carbsPercent + proteinPercent + fatPercent);
+            int total = Integer.parseInt(lblAmountTotal.getText().toString());
+            if (total == 100){
+                lblAmountTotal.setTextColor(getResources().getColor(R.color.Custom_Green));
+            }
+            else if (total > 100) {
+                lblAmountTotal.setTextColor(getResources().getColor(R.color.Custom_Red));
+            }
+            else if (total < 100){
+                lblAmountTotal.setTextColor(getResources().getColor(R.color.Custom_Gray));
+            }
         }
-        if(a < 0)
-            throw new IllegalArgumentException("Age < 0");
-        return a;
+    }
+
+    @Override
+    public void onClick(View v)
+    {
+        switch(v.getId())
+        {
+            case R.id.btnReset:
+                displayDefaultValues();
+                displayChange();
+                break;
+            case R.id.btnFinish:
+                isRegistered = true;
+                // Store values in DB
+                break;
+        }
+    }
+
+    private void readUserInput()
+    {
+        calories = Integer.parseInt(etxtCalories.getText().toString());
+        carbs = Integer.parseInt(etxtCarbs.getText().toString());
+        protein = Integer.parseInt(etxtProtein.getText().toString());
+        fat = Integer.parseInt(etxtFat.getText().toString());
     }
 
     @Override
@@ -250,6 +258,26 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
         super.onResume();
     }
 
+    private void displayDefaultValues() {
+        rbtnCalories.setChecked(true);
+        etxtCalories.setText(calories + "");
+        etxtCarbs.setText(50 + "");
+        etxtProtein.setText(25 + "");
+        etxtFat.setText(25 + "");
+        lblAmountTotal.setText((50 + 25 + 25) + "");
+        int total = Integer.parseInt(lblAmountTotal.getText().toString());
+        if (total == 100) {
+            lblAmountTotal.setTextColor(getResources().getColor(R.color.Custom_Green));
+        } else if (total > 100) {
+            lblAmountTotal.setTextColor(getResources().getColor(R.color.Custom_Red));
+        } else if (total < 100) {
+            lblAmountTotal.setTextColor(getResources().getColor(R.color.Custom_Gray));
+        }
+        lblGramsCarbs.setText(50 * 0.01f * calories + "");
+        lblGramsProtein.setText(25 * 0.01f * calories + "");
+        lblGramsFat.setText(25 * 0.01f * calories + "");
+    }
+
     private void displayChange()
     {
         if(rbtnCalories.isChecked())
@@ -278,5 +306,24 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
             lblGramsProtein.setVisibility(View.INVISIBLE);
             lblGramsFat.setVisibility(View.INVISIBLE);
         }
+    }
+
+    private int getAge (int _year, int _month, int _day) {
+        GregorianCalendar cal = new GregorianCalendar();
+        int y, m, d, a;
+
+        y = cal.get(Calendar.YEAR);
+        m = cal.get(Calendar.MONTH);
+        d = cal.get(Calendar.DAY_OF_MONTH);
+        cal.set(_year, _month, _day);
+        a = y - cal.get(Calendar.YEAR);
+        if ((m < cal.get(Calendar.MONTH))
+                || ((m == cal.get(Calendar.MONTH)) && (d < cal
+                .get(Calendar.DAY_OF_MONTH)))) {
+            --a;
+        }
+        if(a < 0)
+            throw new IllegalArgumentException("Age < 0");
+        return a;
     }
 }

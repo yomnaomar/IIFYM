@@ -89,7 +89,7 @@
             android:textColorHint="?android:attr/textColorHint"
             android:layout_gravity="center_vertical|center_horizontal"
             android:gravity="center_vertical|center"
-            android:text="2000"
+            android:text="xy"
             android:layout_weight="0.25" />
 
         <TextView
@@ -160,7 +160,7 @@
             android:gravity="center" />
 
         <TextView
-            android:text="(100 g)"
+            android:text="(xxx g)"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/lblGramsCarbs"
@@ -215,7 +215,7 @@
             android:gravity="center" />
 
         <TextView
-            android:text="(80 g)"
+            android:text="(yyy g)"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/lblGramsProtein"
@@ -270,7 +270,7 @@
             android:gravity="center" />
 
         <TextView
-            android:text="(25 g)"
+            android:text="(zzz g)"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/lblGramsFat"
