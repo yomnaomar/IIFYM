@@ -32,7 +32,7 @@ import tourguide.tourguide.Sequence;
 import tourguide.tourguide.ToolTip;
 
 public class activityUserMacros extends AppCompatActivity implements View.OnClickListener, TextWatcher {
-
+//delete this
     // UI Elements
     private SegmentedGroup  seggroupDisplay;
     private RadioButton     rbtnCalories, rbtnMacros;
