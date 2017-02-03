@@ -7,6 +7,7 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
@@ -74,12 +75,11 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
 
         // GUI
         initializeGUI();
+        Log.d("onCreate before Def", "temp_protein: " + myPrefs.getInt("temp_protein", 0));
 
         // Set Defaults
         defaultValues();
-
-        // Initialize Prefs to avoid onResume Override
-        initializePrefs();
+        Log.d("onCreate after Def", "temp_protein: " + myPrefs.getInt("temp_protein", 0));
 
         // UI guide
         //beginChainTourGuide();
@@ -282,6 +282,7 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
             editor.putInt("temp_fat", Integer.parseInt(etxtFat.getText().toString()));
 
         editor.commit();
+        Log.d("onPause", "temp_protein: " + myPrefs.getInt("temp_protein", 0));
         super.onPause();
     }
 
@@ -298,10 +299,12 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
             etxtProtein.setText(myPrefs.getInt("temp_protein", Integer.parseInt(etxtProtein.getText().toString()))  + "");
             etxtFat.setText(myPrefs.getInt("temp_fat", Integer.parseInt(etxtFat.getText().toString()))  + "");
 
+            Log.d("onResume", "temp_protein: " + myPrefs.getInt("temp_protein", 0));
+
             lblAmountTotal.setText(myPrefs.getInt("temp_total", Integer.parseInt(lblAmountTotal.getText().toString()))  + "");
             lblGramsCarbs.setText(myPrefs.getString("temp_gramsCarbs", lblGramsCarbs.getText().toString()));
             lblGramsProtein.setText(myPrefs.getString("temp_gramsProtein",  lblGramsProtein.getText().toString()));
-            lblGramsFat.setText(myPrefs.getString("temp_gramsFat","(" +  lblGramsFat.getText().toString()));
+            lblGramsFat.setText(myPrefs.getString("temp_gramsFat", lblGramsFat.getText().toString()));
         }
         else { // Macros
             rbtnMacros.setChecked(true);
@@ -404,20 +407,6 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
             --a;
         }
         return a;
-    }
-
-    private void initializePrefs() {
-        SharedPreferences.Editor editor = myPrefs.edit();
-        editor.putInt("temp_display", 0); // Calories
-        editor.putString("temp_gramsCarbs", carbs + "");
-        editor.putString("temp_gramsProtein", protein + "");
-        editor.putString("temp_gramsFat", fat + "");
-        editor.putInt("temp_calories", caloriesInitial);
-        editor.putInt("temp_carbs", carbsPercent);
-        editor.putInt("temp_protein", proteinPercent);
-        editor.putInt("temp_fat", fatPercent);
-        editor.putInt("temp_total", carbsPercent + proteinPercent + fatPercent);
-        editor.commit();
     }
 
     private void getIntentData() {
