@@ -104,7 +104,7 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
                         // Email is not verified
                         // Display that user needs to verify email
                         Log.d("onAuthStateChanged", "User with UID " + uid + " email is not verified");
-                        showAlertDialog("Email Verification","An email has been sent to you.\n " +
+                        showAlertDialog("Email Verification","An email has been sent to you.\n" +
                                             "Please verify your email in order to log in.");
                     }
                 } else {

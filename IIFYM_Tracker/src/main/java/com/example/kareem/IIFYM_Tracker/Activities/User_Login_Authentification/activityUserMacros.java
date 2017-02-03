@@ -75,11 +75,9 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
 
         // GUI
         initializeGUI();
-        Log.d("onCreate before Def", "temp_protein: " + myPrefs.getInt("temp_protein", 0));
 
         // Set Defaults
         defaultValues();
-        Log.d("onCreate after Def", "temp_protein: " + myPrefs.getInt("temp_protein", 0));
 
         // UI guide
         //beginChainTourGuide();
@@ -111,8 +109,12 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
         {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                //TODO: Put soem stuff in here
+                updateGUI();
             }});
+
+        etxtCarbs.addTextChangedListener(this);
+        etxtProtein.addTextChangedListener(this);
+        etxtFat.addTextChangedListener(this);
 
         btnFinish.setOnClickListener(this);
         btnReset.setOnClickListener(this);
@@ -127,12 +129,13 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
         mExitAnimation.setFillAfter(true);
     }
 
-    private void UpdateGUI()
+    private void updateGUI()
     {
         if(rbtnCalories.isChecked())
         {
             // Update GUI
             etxtCalories.setEnabled(true);
+            etxtCalories.addTextChangedListener(this);
             lblUnitCarbs.setText("%");
             lblUnitProtein.setText("%");
             lblUnitFat.setText("%");
@@ -147,6 +150,7 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
         {
             // Update GUI
             etxtCalories.setEnabled(false);
+            etxtCalories.removeTextChangedListener(this);
             lblUnitCarbs.setText("g");
             lblUnitProtein.setText("g");
             lblUnitFat.setText("g");
@@ -238,7 +242,37 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
 
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {
+        int c, p, f, cals;
 
+        if(rbtnCalories.isChecked()) {
+            String carbP = etxtCarbs.getText().toString();
+            if (carbP.isEmpty())
+                c = 0;
+            else
+                c = Integer.parseInt(carbP);
+
+            String proteinP = etxtProtein.getText().toString();
+            if (proteinP.isEmpty())
+                p = 0;
+            else
+                p = Integer.parseInt(proteinP);
+
+            String fatP = etxtFat.getText().toString();
+            if (fatP.isEmpty())
+                f = 0;
+            else
+                f = Integer.parseInt(fatP);
+
+            String currentCals = etxtCalories.getText().toString();
+            if(currentCals.isEmpty())
+                cals = 0;
+            else
+                cals = Integer.parseInt(currentCals);
+
+            lblGramsCarbs.setText("(" + Math.round(c * 0.01f * cals/4) + " g)");
+            lblGramsProtein.setText("(" + Math.round(p * 0.01f * cals/4) + " g)");
+            lblGramsFat.setText("(" + Math.round(f * 0.01f * cals/9) + " g)");
+        }
     }
 
     @Override
@@ -260,29 +294,29 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
             editor.putString("temp_gramsCarbs",lblGramsCarbs.getText().toString());
             editor.putString("temp_gramsProtein",lblGramsProtein.getText().toString());
             editor.putString("temp_gramsFat",lblGramsFat.getText().toString());
+            Log.d("onPause lblGramsCarbs", lblGramsCarbs.getText().toString());
         }
         else
             editor.putInt("temp_display", 1); // Macros
 
         if(etxtCalories.getText().toString().isEmpty())
-            editor.putInt("temp_calories",0);
+            editor.putInt("temp_calories", 0);
         else
             editor.putInt("temp_calories", Integer.parseInt(etxtCalories.getText().toString()));
-        if(etxtCalories.getText().toString().isEmpty())
-            editor.putInt("temp_carbs",0);
+        if(etxtCarbs.getText().toString().isEmpty())
+            editor.putInt("temp_carbs", 0);
         else
             editor.putInt("temp_carbs", Integer.parseInt(etxtCarbs.getText().toString()));
-        if(etxtCalories.getText().toString().isEmpty())
-            editor.putInt("temp_protein",0);
+        if(etxtProtein.getText().toString().isEmpty())
+            editor.putInt("temp_protein", 0);
         else
             editor.putInt("temp_protein", Integer.parseInt(etxtProtein.getText().toString()));
         if(etxtFat.getText().toString().isEmpty())
-            editor.putInt("temp_fat",0);
+            editor.putInt("temp_fat", 0);
         else
             editor.putInt("temp_fat", Integer.parseInt(etxtFat.getText().toString()));
 
         editor.commit();
-        Log.d("onPause", "temp_protein: " + myPrefs.getInt("temp_protein", 0));
         super.onPause();
     }
 
@@ -298,13 +332,11 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
             etxtCarbs.setText(myPrefs.getInt("temp_carbs", Integer.parseInt(etxtCarbs.getText().toString()))  + "");
             etxtProtein.setText(myPrefs.getInt("temp_protein", Integer.parseInt(etxtProtein.getText().toString()))  + "");
             etxtFat.setText(myPrefs.getInt("temp_fat", Integer.parseInt(etxtFat.getText().toString()))  + "");
-
-            Log.d("onResume", "temp_protein: " + myPrefs.getInt("temp_protein", 0));
-
             lblAmountTotal.setText(myPrefs.getInt("temp_total", Integer.parseInt(lblAmountTotal.getText().toString()))  + "");
             lblGramsCarbs.setText(myPrefs.getString("temp_gramsCarbs", lblGramsCarbs.getText().toString()));
             lblGramsProtein.setText(myPrefs.getString("temp_gramsProtein",  lblGramsProtein.getText().toString()));
             lblGramsFat.setText(myPrefs.getString("temp_gramsFat", lblGramsFat.getText().toString()));
+            Log.d("onResume lblGramsCarbs", lblGramsCarbs.getText().toString());
         }
         else { // Macros
             rbtnMacros.setChecked(true);
@@ -312,7 +344,7 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
             etxtProtein.setText(myPrefs.getInt("temp_protein", Integer.parseInt(etxtProtein.getText().toString())) + "");
             etxtFat.setText(myPrefs.getInt("temp_fat", Integer.parseInt(etxtFat.getText().toString())) + "");
         }
-        UpdateGUI();
+        updateGUI();
     }
 
     private void beginChainTourGuide() {
