@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.view.View;
@@ -22,9 +23,12 @@ import android.widget.TextView;
 import com.example.kareem.IIFYM_Tracker.Custom_Objects.Gender;
 import com.example.kareem.IIFYM_Tracker.Custom_Objects.UnitSystem;
 import com.example.kareem.IIFYM_Tracker.R;
+import com.example.kareem.IIFYM_Tracker.ViewComponents.DecimalDigitsInputFilter;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 import info.hoang8f.android.segmented.SegmentedGroup;
 
@@ -35,7 +39,7 @@ public class activityUserInfo extends AppCompatActivity implements View.OnClickL
     private TextView            lblWeightUnit, lblHeightUnit1, lblHeightUnit2;
     private EditText            etxtName, etxtDateOfBirth, etxtWeight, etxtHeightParam1, etxtHeightParam2;
     private LinearLayout        linearlayoutHeight, linearlayoutWeight;
-    private RadioButton         rbtnGenderMale, rbtnMetric;
+    private RadioButton         rbtnGenderMale, rbtnGenderFemale, rbtnMetric, rbtnGenderImperial;
     private SegmentedGroup      seggroupUnitSystem;
     private Spinner             spinnerWorkoutFreq, spinnerGoals;
     private Button              btnNext;
@@ -90,7 +94,7 @@ public class activityUserInfo extends AppCompatActivity implements View.OnClickL
             height1 = Integer.parseInt(etxtHeightParam1.getText().toString());
             else
             height1 = 0;
-            height2 = -1;
+            height2 = 0;
         }
 
         // Imperial
@@ -105,9 +109,9 @@ public class activityUserInfo extends AppCompatActivity implements View.OnClickL
             else
                 height1 = 0;
             if(!etxtHeightParam2.getText().toString().isEmpty())
-                height1 = Integer.parseInt(etxtHeightParam1.getText().toString());
+                height2 = Integer.parseInt(etxtHeightParam2.getText().toString());
             else
-                height1 = 0;
+                height2 = 0;
         }
 
         workoutFreq = spinnerWorkoutFreq.getSelectedItemPosition();
@@ -138,38 +142,68 @@ public class activityUserInfo extends AppCompatActivity implements View.OnClickL
 
         String validate_name = etxtName.getText().toString();
         if (TextUtils.isEmpty(validate_name)) {
-            etxtName.setError("Required.");
+            etxtName.setError("Required");
             valid = false;
-        } else {
+        } else
             etxtName.setError(null);
+
+        if (!verifyAge()) {
+            etxtDateOfBirth.setError("Invalid");
+            valid = false;
         }
-        
+        else {
+            etxtDateOfBirth.setError(null);
+        }
+
         String validate_weight = etxtWeight.getText().toString();
         if (TextUtils.isEmpty(validate_weight)) {
-            etxtWeight.setError("Required.");
+            etxtWeight.setError("Required");
             valid = false;
-        } else {
+        } else if ( // Weight KG boundaries (30-225)
+                (Float.parseFloat(validate_weight) < 30 ||
+                        Float.parseFloat(validate_weight) > 225) &&
+                        rbtnMetric.isChecked()) {
+            etxtWeight.setError("Invalid measurement");
+            valid = false;
+        } else if ( // Weight LB boundaries (50-500)
+                (Float.parseFloat(validate_weight) < 50 ||
+                        Float.parseFloat(validate_weight) > 500) &&
+                        !rbtnMetric.isChecked()) {
+            etxtWeight.setError("Invalid measurement");
+            valid = false;
+        } else
             etxtWeight.setError(null);
-        }
 
         String validate_height1 = etxtHeightParam1.getText().toString();
-        if (TextUtils.isEmpty((validate_height1))){
-            etxtHeightParam1.setError("Required.");
+        if (TextUtils.isEmpty((validate_height1))) {
+            etxtHeightParam1.setError("Required");
             valid = false;
-        } else {
+        } else if (   // Height cm boundaries (50-250)
+                (Integer.parseInt(validate_height1) < 50 ||
+                        Integer.parseInt(validate_height1) > 250) &&
+                        rbtnMetric.isChecked()) {
+            etxtHeightParam1.setError("Invalid measurement");
+            valid = false;
+        } else if (   // Height feet boundaries (3-8)
+                (Integer.parseInt(validate_height1) < 3 ||
+                        Integer.parseInt(validate_height1) > 8) &&
+                        !rbtnMetric.isChecked()) {
+            etxtHeightParam1.setError("Invalid measurement");
+            valid = false;
+        } else
             etxtHeightParam1.setError(null);
-        }
 
-        if(!rbtnMetric.isChecked()){
+        if (!rbtnMetric.isChecked()) {
             String validate_height2 = etxtHeightParam2.getText().toString();
-            if (TextUtils.isEmpty((validate_height2))){
-                etxtHeightParam2.setError("Required.");
+            if (TextUtils.isEmpty((validate_height2))) {
+                etxtHeightParam2.setError("Required");
                 valid = false;
-            } else {
+            } else if (Integer.parseInt(validate_height2) > 12) { // Inch boundary 0-12
+                etxtHeightParam2.setError("Invalid measurement");
+                valid = false;
+            } else
                 etxtHeightParam2.setError(null);
-            }
         }
-
         return valid;
     }
 
@@ -186,7 +220,9 @@ public class activityUserInfo extends AppCompatActivity implements View.OnClickL
         linearlayoutWeight  = (LinearLayout)findViewById(R.id.linearlayoutWeight);
         seggroupUnitSystem  = (SegmentedGroup) findViewById(R.id.seggroupUnitSystem);
         rbtnGenderMale      = (RadioButton)findViewById(R.id.rbtnGenderMale);
+        rbtnGenderFemale    = (RadioButton)findViewById(R.id.rbtnGenderFemale);
         rbtnMetric          = (RadioButton)findViewById(R.id.rbtnMetric);
+        rbtnGenderImperial  = (RadioButton)findViewById(R.id.rbtnImperial);
         spinnerWorkoutFreq  = (Spinner)findViewById(R.id.spinnerWorkoutFreq);
         spinnerGoals        = (Spinner)findViewById(R.id.spinnerGoals);
         btnNext             = (Button)findViewById(R.id.btnNext);
@@ -202,7 +238,11 @@ public class activityUserInfo extends AppCompatActivity implements View.OnClickL
         etxtDateOfBirth.setInputType(InputType.TYPE_NULL);
         dateFormatter = new SimpleDateFormat("dd-MM-yyyy");
 
+        etxtDateOfBirth.setText(dateFormatter.format(new Date()));
+        etxtDateOfBirth.setOnClickListener(this);
         setDateTimeField();
+
+        etxtWeight.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(4,2)});
 
         seggroupUnitSystem.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -241,8 +281,6 @@ public class activityUserInfo extends AppCompatActivity implements View.OnClickL
     }
 
     private void setDateTimeField() {
-        etxtDateOfBirth.setOnClickListener(this);
-
         Calendar newCalendar = Calendar.getInstance();
         datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
 
@@ -324,15 +362,39 @@ public class activityUserInfo extends AppCompatActivity implements View.OnClickL
     protected void onResume() {
         super.onResume();
         etxtName.setText(myPrefs.getString("temp_name",""));
-        etxtDateOfBirth.setText(myPrefs.getString("temp_name",""));
-        if(myPrefs.getInt("temp_gender",0) == 0) // Imperial
+        etxtDateOfBirth.setText(myPrefs.getString("temp_dob", dateFormatter.format(new Date()).toString()));
+        if(myPrefs.getInt("temp_gender",0) == 0) // Male
             rbtnGenderMale.setChecked(true);
+        else
+            rbtnGenderFemale.setChecked(true); // Female
         if(myPrefs.getInt("temp_unitsystem",0) == 0) // Metric
             rbtnMetric.setChecked(true);
+        else
+            rbtnGenderImperial.setChecked(true); // Imperial
         etxtWeight.setText(myPrefs.getFloat("temp_weight",0.0f) + "");
         etxtHeightParam1.setText(myPrefs.getInt("temp_height1",0) + "");
         etxtHeightParam2.setText(myPrefs.getInt("temp_height2",0) + "");
         spinnerWorkoutFreq.setSelection(myPrefs.getInt("temp_workoutfreq",0));
         spinnerGoals.setSelection(myPrefs.getInt("temp_goal",0));
+    }
+
+    private boolean verifyAge(){
+        String ageArr[] = etxtDateOfBirth.getText().toString().split("-");
+        GregorianCalendar cal = new GregorianCalendar();
+        int y, m, d, a;
+
+        y = cal.get(Calendar.YEAR);
+        m = cal.get(Calendar.MONTH);
+        d = cal.get(Calendar.DAY_OF_MONTH);
+        cal.set(Integer.parseInt(ageArr[2]), Integer.parseInt(ageArr[1]), Integer.parseInt(ageArr[0]));
+        a = y - cal.get(Calendar.YEAR);
+        if ((m < cal.get(Calendar.MONTH))
+                || ((m == cal.get(Calendar.MONTH)) && (d < cal
+                .get(Calendar.DAY_OF_MONTH)))) {
+            --a;
+        }
+        if(a < 0)
+            return false;
+        return true;
     }
 }

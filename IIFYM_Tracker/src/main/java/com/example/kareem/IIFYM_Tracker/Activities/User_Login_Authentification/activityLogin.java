@@ -254,7 +254,7 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
 
         String email = etxtEmail.getText().toString();
         if (TextUtils.isEmpty(email)) {
-            etxtEmail.setError("Required.");
+            etxtEmail.setError("Required");
             valid = false;
         } else {
             etxtEmail.setError(null);
@@ -262,7 +262,7 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
 
         String password = etxtPassword.getText().toString();
         if (TextUtils.isEmpty(password)) {
-            etxtPassword.setError("Required.");
+            etxtPassword.setError("Required");
             valid = false;
         } else {
             etxtPassword.setError(null);
@@ -285,14 +285,5 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
         if (mProgressDialog != null && mProgressDialog.isShowing()) {
             mProgressDialog.dismiss();
         }
-    }
-
-    //Unused
-    private void updateUI() {
-        hideProgressDialog();
-    }
-
-    private void signOut() {
-        mAuth.signOut();
     }
 }

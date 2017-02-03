@@ -202,7 +202,8 @@
                 android:textColorHint="?android:attr/textColorHint"
                 android:layout_weight="0.8"
                 android:textAlignment="center"
-                android:layout_gravity="center" />
+                android:layout_gravity="center"
+                android:maxLength="7" />
 
             <TextView
                 android:text="@string/kg"
@@ -235,7 +236,8 @@
                 android:layout_gravity="center"
                 android:textAlignment="center"
                 android:gravity="center"
-                android:textColor="?attr/colorPrimary" />
+                android:textColor="?attr/colorPrimary"
+                android:maxLength="3" />
 
             <TextView
                 android:text="@string/cm"
@@ -261,7 +263,9 @@
                 android:visibility="gone"
                 android:textAlignment="center"
                 android:gravity="center"
-                android:layout_gravity="center" />
+                android:layout_gravity="center"
+                android:maxLength="2"
+                android:textColor="?attr/colorPrimary" />
 
             <TextView
                 android:text="in"

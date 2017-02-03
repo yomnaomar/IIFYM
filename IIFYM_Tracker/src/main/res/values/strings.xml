@@ -43,7 +43,7 @@
     </string-array>
 
     <string name="userMacros_FeelFree">Feel free to change your macros to your liking\n(But make sure they add up!)</string>
-    <string name="userMacros_MacroRecommendation">If you are unsure of what your daily intake should be, IIFYM recommends the following</string>
+    <string name="userMacros_MacroRecommendation">If you are unsure of what your daily intake should be, IIFYM gives you a good starting point specific to your body!</string>
     <string name="lblCalories">Calories</string>
     <string name="lblCarbs">Carbs</string>
     <string name="lblProtein">Protein</string>
@@ -127,6 +127,8 @@
     <string name="title_activity_create_simple_meal">CreateSimpleMealActivity</string>
     <string name="emailpassword_status_fmt">Email User: %s</string>
     <string name="firebase_status_fmt">Firebase User: %s</string>
+    <string name="UserFocus">I want to focus on ...</string>
+    <string name="UserMacrosTitle">Daily Nutritional Goals</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->
