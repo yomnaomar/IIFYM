@@ -158,7 +158,7 @@
             android:textColorHint="?android:attr/textColorHint"
             android:layout_weight="0.25"
             android:layout_gravity="center_vertical|center_horizontal"
-            android:gravity="center_vertical|center"
+            android:gravity="center"
             android:text="50"
             android:maxLength="4" />
 
@@ -270,9 +270,9 @@
             android:textColorHint="?android:attr/textColorHint"
             android:layout_weight="0.25"
             android:layout_gravity="center_vertical|center_horizontal"
-            android:gravity="center_vertical|center"
             android:text="25"
-            android:maxLength="4" />
+            android:maxLength="4"
+            android:gravity="center" />
 
         <TextView
             android:text="@string/symbolPercent"

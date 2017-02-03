@@ -32,7 +32,7 @@ import tourguide.tourguide.Sequence;
 import tourguide.tourguide.ToolTip;
 
 public class activityUserMacros extends AppCompatActivity implements View.OnClickListener, TextWatcher {
-//delete this
+
     // UI Elements
     private SegmentedGroup  seggroupDisplay;
     private RadioButton     rbtnCalories, rbtnMacros;
@@ -41,14 +41,14 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
     private Button          btnFinish;
     private ImageButton     btnReset;
 
-    // Static Variables
-    private int             BMR, height1, height2, workoutFreq, goal ,caloriesInitial;
+    // Final Variables (Cannot be changed)
+    private int             height1, height2, workoutFreq, goal ,BMR, caloriesInitial;
     private float           weight;
     private String          uid, email, name, dob;
     private Gender          gender;
     private UnitSystem      unitSystem;
 
-    // Dyanamic Variables
+    // Dyanamic Variables (Can be changed)
     private int             totalPercent, calories, carbs, protein, fat, carbsPercent, proteinPercent, fatPercent;
     private boolean         isRegistered, etxtCalories_isWatched, etxtMacros_areWatched;
 
@@ -64,20 +64,10 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
         setContentView(R.layout.activity_user_macros);
 
         // Storage
-        myPrefs = getPreferences(AppCompatActivity.MODE_PRIVATE);
+        myPrefs = PreferenceManager.getDefaultSharedPreferences(this);
 
-        // Data from previous activity
-        uid = getIntent().getStringExtra("uid");
-        email = getIntent().getStringExtra("email");
-        name = getIntent().getStringExtra("name");
-        dob = getIntent().getStringExtra("dob");
-        gender = (Gender) getIntent().getSerializableExtra("gender");
-        unitSystem = (UnitSystem) getIntent().getSerializableExtra("unitSystem");
-        weight = getIntent().getFloatExtra("weight", 0.0f);
-        height1 = getIntent().getIntExtra("height1", 0);
-        height2 = getIntent().getIntExtra("height2", 0);
-        workoutFreq = getIntent().getIntExtra("workoutFreq", 0);
-        goal = getIntent().getIntExtra("goal", 0);
+        // Data from previous Login activities
+        getIntentData();
 
         // Calculate values to be displayed
         getBMR();
@@ -86,13 +76,13 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
         initializeGUI();
 
         // Set Defaults
-        DefaultValues();
+        defaultValues();
 
         // Initialize Prefs to avoid onResume Override
-        InitializePrefs();
+        initializePrefs();
 
-        //UI guide
-        showtipOverlay();
+        // UI guide
+        //beginChainTourGuide();
     }
 
     private void initializeGUI()
@@ -121,7 +111,7 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
         {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-
+                //TODO: Put soem stuff in here
             }});
 
         btnFinish.setOnClickListener(this);
@@ -237,14 +227,28 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
         switch(v.getId())
         {
             case R.id.btnReset:
-                DefaultValues();
-                displayRbtnChange();
+                defaultValues();
                 break;
             case R.id.btnFinish:
                 isRegistered = true;
                 // Store values in DB
                 break;
         }
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
+
     }
 
     @Override
@@ -285,108 +289,82 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
     protected void onResume() {
         // Load preferences
         // If preferences unavailable, set defaults
+        super.onResume();
         etxtCalories.setText(myPrefs.getInt("temp_calories", caloriesInitial) + "");
 
         if(myPrefs.getInt("temp_display",0) == 0) { // Calories
             rbtnCalories.setChecked(true);
-            etxtCarbs.setText(myPrefs.getInt("temp_carbs", 50)  + "");
-            etxtProtein.setText(myPrefs.getInt("temp_protein", 25)  + "");
-            etxtFat.setText(myPrefs.getInt("temp_fat", 25)  + "");
+            etxtCarbs.setText(myPrefs.getInt("temp_carbs", Integer.parseInt(etxtCarbs.getText().toString()))  + "");
+            etxtProtein.setText(myPrefs.getInt("temp_protein", Integer.parseInt(etxtProtein.getText().toString()))  + "");
+            etxtFat.setText(myPrefs.getInt("temp_fat", Integer.parseInt(etxtFat.getText().toString()))  + "");
 
-            lblAmountTotal.setText(myPrefs.getInt("temp_total", 100)  + "");
-            lblGramsCarbs.setText(myPrefs.getString("temp_gramsCarbs", "(" + Math.round(carbsPercent*0.01f*caloriesInitial/4) + " g)"));
-            lblGramsProtein.setText(myPrefs.getString("temp_gramsProtein", "(" + Math.round(proteinPercent*0.01f*caloriesInitial/4) + " g)"));
-            lblGramsFat.setText(myPrefs.getString("temp_gramsFat","(" + Math.round(fatPercent*0.01f*caloriesInitial/9) + " g)"));
+            lblAmountTotal.setText(myPrefs.getInt("temp_total", Integer.parseInt(lblAmountTotal.getText().toString()))  + "");
+            lblGramsCarbs.setText(myPrefs.getString("temp_gramsCarbs", lblGramsCarbs.getText().toString()));
+            lblGramsProtein.setText(myPrefs.getString("temp_gramsProtein",  lblGramsProtein.getText().toString()));
+            lblGramsFat.setText(myPrefs.getString("temp_gramsFat","(" +  lblGramsFat.getText().toString()));
         }
         else { // Macros
             rbtnMacros.setChecked(true);
-            etxtCarbs.setText(myPrefs.getInt("temp_carbs", 0) + "");
-            etxtProtein.setText(myPrefs.getInt("temp_protein", 0) + "");
-            etxtFat.setText(myPrefs.getInt("temp_fat", 0) + "");
+            etxtCarbs.setText(myPrefs.getInt("temp_carbs", Integer.parseInt(etxtCarbs.getText().toString())) + "");
+            etxtProtein.setText(myPrefs.getInt("temp_protein", Integer.parseInt(etxtProtein.getText().toString())) + "");
+            etxtFat.setText(myPrefs.getInt("temp_fat", Integer.parseInt(etxtFat.getText().toString())) + "");
         }
-
         UpdateGUI();
-        super.onResume();
     }
 
-    @Override
-    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+    private void beginChainTourGuide() {
+        ChainTourGuide tourGuide1 = ChainTourGuide.init(this)
+                .setToolTip(new ToolTip()
+                        .setTitle("Set your goals")
+                        .setDescription("It's time to set you daily goal intake")
+                        .setGravity(Gravity.BOTTOM)
+                        .setBackgroundColor(Color.parseColor("#c0392b"))
+                )
+                .setOverlay(new Overlay()
+                        .setBackgroundColor(Color.parseColor("#EE2c3e50"))
+                        .setEnterAnimation(mEnterAnimation)
+                        .setExitAnimation(mExitAnimation)
+                )
+                .playLater(lblTitle);
 
+        ChainTourGuide tourGuide2 = ChainTourGuide.init(this)
+                .setToolTip(new ToolTip()
+                        .setTitle("Calories vs Macros")
+                        .setDescription("What would you like to focus on?")
+                        .setGravity(Gravity.BOTTOM)
+                )
+                .setOverlay(new Overlay()
+                        .setBackgroundColor(Color.parseColor("#EE2c3e50"))
+                        .setEnterAnimation(mEnterAnimation)
+                        .setExitAnimation(mExitAnimation)
+                )
+                .playLater(seggroupDisplay);
+
+
+        ChainTourGuide tourGuide3 = ChainTourGuide.init(this)
+                .setToolTip(new ToolTip()
+                        .setTitle("Don't worry")
+                        .setDescription("If you don't know where to start, " +
+                                "here's a recommended starting point")
+                        .setGravity(Gravity.BOTTOM | Gravity.RIGHT)
+                )
+                .setOverlay(new Overlay()
+                        .setBackgroundColor(Color.parseColor("#EE2c3e50"))
+                        .setEnterAnimation(mEnterAnimation)
+                        .setExitAnimation(mExitAnimation)
+                )
+                .playLater(etxtCarbs);
+
+        Sequence sequence = new Sequence.SequenceBuilder()
+                .add(tourGuide1, tourGuide2, tourGuide3)
+                .setDefaultOverlay(new Overlay())
+                .setDefaultPointer(null)
+                .setContinueMethod(Sequence.ContinueMethod.Overlay)
+                .build();
+        ChainTourGuide.init(this).playInSequence(sequence);
     }
 
-    @Override
-    public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-    }
-
-    @Override
-    public void afterTextChanged(Editable s) {
-
-    }
-
-    private void showtipOverlay() {
-        if (myPrefs.getBoolean("isnewUser", true)) {
-            ChainTourGuide tourGuide1 = ChainTourGuide.init(this)
-                    .setToolTip(new ToolTip()
-                            .setTitle("Set your goals")
-                            .setDescription("It's time to set you daily goal intake")
-                            .setGravity(Gravity.BOTTOM)
-                            .setBackgroundColor(Color.parseColor("#c0392b"))
-                    )
-                    .setOverlay(new Overlay()
-                            .setBackgroundColor(Color.parseColor("#EE2c3e50"))
-                            .setEnterAnimation(mEnterAnimation)
-                            .setExitAnimation(mExitAnimation)
-                    )
-                    .playLater(lblTitle);
-
-            ChainTourGuide tourGuide2 = ChainTourGuide.init(this)
-                    .setToolTip(new ToolTip()
-                            .setTitle("Calories vs Macros")
-                            .setDescription("What would you like to focus on?")
-                            .setGravity(Gravity.BOTTOM)
-                    )
-                    .setOverlay(new Overlay()
-                            .setBackgroundColor(Color.parseColor("#EE2c3e50"))
-                            .setEnterAnimation(mEnterAnimation)
-                            .setExitAnimation(mExitAnimation)
-                    )
-                    .playLater(seggroupDisplay);
-
-
-            ChainTourGuide tourGuide3 = ChainTourGuide.init(this)
-                    .setToolTip(new ToolTip()
-                            .setTitle("Don't worry")
-                            .setDescription("If you don't know where to start, " +
-                                    "here's a recommended starting point")
-                            .setGravity(Gravity.BOTTOM | Gravity.RIGHT)
-                    )
-                    .setOverlay(new Overlay()
-                            .setBackgroundColor(Color.parseColor("#EE2c3e50"))
-                            .setEnterAnimation(mEnterAnimation)
-                            .setExitAnimation(mExitAnimation)
-                    )
-                    .playLater(etxtCalories);
-
-            Sequence sequence = new Sequence.SequenceBuilder()
-                    .add(tourGuide1, tourGuide2, tourGuide3)
-                    .setDefaultOverlay(new Overlay()
-                            .setEnterAnimation(mEnterAnimation)
-                            .setExitAnimation(mExitAnimation)
-                    )
-                    .setDefaultPointer(null)
-                    .setContinueMethod(Sequence.ContinueMethod.Overlay)
-                    .build();
-
-            ChainTourGuide.init(this).playInSequence(sequence);
-            SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-            SharedPreferences.Editor editor = settings.edit();
-            editor.putBoolean("isnewUser", true);
-            editor.commit();
-        }
-    }
-
-    private void DefaultValues() {
+    private void defaultValues() {
         // Macronutrient ratio default
         calories = caloriesInitial;
         carbsPercent = 50;
@@ -428,17 +406,31 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
         return a;
     }
 
-    private void InitializePrefs() {
+    private void initializePrefs() {
         SharedPreferences.Editor editor = myPrefs.edit();
         editor.putInt("temp_display", 0); // Calories
-        editor.putInt("temp_gramsCarbs", carbs);
-        editor.putInt("temp_gramsProtein", protein);
-        editor.putInt("temp_gramsFat", fat);
+        editor.putString("temp_gramsCarbs", carbs + "");
+        editor.putString("temp_gramsProtein", protein + "");
+        editor.putString("temp_gramsFat", fat + "");
         editor.putInt("temp_calories", caloriesInitial);
         editor.putInt("temp_carbs", carbsPercent);
         editor.putInt("temp_protein", proteinPercent);
         editor.putInt("temp_fat", fatPercent);
         editor.putInt("temp_total", carbsPercent + proteinPercent + fatPercent);
         editor.commit();
+    }
+
+    private void getIntentData() {
+        uid = getIntent().getStringExtra("uid");
+        email = getIntent().getStringExtra("email");
+        name = getIntent().getStringExtra("name");
+        dob = getIntent().getStringExtra("dob");
+        gender = (Gender) getIntent().getSerializableExtra("gender");
+        unitSystem = (UnitSystem) getIntent().getSerializableExtra("unitSystem");
+        weight = getIntent().getFloatExtra("weight", 0.0f);
+        height1 = getIntent().getIntExtra("height1", 0);
+        height2 = getIntent().getIntExtra("height2", 0);
+        workoutFreq = getIntent().getIntExtra("workoutFreq", 0);
+        goal = getIntent().getIntExtra("goal", 0);
     }
 }

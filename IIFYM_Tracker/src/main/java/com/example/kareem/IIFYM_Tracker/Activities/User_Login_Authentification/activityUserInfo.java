@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputFilter;
 import android.text.InputType;
@@ -69,7 +70,7 @@ public class activityUserInfo extends AppCompatActivity implements View.OnClickL
         initializeGUI();
 
         // Storage
-        myPrefs = getPreferences(AppCompatActivity.MODE_PRIVATE);
+        myPrefs = PreferenceManager.getDefaultSharedPreferences(this);
     }
 
     private void readUserInput() {
