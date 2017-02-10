@@ -69,8 +69,8 @@ public class User {
         return isRegistered;
     }
 
-    public void setRegistered(boolean registered) {
-        isRegistered = registered;
+    public void setRegistered(boolean isRegistered) {
+        this.isRegistered = isRegistered;
     }
 
     public void setRegisteredFromInt(int registered) { isRegistered = (registered != 0);}
@@ -171,8 +171,8 @@ public class User {
         return isPercent;
     }
 
-    public void setPercent(boolean percent) {
-        isPercent = percent;
+    public void setPercent(boolean isPercent) {
+        isPercent = isPercent;
     }
 
     public void setPercentFromInt(int percent) { isPercent = (percent != 0);}
