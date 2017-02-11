@@ -797,8 +797,8 @@ public class DatabaseConnector {
             newUser.put("email",            U.getEmail());
             newUser.put("name",             U.getName());
             newUser.put("dob",              U.getDob().toString());
-            newUser.put("gender",           U.getGender().getGenderInt());
-            newUser.put("unitSystem",       U.getUnitSystem().getUnitSystemInt());
+            newUser.put("gender",           U.getGender());
+            newUser.put("unitSystem",       U.getUnitSystem());
             newUser.put("weight",           U.getWeight());
             newUser.put("height1",          U.getHeight1());
             newUser.put("height2",          U.getHeight2());
@@ -831,8 +831,8 @@ public class DatabaseConnector {
             U.setEmail(C.getString(2));
             U.setName(C.getString(3));
             U.setDob(C.getString(4));
-            U.setGenderFromInt(C.getInt(5));
-            U.setUnitSystemFromInt(C.getInt(6));
+            U.setGender(C.getInt(5));
+            U.setUnitSystem(C.getInt(6));
             U.setWeight(C.getFloat(7));
             U.setHeight1(C.getInt(8));
             U.setHeight2(C.getInt(9));
@@ -862,8 +862,8 @@ public class DatabaseConnector {
             updateUser.put("email", U.getEmail());
             updateUser.put("name", U.getName());
             updateUser.put("dob", U.getDob().toString());
-            updateUser.put("gender", U.getGender().getGenderInt());
-            updateUser.put("unitSystem", U.getUnitSystem().getUnitSystemInt());
+            updateUser.put("gender", U.getGender());
+            updateUser.put("unitSystem", U.getUnitSystem());
             updateUser.put("weight", U.getWeight());
             updateUser.put("height1", U.getHeight1());
             updateUser.put("height2", U.getHeight2());

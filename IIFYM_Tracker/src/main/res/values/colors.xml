@@ -22,7 +22,6 @@
     <color name="radio_button_selected_color">#1f3972</color>
     <color name="radio_button_unselected_color">#FFFFFF</color>
     <color name="SegmentedGroup_sc_unchecked_tint_color">#FFFFFF</color>
-    <color name="Custom_Gray">#8a000000</color>
     <color name="Custom_Red">#D50000</color>
     <color name="Custom_Green">#2E7D32</color>
 </resources>
