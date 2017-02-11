@@ -790,7 +790,7 @@ public class DatabaseConnector {
     // Returns True if User was successfully inserted
     // Returns False otherwise
     public boolean createUser(User U) {
-        if (isExistingUser(U.getUid())) {
+        if (!isExistingUser(U.getUid())) {
             ContentValues newUser = new ContentValues();
             newUser.put("uid",              U.getUid());
             newUser.put("isRegistered",     U.isRegistered());

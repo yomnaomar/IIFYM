@@ -16,7 +16,6 @@ import android.widget.EditText;
 
 import com.example.kareem.IIFYM_Tracker.Activities.Main.activityMain;
 import com.example.kareem.IIFYM_Tracker.Custom_Objects.User;
-import com.example.kareem.IIFYM_Tracker.Database.DatabaseConnector;
 import com.example.kareem.IIFYM_Tracker.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -38,7 +37,6 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
     private EditText etxtEmail;
     private EditText etxtPassword;
     private SharedPreferences myPrefs;
-    private DatabaseConnector My_DB;
     private boolean isRegistered;
 
     @Override
@@ -48,7 +46,6 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
 
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        My_DB = new DatabaseConnector(getApplicationContext());
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -145,7 +142,6 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
                             String newEmail = firebaseuser.getEmail();
                             User user = new User(newUID,newEmail,false);
                             mDatabase.child("users").child(newUID).setValue(user);
-                            My_DB.createUser(user);
 
                             firebaseuser.sendEmailVerification()
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {

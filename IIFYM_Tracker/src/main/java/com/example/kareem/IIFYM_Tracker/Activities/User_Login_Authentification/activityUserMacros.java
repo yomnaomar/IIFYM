@@ -7,6 +7,7 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
@@ -18,7 +19,13 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.example.kareem.IIFYM_Tracker.Custom_Objects.User;
+import com.example.kareem.IIFYM_Tracker.Database.DatabaseConnector;
 import com.example.kareem.IIFYM_Tracker.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -43,7 +50,7 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
     private int             gender, unitSystem, height1, height2, workoutFreq, goal ,BMR;
     private float           weight;
     private String          uid, email, name, dob;
-    private int             caloriesDefault, carbsDefault, proteinDefault, fatDefault;
+    private int             caloriesDefault;
     private final int       carbsPercentDefault = 50, proteinPercentDefault = 25, fatPercentDefault = 25;
 
     // Dyanamic Variables (Can be changed)
@@ -57,6 +64,10 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
 
     // Storage
     private SharedPreferences myPrefs;
+    private DatabaseConnector My_DB;
+    private FirebaseAuth mAuth;
+    FirebaseUser firebaseuser;
+    private DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +76,10 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
 
         // Storage
         myPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        mAuth = FirebaseAuth.getInstance();
+        firebaseuser = mAuth.getCurrentUser();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        My_DB = new DatabaseConnector(getApplicationContext());
 
         // Data from previous Login activities
         getIntentData();
@@ -376,10 +391,28 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
     }
 
     private void Finish(){
-        // isRegistered = true;
-        // Store values in DB
         if(validateFields()){
-
+            User user;
+            if (rbtnCalories.isChecked()) {
+                user = new User(uid, email, true, name, dob, gender,
+                        unitSystem, weight, height1, height2, workoutFreq,
+                        goal, calories, true, carbsPercent, proteinPercent, fatPercent);
+                Log.d("Finish", "User: " + "UID: " + uid + " email: " + email + " isRegsitered: " + true + " name: " + name + " dob: " + dob
+                        + " gender: " + gender + " unitSystem: " + unitSystem + " weight: " + weight + " height1: " + height1 + " height2: " + height2
+                        + " workoutFreq: " + workoutFreq + " goal: " + goal + " calories: " + calories + " isPercent: " + true +
+                        " carbsPercent: " + carbsPercent + " proteinPercent: " + proteinPercent + " fatPercent: " + fatPercent);
+            }
+            else {
+                user = new User(uid, email, true, name, dob, gender,
+                        unitSystem, weight, height1, height2, workoutFreq,
+                        goal, calories, false, carbs, protein, fat);
+                Log.d("Finish", "User: " + "UID: " + uid + " email: " + email + " isRegsitered: " + true + " name: " + name + " dob: " + dob
+                        + " gender: " + gender + " unitSystem: " + unitSystem + " weight: " + weight + " height1: " + height1 + " height2: " + height2
+                        + " workoutFreq: " + workoutFreq + " goal: " + goal + " calories: " + calories + " isPercent: " + false +
+                        " carbs: " + carbs + " protein : " + protein + " fat: " + fat);
+            }
+            mDatabase.child("users").child(uid).setValue(user);
+            My_DB.createUser(user);
         }
     }
 
@@ -602,10 +635,10 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
 
         if(myPrefs.getInt("temp_display",0) == 0) { // Calories
             rbtnCalories.setChecked(true);
-            etxtCarbs.setText(myPrefs.getInt("temp_carbs", 0));
-            etxtProtein.setText(myPrefs.getInt("temp_protein", 0));
-            etxtFat.setText(myPrefs.getInt("temp_fat", 0));
-            lblAmountTotal.setText(myPrefs.getInt("temp_total", 0));
+            etxtCarbs.setText(myPrefs.getInt("temp_carbs", 0) + "");
+            etxtProtein.setText(myPrefs.getInt("temp_protein", 0) + "");
+            etxtFat.setText(myPrefs.getInt("temp_fat", 0) + "");
+            lblAmountTotal.setText(myPrefs.getInt("temp_total", 0) + "");
             lblValueCarbs.setText(myPrefs.getString("temp_gramsCarbs", ""));
             lblValueProtein.setText(myPrefs.getString("temp_gramsProtein",  ""));
             lblValueFat.setText(myPrefs.getString("temp_gramsFat", ""));
