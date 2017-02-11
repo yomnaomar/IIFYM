@@ -21,8 +21,6 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.example.kareem.IIFYM_Tracker.Custom_Objects.Gender;
-import com.example.kareem.IIFYM_Tracker.Custom_Objects.UnitSystem;
 import com.example.kareem.IIFYM_Tracker.R;
 import com.example.kareem.IIFYM_Tracker.ViewComponents.DecimalDigitsInputFilter;
 
@@ -49,8 +47,8 @@ public class activityUserInfo extends AppCompatActivity implements View.OnClickL
 
     // Variables
     private String      name, dob;
-    private Gender      gender;
-    private UnitSystem  unitSystem;
+    private int         gender;
+    private int         unitSystem;
     private float       weight;
     private int         height1, height2, workoutFreq, goal;
 
@@ -79,14 +77,14 @@ public class activityUserInfo extends AppCompatActivity implements View.OnClickL
         dob = etxtDateOfBirth.getText().toString();
 
         if (rbtnGenderMale.isChecked()) {
-            gender = Gender.Male;
+            gender = 0; // Male
         } else {
-            gender = Gender.Female;
+            gender = 1; // Female
         }
 
         // Metric
         if (rbtnMetric.isChecked()) {
-            unitSystem = UnitSystem.Metric;
+            unitSystem = 0; // Metric
             if(!etxtWeight.getText().toString().isEmpty())
                 weight = Float.parseFloat(etxtWeight.getText().toString());
             else
@@ -100,7 +98,7 @@ public class activityUserInfo extends AppCompatActivity implements View.OnClickL
 
         // Imperial
         else {
-            unitSystem = UnitSystem.Imperial;
+            unitSystem = 0; // Imperial
             if(!etxtWeight.getText().toString().isEmpty())
                 weight = Float.parseFloat(etxtWeight.getText().toString());
             else
@@ -295,7 +293,7 @@ public class activityUserInfo extends AppCompatActivity implements View.OnClickL
     }
 
     private void unitSystemChange() {
-        if(rbtnMetric.isChecked())
+        if(rbtnMetric.isChecked()) // Metric
         {
             linearlayoutHeight.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 0.5f));
             linearlayoutWeight.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 0.5f));
@@ -314,7 +312,7 @@ public class activityUserInfo extends AppCompatActivity implements View.OnClickL
             etxtHeightParam2.setVisibility(View.GONE);
             lblHeightUnit2.setVisibility(View.GONE);
         }
-        else
+        else // Imperial
         {
             linearlayoutHeight.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 0.67f));
             linearlayoutWeight.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 0.33f));

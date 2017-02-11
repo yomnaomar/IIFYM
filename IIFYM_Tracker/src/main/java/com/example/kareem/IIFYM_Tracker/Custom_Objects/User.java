@@ -13,8 +13,8 @@ public class User {
     private String      email;
     private String      name;
     private String      dob;
-    private Gender      gender;
-    private UnitSystem  unitSystem;
+    private int         gender;     // 0 = M or 1 = F
+    private int         unitSystem; // 0 = Metric or 1 = Imperial
     private float       weight;
     private int         height1;
     private int         height2;
@@ -27,7 +27,7 @@ public class User {
     private int         dailyFat;
 
     public User(String uid, String email, boolean isRegistered, String name,
-                String dob, Gender gender, UnitSystem unitSystem, float weight,
+                String dob, int gender, int unitSystem, float weight,
                 int height1, int height2, int workoutFreq, int goal, int dailyCalories,
                 boolean isPercent, int dailyCarbs, int dailyProtein, int dailyFat) {
         this.uid = uid;
@@ -69,8 +69,8 @@ public class User {
         return isRegistered;
     }
 
-    public void setRegistered(boolean registered) {
-        isRegistered = registered;
+    public void setRegistered(boolean isRegistered) {
+        this.isRegistered = isRegistered;
     }
 
     public void setRegisteredFromInt(int registered) { isRegistered = (registered != 0);}
@@ -99,25 +99,21 @@ public class User {
         this.dob = dob;
     }
 
-    public Gender getGender() {
+    public int getGender() {
         return gender;
     }
 
-    public void setGender(Gender gender) {
+    public void setGender(int gender) {
         this.gender = gender;
     }
 
-    public void setGenderFromInt(int gender){ this.gender.fromInteger(gender);}
-
-    public UnitSystem getUnitSystem() {
+    public int getUnitSystem() {
         return unitSystem;
     }
 
-    public void setUnitSystem(UnitSystem unitSystem) {
+    public void setUnitSystem(int unitSystem) {
         this.unitSystem = unitSystem;
     }
-
-    public void setUnitSystemFromInt(int unitSystem){ this.unitSystem.fromInteger(unitSystem);}
 
     public float getWeight() {
         return weight;
@@ -171,8 +167,8 @@ public class User {
         return isPercent;
     }
 
-    public void setPercent(boolean percent) {
-        isPercent = percent;
+    public void setPercent(boolean isPercent) {
+        isPercent = isPercent;
     }
 
     public void setPercentFromInt(int percent) { isPercent = (percent != 0);}

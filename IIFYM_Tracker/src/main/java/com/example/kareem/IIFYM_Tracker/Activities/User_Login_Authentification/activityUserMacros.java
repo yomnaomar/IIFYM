@@ -19,8 +19,6 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import com.example.kareem.IIFYM_Tracker.Custom_Objects.Gender;
-import com.example.kareem.IIFYM_Tracker.Custom_Objects.UnitSystem;
 import com.example.kareem.IIFYM_Tracker.R;
 
 import java.util.Calendar;
@@ -46,8 +44,8 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
     private int             height1, height2, workoutFreq, goal ,BMR, caloriesInitial;
     private float           weight;
     private String          uid, email, name, dob;
-    private Gender          gender;
-    private UnitSystem      unitSystem;
+    private int             gender;
+    private int             unitSystem;
 
     // Dyanamic Variables (Can be changed)
     private int             totalPercent, calories, carbs, protein, fat, carbsPercent, proteinPercent, fatPercent;
@@ -112,9 +110,7 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
                 updateGUI();
             }});
 
-        etxtCarbs.addTextChangedListener(this);
-        etxtProtein.addTextChangedListener(this);
-        etxtFat.addTextChangedListener(this);
+        addTextWatchers();
 
         btnFinish.setOnClickListener(this);
         btnReset.setOnClickListener(this);
@@ -129,16 +125,15 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
         mExitAnimation.setFillAfter(true);
     }
 
-    private void updateGUI()
-    {
+    private void updateGUI() {
         if(rbtnCalories.isChecked())
         {
-            // Update GUI
             etxtCalories.setEnabled(true);
-            etxtCalories.addTextChangedListener(this);
+
             lblUnitCarbs.setText("%");
             lblUnitProtein.setText("%");
             lblUnitFat.setText("%");
+
             lblTotal.setVisibility(View.VISIBLE);
             lblAmountTotal.setVisibility(View.VISIBLE);
             lblPercentTotal.setVisibility(View.VISIBLE);
@@ -148,12 +143,12 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
         }
         else
         {
-            // Update GUI
             etxtCalories.setEnabled(false);
-            etxtCalories.removeTextChangedListener(this);
+
             lblUnitCarbs.setText("g");
             lblUnitProtein.setText("g");
             lblUnitFat.setText("g");
+
             lblTotal.setVisibility(View.INVISIBLE);
             lblAmountTotal.setVisibility(View.INVISIBLE);
             lblPercentTotal.setVisibility(View.INVISIBLE);
@@ -163,8 +158,100 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
         }
     }
 
-    // MEN: BMR = (10 x weight in kg) + (6.25 x height in cm) – (5 x age in years) + 5
-    // WOMEN: BMR = (10 x weight in kg) + (6.25 x height in cm)  – (5 x age in years) -161
+    private void updateValues(){
+        if(rbtnCalories.isChecked()) // Calories
+        {
+            removeTextWatchers();
+
+            lblGramsCarbs.setText("(" + Math.round(carbsPercent * 0.01f * calories/4) + " g)");
+            lblGramsProtein.setText("(" + Math.round(proteinPercent * 0.01f * calories/4) + " g)");
+            lblGramsFat.setText("(" + Math.round(fatPercent * 0.01f * calories/9) + " g)");
+            lblAmountTotal.setText(totalPercent);
+
+            addTextWatchers();
+        }
+        else if (rbtnMacros.isChecked()) // Macros
+        {
+            removeTextWatchers();
+
+
+            addTextWatchers();
+        }
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+        if(rbtnCalories.isChecked())  // Calories
+        {
+            String currentCals = etxtCalories.getText().toString();
+            if(currentCals.isEmpty())
+                calories = 0;
+            else
+                calories = Integer.parseInt(currentCals);
+
+            String carbP = etxtCarbs.getText().toString();
+            if (carbP.isEmpty())
+                carbsPercent = 0;
+            else
+                carbsPercent = Integer.parseInt(carbP);
+
+            String proteinP = etxtProtein.getText().toString();
+            if (proteinP.isEmpty())
+                proteinPercent = 0;
+            else
+                proteinPercent = Integer.parseInt(proteinP);
+
+            String fatP = etxtFat.getText().toString();
+            if (fatP.isEmpty())
+                fatPercent = 0;
+            else
+                fatPercent = Integer.parseInt(fatP);
+
+            updateValues();
+        }
+        else {
+
+
+        }
+    }
+
+    private void defaultValues() {
+        // Macronutrient ratio default
+        calories = caloriesInitial;
+        carbsPercent = 50;
+        proteinPercent = 25;
+        fatPercent = 25;
+        totalPercent = 100;
+
+        // Calculate Macro values from ratios
+        carbs = Math.round(carbsPercent*0.01f*calories/4);
+        protein =  Math.round(proteinPercent*0.01f*calories/4);
+        fat =  Math.round(fatPercent*0.01f*calories/9);
+
+        // Consequently calls updateGUI
+        rbtnCalories.setChecked(true);
+
+        removeTextWatchers();
+
+        etxtCalories.setText(calories + "");
+        etxtCarbs.setText(carbsPercent + "");
+        etxtProtein.setText(proteinPercent + "");
+        etxtFat.setText(fatPercent + "");
+
+        lblGramsCarbs.setText("(" + Math.round(carbsPercent * 0.01f * calories/4) + " g)");
+        lblGramsProtein.setText("(" + Math.round(proteinPercent * 0.01f * calories/4) + " g)");
+        lblGramsFat.setText("(" + Math.round(fatPercent * 0.01f * calories/9) + " g)");
+        lblAmountTotal.setText(totalPercent + "");
+        if (totalPercent == 100)
+            lblAmountTotal.setTextColor(Color.parseColor("#2E7D32")); // Green
+        else
+            lblAmountTotal.setTextColor(Color.parseColor("#D50000")); // Red
+
+        addTextWatchers();
+    }
+
+    // MALE:   BMR = (10 x weight in kg) + (6.25 x height in cm) – (5 x age in years) + 5
+    // FEMALE: BMR = (10 x weight in kg) + (6.25 x height in cm)  – (5 x age in years) - 161
     private void getBMR()
     {
         // Store weight/height in local variables in order to perform unit conversion if needed
@@ -172,7 +259,7 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
         int valHeight = height1;
 
         // Need to convert to Metric in order to calculate BMR
-        if(unitSystem == UnitSystem.Imperial)
+        if(unitSystem == 1) // Imperial
         {
             // Convert LB to KG
             valWeight /= 2.2046226218;
@@ -187,10 +274,12 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
         int valAge = getAge(Integer.parseInt(ageArr[2]), Integer.parseInt(ageArr[1]), Integer.parseInt(ageArr[0]));
 
         // Obtain Gender
-        if (gender == Gender.Male)
+        if (gender == 0) // Male
             BMR = (int) (10*valWeight + 6.25*valHeight + 5*valAge + 5.0);
         else
             BMR = (int) (10*valWeight + 6.25*valHeight + 5*valAge - 161.0);
+
+        Log.d("getBMR", "BMR = " + BMR);
 
         // Activity Factor Multiplier
         // None (little or no exercise)
@@ -210,8 +299,10 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
             caloriesInitial = (int) (BMR * 1.7);
 
             // Very High (physical job or 7+ times/week)
-        else
+        else if (workoutFreq == 4)
             caloriesInitial = (int) (BMR * 1.9);
+
+        Log.d("getBMR workoutfreq", "caloriesInitial = " + caloriesInitial);
 
         // Weight goals
         // Lose weight
@@ -219,10 +310,14 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
             caloriesInitial -= 250.0;
 
             // Maintain weight
-        else if (caloriesInitial == 1) {} // Do nothing
+        else if (goal == 1)
+        {} // Do nothing
 
-        else
+        // Gain weight
+        else if (goal == 2)
             caloriesInitial += 250.0;
+
+        Log.d("getBMR goal", "caloriesInitial = " + caloriesInitial);
     }
 
     @Override
@@ -234,55 +329,10 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
                 defaultValues();
                 break;
             case R.id.btnFinish:
-                isRegistered = true;
+                // isRegistered = true;
                 // Store values in DB
                 break;
         }
-    }
-
-    @Override
-    public void onTextChanged(CharSequence s, int start, int before, int count) {
-        int c, p, f, cals;
-
-        if(rbtnCalories.isChecked()) {
-            String carbP = etxtCarbs.getText().toString();
-            if (carbP.isEmpty())
-                c = 0;
-            else
-                c = Integer.parseInt(carbP);
-
-            String proteinP = etxtProtein.getText().toString();
-            if (proteinP.isEmpty())
-                p = 0;
-            else
-                p = Integer.parseInt(proteinP);
-
-            String fatP = etxtFat.getText().toString();
-            if (fatP.isEmpty())
-                f = 0;
-            else
-                f = Integer.parseInt(fatP);
-
-            String currentCals = etxtCalories.getText().toString();
-            if(currentCals.isEmpty())
-                cals = 0;
-            else
-                cals = Integer.parseInt(currentCals);
-
-            lblGramsCarbs.setText("(" + Math.round(c * 0.01f * cals/4) + " g)");
-            lblGramsProtein.setText("(" + Math.round(p * 0.01f * cals/4) + " g)");
-            lblGramsFat.setText("(" + Math.round(f * 0.01f * cals/9) + " g)");
-        }
-    }
-
-    @Override
-    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-    }
-
-    @Override
-    public void afterTextChanged(Editable s) {
-
     }
 
     @Override
@@ -294,7 +344,6 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
             editor.putString("temp_gramsCarbs",lblGramsCarbs.getText().toString());
             editor.putString("temp_gramsProtein",lblGramsProtein.getText().toString());
             editor.putString("temp_gramsFat",lblGramsFat.getText().toString());
-            Log.d("onPause lblGramsCarbs", lblGramsCarbs.getText().toString());
         }
         else
             editor.putInt("temp_display", 1); // Macros
@@ -336,7 +385,6 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
             lblGramsCarbs.setText(myPrefs.getString("temp_gramsCarbs", lblGramsCarbs.getText().toString()));
             lblGramsProtein.setText(myPrefs.getString("temp_gramsProtein",  lblGramsProtein.getText().toString()));
             lblGramsFat.setText(myPrefs.getString("temp_gramsFat", lblGramsFat.getText().toString()));
-            Log.d("onResume lblGramsCarbs", lblGramsCarbs.getText().toString());
         }
         else { // Macros
             rbtnMacros.setChecked(true);
@@ -398,32 +446,6 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
                 .build();
         ChainTourGuide.init(this).playInSequence(sequence);
     }
-
-    private void defaultValues() {
-        // Macronutrient ratio default
-        calories = caloriesInitial;
-        carbsPercent = 50;
-        proteinPercent = 25;
-        fatPercent = 25;
-        totalPercent = 100;
-
-        // Calculate Macro values from ratios
-        carbs = Math.round(carbsPercent*0.01f*caloriesInitial/4);
-        protein =  Math.round(proteinPercent*0.01f*caloriesInitial/4);
-        fat =  Math.round(fatPercent*0.01f*caloriesInitial/9);
-
-        rbtnCalories.setChecked(true);
-        etxtCalories.setText(caloriesInitial + "");
-        etxtCarbs.setText(carbsPercent + "");
-        etxtProtein.setText(proteinPercent + "");
-        etxtFat.setText(fatPercent + "");
-        lblAmountTotal.setText(totalPercent + "");
-        lblAmountTotal.setTextColor(Color.parseColor("#2E7D32"));
-        lblGramsCarbs.setText("(" + Math.round(50 * 0.01f * caloriesInitial/4) + " g)");
-        lblGramsProtein.setText("(" + Math.round(25 * 0.01f * caloriesInitial/4) + " g)");
-        lblGramsFat.setText("(" + Math.round(25 * 0.01f * caloriesInitial/9) + " g)");
-    }
-
     private int getAge (int _year, int _month, int _day) {
         GregorianCalendar cal = new GregorianCalendar();
         int y, m, d, a;
@@ -446,12 +468,42 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
         email = getIntent().getStringExtra("email");
         name = getIntent().getStringExtra("name");
         dob = getIntent().getStringExtra("dob");
-        gender = (Gender) getIntent().getSerializableExtra("gender");
-        unitSystem = (UnitSystem) getIntent().getSerializableExtra("unitSystem");
+        gender = getIntent().getIntExtra("gender", 0);
+        unitSystem = getIntent().getIntExtra("unitSystem", 0);
         weight = getIntent().getFloatExtra("weight", 0.0f);
         height1 = getIntent().getIntExtra("height1", 0);
         height2 = getIntent().getIntExtra("height2", 0);
         workoutFreq = getIntent().getIntExtra("workoutFreq", 0);
         goal = getIntent().getIntExtra("goal", 0);
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
+
+    }
+
+    private void addTextWatchers() {
+        if(rbtnCalories.isChecked()) // Calories
+        {
+            etxtCalories.addTextChangedListener(this);
+        }
+        etxtCarbs.addTextChangedListener(this);
+        etxtProtein.addTextChangedListener(this);
+        etxtFat.addTextChangedListener(this);
+    }
+
+    private void removeTextWatchers(){
+        if(rbtnCalories.isChecked()) // Calories
+        {
+            etxtCalories.removeTextChangedListener(this);
+        }
+        etxtCarbs.removeTextChangedListener(this);
+        etxtProtein.removeTextChangedListener(this);
+        etxtFat.removeTextChangedListener(this);
     }
 }
