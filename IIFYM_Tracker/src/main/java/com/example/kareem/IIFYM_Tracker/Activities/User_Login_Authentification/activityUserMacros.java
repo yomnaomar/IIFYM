@@ -7,7 +7,6 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
@@ -36,16 +35,16 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
     private SegmentedGroup  seggroupDisplay;
     private RadioButton     rbtnCalories, rbtnMacros;
     private EditText        etxtCalories, etxtCarbs, etxtProtein, etxtFat;
-    private TextView        lblTitle, lblUnitCarbs, lblUnitProtein, lblUnitFat, lblTotal, lblAmountTotal, lblPercentTotal, lblGramsCarbs, lblGramsProtein, lblGramsFat;
+    private TextView        lblTitle, lblUnitCarbs, lblUnitProtein, lblUnitFat, lblTotal, lblAmountTotal, lblPercentTotal, lblValueCarbs, lblValueProtein, lblValueFat;
     private Button          btnFinish;
     private ImageButton     btnReset;
 
     // Final Variables (Cannot be changed)
-    private int             height1, height2, workoutFreq, goal ,BMR, caloriesInitial;
+    private int             gender, unitSystem, height1, height2, workoutFreq, goal ,BMR;
     private float           weight;
     private String          uid, email, name, dob;
-    private int             gender;
-    private int             unitSystem;
+    private int             caloriesDefault, carbsDefault, proteinDefault, fatDefault;
+    private final int       carbsPercentDefault = 50, proteinPercentDefault = 25, fatPercentDefault = 25;
 
     // Dyanamic Variables (Can be changed)
     private int             totalPercent, calories, carbs, protein, fat, carbsPercent, proteinPercent, fatPercent;
@@ -81,8 +80,7 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
         //beginChainTourGuide();
     }
 
-    private void initializeGUI()
-    {
+    private void initializeGUI() {
         lblTitle        = (TextView) findViewById(R.id.lblTitle);
         seggroupDisplay = (SegmentedGroup) findViewById(R.id.seggroupDisplay);
         rbtnCalories    = (RadioButton) findViewById(R.id.rbtnCalories);
@@ -97,9 +95,9 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
         lblTotal        = (TextView) findViewById(R.id.lblTotal);
         lblAmountTotal  = (TextView) findViewById(R.id.lblAmountTotal);
         lblPercentTotal = (TextView) findViewById(R.id.lblPercentTotal);
-        lblGramsCarbs   = (TextView) findViewById(R.id.lblGramsCarbs);
-        lblGramsProtein = (TextView) findViewById(R.id.lblGramsProtein);
-        lblGramsFat     = (TextView) findViewById(R.id.lblGramsFat);
+        lblValueCarbs   = (TextView) findViewById(R.id.lblValueCarbs);
+        lblValueProtein = (TextView) findViewById(R.id.lblValueProtein);
+        lblValueFat     = (TextView) findViewById(R.id.lblValueFat);
         btnFinish       = (Button) findViewById(R.id.btnFinish);
         btnReset        = (ImageButton) findViewById(R.id.btnReset);
 
@@ -108,6 +106,7 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 updateGUI();
+                defaultValues();
             }});
 
         addTextWatchers();
@@ -134,16 +133,9 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
             lblUnitProtein.setText("%");
             lblUnitFat.setText("%");
 
-            etxtCarbs.setText(carbsPercent + "");
-            etxtProtein.setText(proteinPercent + "");
-            etxtFat.setText(fatPercent + "");
-
             lblTotal.setVisibility(View.VISIBLE);
             lblAmountTotal.setVisibility(View.VISIBLE);
             lblPercentTotal.setVisibility(View.VISIBLE);
-            lblGramsCarbs.setVisibility(View.VISIBLE);
-            lblGramsProtein.setVisibility(View.VISIBLE);
-            lblGramsFat.setVisibility(View.VISIBLE);
         }
         else
         {
@@ -153,16 +145,9 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
             lblUnitProtein.setText("g");
             lblUnitFat.setText("g");
 
-            etxtCarbs.setText(carbs + "");
-            etxtProtein.setText(protein + "");
-            etxtFat.setText(fat + "");
-
             lblTotal.setVisibility(View.INVISIBLE);
             lblAmountTotal.setVisibility(View.INVISIBLE);
             lblPercentTotal.setVisibility(View.INVISIBLE);
-            lblGramsCarbs.setVisibility(View.INVISIBLE);
-            lblGramsProtein.setVisibility(View.INVISIBLE);
-            lblGramsFat.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -171,9 +156,13 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
         {
             removeTextWatchers();
 
-            lblGramsCarbs.setText("(" + Math.round(carbsPercent * 0.01f * calories/4) + " g)");
-            lblGramsProtein.setText("(" + Math.round(proteinPercent * 0.01f * calories/4) + " g)");
-            lblGramsFat.setText("(" + Math.round(fatPercent * 0.01f * calories/9) + " g)");
+            etxtCarbs.setText(carbsPercent + "");
+            etxtProtein.setText(proteinPercent + "");
+            etxtFat.setText(fatPercent + "");
+
+            lblValueCarbs.setText("(" + Math.round(carbsPercent * 0.01f * calories/4) + " g)");
+            lblValueProtein.setText("(" + Math.round(proteinPercent * 0.01f * calories/4) + " g)");
+            lblValueFat.setText("(" + Math.round(fatPercent * 0.01f * calories/9) + " g)");
             lblAmountTotal.setText(totalPercent + "");
             if (totalPercent == 100)
                 lblAmountTotal.setTextColor(Color.parseColor("#2E7D32")); // Green
@@ -185,9 +174,10 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
         else if (rbtnMacros.isChecked()) // Macros
         {
             removeTextWatchers();
-
-
-
+            etxtCalories.setText((carbs*4 + protein*4 + fat*9) + "");
+            lblValueCarbs.setText("(" + (carbs * 4 * 100  / calories) + " %)");
+            lblValueProtein.setText("(" + (protein * 4 * 100 / calories)  + " %)");
+            lblValueFat.setText("(" + (fat * 9 * 100 / calories) + " %)");
             addTextWatchers();
         }
     }
@@ -219,55 +209,90 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
                 fatPercent = 0;
             else
                 fatPercent = Integer.parseInt(fatP);
-
             totalPercent = carbsPercent + proteinPercent + fatPercent;
+
             updateValues();
         }
         else {
+            String currentCals = etxtCalories.getText().toString();
+            if(currentCals.isEmpty())
+                calories = 0;
+            else
+                calories = Integer.parseInt(currentCals);
 
+            String carbP = etxtCarbs.getText().toString();
+            if (carbP.isEmpty())
+                carbs = 0;
+            else
+                carbs = Integer.parseInt(carbP);
 
+            String proteinP = etxtProtein.getText().toString();
+            if (proteinP.isEmpty())
+                protein = 0;
+            else
+                protein = Integer.parseInt(proteinP);
+
+            String fatP = etxtFat.getText().toString();
+            if (fatP.isEmpty())
+                fat = 0;
+            else
+                fat = Integer.parseInt(fatP);
+
+            updateValues();
         }
     }
 
     private void defaultValues() {
-        // Macronutrient ratio default
-        calories = caloriesInitial;
-        carbsPercent = 50;
-        proteinPercent = 25;
-        fatPercent = 25;
-        totalPercent = 100;
+        if (rbtnCalories.isChecked()) {
+            // Macronutrient ratio default
+            calories = caloriesDefault;
+            carbsPercent = carbsPercentDefault;
+            proteinPercent = proteinPercentDefault;
+            fatPercent = fatPercentDefault;
+            totalPercent = carbsPercent + proteinPercent + fatPercent;
 
-        // Calculate Macro values from ratios
-        carbs = Math.round(carbsPercent*0.01f*calories/4);
-        protein =  Math.round(proteinPercent*0.01f*calories/4);
-        fat =  Math.round(fatPercent*0.01f*calories/9);
+            removeTextWatchers();
 
-        // Consequently calls updateGUI
-        rbtnCalories.setChecked(true);
+            etxtCalories.setText(calories + "");
+            etxtCarbs.setText(carbsPercent + "");
+            etxtProtein.setText(proteinPercent + "");
+            etxtFat.setText(fatPercent + "");
 
-        removeTextWatchers();
+            lblValueCarbs.setText("(" + Math.round(carbsPercent * 0.01f * calories / 4) + " g)");
+            lblValueProtein.setText("(" + Math.round(proteinPercent * 0.01f * calories / 4) + " g)");
+            lblValueFat.setText("(" + Math.round(fatPercent * 0.01f * calories / 9) + " g)");
+            lblAmountTotal.setText(totalPercent + "");
+            if (totalPercent == 100)
+                lblAmountTotal.setTextColor(Color.parseColor("#2E7D32")); // Green
+            else
+                lblAmountTotal.setTextColor(Color.parseColor("#D50000")); // Red
 
-        etxtCalories.setText(calories + "");
-        etxtCarbs.setText(carbsPercent + "");
-        etxtProtein.setText(proteinPercent + "");
-        etxtFat.setText(fatPercent + "");
+            addTextWatchers();
+        }
+        else {
+            calories = caloriesDefault;
+            carbs = Math.round((carbsPercentDefault * 0.01f * calories) / 4);
+            protein = Math.round((proteinPercentDefault * 0.01f * calories) / 4);
+            fat = Math.round((fatPercentDefault * 0.01f * calories) / 9);
 
-        lblGramsCarbs.setText("(" + Math.round(carbsPercent * 0.01f * calories/4) + " g)");
-        lblGramsProtein.setText("(" + Math.round(proteinPercent * 0.01f * calories/4) + " g)");
-        lblGramsFat.setText("(" + Math.round(fatPercent * 0.01f * calories/9) + " g)");
-        lblAmountTotal.setText(totalPercent + "");
-        if (totalPercent == 100)
-            lblAmountTotal.setTextColor(Color.parseColor("#2E7D32")); // Green
-        else
-            lblAmountTotal.setTextColor(Color.parseColor("#D50000")); // Red
+            removeTextWatchers();
 
-        addTextWatchers();
+            etxtCalories.setText(calories + "");
+            etxtCarbs.setText(carbs + "");
+            etxtProtein.setText(protein + "");
+            etxtFat.setText(fat + "");
+
+            lblValueCarbs.setText("(" + (carbs * 4 * 100 / calories) + " %)");
+            lblValueProtein.setText("(" + (protein * 4 * 100 / calories)  + " %)");
+            lblValueFat.setText("(" + (fat * 9 * 100 / calories) + " %)");
+
+            addTextWatchers();
+        }
     }
 
     // MALE:   BMR = (10 x weight in kg) + (6.25 x height in cm) – (5 x age in years) + 5
     // FEMALE: BMR = (10 x weight in kg) + (6.25 x height in cm)  – (5 x age in years) - 161
-    private void getBMR()
-    {
+    private void getBMR() {
         // Store weight/height in local variables in order to perform unit conversion if needed
         float valWeight = weight;
         int valHeight = height1;
@@ -293,35 +318,31 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
         else
             BMR = (int) (10*valWeight + 6.25*valHeight + 5*valAge - 161.0);
 
-        Log.d("getBMR", "BMR = " + BMR);
-
         // Activity Factor Multiplier
         // None (little or no exercise)
         if (workoutFreq == 0)
-            caloriesInitial = (int) (BMR * 1.2);
+            caloriesDefault = (int) (BMR * 1.2);
 
             // Low (1-3 times/week)
         else if (workoutFreq == 1)
-            caloriesInitial = (int) (BMR * 1.35);
+            caloriesDefault = (int) (BMR * 1.35);
 
             // Medium (3-5 days/week)
         else if (workoutFreq == 2)
-            caloriesInitial = (int) (BMR * 1.5);
+            caloriesDefault = (int) (BMR * 1.5);
 
             // High (6-7 days/week)
         else if (workoutFreq == 3)
-            caloriesInitial = (int) (BMR * 1.7);
+            caloriesDefault = (int) (BMR * 1.7);
 
             // Very High (physical job or 7+ times/week)
         else if (workoutFreq == 4)
-            caloriesInitial = (int) (BMR * 1.9);
-
-        Log.d("getBMR workoutfreq", "caloriesInitial = " + caloriesInitial);
+            caloriesDefault = (int) (BMR * 1.9);
 
         // Weight goals
         // Lose weight
         if (goal == 0)
-            caloriesInitial -= 250.0;
+            caloriesDefault -= 250.0;
 
             // Maintain weight
         else if (goal == 1)
@@ -329,14 +350,11 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
 
         // Gain weight
         else if (goal == 2)
-            caloriesInitial += 250.0;
-
-        Log.d("getBMR goal", "caloriesInitial = " + caloriesInitial);
+            caloriesDefault += 250.0;
     }
 
     @Override
-    public void onClick(View v)
-    {
+    public void onClick(View v) {
         switch(v.getId())
         {
             case R.id.btnReset:
@@ -355,9 +373,9 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
         if(rbtnCalories.isChecked()) {
             editor.putInt("temp_display", 0); // Calories
             editor.putInt("temp_total", Integer.parseInt(lblAmountTotal.getText().toString()));
-            editor.putString("temp_gramsCarbs",lblGramsCarbs.getText().toString());
-            editor.putString("temp_gramsProtein",lblGramsProtein.getText().toString());
-            editor.putString("temp_gramsFat",lblGramsFat.getText().toString());
+            editor.putString("temp_gramsCarbs",lblValueCarbs.getText().toString());
+            editor.putString("temp_gramsProtein",lblValueProtein.getText().toString());
+            editor.putString("temp_gramsFat",lblValueFat.getText().toString());
         }
         else
             editor.putInt("temp_display", 1); // Macros
@@ -388,7 +406,7 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
         // Load preferences
         // If preferences unavailable, set defaults
         super.onResume();
-        etxtCalories.setText(myPrefs.getInt("temp_calories", caloriesInitial) + "");
+        etxtCalories.setText(myPrefs.getInt("temp_calories", caloriesDefault) + "");
 
         if(myPrefs.getInt("temp_display",0) == 0) { // Calories
             rbtnCalories.setChecked(true);
@@ -396,9 +414,9 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
             etxtProtein.setText(myPrefs.getInt("temp_protein", Integer.parseInt(etxtProtein.getText().toString()))  + "");
             etxtFat.setText(myPrefs.getInt("temp_fat", Integer.parseInt(etxtFat.getText().toString()))  + "");
             lblAmountTotal.setText(myPrefs.getInt("temp_total", Integer.parseInt(lblAmountTotal.getText().toString()))  + "");
-            lblGramsCarbs.setText(myPrefs.getString("temp_gramsCarbs", lblGramsCarbs.getText().toString()));
-            lblGramsProtein.setText(myPrefs.getString("temp_gramsProtein",  lblGramsProtein.getText().toString()));
-            lblGramsFat.setText(myPrefs.getString("temp_gramsFat", lblGramsFat.getText().toString()));
+            lblValueCarbs.setText(myPrefs.getString("temp_gramsCarbs", lblValueCarbs.getText().toString()));
+            lblValueProtein.setText(myPrefs.getString("temp_gramsProtein",  lblValueProtein.getText().toString()));
+            lblValueFat.setText(myPrefs.getString("temp_gramsFat", lblValueFat.getText().toString()));
         }
         else { // Macros
             rbtnMacros.setChecked(true);
@@ -513,12 +531,23 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
     }
 
     private void removeTextWatchers(){
-        if(rbtnCalories.isChecked()) // Calories
-        {
-            etxtCalories.removeTextChangedListener(this);
-        }
+        etxtCalories.removeTextChangedListener(this);
         etxtCarbs.removeTextChangedListener(this);
         etxtProtein.removeTextChangedListener(this);
         etxtFat.removeTextChangedListener(this);
+    }
+
+    private boolean validateFields() {
+        boolean valid = true;
+
+        if(rbtnCalories.isChecked()) {
+            if ((carbsPercent + proteinPercent + fatPercent) != 100) {
+                lblAmountTotal.setError("Must equal 100");
+                valid = false;
+            } else {
+                lblAmountTotal.setError(null);
+            }
+        }
+        return valid;
     }
 }

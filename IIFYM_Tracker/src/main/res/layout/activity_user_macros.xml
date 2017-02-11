@@ -177,7 +177,7 @@
             android:text="(xxx g)"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/lblGramsCarbs"
+            android:id="@+id/lblValueCarbs"
             android:layout_weight="0.25"
             android:layout_gravity="center_vertical|center_horizontal"
             android:gravity="center_vertical|center"/>
@@ -233,7 +233,7 @@
             android:text="(yyy g)"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/lblGramsProtein"
+            android:id="@+id/lblValueProtein"
             android:layout_weight="0.25"
             android:layout_gravity="center"
             android:gravity="center" />
@@ -289,7 +289,7 @@
             android:text="(zzz g)"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/lblGramsFat"
+            android:id="@+id/lblValueFat"
             android:layout_weight="0.25"
             android:layout_gravity="center"
             android:gravity="center" />
