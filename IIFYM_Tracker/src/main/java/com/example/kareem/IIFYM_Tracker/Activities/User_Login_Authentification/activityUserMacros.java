@@ -134,6 +134,10 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
             lblUnitProtein.setText("%");
             lblUnitFat.setText("%");
 
+            etxtCarbs.setText(carbsPercent + "");
+            etxtProtein.setText(proteinPercent + "");
+            etxtFat.setText(fatPercent + "");
+
             lblTotal.setVisibility(View.VISIBLE);
             lblAmountTotal.setVisibility(View.VISIBLE);
             lblPercentTotal.setVisibility(View.VISIBLE);
@@ -148,6 +152,10 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
             lblUnitCarbs.setText("g");
             lblUnitProtein.setText("g");
             lblUnitFat.setText("g");
+
+            etxtCarbs.setText(carbs + "");
+            etxtProtein.setText(protein + "");
+            etxtFat.setText(fat + "");
 
             lblTotal.setVisibility(View.INVISIBLE);
             lblAmountTotal.setVisibility(View.INVISIBLE);
@@ -166,13 +174,18 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
             lblGramsCarbs.setText("(" + Math.round(carbsPercent * 0.01f * calories/4) + " g)");
             lblGramsProtein.setText("(" + Math.round(proteinPercent * 0.01f * calories/4) + " g)");
             lblGramsFat.setText("(" + Math.round(fatPercent * 0.01f * calories/9) + " g)");
-            lblAmountTotal.setText(totalPercent);
+            lblAmountTotal.setText(totalPercent + "");
+            if (totalPercent == 100)
+                lblAmountTotal.setTextColor(Color.parseColor("#2E7D32")); // Green
+            else
+                lblAmountTotal.setTextColor(Color.parseColor("#D50000")); // Red
 
             addTextWatchers();
         }
         else if (rbtnMacros.isChecked()) // Macros
         {
             removeTextWatchers();
+
 
 
             addTextWatchers();
@@ -207,6 +220,7 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
             else
                 fatPercent = Integer.parseInt(fatP);
 
+            totalPercent = carbsPercent + proteinPercent + fatPercent;
             updateValues();
         }
         else {
@@ -446,6 +460,7 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
                 .build();
         ChainTourGuide.init(this).playInSequence(sequence);
     }
+
     private int getAge (int _year, int _month, int _day) {
         GregorianCalendar cal = new GregorianCalendar();
         int y, m, d, a;
