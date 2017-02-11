@@ -29,7 +29,7 @@ import tourguide.tourguide.Overlay;
 import tourguide.tourguide.Sequence;
 import tourguide.tourguide.ToolTip;
 
-public class activityUserMacros extends AppCompatActivity implements View.OnClickListener, TextWatcher {
+public class activityUserMacros extends AppCompatActivity implements View.OnClickListener, TextWatcher, View.OnFocusChangeListener {
 
     // UI Elements
     private SegmentedGroup  seggroupDisplay;
@@ -37,7 +37,7 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
     private EditText        etxtCalories, etxtCarbs, etxtProtein, etxtFat;
     private TextView        lblTitle, lblUnitCarbs, lblUnitProtein, lblUnitFat, lblTotal, lblAmountTotal, lblPercentTotal, lblValueCarbs, lblValueProtein, lblValueFat;
     private Button          btnFinish;
-    private ImageButton     btnReset;
+    private ImageButton     btnReset, btnInfo;
 
     // Final Variables (Cannot be changed)
     private int             gender, unitSystem, height1, height2, workoutFreq, goal ,BMR;
@@ -100,6 +100,7 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
         lblValueFat     = (TextView) findViewById(R.id.lblValueFat);
         btnFinish       = (Button) findViewById(R.id.btnFinish);
         btnReset        = (ImageButton) findViewById(R.id.btnReset);
+        btnInfo         = (ImageButton) findViewById(R.id.btnInfo);
 
         seggroupDisplay.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
         {
@@ -113,6 +114,10 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
 
         btnFinish.setOnClickListener(this);
         btnReset.setOnClickListener(this);
+        btnInfo.setOnClickListener(this);
+
+        btnReset.setOnFocusChangeListener(this);
+        btnInfo.setOnFocusChangeListener(this);
 
         // setup enter and exit animation
         mEnterAnimation = new AlphaAnimation(0f, 1f);
@@ -356,6 +361,8 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
             case R.id.btnReset:
                 defaultValues();
                 break;
+            case R.id.btnInfo:
+                break;
             case R.id.btnFinish:
                 // isRegistered = true;
                 // Store values in DB
@@ -545,5 +552,24 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
             }
         }
         return valid;
+    }
+
+    @Override
+    public void onFocusChange(View v, boolean hasFocus) {
+        switch(v.getId())
+        {
+            case R.id.btnReset:
+                if (hasFocus)
+                    btnReset.setImageResource(R.drawable.icon_reset_grey);
+                else
+                    btnReset.setImageResource(R.drawable.icon_reset);
+                break;
+            case R.id.btnInfo:
+                if (hasFocus)
+                    btnInfo.setImageResource(R.drawable.icon_info_grey);
+                else
+                    btnInfo.setImageResource(R.drawable.icon_info);
+                break;
+        }
     }
 }

@@ -116,14 +116,15 @@
             android:layout_weight="0.25">
 
             <ImageButton
-                android:id="@+id/btn_info"
+                android:id="@+id/btnInfo"
                 android:layout_gravity="right"
-                android:background="@drawable/icon_info"
+                android:background="@drawable/icon_info_selector"
                 android:layout_height="24dp"
                 android:layout_marginRight="@dimen/activity_vertical_margin"
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true"
-                android:layout_width="24dp" />
+                android:layout_width="24dp"
+                app:srcCompat="@drawable/icon_info" />
         </RelativeLayout>
 
     </LinearLayout>
@@ -180,7 +181,8 @@
             android:id="@+id/lblValueCarbs"
             android:layout_weight="0.25"
             android:layout_gravity="center_vertical|center_horizontal"
-            android:gravity="center_vertical|center"/>
+            android:gravity="center_vertical|center"
+            android:textColor="@color/customGrey" />
 
     </LinearLayout>
 
@@ -236,7 +238,8 @@
             android:id="@+id/lblValueProtein"
             android:layout_weight="0.25"
             android:layout_gravity="center"
-            android:gravity="center" />
+            android:gravity="center"
+            android:textColor="@color/customGrey" />
 
     </LinearLayout>
 
@@ -292,7 +295,8 @@
             android:id="@+id/lblValueFat"
             android:layout_weight="0.25"
             android:layout_gravity="center"
-            android:gravity="center" />
+            android:gravity="center"
+            android:textColor="@color/customGrey" />
 
     </LinearLayout>
 
@@ -312,7 +316,7 @@
             android:paddingStart="@dimen/activity_horizontal_margin"
             android:paddingEnd="@dimen/activity_horizontal_margin"
             android:textSize="14sp"
-            android:textColor="?attr/colorControlNormal"
+            android:textColor="@color/customGrey"
             android:text="@string/lblTotal"
             android:gravity="left|center_vertical" />
 
@@ -323,7 +327,7 @@
             android:id="@+id/lblAmountTotal"
             android:textAppearance="@android:style/TextAppearance.Medium"
             android:hint="100"
-            android:textColor="?attr/colorControlNormal"
+            android:textColor="@color/customGrey"
             android:layout_weight="0.25"
             android:layout_gravity="center_vertical|center_horizontal"
             android:textSize="14sp"
@@ -335,7 +339,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/lblPercentTotal"
             android:textAppearance="@android:style/TextAppearance.Small"
-            android:textColor="?attr/colorControlNormal"
+            android:textColor="@color/customGrey"
             android:layout_weight="0.25"
             android:layout_gravity="center_vertical|center_horizontal"
             android:gravity="center" />
@@ -350,7 +354,7 @@
                 android:layout_height="24dp"
                 app:srcCompat="@drawable/icon_reset"
                 android:id="@+id/btnReset"
-                android:background="@drawable/icon_reset"
+                android:background="@drawable/icon_reset_selector"
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true" />
         </RelativeLayout>
