@@ -160,9 +160,9 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
             etxtProtein.setText(proteinPercent + "");
             etxtFat.setText(fatPercent + "");
 
-            lblValueCarbs.setText("(" + Math.round(carbsPercent * 0.01f * calories/4) + " g)");
-            lblValueProtein.setText("(" + Math.round(proteinPercent * 0.01f * calories/4) + " g)");
-            lblValueFat.setText("(" + Math.round(fatPercent * 0.01f * calories/9) + " g)");
+            lblValueCarbs.setText("~" + Math.round(carbsPercent * 0.01f * calories/4) + " g");
+            lblValueProtein.setText("~" + Math.round(proteinPercent * 0.01f * calories/4) + " g");
+            lblValueFat.setText("~" + Math.round(fatPercent * 0.01f * calories/9) + " g");
             lblAmountTotal.setText(totalPercent + "");
             if (totalPercent == 100)
                 lblAmountTotal.setTextColor(Color.parseColor("#2E7D32")); // Green
@@ -174,10 +174,10 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
         else if (rbtnMacros.isChecked()) // Macros
         {
             removeTextWatchers();
-            etxtCalories.setText((carbs*4 + protein*4 + fat*9) + "");
-            lblValueCarbs.setText("(" + (carbs * 4 * 100  / calories) + " %)");
-            lblValueProtein.setText("(" + (protein * 4 * 100 / calories)  + " %)");
-            lblValueFat.setText("(" + (fat * 9 * 100 / calories) + " %)");
+            etxtCalories.setText((calories) + "");
+            lblValueCarbs.setText("~" + Math.round(carbs * 4 * 100  / calories) + " %");
+            lblValueProtein.setText("~" + Math.round(protein * 4 * 100 / calories)  + " %");
+            lblValueFat.setText("~" + Math.round(fat * 9 * 100 / calories) + " %");
             addTextWatchers();
         }
     }
@@ -214,12 +214,6 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
             updateValues();
         }
         else {
-            String currentCals = etxtCalories.getText().toString();
-            if(currentCals.isEmpty())
-                calories = 0;
-            else
-                calories = Integer.parseInt(currentCals);
-
             String carbP = etxtCarbs.getText().toString();
             if (carbP.isEmpty())
                 carbs = 0;
@@ -237,6 +231,8 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
                 fat = 0;
             else
                 fat = Integer.parseInt(fatP);
+
+            calories = Math.round(carbs*4 + protein*4 + fat*9);
 
             updateValues();
         }
@@ -258,9 +254,9 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
             etxtProtein.setText(proteinPercent + "");
             etxtFat.setText(fatPercent + "");
 
-            lblValueCarbs.setText("(" + Math.round(carbsPercent * 0.01f * calories / 4) + " g)");
-            lblValueProtein.setText("(" + Math.round(proteinPercent * 0.01f * calories / 4) + " g)");
-            lblValueFat.setText("(" + Math.round(fatPercent * 0.01f * calories / 9) + " g)");
+            lblValueCarbs.setText("~" + Math.round(carbsPercent * 0.01f * calories / 4) + " g");
+            lblValueProtein.setText("~" + Math.round(proteinPercent * 0.01f * calories / 4) + " g");
+            lblValueFat.setText("~" + Math.round(fatPercent * 0.01f * calories / 9) + " g");
             lblAmountTotal.setText(totalPercent + "");
             if (totalPercent == 100)
                 lblAmountTotal.setTextColor(Color.parseColor("#2E7D32")); // Green
@@ -282,9 +278,9 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
             etxtProtein.setText(protein + "");
             etxtFat.setText(fat + "");
 
-            lblValueCarbs.setText("(" + (carbs * 4 * 100 / calories) + " %)");
-            lblValueProtein.setText("(" + (protein * 4 * 100 / calories)  + " %)");
-            lblValueFat.setText("(" + (fat * 9 * 100 / calories) + " %)");
+            lblValueCarbs.setText("~" + Math.round(carbs * 4 * 100 / calories) + " %");
+            lblValueProtein.setText("~" + Math.round(protein * 4 * 100 / calories)  + " %");
+            lblValueFat.setText("~" + Math.round(fat * 9 * 100 / calories) + " %");
 
             addTextWatchers();
         }
