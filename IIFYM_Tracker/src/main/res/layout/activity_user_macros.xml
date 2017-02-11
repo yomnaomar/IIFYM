@@ -182,7 +182,7 @@
             android:layout_weight="0.25"
             android:layout_gravity="center_vertical|center_horizontal"
             android:gravity="center_vertical|center"
-            android:textColor="@color/customGrey" />
+            android:textColor="@color/Custom_Grey" />
 
     </LinearLayout>
 
@@ -239,7 +239,7 @@
             android:layout_weight="0.25"
             android:layout_gravity="center"
             android:gravity="center"
-            android:textColor="@color/customGrey" />
+            android:textColor="@color/Custom_Grey" />
 
     </LinearLayout>
 
@@ -296,7 +296,7 @@
             android:layout_weight="0.25"
             android:layout_gravity="center"
             android:gravity="center"
-            android:textColor="@color/customGrey" />
+            android:textColor="@color/Custom_Grey" />
 
     </LinearLayout>
 
@@ -316,7 +316,7 @@
             android:paddingStart="@dimen/activity_horizontal_margin"
             android:paddingEnd="@dimen/activity_horizontal_margin"
             android:textSize="14sp"
-            android:textColor="@color/customGrey"
+            android:textColor="@color/Custom_Grey"
             android:text="@string/lblTotal"
             android:gravity="left|center_vertical" />
 
@@ -327,7 +327,7 @@
             android:id="@+id/lblAmountTotal"
             android:textAppearance="@android:style/TextAppearance.Medium"
             android:hint="100"
-            android:textColor="@color/customGrey"
+            android:textColor="@color/Custom_Grey"
             android:layout_weight="0.25"
             android:layout_gravity="center_vertical|center_horizontal"
             android:textSize="14sp"
@@ -339,7 +339,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/lblPercentTotal"
             android:textAppearance="@android:style/TextAppearance.Small"
-            android:textColor="@color/customGrey"
+            android:textColor="@color/Custom_Grey"
             android:layout_weight="0.25"
             android:layout_gravity="center_vertical|center_horizontal"
             android:gravity="center" />

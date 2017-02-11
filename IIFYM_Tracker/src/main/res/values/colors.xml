@@ -24,5 +24,5 @@
     <color name="SegmentedGroup_sc_unchecked_tint_color">#FFFFFF</color>
     <color name="Custom_Red">#D50000</color>
     <color name="Custom_Green">#2E7D32</color>
-    <color name="customGrey">#808080</color>
+    <color name="Custom_Grey">#808080</color>
 </resources>
