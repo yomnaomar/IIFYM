@@ -133,7 +133,6 @@ public class activityUserInfo extends AppCompatActivity implements View.OnClickL
         intent.putExtra("goal", goal);
         intent.setClass(context, activityUserMacros.class);
         startActivity(intent);
-        finish();
     }
 
     private boolean validateFields() {
