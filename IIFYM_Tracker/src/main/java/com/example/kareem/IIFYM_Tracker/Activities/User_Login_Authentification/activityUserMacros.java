@@ -1,7 +1,9 @@
 package com.example.kareem.IIFYM_Tracker.Activities.User_Login_Authentification;
 
+import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
@@ -64,10 +66,11 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
 
     // Storage
     private SharedPreferences myPrefs;
-    private DatabaseConnector My_DB;
-    private FirebaseAuth mAuth;
-    FirebaseUser firebaseuser;
-    private DatabaseReference mDatabase;
+    private DatabaseConnector DB_SQLite;
+    private FirebaseAuth firebaseAuth;
+    FirebaseUser firebaseUser;
+    private DatabaseReference firebaseDbRef;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,10 +79,10 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
 
         // Storage
         myPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-        mAuth = FirebaseAuth.getInstance();
-        firebaseuser = mAuth.getCurrentUser();
-        mDatabase = FirebaseDatabase.getInstance().getReference();
-        My_DB = new DatabaseConnector(getApplicationContext());
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseUser = firebaseAuth.getCurrentUser();
+        firebaseDbRef = FirebaseDatabase.getInstance().getReference();
+        DB_SQLite = new DatabaseConnector(getApplicationContext());
 
         // Data from previous Login activities
         getIntentData();
@@ -391,6 +394,7 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
     }
 
     private void Finish(){
+        // Validate Fields
         if(validateFields()){
             User user;
             if (rbtnCalories.isChecked()) {
@@ -411,12 +415,33 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
                         + " workoutFreq: " + workoutFreq + " goal: " + goal + " calories: " + calories + " isPercent: " + false +
                         " carbs: " + carbs + " protein : " + protein + " fat: " + fat);
             }
-            mDatabase.child("users").child(uid).setValue(user);
-            My_DB.createUser(user);
+
+            new RegisterUser().execute(user);
         }
     }
 
-    //TODO
+    private class RegisterUser extends AsyncTask<User, Void, Void> {
+        @Override
+        protected void onPreExecute(){
+            showProgressDialog();
+        }
+
+        @Override
+        protected Void doInBackground(User... params) {
+            // Write Data
+            firebaseDbRef.child("users").child(uid).setValue(params[0]);
+            DB_SQLite.createUser(params[0]);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            hideProgressDialog();
+            //TODO Go to main
+        }
+    }
+
+    //TODO Implement Tour Guide
     private void beginChainTourGuide() {
         ChainTourGuide tourGuide1 = ChainTourGuide.init(this)
                 .setToolTip(new ToolTip()
@@ -580,6 +605,22 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
         etxtFat.removeTextChangedListener(this);
     }
 
+    public void showProgressDialog() {
+        if (progressDialog == null) {
+            progressDialog = new ProgressDialog(this);
+            progressDialog.setMessage("Loading");
+            progressDialog.setIndeterminate(true);
+        }
+
+        progressDialog.show();
+    }
+
+    public void hideProgressDialog() {
+        if (progressDialog != null && progressDialog.isShowing()) {
+            progressDialog.dismiss();
+        }
+    }
+
     private boolean validateFields() {
         boolean valid = true;
 
@@ -627,6 +668,15 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
         super.onPause();
     }
 
+    // TODO - Fix Bug:
+    // Close app while in activityUserMacros
+    // Re-open app will restart from activityUserInfo (intended)
+    // Change values from activityUserInfo
+    // Old calories & macros will be called from OnResume rather than new ones from getBMR
+    // because OnResume is called after OnCreate
+
+    // TODO - Fix Bug:
+    // Default macro percentages = 0 
     @Override protected void onResume() {
         // Load preferences
         // If preferences unavailable, set defaults

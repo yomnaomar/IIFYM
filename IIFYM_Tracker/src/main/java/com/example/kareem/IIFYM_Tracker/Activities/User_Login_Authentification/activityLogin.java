@@ -30,10 +30,10 @@ import com.google.firebase.database.ValueEventListener;
 
 public class activityLogin extends AppCompatActivity implements View.OnClickListener {
 
-    private FirebaseAuth mAuth;
-    private DatabaseReference mDatabase;
-    private FirebaseAuth.AuthStateListener mAuthListener;
-    private ProgressDialog mProgressDialog;
+    private FirebaseAuth firebaseAuth;
+    private DatabaseReference firebaseDbRef;
+    private FirebaseAuth.AuthStateListener firebaseAuthListener;
+    private ProgressDialog progressDialog;
     private EditText etxtEmail;
     private EditText etxtPassword;
     private SharedPreferences myPrefs;
@@ -44,25 +44,25 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        mAuth = FirebaseAuth.getInstance();
-        mDatabase = FirebaseDatabase.getInstance().getReference();
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseDbRef = FirebaseDatabase.getInstance().getReference();
 
-        mAuthListener = new FirebaseAuth.AuthStateListener() {
+        firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser firebaseuser = firebaseAuth.getCurrentUser();
+                FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
 
                 // User is signed in
-                if (firebaseuser != null) {
-                    final String uid = firebaseuser.getUid();
-                    String email = firebaseuser.getEmail();
-                    Log.d("onAuthStateChanged", "User with UID " + uid + " signed_in: " + firebaseuser.getUid());
+                if (firebaseUser != null) {
+                    final String uid = firebaseUser.getUid();
+                    String email = firebaseUser.getEmail();
+                    Log.d("onAuthStateChanged", "User with UID " + uid + " signed_in: " + firebaseUser.getUid());
 
                     // Email is verified
-                    if (mAuth.getCurrentUser().isEmailVerified()) {
+                    if (firebaseAuth.getCurrentUser().isEmailVerified()) {
                         Log.d("onAuthStateChanged", "User with UID " + uid + " email is verified");
 
-                        mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+                        firebaseDbRef.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
                                 User userPost = dataSnapshot.getValue(User.class);
@@ -128,7 +128,7 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
             return;
         }
         showProgressDialog();
-        mAuth.createUserWithEmailAndPassword(email, password)
+        firebaseAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
@@ -136,14 +136,14 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
                         if(task.isSuccessful()) {
                             Log.d("User created:", "createUserWithEmail:onComplete:" + task.isSuccessful());
 
-                            //Save UID, Email and isRegistered to Firebase and SQLite
-                            FirebaseUser firebaseuser = FirebaseAuth.getInstance().getCurrentUser();
-                            String newUID = firebaseuser.getUid();
-                            String newEmail = firebaseuser.getEmail();
+                            //Save UID, Email and isRegistered to Firebase
+                            FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+                            String newUID = firebaseUser.getUid();
+                            String newEmail = firebaseUser.getEmail();
                             User user = new User(newUID,newEmail,false);
-                            mDatabase.child("users").child(newUID).setValue(user);
+                            firebaseDbRef.child("users").child(newUID).setValue(user);
 
-                            firebaseuser.sendEmailVerification()
+                            firebaseUser.sendEmailVerification()
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
@@ -174,7 +174,7 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
         }
         showProgressDialog();
 
-        mAuth.signInWithEmailAndPassword(email, password)
+        firebaseAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
@@ -195,8 +195,8 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
     @Override
     public void onStop(){
         super.onStop();
-        if (mAuthListener != null){
-            mAuth.removeAuthStateListener(mAuthListener);
+        if (firebaseAuthListener != null){
+            firebaseAuth.removeAuthStateListener(firebaseAuthListener);
         }
         hideProgressDialog();
     }
@@ -204,7 +204,7 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
     @Override
     public void onStart() {
         super.onStart();
-        mAuth.addAuthStateListener(mAuthListener);
+        firebaseAuth.addAuthStateListener(firebaseAuthListener);
     }
 
     @Override
@@ -268,18 +268,18 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
     }
 
     public void showProgressDialog() {
-        if (mProgressDialog == null) {
-            mProgressDialog = new ProgressDialog(this);
-            mProgressDialog.setMessage("Loading");
-            mProgressDialog.setIndeterminate(true);
+        if (progressDialog == null) {
+            progressDialog = new ProgressDialog(this);
+            progressDialog.setMessage("Loading");
+            progressDialog.setIndeterminate(true);
         }
 
-        mProgressDialog.show();
+        progressDialog.show();
     }
 
     public void hideProgressDialog() {
-        if (mProgressDialog != null && mProgressDialog.isShowing()) {
-            mProgressDialog.dismiss();
+        if (progressDialog != null && progressDialog.isShowing()) {
+            progressDialog.dismiss();
         }
     }
 }
