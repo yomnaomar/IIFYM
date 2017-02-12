@@ -1,6 +1,8 @@
 package com.example.kareem.IIFYM_Tracker.Activities.User_Login_Authentification;
 
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.AsyncTask;
@@ -21,6 +23,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.example.kareem.IIFYM_Tracker.Activities.Main.activityMain;
 import com.example.kareem.IIFYM_Tracker.Custom_Objects.User;
 import com.example.kareem.IIFYM_Tracker.Database.DatabaseConnector;
 import com.example.kareem.IIFYM_Tracker.R;
@@ -59,7 +62,6 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
     private int             totalPercent, calories, carbs, protein, fat, carbsPercent, proteinPercent, fatPercent;
     private int             carbsOld, proteinOld, fatOld;
     private boolean         carbsChanged, proteinChanged, fatChanged;
-    private boolean         isRegistered;
 
     //Aninmation
     private Animation mEnterAnimation, mExitAnimation;
@@ -401,21 +403,12 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
                 user = new User(uid, email, true, name, dob, gender,
                         unitSystem, weight, height1, height2, workoutFreq,
                         goal, calories, true, carbsPercent, proteinPercent, fatPercent);
-                Log.d("Finish", "User: " + "UID: " + uid + " email: " + email + " isRegsitered: " + true + " name: " + name + " dob: " + dob
-                        + " gender: " + gender + " unitSystem: " + unitSystem + " weight: " + weight + " height1: " + height1 + " height2: " + height2
-                        + " workoutFreq: " + workoutFreq + " goal: " + goal + " calories: " + calories + " isPercent: " + true +
-                        " carbsPercent: " + carbsPercent + " proteinPercent: " + proteinPercent + " fatPercent: " + fatPercent);
             }
             else {
                 user = new User(uid, email, true, name, dob, gender,
                         unitSystem, weight, height1, height2, workoutFreq,
                         goal, calories, false, carbs, protein, fat);
-                Log.d("Finish", "User: " + "UID: " + uid + " email: " + email + " isRegsitered: " + true + " name: " + name + " dob: " + dob
-                        + " gender: " + gender + " unitSystem: " + unitSystem + " weight: " + weight + " height1: " + height1 + " height2: " + height2
-                        + " workoutFreq: " + workoutFreq + " goal: " + goal + " calories: " + calories + " isPercent: " + false +
-                        " carbs: " + carbs + " protein : " + protein + " fat: " + fat);
             }
-
             new RegisterUser().execute(user);
         }
     }
@@ -437,7 +430,16 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
         @Override
         protected void onPostExecute(Void result) {
             hideProgressDialog();
-            //TODO Go to main
+
+            Intent broadcastIntent = new Intent("finish_activity");
+            sendBroadcast(broadcastIntent);
+
+            Context context = getApplicationContext();
+            Intent intent = new Intent();
+            intent.setClass(context, activityMain.class);
+            intent.putExtra("user_uid", uid);
+            startActivity(intent);
+            finish();
         }
     }
 

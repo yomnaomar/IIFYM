@@ -55,22 +55,34 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
                 // User is signed in
                 if (firebaseUser != null) {
                     final String uid = firebaseUser.getUid();
-                    String email = firebaseUser.getEmail();
-                    Log.d("onAuthStateChanged", "User with UID " + uid + " signed_in: " + firebaseUser.getUid());
+                    final String email = firebaseUser.getEmail();
 
                     // Email is verified
                     if (firebaseAuth.getCurrentUser().isEmailVerified()) {
-                        Log.d("onAuthStateChanged", "User with UID " + uid + " email is verified");
-
-                        firebaseDbRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                        firebaseDbRef.child("users").child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
                                 User userPost = dataSnapshot.getValue(User.class);
                                 isRegistered = userPost.isRegistered();
-                                if (isRegistered)
-                                    Log.d("onAuthStateChanged", "User with UID " + uid + " is Registered");
-                                else
-                                    Log.d("onAuthStateChanged", "User with UID " + uid + " is not Registered");
+
+                                if(isRegistered) {
+                                    // Go to main activity
+                                    Context context = getApplicationContext();
+                                    Intent intent = new Intent();
+                                    intent.setClass(context, activityMain.class);
+                                    intent.putExtra("user_uid", uid);
+                                    startActivity(intent);
+                                    finish();
+                                }
+                                else {
+                                    Context context = getApplicationContext();
+                                    Intent intent = new Intent();
+                                    intent.putExtra("uid",uid);
+                                    intent.putExtra("email",email);
+                                    intent.setClass(context, activityUserInfo.class);
+                                    startActivity(intent);
+                                    finish();
+                                }
                             }
 
                             @Override
@@ -78,35 +90,13 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
 
                             }
                         });
-                        if(isRegistered) {
-                            // Go to main activity
-                            Context context = getApplicationContext();
-                            Intent intent = new Intent();
-                            intent.setClass(context, activityMain.class);
-                            startActivity(intent);
-                            finish();
-                        }
-                        else {
-                            Context context = getApplicationContext();
-                            Intent intent = new Intent();
-                            intent.putExtra("uid",uid);
-                            intent.putExtra("email",email);
-                            intent.setClass(context, activityUserInfo.class);
-                            startActivity(intent);
-                            finish();
-                        }
-
 
                     } else {
                         // Email is not verified
                         // Display that user needs to verify email
-                        Log.d("onAuthStateChanged", "User with UID " + uid + " email is not verified");
                         showAlertDialog("Email Verification","An email has been sent to you.\n" +
                                             "Please verify your email in order to log in.");
                     }
-                } else {
-                    // User is signed out
-                    Log.d("onAuthStateChanged", "onAuthStateChanged: signed_out");
                 }
             }
         };
@@ -134,7 +124,6 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         // User Created Success
                         if(task.isSuccessful()) {
-                            Log.d("User created:", "createUserWithEmail:onComplete:" + task.isSuccessful());
 
                             //Save UID, Email and isRegistered to Firebase
                             FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -148,9 +137,7 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if (task.isSuccessful()) {
-                                                Log.d("Auth Email", "Email sent.");
-                                                /*showAlertDialog("Email Verification","An email has been sent to you.\n" +
-                                                                "Please verify your email in order to log in.");*/
+                                                // Sent email verification to user
                                             }
                                             else {
                                                 showAlertDialog("Oops!","There was an error sending the verification email.");
@@ -168,7 +155,6 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
     }
 
     private void signIn(String email, String password) {
-        Log.d("User pressed Sign In", "signIn:" + email);
         if (!validateForm()) {
             return;
         }
@@ -179,9 +165,8 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         //Sign in Success
-                        if(task.isSuccessful()) {
-                            Log.d("Sign in with Email", "signInWithEmail: onComplete:" + task.isSuccessful());
-                        }
+                        if(task.isSuccessful()) {}
+
                         //Sign in Fail
                         if (!task.isSuccessful()) {
                             Log.w("Sign in with Email", "signInWithEmail: failed", task.getException());

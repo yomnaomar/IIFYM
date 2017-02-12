@@ -31,6 +31,7 @@ import com.example.kareem.IIFYM_Tracker.Activities.User_Login_Authentification.a
 import com.example.kareem.IIFYM_Tracker.Custom_Objects.DailyMeal;
 import com.example.kareem.IIFYM_Tracker.Custom_Objects.Meal;
 import com.example.kareem.IIFYM_Tracker.Custom_Objects.Portion_Type;
+import com.example.kareem.IIFYM_Tracker.Custom_Objects.User;
 import com.example.kareem.IIFYM_Tracker.Custom_Objects.User_Old;
 import com.example.kareem.IIFYM_Tracker.Database.DatabaseConnector;
 import com.example.kareem.IIFYM_Tracker.R;
@@ -47,7 +48,7 @@ import tourguide.tourguide.ToolTip;
 
 public class activityMain extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener, OnListItemDeletedListener {
 
-    private TextView Text_CarbsGoal, Text_ProteinGoal, Text_FatGoal;
+    private TextView etxtCarbsGoal, etxtProteinGoal, etxtFatGoal;
     private TextView Text_CarbsLeft, Text_ProteinLeft, Text_FatLeft;
     private TextView Text_CarbsCurrent, Text_ProteinCurrent, Text_FatCurrent;
     private Button Button_AddSavedMeal, Button_AddQuickMeal;
@@ -64,17 +65,17 @@ public class activityMain extends AppCompatActivity implements View.OnClickListe
     public  int ProteinDefault ;
     public  int FatDefault ;
 
-    private DatabaseConnector My_DB;
+    private DatabaseConnector DB_SQLite;
 
     Portion_Type portion = null;
     int daily_consumption;
     boolean isLogged;
 
     private String user_name;
-    private int user_id;
+    private String uid;
     private CoordinatorLayout coordinatorLayout;
 
-    private User_Old currentUser;
+    private User currentUser;
 
     View parentLayout;
 
@@ -97,14 +98,14 @@ public class activityMain extends AppCompatActivity implements View.OnClickListe
         setSupportActionBar(toolbar);
 
         mAuth = FirebaseAuth.getInstance();
-        My_DB = new DatabaseConnector(getApplicationContext());
+        DB_SQLite = new DatabaseConnector(getApplicationContext());
 
         coordinatorLayout = (CoordinatorLayout) findViewById(R.id.main_content);
         settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         //Declaring
-        Text_CarbsGoal = (TextView) findViewById(R.id.Text_CarbsGoal);
-        Text_ProteinGoal = (TextView) findViewById(R.id.Text_ProteinGoal);
-        Text_FatGoal = (TextView) findViewById(R.id.Text_FatGoal);
+        etxtCarbsGoal = (TextView) findViewById(R.id.Text_CarbsGoal);
+        etxtProteinGoal = (TextView) findViewById(R.id.Text_ProteinGoal);
+        etxtFatGoal = (TextView) findViewById(R.id.Text_FatGoal);
 
         Text_CarbsLeft = (TextView) findViewById(R.id.Text_CarbsLeft);
         Text_ProteinLeft = (TextView) findViewById(R.id.Text_ProteinLeft);
@@ -133,11 +134,12 @@ public class activityMain extends AppCompatActivity implements View.OnClickListe
 
         parentLayout = findViewById(R.id.root_view);
 
-        //TODO:(Abdulwahab) get current currentUser here
+        // Getting the current user
         intent = getIntent();
-        isLogged = intent.getBooleanExtra("logged",false);//checks if user just logged in
+        uid = intent.getStringExtra("user_uid");
+        currentUser = DB_SQLite.retrieveUser(uid);
 
-          /* setup enter and exit animation */
+        // Setup enter and exit animation
         mEnterAnimation = new AlphaAnimation(0f, 1f);
         mEnterAnimation.setDuration(600);
         mEnterAnimation.setFillAfter(true);
@@ -146,7 +148,7 @@ public class activityMain extends AppCompatActivity implements View.OnClickListe
         mExitAnimation.setDuration(600);
         mExitAnimation.setFillAfter(true);
 
-        showtipOverlay();//UI guide
+        showtipOverlay();// UI guide
     }
 
     @Override
@@ -159,8 +161,7 @@ public class activityMain extends AppCompatActivity implements View.OnClickListe
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         menu.clear();
-        Log.d("currentUser Gender", currentUser.getGender());
-        if (currentUser.getGender().startsWith("M")) { //Male
+        if (currentUser.getGender() == 0) { //Male
             getMenuInflater().inflate(R.menu.menu_home_man, menu);
         }
         else {
@@ -185,7 +186,7 @@ public class activityMain extends AppCompatActivity implements View.OnClickListe
         }
         if(id==R.id.logout_menu_btn)
         {
-            //My_DB.close();
+            //DB_SQLite.close();
             finish();
             Intent in = new Intent(getApplicationContext(), Login_Abdu.class);
             startActivity(in);
@@ -272,9 +273,9 @@ public class activityMain extends AppCompatActivity implements View.OnClickListe
         int ProteinGoals = Integer.parseInt(prefs.getString(ProteinPrefKey, ProteinDefault + ""));
         int FatGoals = Integer.parseInt(prefs.getString(FatPrefKey, FatDefault + ""));
 
-        Text_CarbsGoal.setText(CarbGoals + "");
-        Text_ProteinGoal.setText(ProteinGoals + "");
-        Text_FatGoal.setText(FatGoals + "");
+        etxtCarbsGoal.setText(CarbGoals + "");
+        etxtProteinGoal.setText(ProteinGoals + "");
+        etxtFatGoal.setText(FatGoals + "");
 
         int CarbsCurrent = 0;
         int ProteinCurrent = 0;
@@ -347,7 +348,7 @@ public class activityMain extends AppCompatActivity implements View.OnClickListe
     //TODO: TEST AFTER IMPLEMENTING DATABASE
     public void UpdateArrayList() {
         My_DailyMealAdapter.clear();
-        Cursor AllDailyMeals_Cursor = My_DB.getAllDailyMeals();
+        Cursor AllDailyMeals_Cursor = DB_SQLite.getAllDailyMeals();
         int count = AllDailyMeals_Cursor.getCount();
         Log.i("Count","Count = " + count);
         if (count > 0) {
@@ -361,7 +362,7 @@ public class activityMain extends AppCompatActivity implements View.OnClickListe
                 Log.i("position", daily_position + "");
                 Log.i("multiplier", daily_multiplier + "");
 
-                Meal M = My_DB.getMeal(daily_meal_id);
+                Meal M = DB_SQLite.getMeal(daily_meal_id);
 
                 String M_name            = M.getMeal_name();
                 int M_carbs              = Math.round(M.getCarbs()*daily_multiplier);
@@ -401,24 +402,6 @@ public class activityMain extends AppCompatActivity implements View.OnClickListe
         intent.putExtra("position", position);
         intent.putExtra("isDaily", true);
         startActivity(intent);
-    }
-
-    private void getActiveUser(boolean logged, Intent intent)
-    {
-        user_name = intent.getStringExtra("user_name");
-        user_id = intent.getIntExtra("user_id",My_DB.fetchUserID(user_name,getApplicationContext()));
-        if(logged)
-        {
-            Snackbar snackbar = Snackbar
-                    .make(parentLayout, "Welcome "+ user_name +" ID: "+ user_id, Snackbar.LENGTH_SHORT);
-            snackbar.show();
-            isLogged=false;
-        }
-        else {
-            SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-            user_name = settings.getString("user_name", "");
-        }
-        currentUser = My_DB.getUserObject(user_name);
     }
 
     private void setPrefMacros()
