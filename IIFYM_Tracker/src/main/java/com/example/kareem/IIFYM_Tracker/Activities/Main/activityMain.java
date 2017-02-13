@@ -4,15 +4,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,16 +20,16 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.akexorcist.roundcornerprogressbar.IconRoundCornerProgressBar;
-import com.example.kareem.IIFYM_Tracker.Activities.Settings.MacroSettings;
 import com.example.kareem.IIFYM_Tracker.Activities.Old_Login.Login_Abdu;
+import com.example.kareem.IIFYM_Tracker.Activities.Settings.MacroSettings;
 import com.example.kareem.IIFYM_Tracker.Activities.Settings.UserProfile_Mina;
 import com.example.kareem.IIFYM_Tracker.Activities.User_Login_Authentification.activityLogin;
 import com.example.kareem.IIFYM_Tracker.Custom_Objects.DailyMeal;
 import com.example.kareem.IIFYM_Tracker.Custom_Objects.Meal;
 import com.example.kareem.IIFYM_Tracker.Custom_Objects.Portion_Type;
 import com.example.kareem.IIFYM_Tracker.Custom_Objects.User;
-import com.example.kareem.IIFYM_Tracker.Custom_Objects.User_Old;
-import com.example.kareem.IIFYM_Tracker.Database.DatabaseConnector;
+import com.example.kareem.IIFYM_Tracker.Database.SQLiteConnector;
+import com.example.kareem.IIFYM_Tracker.Database.SharedPreferenceHelper;
 import com.example.kareem.IIFYM_Tracker.R;
 import com.example.kareem.IIFYM_Tracker.ViewComponents.DailyMealAdapter;
 import com.example.kareem.IIFYM_Tracker.ViewComponents.OnListItemDeletedListener;
@@ -41,13 +37,9 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 
-import tourguide.tourguide.ChainTourGuide;
-import tourguide.tourguide.Overlay;
-import tourguide.tourguide.Sequence;
-import tourguide.tourguide.ToolTip;
-
 public class activityMain extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener, OnListItemDeletedListener {
 
+    // GUI
     private TextView etxtCarbsGoal, etxtProteinGoal, etxtFatGoal;
     private TextView Text_CarbsLeft, Text_ProteinLeft, Text_FatLeft;
     private TextView Text_CarbsCurrent, Text_ProteinCurrent, Text_FatCurrent;
@@ -65,30 +57,21 @@ public class activityMain extends AppCompatActivity implements View.OnClickListe
     public  int ProteinDefault ;
     public  int FatDefault ;
 
-    private DatabaseConnector DB_SQLite;
-
-    Portion_Type portion = null;
-    int daily_consumption;
-    boolean isLogged;
-
-    private String user_name;
-    private String uid;
-    private CoordinatorLayout coordinatorLayout;
-
-    private User currentUser;
-
     View parentLayout;
 
     SharedPreferences settings;
 
-    int Carbs_Val,Protein_Val,Fat_Val;
-    int userBMR;
-    double userCalories;
-
-    Intent intent;
-
-    private Animation mEnterAnimation, mExitAnimation;
+    // Storage
+    SharedPreferenceHelper myPrefs;
     private FirebaseAuth mAuth;
+    private SQLiteConnector DB_SQLite;
+
+    private String uid;
+    private User currentUser;
+
+    // Animation
+    private Animation mEnterAnimation, mExitAnimation;
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,10 +80,11 @@ public class activityMain extends AppCompatActivity implements View.OnClickListe
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        context = getApplicationContext();
         mAuth = FirebaseAuth.getInstance();
-        DB_SQLite = new DatabaseConnector(getApplicationContext());
+        DB_SQLite = new SQLiteConnector(context);
+        myPrefs = new SharedPreferenceHelper(context);
 
-        coordinatorLayout = (CoordinatorLayout) findViewById(R.id.main_content);
         settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         //Declaring
         etxtCarbsGoal = (TextView) findViewById(R.id.Text_CarbsGoal);
@@ -135,8 +119,7 @@ public class activityMain extends AppCompatActivity implements View.OnClickListe
         parentLayout = findViewById(R.id.root_view);
 
         // Getting the current user
-        intent = getIntent();
-        uid = intent.getStringExtra("user_uid");
+        uid = myPrefs.getStringValue("session_uid");
         currentUser = DB_SQLite.retrieveUser(uid);
 
         // Setup enter and exit animation
@@ -147,8 +130,6 @@ public class activityMain extends AppCompatActivity implements View.OnClickListe
         mExitAnimation = new AlphaAnimation(1f, 0f);
         mExitAnimation.setDuration(600);
         mExitAnimation.setFillAfter(true);
-
-        showtipOverlay();// UI guide
     }
 
     @Override
@@ -203,7 +184,6 @@ public class activityMain extends AppCompatActivity implements View.OnClickListe
         if(id==R.id.profile_menu_btn)
         {
             Intent intent = new Intent(getApplicationContext(),UserProfile_Mina.class);
-            intent.putExtra("username",user_name);
             startActivity(intent);
             return true;
         }
@@ -245,23 +225,10 @@ public class activityMain extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onResume() {
         super.onResume();
-
-        getActiveUser(isLogged,intent); //get current user
-        userBMR = getBMR(); // BMR fetched here
-        setPrefMacros(); // puts preferred macro in shared prefs
-
-        UpdateArrayList();
-        UpdateMacros();
     }
 
     @Override
     protected void onPause() {
-        settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        SharedPreferences.Editor editor = settings.edit();
-        editor.putString("user_name", user_name); // here string is the value you want to save
-        editor.commit();
-
-
         super.onPause();
     }
 
@@ -386,12 +353,6 @@ public class activityMain extends AppCompatActivity implements View.OnClickListe
         UpdateMacros();
     }
 
-    public void removeMealHandler(View v) {
-//        DailyMeal itemToRemove = (DailyMeal)v.getTag();
-//        My_DailyMealAdapter.remove(itemToRemove);
-//        UpdateArrayList();
-//        UpdateMacros();
-    }
     @Override
     public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
         DailyMeal DM = (DailyMeal) parent.getItemAtPosition(position);
@@ -402,162 +363,6 @@ public class activityMain extends AppCompatActivity implements View.OnClickListe
         intent.putExtra("position", position);
         intent.putExtra("isDaily", true);
         startActivity(intent);
-    }
-
-    private void setPrefMacros()
-    {
-        //Prefs defaults from database
-        CarbsDefault = Carbs_Val;
-        FatDefault = Fat_Val;
-        ProteinDefault = Protein_Val;
-
-        settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        SharedPreferences.Editor editor = settings.edit();
-
-        editor.putInt("pref_Carbs", currentUser.getPercent_carbs());
-        editor.putInt("pref_Protein",  currentUser.getPercent_protein());
-        editor.putInt("pref_Fat",  currentUser.getPercent_fat());
-        editor.putInt("user_carbs", CarbsDefault);
-        editor.putInt("user_fat", FatDefault);
-        editor.putInt("user_protein", ProteinDefault);
-        editor.putInt("cals", (int) userCalories);
-        editor.putInt("BMR", userBMR);
-        editor.commit();
-    }
-    //TODO: get macro percent from DB and other info to get macro values
-    //MEN: BMR = (10 x weight in kg) + (6.25 x height in cm) – (5 x age in years) + 5
-    //WOMEN: BMR = (10 x weight in kg) + (6.25 x height in cm)  – (5 x age in years) -161
-    private int getBMR()
-    {
-        double BMR; // b/w 1000 - 3000
-        //get all user data height, weight ,age:
-        float Weight_Val = currentUser.getWeight();
-        float Height_Val = currentUser.getHeight();
-        String gender = currentUser.getGender();
-        int Age_Val = currentUser.getAge();
-        double Caloric_Intake;
-        double Carb_Percent,Protein_Percent,Fat_Percent;
-
-        Log.d("BMRINFO", ""+ Weight_Val+ " "+ Height_Val+" "+gender+" "+Age_Val);
-        if(currentUser.getWeight_unit()!= 0) //not kg - convert from lbs to kg
-        {
-            Weight_Val = (Weight_Val/2.2046f);
-            Log.d("WEIGHT", ""+Weight_Val);
-        }
-        if(currentUser.getHeight_unit()!=1)//not cm - convert from feet to cm
-        {
-            Height_Val = (Height_Val/0.032808f);
-            Log.d("HEIGHT", ""+Height_Val);
-        }
-        if (gender.startsWith("M")) {
-            BMR = (10*Weight_Val + 6.25*Height_Val + 5*Age_Val + 5.0); //Male
-            Log.d("BMRMALE", ""+BMR);
-        }
-        else
-        {
-            BMR = (10*Weight_Val + 6.25*Height_Val + 5*Age_Val - 161.0); //Female
-            Log.d("BMRFEMALE", ""+BMR);
-        }
-
-        //Activity Factor Multiplier
-        //Sedentary
-        if (currentUser.getWorkout_freq() == 0) {
-            Caloric_Intake = BMR * 1.2;
-
-        }
-        //Lightly Active
-        else if (currentUser.getWorkout_freq() == 1) {
-            Caloric_Intake = BMR * 1.35;
-            Log.d("WORKOUT", ""+Caloric_Intake);
-        }
-        //Moderately Active
-        else if (currentUser.getWorkout_freq() == 2) {
-            Caloric_Intake = BMR * 1.5;
-        }
-        //Very Active
-        else if (currentUser.getWorkout_freq() ==3) {
-            Caloric_Intake = BMR * 1.7;
-        }
-        else
-        {
-            Caloric_Intake = BMR * 1.9;
-        }
-
-        //Weight goals
-        if (currentUser.getGoal() == 0) { //lose
-            Caloric_Intake -= 250.0;
-        }
-        else if (currentUser.getGoal()== 1) { //maintain
-            //Do nothing
-        }
-        else { //maintain
-            Caloric_Intake += 250.0;
-        }
-        //Macronutrient ratio calculation
-        Carb_Percent = currentUser.getPercent_carbs()/100.0;
-        Protein_Percent = currentUser.getPercent_protein()/100.0;
-        Fat_Percent = currentUser.getPercent_fat()/100.0;
-
-
-        Carbs_Val = (int) ((Carb_Percent * Caloric_Intake) /4.0); //icon_carbs = 4kcal/g
-        Protein_Val = (int) ((Protein_Percent * Caloric_Intake) / 4.0); //icon_protein = 4kcal/g
-        Fat_Val = (int) ((Fat_Percent * Caloric_Intake)/ 9.0); //icon_fat = 9kcal/g
-
-
-        userCalories = Caloric_Intake;
-        return (int) BMR;
-    }
-
-    //UI tooltips will be shown to guide user around  - launched only once
-    private void showtipOverlay()
-    {
-        if(settings.getBoolean("isnewUser",false))
-        {
-            ChainTourGuide tourGuide1 = ChainTourGuide.init(this)
-                    .setToolTip(new ToolTip()
-                            .setTitle("Quick Meals")
-                            .setDescription("Use this to quickly add a meal to your daily list")
-                            .setGravity(Gravity.TOP)
-                    )
-                    .setOverlay(new Overlay()
-                            .setBackgroundColor(Color.parseColor("#EE2c3e50"))
-                            .setEnterAnimation(mEnterAnimation)
-                            .setExitAnimation(mExitAnimation)
-                    )
-                    // note that there is no Overlay here, so the default one will be used
-                    .playLater(Button_AddQuickMeal);
-
-            ChainTourGuide tourGuide2 = ChainTourGuide.init(this)
-                    .setToolTip(new ToolTip()
-                            .setTitle("Saved Meals")
-                            .setDescription("Use this to select a meal from your list of saved meals")
-                            .setGravity(Gravity.TOP | Gravity.LEFT)
-                            .setBackgroundColor(Color.parseColor("#c0392b"))
-                    )
-                    .setOverlay(new Overlay()
-                            .setBackgroundColor(Color.parseColor("#EE2c3e50"))
-                            .setEnterAnimation(mEnterAnimation)
-                            .setExitAnimation(mExitAnimation)
-                    )
-                    .playLater(Button_AddSavedMeal);
-
-            Sequence sequence = new Sequence.SequenceBuilder()
-                    .add(tourGuide1, tourGuide2)
-                    .setDefaultOverlay(new Overlay()
-                            .setEnterAnimation(mEnterAnimation)
-                            .setExitAnimation(mExitAnimation)
-                    )
-                    .setDefaultPointer(null)
-                    .setContinueMethod(Sequence.ContinueMethod.Overlay)
-                    .build();
-
-
-            ChainTourGuide.init(this).playInSequence(sequence);
-            SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-            SharedPreferences.Editor editor = settings.edit();
-            editor.putBoolean("isnewUser", false); // here string is the value you want to save
-            editor.commit();
-        }
     }
 
     private void signOut() {

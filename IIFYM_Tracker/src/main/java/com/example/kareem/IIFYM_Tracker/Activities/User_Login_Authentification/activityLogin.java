@@ -1,21 +1,22 @@
 package com.example.kareem.IIFYM_Tracker.Activities.User_Login_Authentification;
 
 import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
 import com.example.kareem.IIFYM_Tracker.Activities.Main.activityMain;
 import com.example.kareem.IIFYM_Tracker.Custom_Objects.User;
+import com.example.kareem.IIFYM_Tracker.Database.SharedPreferenceHelper;
 import com.example.kareem.IIFYM_Tracker.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -29,21 +30,63 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class activityLogin extends AppCompatActivity implements View.OnClickListener {
+//    ------ Creating a New User ------
+//    Firebase SetValue ->
+//    {
+//        "users" :
+//        {
+//            "UIO9XpMc3BR2sNTzNcdlDJ7rrtD3" :
+//            {
+//                "uid"         :   "UIO9XpMc3BR2sNTzNcdlDJ7rrtD3",
+//                "email"       :   "example@gmail.com",
+//                "registered"  :   true
+//            }
+//        }
+//    }
+//
+//    ------ User Login ------
+//    if(Authentication Successful)
+//    {
+//        if(Email Verified)
+//        {
+//            if(Is Registered)
+//            {
+//                myPrefs.addPreference("session_uid", uid);
+//                Go to Main
+//            }
+//            else if (Not Registered)
+//            {
+//                intent.putExtra("uid", uid);
+//                intent.putExtra("email", email);
+//                Go to UserInfo
+//            }
+//        }
+//        else if (Email is not Verified)
+//        {
+//            Send Verification Email
+//        }
+//    }
 
-    private FirebaseAuth firebaseAuth;
-    private DatabaseReference firebaseDbRef;
-    private FirebaseAuth.AuthStateListener firebaseAuthListener;
-    private ProgressDialog progressDialog;
-    private EditText etxtEmail;
-    private EditText etxtPassword;
-    private SharedPreferences myPrefs;
-    private boolean isRegistered;
+    // GUI
+    private ProgressDialog  progressDialog;
+    private EditText        etxtEmail, etxtPassword;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    // Variables
+    private boolean         isRegistered;
+    private Context         context;
+
+    // Storage
+    private SharedPreferenceHelper          myPrefs;
+    private FirebaseAuth                    firebaseAuth;
+    private DatabaseReference               firebaseDbRef;
+    private FirebaseAuth.AuthStateListener  firebaseAuthListener;
+
+    //TODO don't load activity if user session is stored
+    @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
 
+        context = getApplicationContext();
+        myPrefs = new SharedPreferenceHelper(context);
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseDbRef = FirebaseDatabase.getInstance().getReference();
 
@@ -66,22 +109,21 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
                                 isRegistered = userPost.isRegistered();
 
                                 if(isRegistered) {
-                                    // Go to main activity
-                                    Context context = getApplicationContext();
+                                    // Go to activityMain
+                                    // Store user session in Preferences
+                                    myPrefs.addPreference("session_uid", uid);
                                     Intent intent = new Intent();
                                     intent.setClass(context, activityMain.class);
-                                    intent.putExtra("user_uid", uid);
                                     startActivity(intent);
                                     finish();
                                 }
                                 else {
-                                    Context context = getApplicationContext();
+                                    // Go to activityUserInfo
                                     Intent intent = new Intent();
                                     intent.putExtra("uid",uid);
                                     intent.putExtra("email",email);
                                     intent.setClass(context, activityUserInfo.class);
                                     startActivity(intent);
-                                    finish();
                                 }
                             }
 
@@ -101,6 +143,8 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
             }
         };
 
+        // GUI
+        setContentView(R.layout.activity_login);
         // Views
         etxtEmail = (EditText) findViewById(R.id.email_edittext);
         etxtPassword = (EditText) findViewById(R.id.password_textview);
@@ -109,12 +153,20 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
         findViewById(R.id.Button_Login).setOnClickListener(this);
         findViewById(R.id.Button_Register).setOnClickListener(this);
 
-        // Prefs
-        myPrefs = getPreferences(AppCompatActivity.MODE_PRIVATE);
+        BroadcastReceiver broadcast_reciever = new BroadcastReceiver() {
+
+            @Override
+            public void onReceive(Context arg0, Intent intent) {
+                String action = intent.getAction();
+                if (action.equals("finish_activity"))
+                    finish();
+            }
+        };
+        registerReceiver(broadcast_reciever, new IntentFilter("finish_activity"));
     }
 
     private void createAccount(String email, String password) {
-        if (!validateForm()) {
+        if (!validateForms()) {
             return;
         }
         showProgressDialog();
@@ -137,7 +189,7 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if (task.isSuccessful()) {
-                                                // Sent email verification to user
+                                                // Email verification sent to user
                                             }
                                             else {
                                                 showAlertDialog("Oops!","There was an error sending the verification email.");
@@ -155,21 +207,21 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
     }
 
     private void signIn(String email, String password) {
-        if (!validateForm()) {
+        if (!validateForms())
             return;
-        }
-        showProgressDialog();
 
+        showProgressDialog();
         firebaseAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         //Sign in Success
-                        if(task.isSuccessful()) {}
+                        if(task.isSuccessful()) {
+                            // onAuthStateChanged will be called
+                        }
 
                         //Sign in Fail
                         if (!task.isSuccessful()) {
-                            Log.w("Sign in with Email", "signInWithEmail: failed", task.getException());
                             showAlertDialog("Sign in failed", "Unable to sign in.");
                         }
                         hideProgressDialog();
@@ -177,8 +229,7 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
                 });
     }
 
-    @Override
-    public void onStop(){
+    @Override public void onStop(){
         super.onStop();
         if (firebaseAuthListener != null){
             firebaseAuth.removeAuthStateListener(firebaseAuthListener);
@@ -186,28 +237,22 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
         hideProgressDialog();
     }
 
-    @Override
-    public void onStart() {
+    @Override public void onStart() {
         super.onStart();
         firebaseAuth.addAuthStateListener(firebaseAuthListener);
     }
 
-    @Override
-    protected void onPause() {
+    @Override protected void onPause() {
         super.onPause();
-        SharedPreferences.Editor editor = myPrefs.edit();
-        editor.putString("temp_email",etxtEmail.getText().toString());
-        editor.commit();
+        myPrefs.addPreference("temp_email",etxtEmail.getText().toString());
     }
 
-    @Override
-    protected void onResume() {
+    @Override protected void onResume() {
         super.onResume();
-        etxtEmail.setText(myPrefs.getString("temp_email",""));
+        etxtEmail.setText(myPrefs.getStringValue("temp_email"));
     }
 
-    @Override
-    public void onClick(View v) {
+    @Override public void onClick(View v) {
         int i = v.getId();
         if (i == R.id.Button_Register) {
             createAccount(etxtEmail.getText().toString(), etxtPassword.getText().toString());
@@ -230,7 +275,7 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
         dialog.show();
     }
 
-    private boolean validateForm() {
+    private boolean validateForms() {
         boolean valid = true;
 
         String email = etxtEmail.getText().toString();

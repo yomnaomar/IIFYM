@@ -11,7 +11,7 @@ import android.util.Log;
 
 //Database Helper class which ensures only one instance of the database is initialized
 
-public class DatabaseHelper extends SQLiteOpenHelper {
+public class SQLiteHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "MacroTrackerDB";
 
@@ -24,16 +24,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String Table_User          = "User";
 
-    private static DatabaseHelper sInstance;
+    private static SQLiteHelper sInstance;
 
-    public static synchronized DatabaseHelper getInstance(Context context) {
+    public static synchronized SQLiteHelper getInstance(Context context) {
         if (sInstance == null) {
-            sInstance = new DatabaseHelper(context.getApplicationContext());
+            sInstance = new SQLiteHelper(context.getApplicationContext());
         }
         return sInstance;
     }
 
-    private DatabaseHelper(Context context) {
+    private SQLiteHelper(Context context) {
         super(context, DATABASE_NAME, null, 1);
     }
 

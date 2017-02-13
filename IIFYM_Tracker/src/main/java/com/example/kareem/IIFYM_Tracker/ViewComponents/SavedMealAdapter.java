@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.example.kareem.IIFYM_Tracker.Custom_Objects.Meal;
 import com.example.kareem.IIFYM_Tracker.Custom_Objects.Portion_Type;
 import com.example.kareem.IIFYM_Tracker.Custom_Objects.Weight;
-import com.example.kareem.IIFYM_Tracker.Database.DatabaseConnector;
+import com.example.kareem.IIFYM_Tracker.Database.SQLiteConnector;
 import com.example.kareem.IIFYM_Tracker.R;
 
 import java.util.ArrayList;
@@ -21,7 +21,7 @@ import java.util.ArrayList;
  * Created by Kareem on 9/13/2016.
  */
 public class SavedMealAdapter extends ArrayAdapter<Meal>{
-    private DatabaseConnector My_DB;
+    private SQLiteConnector My_DB;
 
     private ArrayList<Meal> ArrayList_Meals_original;
     private ArrayList<Meal> ArrayList_Meals_filtered;
@@ -39,7 +39,7 @@ public class SavedMealAdapter extends ArrayAdapter<Meal>{
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        My_DB = new DatabaseConnector(getContext());
+        My_DB = new SQLiteConnector(getContext());
         // Get the data item for this position
         Meal M = getItem(position);
         int meal_id = M.getMeal_id();

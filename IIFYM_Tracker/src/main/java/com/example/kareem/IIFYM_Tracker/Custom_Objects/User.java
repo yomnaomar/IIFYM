@@ -197,8 +197,16 @@ public class User {
         this.dailyFat = dailyFat;
     }
 
-    //TODO Implement correctly
-    public int getAge (int _year, int _month, int _day) {
+    public int calculateAge () {
+        // Parse Date of Birth string
+        String ageArr[] = dob.split("-");
+
+        // Obtain Age value from Date of Birth String
+        int valAge = calculateAgeAgeFromDob(Integer.parseInt(ageArr[2]), Integer.parseInt(ageArr[1]), Integer.parseInt(ageArr[0]));
+        return valAge;
+    }
+
+    private int calculateAgeAgeFromDob (int _year, int _month, int _day) {
         GregorianCalendar cal = new GregorianCalendar();
         int y, m, d, a;
 
@@ -212,8 +220,6 @@ public class User {
                 .get(Calendar.DAY_OF_MONTH)))) {
             --a;
         }
-        if(a < 0)
-            throw new IllegalArgumentException("Age < 0");
         return a;
     }
 

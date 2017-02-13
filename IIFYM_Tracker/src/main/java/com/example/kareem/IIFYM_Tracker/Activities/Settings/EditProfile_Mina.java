@@ -11,7 +11,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.kareem.IIFYM_Tracker.Database.DatabaseConnector;
+import com.example.kareem.IIFYM_Tracker.Database.SQLiteConnector;
 import com.example.kareem.IIFYM_Tracker.R;
 
 public class EditProfile_Mina extends AppCompatActivity implements View.OnClickListener{
@@ -24,7 +24,7 @@ public class EditProfile_Mina extends AppCompatActivity implements View.OnClickL
     EditText email;
     Button update;
     String user_name;
-    DatabaseConnector DB;
+    SQLiteConnector DB;
 
     SharedPreferences settings;
     @Override
@@ -50,7 +50,7 @@ public class EditProfile_Mina extends AppCompatActivity implements View.OnClickL
 
         update.setOnClickListener(this);
 
-        DB = new DatabaseConnector(getApplication());
+        DB = new SQLiteConnector(getApplication());
 
 
     }

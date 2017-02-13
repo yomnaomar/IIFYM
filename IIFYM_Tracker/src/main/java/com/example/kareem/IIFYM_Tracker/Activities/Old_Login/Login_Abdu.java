@@ -18,7 +18,7 @@ import android.widget.Toast;
 import com.example.kareem.IIFYM_Tracker.Activities.Main.activityMain;
 import com.example.kareem.IIFYM_Tracker.Activities.User_Login_Authentification.activityLogin;
 import com.example.kareem.IIFYM_Tracker.Custom_Objects.User_Old;
-import com.example.kareem.IIFYM_Tracker.Database.DatabaseConnector;
+import com.example.kareem.IIFYM_Tracker.Database.SQLiteConnector;
 import com.example.kareem.IIFYM_Tracker.R;
 import com.example.kareem.IIFYM_Tracker.ViewComponents.LockableViewPager;
 
@@ -38,7 +38,7 @@ public class Login_Abdu extends AppCompatActivity implements myFragEventListener
      * The {@link ViewPager} that will host the section contents.
      */
     private LockableViewPager mViewPager;
-    private DatabaseConnector My_DB;
+    private SQLiteConnector My_DB;
     User_Old newUser;
 
     @Override
@@ -49,7 +49,7 @@ public class Login_Abdu extends AppCompatActivity implements myFragEventListener
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        My_DB = new DatabaseConnector(getApplicationContext());
+        My_DB = new SQLiteConnector(getApplicationContext());
 
 
         // Create the adapter that will return a fragment for each of the three

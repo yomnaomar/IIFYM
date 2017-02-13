@@ -21,7 +21,7 @@ import android.widget.TextView;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.androidadvance.topsnackbar.TSnackbar;
 import com.example.kareem.IIFYM_Tracker.Custom_Objects.User_Old;
-import com.example.kareem.IIFYM_Tracker.Database.DatabaseConnector;
+import com.example.kareem.IIFYM_Tracker.Database.SQLiteConnector;
 import com.example.kareem.IIFYM_Tracker.R;
 
 import java.util.ArrayList;
@@ -40,7 +40,7 @@ import tourguide.tourguide.TourGuide;
 public class MacroSettings extends AppCompatActivity implements View.OnFocusChangeListener{
 
     String user_name;
-    DatabaseConnector My_DB;
+    SQLiteConnector My_DB;
     User_Old currentUser;
 
     EditText goal,gender,carbs,prot,fat,workoutfreq,weight,height,calories,bmr,age;
@@ -109,7 +109,7 @@ public class MacroSettings extends AppCompatActivity implements View.OnFocusChan
 
         parentLayout = findViewById(R.id.activity_macro_settings);
 
-        My_DB = new DatabaseConnector(getApplicationContext());
+        My_DB = new SQLiteConnector(getApplicationContext());
 
         goal = (EditText)findViewById(R.id.txt_goal);
         gender = (EditText)findViewById(R.id.txt_gender);

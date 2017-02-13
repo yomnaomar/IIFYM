@@ -19,11 +19,11 @@ import com.example.kareem.IIFYM_Tracker.Custom_Objects.Weight;
  * Created by Kareem on 8/5/2016.
  */
 
-//DatabaseConnector class which contains two tables:
+//SQLiteConnector class which contains two tables:
 //Table1: SavedMeals
 //Table2: DailyMeals
 
-public class DatabaseConnector {
+public class SQLiteConnector {
 
     private static final String Table_Meal          = "Meal";
     private static final String Table_Weight        = "Weight";
@@ -35,12 +35,12 @@ public class DatabaseConnector {
     private static final String Table_User          = "User";
 
     private SQLiteDatabase database;
-    private DatabaseHelper databaseHelper;
+    private SQLiteHelper databaseHelper;
 
     Portion_Type portion = null;
 
-    public DatabaseConnector(Context context) {
-        databaseHelper = DatabaseHelper.getInstance(context);
+    public SQLiteConnector(Context context) {
+        databaseHelper = SQLiteHelper.getInstance(context);
         openReadableDB();
         openWriteableDB();
         Log.d("DBNAME", String.valueOf(context.getDatabasePath(databaseHelper.getDatabaseName())));

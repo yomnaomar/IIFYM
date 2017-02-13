@@ -5,9 +5,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputFilter;
 import android.text.InputType;
@@ -23,6 +21,7 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.kareem.IIFYM_Tracker.Database.SharedPreferenceHelper;
 import com.example.kareem.IIFYM_Tracker.R;
 import com.example.kareem.IIFYM_Tracker.ViewComponents.DecimalDigitsInputFilter;
 
@@ -34,8 +33,23 @@ import java.util.GregorianCalendar;
 import info.hoang8f.android.segmented.SegmentedGroup;
 
 public class activityUserInfo extends AppCompatActivity implements View.OnClickListener{
+//    OnClick (btnNext)
+//    {
+//      intent.putExtra("uid", uid);
+//      intent.putExtra("email", email);
+//      intent.putExtra("name", name);
+//      intent.putExtra("dob", dob);
+//      intent.putExtra("gender", gender);
+//      intent.putExtra("unitSystem", unitSystem);
+//      intent.putExtra("weight", weight);
+//      intent.putExtra("height1", height1);
+//      intent.putExtra("height2", height2);
+//      intent.putExtra("workoutFreq", workoutFreq);
+//      intent.putExtra("goal", goal);
+//      Go to userMacros
+//    }
 
-    // UI Elements
+    // GUI
     private String              uid, email;
     private TextView            lblWeightUnit, lblHeightUnit1, lblHeightUnit2;
     private EditText            etxtName, etxtDateOfBirth, etxtWeight, etxtHeightParam1, etxtHeightParam2;
@@ -53,12 +67,12 @@ public class activityUserInfo extends AppCompatActivity implements View.OnClickL
     private int         unitSystem;
     private float       weight;
     private int         height1, height2, workoutFreq, goal;
+    private Context     context;
 
     // Storage
-    private SharedPreferences myPrefs;
+    private SharedPreferenceHelper myPrefs;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_info);
 
@@ -70,7 +84,19 @@ public class activityUserInfo extends AppCompatActivity implements View.OnClickL
         initializeGUI();
 
         // Storage
-        myPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        context = getApplicationContext();
+        myPrefs = new SharedPreferenceHelper(context);
+
+        BroadcastReceiver broadcast_reciever = new BroadcastReceiver() {
+
+            @Override
+            public void onReceive(Context arg0, Intent intent) {
+                String action = intent.getAction();
+                if (action.equals("finish_activity"))
+                    finish();
+            }
+        };
+        registerReceiver(broadcast_reciever, new IntentFilter("finish_activity"));
     }
 
     private void readUserInput() {
@@ -120,19 +146,7 @@ public class activityUserInfo extends AppCompatActivity implements View.OnClickL
     }
 
     private void goToUserMacros() {
-        BroadcastReceiver broadcast_reciever = new BroadcastReceiver() {
-
-            @Override
-            public void onReceive(Context arg0, Intent intent) {
-                String action = intent.getAction();
-                if (action.equals("finish_activity"))
-                    finish();
-            }
-        };
-
-        registerReceiver(broadcast_reciever, new IntentFilter("finish_activity"));
-
-        Context context = getApplicationContext();
+        context = getApplicationContext();
         Intent intent = new Intent();
         intent.putExtra("uid", uid);
         intent.putExtra("email", email);
@@ -277,8 +291,7 @@ public class activityUserInfo extends AppCompatActivity implements View.OnClickL
         btnNext.setOnClickListener(this);
     }
 
-    @Override
-    public void onClick(View v) {
+    @Override public void onClick(View v) {
         switch (v.getId()) {
             case R.id.etxtDateOfBirth:
                 datePickerDialog.show();
@@ -346,48 +359,45 @@ public class activityUserInfo extends AppCompatActivity implements View.OnClickL
         }
     }
 
-    @Override
-    protected void onPause() {
+    //TODO fix showing 0 or -1 onCreate (make it blank if it is empty) (including radiobuttons)
+    @Override protected void onPause() {
         readUserInput();
 
-        SharedPreferences.Editor editor = myPrefs.edit();
-        editor.putString("temp_name",name);
-        editor.putString("temp_dob",dob);
+        myPrefs.addPreference("temp_name",name);
+        myPrefs.addPreference("temp_dob",dob);
         if(rbtnGenderMale.isChecked())
-            editor.putInt("temp_gender",0); // Male
+            myPrefs.addPreference("temp_gender",0); // Male
         else
-            editor.putInt("temp_gender",1); // Female
+            myPrefs.addPreference("temp_gender",1); // Female
         if(rbtnMetric.isChecked())
-            editor.putInt("temp_unitsystem",0); // Metric
+            myPrefs.addPreference("temp_unitsystem",0); // Metric
         else
-            editor.putInt("temp_unitsystem",1); // Imperial
-        editor.putFloat("temp_weight",weight);
-        editor.putInt("temp_height1",height1);
-        editor.putInt("temp_height2",height2);
-        editor.putInt("temp_workoutfreq",workoutFreq);
-        editor.putInt("temp_goal",goal);
-        editor.commit();
+            myPrefs.addPreference("temp_unitsystem",1); // Imperial
+        myPrefs.addPreference("temp_weight",weight);
+        myPrefs.addPreference("temp_height1",height1);
+        myPrefs.addPreference("temp_height2",height2);
+        myPrefs.addPreference("temp_workoutfreq",workoutFreq);
+        myPrefs.addPreference("temp_goal",goal);
         super.onPause();
     }
 
-    @Override
-    protected void onResume() {
+    @Override protected void onResume() {
         super.onResume();
-        etxtName.setText(myPrefs.getString("temp_name",""));
-        etxtDateOfBirth.setText(myPrefs.getString("temp_dob", dateFormatter.format(new Date()).toString()));
-        if(myPrefs.getInt("temp_gender",0) == 0) // Male
+        etxtName.setText(myPrefs.getStringValue("temp_name"));
+        etxtDateOfBirth.setText(myPrefs.getStringValue("temp_dob"));
+        if(myPrefs.getIntValue("temp_gender") == 0) // Male
             rbtnGenderMale.setChecked(true);
         else
             rbtnGenderFemale.setChecked(true); // Female
-        if(myPrefs.getInt("temp_unitsystem",0) == 0) // Metric
+        if(myPrefs.getIntValue("temp_unitsystem") == 0) // Metric
             rbtnMetric.setChecked(true);
         else
             rbtnGenderImperial.setChecked(true); // Imperial
-        etxtWeight.setText(myPrefs.getFloat("temp_weight",0.0f) + "");
-        etxtHeightParam1.setText(myPrefs.getInt("temp_height1",0) + "");
-        etxtHeightParam2.setText(myPrefs.getInt("temp_height2",0) + "");
-        spinnerWorkoutFreq.setSelection(myPrefs.getInt("temp_workoutfreq",0));
-        spinnerGoals.setSelection(myPrefs.getInt("temp_goal",0));
+        etxtWeight.setText(myPrefs.getFloatValue("temp_weight") + "");
+        etxtHeightParam1.setText(myPrefs.getIntValue("temp_height1") + "");
+        etxtHeightParam2.setText(myPrefs.getIntValue("temp_height2") + "");
+        spinnerWorkoutFreq.setSelection(myPrefs.getIntValue("temp_workoutfreq"));
+        spinnerGoals.setSelection(myPrefs.getIntValue("temp_goal"));
     }
 
     private boolean verifyAge(){

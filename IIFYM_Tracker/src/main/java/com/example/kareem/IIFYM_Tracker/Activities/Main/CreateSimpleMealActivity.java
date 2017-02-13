@@ -23,7 +23,7 @@ import android.widget.Toast;
 
 import com.example.kareem.IIFYM_Tracker.Custom_Objects.Meal;
 import com.example.kareem.IIFYM_Tracker.Custom_Objects.User_Old;
-import com.example.kareem.IIFYM_Tracker.Database.DatabaseConnector;
+import com.example.kareem.IIFYM_Tracker.Database.SQLiteConnector;
 import com.example.kareem.IIFYM_Tracker.R;
 
 public class CreateSimpleMealActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
@@ -35,7 +35,7 @@ public class CreateSimpleMealActivity extends AppCompatActivity implements View.
     private Spinner Spinner_Unit;
     private Button Button_Enter, Button_Cancel;
 
-    private DatabaseConnector My_DB;
+    private SQLiteConnector My_DB;
 
     private int Weight_Unit_Selected = 0;
 
@@ -87,7 +87,7 @@ public class CreateSimpleMealActivity extends AppCompatActivity implements View.
         //setup views
         UpdateGUI();
 
-        My_DB = new DatabaseConnector(getApplicationContext());
+        My_DB = new SQLiteConnector(getApplicationContext());
 
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         user_name = settings.getString("user_name", "");

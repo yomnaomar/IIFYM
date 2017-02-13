@@ -14,7 +14,7 @@ import android.widget.ListView;
 
 import com.example.kareem.IIFYM_Tracker.Custom_Objects.Meal;
 import com.example.kareem.IIFYM_Tracker.Custom_Objects.Portion_Type;
-import com.example.kareem.IIFYM_Tracker.Database.DatabaseConnector;
+import com.example.kareem.IIFYM_Tracker.Database.SQLiteConnector;
 import com.example.kareem.IIFYM_Tracker.R;
 import com.example.kareem.IIFYM_Tracker.ViewComponents.SavedMealAdapter;
 
@@ -26,7 +26,7 @@ public class SelectSavedMealActivity extends AppCompatActivity implements Adapte
     private ArrayList<Meal> ArrayList_SavedMeals;
     private SavedMealAdapter My_SavedMealAdapter;
     private ListView Meals_ListView;
-    private DatabaseConnector My_DB;
+    private SQLiteConnector My_DB;
 
     Portion_Type portion = null;
 
@@ -35,7 +35,7 @@ public class SelectSavedMealActivity extends AppCompatActivity implements Adapte
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_saved_meal);
 
-        My_DB = new DatabaseConnector(getApplicationContext());
+        My_DB = new SQLiteConnector(getApplicationContext());
 
         ArrayList_SavedMeals = new ArrayList<Meal>();
         ConstructArrayList_SavedMeals();

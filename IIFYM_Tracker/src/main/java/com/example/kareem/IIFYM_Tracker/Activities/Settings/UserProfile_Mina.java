@@ -12,12 +12,12 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.kareem.IIFYM_Tracker.Database.DatabaseConnector;
+import com.example.kareem.IIFYM_Tracker.Database.SQLiteConnector;
 import com.example.kareem.IIFYM_Tracker.R;
 
 public class UserProfile_Mina extends AppCompatActivity implements View.OnClickListener{
 
-    private DatabaseConnector DB;
+    private SQLiteConnector DB;
     TextView username;
     TextView userid;
     TextView dob;
@@ -42,7 +42,7 @@ public class UserProfile_Mina extends AppCompatActivity implements View.OnClickL
         edit= (Button) findViewById(R.id.EditBTN);
         edit.setOnClickListener(this);
 
-        DB = new DatabaseConnector(getApplicationContext());
+        DB = new SQLiteConnector(getApplicationContext());
 
     }
 

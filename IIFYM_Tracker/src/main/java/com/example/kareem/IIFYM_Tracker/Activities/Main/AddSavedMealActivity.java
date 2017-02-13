@@ -18,7 +18,7 @@ import android.widget.TextView;
 import com.example.kareem.IIFYM_Tracker.Custom_Objects.Meal;
 import com.example.kareem.IIFYM_Tracker.Custom_Objects.Portion_Type;
 import com.example.kareem.IIFYM_Tracker.Custom_Objects.Weight;
-import com.example.kareem.IIFYM_Tracker.Database.DatabaseConnector;
+import com.example.kareem.IIFYM_Tracker.Database.SQLiteConnector;
 import com.example.kareem.IIFYM_Tracker.R;
 
 public class AddSavedMealActivity extends AppCompatActivity implements View.OnClickListener, TextWatcher {
@@ -36,7 +36,7 @@ public class AddSavedMealActivity extends AppCompatActivity implements View.OnCl
     float multiplier;
     Meal M;
 
-    private DatabaseConnector My_DB;
+    private SQLiteConnector My_DB;
     private SharedPreferences settings;
     private boolean isServing;
 
@@ -62,7 +62,7 @@ public class AddSavedMealActivity extends AppCompatActivity implements View.OnCl
         Button_Done.setOnClickListener(this);
         Button_Cancel.setOnClickListener(this);
 
-        My_DB = new DatabaseConnector(getApplicationContext());
+        My_DB = new SQLiteConnector(getApplicationContext());
         settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
         meal_id = getIntent().getIntExtra("meal_id",1);

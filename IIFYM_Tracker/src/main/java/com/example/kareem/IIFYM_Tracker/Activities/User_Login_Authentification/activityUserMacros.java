@@ -3,15 +3,12 @@ package com.example.kareem.IIFYM_Tracker.Activities.User_Login_Authentification;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
@@ -25,10 +22,9 @@ import android.widget.TextView;
 
 import com.example.kareem.IIFYM_Tracker.Activities.Main.activityMain;
 import com.example.kareem.IIFYM_Tracker.Custom_Objects.User;
-import com.example.kareem.IIFYM_Tracker.Database.DatabaseConnector;
+import com.example.kareem.IIFYM_Tracker.Database.SQLiteConnector;
+import com.example.kareem.IIFYM_Tracker.Database.SharedPreferenceHelper;
 import com.example.kareem.IIFYM_Tracker.R;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -43,13 +39,14 @@ import tourguide.tourguide.ToolTip;
 
 public class activityUserMacros extends AppCompatActivity implements View.OnClickListener, TextWatcher {
 
-    // UI Elements
+    // GUI
     private SegmentedGroup  seggroupDisplay;
     private RadioButton     rbtnCalories, rbtnMacros;
     private EditText        etxtCalories, etxtCarbs, etxtProtein, etxtFat;
     private TextView        lblTitle, lblUnitCarbs, lblUnitProtein, lblUnitFat, lblTotal, lblAmountTotal, lblPercentTotal, lblValueCarbs, lblValueProtein, lblValueFat;
     private Button          btnFinish;
     private ImageButton     btnReset, btnInfo;
+    private Animation       mEnterAnimation, mExitAnimation;
 
     // Final Variables (Cannot be changed)
     private int             gender, unitSystem, height1, height2, workoutFreq, goal ,BMR;
@@ -57,22 +54,18 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
     private String          uid, email, name, dob;
     private int             caloriesDefault;
     private final int       carbsPercentDefault = 50, proteinPercentDefault = 25, fatPercentDefault = 25;
+    private Context         context;
 
-    // Dyanamic Variables (Can be changed)
+    // Dynamic Variables (Can be changed)
     private int             totalPercent, calories, carbs, protein, fat, carbsPercent, proteinPercent, fatPercent;
     private int             carbsOld, proteinOld, fatOld;
     private boolean         carbsChanged, proteinChanged, fatChanged;
 
-    //Aninmation
-    private Animation mEnterAnimation, mExitAnimation;
-
     // Storage
-    private SharedPreferences myPrefs;
-    private DatabaseConnector DB_SQLite;
-    private FirebaseAuth firebaseAuth;
-    FirebaseUser firebaseUser;
-    private DatabaseReference firebaseDbRef;
-    private ProgressDialog progressDialog;
+    private SharedPreferenceHelper  myPrefs;
+    private SQLiteConnector         DB_SQLite;
+    private DatabaseReference       firebaseDbRef;
+    private ProgressDialog          progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,11 +73,10 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
         setContentView(R.layout.activity_user_macros);
 
         // Storage
-        myPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-        firebaseAuth = FirebaseAuth.getInstance();
-        firebaseUser = firebaseAuth.getCurrentUser();
+        context = getApplicationContext();
+        myPrefs = new SharedPreferenceHelper(context);
         firebaseDbRef = FirebaseDatabase.getInstance().getReference();
-        DB_SQLite = new DatabaseConnector(getApplicationContext());
+        DB_SQLite = new SQLiteConnector(context);
 
         // Data from previous Login activities
         getIntentData();
@@ -176,7 +168,7 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
     }
 
     @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-        capruteOldValues();
+        captureOldValues();
     }
 
     @Override public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -185,7 +177,7 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
         updateValues();
     }
 
-    private void capruteOldValues() {
+    private void captureOldValues() {
         if(rbtnCalories.isChecked()) {
             String carbP = etxtCarbs.getText().toString();
             if (carbP.isEmpty())
@@ -431,13 +423,15 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
         protected void onPostExecute(Void result) {
             hideProgressDialog();
 
+            // Go to activityMain
+            // Store user session in Preferences
+            myPrefs.addPreference("session_uid",uid);
             Intent broadcastIntent = new Intent("finish_activity");
             sendBroadcast(broadcastIntent);
 
             Context context = getApplicationContext();
             Intent intent = new Intent();
             intent.setClass(context, activityMain.class);
-            intent.putExtra("user_uid", uid);
             startActivity(intent);
             finish();
         }
@@ -637,15 +631,12 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
         return valid;
     }
 
+    //TODO fix showing 0 or -1 onCreate (make it blank if it is empty) (including radiobuttons)
     @Override protected void onPause() {
-        SharedPreferences.Editor editor = myPrefs.edit();
-
         if(rbtnCalories.isChecked())
-            editor.putInt("temp_display", 0); // Calories
+            myPrefs.addPreference("temp_display", 0); // Calories
         else
-            editor.putInt("temp_display", 1); // Macros
-
-        editor.commit();
+            myPrefs.addPreference("temp_display", 1); // Macros
         super.onPause();
     }
 
@@ -655,7 +646,7 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
         super.onResume();
         etxtCalories.setText(caloriesDefault + "");
 
-        if(myPrefs.getInt("temp_display",0) == 0) { // Calories
+        if(myPrefs.getIntValue("temp_display") == 0) { // Calories
             rbtnCalories.setChecked(true);
             etxtCarbs.setText(carbsPercent + "");
             etxtProtein.setText(proteinPercent + "");

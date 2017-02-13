@@ -22,7 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.kareem.IIFYM_Tracker.Custom_Objects.User_Old;
-import com.example.kareem.IIFYM_Tracker.Database.DatabaseConnector;
+import com.example.kareem.IIFYM_Tracker.Database.SQLiteConnector;
 import com.example.kareem.IIFYM_Tracker.R;
 import com.example.kareem.IIFYM_Tracker.Custom_Objects.Meal;
 
@@ -36,7 +36,7 @@ public class AddQuickMealActivity extends AppCompatActivity implements View.OnCl
     private CheckBox CheckBox_SaveMeal;
     private Button Button_Enter, Button_Cancel;
 
-    private DatabaseConnector My_DB;
+    private SQLiteConnector My_DB;
 
     private int Weight_Unit_Selected = 0;
 
@@ -95,7 +95,7 @@ public class AddQuickMealActivity extends AppCompatActivity implements View.OnCl
         //setup views
         UpdateGUI();
 
-        My_DB = new DatabaseConnector(getApplicationContext());
+        My_DB = new SQLiteConnector(getApplicationContext());
 
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         user_name = settings.getString("user_name", "");

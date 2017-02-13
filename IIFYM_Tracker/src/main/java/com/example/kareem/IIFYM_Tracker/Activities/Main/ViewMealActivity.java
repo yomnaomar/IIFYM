@@ -20,7 +20,7 @@ import com.example.kareem.IIFYM_Tracker.Custom_Objects.DailyMeal;
 import com.example.kareem.IIFYM_Tracker.Custom_Objects.Meal;
 import com.example.kareem.IIFYM_Tracker.Custom_Objects.Portion_Type;
 import com.example.kareem.IIFYM_Tracker.Custom_Objects.Weight;
-import com.example.kareem.IIFYM_Tracker.Database.DatabaseConnector;
+import com.example.kareem.IIFYM_Tracker.Database.SQLiteConnector;
 import com.example.kareem.IIFYM_Tracker.R;
 
 public class ViewMealActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
@@ -39,7 +39,7 @@ public class ViewMealActivity extends AppCompatActivity implements AdapterView.O
     boolean isDaily, isQuick;
     int position;
 
-    private DatabaseConnector My_DB;
+    private SQLiteConnector My_DB;
     private Context context;
 
     @Override
@@ -47,7 +47,7 @@ public class ViewMealActivity extends AppCompatActivity implements AdapterView.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_meal);
         context = ViewMealActivity.this;
-        My_DB = new DatabaseConnector(getApplicationContext());
+        My_DB = new SQLiteConnector(getApplicationContext());
         Meal_ID = getIntent().getIntExtra("Meal_ID", 0);
         isDaily = getIntent().getBooleanExtra("isDaily", false);
         if (isDaily){
