@@ -16,6 +16,7 @@ import android.widget.EditText;
 
 import com.example.kareem.IIFYM_Tracker.Activities.Main.activityMain;
 import com.example.kareem.IIFYM_Tracker.Custom_Objects.User;
+import com.example.kareem.IIFYM_Tracker.Database.SQLiteConnector;
 import com.example.kareem.IIFYM_Tracker.Database.SharedPreferenceHelper;
 import com.example.kareem.IIFYM_Tracker.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -76,12 +77,13 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
     private Context         context;
 
     // Storage
+    private SQLiteConnector DB_SQLite;
     private SharedPreferenceHelper          myPrefs;
     private FirebaseAuth                    firebaseAuth;
     private DatabaseReference               firebaseDbRef;
     private FirebaseAuth.AuthStateListener  firebaseAuthListener;
 
-    //TODO don't load activity if user session is stored
+    //TODO don't load activity if user session is active
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -89,6 +91,8 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
         myPrefs = new SharedPreferenceHelper(context);
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseDbRef = FirebaseDatabase.getInstance().getReference();
+        // Creating SQLite DB here makes App's first run slower, but enhances user experience in later activities by avoiding creating the DB later
+        DB_SQLite = new SQLiteConnector(context);
 
         firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
