@@ -1,6 +1,8 @@
 package com.example.kareem.IIFYM_Tracker.Activities.User_Login_Authentification;
 
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.AsyncTask;
@@ -21,6 +23,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.example.kareem.IIFYM_Tracker.Activities.Main.activityMain;
 import com.example.kareem.IIFYM_Tracker.Custom_Objects.User;
 import com.example.kareem.IIFYM_Tracker.Database.DatabaseConnector;
 import com.example.kareem.IIFYM_Tracker.R;
@@ -59,7 +62,6 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
     private int             totalPercent, calories, carbs, protein, fat, carbsPercent, proteinPercent, fatPercent;
     private int             carbsOld, proteinOld, fatOld;
     private boolean         carbsChanged, proteinChanged, fatChanged;
-    private boolean         isRegistered;
 
     //Aninmation
     private Animation mEnterAnimation, mExitAnimation;
@@ -97,7 +99,7 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
         defaultValues();
 
         // UI guide
-        //beginChainTourGuide();
+        // beginChainTourGuide();
     }
 
     private void initializeGUI() {
@@ -401,21 +403,12 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
                 user = new User(uid, email, true, name, dob, gender,
                         unitSystem, weight, height1, height2, workoutFreq,
                         goal, calories, true, carbsPercent, proteinPercent, fatPercent);
-                Log.d("Finish", "User: " + "UID: " + uid + " email: " + email + " isRegsitered: " + true + " name: " + name + " dob: " + dob
-                        + " gender: " + gender + " unitSystem: " + unitSystem + " weight: " + weight + " height1: " + height1 + " height2: " + height2
-                        + " workoutFreq: " + workoutFreq + " goal: " + goal + " calories: " + calories + " isPercent: " + true +
-                        " carbsPercent: " + carbsPercent + " proteinPercent: " + proteinPercent + " fatPercent: " + fatPercent);
             }
             else {
                 user = new User(uid, email, true, name, dob, gender,
                         unitSystem, weight, height1, height2, workoutFreq,
                         goal, calories, false, carbs, protein, fat);
-                Log.d("Finish", "User: " + "UID: " + uid + " email: " + email + " isRegsitered: " + true + " name: " + name + " dob: " + dob
-                        + " gender: " + gender + " unitSystem: " + unitSystem + " weight: " + weight + " height1: " + height1 + " height2: " + height2
-                        + " workoutFreq: " + workoutFreq + " goal: " + goal + " calories: " + calories + " isPercent: " + false +
-                        " carbs: " + carbs + " protein : " + protein + " fat: " + fat);
             }
-
             new RegisterUser().execute(user);
         }
     }
@@ -437,7 +430,16 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
         @Override
         protected void onPostExecute(Void result) {
             hideProgressDialog();
-            //TODO Go to main
+
+            Intent broadcastIntent = new Intent("finish_activity");
+            sendBroadcast(broadcastIntent);
+
+            Context context = getApplicationContext();
+            Intent intent = new Intent();
+            intent.setClass(context, activityMain.class);
+            intent.putExtra("user_uid", uid);
+            startActivity(intent);
+            finish();
         }
     }
 
@@ -637,67 +639,41 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
 
     @Override protected void onPause() {
         SharedPreferences.Editor editor = myPrefs.edit();
-        if(rbtnCalories.isChecked()) {
+
+        if(rbtnCalories.isChecked())
             editor.putInt("temp_display", 0); // Calories
-            editor.putInt("temp_total", Integer.parseInt(lblAmountTotal.getText().toString()));
-            editor.putString("temp_gramsCarbs",lblValueCarbs.getText().toString());
-            editor.putString("temp_gramsProtein",lblValueProtein.getText().toString());
-            editor.putString("temp_gramsFat",lblValueFat.getText().toString());
-        }
         else
             editor.putInt("temp_display", 1); // Macros
-
-        if(etxtCalories.getText().toString().isEmpty())
-            editor.putInt("temp_calories", 0);
-        else
-            editor.putInt("temp_calories", Integer.parseInt(etxtCalories.getText().toString()));
-        if(etxtCarbs.getText().toString().isEmpty())
-            editor.putInt("temp_carbs", 0);
-        else
-            editor.putInt("temp_carbs", Integer.parseInt(etxtCarbs.getText().toString()));
-        if(etxtProtein.getText().toString().isEmpty())
-            editor.putInt("temp_protein", 0);
-        else
-            editor.putInt("temp_protein", Integer.parseInt(etxtProtein.getText().toString()));
-        if(etxtFat.getText().toString().isEmpty())
-            editor.putInt("temp_fat", 0);
-        else
-            editor.putInt("temp_fat", Integer.parseInt(etxtFat.getText().toString()));
 
         editor.commit();
         super.onPause();
     }
 
-    // TODO - Fix Bug:
-    // Close app while in activityUserMacros
-    // Re-open app will restart from activityUserInfo (intended)
-    // Change values from activityUserInfo
-    // Old calories & macros will be called from OnResume rather than new ones from getBMR
-    // because OnResume is called after OnCreate
-
-    // TODO - Fix Bug:
-    // Default macro percentages = 0 
     @Override protected void onResume() {
         // Load preferences
         // If preferences unavailable, set defaults
         super.onResume();
-        etxtCalories.setText(myPrefs.getInt("temp_calories", caloriesDefault) + "");
+        etxtCalories.setText(caloriesDefault + "");
 
         if(myPrefs.getInt("temp_display",0) == 0) { // Calories
             rbtnCalories.setChecked(true);
-            etxtCarbs.setText(myPrefs.getInt("temp_carbs", 0) + "");
-            etxtProtein.setText(myPrefs.getInt("temp_protein", 0) + "");
-            etxtFat.setText(myPrefs.getInt("temp_fat", 0) + "");
-            lblAmountTotal.setText(myPrefs.getInt("temp_total", 0) + "");
-            lblValueCarbs.setText(myPrefs.getString("temp_gramsCarbs", ""));
-            lblValueProtein.setText(myPrefs.getString("temp_gramsProtein",  ""));
-            lblValueFat.setText(myPrefs.getString("temp_gramsFat", ""));
+            etxtCarbs.setText(carbsPercent + "");
+            etxtProtein.setText(proteinPercent + "");
+            etxtFat.setText(fatPercent + "");
+            lblValueCarbs.setText("~" + Math.round(carbsPercent * 0.01f * caloriesDefault/4) + " g");
+            lblValueProtein.setText("~" + Math.round(proteinPercent * 0.01f * caloriesDefault/4) + " g");
+            lblValueFat.setText("~" + Math.round(fatPercent * 0.01f * caloriesDefault/9) + " g");
+            lblAmountTotal.setText(totalPercent + "");
+            if (totalPercent == 100)
+                lblAmountTotal.setTextColor(Color.parseColor("#2E7D32")); // Green
+            else
+                lblAmountTotal.setTextColor(Color.parseColor("#D50000")); // Red
         }
         else { // Macros
             rbtnMacros.setChecked(true);
-            etxtCarbs.setText(myPrefs.getInt("temp_carbs", 0) + "");
-            etxtProtein.setText(myPrefs.getInt("temp_protein", 0) + "");
-            etxtFat.setText(myPrefs.getInt("temp_fat", 0) + "");
+            etxtCarbs.setText(Math.round(carbsPercent * 0.01f * caloriesDefault/4) + "");
+            etxtProtein.setText(Math.round(proteinPercent * 0.01f * caloriesDefault/4) + "");
+            etxtFat.setText(Math.round(fatPercent * 0.01f * caloriesDefault/9) + "");
         }
         updateGUI();
     }

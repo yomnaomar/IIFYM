@@ -17,9 +17,9 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:id="@+id/linearlayoutBase"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/linearlayoutBase">
+        android:layout_alignParentStart="true">
 
         <LinearLayout
             android:orientation="horizontal"
@@ -359,14 +359,14 @@
             <RelativeLayout
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.21">
+                android:layout_weight="0.24">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAppearance="@android:style/TextAppearance.Material.Small"
                     android:id="@+id/lblCurrentCals"
-                    android:text="500 kcals"
+                    android:text="00000 kcals"
                     android:gravity="left"
                     android:layout_gravity="center"
                     android:textColor="@color/DarkGrayFaded2" />
@@ -376,7 +376,7 @@
             <RelativeLayout
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.185">
+                android:layout_weight="0.14">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -393,24 +393,26 @@
             <RelativeLayout
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.21">
+                android:layout_weight="0.24">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAppearance="@android:style/TextAppearance.Material.Small"
                     android:id="@+id/lblRemainingCals"
-                    android:text="1500 kcals"
+                    android:text="00000 kcals"
                     android:gravity="center"
                     android:layout_gravity="center"
-                    android:textColor="@color/DarkGrayFaded2"/>
+                    android:textColor="@color/DarkGrayFaded2"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentStart="true" />
 
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.185">
+                android:layout_weight="0.14">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -427,14 +429,14 @@
             <RelativeLayout
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.21">
+                android:layout_weight="0.24">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAppearance="@android:style/TextAppearance.Material.Small"
                     android:id="@+id/lblGoalCals"
-                    android:text="2000 kcals"
+                    android:text="00000 kcals"
                     android:gravity="right"
                     android:layout_gravity="center"
                     android:textColor="@color/DarkGrayFaded2"/>

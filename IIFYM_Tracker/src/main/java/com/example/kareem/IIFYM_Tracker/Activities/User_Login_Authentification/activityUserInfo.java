@@ -1,8 +1,10 @@
 package com.example.kareem.IIFYM_Tracker.Activities.User_Login_Authentification;
 
 import android.app.DatePickerDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -118,6 +120,18 @@ public class activityUserInfo extends AppCompatActivity implements View.OnClickL
     }
 
     private void goToUserMacros() {
+        BroadcastReceiver broadcast_reciever = new BroadcastReceiver() {
+
+            @Override
+            public void onReceive(Context arg0, Intent intent) {
+                String action = intent.getAction();
+                if (action.equals("finish_activity"))
+                    finish();
+            }
+        };
+
+        registerReceiver(broadcast_reciever, new IntentFilter("finish_activity"));
+
         Context context = getApplicationContext();
         Intent intent = new Intent();
         intent.putExtra("uid", uid);
@@ -133,7 +147,6 @@ public class activityUserInfo extends AppCompatActivity implements View.OnClickL
         intent.putExtra("goal", goal);
         intent.setClass(context, activityUserMacros.class);
         startActivity(intent);
-        finish();
     }
 
     private boolean validateFields() {
