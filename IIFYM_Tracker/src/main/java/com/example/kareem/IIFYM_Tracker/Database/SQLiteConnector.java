@@ -821,7 +821,7 @@ public class SQLiteConnector {
     }
 
     // Returns User with UID = uid if found
-    // Returns null User otherwise
+    // Returns null otherwise
     public User retrieveUser(String uid) {
         Cursor C = database.rawQuery("SELECT * FROM " + Table_User + " WHERE uid = '" + uid + "'", null);
         if (C.moveToFirst() && C != null) {

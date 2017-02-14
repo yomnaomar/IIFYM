@@ -109,13 +109,18 @@ public class SharedPreferenceHelper {
         return value;
     }
 
+    public String getStringValue(String key, String defValue) {
+        String value = preferences.getString(key, defValue);
+        return value;
+    }
+
     public Set<String> getValues(String key) {
         Set<String> values = preferences.getStringSet(key, null);
         return values;
     }
 
     public int getIntValue(String key) {
-        int value = preferences.getInt(key, -1);
+        int value = preferences.getInt(key, 0);
         return value;
     }
 
@@ -125,12 +130,12 @@ public class SharedPreferenceHelper {
     }
 
     public float getFloatValue(String key) {
-        float value = preferences.getFloat(key, -1);
+        float value = preferences.getFloat(key, 0);
         return value;
     }
 
     public Long getLongValue(String key) {
-        Long value = preferences.getLong(key, -1);
+        Long value = preferences.getLong(key, 0);
         return value;
     }
 

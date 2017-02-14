@@ -44,30 +44,24 @@
             android:name=".Activities.Main.SelectSavedMealActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
-        <activity
-            android:name=".Activities.Main.CreateComplexMealActivity"
-            android:label="Add Complex Meal"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" />
         android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".Activities.Main.AddSavedMealActivity"
-            android:theme="@style/AppTheme.NoActionBar" /><![CDATA[
+            android:theme="@style/AppTheme.NoActionBar" />
         >>>>>>> master
-        ]]>
         <activity
             android:name=".Activities.Main.CreateSimpleMealActivity"
             android:label="@string/title_activity_create_simple_meal"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Activities.User_Login_Authentification.activityLogin">
+        <activity android:name=".Activities.User_Login_Authentification.activityLogin"/>
+        <activity android:name=".Activities.User_Login_Authentification.activityUserInfo" />
+        <activity android:name=".Activities.User_Login_Authentification.activityUserMacros" />
+        <activity android:name=".Activities.User_Login_Authentification.activityLauncher">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activities.User_Login_Authentification.activityUserInfo" />
-        <activity android:name=".Activities.User_Login_Authentification.activityUserMacros"></activity>
     </application>
 
 </manifest>
