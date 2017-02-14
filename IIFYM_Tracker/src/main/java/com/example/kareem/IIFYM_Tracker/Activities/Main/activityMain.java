@@ -18,6 +18,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.akexorcist.roundcornerprogressbar.IconRoundCornerProgressBar;
 import com.example.kareem.IIFYM_Tracker.Activities.Old_Login.Login_Abdu;
@@ -34,6 +35,9 @@ import com.example.kareem.IIFYM_Tracker.R;
 import com.example.kareem.IIFYM_Tracker.ViewComponents.DailyMealAdapter;
 import com.example.kareem.IIFYM_Tracker.ViewComponents.OnListItemDeletedListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
@@ -63,7 +67,9 @@ public class activityMain extends AppCompatActivity implements View.OnClickListe
 
     // Storage
     SharedPreferenceHelper myPrefs;
-    private FirebaseAuth mAuth;
+    private FirebaseAuth firebaseAuth;
+    private DatabaseReference firebaseDbRef;
+    private FirebaseUser firebaseUser;
     private SQLiteConnector DB_SQLite;
 
     private String uid;
@@ -73,6 +79,7 @@ public class activityMain extends AppCompatActivity implements View.OnClickListe
     private Animation mEnterAnimation, mExitAnimation;
     private Context context;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,7 +88,9 @@ public class activityMain extends AppCompatActivity implements View.OnClickListe
         setSupportActionBar(toolbar);
 
         context = getApplicationContext();
-        mAuth = FirebaseAuth.getInstance();
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseUser = firebaseAuth.getCurrentUser();
+        firebaseDbRef = FirebaseDatabase.getInstance().getReference();
         DB_SQLite = new SQLiteConnector(context);
         myPrefs = new SharedPreferenceHelper(context);
 
@@ -118,9 +127,11 @@ public class activityMain extends AppCompatActivity implements View.OnClickListe
 
         parentLayout = findViewById(R.id.root_view);
 
-        // Getting the current user
         uid = myPrefs.getStringValue("session_uid");
         currentUser = DB_SQLite.retrieveUser(uid);
+
+        Toast toast = Toast.makeText(context, "Hello " + currentUser.getName() + "!", Toast.LENGTH_SHORT);
+        toast.show();
 
         // Setup enter and exit animation
         mEnterAnimation = new AlphaAnimation(0f, 1f);
@@ -176,9 +187,9 @@ public class activityMain extends AppCompatActivity implements View.OnClickListe
         if(id==R.id.logout_firbase_menu_btn)
         {
             signOut();
-            finish();
             Intent in = new Intent(getApplicationContext(), activityLogin.class);
             startActivity(in);
+            finish();
             return true;
         }
         if(id==R.id.profile_menu_btn)
@@ -366,7 +377,10 @@ public class activityMain extends AppCompatActivity implements View.OnClickListe
     }
 
     private void signOut() {
-        mAuth.signOut();
+        myPrefs.addPreference("session_uid", "");
+        Log.d("Main_SignOut","session_uid removed");
+        Log.d("Main_SignOut","checking ... " + myPrefs.getStringValue("session_uid"));
+        firebaseAuth.signOut();
     }
 
 }

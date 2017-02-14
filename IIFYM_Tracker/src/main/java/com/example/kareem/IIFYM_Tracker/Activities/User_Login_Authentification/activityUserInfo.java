@@ -174,7 +174,7 @@ public class activityUserInfo extends AppCompatActivity implements View.OnClickL
             etxtName.setError(null);
 
         if (!verifyAge()) {
-            etxtDateOfBirth.setError("Invalid");
+            etxtDateOfBirth.setError("Invalid Date");
             valid = false;
         }
         else {
@@ -313,6 +313,9 @@ public class activityUserInfo extends AppCompatActivity implements View.OnClickL
                 Calendar newDate = Calendar.getInstance();
                 newDate.set(year, monthOfYear, dayOfMonth);
                 etxtDateOfBirth.setText(dateFormatter.format(newDate.getTime()));
+                if(etxtDateOfBirth.getError() != null) {
+                    etxtDateOfBirth.setError(null);
+                }
             }
 
         }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
@@ -359,7 +362,6 @@ public class activityUserInfo extends AppCompatActivity implements View.OnClickL
         }
     }
 
-    //TODO fix showing 0 or -1 onCreate (make it blank if it is empty) (including radiobuttons)
     @Override protected void onPause() {
         readUserInput();
 
@@ -384,7 +386,8 @@ public class activityUserInfo extends AppCompatActivity implements View.OnClickL
     @Override protected void onResume() {
         super.onResume();
         etxtName.setText(myPrefs.getStringValue("temp_name"));
-        etxtDateOfBirth.setText(myPrefs.getStringValue("temp_dob"));
+        Calendar newDate = Calendar.getInstance();
+        etxtDateOfBirth.setText(myPrefs.getStringValue("temp_dob", dateFormatter.format(newDate.getTime())));
         if(myPrefs.getIntValue("temp_gender") == 0) // Male
             rbtnGenderMale.setChecked(true);
         else
@@ -393,9 +396,22 @@ public class activityUserInfo extends AppCompatActivity implements View.OnClickL
             rbtnMetric.setChecked(true);
         else
             rbtnGenderImperial.setChecked(true); // Imperial
-        etxtWeight.setText(myPrefs.getFloatValue("temp_weight") + "");
-        etxtHeightParam1.setText(myPrefs.getIntValue("temp_height1") + "");
-        etxtHeightParam2.setText(myPrefs.getIntValue("temp_height2") + "");
+
+        if(myPrefs.getFloatValue("temp_weight") != 0)
+            etxtWeight.setText(myPrefs.getFloatValue("temp_weight") + "");
+        else
+            etxtWeight.setText("");
+
+        if(myPrefs.getIntValue("temp_height1") != 0)
+            etxtHeightParam1.setText(myPrefs.getIntValue("temp_height1") + "");
+        else
+            etxtHeightParam1.setText("");
+
+        if(myPrefs.getIntValue("temp_height2") != 0)
+            etxtHeightParam2.setText(myPrefs.getIntValue("temp_height2") + "");
+        else
+            etxtHeightParam2.setText("");
+
         spinnerWorkoutFreq.setSelection(myPrefs.getIntValue("temp_workoutfreq"));
         spinnerGoals.setSelection(myPrefs.getIntValue("temp_goal"));
     }

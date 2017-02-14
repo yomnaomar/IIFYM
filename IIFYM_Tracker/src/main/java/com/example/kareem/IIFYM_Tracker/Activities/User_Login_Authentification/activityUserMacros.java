@@ -631,7 +631,6 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
         return valid;
     }
 
-    //TODO fix showing 0 or -1 onCreate (make it blank if it is empty) (including radiobuttons)
     @Override protected void onPause() {
         if(rbtnCalories.isChecked())
             myPrefs.addPreference("temp_display", 0); // Calories

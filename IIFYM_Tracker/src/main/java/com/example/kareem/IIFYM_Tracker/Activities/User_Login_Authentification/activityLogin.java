@@ -11,6 +11,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
@@ -75,6 +76,7 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
     // Variables
     private boolean         isRegistered;
     private Context         context;
+    BroadcastReceiver       broadcast_reciever;
 
     // Storage
     private SQLiteConnector DB_SQLite;
@@ -91,7 +93,7 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
         myPrefs = new SharedPreferenceHelper(context);
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseDbRef = FirebaseDatabase.getInstance().getReference();
-        // Creating SQLite DB here makes App's first run slower, but enhances user experience in later activities by avoiding creating the DB later
+        // Creating SQLite DB here makes App's first run slower, but enhances UX later by avoiding creating the DB later
         DB_SQLite = new SQLiteConnector(context);
 
         firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -103,6 +105,7 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
                 if (firebaseUser != null) {
                     final String uid = firebaseUser.getUid();
                     final String email = firebaseUser.getEmail();
+                    Log.d("OnAuthStateChanged","User " + uid +  "is signed in");
 
                     // Email is verified
                     if (firebaseAuth.getCurrentUser().isEmailVerified()) {
@@ -112,20 +115,23 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
                                 User userPost = dataSnapshot.getValue(User.class);
                                 isRegistered = userPost.isRegistered();
 
-                                if(isRegistered) {
-                                    // Go to activityMain
+                                if (isRegistered) {
+                                    // If User is not found, create new User
+                                    if(!DB_SQLite.isExistingUser(uid)){
+                                        DB_SQLite.createUser(userPost);
+                                    }
                                     // Store user session in Preferences
                                     myPrefs.addPreference("session_uid", uid);
+                                    // Go to activityMain
                                     Intent intent = new Intent();
                                     intent.setClass(context, activityMain.class);
                                     startActivity(intent);
                                     finish();
-                                }
-                                else {
+                                } else {
                                     // Go to activityUserInfo
                                     Intent intent = new Intent();
-                                    intent.putExtra("uid",uid);
-                                    intent.putExtra("email",email);
+                                    intent.putExtra("uid", uid);
+                                    intent.putExtra("email", email);
                                     intent.setClass(context, activityUserInfo.class);
                                     startActivity(intent);
                                 }
@@ -140,8 +146,8 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
                     } else {
                         // Email is not verified
                         // Display that user needs to verify email
-                        showAlertDialog("Email Verification","An email has been sent to you.\n" +
-                                            "Please verify your email in order to log in.");
+                        showAlertDialog("Email Verification", "An email has been sent to you.\n" +
+                                "Please verify your email in order to log in.");
                     }
                 }
             }
@@ -157,13 +163,14 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
         findViewById(R.id.Button_Login).setOnClickListener(this);
         findViewById(R.id.Button_Register).setOnClickListener(this);
 
-        BroadcastReceiver broadcast_reciever = new BroadcastReceiver() {
+        broadcast_reciever = new BroadcastReceiver() {
 
             @Override
             public void onReceive(Context arg0, Intent intent) {
                 String action = intent.getAction();
-                if (action.equals("finish_activity"))
+                if (action.equals("finish_activity")) {
                     finish();
+                }
             }
         };
         registerReceiver(broadcast_reciever, new IntentFilter("finish_activity"));
@@ -234,11 +241,12 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
     }
 
     @Override public void onStop(){
-        super.onStop();
+        unregisterReceiver(broadcast_reciever);
         if (firebaseAuthListener != null){
             firebaseAuth.removeAuthStateListener(firebaseAuthListener);
         }
         hideProgressDialog();
+        super.onStop();
     }
 
     @Override public void onStart() {
