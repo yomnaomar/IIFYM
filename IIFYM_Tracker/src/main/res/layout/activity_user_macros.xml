@@ -119,12 +119,12 @@
                 android:id="@+id/btnInfo"
                 android:layout_gravity="right"
                 android:background="@drawable/icon_info_selector"
-                android:layout_height="24dp"
                 android:layout_marginRight="@dimen/activity_vertical_margin"
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true"
-                android:layout_width="24dp"
-                app:srcCompat="@drawable/icon_info" />
+                android:layout_width="25dp"
+                app:srcCompat="@drawable/icon_info"
+                android:layout_height="25dp" />
         </RelativeLayout>
 
     </LinearLayout>
@@ -350,13 +350,14 @@
             android:layout_weight="0.25">
 
             <ImageButton
-                android:layout_width="24dp"
-                android:layout_height="24dp"
                 app:srcCompat="@drawable/icon_reset"
                 android:id="@+id/btnReset"
                 android:background="@drawable/icon_reset_selector"
                 android:layout_centerVertical="true"
-                android:layout_centerHorizontal="true" />
+                android:layout_centerHorizontal="true"
+                android:scaleType="fitCenter"
+                android:layout_width="28dp"
+                android:layout_height="28dp" />
         </RelativeLayout>
 
     </LinearLayout>
