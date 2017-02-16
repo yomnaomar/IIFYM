@@ -25,6 +25,7 @@ import com.example.kareem.IIFYM_Tracker.Custom_Objects.User;
 import com.example.kareem.IIFYM_Tracker.Database.SQLiteConnector;
 import com.example.kareem.IIFYM_Tracker.Database.SharedPreferenceHelper;
 import com.example.kareem.IIFYM_Tracker.R;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -47,6 +48,7 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
     private Button          btnFinish;
     private ImageButton     btnReset, btnInfo;
     private Animation       mEnterAnimation, mExitAnimation;
+    private ProgressDialog  progressDialog;
 
     // Final Variables (Cannot be changed)
     private int             gender, unitSystem, height1, height2, workoutFreq, goal ,BMR;
@@ -65,7 +67,7 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
     private SharedPreferenceHelper  myPrefs;
     private SQLiteConnector         DB_SQLite;
     private DatabaseReference       firebaseDbRef;
-    private ProgressDialog          progressDialog;
+    private FirebaseAuth            firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +77,7 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
         // Storage
         context = getApplicationContext();
         myPrefs = new SharedPreferenceHelper(context);
+        firebaseAuth = FirebaseAuth.getInstance();
         firebaseDbRef = FirebaseDatabase.getInstance().getReference();
         DB_SQLite = new SQLiteConnector(context);
 

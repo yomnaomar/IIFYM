@@ -79,7 +79,7 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
     BroadcastReceiver       broadcast_reciever;
 
     // Storage
-    private SQLiteConnector DB_SQLite;
+    private SQLiteConnector                 DB_SQLite;
     private SharedPreferenceHelper          myPrefs;
     private FirebaseAuth                    firebaseAuth;
     private DatabaseReference               firebaseDbRef;
@@ -114,6 +114,7 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
                             public void onDataChange(DataSnapshot dataSnapshot) {
                                 User userPost = dataSnapshot.getValue(User.class);
                                 isRegistered = userPost.isRegistered();
+                                Log.i("onAuthStateChanged","isRegistered: " + isRegistered);
 
                                 if (isRegistered) {
                                     // If User is not found, create new User
@@ -162,18 +163,6 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
         // Buttons
         findViewById(R.id.Button_Login).setOnClickListener(this);
         findViewById(R.id.Button_Register).setOnClickListener(this);
-
-        broadcast_reciever = new BroadcastReceiver() {
-
-            @Override
-            public void onReceive(Context arg0, Intent intent) {
-                String action = intent.getAction();
-                if (action.equals("finish_activity")) {
-                    finish();
-                }
-            }
-        };
-        registerReceiver(broadcast_reciever, new IntentFilter("finish_activity"));
     }
 
     private void createAccount(String email, String password) {
@@ -208,7 +197,7 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
                                         }
                                     });
                         }
-                        // User Create Failed
+                        //  Failed to Create User
                         if (!task.isSuccessful()) {
                             showAlertDialog("User Registration Failed","Unable to create user.");
                         }
@@ -241,7 +230,6 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
     }
 
     @Override public void onStop(){
-        unregisterReceiver(broadcast_reciever);
         if (firebaseAuthListener != null){
             firebaseAuth.removeAuthStateListener(firebaseAuthListener);
         }
@@ -256,11 +244,23 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
 
     @Override protected void onPause() {
         super.onPause();
+        unregisterReceiver(broadcast_reciever);
         myPrefs.addPreference("temp_email",etxtEmail.getText().toString());
     }
 
     @Override protected void onResume() {
         super.onResume();
+        broadcast_reciever = new BroadcastReceiver() {
+
+            @Override
+            public void onReceive(Context arg0, Intent intent) {
+                String action = intent.getAction();
+                if (action.equals("finish_activity")) {
+                    finish();
+                }
+            }
+        };
+        registerReceiver(broadcast_reciever, new IntentFilter("finish_activity"));
         etxtEmail.setText(myPrefs.getStringValue("temp_email"));
     }
 

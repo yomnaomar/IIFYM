@@ -21,7 +21,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.akexorcist.roundcornerprogressbar.IconRoundCornerProgressBar;
-import com.example.kareem.IIFYM_Tracker.Activities.Old_Login.Login_Abdu;
 import com.example.kareem.IIFYM_Tracker.Activities.Settings.MacroSettings;
 import com.example.kareem.IIFYM_Tracker.Activities.Settings.UserProfile_Mina;
 import com.example.kareem.IIFYM_Tracker.Activities.User_Login_Authentification.activityLogin;
@@ -174,14 +173,6 @@ public class activityMain extends AppCompatActivity implements View.OnClickListe
             Intent intent = new Intent();
             intent.setClassName(this, "com.example.kareem.IIFYM_Tracker.Activities.Main.ViewSavedMealsActivity");
             startActivity(intent);
-            return true;
-        }
-        if(id==R.id.logout_menu_btn)
-        {
-            //DB_SQLite.close();
-            finish();
-            Intent in = new Intent(getApplicationContext(), Login_Abdu.class);
-            startActivity(in);
             return true;
         }
         if(id==R.id.logout_firbase_menu_btn)

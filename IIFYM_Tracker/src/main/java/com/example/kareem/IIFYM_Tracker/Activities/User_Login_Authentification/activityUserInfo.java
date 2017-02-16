@@ -24,6 +24,7 @@ import android.widget.TextView;
 import com.example.kareem.IIFYM_Tracker.Database.SharedPreferenceHelper;
 import com.example.kareem.IIFYM_Tracker.R;
 import com.example.kareem.IIFYM_Tracker.ViewComponents.DecimalDigitsInputFilter;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -70,7 +71,9 @@ public class activityUserInfo extends AppCompatActivity implements View.OnClickL
     private Context     context;
 
     // Storage
-    private SharedPreferenceHelper myPrefs;
+    private SharedPreferenceHelper  myPrefs;
+    private FirebaseAuth            firebaseAuth;
+    private BroadcastReceiver       broadcast_reciever;
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,17 +89,7 @@ public class activityUserInfo extends AppCompatActivity implements View.OnClickL
         // Storage
         context = getApplicationContext();
         myPrefs = new SharedPreferenceHelper(context);
-
-        BroadcastReceiver broadcast_reciever = new BroadcastReceiver() {
-
-            @Override
-            public void onReceive(Context arg0, Intent intent) {
-                String action = intent.getAction();
-                if (action.equals("finish_activity"))
-                    finish();
-            }
-        };
-        registerReceiver(broadcast_reciever, new IntentFilter("finish_activity"));
+        firebaseAuth = FirebaseAuth.getInstance();
     }
 
     private void readUserInput() {
@@ -364,7 +357,7 @@ public class activityUserInfo extends AppCompatActivity implements View.OnClickL
 
     @Override protected void onPause() {
         readUserInput();
-
+        unregisterReceiver(broadcast_reciever);
         myPrefs.addPreference("temp_name",name);
         myPrefs.addPreference("temp_dob",dob);
         if(rbtnGenderMale.isChecked())
@@ -385,6 +378,16 @@ public class activityUserInfo extends AppCompatActivity implements View.OnClickL
 
     @Override protected void onResume() {
         super.onResume();
+        broadcast_reciever = new BroadcastReceiver() {
+
+            @Override
+            public void onReceive(Context arg0, Intent intent) {
+                String action = intent.getAction();
+                if (action.equals("finish_activity"))
+                    finish();
+            }
+        };
+        registerReceiver(broadcast_reciever, new IntentFilter("finish_activity"));
         etxtName.setText(myPrefs.getStringValue("temp_name"));
         Calendar newDate = Calendar.getInstance();
         etxtDateOfBirth.setText(myPrefs.getStringValue("temp_dob", dateFormatter.format(newDate.getTime())));

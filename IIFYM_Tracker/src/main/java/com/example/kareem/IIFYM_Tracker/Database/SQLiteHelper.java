@@ -13,22 +13,21 @@ import android.util.Log;
 
 public class SQLiteHelper extends SQLiteOpenHelper {
 
-    private static final String DATABASE_NAME = "MacroTrackerDB";
+    private static final String DATABASE_NAME = "DB_IIFYM";
+
+    private static final String Table_User          = "User";
 
     private static final String Table_Meal          = "Meal";
     private static final String Table_Weight        = "Weight";
     private static final String Table_Serving       = "Serving";
     private static final String Table_Daily_Meals   = "Daily_Meal";
     private static final String Table_Composed_Of   = "Composed_Of";
-    private static final String Table_User_Old      = "User_Old";
-
-    private static final String Table_User          = "User";
 
     private static SQLiteHelper sInstance;
 
     public static synchronized SQLiteHelper getInstance(Context context) {
         if (sInstance == null) {
-            sInstance = new SQLiteHelper(context.getApplicationContext());
+            sInstance = new SQLiteHelper(context);
         }
         return sInstance;
     }
@@ -39,15 +38,34 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        Log.d("DBHELPER","onCreate Called");
+        Log.d("SQLiteHelper","onCreate Called");
+
+        String createTable_User = "CREATE TABLE " + Table_User + " " +
+                "(uid               TEXT PRIMARY KEY, " +   // firebase UID
+                "isRegistered       INTEGER, " +            // 0 = no 1 = yes
+                "email              TEXT, " +
+                "name               TEXT, " +
+                "dob                TEXT, " +               // dd/mm/yyyy
+                "gender             INTEGER, " +            // 0 = M or 1 = F
+                "unitSystem         INTEGER, " +            // 0 = Metric or 1 = Imperial
+                "weight             REAL, " +
+                "height1            INTEGER, " +
+                "height2            INTEGER, " +
+                "workoutFrequency   INTEGER, " +            // 0-4
+                "goal               INTEGER, " +            // 0-2
+                "dailyCalories      INTEGER, " +
+                "isPercent          INTEGER, " +            // 0 = false or 1 = true
+                "dailyCarbs         INTEGER, " +
+                "dailyProtein       INTEGER, " +
+                "dailyFat           INTEGER);";
 
         /*String createTable_Meal = "CREATE TABLE " + Table_Meal + " " +
                 "(meal_id       INTEGER PRIMARY KEY autoincrement, " +
                 "meal_name      TEXT UNIQUE, " +
                 "date_created   TEXT, " +
-                "icon_carbs          INTEGER, " +
-                "icon_protein        INTEGER, " +
-                "icon_fat            INTEGER, " +
+                "carbs          INTEGER, " +
+                "protein        INTEGER, " +
+                "fat            INTEGER, " +
                 "portion        INTEGER, " +     //enum, 0 - Serving, 1 - Weight, 2 - None
                 "is_daily       INTEGER, " +     //boolean, processed in code
                 "user_id        INTEGER, " +
@@ -58,9 +76,9 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 "(meal_id           INTEGER PRIMARY KEY autoincrement, " +
                 "meal_name          TEXT UNIQUE, " +
                 "date_created       TEXT, " +
-                "icon_carbs              REAL, " +
-                "icon_protein            REAL, " +
-                "icon_fat                REAL, " +
+                "carbs              REAL, " +
+                "protein            REAL, " +
+                "fat                REAL, " +
                 "portion            INTEGER, " +     //enum, 0 - Serving, 1 - Weight, 2 - None
                 "user_id            INTEGER, " +
                 "is_quick           INTEGER);"; //TODO REDESIGN THIS NONSENSE
@@ -88,63 +106,24 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 "CONSTRAINT meal_id_fk FOREIGN KEY(meal_id) REFERENCES " + Table_Meal + " (meal_id) ON DELETE CASCADE);";
 
         String createTable_Composed_Of = "CREATE TABLE " + Table_Composed_Of + " " +
-                "(meal_id       INTEGER, " +
-                "complex_id     INTEGER, " +
+                "(food_id       INTEGER, " +
+                "meal_id     INTEGER, " +
 
                 "CONSTRAINT complex_id_pk PRIMARY KEY(meal_id, complex_id), " +
                 "CONSTRAINT meal_id_fk FOREIGN KEY(meal_id) REFERENCES " + Table_Meal + " (meal_id), " +
                 "CONSTRAINT complex_id_fk FOREIGN KEY(complex_id) REFERENCES " + Table_Meal + "(meal_id) ON DELETE CASCADE);";
         //ON UPDATE is not needed because meal_id will never be updated, it is hidden from the user
 
-        String createTable_User_Old = "CREATE TABLE " + Table_User_Old + " " +
-                "(user_id           INTEGER PRIMARY KEY autoincrement, " +
-                "user_name          TEXT UNIQUE, " +
-                "dob                TEXT, " +
-                "weight             REAL, " +
-                "height             REAL, " +
-                "workout_freq       INTEGER, " +
-                "gender             TEXT, " +        //M or F
-                "age                INTEGER, " +
-                "goal               INTEGER, " +     //enum, 0 - Gain, 1 - Lose or 2 - Maintain
-                "fname              TEXT, " +
-                "lname              TEXT, " +
-                "email              TEXT, " +
-                "percent_carbs      INTEGER, " +
-                "percent_protein    INTEGER, " +
-                "percent_fat        INTEGER, " +
-                "weight_unit        INTEGER, " +
-                "height_unit        INTEGER); ";
-
         //Create tables
+        db.execSQL(createTable_User);
         db.execSQL(createTable_Meal);
         db.execSQL(createTable_Weight);
         db.execSQL(createTable_Serving);
         db.execSQL(createTable_Daily_Meals);
         db.execSQL(createTable_Composed_Of);
-        db.execSQL(createTable_User_Old);
-        Log.d("TABLES", "DB tables created ");
+        Log.d("SQLiteHelper", "SQLite tables created ");
 
-        //NEW SQLITE DATABASE-----------------------------------------------------------------------
-        String createTable_User = "CREATE TABLE " + Table_User + " " +
-                "(uid               TEXT PRIMARY KEY, " +   // firebase UID
-                "isRegistered       INTEGER, " +            // 0 = no 1 = yes
-                "email              TEXT, " +
-                "name               TEXT, " +
-                "dob                TEXT, " +               // dd/mm/yyyy
-                "gender             INTEGER, " +            // 0 = M or 1 = F
-                "unitSystem         INTEGER, " +            // 0 = Metric or 1 = Imperial
-                "weight             REAL, " +
-                "height1            INTEGER, " +
-                "height2            INTEGER, " +
-                "workoutFrequency   INTEGER, " +            // 0-4
-                "goal               INTEGER, " +            // 0-2
-                "dailyCalories      INTEGER, " +
-                "isPercent          INTEGER, " +            // 0 = F or 1 = T
-                "dailyCarbs         INTEGER, " +
-                "dailyProtein       INTEGER, " +
-                "dailyFat           INTEGER);";
 
-        db.execSQL(createTable_User);
     }
 
     @Override
@@ -154,6 +133,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     @Override
     public void onOpen(SQLiteDatabase db) {
         super.onOpen(db);
-        db.execSQL("PRAGMA foreign_keys=ON;"); // Enable foreign key constraints
+        // Enable foreign key constraints
+        db.execSQL("PRAGMA foreign_keys=ON;");
     }
 }
