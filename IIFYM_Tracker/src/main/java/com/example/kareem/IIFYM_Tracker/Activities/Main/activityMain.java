@@ -107,14 +107,14 @@ public class activityMain extends AppCompatActivity implements View.OnClickListe
         Text_ProteinCurrent = (TextView) findViewById(R.id.Text_ProteinCurrent);
         Text_FatCurrent = (TextView) findViewById(R.id.Text_FatCurrent);
 
-        Carb_ProgressBar = (IconRoundCornerProgressBar) findViewById(R.id.Carb_ProgressBar);
-        Protein_ProgressBar = (IconRoundCornerProgressBar) findViewById(R.id.Protein_ProgressBar);
-        Fat_ProgressBar = (IconRoundCornerProgressBar) findViewById(R.id.Fat_ProgressBar);
-
-        Button_AddSavedMeal = (Button) findViewById(R.id.Button_AddSavedMeal);
-        Button_AddSavedMeal.setOnClickListener(this);
-        Button_AddQuickMeal = (Button) findViewById(R.id.Button_AddQuickMeal);
-        Button_AddQuickMeal.setOnClickListener(this);
+//        Carb_ProgressBar = (IconRoundCornerProgressBar) findViewById(R.id.Carb_ProgressBar);
+//        Protein_ProgressBar = (IconRoundCornerProgressBar) findViewById(R.id.Protein_ProgressBar);
+//        Fat_ProgressBar = (IconRoundCornerProgressBar) findViewById(R.id.Fat_ProgressBar);
+//
+//        Button_AddSavedMeal = (Button) findViewById(R.id.Button_AddSavedMeal);
+//        Button_AddSavedMeal.setOnClickListener(this);
+//        Button_AddQuickMeal = (Button) findViewById(R.id.Button_AddQuickMeal);
+//        Button_AddQuickMeal.setOnClickListener(this);
 
         ArrayList_DailyMeals = new ArrayList<DailyMeal>();
         My_DailyMealAdapter = new DailyMealAdapter(this, ArrayList_DailyMeals);
@@ -200,14 +200,14 @@ public class activityMain extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.Button_AddSavedMeal:
-                AddSavedMeal();
-                break;
-            case R.id.Button_AddQuickMeal:
-                AddQuickMeal();
-                break;
-        }
+//        switch (v.getId()){
+//            case R.id.Button_AddSavedMeal:
+//                AddSavedMeal();
+//                break;
+//            case R.id.Button_AddQuickMeal:
+//                AddQuickMeal();
+//                break;
+//        }
     }
 
     private void AddSavedMeal() {

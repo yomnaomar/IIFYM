@@ -13,6 +13,18 @@
     tools:context="com.example.kareem.IIFYM_Tracker.Activities.Main.activityMain"
     tools:showIn="@layout/activity_home">
 
+    <android.support.design.widget.FloatingActionButton
+        android:clickable="true"
+        app:srcCompat="@drawable/icon_addnewmeal"
+        android:id="@+id/fabAddDailyMeal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:fabSize="normal"
+        android:scaleType="centerCrop"
+        android:adjustViewBounds="false"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true" />
+
     <LinearLayout
         android:id="@+id/linearlayoutBase"
         android:layout_width="match_parent"
@@ -110,7 +122,10 @@
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:scaleType="centerInside"
-                app:srcCompat="@drawable/icon_calories" />
+                app:srcCompat="@drawable/icon_calories"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:paddingTop="5dp" />
 
             <LinearLayout
                 android:id="@+id/linearLayoutCaloriesProgressBar"
@@ -172,7 +187,8 @@
                     app:rcProgress="0"
                     app:rcProgressColor="@color/CaloriesProgessColor"
                     app:rcRadius="10dp"
-                    app:rcReverse="true" />
+                    app:rcReverse="true"
+                    android:id="@+id/progressBarCalories" />
 
             </LinearLayout>
 
@@ -280,7 +296,8 @@
                     app:rcProgress="0"
                     app:rcProgressColor="@color/CarbProgressColor"
                     app:rcRadius="10dp"
-                    app:rcReverse="true" />
+                    app:rcReverse="true"
+                    android:id="@+id/progressBarCarbs" />
 
             </LinearLayout>
 
@@ -363,7 +380,8 @@
                     app:rcProgress="0"
                     app:rcProgressColor="@color/ProteinProgessColor"
                     app:rcRadius="10dp"
-                    app:rcReverse="true" />
+                    app:rcReverse="true"
+                    android:id="@+id/progressBarProtein" />
 
             </LinearLayout>
 
@@ -444,7 +462,8 @@
                     app:rcProgress="0"
                     app:rcProgressColor="@color/FatProgessColor"
                     app:rcRadius="10dp"
-                    app:rcReverse="true" />
+                    app:rcReverse="true"
+                    android:id="@+id/progressBarFat" />
 
             </LinearLayout>
 
@@ -459,17 +478,5 @@
             android:layout_height="match_parent" />
 
     </LinearLayout>
-
-    <android.support.design.widget.FloatingActionButton
-        android:clickable="true"
-        app:srcCompat="@drawable/icon_addnewmeal"
-        android:id="@+id/floatingActionButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        app:fabSize="normal"
-        android:scaleType="centerCrop"
-        android:layout_alignParentRight="true" />
 
 </RelativeLayout>
