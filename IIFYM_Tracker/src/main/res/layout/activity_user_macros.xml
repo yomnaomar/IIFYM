@@ -356,8 +356,8 @@
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true"
                 android:scaleType="fitCenter"
-                android:layout_width="28dp"
-                android:layout_height="28dp" />
+                android:layout_width="32dp"
+                android:layout_height="32dp" />
         </RelativeLayout>
 
     </LinearLayout>
