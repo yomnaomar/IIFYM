@@ -83,14 +83,14 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 "CONSTRAINT food_id_fk FOREIGN KEY(id) REFERENCES " + Table_Food + " (id) ON DELETE CASCADE);";
                 //ON UPDATE is not needed because the id will never be updated, it is hidden from the user
 
-        String createTable_Daily_Meals = "CREATE TABLE " + Table_DailyItem + " " +
+        String createTable_DailyItem = "CREATE TABLE " + Table_DailyItem + " " +
                 "(position      INTEGER PRIMARY KEY, " +
                 "id             INTEGER, " +
                 "multiplier     REAL, " +
                 "CONSTRAINT food_id_fk FOREIGN KEY(id) REFERENCES " + Table_Food + " (id) ON DELETE CASCADE);";
 
-        String createTable_Composed_Of = "CREATE TABLE " + Table_ComposedOf + " " +
-                "(mid   INTEGER, " +    // mid = Meal ID
+        String createTable_ComposedOf = "CREATE TABLE " + Table_ComposedOf + " " +
+                "(mid   INTEGER, " +    // mid = Food ID
                 "fid    INTEGER, " +    // fid = Food ID
                 "CONSTRAINT composed_id_pk PRIMARY KEY(mid, fid), " +
                 "CONSTRAINT meal_id_fk FOREIGN KEY(mid) REFERENCES " + Table_Food + " (id) ON DELETE CASCADE, " +
@@ -102,8 +102,8 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         db.execSQL(createTable_Food);
         db.execSQL(createTable_Weight);
         db.execSQL(createTable_Serving);
-        db.execSQL(createTable_Daily_Meals);
-        db.execSQL(createTable_Composed_Of);
+        db.execSQL(createTable_DailyItem);
+        db.execSQL(createTable_ComposedOf);
         Log.d("SQLiteHelper", "SQLite tables created ");
     }
 

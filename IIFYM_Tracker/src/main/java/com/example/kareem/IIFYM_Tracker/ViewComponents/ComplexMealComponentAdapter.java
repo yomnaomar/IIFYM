@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.example.kareem.IIFYM_Tracker.Custom_Objects.Meal;
+import com.example.kareem.IIFYM_Tracker.Custom_Objects.Food;
 import com.example.kareem.IIFYM_Tracker.R;
 
 import java.util.ArrayList;
@@ -16,16 +16,16 @@ import java.util.ArrayList;
  * Created by GIGABYTE on 12/11/2016.
  */
 
-public class ComplexMealComponentAdapter extends ArrayAdapter<Meal> {
+public class ComplexMealComponentAdapter extends ArrayAdapter<Food> {
 
-    public ComplexMealComponentAdapter(Context context, ArrayList<Meal> meals) {
-        super(context, 0, meals);
+    public ComplexMealComponentAdapter(Context context, ArrayList<Food> foods) {
+        super(context, 0, foods);
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
               // Get the data item for this position
-        Meal M = getItem(position);
+        Food M = getItem(position);
         int meal_id = M.getMeal_id();
 
         // Check if an existing view is being reused, otherwise inflate the view

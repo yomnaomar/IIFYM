@@ -21,8 +21,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.kareem.IIFYM_Tracker.Custom_Objects.Meal;
-import com.example.kareem.IIFYM_Tracker.Custom_Objects.User_Old;
+import com.example.kareem.IIFYM_Tracker.Custom_Objects.Food;
 import com.example.kareem.IIFYM_Tracker.Database.SQLiteConnector;
 import com.example.kareem.IIFYM_Tracker.R;
 
@@ -106,35 +105,35 @@ public class CreateSimpleMealActivity extends AppCompatActivity implements View.
     }
 
     private void InsertSimpleMeal(String meal_name, float carbs, float protein, float fat, int indexofPortionType) {
-        //Initializing Meal to be inserted in Database
-        Meal NewMeal = new Meal(meal_name, carbs, protein, fat, indexofPortionType, currentUser.getUser_id());
+        //Initializing Food to be inserted in Database
+        Food newFood = new Food(meal_name, carbs, protein, fat, indexofPortionType, currentUser.getUser_id());
 
-        if (My_DB.insertSavedMeal(NewMeal)) {
-            Meal NewMeal_WithID = My_DB.getMeal(meal_name);//meal needs to be retrieved because ID is initialized in the DB
-            Log.i("Meal Inserted", "ID: " + NewMeal_WithID.getMeal_id() + " Name:" + " " + NewMeal.getMeal_name());
+        if (My_DB.insertSavedMeal(newFood)) {
+            Food newFood_WithID = My_DB.getMeal(meal_name);//meal needs to be retrieved because ID is initialized in the DB
+            Log.i("Food Inserted", "ID: " + newFood_WithID.getMeal_id() + " Name:" + " " + newFood.getMeal_name());
 
-            if (indexofPortionType == 0) { //Meal is measured by servings
+            if (indexofPortionType == 0) { //Food is measured by servings
                 float Serving_Number = Float.parseFloat(EditText_ServingNumber.getText().toString());
-                if (My_DB.insertServing(NewMeal_WithID, Serving_Number)) {
-                    Log.i("Serving Inserted", "ID: " + NewMeal_WithID.getMeal_id() + " Name:" + " " + NewMeal.getMeal_name() + " Serving #: " + Serving_Number);
+                if (My_DB.insertServing(newFood_WithID, Serving_Number)) {
+                    Log.i("Serving Inserted", "ID: " + newFood_WithID.getMeal_id() + " Name:" + " " + newFood.getMeal_name() + " Serving #: " + Serving_Number);
                 } else {
                     Toast.makeText(this, "Failed to insert serving", Toast.LENGTH_SHORT).show();
                 }
-            } else if (indexofPortionType == 1) { //Meal is measured by weight
+            } else if (indexofPortionType == 1) { //Food is measured by weight
                 int Weight_Quantity = Integer.parseInt(EditText_Quantity.getText().toString());
-                if (My_DB.insertWeight(NewMeal_WithID, Weight_Quantity, Weight_Unit_Selected)) {
+                if (My_DB.insertWeight(newFood_WithID, Weight_Quantity, Weight_Unit_Selected)) {
                     Toast.makeText(this, "Weight added", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(this, "Failed to insert Weight", Toast.LENGTH_SHORT).show();
                 }
             }
-            Toast.makeText(this, "Meal added", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Food added", Toast.LENGTH_SHORT).show();
             Context context = getApplicationContext();
             Intent intent = new Intent();
             intent.setClass(context, ViewSavedMealsActivity.class);
             startActivity(intent);
         } else {
-            Toast.makeText(this, "Meal with the same name already exists", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Food with the same name already exists", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -156,8 +155,8 @@ public class CreateSimpleMealActivity extends AppCompatActivity implements View.
         }
     }
 
-    //Inserts Meal from User_Old input to Meal table in the Database
-    //Alerts the User_Old if a Meal with the same meal_name already exists and makes no changes
+    //Inserts Food from User_Old input to Food table in the Database
+    //Alerts the User_Old if a Food with the same meal_name already exists and makes no changes
     private void Enter() {
         fieldsOk = validate(new EditText[]{EditText_MealName, EditText_Carbs, EditText_Protein,EditText_Fat});
         if(fieldsOk) {

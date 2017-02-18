@@ -12,7 +12,7 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 
-import com.example.kareem.IIFYM_Tracker.Custom_Objects.Meal;
+import com.example.kareem.IIFYM_Tracker.Custom_Objects.Food;
 import com.example.kareem.IIFYM_Tracker.Custom_Objects.Portion_Type;
 import com.example.kareem.IIFYM_Tracker.Database.SQLiteConnector;
 import com.example.kareem.IIFYM_Tracker.R;
@@ -23,7 +23,7 @@ import java.util.ArrayList;
 public class ViewSavedMealsActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     private EditText EditText_MealSearch;
-    private ArrayList<Meal> ArrayList_SavedMeals;
+    private ArrayList<Food> arrayList_SavedFoods;
     private SavedMealAdapter My_SavedMealAdapter;
     private ListView Meals_ListView;
     private SQLiteConnector My_DB;
@@ -40,9 +40,9 @@ public class ViewSavedMealsActivity extends AppCompatActivity implements Adapter
         My_DB = new SQLiteConnector(getApplicationContext());
 
 
-        ArrayList_SavedMeals = new ArrayList<Meal>();
+        arrayList_SavedFoods = new ArrayList<Food>();
         ConstructArrayList_SavedMeals();
-        My_SavedMealAdapter = new SavedMealAdapter(this, ArrayList_SavedMeals);
+        My_SavedMealAdapter = new SavedMealAdapter(this, arrayList_SavedFoods);
         Meals_ListView = (ListView) findViewById(R.id.ListView_SavedMeals);
         Meals_ListView.setAdapter(My_SavedMealAdapter);
         Meals_ListView.setOnItemClickListener(this);
@@ -74,7 +74,7 @@ public class ViewSavedMealsActivity extends AppCompatActivity implements Adapter
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Meal M = (Meal) parent.getItemAtPosition(position);
+        Food M = (Food) parent.getItemAtPosition(position);
         int M_ID = M.getMeal_id();
 
         Intent intent = new Intent(getBaseContext(), ViewMealActivity.class);
@@ -101,13 +101,13 @@ public class ViewSavedMealsActivity extends AppCompatActivity implements Adapter
                 portion = portion.values()[C.getInt(6)];    //portion
                 int daily_consumption = C.getInt(7);    //daily_consumption
                 int user_id = C.getInt(8);      //user_id
-                Meal M = new Meal(meal_id, meal_name, carbs, protein, fat, portion, user_id);
+                Food M = new Food(meal_id, meal_name, carbs, protein, fat, portion, user_id);
                 My_SavedMealAdapter.add(M);
             }
         }
     }
 
-    //Fills ArrayList_SavedMeals
+    //Fills arrayList_SavedFoods
     private void ConstructArrayList_SavedMeals() {
         Cursor C = My_DB.getAllMealsSorted();
 
@@ -123,9 +123,9 @@ public class ViewSavedMealsActivity extends AppCompatActivity implements Adapter
                 float   fat             = C.getFloat(5);      //icon_fat
                 portion = portion.values()[C.getInt(6)];    //portion
                 int     user_id         = C.getInt(8);      //user_id
-                Meal M = new Meal(meal_id,meal_name,carbs,protein,fat,portion,user_id);
+                Food M = new Food(meal_id,meal_name,carbs,protein,fat,portion,user_id);
                 getFullMealNutrients(M);
-                ArrayList_SavedMeals.add(M);
+                arrayList_SavedFoods.add(M);
             }
         }
     }
@@ -142,28 +142,28 @@ public class ViewSavedMealsActivity extends AppCompatActivity implements Adapter
     }
 
     //TODO USE THIS FUCNTION IN OTHER ACTIVITIES
-    //Takes a meal "My_Meal" and retrieves the full nutrient calculation of that meal from the database
-    //by traversing through the meals which compose My_Meal and cumulatively adds the nutrients of each simple meal
-    private Meal getFullMealNutrients(Meal My_Meal){
-        int meal_id = My_Meal.getMeal_id();
+    //Takes a meal "my_Food" and retrieves the full nutrient calculation of that meal from the database
+    //by traversing through the meals which compose my_Food and cumulatively adds the nutrients of each simple meal
+    private Food getFullMealNutrients(Food my_Food){
+        int meal_id = my_Food.getMeal_id();
         int simple_id;
         float carbs, protein, fat;
-        carbs = My_Meal.getCarbs();
-        protein = My_Meal.getProtein();
-        fat = My_Meal.getFat();
+        carbs = my_Food.getCarbs();
+        protein = my_Food.getProtein();
+        fat = my_Food.getFat();
 
         //TODO check what happens if simple_meal_list is null
         int[] simple_meal_list = My_DB.getSimpleMealList(meal_id);
         if (simple_meal_list.length != 0) {
             for (int i = 0; i < simple_meal_list.length; i++) {
                 simple_id = simple_meal_list[i];
-                Meal simple_meal = My_DB.getMeal(simple_id);
-                carbs += simple_meal.getCarbs() + getFullMealNutrients(simple_meal).getCarbs();
-                protein += simple_meal.getProtein() + getFullMealNutrients(simple_meal).getProtein();
-                fat += simple_meal.getFat() + getFullMealNutrients(simple_meal).getFat();
+                Food simple_food = My_DB.getMeal(simple_id);
+                carbs += simple_food.getCarbs() + getFullMealNutrients(simple_food).getCarbs();
+                protein += simple_food.getProtein() + getFullMealNutrients(simple_food).getProtein();
+                fat += simple_food.getFat() + getFullMealNutrients(simple_food).getFat();
             }
         }
-        Meal M = new Meal(meal_id,My_Meal.getMeal_name(),carbs,protein,fat,My_Meal.getPortion(),My_Meal.getUser_id());
+        Food M = new Food(meal_id, my_Food.getMeal_name(),carbs,protein,fat, my_Food.getPortion(), my_Food.getUser_id());
         return M;
     }
 }
