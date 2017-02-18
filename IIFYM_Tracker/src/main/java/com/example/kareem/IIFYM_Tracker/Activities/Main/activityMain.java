@@ -42,38 +42,29 @@ import java.util.ArrayList;
 public class activityMain extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener, OnListItemDeletedListener {
 
     // GUI
-    private TextView lblCarbsGoals, lblProteinGoal, lblFatGoal;
-    private TextView lblCarbsLeft, lblProteinLeft, lblFatLeft;
-    private TextView lblCarbsCurrent, lblProteinCurrent, lblFatCurrent;
-
+    private TextView lblCaloriesCurrent, lblCaloriesLeft, lblCaloriesGoal;
+    private TextView lblCarbsCurrent,    lblCarbsLeft,    lblCarbsGoal;
+    private TextView lblProteinCurrent,  lblProteinLeft,  lblProteinGoal;
+    private TextView lblFatCurrent,      lblFatLeft,      lblFatGoal;
     private ArrayList<DailyMeal> arrDailyMeals;
     private DailyMealAdapter adapterDailyMeals;
     private ListView listViewDailyMeals;
     private RoundCornerProgressBar progressBarCarbs, progressBarProtein, progressBarFat;
+    private Animation mEnterAnimation, mExitAnimation;
 
+    // Variables
+    private Context context;
+    public int defaultCarbs, defaultProtein, defaultFat;
     public static final String CarbsPrefKey = "EditTextPrefCarbsGoal";
     public static final String ProteinPrefKey = "EditTextPrefProteinGoal";
     public static final String FatPrefKey = "EditTextPrefFatGoal";
-    public  int defaultCarbs, defaultProtein, defaultFat;
-
-    View parentLayout;
-
-    SharedPreferences settings;
 
     // Storage
-    SharedPreferenceHelper myPrefs;
-    private FirebaseAuth firebaseAuth;
-    private DatabaseReference firebaseDbRef;
-    private FirebaseUser firebaseUser;
-    private SQLiteConnector DB_SQLite;
-
-    private String uid;
-    private User currentUser;
-
-    // Animation
-    private Animation mEnterAnimation, mExitAnimation;
-    private Context context;
-
+    private SharedPreferenceHelper          myPrefs;
+    private SQLiteConnector                 DB_SQLite;
+    private FirebaseAuth                    firebaseAuth;
+    private User                            currentUser;
+    private String                          uid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,159 +72,35 @@ public class activityMain extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_home);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         context = getApplicationContext();
-        firebaseAuth = FirebaseAuth.getInstance();
-        firebaseUser = firebaseAuth.getCurrentUser();
-        firebaseDbRef = FirebaseDatabase.getInstance().getReference();
-        DB_SQLite = new SQLiteConnector(context);
+
+        // Storage
         myPrefs = new SharedPreferenceHelper(context);
+        DB_SQLite = new SQLiteConnector(context);
+        firebaseAuth = FirebaseAuth.getInstance();
 
-        settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        //Declaring
-        lblCarbsGoals = (TextView) findViewById(R.id.lblCarbsGoal);
-        lblProteinGoal = (TextView) findViewById(R.id.lblProteinGoal);
-        lblFatGoal = (TextView) findViewById(R.id.lblFatGoal);
-
-        lblCarbsLeft = (TextView) findViewById(R.id.lblCarbsLeft);
-        lblProteinLeft = (TextView) findViewById(R.id.lblProteinLeft);
-        lblFatLeft = (TextView) findViewById(R.id.lblFatLeft);
-
-        lblCarbsCurrent = (TextView) findViewById(R.id.lblCarbsCurrent);
-        lblProteinCurrent = (TextView) findViewById(R.id.lblProteinCurrent);
-        lblFatCurrent = (TextView) findViewById(R.id.lblFatCurrent);
-
-        progressBarCarbs = (RoundCornerProgressBar) findViewById(R.id.progressBarCarbs);
-        progressBarProtein = (RoundCornerProgressBar) findViewById(R.id.progressBarProtein);
-        progressBarFat = (RoundCornerProgressBar) findViewById(R.id.progressBarFat);
-
-        arrDailyMeals = new ArrayList<DailyMeal>();
-        adapterDailyMeals = new DailyMealAdapter(this, arrDailyMeals);
-
-        listViewDailyMeals = (ListView) findViewById(R.id.listViewDailyMeals);
-        listViewDailyMeals.setAdapter(adapterDailyMeals);
-        listViewDailyMeals.setOnItemClickListener(this);
-
-
-        parentLayout = findViewById(R.id.root_view);
-
+        // Get User
         uid = myPrefs.getStringValue("session_uid");
         currentUser = DB_SQLite.retrieveUser(uid);
 
-        Toast toast = Toast.makeText(context, "Hello " + currentUser.getName() + "!", Toast.LENGTH_SHORT);
-        toast.show();
-
-        // Setup enter and exit animation
-        mEnterAnimation = new AlphaAnimation(0f, 1f);
-        mEnterAnimation.setDuration(600);
-        mEnterAnimation.setFillAfter(true);
-
-        mExitAnimation = new AlphaAnimation(1f, 0f);
-        mExitAnimation.setDuration(600);
-        mExitAnimation.setFillAfter(true);
+        // GUI
+        initializeGUI();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_home_woman, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        menu.clear();
-        if (currentUser.getGender() == 0) { //Male
-            getMenuInflater().inflate(R.menu.menu_home_man, menu);
-        }
-        else {
-            getMenuInflater().inflate(R.menu.menu_home_woman, menu);
-        }
-        return super.onPrepareOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_MealSettings) {
-            Intent intent = new Intent();
-            intent.setClassName(this, "com.example.kareem.IIFYM_Tracker.Activities.Main.ViewSavedMealsActivity");
-            startActivity(intent);
-            return true;
-        }
-        if(id==R.id.logout_firbase_menu_btn)
-        {
-            signOut();
-            Intent in = new Intent(getApplicationContext(), activityLogin.class);
-            startActivity(in);
-            finish();
-            return true;
-        }
-        if(id==R.id.profile_menu_btn)
-        {
-            Intent intent = new Intent(getApplicationContext(),UserProfile_Mina.class);
-            startActivity(intent);
-            return true;
-        }
-        if(id==R.id.action_MacroSettings)
-        {
-            Intent in = new Intent(getApplicationContext(),MacroSettings.class );
-            startActivity(in);
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onClick(View v) {
-//        switch (v.getId()){
-//            case R.id.Button_AddSavedMeal:
-//                AddSavedMeal();
-//                break;
-//            case R.id.Button_AddQuickMeal:
-//                AddQuickMeal();
-//                break;
-//        }
-    }
-
-    private void AddSavedMeal() {
-        Context context = getApplicationContext();
-        Intent intent = new Intent();
-        intent.setClass(context,SelectSavedMealActivity.class);
-        startActivity(intent);
-    }
-
-    private void AddQuickMeal() {
-        Context context = getApplicationContext();
-        Intent intent = new Intent();
-        intent.setClass(context,AddQuickMealActivity.class);
-        startActivity(intent);
-    }
-
-    @Override
-    protected void onResume() {
+    @Override protected void onResume() {
         super.onResume();
     }
 
-    @Override
-    protected void onPause() {
+    @Override protected void onPause() {
         super.onPause();
     }
 
     public void UpdateMacros (){
-        SharedPreferences prefs =
-                PreferenceManager.getDefaultSharedPreferences(this);
-
         int CarbGoals = Integer.parseInt(prefs.getString(CarbsPrefKey, defaultCarbs + ""));
         int ProteinGoals = Integer.parseInt(prefs.getString(ProteinPrefKey, defaultProtein + ""));
         int FatGoals = Integer.parseInt(prefs.getString(FatPrefKey, defaultFat + ""));
 
-        lblCarbsGoals.setText(CarbGoals + "");
+        lblCarbsGoal.setText(CarbGoals + "");
         lblProteinGoal.setText(ProteinGoals + "");
         lblFatGoal.setText(FatGoals + "");
 
@@ -340,14 +207,25 @@ public class activityMain extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    @Override
-    public void onItemDeleted() {
+    @Override public void onClick(View v) {
+        switch (v.getId()){
+
+        }
+    }
+
+    private void AddItem() {
+        Context context = getApplicationContext();
+        Intent intent = new Intent();
+        intent.setClass(context,AddSavedMealActivity.class);
+        startActivity(intent);
+    }
+
+    @Override public void onItemDeleted() {
         UpdateArrayList();
         UpdateMacros();
     }
 
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+    @Override public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
         DailyMeal DM = (DailyMeal) parent.getItemAtPosition(position);
         int DM_ID = DM.getMeal_id();
 
@@ -358,6 +236,59 @@ public class activityMain extends AppCompatActivity implements View.OnClickListe
         startActivity(intent);
     }
 
+    @Override public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_MealSettings) {
+            Intent intent = new Intent();
+            intent.setClassName(this, "com.example.kareem.IIFYM_Tracker.Activities.Main.ViewSavedMealsActivity");
+            startActivity(intent);
+            return true;
+        }
+        if(id==R.id.logout_menu_btn)
+        {
+            signOut();
+            Intent in = new Intent(getApplicationContext(), activityLogin.class);
+            startActivity(in);
+            finish();
+            return true;
+        }
+        if(id==R.id.profile_menu_btn)
+        {
+            Intent intent = new Intent(getApplicationContext(),UserProfile_Mina.class);
+            startActivity(intent);
+            return true;
+        }
+        if(id==R.id.action_MacroSettings)
+        {
+            Intent in = new Intent(getApplicationContext(),MacroSettings.class );
+            startActivity(in);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_home_woman, menu);
+        return true;
+    }
+
+    @Override public boolean onPrepareOptionsMenu(Menu menu) {
+        menu.clear();
+        if (currentUser.getGender() == 0) { //Male
+            getMenuInflater().inflate(R.menu.menu_home_man, menu);
+        }
+        else {
+            getMenuInflater().inflate(R.menu.menu_home_woman, menu);
+        }
+        return super.onPrepareOptionsMenu(menu);
+    }
+
     private void signOut() {
         myPrefs.addPreference("session_uid", "");
         Log.d("Main_SignOut","session_uid removed");
@@ -365,4 +296,45 @@ public class activityMain extends AppCompatActivity implements View.OnClickListe
         firebaseAuth.signOut();
     }
 
+    private void initializeGUI() {
+        lblCaloriesCurrent = (TextView) findViewById(R.id.lblCaloriesCurrent);
+        lblCaloriesLeft = (TextView) findViewById(R.id.lblCaloriesLeft);
+        lblCaloriesGoal = (TextView) findViewById(R.id.lblCaloriesGoal);
+
+        lblCarbsCurrent = (TextView) findViewById(R.id.lblCarbsCurrent);
+        lblCarbsLeft = (TextView) findViewById(R.id.lblCarbsLeft);
+        lblCarbsGoal = (TextView) findViewById(R.id.lblCarbsGoal);
+
+        lblProteinCurrent = (TextView) findViewById(R.id.lblProteinCurrent);
+        lblProteinLeft = (TextView) findViewById(R.id.lblProteinLeft);
+        lblProteinGoal = (TextView) findViewById(R.id.lblProteinGoal);
+
+        lblFatCurrent = (TextView) findViewById(R.id.lblFatCurrent);
+        lblFatLeft = (TextView) findViewById(R.id.lblFatLeft);
+        lblFatGoal = (TextView) findViewById(R.id.lblFatGoal);
+
+        progressBarCarbs = (RoundCornerProgressBar) findViewById(R.id.progressBarCarbs);
+        progressBarProtein = (RoundCornerProgressBar) findViewById(R.id.progressBarProtein);
+        progressBarFat = (RoundCornerProgressBar) findViewById(R.id.progressBarFat);
+
+        arrDailyMeals = new ArrayList<DailyMeal>();
+        adapterDailyMeals = new DailyMealAdapter(this, arrDailyMeals);
+
+        listViewDailyMeals = (ListView) findViewById(R.id.listViewDailyMeals);
+        listViewDailyMeals.setAdapter(adapterDailyMeals);
+        listViewDailyMeals.setOnItemClickListener(this);
+
+        // Setup enter and exit animation
+        mEnterAnimation = new AlphaAnimation(0f, 1f);
+        mEnterAnimation.setDuration(600);
+        mEnterAnimation.setFillAfter(true);
+
+        mExitAnimation = new AlphaAnimation(1f, 0f);
+        mExitAnimation.setDuration(600);
+        mExitAnimation.setFillAfter(true);
+
+        // User Greetings
+        Toast toast = Toast.makeText(context, "Hello " + currentUser.getName() + "!", Toast.LENGTH_SHORT);
+        toast.show();
+    }
 }

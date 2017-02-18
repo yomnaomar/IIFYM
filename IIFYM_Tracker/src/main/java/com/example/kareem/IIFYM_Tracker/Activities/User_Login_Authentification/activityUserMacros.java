@@ -53,6 +53,7 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
     private Animation       mEnterAnimation, mExitAnimation;
     private ProgressDialog  progressDialog;
 
+    // Variables
     // Final Variables (Cannot be changed)
     private int             gender, unitSystem, height1, height2, workoutFreq, goal ,BMR;
     private float           weight;
@@ -69,8 +70,8 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
     // Storage
     private SharedPreferenceHelper  myPrefs;
     private SQLiteConnector         DB_SQLite;
-    private DatabaseReference       firebaseDbRef;
     private FirebaseAuth            firebaseAuth;
+    private DatabaseReference       firebaseDbRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -391,6 +392,12 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
             lblValueFat.setText("~" + Math.round(fat * 9 * 100 / calories) + " %");
 
             addTextWatchers();
+        }
+
+        if ((carbsPercent + proteinPercent + fatPercent) != 100) {
+            lblAmountTotal.setError("Must equal 100");
+        } else {
+            lblAmountTotal.setError(null);
         }
     }
 

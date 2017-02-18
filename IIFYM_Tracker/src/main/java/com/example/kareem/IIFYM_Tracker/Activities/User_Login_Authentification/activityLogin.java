@@ -84,8 +84,8 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
     BroadcastReceiver       broadcast_reciever;
 
     // Storage
-    private SQLiteConnector                 DB_SQLite;
     private SharedPreferenceHelper          myPrefs;
+    private SQLiteConnector                 DB_SQLite;
     private FirebaseAuth                    firebaseAuth;
     private DatabaseReference               firebaseDbRef;
     private FirebaseAuth.AuthStateListener  firebaseAuthListener;
