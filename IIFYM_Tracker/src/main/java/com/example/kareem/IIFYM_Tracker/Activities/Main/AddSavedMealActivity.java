@@ -15,7 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.example.kareem.IIFYM_Tracker.Custom_Objects.Meal;
+import com.example.kareem.IIFYM_Tracker.Custom_Objects.Food;
 import com.example.kareem.IIFYM_Tracker.Custom_Objects.Portion_Type;
 import com.example.kareem.IIFYM_Tracker.Custom_Objects.Weight;
 import com.example.kareem.IIFYM_Tracker.Database.SQLiteConnector;
@@ -34,7 +34,7 @@ public class AddSavedMealActivity extends AppCompatActivity implements View.OnCl
     int   base_weight_quantity;
 
     float multiplier;
-    Meal M;
+    Food M;
 
     private SQLiteConnector My_DB;
     private SharedPreferences settings;

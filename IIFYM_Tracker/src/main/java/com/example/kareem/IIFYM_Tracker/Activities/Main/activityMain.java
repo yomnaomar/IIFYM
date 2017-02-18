@@ -2,10 +2,8 @@ package com.example.kareem.IIFYM_Tracker.Activities.Main;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -23,8 +21,8 @@ import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
 import com.example.kareem.IIFYM_Tracker.Activities.Settings.MacroSettings;
 import com.example.kareem.IIFYM_Tracker.Activities.Settings.UserProfile_Mina;
 import com.example.kareem.IIFYM_Tracker.Activities.User_Login_Authentification.activityLogin;
-import com.example.kareem.IIFYM_Tracker.Custom_Objects.DailyMeal;
-import com.example.kareem.IIFYM_Tracker.Custom_Objects.Meal;
+import com.example.kareem.IIFYM_Tracker.Custom_Objects.DailyItem;
+import com.example.kareem.IIFYM_Tracker.Custom_Objects.Food;
 import com.example.kareem.IIFYM_Tracker.Custom_Objects.Portion_Type;
 import com.example.kareem.IIFYM_Tracker.Custom_Objects.User;
 import com.example.kareem.IIFYM_Tracker.Database.SQLiteConnector;
@@ -33,9 +31,6 @@ import com.example.kareem.IIFYM_Tracker.R;
 import com.example.kareem.IIFYM_Tracker.ViewComponents.DailyMealAdapter;
 import com.example.kareem.IIFYM_Tracker.ViewComponents.OnListItemDeletedListener;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
@@ -46,7 +41,7 @@ public class activityMain extends AppCompatActivity implements View.OnClickListe
     private TextView lblCarbsCurrent,    lblCarbsLeft,    lblCarbsGoal;
     private TextView lblProteinCurrent,  lblProteinLeft,  lblProteinGoal;
     private TextView lblFatCurrent,      lblFatLeft,      lblFatGoal;
-    private ArrayList<DailyMeal> arrDailyMeals;
+    private ArrayList<DailyItem> arrDailyMeals;
     private DailyMealAdapter adapterDailyMeals;
     private ListView listViewDailyMeals;
     private RoundCornerProgressBar progressBarCarbs, progressBarProtein, progressBarFat;
@@ -114,7 +109,7 @@ public class activityMain extends AppCompatActivity implements View.OnClickListe
 
         int NumberOfMeals = adapterDailyMeals.getCount();
         for (int i = 0; i < NumberOfMeals; i++) {
-            DailyMeal TempMeal = adapterDailyMeals.getItem(i);
+            DailyItem TempMeal = adapterDailyMeals.getItem(i);
             int carbs = Math.round(TempMeal.getCarbs());
             int protein = Math.round(TempMeal.getProtein());
             int fat = Math.round(TempMeal.getFat());
@@ -189,7 +184,7 @@ public class activityMain extends AppCompatActivity implements View.OnClickListe
                 Log.i("position", daily_position + "");
                 Log.i("multiplier", daily_multiplier + "");
 
-                Meal M = DB_SQLite.getMeal(daily_meal_id);
+                Food M = DB_SQLite.getMeal(daily_meal_id);
 
                 String M_name            = M.getMeal_name();
                 int M_carbs              = Math.round(M.getCarbs()*daily_multiplier);
@@ -197,10 +192,10 @@ public class activityMain extends AppCompatActivity implements View.OnClickListe
                 int M_fat                = Math.round(M.getFat()*daily_multiplier);
                 Portion_Type M_portion   = M.getPortion();
 
-                DailyMeal DM = new DailyMeal(M_name,daily_meal_id,M_carbs,M_protein,M_fat,M_portion,daily_position,daily_multiplier);
+                DailyItem DM = new DailyItem(M_name,daily_meal_id,M_carbs,M_protein,M_fat,M_portion,daily_position,daily_multiplier);
                 adapterDailyMeals.add(DM);
 
-                Log.i("DailyMeal Added:", "Name: "
+                Log.i("DailyItem Added:", "Name: "
                         + M.getMeal_name() + " " + M.getMeal_id() + " "
                         + M_carbs + " " + M_protein + " " + M_fat + " position: " + daily_position + " multiplier: " + daily_multiplier);
             }
@@ -226,7 +221,7 @@ public class activityMain extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-        DailyMeal DM = (DailyMeal) parent.getItemAtPosition(position);
+        DailyItem DM = (DailyItem) parent.getItemAtPosition(position);
         int DM_ID = DM.getMeal_id();
 
         Intent intent = new Intent(getBaseContext(), ViewMealActivity.class);
@@ -317,7 +312,7 @@ public class activityMain extends AppCompatActivity implements View.OnClickListe
         progressBarProtein = (RoundCornerProgressBar) findViewById(R.id.progressBarProtein);
         progressBarFat = (RoundCornerProgressBar) findViewById(R.id.progressBarFat);
 
-        arrDailyMeals = new ArrayList<DailyMeal>();
+        arrDailyMeals = new ArrayList<DailyItem>();
         adapterDailyMeals = new DailyMealAdapter(this, arrDailyMeals);
 
         listViewDailyMeals = (ListView) findViewById(R.id.listViewDailyMeals);

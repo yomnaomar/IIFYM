@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.example.kareem.IIFYM_Tracker.Custom_Objects.DailyMeal;
+import com.example.kareem.IIFYM_Tracker.Custom_Objects.DailyItem;
 import com.example.kareem.IIFYM_Tracker.Custom_Objects.Portion_Type;
 import com.example.kareem.IIFYM_Tracker.Custom_Objects.Weight;
 import com.example.kareem.IIFYM_Tracker.Database.SQLiteConnector;
@@ -19,12 +19,12 @@ import java.util.ArrayList;
 /**
  * Created by Kareem on 9/13/2016.
  */
-public class DailyMealAdapter extends ArrayAdapter<DailyMeal> {
+public class DailyMealAdapter extends ArrayAdapter<DailyItem> {
     private SQLiteConnector My_DB;
 
-    DailyMeal DM;
+    DailyItem DM;
 
-    public DailyMealAdapter(Context context, ArrayList<DailyMeal> meals) {
+    public DailyMealAdapter(Context context, ArrayList<DailyItem> meals) {
         super(context, 0, meals);
     }
 

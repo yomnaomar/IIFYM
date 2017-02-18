@@ -16,8 +16,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.kareem.IIFYM_Tracker.Custom_Objects.DailyMeal;
-import com.example.kareem.IIFYM_Tracker.Custom_Objects.Meal;
+import com.example.kareem.IIFYM_Tracker.Custom_Objects.DailyItem;
+import com.example.kareem.IIFYM_Tracker.Custom_Objects.Food;
 import com.example.kareem.IIFYM_Tracker.Custom_Objects.Portion_Type;
 import com.example.kareem.IIFYM_Tracker.Custom_Objects.Weight;
 import com.example.kareem.IIFYM_Tracker.Database.SQLiteConnector;
@@ -32,7 +32,7 @@ public class ViewMealActivity extends AppCompatActivity implements AdapterView.O
     private boolean isEnabled = false;
 
     int Meal_ID;
-    Meal thisMeal;
+    Food thisFood;
     float serving_number;
     Weight weight;
     int Weight_Unit_Selected;
@@ -54,7 +54,7 @@ public class ViewMealActivity extends AppCompatActivity implements AdapterView.O
             position = getIntent().getIntExtra("position", 0);
             isQuick = My_DB.isQuickMeal(Meal_ID);
         }
-        thisMeal = My_DB.getMeal(Meal_ID);
+        thisFood = My_DB.getMeal(Meal_ID);
         InitializeGUI();
         populateGUI();
     }
@@ -205,13 +205,13 @@ public class ViewMealActivity extends AppCompatActivity implements AdapterView.O
         //Populating GUI
         //initially disabled (view mode)
         disableFields_Saved();
-        //Meal Name
-        EditText_Meal_Name.setText(thisMeal.getMeal_name());
+        //Food Name
+        EditText_Meal_Name.setText(thisFood.getMeal_name());
 
         //Portion_Quantity and Serving_Label/Spinner_Unit
-        if (thisMeal.getPortion() == Portion_Type.Serving) {
+        if (thisFood.getPortion() == Portion_Type.Serving) {
             Spinner_Unit.setVisibility(View.INVISIBLE); // Hide Weight_Unit Spinner
-            serving_number = My_DB.getServing(thisMeal.getMeal_id());
+            serving_number = My_DB.getServing(thisFood.getMeal_id());
             if (serving_number == 1.0f) {
                 EditText_Portion_Quantity.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
                 EditText_Portion_Quantity.setText(serving_number + "");
@@ -220,21 +220,21 @@ public class ViewMealActivity extends AppCompatActivity implements AdapterView.O
                 EditText_Portion_Quantity.setText(serving_number + "");
                 Label_Serving.setText("Servings");
             }
-        } else if (thisMeal.getPortion() == Portion_Type.Weight) {
+        } else if (thisFood.getPortion() == Portion_Type.Weight) {
             EditText_Portion_Quantity.setInputType(InputType.TYPE_CLASS_NUMBER);
             Label_Serving.setVisibility(View.INVISIBLE); //Hide Serving Label
-            weight = My_DB.getWeight(thisMeal.getMeal_id());
-            Log.d("Weight Retrieved: ", "ID: " + thisMeal.getMeal_id() + " Weight_quantity: " + weight.getWeight_quantity() + " Weight_Unit: " + weight.getWeight_unit());
+            weight = My_DB.getWeight(thisFood.getMeal_id());
+            Log.d("Weight Retrieved: ", "ID: " + thisFood.getMeal_id() + " Weight_quantity: " + weight.getWeight_quantity() + " Weight_Unit: " + weight.getWeight_unit());
             Spinner_Unit.setSelection(weight.getWeight_unit().getWeightInt()); //set spinner selection value
             Weight_Unit_Selected = Spinner_Unit.getSelectedItemPosition();
             EditText_Portion_Quantity.setText(weight.getWeight_quantity() + "");
         }
 
         //Macronutrients
-        EditText_Carbs.setText(thisMeal.getCarbs() + "");
-        EditText_Protein.setText(thisMeal.getProtein() + "");
-        EditText_Fat.setText(thisMeal.getFat() + "");
-        int calories = Math.round(thisMeal.getCarbs() * 4 + thisMeal.getProtein() * 4 + thisMeal.getFat() * 9);
+        EditText_Carbs.setText(thisFood.getCarbs() + "");
+        EditText_Protein.setText(thisFood.getProtein() + "");
+        EditText_Fat.setText(thisFood.getFat() + "");
+        int calories = Math.round(thisFood.getCarbs() * 4 + thisFood.getProtein() * 4 + thisFood.getFat() * 9);
         Label_Calories.setText(calories + "");
     }
 
@@ -244,10 +244,10 @@ public class ViewMealActivity extends AppCompatActivity implements AdapterView.O
 
         String check_newMealName = EditText_Meal_Name.getText().toString();
 
-        if (check_newMealName.compareTo(thisMeal.getMeal_name()) == 1) { //checks if meal_name has been changed by user
+        if (check_newMealName.compareTo(thisFood.getMeal_name()) == 1) { //checks if meal_name has been changed by user
             if (My_DB.isDuplicateName(check_newMealName)) { //duplicate
                 //TODO handle invalid meal_name change
-                Toast.makeText(this, "Meal with the same name already exists", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Food with the same name already exists", Toast.LENGTH_SHORT).show();
             }
         } else { //non-duplicate
             String newMealName = EditText_Meal_Name.getText().toString();
@@ -255,30 +255,30 @@ public class ViewMealActivity extends AppCompatActivity implements AdapterView.O
             float newProtein = Float.parseFloat(EditText_Protein.getText().toString());
             float newFat = Float.parseFloat(EditText_Fat.getText().toString());
 
-            thisMeal.setMeal_name(newMealName);
-            thisMeal.setCarbs(newCarbs);
-            thisMeal.setProtein(newProtein);
-            thisMeal.setFat(newFat);
+            thisFood.setMeal_name(newMealName);
+            thisFood.setCarbs(newCarbs);
+            thisFood.setProtein(newProtein);
+            thisFood.setFat(newFat);
 
-            switch (thisMeal.getPortion().getPortionInt()) {
+            switch (thisFood.getPortion().getPortionInt()) {
                 case (0):
                     float newServing_Quantity = Float.parseFloat(EditText_Portion_Quantity.getText().toString());
-                    My_DB.updateServing(thisMeal, newServing_Quantity);
+                    My_DB.updateServing(thisFood, newServing_Quantity);
                     break;
                 case (1):
                     int newWeight_Quantity = Integer.parseInt(EditText_Portion_Quantity.getText().toString());
-                    My_DB.updateWeight(thisMeal, newWeight_Quantity, Weight_Unit_Selected);
+                    My_DB.updateWeight(thisFood, newWeight_Quantity, Weight_Unit_Selected);
                     break;
             }
 
-            My_DB.updateMeal(thisMeal);
+            My_DB.updateMeal(thisFood);
         }
 
         //Append text_views
         EditText_Carbs.setText(EditText_Carbs.getText().toString());
         EditText_Protein.setText(EditText_Protein.getText().toString());
         EditText_Fat.setText(EditText_Fat.getText().toString());
-        int calories = Math.round(thisMeal.getCarbs() * 4 + thisMeal.getProtein() * 4 + thisMeal.getFat() * 9);
+        int calories = Math.round(thisFood.getCarbs() * 4 + thisFood.getProtein() * 4 + thisFood.getFat() * 9);
         Label_Calories.setText(calories + "");
     }
 
@@ -288,16 +288,16 @@ public class ViewMealActivity extends AppCompatActivity implements AdapterView.O
         float new_serving = Float.parseFloat(EditText_Portion_Quantity.getText().toString());
         UpdateServingViews(new_serving);
         float multiplier = new_serving/My_DB.getServing(Meal_ID);
-        DailyMeal DM = new DailyMeal(thisMeal, position, multiplier);
+        DailyItem DM = new DailyItem(thisFood, position, multiplier);
         My_DB.updateDailyMeal(DM);
     }
 
     private void UpdateServingViews(float new_serving) {
         if (new_serving != 0) {
             float multiplier = new_serving / My_DB.getServing(Meal_ID);
-            float new_carbs = multiplier * thisMeal.getCarbs();
-            float new_protein = multiplier * thisMeal.getProtein();
-            float new_fat = multiplier * thisMeal.getFat();
+            float new_carbs = multiplier * thisFood.getCarbs();
+            float new_protein = multiplier * thisFood.getProtein();
+            float new_fat = multiplier * thisFood.getFat();
             int new_calories = Math.round(new_carbs * 4 + new_protein * 4 + new_fat * 9);
 
             EditText_Carbs.setText(new_carbs + " c");
@@ -335,23 +335,23 @@ public class ViewMealActivity extends AppCompatActivity implements AdapterView.O
     }
 
     private void deleteDaily() {
-        My_DB.deleteDailyMeal(position);
+        My_DB.deleteDailyItem(position);
         if(My_DB.isQuickMeal(Meal_ID)){
             Log.i("isQuickDailyAdapter", "deleted quick meal with ID: "+ My_DB.isQuickMeal(Meal_ID));
             My_DB.deleteMealbyID(Meal_ID);
         }
-            My_DB.updatePositions(position);
+            My_DB.updateDailyItemPositions(position);
     }
 
 
     private void deleteSaved() {
-        My_DB.deleteMeal(thisMeal);
-        switch (thisMeal.getPortion().getPortionInt()) {
+        My_DB.deleteMeal(thisFood);
+        switch (thisFood.getPortion().getPortionInt()) {
             case (0):
-                My_DB.deleteServing(thisMeal);
+                My_DB.deleteServing(thisFood);
                 break;
             case (1):
-                My_DB.deleteWeight(thisMeal);
+                My_DB.deleteWeight(thisFood);
                 break;
         }
     }
