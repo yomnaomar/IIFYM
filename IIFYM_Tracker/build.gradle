@@ -40,9 +40,9 @@ dependencies {
     compile 'com.afollestad.material-dialogs:core:0.9.1.0'
     compile 'com.androidadvance:topsnackbar:1.1.1'
     compile 'info.hoang8f:android-segmented:1.0.6'
-    compile 'com.google.firebase:firebase-auth:10.2.0'
-    compile 'com.google.firebase:firebase-database:10.2.0'
-    compile 'com.google.android.gms:play-services:10.2.0'
+    compile 'com.google.firebase:firebase-auth:9.6.0'
+    compile 'com.google.firebase:firebase-database:9.6.0'
+    compile 'com.google.android.gms:play-services:9.6.0'
     testCompile 'junit:junit:4.12'
 }
 
