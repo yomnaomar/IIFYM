@@ -49,13 +49,40 @@ public class User {
         this.dailyFat = dailyFat;
     }
 
+    public User(String uid, String email, int isRegistered, String name,
+                String dob, int gender, int unitSystem, float weight,
+                int height1, int height2, int workoutFreq, int goal, int dailyCalories,
+                int isPercent, int dailyCarbs, int dailyProtein, int dailyFat) {
+        this.uid = uid;
+        this.email = email;
+        if (isRegistered == 1)
+            this.isRegistered = true;
+        else
+            this.isRegistered = false;
+        this.name = name;
+        this.dob = dob;
+        this.gender = gender;
+        this.unitSystem = unitSystem;
+        this.weight = weight;
+        this.height1 = height1;
+        this.height2 = height2;
+        this.workoutFreq = workoutFreq;
+        this.goal = goal;
+        this.dailyCalories = dailyCalories;
+        if (isPercent == 1)
+            this.isPercent = true;
+        else
+            this.isPercent = false;
+        this.dailyCarbs = dailyCarbs;
+        this.dailyProtein = dailyProtein;
+        this.dailyFat = dailyFat;
+    }
+
     public User(String uid, String email, boolean isRegistered) {
         this.uid = uid;
         this.email = email;
         this.isRegistered = isRegistered;
     }
-
-    public User(){}
 
     public String getUid() {
         return uid;

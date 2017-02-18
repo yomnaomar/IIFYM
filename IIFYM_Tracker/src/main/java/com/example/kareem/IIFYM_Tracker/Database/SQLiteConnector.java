@@ -6,13 +6,11 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.example.kareem.IIFYM_Tracker.Custom_Objects.DailyMeal;
 import com.example.kareem.IIFYM_Tracker.Custom_Objects.Meal;
 import com.example.kareem.IIFYM_Tracker.Custom_Objects.Portion_Type;
 import com.example.kareem.IIFYM_Tracker.Custom_Objects.User;
-import com.example.kareem.IIFYM_Tracker.Custom_Objects.User_Old;
 import com.example.kareem.IIFYM_Tracker.Custom_Objects.Weight;
 
 /**
@@ -25,19 +23,15 @@ import com.example.kareem.IIFYM_Tracker.Custom_Objects.Weight;
 
 public class SQLiteConnector {
 
-    private static final String Table_Meal          = "Meal";
+    private static final String Table_User          = "User";
+    private static final String Table_Food          = "Food";
     private static final String Table_Weight        = "Weight";
     private static final String Table_Serving       = "Serving";
-    private static final String Table_Daily_Meals   = "Daily_Meal";
-    private static final String Table_Composed_Of   = "Composed_Of";
-    private static final String Table_User_Old      = "User_Old";
-
-    private static final String Table_User          = "User";
+    private static final String Table_DailyItem     = "DailyItem";
+    private static final String Table_ComposedOf    = "ComposedOf";
 
     private SQLiteDatabase database;
     private SQLiteHelper databaseHelper;
-
-    Portion_Type portion = null;
 
     public SQLiteConnector(Context context) {
         databaseHelper = SQLiteHelper.getInstance(context);
@@ -55,10 +49,130 @@ public class SQLiteConnector {
         database = databaseHelper.getWritableDatabase();
     }
 
-    public void close() { //TODO: being used on logout currently
-        if (database != null)
-            database.close();
+    // ----------    Table_User = "User"    ----------------
+
+    // Returns True if User with UID = uid found
+    // Returns False otherwise
+    public boolean isExistingUser (String uid){
+        Cursor C = database.rawQuery("SELECT * FROM " + Table_User + " WHERE uid = '" + uid + "'", null);
+        C.moveToFirst();
+        if (C.getCount() != 0) {
+            Log.d("isExistingUser","User with uid:" + uid + " found.");
+            return true;
+        }
+        Log.d("isExistingUser","User with uid:" + uid + " not found.");
+        return false;
     }
+
+    // Returns True if User was successfully inserted
+    // Returns False otherwise
+    public boolean createUser(User U) {
+        if (!isExistingUser(U.getUid())) {
+            ContentValues newUser = new ContentValues();
+            newUser.put("uid",              U.getUid());
+            newUser.put("isRegistered",     U.isRegistered());
+            newUser.put("email",            U.getEmail());
+            newUser.put("name",             U.getName());
+            newUser.put("dob",              U.getDob().toString());
+            newUser.put("gender",           U.getGender());
+            newUser.put("unitSystem",       U.getUnitSystem());
+            newUser.put("weight",           U.getWeight());
+            newUser.put("height1",          U.getHeight1());
+            newUser.put("height2",          U.getHeight2());
+            newUser.put("workoutFrequency", U.getWorkoutFreq());
+            newUser.put("goal",             U.getGoal());
+            newUser.put("dailyCalories",    U.getDailyCalories());
+            newUser.put("isPercent",        U.isPercent());
+            newUser.put("dailyCarbs",       U.getDailyCarbs());
+            newUser.put("dailyProtein",     U.getDailyProtein());
+            newUser.put("dailyFat",         U.getDailyFat());
+
+            database.insert(Table_User, null, newUser);
+            Log.d("createUser", "User with uid " + U.getUid() + " created");
+            return true;
+        }
+        else {
+            Log.d("createUser", "User with uid " + U.getUid() + " already exists");
+            return false;
+        }
+    }
+
+    // Returns User with UID = uid if found
+    // Returns null otherwise
+    public User retrieveUser(String uid) {
+        Cursor C = database.rawQuery("SELECT * FROM " + Table_User + " WHERE uid = '" + uid + "'", null);
+        if (C.moveToFirst() && C != null) {
+            Log.d("retrieveUser", "User with uid " + uid + " retrieved");
+            return new User(C.getString(0),
+                    C.getString(1),
+                    C.getInt(2),
+                    C.getString(3),
+                    C.getString(4),
+                    C.getInt(5),
+                    C.getInt(6),
+                    C.getFloat(7),
+                    C.getInt(8),
+                    C.getInt(9),
+                    C.getInt(10),
+                    C.getInt(11),
+                    C.getInt(12),
+                    C.getInt(13),
+                    C.getInt(14),
+                    C.getInt(15),
+                    C.getInt(16));
+        }
+        else {
+            Log.d("retrieveUser", "User with uid " + uid + " not found");
+            return null;
+        }
+    }
+
+    // Returns True if User with UID = U.getUID was found and updated successfully
+    // Returns False otherwise
+    public boolean updateUser(User U) {
+        if (isExistingUser(U.getUid())) {
+            ContentValues updateUser = new ContentValues();
+            updateUser.put("uid", U.getUid());
+            updateUser.put("isRegistered", U.isRegistered());
+            updateUser.put("email", U.getEmail());
+            updateUser.put("name", U.getName());
+            updateUser.put("dob", U.getDob().toString());
+            updateUser.put("gender", U.getGender());
+            updateUser.put("unitSystem", U.getUnitSystem());
+            updateUser.put("weight", U.getWeight());
+            updateUser.put("height1", U.getHeight1());
+            updateUser.put("height2", U.getHeight2());
+            updateUser.put("workoutFrequency", U.getWorkoutFreq());
+            updateUser.put("goal", U.getGoal());
+            updateUser.put("dailyCalories", U.getDailyCalories());
+            updateUser.put("isPercent", U.isPercent());
+            updateUser.put("dailyCarbs", U.getDailyCarbs());
+            updateUser.put("dailyProtein", U.getDailyProtein());
+            updateUser.put("dailyFat", U.getDailyFat());
+            database.update(Table_User, updateUser, "uid = " + U.getUid(), null);
+            Log.d("updateUser", "User with uid " + U.getUid() + " updated");
+            return true;
+        }
+        else {
+            Log.d("updateUser", "User with uid " + U.getUid() + " not found");
+            return false;
+        }
+    }
+
+    // Returns True if User with UID = uid was found and deleted
+    // Returns False otherwise
+    public boolean deleteUser(String uid) {
+        if (isExistingUser(uid)){
+            database.delete(Table_User, "uid = '" + uid + "'", null);
+            Log.d("deleteUser", "User with uid " + uid + " deleted");
+            return true;
+        }
+        else {
+            Log.d("deleteUser", "User with uid " + uid + " not found");
+            return false;
+        }
+    }
+
 
     //MEALs TABLE FUNCTIONS-------------------------------------------------------------------------
 
@@ -521,380 +635,5 @@ public class SQLiteConnector {
         Cursor C = database.rawQuery("Select * From " + Table_Weight + "Where meal_id = " + meal_id, null);
         Log.i("Mina", "Weight Tuple is Retrieved Correctly");
         return C;
-    }
-
-//----------------TODO: User_Old Insert /Delete/Update + Registration/Login methods (Abdulwahab)------------------
-
-    private boolean isDuplicateUserName(User_Old M) {
-        Cursor C = database.rawQuery("SELECT * FROM " + Table_User_Old + " WHERE user_name = '" + M.getUser_name() + "'", null);
-        Log.i("User_Old Retrieved", "user_name: " + M.getUser_name() + " Retrieved");
-        C.moveToFirst();
-        if (C.getCount() == 0) {
-            return false;
-        }
-        return true;
-    }
-
-    //    private boolean checkLogin(String username, String password){
-//        Cursor C = database.rawQuery("SELECT * FROM " +Table_User_Old + " WHERE user_name = ? AND password = ?", new String[] {username, password});
-//        Log.i("User_Old Retrieved", "user_name: " + username + " Retrieved");
-//        C.moveToFirst();
-//        if (C.getCount() == 0) {
-//            return false; //no such user
-//        }
-//        return true; //found user
-//    }
-    //Insert
-    public boolean insertUserOld(User_Old M) {
-        if (isDuplicateUserName(M)) {
-            Log.i("User_Old insert failed:", "User_Old with duplicate name found: " + M.getUser_name());
-            return false;
-        }
-        ContentValues newUser = new ContentValues();
-        newUser.put("user_name", M.getUser_name());
-        newUser.put("fname", M.getFname());
-        newUser.put("lname", M.getLname());
-        newUser.put("email",M.getEmail());
-        newUser.put("dob", M.getDob());
-        newUser.put("age", M.getAge());
-        newUser.put("weight", M.getWeight());
-        newUser.put("height", M.getHeight());
-        newUser.put("percent_carbs", M.getPercent_carbs());
-        newUser.put("percent_fat", M.getPercent_fat());
-        newUser.put("percent_protein", M.getPercent_protein());
-        newUser.put("gender", M.getGender());
-        newUser.put("goal", M.getGoal());
-        newUser.put("workout_freq", M.getWorkout_freq());
-        newUser.put("weight_unit", M.getWeight_unit());
-        newUser.put("height_unit", M.getHeight_unit());
-        
-
-        database.insert(Table_User_Old, null, newUser);
-        Log.i("User_Old Inserted", "User_Old inserted: " + M.toString());
-        return true;
-
-    }
-
-    //Delete
-
-    public void deleteUser_Old(String username) {
-        database.delete(Table_User_Old, "user_name = '" + username + "'", null);
-    }
-
-    //Update
-
-    public boolean updateUser( User_Old user) {
-       // Cursor C = database.rawQuery("SELECT * FROM " + Table_User_Old + " WHERE user_id = '" + user.getUser_id()+ "'", null);
-        Cursor C = getAllUsers();
-        C.moveToFirst();
-        Log.i("UserC", "C: " + C.getCount() + "");
-        if (C.getCount() != 0) {
-            ContentValues editUser = new ContentValues();
-            editUser.put("user_name", user.getUser_name());
-            editUser.put("fname", user.getFname());
-            editUser.put("lname", user.getLname());
-            editUser.put("email",user.getEmail());
-            editUser.put("dob", user.getDob());
-            editUser.put("age", user.getAge());
-            editUser.put("weight", user.getWeight());
-            editUser.put("height", user.getHeight());
-            editUser.put("percent_carbs", user.getPercent_carbs());
-            editUser.put("percent_fat", user.getPercent_fat());
-            editUser.put("percent_protein", user.getPercent_protein());
-            editUser.put("gender", user.getGender());
-            editUser.put("goal", user.getGoal());
-            editUser.put("workout_freq", user.getWorkout_freq());
-            editUser.put("weight_unit", user.getWeight_unit());
-            editUser.put("height_unit", user.getHeight_unit());
-
-            database.update(Table_User_Old, editUser, "user_id = " + user.getUser_id(), null);
-            Log.i("User_Old Updated", "ID: " + user.getUser_id() + " Updated");
-            return true;
-        } else {
-            return false;
-        }
-
-
-    }
-    public boolean updateuserdata(String id , String uname, String dob, String fname, String lname, String email)
-    {
-       // database.rawQuery("Update "+Table_User_Old+" SET  dob = '"+dob+"', fname = '"+fname+"', lname = '"+lname+"', email = '"+email+"' where user_name = '"+uname+"' ",null);
-
-        ContentValues editUser = new ContentValues();
-        editUser.put("dob",dob);
-        editUser.put("fname",fname);
-        editUser.put("lname",lname);
-        editUser.put("email",email);
-        editUser.put("user_id",id);
-        database.update(Table_User_Old,editUser,"user_name = '"+uname+"'",null);
-        Log.i("Updated",uname);
-        return true;
-    }
-
-    public Cursor getUserOld(String username) {
-        Cursor C = null;
-        try {
-            C = database.rawQuery("SELECT * FROM " + Table_User_Old + " WHERE user_name = '" + username + "'", null);
-            Log.i("User_Old Retrieved", "Name: " + username + " Retrieved");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return C;
-
-    }
-
-    //TODO FINISH THIS IMPLEMENTATION
-    public User_Old getUserObject(String username) {
-        User_Old U = new User_Old();
-        Cursor C = null;
-        try {
-            C = database.rawQuery("SELECT * FROM " + Table_User_Old + " WHERE user_name = '" + username + "'", null);
-            Log.i("User_Old Retrieved", "Name: " + username + " Retrieved");
-        } catch (Exception e) {
-            Log.d("WHY??", e.getMessage());
-        }
-        if(C.moveToFirst() && C != null){
-            U.setUser_id(C.getInt(0));
-            U.setUser_name(C.getString(1));
-            U.setDob(C.getString(2));
-            U.setWeight(C.getFloat(3));
-            U.setHeight(C.getFloat(4));
-            U.setWorkout_freq(C.getInt(5));
-            U.setGender(C.getString(6));
-            U.setAge(C.getInt(7));
-            U.setGoal(C.getInt(8));
-            U.setFname(C.getString(9));
-            U.setLname(C.getString(10));
-            U.setEmail(C.getString(11));
-            U.setPercent_carbs(C.getInt(12));
-            U.setPercent_protein(C.getInt(13));
-            U.setPercent_fat(C.getInt(14));
-            U.setWeight_unit(C.getInt(15));
-            U.setHeight_unit(C.getInt(16));
-        }
-        else {
-            U.setUser_id(-1);
-            U.setUser_name("CURSOR IS NULL");
-        }
-        return U;
-    }
-
-    public Cursor getAllUsers() {
-        Cursor C = database.rawQuery("SELECT * FROM " + Table_User_Old, null);
-        Log.i("Users Retrieved", " Retrieved");
-        return C;
-
-    }
-
-    public boolean validateLogin(String userName,Context context) {
-
-        //openWriteableDB();
-        //SELECT
-        String[] columns = {"user_id"};
-
-        //WHERE clause
-        String selection = "user_name = ?";
-
-        //WHERE clause arguments
-        String[] selectionArgs = {userName};
-        Cursor c = null;
-
-        try {
-            //SELECT userId FROM login WHERE user_name=userName AND password=userPass
-            //c = database.query(Table_User_Old, columns, selection, selectionArgs, null, null, null);
-            //c = database.rawQuery("SELECT user_id FROM User_Old WHERE user_name like ? AND password like ?", selectionArgs);
-            String sql = "SELECT * FROM User_Old WHERE user_name = '" + userName + "'";
-            c = database.rawQuery(sql, null);
-            c.moveToFirst();
-
-            int i = c.getCount();
-            Log.d("CursorCount", "count: " + i);
-            if (i <= 0) {
-                Toast.makeText(context, "Looks Like You're New !", Toast.LENGTH_SHORT).show();
-                Log.d("VALIDATE", "NEW USER FOUND");
-                return false;
-            }
-
-            return true;
-        } catch (Exception e) {
-            Log.d("VALIDATE", e.getMessage());
-            return false;
-        }
-    }//validate Login
-
-    public int fetchUserID(String userName, Context context) {
-
-        //SELECT
-        String[] columns = {"user_id"};
-
-        //WHERE clause
-        String selection = "user_name= ?";
-
-        //WHERE clause arguments
-        String[] selectionArgs = {userName};
-        Cursor c = null;
-
-        try {
-            //SELECT userId FROM login WHERE username=userName AND password=userPass
-            c = database.query(Table_User_Old, columns, selection, selectionArgs, null, null, null);
-            c.moveToFirst();
-
-            int i = c.getCount();
-            //c.close();
-            if (i <= 0) {
-                Toast.makeText(context, "UserID Not Found in DB", Toast.LENGTH_SHORT).show();
-                Log.d("FETCHUID", "UserID Not Found in DB");
-                return 0;
-            }
-
-            return c.getInt(0);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return 0;
-        }
-    }//validate Login
-
-    public boolean ValidateLogin(String username, String pwd, Context context) {
-        String[] selectionArgs = {username, pwd};
-        String[] columns = {"user_name"};
-        Cursor cursor = database.query(Table_User_Old, columns, "user_name=?", selectionArgs, null, null, null);
-
-        if (cursor.moveToNext()) {
-            //Success
-            return true;
-        } else {
-            //Failure
-            Toast.makeText(context, "Looks Like You're New !", Toast.LENGTH_SHORT).show();
-        }
-        cursor.close();
-        return false;
-    }
-
-    //NEW SQLITE Functions ----------------------------------------------------------------------------
-
-    // ----------    Table_User = "User"    ----------------
-
-    // Returns True if User with UID = uid found
-    // Returns False otherwise
-    public boolean isExistingUser (String uid){
-        Cursor C = database.rawQuery("SELECT * FROM " + Table_User + " WHERE uid = '" + uid + "'", null);
-        C.moveToFirst();
-        if (C.getCount() != 0) {
-            Log.d("isExistingUser","User with uid:" + uid + " found.");
-            return true;
-        }
-        Log.d("isExistingUser","User with uid:" + uid + " not found.");
-        return false;
-    }
-
-    // Returns True if User was successfully inserted
-    // Returns False otherwise
-    public boolean createUser(User U) {
-        if (!isExistingUser(U.getUid())) {
-            ContentValues newUser = new ContentValues();
-            newUser.put("uid",              U.getUid());
-            newUser.put("isRegistered",     U.isRegistered());
-            newUser.put("email",            U.getEmail());
-            newUser.put("name",             U.getName());
-            newUser.put("dob",              U.getDob().toString());
-            newUser.put("gender",           U.getGender());
-            newUser.put("unitSystem",       U.getUnitSystem());
-            newUser.put("weight",           U.getWeight());
-            newUser.put("height1",          U.getHeight1());
-            newUser.put("height2",          U.getHeight2());
-            newUser.put("workoutFrequency", U.getWorkoutFreq());
-            newUser.put("goal",             U.getGoal());
-            newUser.put("dailyCalories",    U.getDailyCalories());
-            newUser.put("isPercent",        U.isPercent());
-            newUser.put("dailyCarbs",       U.getDailyCarbs());
-            newUser.put("dailyProtein",     U.getDailyProtein());
-            newUser.put("dailyFat",         U.getDailyFat());
-
-            database.insert(Table_User, null, newUser);
-            Log.d("createUser", "User with uid " + U.getUid() + " created");
-            return true;
-        }
-        else {
-            Log.d("createUser", "User with uid " + U.getUid() + " already exists");
-            return false;
-        }
-    }
-
-    // Returns User with UID = uid if found
-    // Returns null otherwise
-    public User retrieveUser(String uid) {
-        Cursor C = database.rawQuery("SELECT * FROM " + Table_User + " WHERE uid = '" + uid + "'", null);
-        if (C.moveToFirst() && C != null) {
-            User U = new User();
-            U.setUid(C.getString(0));
-            U.setRegisteredFromInt(C.getInt(1));
-            U.setEmail(C.getString(2));
-            U.setName(C.getString(3));
-            U.setDob(C.getString(4));
-            U.setGender(C.getInt(5));
-            U.setUnitSystem(C.getInt(6));
-            U.setWeight(C.getFloat(7));
-            U.setHeight1(C.getInt(8));
-            U.setHeight2(C.getInt(9));
-            U.setWorkoutFreq(C.getInt(10));
-            U.setGoal(C.getInt(11));
-            U.setDailyCalories(C.getInt(12));
-            U.setPercentFromInt(C.getInt(13));
-            U.setDailyCarbs(C.getInt(14));
-            U.setDailyProtein(C.getInt(15));
-            U.setDailyFat(C.getInt(16));
-            Log.d("retrieveUser", "User with uid " + uid + " retrieved");
-            return U;
-        }
-        else {
-            Log.d("retrieveUser", "User with uid " + uid + " not found");
-            return null;
-        }
-    }
-
-    // Returns True if User with UID = U.getUID was found and updated successfully
-    // Returns False otherwise
-    public boolean updateUser(User U) {
-        if (isExistingUser(U.getUid())) {
-            ContentValues updateUser = new ContentValues();
-            updateUser.put("uid", U.getUid());
-            updateUser.put("isRegistered", U.isRegistered());
-            updateUser.put("email", U.getEmail());
-            updateUser.put("name", U.getName());
-            updateUser.put("dob", U.getDob().toString());
-            updateUser.put("gender", U.getGender());
-            updateUser.put("unitSystem", U.getUnitSystem());
-            updateUser.put("weight", U.getWeight());
-            updateUser.put("height1", U.getHeight1());
-            updateUser.put("height2", U.getHeight2());
-            updateUser.put("workoutFrequency", U.getWorkoutFreq());
-            updateUser.put("goal", U.getGoal());
-            updateUser.put("dailyCalories", U.getDailyCalories());
-            updateUser.put("isPercent", U.isPercent());
-            updateUser.put("dailyCarbs", U.getDailyCarbs());
-            updateUser.put("dailyProtein", U.getDailyProtein());
-            updateUser.put("dailyFat", U.getDailyFat());
-            database.update(Table_User, updateUser, "uid = " + U.getUid(), null);
-            Log.d("updateUser", "User with uid " + U.getUid() + " updated");
-            return true;
-        }
-        else {
-            Log.d("updateUser", "User with uid " + U.getUid() + " not found");
-            return false;
-        }
-    }
-
-    // Returns True if User with UID = uid was found and deleted
-    // Returns False otherwise
-    public boolean deleteUser(String uid) {
-        if (isExistingUser(uid)){
-            database.delete(Table_User, "uid = '" + uid + "'", null);
-            Log.d("deleteUser", "User with uid " + uid + " deleted");
-            return true;
-        }
-        else {
-            Log.d("deleteUser", "User with uid " + uid + " not found");
-            return false;
-        }
     }
 }
