@@ -86,7 +86,7 @@
                 android:textColor="@color/DarkGrayFaded2" />
 
             <TextView
-                android:id="@+id/Text_Equal"
+                android:id="@+id/lblEqual"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -97,7 +97,7 @@
                 android:textColor="@color/DarkGrayFaded2" />
 
             <TextView
-                android:id="@+id/Text_Goal"
+                android:id="@+id/lblGoal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -122,7 +122,6 @@
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:scaleType="centerInside"
-                app:srcCompat="@drawable/icon_calories"
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
                 android:paddingTop="5dp" />
@@ -142,7 +141,7 @@
                     android:weightSum="1">
 
                     <TextView
-                        android:id="@+id/Text_CaloriesCurrent"
+                        android:id="@+id/lblCaloriesCurrent"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -153,7 +152,7 @@
                         android:textColor="@color/Custom_Grey" />
 
                     <TextView
-                        android:id="@+id/Text_CaloriesLeft"
+                        android:id="@+id/lblCaloriesLeft"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -164,7 +163,7 @@
                         android:textColor="@color/Custom_Grey" />
 
                     <TextView
-                        android:id="@+id/Text_CaloriesGoal"
+                        android:id="@+id/lblCaloriesGoal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentStart="true"
@@ -251,7 +250,7 @@
                     android:weightSum="1">
 
                     <TextView
-                        android:id="@+id/Text_CarbsCurrent"
+                        android:id="@+id/lblCarbsCurrent"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -262,7 +261,7 @@
                         android:textColor="@color/Custom_Grey" />
 
                     <TextView
-                        android:id="@+id/Text_CarbsLeft"
+                        android:id="@+id/lblCarbsLeft"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -273,7 +272,7 @@
                         android:textColor="@color/Custom_Grey" />
 
                     <TextView
-                        android:id="@+id/Text_CarbsGoal"
+                        android:id="@+id/lblCarbsGoal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentStart="true"
@@ -335,7 +334,7 @@
                     android:weightSum="1">
 
                     <TextView
-                        android:id="@+id/Text_ProteinCurrent"
+                        android:id="@+id/lblProteinCurrent"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -346,7 +345,7 @@
                         android:textColor="@color/Custom_Grey" />
 
                     <TextView
-                        android:id="@+id/Text_ProteinLeft"
+                        android:id="@+id/lblProteinLeft"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -357,7 +356,7 @@
                         android:textColor="@color/Custom_Grey" />
 
                     <TextView
-                        android:id="@+id/Text_ProteinGoal"
+                        android:id="@+id/lblProteinGoal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentStart="true"
@@ -417,7 +416,7 @@
                     android:weightSum="1">
 
                     <TextView
-                        android:id="@+id/Text_FatCurrent"
+                        android:id="@+id/lblFatCurrent"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -428,7 +427,7 @@
                         android:textColor="@color/Custom_Grey" />
 
                     <TextView
-                        android:id="@+id/Text_FatLeft"
+                        android:id="@+id/lblFatLeft"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -439,7 +438,7 @@
                         android:textColor="@color/Custom_Grey" />
 
                     <TextView
-                        android:id="@+id/Text_FatGoal"
+                        android:id="@+id/lblFatGoal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentStart="true"
@@ -471,7 +470,7 @@
 
         <ListView
         android:layout_width="match_parent"
-        android:id="@+id/ListView_Meals"
+        android:id="@+id/listViewDailyMeals"
         android:fastScrollEnabled="false"
             tools:layout_editor_absoluteY="8dp"
             tools:layout_editor_absoluteX="8dp"

@@ -69,8 +69,8 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:id="@+id/linearlayoutCalories">
+        android:id="@+id/linearlayoutCalories"
+        android:layout_height="40dp">
 
         <TextView
             android:layout_width="match_parent"
@@ -132,8 +132,8 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:id="@+id/linearlayoutCarbs">
+        android:id="@+id/linearlayoutCarbs"
+        android:layout_height="40dp">
 
         <TextView
             android:text="@string/lblCarbs"
@@ -189,8 +189,8 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:id="@+id/linearlayoutProtein">
+        android:id="@+id/linearlayoutProtein"
+        android:layout_height="40dp">
 
         <TextView
             android:text="@string/lblProtein"
@@ -246,8 +246,8 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:id="@+id/linearlayoutFat">
+        android:id="@+id/linearlayoutFat"
+        android:layout_height="40dp">
 
         <TextView
             android:text="@string/lblFat"
@@ -304,7 +304,7 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:id="@+id/linearlayoutTotal"
-        android:layout_height="50dp">
+        android:layout_height="40dp">
 
         <TextView
             android:layout_width="match_parent"
