@@ -22,8 +22,13 @@ import com.example.kareem.IIFYM_Tracker.Database.SharedPreferenceHelper;
 import com.example.kareem.IIFYM_Tracker.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseNetworkException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthInvalidUserException;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -103,22 +108,21 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
 
                 // User is signed in
                 if (firebaseUser != null) {
-                    final String uid = firebaseUser.getUid();
-                    final String email = firebaseUser.getEmail();
-                    Log.d("OnAuthStateChanged","User " + uid +  "is signed in");
-
-                    // Email is verified
-                    if (firebaseAuth.getCurrentUser().isEmailVerified()) {
+                    // Email verified
+                    if (firebaseUser.isEmailVerified()) {
+                        final String uid = firebaseUser.getUid();
+                        final String email = firebaseUser.getEmail();
+                        Log.d("OnAuthStateChanged", "User " + uid + "is signed in");
                         firebaseDbRef.child("users").child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
                                 User userPost = dataSnapshot.getValue(User.class);
                                 isRegistered = userPost.isRegistered();
-                                Log.i("onAuthStateChanged","isRegistered: " + isRegistered);
+                                Log.i("onAuthStateChanged", "isRegistered: " + isRegistered);
 
                                 if (isRegistered) {
-                                    // If User is not found, create new User
-                                    if(!DB_SQLite.isExistingUser(uid)){
+                                    // If local User is not found, create new User
+                                    if (!DB_SQLite.isExistingUser(uid)) {
                                         DB_SQLite.createUser(userPost);
                                     }
                                     // Store user session in Preferences
@@ -143,12 +147,10 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
 
                             }
                         });
-
-                    } else {
-                        // Email is not verified
-                        // Display that user needs to verify email
-                        showAlertDialog("Email Verification", "An email has been sent to you.\n" +
-                                "Please verify your email in order to log in.");
+                    }
+                    // Email not verified
+                    else {
+                        showAlertDialog("Email Verification", "Please verify your email before continuing");
                     }
                 }
             }
@@ -175,13 +177,13 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         // User Created Success
-                        if(task.isSuccessful()) {
+                        if (task.isSuccessful()) {
 
                             //Save UID, Email and isRegistered to Firebase
                             FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
                             String newUID = firebaseUser.getUid();
                             String newEmail = firebaseUser.getEmail();
-                            User user = new User(newUID,newEmail,false);
+                            User user = new User(newUID, newEmail, false);
                             firebaseDbRef.child("users").child(newUID).setValue(user);
 
                             firebaseUser.sendEmailVerification()
@@ -190,16 +192,27 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if (task.isSuccessful()) {
                                                 // Email verification sent to user
+                                                signOut();
                                             }
                                             else {
-                                                showAlertDialog("Oops!","There was an error sending the verification email.");
+                                                showAlertDialog("Oops!","There was an error sending the verification email");
                                             }
                                         }
                                     });
                         }
                         //  Failed to Create User
                         if (!task.isSuccessful()) {
-                            showAlertDialog("User Registration Failed","Unable to create user.");
+                            try {
+                                throw task.getException();
+                            } catch (FirebaseAuthUserCollisionException E) {
+                                showAlertDialog("Failed to create user", "User already exists");
+                            } catch (FirebaseAuthWeakPasswordException E) {
+                                showAlertDialog("Failed to create user", "Password should be at least 6 characters");
+                            } catch (FirebaseNetworkException E) {
+                                showAlertDialog("Failed to create user", "Network connection not found");
+                            }catch (Exception E) {
+                                Log.e("createUser", E.getMessage());
+                            }
                         }
                         hideProgressDialog();
                     }
@@ -216,13 +229,23 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         //Sign in Success
-                        if(task.isSuccessful()) {
+                        if (task.isSuccessful()) {
+
                             // onAuthStateChanged will be called
                         }
-
                         //Sign in Fail
                         if (!task.isSuccessful()) {
-                            showAlertDialog("Sign in failed", "Unable to sign in.");
+                            try {
+                                throw task.getException();
+                            } catch (FirebaseAuthInvalidCredentialsException E) {
+                                showAlertDialog("Failed to sign in", "Invalid username or password");
+                            } catch (FirebaseAuthInvalidUserException E) {
+                                showAlertDialog("Failed to sign in", "User does not exist");
+                            } catch (FirebaseNetworkException E) {
+                                showAlertDialog("Failed to sign in", "Network connection not found");
+                            } catch (Exception e) {
+                                Log.e("createUser", e.getMessage());
+                            }
                         }
                         hideProgressDialog();
                     }
@@ -267,9 +290,9 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
     @Override public void onClick(View v) {
         int i = v.getId();
         if (i == R.id.Button_Register) {
-            createAccount(etxtEmail.getText().toString(), etxtPassword.getText().toString());
+            createAccount(etxtEmail.getText().toString().trim(), etxtPassword.getText().toString().trim());
         } else if (i == R.id.Button_Login) {
-            signIn(etxtEmail.getText().toString(), etxtPassword.getText().toString());
+            signIn(etxtEmail.getText().toString().trim(), etxtPassword.getText().toString().trim());
         }
     }
 
@@ -323,5 +346,10 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
         if (progressDialog != null && progressDialog.isShowing()) {
             progressDialog.dismiss();
         }
+    }
+
+    private void signOut() {
+        Log.d("UserInfo","Signed out");
+        firebaseAuth.signOut();
     }
 }

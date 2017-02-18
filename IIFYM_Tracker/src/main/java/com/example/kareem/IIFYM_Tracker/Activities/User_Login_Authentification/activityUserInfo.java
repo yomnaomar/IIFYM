@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -373,6 +374,8 @@ public class activityUserInfo extends AppCompatActivity implements View.OnClickL
         myPrefs.addPreference("temp_height2",height2);
         myPrefs.addPreference("temp_workoutfreq",workoutFreq);
         myPrefs.addPreference("temp_goal",goal);
+
+        signOut();
         super.onPause();
     }
 
@@ -437,5 +440,10 @@ public class activityUserInfo extends AppCompatActivity implements View.OnClickL
         if(a < 0)
             return false;
         return true;
+    }
+
+    private void signOut() {
+        Log.d("UserInfo","Signed out");
+        firebaseAuth.signOut();
     }
 }

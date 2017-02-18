@@ -26,7 +26,7 @@ public class activityLauncher extends AppCompatActivity {
         String session_uid = myPrefs.getStringValue("session_uid");
         Log.d("Launcher","session_uid:" + session_uid);
         if(session_uid.isEmpty()){
-            // Go to activityUserInfo
+            // Go to activityLogin
             Intent intent = new Intent();
             intent.setClass(context, activityLogin.class);
             startActivity(intent);

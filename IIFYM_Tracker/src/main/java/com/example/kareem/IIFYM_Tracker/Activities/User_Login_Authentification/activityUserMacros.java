@@ -2,13 +2,15 @@ package com.example.kareem.IIFYM_Tracker.Activities.User_Login_Authentification;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
-import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
@@ -26,6 +28,7 @@ import com.example.kareem.IIFYM_Tracker.Database.SQLiteConnector;
 import com.example.kareem.IIFYM_Tracker.Database.SharedPreferenceHelper;
 import com.example.kareem.IIFYM_Tracker.R;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -393,7 +396,7 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
     private void Finish(){
         // Validate Fields
         if(validateFields()){
-            User user;
+            final User user;
             if (rbtnCalories.isChecked()) {
                 user = new User(uid, email, true, name, dob, gender,
                         unitSystem, weight, height1, height2, workoutFreq,
@@ -404,39 +407,38 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
                         unitSystem, weight, height1, height2, workoutFreq,
                         goal, calories, false, carbs, protein, fat);
             }
-            new RegisterUser().execute(user);
-        }
-    }
 
-    private class RegisterUser extends AsyncTask<User, Void, Void> {
-        @Override
-        protected void onPreExecute(){
             showProgressDialog();
-        }
+            Log.i("RegisterUser","adding user data: " + uid);
+            Log.i("RegisterUser", user + "");
+            firebaseDbRef.child("users").child(uid).setValue(user, new DatabaseReference.CompletionListener() {
+                public void onComplete(DatabaseError error, DatabaseReference ref) {
+                    Log.d("RegisterUser","Value was set. Error = " + error);
 
-        @Override
-        protected Void doInBackground(User... params) {
-            // Write Data
-            firebaseDbRef.child("users").child(uid).setValue(params[0]);
-            DB_SQLite.createUser(params[0]);
-            return null;
-        }
+                    // No error
+                    if (error == null) {
+                        DB_SQLite.createUser(user);
 
-        @Override
-        protected void onPostExecute(Void result) {
-            hideProgressDialog();
+                        hideProgressDialog();
 
-            // Go to activityMain
-            // Store user session in Preferences
-            myPrefs.addPreference("session_uid",uid);
-            Intent broadcastIntent = new Intent("finish_activity");
-            sendBroadcast(broadcastIntent);
+                        // Go to activityMain
+                        // Store user session in Preferences
+                        myPrefs.addPreference("session_uid", uid);
+                        Intent broadcastIntent = new Intent("finish_activity");
+                        sendBroadcast(broadcastIntent);
 
-            Context context = getApplicationContext();
-            Intent intent = new Intent();
-            intent.setClass(context, activityMain.class);
-            startActivity(intent);
-            finish();
+                        Context context = getApplicationContext();
+                        Intent intent = new Intent();
+                        intent.setClass(context, activityMain.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                    // Error writing to database
+                    else {
+                        showAlertDialog("Network Error","Please check your network connection and try again");
+                    }
+                }
+            });
         }
     }
 
@@ -639,6 +641,8 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
             myPrefs.addPreference("temp_display", 0); // Calories
         else
             myPrefs.addPreference("temp_display", 1); // Macros
+
+        signOut();
         super.onPause();
     }
 
@@ -673,5 +677,24 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
 
     @Override public void afterTextChanged(Editable s) {
 
+    }
+
+    private void signOut() {
+        Log.d("UserInfo","Signed out");
+        firebaseAuth.signOut();
+    }
+
+    private void showAlertDialog(String title, String message){
+        AlertDialog.Builder builder = new AlertDialog.Builder(activityUserMacros.this);
+        builder.setTitle(title)
+                .setMessage(message);
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.dismiss();
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }

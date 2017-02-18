@@ -106,12 +106,12 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 "CONSTRAINT meal_id_fk FOREIGN KEY(meal_id) REFERENCES " + Table_Meal + " (meal_id) ON DELETE CASCADE);";
 
         String createTable_Composed_Of = "CREATE TABLE " + Table_Composed_Of + " " +
-                "(food_id       INTEGER, " +
-                "meal_id     INTEGER, " +
+                "(meal_id       INTEGER, " +
+                "food_id     INTEGER, " +
 
-                "CONSTRAINT complex_id_pk PRIMARY KEY(meal_id, complex_id), " +
+                "CONSTRAINT meal_id_pk PRIMARY KEY(meal_id, food_id), " +
                 "CONSTRAINT meal_id_fk FOREIGN KEY(meal_id) REFERENCES " + Table_Meal + " (meal_id), " +
-                "CONSTRAINT complex_id_fk FOREIGN KEY(complex_id) REFERENCES " + Table_Meal + "(meal_id) ON DELETE CASCADE);";
+                "CONSTRAINT food_id_fk FOREIGN KEY(food_id) REFERENCES " + Table_Meal + "(meal_id) ON DELETE CASCADE);";
         //ON UPDATE is not needed because meal_id will never be updated, it is hidden from the user
 
         //Create tables
