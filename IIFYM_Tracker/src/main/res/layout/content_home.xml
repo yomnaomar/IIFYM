@@ -191,33 +191,6 @@
 
             </LinearLayout>
 
-
-            <!--<ListView-->
-            <!--android:id="@+id/ListView_Meals"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="233dp"-->
-            <!--android:fastScrollEnabled="false" />-->
-
-            <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:orientation="horizontal">-->
-
-            <!--<Button-->
-            <!--android:id="@+id/Button_AddQuickMeal"-->
-            <!--android:layout_width="fill_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_weight="1"-->
-            <!--android:text="Add Quick Meal" />-->
-
-            <!--<Button-->
-            <!--android:id="@+id/Button_AddSavedMeal"-->
-            <!--android:layout_width="fill_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_weight="1"-->
-            <!--android:text="Add Saved Meal" />-->
-
-            <!--</LinearLayout>-->
         </LinearLayout>
 
         <LinearLayout
