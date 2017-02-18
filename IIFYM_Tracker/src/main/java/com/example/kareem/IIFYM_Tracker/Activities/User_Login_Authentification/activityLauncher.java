@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.widget.ProgressBar;
 
 import com.example.kareem.IIFYM_Tracker.Activities.Main.activityMain;
 import com.example.kareem.IIFYM_Tracker.Database.SharedPreferenceHelper;
@@ -13,7 +12,6 @@ import com.example.kareem.IIFYM_Tracker.R;
 
 public class activityLauncher extends AppCompatActivity {
 
-    private ProgressBar             progressbarLoading;
     private SharedPreferenceHelper  myPrefs;
     private Context                 context;
 
@@ -41,6 +39,5 @@ public class activityLauncher extends AppCompatActivity {
         }
 
         setContentView(R.layout.activity_launcher);
-        progressbarLoading = (ProgressBar)findViewById(R.id.progressbarLoading);
     }
 }

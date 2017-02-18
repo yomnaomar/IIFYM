@@ -15,12 +15,11 @@ import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.akexorcist.roundcornerprogressbar.IconRoundCornerProgressBar;
+import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
 import com.example.kareem.IIFYM_Tracker.Activities.Settings.MacroSettings;
 import com.example.kareem.IIFYM_Tracker.Activities.Settings.UserProfile_Mina;
 import com.example.kareem.IIFYM_Tracker.Activities.User_Login_Authentification.activityLogin;
@@ -43,22 +42,19 @@ import java.util.ArrayList;
 public class activityMain extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener, OnListItemDeletedListener {
 
     // GUI
-    private TextView etxtCarbsGoal, etxtProteinGoal, etxtFatGoal;
-    private TextView Text_CarbsLeft, Text_ProteinLeft, Text_FatLeft;
-    private TextView Text_CarbsCurrent, Text_ProteinCurrent, Text_FatCurrent;
-    private Button Button_AddSavedMeal, Button_AddQuickMeal;
+    private TextView lblCarbsGoals, lblProteinGoal, lblFatGoal;
+    private TextView lblCarbsLeft, lblProteinLeft, lblFatLeft;
+    private TextView lblCarbsCurrent, lblProteinCurrent, lblFatCurrent;
 
-    private ArrayList<DailyMeal> ArrayList_DailyMeals;
-    private DailyMealAdapter My_DailyMealAdapter;
-    private ListView Meals_ListView;
-    private IconRoundCornerProgressBar Carb_ProgressBar, Protein_ProgressBar, Fat_ProgressBar;
+    private ArrayList<DailyMeal> arrDailyMeals;
+    private DailyMealAdapter adapterDailyMeals;
+    private ListView listViewDailyMeals;
+    private RoundCornerProgressBar progressBarCarbs, progressBarProtein, progressBarFat;
 
     public static final String CarbsPrefKey = "EditTextPrefCarbsGoal";
     public static final String ProteinPrefKey = "EditTextPrefProteinGoal";
     public static final String FatPrefKey = "EditTextPrefFatGoal";
-    public  int CarbsDefault ;
-    public  int ProteinDefault ;
-    public  int FatDefault ;
+    public  int defaultCarbs, defaultProtein, defaultFat;
 
     View parentLayout;
 
@@ -95,33 +91,28 @@ public class activityMain extends AppCompatActivity implements View.OnClickListe
 
         settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         //Declaring
-        etxtCarbsGoal = (TextView) findViewById(R.id.Text_CarbsGoal);
-        etxtProteinGoal = (TextView) findViewById(R.id.Text_ProteinGoal);
-        etxtFatGoal = (TextView) findViewById(R.id.Text_FatGoal);
+        lblCarbsGoals = (TextView) findViewById(R.id.lblCarbsGoal);
+        lblProteinGoal = (TextView) findViewById(R.id.lblProteinGoal);
+        lblFatGoal = (TextView) findViewById(R.id.lblFatGoal);
 
-        Text_CarbsLeft = (TextView) findViewById(R.id.Text_CarbsLeft);
-        Text_ProteinLeft = (TextView) findViewById(R.id.Text_ProteinLeft);
-        Text_FatLeft = (TextView) findViewById(R.id.Text_FatLeft);
+        lblCarbsLeft = (TextView) findViewById(R.id.lblCarbsLeft);
+        lblProteinLeft = (TextView) findViewById(R.id.lblProteinLeft);
+        lblFatLeft = (TextView) findViewById(R.id.lblFatLeft);
 
-        Text_CarbsCurrent = (TextView) findViewById(R.id.Text_CarbsCurrent);
-        Text_ProteinCurrent = (TextView) findViewById(R.id.Text_ProteinCurrent);
-        Text_FatCurrent = (TextView) findViewById(R.id.Text_FatCurrent);
+        lblCarbsCurrent = (TextView) findViewById(R.id.lblCarbsCurrent);
+        lblProteinCurrent = (TextView) findViewById(R.id.lblProteinCurrent);
+        lblFatCurrent = (TextView) findViewById(R.id.lblFatCurrent);
 
-//        Carb_ProgressBar = (IconRoundCornerProgressBar) findViewById(R.id.Carb_ProgressBar);
-//        Protein_ProgressBar = (IconRoundCornerProgressBar) findViewById(R.id.Protein_ProgressBar);
-//        Fat_ProgressBar = (IconRoundCornerProgressBar) findViewById(R.id.Fat_ProgressBar);
-//
-//        Button_AddSavedMeal = (Button) findViewById(R.id.Button_AddSavedMeal);
-//        Button_AddSavedMeal.setOnClickListener(this);
-//        Button_AddQuickMeal = (Button) findViewById(R.id.Button_AddQuickMeal);
-//        Button_AddQuickMeal.setOnClickListener(this);
+        progressBarCarbs = (RoundCornerProgressBar) findViewById(R.id.progressBarCarbs);
+        progressBarProtein = (RoundCornerProgressBar) findViewById(R.id.progressBarProtein);
+        progressBarFat = (RoundCornerProgressBar) findViewById(R.id.progressBarFat);
 
-        ArrayList_DailyMeals = new ArrayList<DailyMeal>();
-        My_DailyMealAdapter = new DailyMealAdapter(this, ArrayList_DailyMeals);
+        arrDailyMeals = new ArrayList<DailyMeal>();
+        adapterDailyMeals = new DailyMealAdapter(this, arrDailyMeals);
 
-        Meals_ListView = (ListView) findViewById(R.id.ListView_Meals);
-        Meals_ListView.setAdapter(My_DailyMealAdapter);
-        Meals_ListView.setOnItemClickListener(this);
+        listViewDailyMeals = (ListView) findViewById(R.id.listViewDailyMeals);
+        listViewDailyMeals.setAdapter(adapterDailyMeals);
+        listViewDailyMeals.setOnItemClickListener(this);
 
 
         parentLayout = findViewById(R.id.root_view);
@@ -238,13 +229,13 @@ public class activityMain extends AppCompatActivity implements View.OnClickListe
         SharedPreferences prefs =
                 PreferenceManager.getDefaultSharedPreferences(this);
 
-        int CarbGoals = Integer.parseInt(prefs.getString(CarbsPrefKey, CarbsDefault + ""));
-        int ProteinGoals = Integer.parseInt(prefs.getString(ProteinPrefKey, ProteinDefault + ""));
-        int FatGoals = Integer.parseInt(prefs.getString(FatPrefKey, FatDefault + ""));
+        int CarbGoals = Integer.parseInt(prefs.getString(CarbsPrefKey, defaultCarbs + ""));
+        int ProteinGoals = Integer.parseInt(prefs.getString(ProteinPrefKey, defaultProtein + ""));
+        int FatGoals = Integer.parseInt(prefs.getString(FatPrefKey, defaultFat + ""));
 
-        etxtCarbsGoal.setText(CarbGoals + "");
-        etxtProteinGoal.setText(ProteinGoals + "");
-        etxtFatGoal.setText(FatGoals + "");
+        lblCarbsGoals.setText(CarbGoals + "");
+        lblProteinGoal.setText(ProteinGoals + "");
+        lblFatGoal.setText(FatGoals + "");
 
         int CarbsCurrent = 0;
         int ProteinCurrent = 0;
@@ -254,9 +245,9 @@ public class activityMain extends AppCompatActivity implements View.OnClickListe
         int ProteinLeft = 0;
         int FatLeft = 0;
 
-        int NumberOfMeals = My_DailyMealAdapter.getCount();
+        int NumberOfMeals = adapterDailyMeals.getCount();
         for (int i = 0; i < NumberOfMeals; i++) {
-            DailyMeal TempMeal = My_DailyMealAdapter.getItem(i);
+            DailyMeal TempMeal = adapterDailyMeals.getItem(i);
             int carbs = Math.round(TempMeal.getCarbs());
             int protein = Math.round(TempMeal.getProtein());
             int fat = Math.round(TempMeal.getFat());
@@ -270,53 +261,53 @@ public class activityMain extends AppCompatActivity implements View.OnClickListe
         ProteinLeft = ProteinGoals - ProteinCurrent;
         FatLeft = FatGoals - FatCurrent;
 
-        Text_CarbsLeft.setText(CarbsLeft + "");
-        Text_CarbsCurrent.setText(CarbsCurrent + "");
+        lblCarbsLeft.setText(CarbsLeft + "");
+        lblCarbsCurrent.setText(CarbsCurrent + "");
         if(CarbsCurrent <= CarbGoals)
         {
-            Carb_ProgressBar.setProgress(100 * CarbsCurrent / CarbGoals);
-            Carb_ProgressBar.setSecondaryProgress(0);
+            progressBarCarbs.setProgress(100 * CarbsCurrent / CarbGoals);
+            progressBarCarbs.setSecondaryProgress(0);
         }
         else
         {
             int CarbsExcess = CarbsCurrent - CarbGoals;
-            Carb_ProgressBar.setProgress(100*((float) CarbGoals)/CarbsCurrent);
-            Carb_ProgressBar.setSecondaryProgress(100);
+            progressBarCarbs.setProgress(100*((float) CarbGoals)/CarbsCurrent);
+            progressBarCarbs.setSecondaryProgress(100);
         }
 
-        Text_ProteinLeft.setText(ProteinLeft + "");
-        Text_ProteinCurrent.setText(ProteinCurrent + "");
+        lblProteinLeft.setText(ProteinLeft + "");
+        lblProteinCurrent.setText(ProteinCurrent + "");
         if(ProteinCurrent <= ProteinGoals)
         {
-            Protein_ProgressBar.setProgress(100 * ProteinCurrent / ProteinGoals);
-            Protein_ProgressBar.setSecondaryProgress(0);
+            progressBarProtein.setProgress(100 * ProteinCurrent / ProteinGoals);
+            progressBarProtein.setSecondaryProgress(0);
         }
         else
         {
             int ProteinExcess = ProteinCurrent - ProteinGoals;
-            Protein_ProgressBar.setProgress(100*ProteinGoals/ProteinCurrent);
-            Protein_ProgressBar.setSecondaryProgress(100);
+            progressBarProtein.setProgress(100*ProteinGoals/ProteinCurrent);
+            progressBarProtein.setSecondaryProgress(100);
         }
 
-        Text_FatLeft.setText(FatLeft + "");
-        Text_FatCurrent.setText(FatCurrent + "");
+        lblFatLeft.setText(FatLeft + "");
+        lblFatCurrent.setText(FatCurrent + "");
         if(FatCurrent <= FatGoals)
         {
-            Fat_ProgressBar.setProgress(100 * FatCurrent / FatGoals);
-            Fat_ProgressBar.setSecondaryProgress(0);
+            progressBarFat.setProgress(100 * FatCurrent / FatGoals);
+            progressBarFat.setSecondaryProgress(0);
         }
         else
         {
             int FatExcess = FatCurrent - FatGoals;
-            Fat_ProgressBar.setProgress(100*FatGoals/FatCurrent);
-            Fat_ProgressBar.setSecondaryProgress(100);
+            progressBarFat.setProgress(100*FatGoals/FatCurrent);
+            progressBarFat.setSecondaryProgress(100);
         }
     }
 
     //Updates My_MealAdapter
     //TODO: TEST AFTER IMPLEMENTING DATABASE
     public void UpdateArrayList() {
-        My_DailyMealAdapter.clear();
+        adapterDailyMeals.clear();
         Cursor AllDailyMeals_Cursor = DB_SQLite.getAllDailyMeals();
         int count = AllDailyMeals_Cursor.getCount();
         Log.i("Count","Count = " + count);
@@ -340,7 +331,7 @@ public class activityMain extends AppCompatActivity implements View.OnClickListe
                 Portion_Type M_portion   = M.getPortion();
 
                 DailyMeal DM = new DailyMeal(M_name,daily_meal_id,M_carbs,M_protein,M_fat,M_portion,daily_position,daily_multiplier);
-                My_DailyMealAdapter.add(DM);
+                adapterDailyMeals.add(DM);
 
                 Log.i("DailyMeal Added:", "Name: "
                         + M.getMeal_name() + " " + M.getMeal_id() + " "

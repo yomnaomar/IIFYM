@@ -181,6 +181,7 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
         captureNewValues();
         compareValues();
         updateValues();
+        validateFields();
     }
 
     private void captureOldValues() {

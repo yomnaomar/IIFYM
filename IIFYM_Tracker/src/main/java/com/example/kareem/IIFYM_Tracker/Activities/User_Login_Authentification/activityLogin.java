@@ -90,7 +90,6 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
     private DatabaseReference               firebaseDbRef;
     private FirebaseAuth.AuthStateListener  firebaseAuthListener;
 
-    //TODO don't load activity if user session is active
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -98,9 +97,9 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
         myPrefs = new SharedPreferenceHelper(context);
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseDbRef = FirebaseDatabase.getInstance().getReference();
-        // Creating SQLite DB here makes App's first run slower, but enhances UX later by avoiding creating the DB later
-        DB_SQLite = new SQLiteConnector(context);
+        DB_SQLite = new SQLiteConnector(context); // Creating SQLite DB here makes App's first run slower, but enhances UX later by avoiding creating the DB later
 
+        // Handles Signing in
         firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -108,18 +107,20 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
 
                 // User is signed in
                 if (firebaseUser != null) {
+
                     // Email verified
                     if (firebaseUser.isEmailVerified()) {
                         final String uid = firebaseUser.getUid();
                         final String email = firebaseUser.getEmail();
-                        Log.d("OnAuthStateChanged", "User " + uid + "is signed in");
+
+                        // Get User data to check if Registered
                         firebaseDbRef.child("users").child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
                                 User userPost = dataSnapshot.getValue(User.class);
                                 isRegistered = userPost.isRegistered();
-                                Log.i("onAuthStateChanged", "isRegistered: " + isRegistered);
 
+                                // User is Registered
                                 if (isRegistered) {
                                     // If local User is not found, create new User
                                     if (!DB_SQLite.isExistingUser(uid)) {
@@ -127,12 +128,16 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
                                     }
                                     // Store user session in Preferences
                                     myPrefs.addPreference("session_uid", uid);
+
                                     // Go to activityMain
                                     Intent intent = new Intent();
                                     intent.setClass(context, activityMain.class);
                                     startActivity(intent);
                                     finish();
-                                } else {
+                                }
+
+                                // User is not Registered
+                                else {
                                     // Go to activityUserInfo
                                     Intent intent = new Intent();
                                     intent.putExtra("uid", uid);
@@ -230,7 +235,6 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         //Sign in Success
                         if (task.isSuccessful()) {
-
                             // onAuthStateChanged will be called
                         }
                         //Sign in Fail
