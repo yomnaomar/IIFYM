@@ -1,21 +1,9 @@
 package com.example.kareem.IIFYM_Tracker.Activities.Settings;
 
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.database.Cursor;
-import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.kareem.IIFYM_Tracker.Database.SQLiteConnector;
-import com.example.kareem.IIFYM_Tracker.R;
-
-public class UserProfile_Mina extends AppCompatActivity implements View.OnClickListener{
+public class UserProfile_Mina extends AppCompatActivity {}
+/*public class UserProfile_Mina extends AppCompatActivity implements View.OnClickListener{
 
     private SQLiteConnector DB;
     TextView username;
@@ -79,3 +67,4 @@ public class UserProfile_Mina extends AppCompatActivity implements View.OnClickL
         }
     }
 }
+*/

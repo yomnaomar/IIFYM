@@ -1,42 +1,9 @@
 package com.example.kareem.IIFYM_Tracker.Activities.Settings;
 
-import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.graphics.Typeface;
-import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.text.InputType;
-import android.util.Log;
-import android.view.Gravity;
-import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.BounceInterpolator;
-import android.view.animation.TranslateAnimation;
-import android.widget.EditText;
-import android.widget.TextView;
 
-import com.afollestad.materialdialogs.MaterialDialog;
-import com.androidadvance.topsnackbar.TSnackbar;
-import com.example.kareem.IIFYM_Tracker.Database.SQLiteConnector;
-import com.example.kareem.IIFYM_Tracker.R;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import lecho.lib.hellocharts.listener.PieChartOnValueSelectListener;
-import lecho.lib.hellocharts.model.PieChartData;
-import lecho.lib.hellocharts.model.SliceValue;
-import lecho.lib.hellocharts.util.ChartUtils;
-import lecho.lib.hellocharts.view.PieChartView;
-import tourguide.tourguide.Overlay;
-import tourguide.tourguide.Pointer;
-import tourguide.tourguide.ToolTip;
-import tourguide.tourguide.TourGuide;
-
-public class MacroSettings extends AppCompatActivity implements View.OnFocusChangeListener{
+public class MacroSettings extends AppCompatActivity {}
+/*public class MacroSettings extends AppCompatActivity implements View.OnFocusChangeListener{
 
     String user_name;
     SQLiteConnector My_DB;
@@ -749,3 +716,4 @@ public class MacroSettings extends AppCompatActivity implements View.OnFocusChan
         }catch (Exception e){}
     }
 }
+*/

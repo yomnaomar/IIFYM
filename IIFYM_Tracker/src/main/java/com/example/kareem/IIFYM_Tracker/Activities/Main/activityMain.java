@@ -2,7 +2,6 @@ package com.example.kareem.IIFYM_Tracker.Activities.Main;
 
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -21,15 +20,13 @@ import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
 import com.example.kareem.IIFYM_Tracker.Activities.Settings.MacroSettings;
 import com.example.kareem.IIFYM_Tracker.Activities.Settings.UserProfile_Mina;
 import com.example.kareem.IIFYM_Tracker.Activities.User_Login_Authentification.activityLogin;
-import com.example.kareem.IIFYM_Tracker.Custom_Objects.DailyItem;
-import com.example.kareem.IIFYM_Tracker.Custom_Objects.Food;
-import com.example.kareem.IIFYM_Tracker.Custom_Objects.Portion_Type;
-import com.example.kareem.IIFYM_Tracker.Custom_Objects.User;
 import com.example.kareem.IIFYM_Tracker.Database.SQLiteConnector;
 import com.example.kareem.IIFYM_Tracker.Database.SharedPreferenceHelper;
+import com.example.kareem.IIFYM_Tracker.Models.DailyItem;
+import com.example.kareem.IIFYM_Tracker.Models.User;
 import com.example.kareem.IIFYM_Tracker.R;
-import com.example.kareem.IIFYM_Tracker.ViewComponents.DailyMealAdapter;
 import com.example.kareem.IIFYM_Tracker.ViewComponents.OnListItemDeletedListener;
+import com.example.kareem.IIFYM_Tracker.ViewComponents.adapterDailyItem;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
@@ -37,22 +34,22 @@ import java.util.ArrayList;
 public class activityMain extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener, OnListItemDeletedListener {
 
     // GUI
-    private TextView lblCaloriesCurrent, lblCaloriesLeft, lblCaloriesGoal;
-    private TextView lblCarbsCurrent,    lblCarbsLeft,    lblCarbsGoal;
-    private TextView lblProteinCurrent,  lblProteinLeft,  lblProteinGoal;
-    private TextView lblFatCurrent,      lblFatLeft,      lblFatGoal;
-    private ArrayList<DailyItem> arrDailyMeals;
-    private DailyMealAdapter adapterDailyMeals;
-    private ListView listViewDailyMeals;
-    private RoundCornerProgressBar progressBarCarbs, progressBarProtein, progressBarFat;
-    private Animation mEnterAnimation, mExitAnimation;
+    private TextView lblCaloriesCurrent, lblCarbsCurrent, lblProteinCurrent, lblFatCurrent;
+    private TextView lblCaloriesLeft,    lblCarbsLeft,    lblProteinLeft,    lblFatLeft;
+    private TextView lblCaloriesGoal,    lblCarbsGoal,    lblProteinGoal,    lblFatGoal;
+
+    private ArrayList<DailyItem>    arrDailyItems;
+    private adapterDailyItem        adapterDailyItems;
+    private ListView                listViewDailyItems;
+    private RoundCornerProgressBar  progressBarCalories, progressBarCarbs, progressBarProtein, progressBarFat;
+    private Animation               mEnterAnimation, mExitAnimation;
 
     // Variables
     private Context context;
-    public int defaultCarbs, defaultProtein, defaultFat;
-    public static final String CarbsPrefKey = "EditTextPrefCarbsGoal";
-    public static final String ProteinPrefKey = "EditTextPrefProteinGoal";
-    public static final String FatPrefKey = "EditTextPrefFatGoal";
+    public boolean  isPercent;
+    public int      caloriesCurrent = 0,    carbsCurrent = 0,   proteinCurrent = 0, fatCurrent = 0;
+    public int      caloriesLeft = 0,       carbsLeft = 0,      proteinLeft = 0,    fatLeft = 0;
+    public int      caloriesGoal,           carbsGoal,          proteinGoal,        fatGoal;
 
     // Storage
     private SharedPreferenceHelper          myPrefs;
@@ -74,132 +71,11 @@ public class activityMain extends AppCompatActivity implements View.OnClickListe
         DB_SQLite = new SQLiteConnector(context);
         firebaseAuth = FirebaseAuth.getInstance();
 
-        // Get User
-        uid = myPrefs.getStringValue("session_uid");
-        currentUser = DB_SQLite.retrieveUser(uid);
-
         // GUI
         initializeGUI();
-    }
-
-    @Override protected void onResume() {
-        super.onResume();
-    }
-
-    @Override protected void onPause() {
-        super.onPause();
-    }
-
-    public void UpdateMacros (){
-        int CarbGoals = Integer.parseInt(prefs.getString(CarbsPrefKey, defaultCarbs + ""));
-        int ProteinGoals = Integer.parseInt(prefs.getString(ProteinPrefKey, defaultProtein + ""));
-        int FatGoals = Integer.parseInt(prefs.getString(FatPrefKey, defaultFat + ""));
-
-        lblCarbsGoal.setText(CarbGoals + "");
-        lblProteinGoal.setText(ProteinGoals + "");
-        lblFatGoal.setText(FatGoals + "");
-
-        int CarbsCurrent = 0;
-        int ProteinCurrent = 0;
-        int FatCurrent = 0;
-
-        int CarbsLeft = 0;
-        int ProteinLeft = 0;
-        int FatLeft = 0;
-
-        int NumberOfMeals = adapterDailyMeals.getCount();
-        for (int i = 0; i < NumberOfMeals; i++) {
-            DailyItem TempMeal = adapterDailyMeals.getItem(i);
-            int carbs = Math.round(TempMeal.getCarbs());
-            int protein = Math.round(TempMeal.getProtein());
-            int fat = Math.round(TempMeal.getFat());
-
-            CarbsCurrent    += carbs;
-            ProteinCurrent  += protein;
-            FatCurrent      += fat;
-        }
-
-        CarbsLeft = CarbGoals - CarbsCurrent;
-        ProteinLeft = ProteinGoals - ProteinCurrent;
-        FatLeft = FatGoals - FatCurrent;
-
-        lblCarbsLeft.setText(CarbsLeft + "");
-        lblCarbsCurrent.setText(CarbsCurrent + "");
-        if(CarbsCurrent <= CarbGoals)
-        {
-            progressBarCarbs.setProgress(100 * CarbsCurrent / CarbGoals);
-            progressBarCarbs.setSecondaryProgress(0);
-        }
-        else
-        {
-            int CarbsExcess = CarbsCurrent - CarbGoals;
-            progressBarCarbs.setProgress(100*((float) CarbGoals)/CarbsCurrent);
-            progressBarCarbs.setSecondaryProgress(100);
-        }
-
-        lblProteinLeft.setText(ProteinLeft + "");
-        lblProteinCurrent.setText(ProteinCurrent + "");
-        if(ProteinCurrent <= ProteinGoals)
-        {
-            progressBarProtein.setProgress(100 * ProteinCurrent / ProteinGoals);
-            progressBarProtein.setSecondaryProgress(0);
-        }
-        else
-        {
-            int ProteinExcess = ProteinCurrent - ProteinGoals;
-            progressBarProtein.setProgress(100*ProteinGoals/ProteinCurrent);
-            progressBarProtein.setSecondaryProgress(100);
-        }
-
-        lblFatLeft.setText(FatLeft + "");
-        lblFatCurrent.setText(FatCurrent + "");
-        if(FatCurrent <= FatGoals)
-        {
-            progressBarFat.setProgress(100 * FatCurrent / FatGoals);
-            progressBarFat.setSecondaryProgress(0);
-        }
-        else
-        {
-            int FatExcess = FatCurrent - FatGoals;
-            progressBarFat.setProgress(100*FatGoals/FatCurrent);
-            progressBarFat.setSecondaryProgress(100);
-        }
-    }
-
-    //Updates My_MealAdapter
-    //TODO: TEST AFTER IMPLEMENTING DATABASE
-    public void UpdateArrayList() {
-        adapterDailyMeals.clear();
-        Cursor AllDailyMeals_Cursor = DB_SQLite.getAllDailyMeals();
-        int count = AllDailyMeals_Cursor.getCount();
-        Log.i("Count","Count = " + count);
-        if (count > 0) {
-            for (int i = 0; i < count; i++) {
-                AllDailyMeals_Cursor.moveToNext();
-
-                int     daily_position      = AllDailyMeals_Cursor.getInt(0);      //position
-                int     daily_meal_id       = AllDailyMeals_Cursor.getInt(1);      //meal_id
-                float   daily_multiplier    = AllDailyMeals_Cursor.getFloat(2);      //multiplier
-                Log.i("meal_id", daily_meal_id + "");
-                Log.i("position", daily_position + "");
-                Log.i("multiplier", daily_multiplier + "");
-
-                Food M = DB_SQLite.getMeal(daily_meal_id);
-
-                String M_name            = M.getMeal_name();
-                int M_carbs              = Math.round(M.getCarbs()*daily_multiplier);
-                int M_protein            = Math.round(M.getProtein()*daily_multiplier);
-                int M_fat                = Math.round(M.getFat()*daily_multiplier);
-                Portion_Type M_portion   = M.getPortion();
-
-                DailyItem DM = new DailyItem(M_name,daily_meal_id,M_carbs,M_protein,M_fat,M_portion,daily_position,daily_multiplier);
-                adapterDailyMeals.add(DM);
-
-                Log.i("DailyItem Added:", "Name: "
-                        + M.getMeal_name() + " " + M.getMeal_id() + " "
-                        + M_carbs + " " + M_protein + " " + M_fat + " position: " + daily_position + " multiplier: " + daily_multiplier);
-            }
-        }
+        
+        // Initialize User
+        initializeUser();
     }
 
     @Override public void onClick(View v) {
@@ -208,10 +84,11 @@ public class activityMain extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    // TODO Implement
     private void AddItem() {
         Context context = getApplicationContext();
         Intent intent = new Intent();
-        intent.setClass(context,AddSavedMealActivity.class);
+        intent.setClass(context,acitivityAddSavedFood.class);
         startActivity(intent);
     }
 
@@ -220,15 +97,16 @@ public class activityMain extends AppCompatActivity implements View.OnClickListe
         UpdateMacros();
     }
 
+    // TODO Implement
     @Override public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-        DailyItem DM = (DailyItem) parent.getItemAtPosition(position);
-        int DM_ID = DM.getMeal_id();
+        /*DailyItem dailyItem = (DailyItem) parent.getItemAtPosition(position);
+        int dailyItem_id = dailyItem.getFood().getId();
 
         Intent intent = new Intent(getBaseContext(), ViewMealActivity.class);
-        intent.putExtra("Meal_ID", DM_ID);
+        intent.putExtra("id", dailyItem_id);
         intent.putExtra("position", position);
         intent.putExtra("isDaily", true);
-        startActivity(intent);
+        startActivity(intent);*/
     }
 
     @Override public boolean onOptionsItemSelected(MenuItem item) {
@@ -284,13 +162,6 @@ public class activityMain extends AppCompatActivity implements View.OnClickListe
         return super.onPrepareOptionsMenu(menu);
     }
 
-    private void signOut() {
-        myPrefs.addPreference("session_uid", "");
-        Log.d("Main_SignOut","session_uid removed");
-        Log.d("Main_SignOut","checking ... " + myPrefs.getStringValue("session_uid"));
-        firebaseAuth.signOut();
-    }
-
     private void initializeGUI() {
         lblCaloriesCurrent = (TextView) findViewById(R.id.lblCaloriesCurrent);
         lblCaloriesLeft = (TextView) findViewById(R.id.lblCaloriesLeft);
@@ -308,16 +179,17 @@ public class activityMain extends AppCompatActivity implements View.OnClickListe
         lblFatLeft = (TextView) findViewById(R.id.lblFatLeft);
         lblFatGoal = (TextView) findViewById(R.id.lblFatGoal);
 
+        progressBarCalories = (RoundCornerProgressBar) findViewById(R.id.progressBarCalories);
         progressBarCarbs = (RoundCornerProgressBar) findViewById(R.id.progressBarCarbs);
         progressBarProtein = (RoundCornerProgressBar) findViewById(R.id.progressBarProtein);
         progressBarFat = (RoundCornerProgressBar) findViewById(R.id.progressBarFat);
 
-        arrDailyMeals = new ArrayList<DailyItem>();
-        adapterDailyMeals = new DailyMealAdapter(this, arrDailyMeals);
+        arrDailyItems = new ArrayList<DailyItem>();
+        adapterDailyItems = new adapterDailyItem(this, arrDailyItems);
 
-        listViewDailyMeals = (ListView) findViewById(R.id.listViewDailyMeals);
-        listViewDailyMeals.setAdapter(adapterDailyMeals);
-        listViewDailyMeals.setOnItemClickListener(this);
+        listViewDailyItems = (ListView) findViewById(R.id.listViewDailyMeals);
+        listViewDailyItems.setAdapter(adapterDailyItems);
+        listViewDailyItems.setOnItemClickListener(this);
 
         // Setup enter and exit animation
         mEnterAnimation = new AlphaAnimation(0f, 1f);
@@ -331,5 +203,122 @@ public class activityMain extends AppCompatActivity implements View.OnClickListe
         // User Greetings
         Toast toast = Toast.makeText(context, "Hello " + currentUser.getName() + "!", Toast.LENGTH_SHORT);
         toast.show();
+    }
+
+    private void initializeUser() {
+        uid = myPrefs.getStringValue("session_uid");
+        currentUser = DB_SQLite.retrieveUser(uid);
+
+        isPercent = currentUser.isPercent();
+
+        caloriesGoal = currentUser.getDailyCalories();
+        carbsGoal = currentUser.getDailyCarbs();
+        proteinGoal = currentUser.getDailyProtein();
+        fatGoal = currentUser.getDailyFat();
+
+        if (isPercent){
+            carbsGoal = carbsGoal*caloriesGoal/400;
+            proteinGoal = proteinGoal*caloriesGoal/400;
+            fatGoal = fatGoal*caloriesGoal/900;
+        }
+    }
+
+    public void UpdateMacros(){
+        // Updating "Current" Variables
+        int itemCount = adapterDailyItems.getCount();
+        for (int i = 0; i < itemCount; i++) {
+            DailyItem tempItem = adapterDailyItems.getItem(i);
+            int calories = Math.round(tempItem.getFood().getCalories());
+            int carbs = Math.round(tempItem.getFood().getCarbs());
+            int protein = Math.round(tempItem.getFood().getProtein());
+            int fat = Math.round(tempItem.getFood().getFat());
+
+            caloriesCurrent +=calories;
+            carbsCurrent    += carbs;
+            proteinCurrent  += protein;
+            fatCurrent      += fat;
+        }
+
+        // Updating "Left" Variables
+        caloriesLeft = caloriesGoal - caloriesCurrent;
+        carbsLeft = carbsGoal - carbsCurrent;
+        proteinLeft = proteinGoal - proteinCurrent;
+        fatLeft = fatGoal - fatCurrent;
+
+        // Updating Labels
+        lblCaloriesGoal.setText(caloriesGoal + "");
+        lblCarbsGoal.setText(carbsGoal + "");
+        lblProteinGoal.setText(proteinGoal + "");
+        lblFatGoal.setText(fatGoal + "");
+
+        lblCaloriesLeft.setText(caloriesLeft + "");
+        lblCarbsLeft.setText(carbsLeft + "");
+        lblProteinLeft.setText(proteinLeft + "");
+        lblFatLeft.setText(fatLeft + "");
+
+        lblCaloriesCurrent.setText(caloriesCurrent + "");
+        lblCarbsCurrent.setText(carbsCurrent + "");
+        lblProteinCurrent.setText(proteinCurrent + "");
+        lblFatCurrent.setText(fatCurrent + "");
+
+        // Updating ProgressBars
+        if(caloriesCurrent <= caloriesGoal) {
+            progressBarCalories.setProgress(100 * caloriesCurrent / caloriesGoal);
+            // TODO change label color to normal
+        }
+        else {
+            progressBarCalories.setProgress(100);
+            // TODO change label color to red
+        }
+
+        if(carbsCurrent <= carbsGoal) {
+            progressBarCarbs.setProgress(100 * carbsCurrent / carbsGoal);
+            // TODO change label color to normal
+        }
+        else {
+            progressBarCarbs.setProgress(100);
+            // TODO change label color to red
+        }
+        if(proteinCurrent <= proteinGoal) {
+            progressBarProtein.setProgress(100 * proteinCurrent / proteinGoal);
+            // TODO change label color to normal
+        }
+        else {
+            progressBarProtein.setProgress(100);
+            // TODO change label color to red
+        }
+        if(fatCurrent <= fatGoal) {
+            progressBarFat.setProgress(100 * fatCurrent / fatGoal);
+            // TODO change label color to normal
+        }
+        else {
+            progressBarFat.setProgress(100);
+            // TODO change label color to red
+        }
+    }
+
+    // Updates adapterDailyItems
+    public void UpdateArrayList() {
+        adapterDailyItems.clear();
+        arrDailyItems = DB_SQLite.retrieveAllDailyItems();
+        for (int i =0; i <arrDailyItems.size(); i++)
+            adapterDailyItems.add(arrDailyItems.get(i));
+    }
+
+    @Override protected void onResume() {
+        super.onResume();
+        UpdateMacros();
+        UpdateArrayList();
+    }
+
+    @Override protected void onPause() {
+        super.onPause();
+    }
+
+    private void signOut() {
+        myPrefs.addPreference("session_uid", "");
+        Log.d("Main_SignOut","session_uid removed");
+        Log.d("Main_SignOut","checking ... " + myPrefs.getStringValue("session_uid"));
+        firebaseAuth.signOut();
     }
 }

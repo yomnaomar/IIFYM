@@ -8,10 +8,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.example.kareem.IIFYM_Tracker.Custom_Objects.DailyItem;
-import com.example.kareem.IIFYM_Tracker.Custom_Objects.Portion_Type;
-import com.example.kareem.IIFYM_Tracker.Custom_Objects.Weight;
 import com.example.kareem.IIFYM_Tracker.Database.SQLiteConnector;
+import com.example.kareem.IIFYM_Tracker.Models.DailyItem;
+import com.example.kareem.IIFYM_Tracker.Models.Weight;
 import com.example.kareem.IIFYM_Tracker.R;
 
 import java.util.ArrayList;
@@ -19,12 +18,12 @@ import java.util.ArrayList;
 /**
  * Created by Kareem on 9/13/2016.
  */
-public class DailyMealAdapter extends ArrayAdapter<DailyItem> {
+public class adapterDailyItem extends ArrayAdapter<DailyItem> {
     private SQLiteConnector My_DB;
 
     DailyItem DM;
 
-    public DailyMealAdapter(Context context, ArrayList<DailyItem> meals) {
+    public adapterDailyItem(Context context, ArrayList<DailyItem> meals) {
         super(context, 0, meals);
     }
 
@@ -35,7 +34,7 @@ public class DailyMealAdapter extends ArrayAdapter<DailyItem> {
         DM = getItem(position);
 
         //TODO RE-EVALUATE BELOW
-        final int meal_id = DM.getMeal_id();
+        final int meal_id = DM.getFood().getId();
         float multiplier = DM.getMultiplier();
         Log.i("dailymeal adapter", "position: " + position + " meal id: " + meal_id);
         Log.i("dailymeal adapter", "multiplier: " + multiplier + " meal id: " + meal_id);
@@ -53,24 +52,24 @@ public class DailyMealAdapter extends ArrayAdapter<DailyItem> {
 
         //TODO IMPLEMENT MULTIPLER
         // Populate the data into the template view using the data object
-        name.setText(DM.getMeal_name());
-        carbs.setText(String.valueOf(Math.round(DM.getCarbs()) + " c "));
-        protein.setText(String.valueOf(Math.round(DM.getProtein()) + " p "));
-        fat.setText(String.valueOf(Math.round(DM.getFat()) + " f "));
+        name.setText(DM.getFood().getName());
+        carbs.setText(String.valueOf(Math.round(DM.getFood().getCarbs()) + " c "));
+        protein.setText(String.valueOf(Math.round(DM.getFood().getProtein()) + " p "));
+        fat.setText(String.valueOf(Math.round(DM.getFood().getFat()) + " f "));
 
-        if (DM.getPortion_type() == Portion_Type.Serving) {
-            float serving_number = My_DB.getServing(meal_id);
+        if (DM.getFood().getPortionType() == 0) {
+            float serving_number = My_DB.retrieveServing(DM.getFood());
             float serving_post_multiplication = serving_number * multiplier;
             if (serving_post_multiplication == 1.0f) {
                 portion.setText(serving_post_multiplication + " Serving");
             } else {
                 portion.setText(serving_post_multiplication + " Servings");
             }
-        } else if (DM.getPortion_type() == Portion_Type.Weight) {
-            Weight weight = My_DB.getWeight(meal_id);
-            int weight_post_multiplication = Math.round(weight.getWeight_quantity() * multiplier);
-            weight.setWeight_quantity(weight_post_multiplication);
-            portion.setText(weight.getWeight_quantity() + " " + weight.getWeight_unit().Abbreviate());
+        } else if (DM.getFood().getPortionType() == 1) {
+            Weight weight = My_DB.retrieveWeight(DM.getFood());
+            int weight_post_multiplication = Math.round(weight.getAmount() * multiplier);
+            weight.setAmount(weight_post_multiplication);
+            portion.setText(weight.getAmount() + " " + weight.getUnit());
         }
         // Return the completed view to render on screen
         return convertView;

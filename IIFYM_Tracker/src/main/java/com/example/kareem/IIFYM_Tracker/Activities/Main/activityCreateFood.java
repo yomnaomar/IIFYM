@@ -1,31 +1,9 @@
 package com.example.kareem.IIFYM_Tracker.Activities.Main;
 
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.kareem.IIFYM_Tracker.Custom_Objects.Food;
-import com.example.kareem.IIFYM_Tracker.Database.SQLiteConnector;
-import com.example.kareem.IIFYM_Tracker.R;
-
-public class CreateSimpleMealActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
+public class activityCreateFood extends AppCompatActivity{}
+/*public class activityCreateFood extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
     private TextView Label_ServingNumber, Label_Unit, Label_Quantity;
     private EditText EditText_MealName, EditText_Carbs, EditText_Protein, EditText_Fat, EditText_ServingNumber, EditText_Quantity;
@@ -268,4 +246,4 @@ public class CreateSimpleMealActivity extends AppCompatActivity implements View.
             ShowWeight();
         }
     }
-}
+}*/

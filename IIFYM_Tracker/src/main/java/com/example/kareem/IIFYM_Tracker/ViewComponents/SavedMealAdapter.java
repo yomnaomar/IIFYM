@@ -1,26 +1,10 @@
 package com.example.kareem.IIFYM_Tracker.ViewComponents;
 
-import android.content.Context;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.Filter;
-import android.widget.TextView;
-
-import com.example.kareem.IIFYM_Tracker.Custom_Objects.Food;
-import com.example.kareem.IIFYM_Tracker.Custom_Objects.Portion_Type;
-import com.example.kareem.IIFYM_Tracker.Custom_Objects.Weight;
-import com.example.kareem.IIFYM_Tracker.Database.SQLiteConnector;
-import com.example.kareem.IIFYM_Tracker.R;
-
-import java.util.ArrayList;
-
 /**
  * Created by Kareem on 9/13/2016.
  */
-public class SavedMealAdapter extends ArrayAdapter<Food>{
+
+/*public class SavedMealAdapter extends ArrayAdapter<Food>{
     private SQLiteConnector My_DB;
 
     private ArrayList<Food> arrayList_Meals_original;
@@ -132,3 +116,4 @@ public class SavedMealAdapter extends ArrayAdapter<Food>{
         }
     }
 }
+*/

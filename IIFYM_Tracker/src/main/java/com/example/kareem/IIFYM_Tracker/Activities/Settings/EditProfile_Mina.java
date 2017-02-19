@@ -1,20 +1,9 @@
 package com.example.kareem.IIFYM_Tracker.Activities.Settings;
 
-import android.content.SharedPreferences;
-import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.kareem.IIFYM_Tracker.Database.SQLiteConnector;
-import com.example.kareem.IIFYM_Tracker.R;
-
-public class EditProfile_Mina extends AppCompatActivity implements View.OnClickListener{
+public class EditProfile_Mina extends AppCompatActivity {}
+/*public class EditProfile_Mina extends AppCompatActivity implements View.OnClickListener{
 
     EditText userid ;
     TextView username;
@@ -58,7 +47,7 @@ public class EditProfile_Mina extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onResume() {
         super.onResume();
-        /*Cursor C = DB.getUser(user_name);
+        *//*Cursor C = DB.getUser(user_name);
         if(C.moveToFirst())
         {
             userid.setText(C.getString(0));
@@ -74,7 +63,7 @@ public class EditProfile_Mina extends AppCompatActivity implements View.OnClickL
             userid.setText("User_Old is Not Found !!");
             Toast.makeText(this, "Ooops User_Old is not there", Toast.LENGTH_SHORT).show();
             Log.i("Error",user_name);
-        }*/
+        }*//*
     }
 
     @Override
@@ -89,7 +78,7 @@ public class EditProfile_Mina extends AppCompatActivity implements View.OnClickL
                 String ln = lname.getText().toString();
                 String em = email.getText().toString();
 
-               if( DB.updateuserdata(id,user_name,dateofbirth,fn,ln,em)) {
+               if( DB.(id,user_name,dateofbirth,fn,ln,em)) {
                    Toast.makeText(getApplication(), "Profile Updated", Toast.LENGTH_LONG).show();
 //                   Intent i = new Intent(getApplicationContext(), UserProfile_Mina.class);
 //                   i.putExtra("username", user_name);
@@ -106,4 +95,4 @@ public class EditProfile_Mina extends AppCompatActivity implements View.OnClickL
 
 
     }
-}
+}*/

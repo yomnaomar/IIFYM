@@ -1,27 +1,9 @@
 package com.example.kareem.IIFYM_Tracker.Activities.Main;
 
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
 
-import com.example.kareem.IIFYM_Tracker.Custom_Objects.Food;
-import com.example.kareem.IIFYM_Tracker.Custom_Objects.Portion_Type;
-import com.example.kareem.IIFYM_Tracker.Custom_Objects.Weight;
-import com.example.kareem.IIFYM_Tracker.Database.SQLiteConnector;
-import com.example.kareem.IIFYM_Tracker.R;
-
-public class AddSavedMealActivity extends AppCompatActivity implements View.OnClickListener, TextWatcher {
+public class acitivityAddSavedFood extends AppCompatActivity{}
+/*public class acitivityAddSavedFood extends AppCompatActivity implements View.OnClickListener, TextWatcher {
 
     TextView Label_Meal_Name, Label_Carbs, Label_Protein, Label_Fat, Label_Calories, Label_Serving, Label_Weight_Unit;
     EditText EditText_Serving_Quantity,EditText_Weight_Quantity;
@@ -295,4 +277,4 @@ public class AddSavedMealActivity extends AppCompatActivity implements View.OnCl
         EditText_Weight_Quantity.setVisibility(View.INVISIBLE);
         Label_Weight_Unit.setVisibility(View.INVISIBLE);
     }
-}
+}*/

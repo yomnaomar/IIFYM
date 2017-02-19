@@ -1,26 +1,9 @@
 package com.example.kareem.IIFYM_Tracker.Activities.Main;
 
-import android.content.Intent;
-import android.database.Cursor;
-import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.EditText;
-import android.widget.ListView;
 
-import com.example.kareem.IIFYM_Tracker.Custom_Objects.Food;
-import com.example.kareem.IIFYM_Tracker.Custom_Objects.Portion_Type;
-import com.example.kareem.IIFYM_Tracker.Database.SQLiteConnector;
-import com.example.kareem.IIFYM_Tracker.R;
-import com.example.kareem.IIFYM_Tracker.ViewComponents.SavedMealAdapter;
-
-import java.util.ArrayList;
-
-public class ViewSavedMealsActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
+public class ViewSavedMealsActivity extends AppCompatActivity {}
+/*public class ViewSavedMealsActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     private EditText EditText_MealSearch;
     private ArrayList<Food> arrayList_SavedFoods;
@@ -51,7 +34,7 @@ public class ViewSavedMealsActivity extends AppCompatActivity implements Adapter
         addmeal_fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ViewSavedMealsActivity.this,CreateSimpleMealActivity.class));
+                startActivity(new Intent(ViewSavedMealsActivity.this,activityCreateFood.class));
             }
         });
 
@@ -75,7 +58,7 @@ public class ViewSavedMealsActivity extends AppCompatActivity implements Adapter
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Food M = (Food) parent.getItemAtPosition(position);
-        int M_ID = M.getMeal_id();
+        int M_ID = M.getId();
 
         Intent intent = new Intent(getBaseContext(), ViewMealActivity.class);
         intent.putExtra("Meal_ID", M_ID);
@@ -86,7 +69,7 @@ public class ViewSavedMealsActivity extends AppCompatActivity implements Adapter
     //Updates My_MealAdapter
     private void UpdateArrayList() {
         My_SavedMealAdapter.clear();
-        Cursor C = My_DB.getAllMealsSorted();
+        Cursor C = My_DB.retrieveAllFoods();
 
         int count = C.getCount();
         if (count > 0) {
@@ -101,7 +84,7 @@ public class ViewSavedMealsActivity extends AppCompatActivity implements Adapter
                 portion = portion.values()[C.getInt(6)];    //portion
                 int daily_consumption = C.getInt(7);    //daily_consumption
                 int user_id = C.getInt(8);      //user_id
-                Food M = new Food(meal_id, meal_name, carbs, protein, fat, portion, user_id);
+                Food M = new Food(meal_id, meal_name, carbs, protein, fat, portion);
                 My_SavedMealAdapter.add(M);
             }
         }
@@ -166,4 +149,4 @@ public class ViewSavedMealsActivity extends AppCompatActivity implements Adapter
         Food M = new Food(meal_id, my_Food.getMeal_name(),carbs,protein,fat, my_Food.getPortion(), my_Food.getUser_id());
         return M;
     }
-}
+}*/

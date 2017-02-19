@@ -14,7 +14,7 @@ import android.util.Log;
 public class SQLiteHelper extends SQLiteOpenHelper {
 
     // Names
-    private static final String DATABASE_NAME = "DB_IIFYM";
+    private static final String DATABASE_NAME       = "DB_IIFYM";
 
     private static final String Table_User          = "User";
     private static final String Table_Food          = "Food";
@@ -72,14 +72,14 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
         String createTable_Weight = "CREATE TABLE " + Table_Weight + " " +
                 "(id            INTEGER PRIMARY KEY, " +
-                "weight_amount  INTEGER, " +
-                "weight_unit    INTEGER, " +
+                "amount         INTEGER, " +
+                "unit           INTEGER, " +
                 "CONSTRAINT food_id_fk FOREIGN KEY(id) REFERENCES " + Table_Food + " (id) ON DELETE CASCADE);";
                 //ON UPDATE is not needed because the id will never be updated, it is hidden from the user
 
         String createTable_Serving = "CREATE TABLE " + Table_Serving + " " +
                 "(id            INTEGER PRIMARY KEY, " +
-                "serving_number REAL, " +
+                "servingNum     REAL, " +
                 "CONSTRAINT food_id_fk FOREIGN KEY(id) REFERENCES " + Table_Food + " (id) ON DELETE CASCADE);";
                 //ON UPDATE is not needed because the id will never be updated, it is hidden from the user
 
@@ -90,8 +90,9 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 "CONSTRAINT food_id_fk FOREIGN KEY(id) REFERENCES " + Table_Food + " (id) ON DELETE CASCADE);";
 
         String createTable_ComposedOf = "CREATE TABLE " + Table_ComposedOf + " " +
-                "(mid   INTEGER, " +    // mid = Food ID
-                "fid    INTEGER, " +    // fid = Food ID
+                "(mid           INTEGER, " +    // mid = Food ID
+                "fid            INTEGER, " +    // fid = Food ID
+                "multiplier     REAL, "+
                 "CONSTRAINT composed_id_pk PRIMARY KEY(mid, fid), " +
                 "CONSTRAINT meal_id_fk FOREIGN KEY(mid) REFERENCES " + Table_Food + " (id) ON DELETE CASCADE, " +
                 "CONSTRAINT food_id_fk FOREIGN KEY(fid) REFERENCES " + Table_Food + " (id) ON DELETE CASCADE);";

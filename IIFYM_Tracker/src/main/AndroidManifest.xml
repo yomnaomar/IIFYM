@@ -25,7 +25,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Activities.Main.AddQuickMealActivity"
+            android:name=".Activities.Main.activityAddFood"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Activities.Main.ViewSavedMealsActivity"
@@ -46,11 +46,11 @@
             android:windowSoftInputMode="adjustPan" />
         android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".Activities.Main.AddSavedMealActivity"
+            android:name=".Activities.Main.acitivityAddSavedFood"
             android:theme="@style/AppTheme.NoActionBar" />
         >>>>>>> master
         <activity
-            android:name=".Activities.Main.CreateSimpleMealActivity"
+            android:name=".Activities.Main.activityCreateFood"
             android:label="@string/title_activity_create_simple_meal"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Activities.User_Login_Authentification.activityLogin"/>

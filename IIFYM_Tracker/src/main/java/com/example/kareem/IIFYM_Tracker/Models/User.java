@@ -1,4 +1,4 @@
-package com.example.kareem.IIFYM_Tracker.Custom_Objects;
+package com.example.kareem.IIFYM_Tracker.Models;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -83,6 +83,9 @@ public class User {
         this.email = email;
         this.isRegistered = isRegistered;
     }
+
+    // DO NOT DELETE
+    public User(){}
 
     public String getUid() {
         return uid;

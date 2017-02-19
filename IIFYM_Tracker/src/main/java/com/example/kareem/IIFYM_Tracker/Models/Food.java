@@ -1,4 +1,4 @@
-package com.example.kareem.IIFYM_Tracker.Custom_Objects;
+package com.example.kareem.IIFYM_Tracker.Models;
 
 /**
  * Created by Yomna on 2/18/2017.

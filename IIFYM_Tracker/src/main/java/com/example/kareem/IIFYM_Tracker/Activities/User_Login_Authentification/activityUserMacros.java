@@ -23,7 +23,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.example.kareem.IIFYM_Tracker.Activities.Main.activityMain;
-import com.example.kareem.IIFYM_Tracker.Custom_Objects.User;
+import com.example.kareem.IIFYM_Tracker.Models.User;
 import com.example.kareem.IIFYM_Tracker.Database.SQLiteConnector;
 import com.example.kareem.IIFYM_Tracker.Database.SharedPreferenceHelper;
 import com.example.kareem.IIFYM_Tracker.R;

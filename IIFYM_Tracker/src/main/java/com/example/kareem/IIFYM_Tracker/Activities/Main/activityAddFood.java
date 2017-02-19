@@ -1,33 +1,11 @@
 package com.example.kareem.IIFYM_Tracker.Activities.Main;
 
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.kareem.IIFYM_Tracker.Database.SQLiteConnector;
-import com.example.kareem.IIFYM_Tracker.R;
-import com.example.kareem.IIFYM_Tracker.Custom_Objects.Food;
+public class activityAddFood extends AppCompatActivity{}
+//public class activityAddFood extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
-public class AddQuickMealActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
-
-    private TextView Label_PortionType, Label_ServingNumber, Label_Unit, Label_Quantity;
+   /* private TextView Label_PortionType, Label_ServingNumber, Label_Unit, Label_Quantity;
     private EditText EditText_MealName, EditText_Carbs, EditText_Protein, EditText_Fat, EditText_ServingNumber, EditText_Quantity;
     private RadioButton RadioButton_Serving, RadioButton_Weight;
     private RadioGroup RadioGroup_PortionType;
@@ -40,12 +18,12 @@ public class AddQuickMealActivity extends AppCompatActivity implements View.OnCl
     private int Weight_Unit_Selected = 0;
 
     String user_name;
-    User_Old currentUser;
+    User currentUser;
     boolean fieldsOk;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_quick_meal);
+        setContentView(R.layout.activity_add_food);
 
         //Labels
         Label_PortionType = (TextView) findViewById(R.id.Label_PortionType);
@@ -96,10 +74,7 @@ public class AddQuickMealActivity extends AppCompatActivity implements View.OnCl
 
         My_DB = new SQLiteConnector(getApplicationContext());
 
-        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        user_name = settings.getString("user_name", "");
-
-        currentUser = My_DB.getUserObject(user_name);
+        currentUser = My_DB.retrieveUser(user_name);
 
     }
 
@@ -327,4 +302,4 @@ public class AddQuickMealActivity extends AppCompatActivity implements View.OnCl
             HideEverything();
         }
     }
-}
+}*/

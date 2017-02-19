@@ -1,27 +1,9 @@
 package com.example.kareem.IIFYM_Tracker.Activities.Main;
 
-import android.content.Context;
-import android.content.Intent;
-import android.database.Cursor;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.EditText;
-import android.widget.ListView;
 
-import com.example.kareem.IIFYM_Tracker.Custom_Objects.Food;
-import com.example.kareem.IIFYM_Tracker.Custom_Objects.Portion_Type;
-import com.example.kareem.IIFYM_Tracker.Database.SQLiteConnector;
-import com.example.kareem.IIFYM_Tracker.R;
-import com.example.kareem.IIFYM_Tracker.ViewComponents.SavedMealAdapter;
-
-import java.util.ArrayList;
-
-public class SelectSavedMealActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
-
+public class SelectSavedMealActivity extends AppCompatActivity {}
+/*public class SelectSavedMealActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
     private EditText EditText_MealSearch;
     private ArrayList<Food> arrayList_SavedFoods;
     private SavedMealAdapter My_SavedMealAdapter;
@@ -68,7 +50,7 @@ public class SelectSavedMealActivity extends AppCompatActivity implements Adapte
 
         Context context = getApplicationContext();
         Intent intent = new Intent();
-        intent.setClass(context, AddSavedMealActivity.class);
+        intent.setClass(context, acitivityAddSavedFood.class);
         intent.putExtra("meal_id",meal_id);
         startActivity(intent);
     }
@@ -158,4 +140,4 @@ public class SelectSavedMealActivity extends AppCompatActivity implements Adapte
         Food M = new Food(meal_id, my_Food.getMeal_name(),carbs,protein,fat, my_Food.getPortion(), my_Food.getUser_id());
         return M;
     }
-}
+}*/

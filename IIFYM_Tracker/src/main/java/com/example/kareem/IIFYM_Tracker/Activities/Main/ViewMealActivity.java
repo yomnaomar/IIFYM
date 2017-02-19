@@ -1,29 +1,9 @@
 package com.example.kareem.IIFYM_Tracker.Activities.Main;
 
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.text.InputType;
-import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.kareem.IIFYM_Tracker.Custom_Objects.DailyItem;
-import com.example.kareem.IIFYM_Tracker.Custom_Objects.Food;
-import com.example.kareem.IIFYM_Tracker.Custom_Objects.Portion_Type;
-import com.example.kareem.IIFYM_Tracker.Custom_Objects.Weight;
-import com.example.kareem.IIFYM_Tracker.Database.SQLiteConnector;
-import com.example.kareem.IIFYM_Tracker.R;
-
-public class ViewMealActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class ViewMealActivity extends AppCompatActivity {}
+/*public class ViewMealActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     private EditText EditText_Meal_Name, EditText_Portion_Quantity, EditText_Carbs, EditText_Protein, EditText_Fat;
     private TextView Label_MealType, Label_Serving, Label_Calories;
     private Spinner Spinner_Unit;
@@ -386,3 +366,4 @@ public class ViewMealActivity extends AppCompatActivity implements AdapterView.O
         EditText_Portion_Quantity.setEnabled(false);
     }
 }
+*/
