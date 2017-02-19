@@ -177,17 +177,15 @@
                 </LinearLayout>
 
                 <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
+                    android:layout_height="17dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:elevation="0dp"
-                    app:rcBackgroundColor="@color/Progress_Bar_Background"
                     app:rcBackgroundPadding="1dp"
+                    app:rcBackgroundColor="@color/Progress_Bar_Background"
+                    app:rcProgressColor="@color/CaloriesProgessColor"
                     app:rcMax="100"
                     app:rcProgress="0"
-                    app:rcProgressColor="@color/CaloriesProgessColor"
                     app:rcRadius="10dp"
-                    app:rcReverse="true"
-                    android:id="@+id/progressBarCalories" />
+                    android:id= "@+id/progressBarCalories"/>
 
             </LinearLayout>
 
@@ -259,16 +257,13 @@
                 </LinearLayout>
 
                 <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
+                    android:layout_height="17dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:elevation="0dp"
-                    app:rcBackgroundColor="@color/Progress_Bar_Background"
                     app:rcBackgroundPadding="1dp"
+                    app:rcBackgroundColor="@color/Progress_Bar_Background"
+                    app:rcProgressColor="@color/CarbProgressColor"
                     app:rcMax="100"
                     app:rcProgress="0"
-                    app:rcProgressColor="@color/CarbProgressColor"
-                    app:rcRadius="10dp"
-                    app:rcReverse="true"
                     android:id="@+id/progressBarCarbs" />
 
             </LinearLayout>
@@ -343,16 +338,14 @@
                 </LinearLayout>
 
                 <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
+                    android:layout_height="17dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:elevation="0dp"
+                    app:rcBackgroundPadding="3dp"
                     app:rcBackgroundColor="@color/Progress_Bar_Background"
-                    app:rcBackgroundPadding="1dp"
+                    app:rcProgressColor="@color/ProteinProgessColor"
                     app:rcMax="100"
                     app:rcProgress="0"
-                    app:rcProgressColor="@color/ProteinProgessColor"
                     app:rcRadius="10dp"
-                    app:rcReverse="true"
                     android:id="@+id/progressBarProtein" />
 
             </LinearLayout>
@@ -425,16 +418,14 @@
                 </LinearLayout>
 
                 <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
+                    android:layout_height="17dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:elevation="0dp"
+                    app:rcBackgroundPadding="3dp"
                     app:rcBackgroundColor="@color/Progress_Bar_Background"
-                    app:rcBackgroundPadding="1dp"
+                    app:rcProgressColor="@color/FatProgessColor"
                     app:rcMax="100"
                     app:rcProgress="0"
-                    app:rcProgressColor="@color/FatProgessColor"
                     app:rcRadius="10dp"
-                    app:rcReverse="true"
                     android:id="@+id/progressBarFat" />
 
             </LinearLayout>

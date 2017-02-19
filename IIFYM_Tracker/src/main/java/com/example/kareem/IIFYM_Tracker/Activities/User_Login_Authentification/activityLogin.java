@@ -95,9 +95,9 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
 
         context = getApplicationContext();
         myPrefs = new SharedPreferenceHelper(context);
+        DB_SQLite = new SQLiteConnector(context);
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseDbRef = FirebaseDatabase.getInstance().getReference();
-        DB_SQLite = new SQLiteConnector(context); // Creating SQLite DB here makes App's first run slower, but enhances UX later by avoiding creating the DB later
 
         // Handles Signing in
         firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -112,7 +112,6 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
                     if (firebaseUser.isEmailVerified()) {
                         final String uid = firebaseUser.getUid();
                         final String email = firebaseUser.getEmail();
-
                         // Get User data to check if Registered
                         firebaseDbRef.child("users").child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override

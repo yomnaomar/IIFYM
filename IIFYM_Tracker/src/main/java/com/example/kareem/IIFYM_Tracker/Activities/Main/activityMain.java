@@ -199,15 +199,15 @@ public class activityMain extends AppCompatActivity implements View.OnClickListe
         mExitAnimation = new AlphaAnimation(1f, 0f);
         mExitAnimation.setDuration(600);
         mExitAnimation.setFillAfter(true);
-
-        // User Greetings
-        Toast toast = Toast.makeText(context, "Hello " + currentUser.getName() + "!", Toast.LENGTH_SHORT);
-        toast.show();
     }
 
     private void initializeUser() {
         uid = myPrefs.getStringValue("session_uid");
         currentUser = DB_SQLite.retrieveUser(uid);
+
+        // User Greetings
+        Toast toast = Toast.makeText(context, "Hello " + currentUser.getName() + "!", Toast.LENGTH_SHORT);
+        toast.show();
 
         isPercent = currentUser.isPercent();
 
