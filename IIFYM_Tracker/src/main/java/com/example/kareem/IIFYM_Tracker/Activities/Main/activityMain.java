@@ -32,7 +32,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 
-public class activityMain extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener, OnListItemDeletedListener {
+public class activityMain extends AppCompatActivity implements AdapterView.OnItemClickListener, OnListItemDeletedListener {
 
     // GUI
     private TextView lblCaloriesCurrent, lblCarbsCurrent, lblProteinCurrent, lblFatCurrent;
@@ -80,38 +80,6 @@ public class activityMain extends AppCompatActivity implements View.OnClickListe
         initializeUser();
     }
 
-    @Override public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.fabAddDailyItem:
-                AddItem();
-                break;
-        }
-    }
-
-    private void AddItem() {
-        Context context = getApplicationContext();
-        Intent intent = new Intent();
-        intent.setClass(context,acitivityAddSavedItem.class);
-        startActivity(intent);
-    }
-
-    @Override public void onItemDeleted() {
-        UpdateArrayList();
-        UpdateMacros();
-    }
-
-    // TODO Implement
-    @Override public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-        /*DailyItem dailyItem = (DailyItem) parent.getItemAtPosition(position);
-        int dailyItem_id = dailyItem.getFood().getId();
-
-        Intent intent = new Intent(getBaseContext(), ViewMealActivity.class);
-        intent.putExtra("id", dailyItem_id);
-        intent.putExtra("position", position);
-        intent.putExtra("isDaily", true);
-        startActivity(intent);*/
-    }
-
     private void initializeGUI() {
         lblCaloriesCurrent = (TextView) findViewById(R.id.lblCaloriesCurrent);
         lblCaloriesLeft = (TextView) findViewById(R.id.lblCaloriesLeft);
@@ -135,6 +103,11 @@ public class activityMain extends AppCompatActivity implements View.OnClickListe
         progressBarFat = (RoundCornerProgressBar) findViewById(R.id.progressBarFat);
 
         fabAddDailyItem = (FloatingActionButton) findViewById(R.id.fabAddDailyItem);
+        fabAddDailyItem.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                goToAddDailyItem();
+            }
+        });
 
         arrDailyItems = new ArrayList<DailyItem>();
         adapterDailyItems = new adapterDailyItem(this, arrDailyItems);
@@ -176,7 +149,7 @@ public class activityMain extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    public void UpdateMacros(){
+    public void updateMacros(){
         // Updating "Current" Variables
         int itemCount = adapterDailyItems.getCount();
         for (int i = 0; i < itemCount; i++) {
@@ -251,7 +224,7 @@ public class activityMain extends AppCompatActivity implements View.OnClickListe
     }
 
     // Updates adapterDailyItems
-    public void UpdateArrayList() {
+    public void updateArrayList() {
         adapterDailyItems.clear();
         arrDailyItems = DB_SQLite.retrieveAllDailyItems();
         for (int i =0; i <arrDailyItems.size(); i++)
@@ -260,16 +233,40 @@ public class activityMain extends AppCompatActivity implements View.OnClickListe
 
     @Override protected void onResume() {
         super.onResume();
-        UpdateMacros();
-        UpdateArrayList();
+        updateMacros();
+        updateArrayList();
     }
 
     @Override protected void onPause() {
         super.onPause();
     }
 
+    private void goToAddDailyItem() {
+        Context context = getApplicationContext();
+        Intent intent = new Intent();
+        intent.setClass(context,activityAddDailyItem.class);
+        startActivity(intent);
+    }
+
+    @Override public void onItemDeleted() {
+        updateArrayList();
+        updateMacros();
+    }
+
+    // TODO Implement
+    @Override public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+        /*DailyItem dailyItem = (DailyItem) parent.getItemAtPosition(position);
+        int dailyItem_id = dailyItem.getFood().getId();
+
+        Intent intent = new Intent(getBaseContext(), ViewMealActivity.class);
+        intent.putExtra("id", dailyItem_id);
+        intent.putExtra("position", position);
+        intent.putExtra("isDaily", true);
+        startActivity(intent);*/
+    }
+
     @Override public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
+        // Handle action bar listItem clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();

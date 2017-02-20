@@ -10,6 +10,7 @@ import com.example.kareem.IIFYM_Tracker.Models.DailyItem;
 import com.example.kareem.IIFYM_Tracker.Models.Food;
 import com.example.kareem.IIFYM_Tracker.Models.User;
 import com.example.kareem.IIFYM_Tracker.Models.Weight;
+import com.example.kareem.IIFYM_Tracker.Models.weightUnit;
 
 import java.util.ArrayList;
 
@@ -316,7 +317,7 @@ public class SQLiteConnector {
             ContentValues newWeight = new ContentValues();
             newWeight.put("id",               f.getId());
             newWeight.put("amount",           w.getAmount());
-            newWeight.put("unit",             w.getUnit());
+            newWeight.put("unit",             w.getUnit().getWeightInt());
 
             database.insert(Table_Weight, null, newWeight);
             Log.d("createWeight", "Weight with id " + f.getId() + " and name " + f.getName() + " created");
@@ -332,8 +333,9 @@ public class SQLiteConnector {
         Cursor C = database.rawQuery("SELECT * FROM " + Table_Weight + " WHERE id = " + f.getId(), null);
         if (C.moveToFirst() && C != null) {
             Log.d("retrieveWeight", "Weight with id " + f.getId() + " and name " + f.getName() + " retrieved");
+            weightUnit w = weightUnit.Grams;
             return new Weight(C.getInt(1),
-                    C.getInt(2));
+                    w.fromInteger(C.getInt(2)));
         }
         else {
             Log.d("retrieveWeight", "Weight with id " + f.getId() + " not found");
@@ -347,7 +349,7 @@ public class SQLiteConnector {
         if (isExistingWeight(f)) {
             ContentValues updateWeight = new ContentValues();
             updateWeight.put("amount",        w.getAmount());
-            updateWeight.put("unit",          w.getUnit());
+            updateWeight.put("unit",          w.getUnit().getWeightInt());
             database.update(Table_Weight, updateWeight, "id = " + f.getId(), null);
             Log.d("updateWeight", "Weight with id " + f.getId() + " and name " + f.getName() + " updated");
             return true;
@@ -517,7 +519,7 @@ public class SQLiteConnector {
         return C;
     }
 
-    // Return True if DailyItem with id = item.getId was updated successfully
+    // Return True if DailyItem with id = listItem.getId was updated successfully
     // Returns False otherwise
     public boolean updateDailyItem(DailyItem item) {
         Cursor C = database.rawQuery("SELECT * FROM " + Table_DailyItem + " WHERE id = " + item.getFood().getId()

@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
             android:ems="10"
-            android:id="@+id/EditText_MealSearch"
+            android:id="@+id/etxtSearch"
             android:hint="Search Meals ..."
             android:drawableLeft="?android:attr/actionModeWebSearchDrawable"
             tools:layout_editor_absoluteY="0dp"
@@ -28,7 +28,7 @@
 
         <ListView
             android:layout_width="match_parent"
-            android:id="@+id/ListView_SavedMeals"
+            android:id="@+id/listviewSavedItems"
             android:layout_height="match_parent"
             tools:layout_editor_absoluteX="0dp"></ListView>
 

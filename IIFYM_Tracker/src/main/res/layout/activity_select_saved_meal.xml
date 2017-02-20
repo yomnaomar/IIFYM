@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
             android:ems="10"
-            android:id="@+id/EditText_MealSearch"
+            android:id="@+id/etxtSearch"
             android:hint="Search Meals ..."
             android:drawableLeft="?android:attr/actionModeWebSearchDrawable" />
 

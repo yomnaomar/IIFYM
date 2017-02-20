@@ -30,7 +30,7 @@ public class adapterDailyItem extends ArrayAdapter<DailyItem> {
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         My_DB = new SQLiteConnector(getContext());
-        // Get the data item for this position
+        // Get the data listItem for this position
         DM = getItem(position);
 
         //TODO RE-EVALUATE BELOW
@@ -41,14 +41,14 @@ public class adapterDailyItem extends ArrayAdapter<DailyItem> {
 
         // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_meal, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.listItem, parent, false);
         }
         // Lookup view for data population
-        TextView name = (TextView) convertView.findViewById(R.id.Text_MealName);
-        TextView carbs = (TextView) convertView.findViewById(R.id.Text_Carbs);
-        TextView protein = (TextView) convertView.findViewById(R.id.Text_Protein);
-        TextView fat = (TextView) convertView.findViewById(R.id.Text_Fat);
-        TextView portion = (TextView) convertView.findViewById(R.id.Text_PortionDetails);
+        TextView name = (TextView) convertView.findViewById(R.id.lblName);
+        TextView carbs = (TextView) convertView.findViewById(R.id.lblCarbs);
+        TextView protein = (TextView) convertView.findViewById(R.id.lblProtein);
+        TextView fat = (TextView) convertView.findViewById(R.id.lblFat);
+        TextView portion = (TextView) convertView.findViewById(R.id.lblPortionDetails);
 
         //TODO IMPLEMENT MULTIPLER
         // Populate the data into the template view using the data object

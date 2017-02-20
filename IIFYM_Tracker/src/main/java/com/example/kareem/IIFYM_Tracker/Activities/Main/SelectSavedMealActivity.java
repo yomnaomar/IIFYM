@@ -6,7 +6,7 @@ public class SelectSavedMealActivity extends AppCompatActivity {}
 /*public class SelectSavedMealActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
     private EditText EditText_MealSearch;
     private ArrayList<Food> arrayList_SavedFoods;
-    private SavedMealAdapter My_SavedMealAdapter;
+    private adapterSavedItem My_SavedMealAdapter;
     private ListView Meals_ListView;
     private SQLiteConnector My_DB;
 
@@ -21,7 +21,7 @@ public class SelectSavedMealActivity extends AppCompatActivity {}
 
         arrayList_SavedFoods = new ArrayList<Food>();
         ConstructArrayList_SavedMeals();
-        My_SavedMealAdapter = new SavedMealAdapter(this, arrayList_SavedFoods);
+        My_SavedMealAdapter = new adapterSavedItem(this, arrayList_SavedFoods);
         Meals_ListView = (ListView) findViewById(R.id.ListView_AddSavedMeals);
         Meals_ListView.setAdapter(My_SavedMealAdapter);
         Meals_ListView.setOnItemClickListener(this);

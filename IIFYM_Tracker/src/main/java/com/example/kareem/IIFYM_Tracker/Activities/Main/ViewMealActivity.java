@@ -190,7 +190,7 @@ public class ViewMealActivity extends AppCompatActivity {}
 
         //Portion_Quantity and Serving_Label/Spinner_Unit
         if (thisFood.getPortion() == Portion_Type.Serving) {
-            Spinner_Unit.setVisibility(View.INVISIBLE); // Hide Weight_Unit Spinner
+            Spinner_Unit.setVisibility(View.INVISIBLE); // Hide weightUnit Spinner
             serving_number = My_DB.getServing(thisFood.getMeal_id());
             if (serving_number == 1.0f) {
                 EditText_Portion_Quantity.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
@@ -204,7 +204,7 @@ public class ViewMealActivity extends AppCompatActivity {}
             EditText_Portion_Quantity.setInputType(InputType.TYPE_CLASS_NUMBER);
             Label_Serving.setVisibility(View.INVISIBLE); //Hide Serving Label
             weight = My_DB.getWeight(thisFood.getMeal_id());
-            Log.d("Weight Retrieved: ", "ID: " + thisFood.getMeal_id() + " Weight_quantity: " + weight.getWeight_quantity() + " Weight_Unit: " + weight.getWeight_unit());
+            Log.d("Weight Retrieved: ", "ID: " + thisFood.getMeal_id() + " Weight_quantity: " + weight.getWeight_quantity() + " weightUnit: " + weight.getWeight_unit());
             Spinner_Unit.setSelection(weight.getWeight_unit().getWeightInt()); //set spinner selection value
             Weight_Unit_Selected = Spinner_Unit.getSelectedItemPosition();
             EditText_Portion_Quantity.setText(weight.getWeight_quantity() + "");

@@ -2,8 +2,7 @@ package com.example.kareem.IIFYM_Tracker.Activities.Main;
 
 import android.support.v7.app.AppCompatActivity;
 
-public class ViewSavedMealsActivity extends AppCompatActivity {}
-/*public class ViewSavedMealsActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
+public class ViewSavedMealsActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     private EditText EditText_MealSearch;
     private ArrayList<Food> arrayList_SavedFoods;
@@ -149,4 +148,4 @@ public class ViewSavedMealsActivity extends AppCompatActivity {}
         Food M = new Food(meal_id, my_Food.getMeal_name(),carbs,protein,fat, my_Food.getPortion(), my_Food.getUser_id());
         return M;
     }
-}*/
+}

@@ -6,18 +6,10 @@ package com.example.kareem.IIFYM_Tracker.Models;
 
 public class Weight {
     private int amount;
-    private int unit;
+    private weightUnit unit;
 
-    public Weight(int amount, int unit) {
+    public Weight(int amount, weightUnit unit) {
         this.amount = amount;
-        this.unit = unit;
-    }
-
-    public int getUnit() {
-        return unit;
-    }
-
-    public void setUnit(int unit) {
         this.unit = unit;
     }
 
@@ -27,5 +19,13 @@ public class Weight {
 
     public void setAmount(int amount) {
         this.amount = amount;
+    }
+
+    public weightUnit getUnit() {
+        return unit;
+    }
+
+    public void setUnit(weightUnit unit) {
+        this.unit = unit;
     }
 }

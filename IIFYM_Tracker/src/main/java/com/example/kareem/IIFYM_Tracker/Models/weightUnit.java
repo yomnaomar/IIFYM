@@ -4,12 +4,12 @@ package com.example.kareem.IIFYM_Tracker.Models;
  * Created by Kareem on 11/6/2016.
  */
 
-public enum Weight_Unit {
+public enum weightUnit {
         Grams,
         Ounces,
         mL;
 
-        public Weight_Unit fromInteger(int x) {
+        public weightUnit fromInteger(int x) {
             switch(x) {
                 case 0:
                     return Grams;
@@ -21,12 +21,12 @@ public enum Weight_Unit {
             return null;
         }
 
-        //Return the String Value of the Weight_Unit, eg. Grams, Ounces
+    //Return the String Value of the weightUnit, eg. Grams, Ounces
     public String getWeightString(){
         return this.name();
     }
 
-    //Return the Int Value of the Weight_Unit, eg. 0, 1
+    //Return the Int Value of the weightUnit, eg. 0, 1
     public int getWeightInt (){
         return this.ordinal();
     }

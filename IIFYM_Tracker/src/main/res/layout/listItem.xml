@@ -14,7 +14,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Meal Name"
-            android:id="@+id/Text_MealName"
+            android:id="@+id/lblName"
             android:textColor="@color/abc_primary_text_disable_only_material_light" />
 
     </LinearLayout>
@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="portionDetails"
-            android:id="@+id/Text_PortionDetails"
+            android:id="@+id/lblPortionDetails"
             android:layout_alignParentRight="true"
             android:textColor="#8b8b8b"
             android:layout_weight="1" />
@@ -45,7 +45,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Carbs"
-            android:id="@+id/Text_Carbs"
+            android:id="@+id/lblCarbs"
             android:layout_weight="1"
             android:textColor="#f9e01e" />
 
@@ -54,7 +54,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Protein"
-            android:id="@+id/Text_Protein"
+            android:id="@+id/lblProtein"
             android:layout_weight="1"
             android:textColor="#d42727" />
 
@@ -63,7 +63,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Fat"
-            android:id="@+id/Text_Fat"
+            android:id="@+id/lblFat"
             android:layout_weight="1"
             android:textColor="#17a900" />
     </LinearLayout>
