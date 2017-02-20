@@ -19,7 +19,7 @@
 
     <android.support.design.widget.FloatingActionButton
         android:clickable="true"
-        app:srcCompat="@drawable/icon_addnewmeal"
+        app:srcCompat="@drawable/icon_adddailyitem"
         android:id="@+id/addmeal_fab"
         app:backgroundTint="?attr/colorPrimaryDark"
         app:fabSize="mini"

@@ -84,7 +84,7 @@ public class SQLiteConnector {
             newUser.put("dailyFat",         u.getDailyFat());
 
             database.insert(Table_User, null, newUser);
-            Log.d("createUser", "User with uid " + u.getUid() + " created");
+            Log.d("createUser", "User with uid " + u.getUid() + " created and isPercent is " + u.isPercent());
             return true;
         }
         else {
@@ -98,7 +98,7 @@ public class SQLiteConnector {
     public User retrieveUser(String uid) {
         Cursor C = database.rawQuery("SELECT * FROM " + Table_User + " WHERE uid = '" + uid + "'", null);
         if (C.moveToFirst() && C != null) {
-            Log.d("retrieveUser", "User with uid " + uid + " retrieved");
+            Log.d("retrieveUser", "User with uid " + uid + " retrieved and isPercent is " + C.getInt(13));
             return new User(C.getString(0),
                     C.getString(1),
                     C.getInt(2),

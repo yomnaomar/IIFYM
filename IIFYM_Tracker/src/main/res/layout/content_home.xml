@@ -17,18 +17,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
-        android:id="@+id/floatingActionButton"
+        android:id="@+id/fabAddDailyItem"
         android:baselineAlignBottom="false"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        app:elevation="3dp"
-        android:scaleType="fitCenter"
-        app:fabSize="normal"
-        app:backgroundTint="@color/colorButtonBackground"
-        app:srcCompat="@drawable/btn_add"
-        app:borderWidth="5dp"
-        android:layout_marginRight="2dp"
-        android:layout_marginBottom="5dp" />
+        app:elevation="5dp"
+        app:fabSize="mini"
+        app:srcCompat="@drawable/icon_adddailyitem"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="5dp"
+        app:rippleColor="?attr/colorButtonNormal" />
 
     <LinearLayout
         android:id="@+id/linearlayoutBase"
