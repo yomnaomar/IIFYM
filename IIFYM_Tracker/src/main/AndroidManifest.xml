@@ -53,15 +53,17 @@
             android:name=".Activities.Main.activityCreateFood"
             android:label="@string/title_activity_create_simple_meal"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Activities.User_Login_Authentification.activityLogin"/>
+        <activity android:name=".Activities.User_Login_Authentification.activityLogin" />
         <activity android:name=".Activities.User_Login_Authentification.activityUserInfo" />
         <activity android:name=".Activities.User_Login_Authentification.activityUserMacros" />
         <activity android:name=".Activities.User_Login_Authentification.activityLauncher">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Activities.Main.activityAddDailyItem"></activity>
     </application>
 
 </manifest>
