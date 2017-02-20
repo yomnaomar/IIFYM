@@ -2,8 +2,8 @@ package com.example.kareem.IIFYM_Tracker.Activities.Main;
 
 import android.support.v7.app.AppCompatActivity;
 
-public class acitivityAddSavedFood extends AppCompatActivity{}
-/*public class acitivityAddSavedFood extends AppCompatActivity implements View.OnClickListener, TextWatcher {
+public class acitivityAddSavedItem extends AppCompatActivity{}
+/*public class acitivityAddSavedItem extends AppCompatActivity implements View.OnClickListener, TextWatcher {
 
     TextView Label_Meal_Name, Label_Carbs, Label_Protein, Label_Fat, Label_Calories, Label_Serving, Label_Weight_Unit;
     EditText EditText_Serving_Quantity,EditText_Weight_Quantity;

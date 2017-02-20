@@ -50,7 +50,7 @@ public class SelectSavedMealActivity extends AppCompatActivity {}
 
         Context context = getApplicationContext();
         Intent intent = new Intent();
-        intent.setClass(context, acitivityAddSavedFood.class);
+        intent.setClass(context, acitivityAddSavedItem.class);
         intent.putExtra("meal_id",meal_id);
         startActivity(intent);
     }
