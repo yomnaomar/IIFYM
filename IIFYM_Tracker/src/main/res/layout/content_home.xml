@@ -13,6 +13,19 @@
     tools:context="com.example.kareem.IIFYM_Tracker.Activities.Main.activityMain"
     tools:showIn="@layout/activity_home">
 
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        app:srcCompat="@drawable/icon_addnewmeal"
+        android:id="@+id/floatingActionButton"
+        android:baselineAlignBottom="false"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        app:elevation="0dp"
+        android:scaleType="center"
+        app:fabSize="normal" />
+
     <LinearLayout
         android:id="@+id/linearlayoutBase"
         android:layout_width="match_parent"
@@ -22,78 +35,46 @@
         android:layout_alignParentStart="true">
 
         <LinearLayout
-            android:id="@+id/linearlayoutHeader"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="1">
+            android:id="@+id/linearlayoutLabels">
 
-            <TextView
-                android:id="@+id/lblSpace"
+            <Space
+                android:layout_width="35dp"
+                android:layout_height="20dp"
+                android:layout_weight="0.2" />
+
+            <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="0.167"
-                android:gravity="center"
-                android:text=""
-                android:textAppearance="@android:style/TextAppearance.Material.Small"
-                android:textColor="@color/DarkGrayFaded2" />
+                android:layout_height="match_parent"
+                android:layout_weight="0.8"
+                android:weightSum="1">
 
+                <TextView
+                    android:text="Food"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView42"
+                    android:layout_weight="0.2" />
 
-            <TextView
-                android:id="@+id/lblCurrent"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="0.167"
-                android:gravity="left"
-                android:text="Current"
-                android:textAppearance="@android:style/TextAppearance.Material.Small"
-                android:textColor="@color/DarkGrayFaded2" />
+                <TextView
+                    android:text="+               Left               ="
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView43"
+                    android:textAlignment="center"
+                    android:layout_weight="0.6" />
 
-            <TextView
-                android:id="@+id/lblHeaderPlus"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="0.167"
-                android:gravity="center"
-                android:text="+"
-                android:textAppearance="@android:style/TextAppearance.Material.Small"
-                android:textColor="@color/DarkGrayFaded2" />
-
-            <TextView
-                android:id="@+id/lblRemaining"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="0.167"
-                android:gravity="center"
-                android:text="Remaining"
-                android:textAppearance="@android:style/TextAppearance.Material.Small"
-                android:textColor="@color/DarkGrayFaded2" />
-
-            <TextView
-                android:id="@+id/lblEqual"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="0.167"
-                android:gravity="center"
-                android:text="="
-                android:textAppearance="@android:style/TextAppearance.Material.Small"
-                android:textColor="@color/DarkGrayFaded2" />
-
-            <TextView
-                android:id="@+id/lblGoal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="0.167"
-                android:gravity="right"
-                android:text="Goal"
-                android:textAppearance="@android:style/TextAppearance.Material.Small"
-                android:textColor="@color/DarkGrayFaded2" />
+                <TextView
+                    android:text="Goal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView44"
+                    android:layout_weight="0.2"
+                    android:textAlignment="viewEnd" />
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -112,13 +93,14 @@
                 android:scaleType="centerInside"
                 app:srcCompat="@drawable/icon_calories"
                 android:paddingRight="2.5dp"
-                android:paddingTop="5dp" />
+                android:paddingTop="5dp"
+                android:layout_weight="0.20" />
 
             <LinearLayout
                 android:id="@+id/linearLayoutCaloriesProgressBar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.7"
+                android:layout_weight="0.8"
                 android:orientation="vertical"
                 android:weightSum="1">
 
@@ -133,9 +115,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_weight="0.15"
+                        android:layout_weight="0.2"
                         android:gravity="left"
-                        android:text="100"
+                        android:text="0"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:textColor="@color/Custom_Grey" />
 
@@ -144,24 +126,25 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_weight="0.65"
                         android:gravity="center"
-                        android:text="100"
+                        android:text="500"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@color/Custom_Grey" />
+                        android:textColor="@color/Custom_Grey"
+                        android:layout_weight="0.60" />
 
                     <TextView
                         android:id="@+id/lblCaloriesGoal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentTop="true"
-                        android:layout_weight="0.15"
+                        android:layout_alignParentStart="false"
+                        android:layout_alignParentTop="false"
+                        android:layout_weight="0.20"
                         android:gravity="right"
-                        android:text="100"
+                        android:text="2000"
                         android:textAlignment="gravity"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@color/Custom_Grey" />
+                        android:textColor="@color/Custom_Grey"
+                        android:layout_gravity="center" />
                 </LinearLayout>
 
                 <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
@@ -192,13 +175,14 @@
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:scaleType="centerInside"
-                app:srcCompat="@drawable/icon_carbs" />
+                app:srcCompat="@drawable/icon_carbs"
+                android:layout_weight="0.2" />
 
             <LinearLayout
                 android:id="@+id/linearLayoutCarbsProgressBar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.7"
+                android:layout_weight="0.8"
                 android:orientation="vertical"
                 android:weightSum="1">
 
@@ -213,7 +197,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_weight="0.15"
+                        android:layout_weight="0.20"
                         android:gravity="left"
                         android:text="100"
                         android:textAppearance="?android:attr/textAppearanceMedium"
@@ -224,7 +208,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_weight="0.65"
+                        android:layout_weight="0.6"
                         android:gravity="center"
                         android:text="100"
                         android:textAppearance="?android:attr/textAppearanceMedium"
@@ -236,7 +220,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentStart="true"
                         android:layout_alignParentTop="true"
-                        android:layout_weight="0.15"
+                        android:layout_weight="0.2"
                         android:gravity="right"
                         android:text="100"
                         android:textAlignment="gravity"
@@ -273,13 +257,14 @@
                 android:paddingLeft="3dp"
                 android:paddingRight="3dp"
                 android:scaleType="centerInside"
-                app:srcCompat="@drawable/icon_protein" />
+                app:srcCompat="@drawable/icon_protein"
+                android:layout_weight="0.2" />
 
             <LinearLayout
                 android:id="@+id/linearLayoutProteinProgressBar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.7"
+                android:layout_weight="0.8"
                 android:orientation="vertical"
                 android:weightSum="1">
 
@@ -294,7 +279,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_weight="0.15"
+                        android:layout_weight="0.2"
                         android:gravity="left"
                         android:text="100"
                         android:textAppearance="?android:attr/textAppearanceMedium"
@@ -305,7 +290,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_weight="0.65"
+                        android:layout_weight="0.6"
                         android:gravity="center"
                         android:text="100"
                         android:textAppearance="?android:attr/textAppearanceMedium"
@@ -317,7 +302,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentStart="true"
                         android:layout_alignParentTop="true"
-                        android:layout_weight="0.15"
+                        android:layout_weight="0.2"
                         android:gravity="right"
                         android:text="100"
                         android:textAlignment="gravity"
@@ -353,13 +338,14 @@
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:scaleType="centerInside"
-                app:srcCompat="@drawable/icon_fat" />
+                app:srcCompat="@drawable/icon_fat"
+                android:layout_weight="0.2" />
 
             <LinearLayout
                 android:id="@+id/linearLayoutFatProgressBar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.7"
+                android:layout_weight="0.8"
                 android:orientation="vertical"
                 android:weightSum="1">
 
@@ -374,7 +360,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_weight="0.15"
+                        android:layout_weight="0.2"
                         android:gravity="left"
                         android:text="100"
                         android:textAppearance="?android:attr/textAppearanceMedium"
@@ -385,7 +371,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_weight="0.65"
+                        android:layout_weight="0.6"
                         android:gravity="center"
                         android:text="100"
                         android:textAppearance="?android:attr/textAppearanceMedium"
@@ -397,7 +383,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentStart="true"
                         android:layout_alignParentTop="true"
-                        android:layout_weight="0.15"
+                        android:layout_weight="0.2"
                         android:gravity="right"
                         android:text="100"
                         android:textAlignment="gravity"
@@ -421,12 +407,9 @@
         </LinearLayout>
 
         <ListView
-        android:layout_width="match_parent"
-        android:id="@+id/listViewDailyMeals"
-        android:fastScrollEnabled="false"
-            tools:layout_editor_absoluteY="8dp"
-            tools:layout_editor_absoluteX="8dp"
-            android:layout_height="match_parent" />
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/listviewDailyItems" />
 
     </LinearLayout>
 

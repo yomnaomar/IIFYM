@@ -187,7 +187,7 @@ public class activityMain extends AppCompatActivity implements View.OnClickListe
         arrDailyItems = new ArrayList<DailyItem>();
         adapterDailyItems = new adapterDailyItem(this, arrDailyItems);
 
-        listViewDailyItems = (ListView) findViewById(R.id.listViewDailyMeals);
+        listViewDailyItems = (ListView) findViewById(R.id.listviewDailyItems);
         listViewDailyItems.setAdapter(adapterDailyItems);
         listViewDailyItems.setOnItemClickListener(this);
 
