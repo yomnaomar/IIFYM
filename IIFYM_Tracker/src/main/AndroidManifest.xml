@@ -14,12 +14,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".Activities.Old_Login.Login_Abdu"
-            android:label="@string/appName"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustPan" />
-        <activity
             android:name=".Activities.Main.activityMain"
             android:label="@string/appName"
             android:screenOrientation="portrait"
@@ -46,7 +40,7 @@
             android:windowSoftInputMode="adjustPan" />
         android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".Activities.Main.acitivityAddSavedFood"
+            android:name=".Activities.Main.acitivityAddSavedItem"
             android:theme="@style/AppTheme.NoActionBar" />
         >>>>>>> master
         <activity

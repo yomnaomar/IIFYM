@@ -3,6 +3,7 @@ package com.example.kareem.IIFYM_Tracker.Activities.Main;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -43,6 +44,7 @@ public class activityMain extends AppCompatActivity implements View.OnClickListe
     private ListView                listViewDailyItems;
     private RoundCornerProgressBar  progressBarCalories, progressBarCarbs, progressBarProtein, progressBarFat;
     private Animation               mEnterAnimation, mExitAnimation;
+    private FloatingActionButton    fabAddDailyItem;
 
     // Variables
     private Context context;
@@ -80,15 +82,16 @@ public class activityMain extends AppCompatActivity implements View.OnClickListe
 
     @Override public void onClick(View v) {
         switch (v.getId()){
-
+            case R.id.fabAddDailyItem:
+                AddItem();
+                break;
         }
     }
 
-    // TODO Implement
     private void AddItem() {
         Context context = getApplicationContext();
         Intent intent = new Intent();
-        intent.setClass(context,acitivityAddSavedFood.class);
+        intent.setClass(context,acitivityAddSavedItem.class);
         startActivity(intent);
     }
 
@@ -107,59 +110,6 @@ public class activityMain extends AppCompatActivity implements View.OnClickListe
         intent.putExtra("position", position);
         intent.putExtra("isDaily", true);
         startActivity(intent);*/
-    }
-
-    @Override public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_MealSettings) {
-            Intent intent = new Intent();
-            intent.setClassName(this, "com.example.kareem.IIFYM_Tracker.Activities.Main.ViewSavedMealsActivity");
-            startActivity(intent);
-            return true;
-        }
-        if(id==R.id.logout_menu_btn)
-        {
-            signOut();
-            Intent in = new Intent(getApplicationContext(), activityLogin.class);
-            startActivity(in);
-            finish();
-            return true;
-        }
-        if(id==R.id.profile_menu_btn)
-        {
-            Intent intent = new Intent(getApplicationContext(),UserProfile_Mina.class);
-            startActivity(intent);
-            return true;
-        }
-        if(id==R.id.action_MacroSettings)
-        {
-            Intent in = new Intent(getApplicationContext(),MacroSettings.class );
-            startActivity(in);
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_home_woman, menu);
-        return true;
-    }
-
-    @Override public boolean onPrepareOptionsMenu(Menu menu) {
-        menu.clear();
-        if (currentUser.getGender() == 0) { //Male
-            getMenuInflater().inflate(R.menu.menu_home_man, menu);
-        }
-        else {
-            getMenuInflater().inflate(R.menu.menu_home_woman, menu);
-        }
-        return super.onPrepareOptionsMenu(menu);
     }
 
     private void initializeGUI() {
@@ -183,6 +133,8 @@ public class activityMain extends AppCompatActivity implements View.OnClickListe
         progressBarCarbs = (RoundCornerProgressBar) findViewById(R.id.progressBarCarbs);
         progressBarProtein = (RoundCornerProgressBar) findViewById(R.id.progressBarProtein);
         progressBarFat = (RoundCornerProgressBar) findViewById(R.id.progressBarFat);
+
+        fabAddDailyItem = (FloatingActionButton) findViewById(R.id.fabAddDailyItem);
 
         arrDailyItems = new ArrayList<DailyItem>();
         adapterDailyItems = new adapterDailyItem(this, arrDailyItems);
@@ -210,13 +162,14 @@ public class activityMain extends AppCompatActivity implements View.OnClickListe
         toast.show();
 
         isPercent = currentUser.isPercent();
+        Log.d("initializeUser","isPercent" + isPercent);
 
         caloriesGoal = currentUser.getDailyCalories();
         carbsGoal = currentUser.getDailyCarbs();
         proteinGoal = currentUser.getDailyProtein();
         fatGoal = currentUser.getDailyFat();
 
-        if (isPercent){
+        if (isPercent){ // Convert from percentage to grams
             carbsGoal = carbsGoal*caloriesGoal/400;
             proteinGoal = proteinGoal*caloriesGoal/400;
             fatGoal = fatGoal*caloriesGoal/900;
@@ -313,6 +266,59 @@ public class activityMain extends AppCompatActivity implements View.OnClickListe
 
     @Override protected void onPause() {
         super.onPause();
+    }
+
+    @Override public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_MealSettings) {
+            Intent intent = new Intent();
+            intent.setClassName(this, "com.example.kareem.IIFYM_Tracker.Activities.Main.ViewSavedMealsActivity");
+            startActivity(intent);
+            return true;
+        }
+        if(id==R.id.logout_menu_btn)
+        {
+            signOut();
+            Intent in = new Intent(getApplicationContext(), activityLogin.class);
+            startActivity(in);
+            finish();
+            return true;
+        }
+        if(id==R.id.profile_menu_btn)
+        {
+            Intent intent = new Intent(getApplicationContext(),UserProfile_Mina.class);
+            startActivity(intent);
+            return true;
+        }
+        if(id==R.id.action_MacroSettings)
+        {
+            Intent in = new Intent(getApplicationContext(),MacroSettings.class );
+            startActivity(in);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_home_woman, menu);
+        return true;
+    }
+
+    @Override public boolean onPrepareOptionsMenu(Menu menu) {
+        menu.clear();
+        if (currentUser.getGender() == 0) { //Male
+            getMenuInflater().inflate(R.menu.menu_home_man, menu);
+        }
+        else {
+            getMenuInflater().inflate(R.menu.menu_home_woman, menu);
+        }
+        return super.onPrepareOptionsMenu(menu);
     }
 
     private void signOut() {
