@@ -4,6 +4,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import com.example.kareem.IIFYM_Tracker.R;
 
+// TODO Delete this
+
 public class activityAddDailyItem extends AppCompatActivity {
 
     @Override
