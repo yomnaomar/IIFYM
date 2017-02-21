@@ -1,7 +1,8 @@
-package com.example.kareem.IIFYM_Tracker.Activities.Main;
+package com.example.kareem.IIFYM_Tracker.Activities.Main.New;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -53,7 +54,7 @@ public class activityMain extends AppCompatActivity implements AdapterView.OnIte
     public int      caloriesLeft = 0,       carbsLeft = 0,      proteinLeft = 0,    fatLeft = 0;
     public int      caloriesGoal,           carbsGoal,          proteinGoal,        fatGoal;
 
-    // Storage
+    // Database
     private SharedPreferenceHelper          myPrefs;
     private SQLiteConnector                 DB_SQLite;
     private FirebaseAuth                    firebaseAuth;
@@ -68,7 +69,7 @@ public class activityMain extends AppCompatActivity implements AdapterView.OnIte
         setSupportActionBar(toolbar);
         context = getApplicationContext();
 
-        // Storage
+        // Database
         myPrefs = new SharedPreferenceHelper(context);
         DB_SQLite = new SQLiteConnector(context);
         firebaseAuth = FirebaseAuth.getInstance();
@@ -190,40 +191,39 @@ public class activityMain extends AppCompatActivity implements AdapterView.OnIte
         // Updating ProgressBars
         if(caloriesCurrent <= caloriesGoal) {
             progressBarCalories.setProgress(100 * caloriesCurrent / caloriesGoal);
-            // TODO change label color to normal
+            lblCaloriesCurrent.setTextColor(Color.parseColor("#f0c419"));
         }
         else {
             progressBarCalories.setProgress(100);
-            // TODO change label color to red
+            lblCaloriesCurrent.setTextColor(Color.parseColor("#D50000")); // RED
         }
 
         if(carbsCurrent <= carbsGoal) {
             progressBarCarbs.setProgress(100 * carbsCurrent / carbsGoal);
-            // TODO change label color to normal
+            lblCarbsCurrent.setTextColor(Color.parseColor("#f57c00"));
         }
         else {
             progressBarCarbs.setProgress(100);
-            // TODO change label color to red
+            lblCarbsCurrent.setTextColor(Color.parseColor("#D50000")); // RED
         }
         if(proteinCurrent <= proteinGoal) {
             progressBarProtein.setProgress(100 * proteinCurrent / proteinGoal);
-            // TODO change label color to normal
+            lblProteinCurrent.setTextColor(Color.parseColor("#f44336"));
         }
         else {
             progressBarProtein.setProgress(100);
-            // TODO change label color to red
+            lblProteinCurrent.setTextColor(Color.parseColor("#D50000")); // RED
         }
         if(fatCurrent <= fatGoal) {
             progressBarFat.setProgress(100 * fatCurrent / fatGoal);
-            // TODO change label color to normal
+            lblFatCurrent.setTextColor(Color.parseColor("#66bb6a"));
         }
         else {
             progressBarFat.setProgress(100);
-            // TODO change label color to red
+            lblFatCurrent.setTextColor(Color.parseColor("#D50000")); // RED
         }
     }
 
-    // Updates adapterDailyItems
     public void updateArrayList() {
         adapterDailyItems.clear();
         arrDailyItems = DB_SQLite.retrieveAllDailyItems();
@@ -266,7 +266,7 @@ public class activityMain extends AppCompatActivity implements AdapterView.OnIte
     }
 
     @Override public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar listItem clicks here. The action bar will
+        // Handle action bar listitem clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
@@ -274,7 +274,7 @@ public class activityMain extends AppCompatActivity implements AdapterView.OnIte
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_MealSettings) {
             Intent intent = new Intent();
-            intent.setClassName(this, "com.example.kareem.IIFYM_Tracker.Activities.Main.ViewSavedMealsActivity");
+            intent.setClassName(this, "com.example.kareem.IIFYM_Tracker.Activities.Main.Old.ViewSavedMealsActivity");
             startActivity(intent);
             return true;
         }

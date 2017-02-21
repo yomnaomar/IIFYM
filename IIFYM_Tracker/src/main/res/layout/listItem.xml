@@ -13,7 +13,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Meal Name"
+            android:text="Name"
             android:id="@+id/lblName"
             android:textColor="@color/abc_primary_text_disable_only_material_light" />
 
@@ -23,6 +23,13 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
+        <TextView
+            android:text="Brand"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/lblBrand"
+            android:layout_weight="1" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -66,5 +73,12 @@
             android:id="@+id/lblFat"
             android:layout_weight="1"
             android:textColor="#17a900" />
+
+        <TextView
+            android:text="Calories"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/lblCalories"
+            android:layout_weight="1" />
     </LinearLayout>
 </LinearLayout>

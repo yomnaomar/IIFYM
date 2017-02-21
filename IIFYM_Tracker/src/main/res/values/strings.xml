@@ -65,20 +65,20 @@
 
         <string name="pref_title_sync_frequency">Sync frequency</string>
         <string-array name="pref_sync_frequency_titles">
-            <listItem>15 minutes</listItem>
-            <listItem>30 minutes</listItem>
-            <listItem>1 hour</listItem>
-            <listItem>3 hours</listItem>
-            <listItem>6 hours</listItem>
-            <listItem>Never</listItem>
+            <listitem>15 minutes</listitem>
+            <listitem>30 minutes</listitem>
+            <listitem>1 hour</listitem>
+            <listitem>3 hours</listitem>
+            <listitem>6 hours</listitem>
+            <listitem>Never</listitem>
         </string-array>
         <string-array name="pref_sync_frequency_values">
-            <listItem>15</listItem>
-            <listItem>30</listItem>
-            <listItem>60</listItem>
-            <listItem>180</listItem>
-            <listItem>360</listItem>
-            <listItem>-1</listItem>
+            <listitem>15</listitem>
+            <listitem>30</listitem>
+            <listitem>60</listitem>
+            <listitem>180</listitem>
+            <listitem>360</listitem>
+            <listitem>-1</listitem>
         </string-array>
 
         <string name="pref_title_system_sync_settings">System sync settings</string>

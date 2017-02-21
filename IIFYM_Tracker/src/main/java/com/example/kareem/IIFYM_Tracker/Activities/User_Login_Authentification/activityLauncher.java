@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
-import com.example.kareem.IIFYM_Tracker.Activities.Main.activityMain;
+import com.example.kareem.IIFYM_Tracker.Activities.Main.New.activityMain;
 import com.example.kareem.IIFYM_Tracker.Database.SharedPreferenceHelper;
 import com.example.kareem.IIFYM_Tracker.R;
 

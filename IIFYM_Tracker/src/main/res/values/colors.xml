@@ -24,10 +24,4 @@
     <color name="Custom_Red">#D50000</color>
     <color name="Custom_Green">#2E7D32</color>
     <color name="Custom_Grey">#808080</color>
-    <!--<color name="CarbProgressColor">#ffb74d</color>-->
-    <!--<color name="CarbSecondaryProgressColor">#f57c00</color>-->
-    <!--<color name="ProteinProgessColor">#f44336</color>-->
-    <!--<color name="ProteinSecondaryProgressColor">#cc0000</color>-->
-    <!--<color name="FatProgessColor">#66bb6a</color>-->
-    <!--<color name="FatSecondaryProgressColor">#2e7d32</color>-->
 </resources>

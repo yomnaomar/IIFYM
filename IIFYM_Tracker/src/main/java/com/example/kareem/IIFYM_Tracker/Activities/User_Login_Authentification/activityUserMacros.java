@@ -22,7 +22,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import com.example.kareem.IIFYM_Tracker.Activities.Main.activityMain;
+import com.example.kareem.IIFYM_Tracker.Activities.Main.New.activityMain;
 import com.example.kareem.IIFYM_Tracker.Models.User;
 import com.example.kareem.IIFYM_Tracker.Database.SQLiteConnector;
 import com.example.kareem.IIFYM_Tracker.Database.SharedPreferenceHelper;
@@ -67,7 +67,7 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
     private int             carbsOld, proteinOld, fatOld;
     private boolean         carbsChanged, proteinChanged, fatChanged;
 
-    // Storage
+    // Database
     private SharedPreferenceHelper  myPrefs;
     private SQLiteConnector         DB_SQLite;
     private FirebaseAuth            firebaseAuth;
@@ -78,7 +78,7 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_macros);
 
-        // Storage
+        // Database
         context = getApplicationContext();
         myPrefs = new SharedPreferenceHelper(context);
         firebaseAuth = FirebaseAuth.getInstance();

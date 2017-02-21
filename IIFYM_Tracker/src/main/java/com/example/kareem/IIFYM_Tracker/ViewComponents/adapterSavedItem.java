@@ -39,16 +39,18 @@ public class adapterSavedItem extends ArrayAdapter<Food> {
 
     @Override public View getView(int position, View convertView, ViewGroup parent) {
 
-        // Get the data listItem for this position
+        // Get the data listitem for this position
         Food food = getItem(position);
         int id = food.getId();
 
         // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.listItem, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.listitem, parent, false);
         }
         // Lookup view for data population
         TextView name = (TextView) convertView.findViewById(R.id.lblName);
+        TextView brand = (TextView) convertView.findViewById(R.id.lblBrand);
+        TextView calories = (TextView) convertView.findViewById(R.id.lblCalories);
         TextView carbs = (TextView) convertView.findViewById(R.id.lblCarbs);
         TextView protein = (TextView) convertView.findViewById(R.id.lblProtein);
         TextView fat = (TextView) convertView.findViewById(R.id.lblFat);
@@ -56,6 +58,8 @@ public class adapterSavedItem extends ArrayAdapter<Food> {
 
         // Populate the data into the template view using the data object
         name.setText(food.getName());
+        brand.setText(food.getBrand());
+        calories.setText(String.valueOf(food.getCalories()));
         carbs.setText(String.valueOf(food.getCarbs()));
         protein.setText(String.valueOf(food.getProtein()));
         fat.setText(String.valueOf(food.getFat()));
@@ -125,7 +129,7 @@ public class adapterSavedItem extends ArrayAdapter<Food> {
             int count = arrFilteredMeals.size();
             for (int i=0; i<count; i++)
             {
-                Food food = (Food) arrFilteredMeals.get(i);
+                Food food = arrFilteredMeals.get(i);
                 add(food);
             }
         }

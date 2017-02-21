@@ -288,11 +288,37 @@ public class SQLiteConnector {
         }
     }
 
-    // TODO Return list of Foods rather than Cursor
-    public Cursor retrieveAllFoods() {
+    public ArrayList<Food> retrieveAllFoods() {
         Cursor C = database.rawQuery("SELECT * FROM " + Table_Food + " ORDER BY name COLLATE NOCASE ASC", null);
         Log.i("retrieveAllFoods", "All Foods retrieved in ascending order");
-        return C;
+
+        int count = C.getCount();
+        Log.d("retrieveAllFoods", "Food count " + count);
+
+        ArrayList<Food> arrFood = new ArrayList();
+
+        if (count > 0) {
+            for (int i = 0; i < count; i++) {
+                C.moveToNext();
+
+                int     id          = C.getInt(0);
+                String  name        = C.getString(1);
+                String  brand       = C.getString(2);
+                float   calories    = C.getFloat(3);
+                float   carbs       = C.getFloat(4);
+                float   protein     = C.getFloat(5);
+                float   fat         = C.getFloat(6);
+                int     portionType = C.getInt(7);
+                int     isMeal      = C.getInt(8);
+
+                Food food = new Food(id,name,brand,calories,carbs,protein,fat,portionType,isMeal);
+
+                arrFood.add(food);
+
+                Log.i("food Added:", "Name: " + name);
+            }
+        }
+        return arrFood;
     }
 
     // ----------    Table_Weight = "Weight"    ----------------
@@ -519,7 +545,7 @@ public class SQLiteConnector {
         return C;
     }
 
-    // Return True if DailyItem with id = listItem.getId was updated successfully
+    // Return True if DailyItem with id = listitem.getId was updated successfully
     // Returns False otherwise
     public boolean updateDailyItem(DailyItem item) {
         Cursor C = database.rawQuery("SELECT * FROM " + Table_DailyItem + " WHERE id = " + item.getFood().getId()

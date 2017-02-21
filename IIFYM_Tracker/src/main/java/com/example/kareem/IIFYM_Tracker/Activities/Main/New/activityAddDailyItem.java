@@ -1,7 +1,5 @@
-package com.example.kareem.IIFYM_Tracker.Activities.Main;
+package com.example.kareem.IIFYM_Tracker.Activities.Main.New;
 
-import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -20,41 +18,41 @@ import java.util.ArrayList;
 
 public class activityAddDailyItem extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
+    // Search Bar
     private EditText etxtSearch;
 
+    // List View
     private ArrayList<Food> arrSavedItems;
-    private com.example.kareem.IIFYM_Tracker.ViewComponents.adapterSavedItem adapterSavedItem;
+    private adapterSavedItem adapterSavedItem;
     private ListView listviewSavedItems;
 
+    // Database
     private SQLiteConnector DB_SQLite;
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_daily_item);
-
+        
+        // Database
         DB_SQLite = new SQLiteConnector(getApplicationContext());
 
-
-        arrSavedItems = new ArrayList<Food>();
-        ConstructArrayList_SavedMeals();
+        // List View
+        arrSavedItems = DB_SQLite.retrieveAllFoods();
         adapterSavedItem = new adapterSavedItem(this, arrSavedItems);
         listviewSavedItems = (ListView) findViewById(R.id.listviewSavedItems);
         listviewSavedItems.setAdapter(adapterSavedItem);
         listviewSavedItems.setOnItemClickListener(this);
 
+        // Search Functionality
         etxtSearch = (EditText) findViewById(R.id.etxtSearch);
         etxtSearch.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
-                // When user changed the Text
+            @Override public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
                 adapterSavedItem.getFilter().filter(cs);
             }
 
-            @Override
-            public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) { }
+            @Override public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) { }
 
-            @Override
-            public void afterTextChanged(Editable arg0) {}
+            @Override public void afterTextChanged(Editable arg0) {}
         });
     }
 
@@ -69,44 +67,17 @@ public class activityAddDailyItem extends AppCompatActivity implements AdapterVi
         startActivity(intent);*/
     }
 
-    //TODO Implement this in database connector
-    //Updates My_MealAdapter
+    //Updates adapterSavedItem and arrSavedItems
     private void UpdateArrayList() {
         adapterSavedItem.clear();
-        Cursor C = DB_SQLite.retrieveAllFoods();
+        arrSavedItems = DB_SQLite.retrieveAllFoods();
     }
 
-    // TODO Implement
-    //Fills arrSavedItems
-    private void ConstructArrayList_SavedMeals() {
-        Cursor C = DB_SQLite.getAllMealsSorted();
-
-        int count = C.getCount();
-        if (count > 0) {
-            for (int i = 0; i < count; i++) {
-                C.moveToNext();
-                int     meal_id         = C.getInt(0);      //meal)id
-                String  meal_name       = C.getString(1);   //meal_name
-                String  date_created    = C.getString(2);   //date_created
-                float   carbs           = C.getFloat(3);      //icon_carbs
-                float   protein         = C.getFloat(4);      //icon_protein
-                float   fat             = C.getFloat(5);      //icon_fat
-                portion = portion.values()[C.getInt(6)];    //portion
-                int     user_id         = C.getInt(8);      //user_id
-                Food M = new Food(meal_id,meal_name,carbs,protein,fat,portion,user_id);
-                getFullMealNutrients(M);
-                arrSavedItems.add(M);
-            }
-        }
-    }
-
-    @Override
-    protected void onPause() {
+    @Override protected void onPause() {
         super.onPause();
     }
 
-    @Override
-    protected void onResume() {
+    @Override protected void onResume() {
         super.onResume();
         UpdateArrayList();
     }

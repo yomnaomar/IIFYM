@@ -15,7 +15,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
-import com.example.kareem.IIFYM_Tracker.Activities.Main.activityMain;
+import com.example.kareem.IIFYM_Tracker.Activities.Main.New.activityMain;
 import com.example.kareem.IIFYM_Tracker.Models.User;
 import com.example.kareem.IIFYM_Tracker.Database.SQLiteConnector;
 import com.example.kareem.IIFYM_Tracker.Database.SharedPreferenceHelper;
@@ -83,7 +83,7 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
     private Context         context;
     BroadcastReceiver       broadcast_reciever;
 
-    // Storage
+    // Database
     private SharedPreferenceHelper          myPrefs;
     private SQLiteConnector                 DB_SQLite;
     private FirebaseAuth                    firebaseAuth;

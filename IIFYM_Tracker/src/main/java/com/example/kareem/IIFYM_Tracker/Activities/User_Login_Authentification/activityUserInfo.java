@@ -71,7 +71,7 @@ public class activityUserInfo extends AppCompatActivity implements View.OnClickL
     private int         height1, height2, workoutFreq, goal;
     private Context     context;
 
-    // Storage
+    // Database
     private SharedPreferenceHelper  myPrefs;
     private FirebaseAuth            firebaseAuth;
     private BroadcastReceiver       broadcast_reciever;
@@ -87,7 +87,7 @@ public class activityUserInfo extends AppCompatActivity implements View.OnClickL
         // GUI
         initializeGUI();
 
-        // Storage
+        // Database
         context = getApplicationContext();
         myPrefs = new SharedPreferenceHelper(context);
         firebaseAuth = FirebaseAuth.getInstance();
