@@ -29,7 +29,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".Activities.Settings.MacroSettings"
-            android:label="Macro Settings"
+            android:label="Nutrition Settings"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
         <activity android:name=".Activities.Settings.UserProfile_Mina" />
@@ -47,17 +47,21 @@
             android:name=".Activities.Main.Old.activityCreateFood"
             android:label="@string/title_activity_create_simple_meal"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Activities.User_Login_Authentification.activityLogin" />
-        <activity android:name=".Activities.User_Login_Authentification.activityUserInfo" />
-        <activity android:name=".Activities.User_Login_Authentification.activityUserMacros" />
-        <activity android:name=".Activities.User_Login_Authentification.activityLauncher">
+        <activity android:name=".Activities.User_Login_Authentification.activityLogin"
+            android:label="@string/appName"/>
+        <activity android:name=".Activities.User_Login_Authentification.activityUserInfo"
+            android:label="Register Yourself!"/>
+        <activity android:name=".Activities.User_Login_Authentification.activityUserMacros"
+            android:label="Set your Daily Nutritional Goals"/>
+        <activity android:name=".Activities.User_Login_Authentification.activityLauncher"
+            android:label="Hidden Launcher Activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activities.Main.New.activityAddDailyItem"></activity>
+        <activity android:name=".Activities.Main.New.activityAddDailyItem"
+            android:label="Add an Item to your Daily List"></activity>
     </application>
 
 </manifest>

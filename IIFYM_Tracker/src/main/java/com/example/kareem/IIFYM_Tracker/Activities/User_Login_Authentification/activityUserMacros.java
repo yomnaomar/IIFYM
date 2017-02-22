@@ -102,7 +102,6 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
     }
 
     private void initializeGUI() {
-        lblTitle        = (TextView) findViewById(R.id.lblTitle);
         seggroupDisplay = (SegmentedGroup) findViewById(R.id.seggroupDisplay);
         rbtnCalories    = (RadioButton) findViewById(R.id.rbtnCalories);
         rbtnMacros      = (RadioButton) findViewById(R.id.rbtnMacros);

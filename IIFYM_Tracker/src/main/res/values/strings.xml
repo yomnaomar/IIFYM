@@ -129,6 +129,7 @@
     <string name="firebase_status_fmt">Firebase User: %s</string>
     <string name="UserFocus">I want to focus on ...</string>
     <string name="UserMacrosTitle">Daily Nutritional Goals</string>
+    <string name="MacroSettingsTitle">Change your Daily Nutritional Goals</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->
