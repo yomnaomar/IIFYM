@@ -1,4 +1,5 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources xmlns:tools="http://schemas.android.com/tools"
+    xmlns:fab="http://schemas.android.com/apk/res-auto">
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
@@ -11,4 +12,7 @@
 
     <dimen name="design_fab_size_mini" tools:override="true">60dp</dimen>
     <dimen name="design_fab_image_size" tools:override="true">45dp</dimen>
+
+    <dimen name="fab_size_mini" fab:override="true">60dp</dimen>
+    <dimen name="fab_image_size" fab:override="true">60dp</dimen>
 </resources>

@@ -24,4 +24,14 @@
     <color name="Custom_Red">#D50000</color>
     <color name="Custom_Green">#2E7D32</color>
     <color name="Custom_Grey">#808080</color>
+    <color name="fabBlackSemiTransparent">#B2000000</color>
+    <color name="fabBackground">#e5e5e5</color>
+    <color name="fabHalfBlack">#808080</color>
+    <color name="fabWhite">#fafafa</color>
+    <color name="fabWhitePressed">#f1f1f1</color>
+    <color name="fabPink">#e91e63</color>
+    <color name="fabPinkPressed">#ec407a</color>
+    <color name="fabBlue">#805677fc</color>
+    <color name="fabBluePressed">#80738ffe</color>
+    <color name="colorPrimaryLight">#2b51a2</color>
 </resources>

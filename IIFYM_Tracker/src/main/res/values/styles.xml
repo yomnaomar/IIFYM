@@ -28,4 +28,9 @@
         <item name="android:paddingRight">5dp</item>
     </style>
 
+    <style name="menu_labels_style">
+        <item name="android:background">@color/Transparent</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+    </style>
+
 </resources>

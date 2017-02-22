@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_add_daily_item"
     android:layout_width="match_parent"
@@ -33,4 +34,44 @@
             tools:layout_editor_absoluteX="0dp"></ListView>
 
     </LinearLayout>
+
+    <com.getbase.floatingactionbutton.FloatingActionsMenu
+        android:id="@+id/fabAddNew"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        fab:fab_addButtonColorNormal="@color/colorPrimary"
+        fab:fab_addButtonColorPressed="@color/fabWhitePressed"
+        fab:fab_addButtonPlusIconColor="@color/fabWhite"
+        fab:fab_labelStyle="@style/menu_labels_style"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        fab:fab_addButtonSize="mini"
+        fab:fab_expandDirection="up"
+        fab:fab_labelsPosition="left">
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabAddNewFood"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="@color/colorPrimaryLight"
+            fab:fab_title="Add New Food"
+            fab:fab_colorPressed="@color/fabWhitePressed"
+            fab:fab_icon="@drawable/icon_food"
+            fab:fab_size="mini"/>
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabAddNewMeal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="@color/colorPrimaryLight"
+            fab:fab_title="Add New Meal"
+            fab:fab_colorPressed="@color/fabWhitePressed"
+            fab:fab_icon="@drawable/icon_meal"
+            fab:fab_size="mini"
+            style="imageButtonStyle"
+            android:scaleType="fitCenter"
+            android:background="@drawable/icon_meal" />
+
+    </com.getbase.floatingactionbutton.FloatingActionsMenu>
+
 </RelativeLayout>
