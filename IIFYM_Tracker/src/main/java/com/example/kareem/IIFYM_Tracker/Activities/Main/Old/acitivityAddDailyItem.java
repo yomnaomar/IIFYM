@@ -25,7 +25,7 @@ public class acitivityAddDailyItem extends AppCompatActivity{}
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_daily_food);
+        setContentView(R.layout.activity_add_daily_item);
 
         Label_Meal_Name = (TextView)findViewById(R.id.Label_Meal_Name);
         Label_Carbs = (TextView)findViewById(R.id.Label_Carbs);
