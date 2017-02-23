@@ -1,84 +1,128 @@
+
 package com.example.kareem.IIFYM_Tracker.Activities.Main.New;
 
 import android.support.v7.app.AppCompatActivity;
 
 public class activityCreateDailyFood extends AppCompatActivity {}
-/*
-public class activityCreateDailyFood extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
+/*public class activityCreateDailyFood extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
-    private TextView Label_PortionType, Label_ServingNumber, Label_Unit, Label_Quantity;
-    private EditText EditText_MealName, EditText_Carbs, EditText_Protein, EditText_Fat, EditText_ServingNumber, EditText_Quantity;
-    private RadioButton RadioButton_Serving, RadioButton_Weight;
-    private RadioGroup RadioGroup_PortionType;
-    private Spinner Spinner_Unit;
-    private CheckBox CheckBox_SaveMeal;
-    private Button Button_Enter, Button_Cancel;
+    // GUI
+    private TextView        lblServingNum, lblAmount;
+    private EditText        etxtName, etxtBrand, etxtCalories, etxtCarbs, etxtProtein, etxtFat, etxtServingNum, etxtAmount;
+    private RadioButton     rbtnServing, rbtnWeight;
+    private SegmentedGroup  seggroupPortionType;
+    private Spinner         spinnerUnit;
+    private Button          buttonEnter;
 
-    private SQLiteConnector DB_SQLite;
-
-    private int Weight_Unit_Selected = 0;
-
-    private User currentUser;
-    private String uid;
-    boolean fieldsOk;
-    private SharedPreferenceHelper myPrefs;
+    // Variables
     private Context context;
+    private int     weightUnitSelected = 0;
+    boolean         fieldsOk;
+
+    // Database
+    private SharedPreferenceHelper  myPrefs;
+    private SQLiteConnector         DB_SQLite;
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_daily_food);
 
+        // GUI
+        initializeGUI();
+
+        // Database
+        context = getApplicationContext();
+        DB_SQLite = new SQLiteConnector(context);
+        myPrefs = new SharedPreferenceHelper(context);
+    }
+
+    // TODO Implement with additional customization features (user wishes to track calories only vs macros only
+    private boolean validateFields() {
+        boolean valid = true;
+        if (etxtName.getText().toString().isEmpty()) {
+            etxtName.setError("Required");
+            valid = false;
+        } else
+            etxtName.setError(null);
+
+        if (etxtCalories.getText().toString().isEmpty()) {
+            etxtCalories.setError("Required");
+            valid = false;
+        } else
+            etxtCalories.setError(null);
+
+        if (etxtCarbs.getText().toString().isEmpty()) {
+            etxtCarbs.setError("Required");
+            valid = false;
+        } else
+            etxtCarbs.setError(null);
+
+        if (etxtProtein.getText().toString().isEmpty()) {
+            etxtProtein.setError("Required");
+            valid = false;
+        } else
+            etxtProtein.setError(null);
+
+        if (etxtFat.getText().toString().isEmpty()) {
+            etxtFat.setError("Required");
+            valid = false;
+        } else
+            etxtFat.setError(null);
+
+        if (rbtnServing.isChecked()) {
+            if (etxtServingNum.getText().toString().isEmpty()) {
+                etxtServingNum.setError("Required");
+                valid = false;
+            } else
+                etxtServingNum.setError(null);
+        } else {
+            if (etxtAmount.getText().toString().isEmpty()) {
+                etxtAmount.setError("Required");
+                valid = false;
+            } else {
+                etxtAmount.setError(null);
+            }
+        }
+        return valid;
+    }
+
+    private void initializeGUI() {
+
         //Labels
-        Label_PortionType = (TextView) findViewById(R.id.Label_PortionType);
-        Label_ServingNumber = (TextView) findViewById(R.id.Label_ServingNumber);
-        Label_Unit = (TextView) findViewById(R.id.Label_Unit);
-        Label_Quantity = (TextView) findViewById(R.id.Label_Quantity);
+        lblServingNum = (TextView) findViewById(R.id.Label_ServingNumber);
+        lblAmount = (TextView) findViewById(R.id.Label_Quantity);
 
         //EditTexts
-        EditText_MealName = (EditText) findViewById(R.id.EditText_MealName);
-        EditText_Carbs = (EditText) findViewById(R.id.EditText_Carbs);
-        EditText_Protein = (EditText) findViewById(R.id.EditText_Protein);
-        EditText_Fat = (EditText) findViewById(R.id.EditText_Fat);
-        EditText_ServingNumber = (EditText) findViewById(R.id.EditText_ServingNumber);
-        EditText_Quantity = (EditText) findViewById(R.id.EditText_Quantity);
+        etxtName = (EditText) findViewById(R.id.etxtName);
+        etxtBrand = (EditText) findViewById(R.id.etxtBrand);
+        etxtCalories = (EditText) findViewById(R.id.etxtCalories);
+        etxtCarbs = (EditText) findViewById(R.id.EditText_Carbs);
+        etxtProtein = (EditText) findViewById(R.id.EditText_Protein);
+        etxtFat = (EditText) findViewById(R.id.EditText_Fat);
+        etxtServingNum = (EditText) findViewById(R.id.EditText_ServingNumber);
+        etxtAmount = (EditText) findViewById(R.id.EditText_Quantity);
 
         //Buttons
-        Button_Enter = (Button) findViewById(R.id.Button_Enter);
-        Button_Enter.setOnClickListener(this);
-        Button_Cancel = (Button) findViewById(R.id.Button_Cancel);
-        Button_Cancel.setOnClickListener(this);
+        btnEnter = (Button) findViewById(R.id.Button_Enter);
+        btnEnter.setOnClickListener(this);
 
         //RadioButtons & RadioGroups
-        RadioButton_Serving = (RadioButton) findViewById(R.id.RadioButton_Serving);
-        RadioButton_Serving.setOnClickListener(this);
-        RadioButton_Weight = (RadioButton) findViewById(R.id.RadioButton_Weight);
-        RadioButton_Weight.setOnClickListener(this);
-        RadioGroup_PortionType = (RadioGroup) findViewById(R.id.RadioGroup_PortionType);
+        rbtnServing = (RadioButton) findViewById(R.id.rbtnServing);
+        rbtnServing.setOnClickListener(this);
+        rbtnWeight = (RadioButton) findViewById(R.id.rbtnWeight);
+        rbtnWeight.setOnClickListener(this);
+        seggroupPortionType = (SegmentedGroup) findViewById(R.id.seggroupPortionType);
 
         //Spinner
-        Spinner_Unit = (Spinner) findViewById(R.id.Spinner_Unit);
-        ArrayAdapter<CharSequence> Spinner_Unit_Adapter = ArrayAdapter.createFromResource(this, R.array.weight_units_array, android.R.layout.simple_spinner_item);
-        Spinner_Unit_Adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        Spinner_Unit.setAdapter(Spinner_Unit_Adapter);
-        Spinner_Unit.setSelection(0); // default selection value
-        Spinner_Unit.setOnItemSelectedListener(this);
-
-        CheckBox_SaveMeal = (CheckBox) findViewById(R.id.CheckBox_SaveMeal);
-        CheckBox_SaveMeal.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (v.getId() == CheckBox_SaveMeal.getId())
-                    UpdateGUI();
-            }
-        });
+        ArrayAdapter<CharSequence> adapterUnit = ArrayAdapter.createFromResource(this, R.array.weight_units_array, android.R.layout.simple_spinner_item);
+        adapterUnit.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerUnit = (Spinner) findViewById(R.id.Spinner_Unit);
+        spinnerUnit.setAdapter(adapterUnit);
+        spinnerUnit.setSelection(0); // default selection value
+        spinnerUnit.setOnItemSelectedListener(this);
 
         //setup views
         UpdateGUI();
-
-        context = getApplicationContext();
-        DB_SQLite = new SQLiteConnector(context);
-        uid = myPrefs.getStringValue("session_uid");
-        currentUser = DB_SQLite.retrieveUser(uid);
     }
 
     @Override
@@ -98,43 +142,41 @@ public class activityCreateDailyFood extends AppCompatActivity implements View.O
                 break;
         }
     }
-    private boolean validate(EditText[] fields){
-        for(int i=0; i<fields.length; i++){
-            EditText currentField=fields[i];
-            if(currentField.getText().toString().length()<=0){
+
+    private boolean validate(EditText[] fields) {
+        for (int i = 0; i < fields.length; i++) {
+            EditText currentField = fields[i];
+            if (currentField.getText().toString().length() <= 0) {
                 return false;
             }
         }
         return true;
     }
 
-*/
-/*    //Inserts Food from User_Old input to Food table in the Database
+    //Inserts Food from User_Old input to Food table in the Database
     //Alerts the User_Old if a Food with the same meal_name already exists and makes no changes
     private void Enter() {
-        fieldsOk = validate(new EditText[]{EditText_MealName, EditText_Carbs, EditText_Protein,EditText_Fat});
-        if(fieldsOk) {
-        String meal_name = EditText_MealName.getText().toString();
-        float carbs = Float.parseFloat(EditText_Carbs.getText().toString());
-        float protein = Float.parseFloat(EditText_Protein.getText().toString());
-        float fat = Float.parseFloat(EditText_Fat.getText().toString());
+        fieldsOk = validate(new EditText[]{etxtName, etxtCarbs, etxtProtein, etxtFat});
+        if (fieldsOk) {
+            String meal_name = etxtName.getText().toString();
+            float carbs = Float.parseFloat(etxtCarbs.getText().toString());
+            float protein = Float.parseFloat(etxtProtein.getText().toString());
+            float fat = Float.parseFloat(etxtFat.getText().toString());
             if (CheckBox_SaveMeal.isChecked()) {
                 //Get PortionType
-                int radioButtonID = RadioGroup_PortionType.getCheckedRadioButtonId();
-                View radioButton = RadioGroup_PortionType.findViewById(radioButtonID);
-                int indexofPortionType = RadioGroup_PortionType.indexOfChild(radioButton);
+                int radioButtonID = seggroupPortionType.getCheckedRadioButtonId();
+                View radioButton = seggroupPortionType.findViewById(radioButtonID);
+                int indexofPortionType = seggroupPortionType.indexOfChild(radioButton);
                 InsertSavedMeal(meal_name, carbs, protein, fat, indexofPortionType);
             } else {
                 int indexofPortionType = 2; //None
                 InsertQuickMeal(meal_name, carbs, protein, fat, indexofPortionType);
             }
-        }
-        else
-        {
-            EditText_MealName.setError("Required");
-            EditText_Carbs.setError("Required");
-            EditText_Protein.setError("Required");
-            EditText_Fat.setError("Required");
+        } else {
+            etxtName.setError("Required");
+            etxtCarbs.setError("Required");
+            etxtProtein.setError("Required");
+            etxtFat.setError("Required");
         }
     }
 
@@ -147,21 +189,21 @@ public class activityCreateDailyFood extends AppCompatActivity implements View.O
             Log.i("Food Inserted", "ID: " + newFood_WithID.getMeal_id() + " Name:" + " " + newFood.getMeal_name());
 
             if (indexofPortionType == 0) { //Food is measured by servings
-                float Serving_Number = Float.parseFloat(EditText_ServingNumber.getText().toString());
+                float Serving_Number = Float.parseFloat(etxtServingNum.getText().toString());
                 if (DB_SQLite.insertServing(newFood_WithID, Serving_Number)) {
                     Log.i("Serving Inserted", "ID: " + newFood_WithID.getMeal_id() + " Name:" + " " + newFood.getMeal_name() + " Serving #: " + Serving_Number);
                 } else {
                     Toast.makeText(this, "Failed to insert serving", Toast.LENGTH_SHORT).show();
                 }
             } else if (indexofPortionType == 1) { //Food is measured by weight
-                int Weight_Quantity = Integer.parseInt(EditText_Quantity.getText().toString());
-                if (DB_SQLite.insertWeight(newFood_WithID, Weight_Quantity, Weight_Unit_Selected)) {
+                int Weight_Quantity = Integer.parseInt(etxtAmount.getText().toString());
+                if (DB_SQLite.insertWeight(newFood_WithID, Weight_Quantity, weightUnitSelected)) {
                     Toast.makeText(this, "Weight added", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(this, "Failed to insert Weight", Toast.LENGTH_SHORT).show();
                 }
             }
-            if(DB_SQLite.insertDailyMeal(newFood_WithID.getMeal_id(),1.0f)) { //Insert new daily meal with multiplier = 1
+            if (DB_SQLite.insertDailyMeal(newFood_WithID.getMeal_id(), 1.0f)) { //Insert new daily meal with multiplier = 1
                 //TODO perform error checking
             }
             Toast.makeText(this, "Food added", Toast.LENGTH_SHORT).show();
@@ -189,104 +231,71 @@ public class activityCreateDailyFood extends AppCompatActivity implements View.O
                 });
         builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                // User_Old cancelled the dialog
+                // Usercancelled the dialog
             }
         });
         AlertDialog dialog = builder.create();
         dialog.show();
-    }*//*
+    }
 
-
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+    @Override public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         switch (position) {
             case (0):
-                Weight_Unit_Selected = 0;
+                weightUnitSelected = 0;
                 break;
             case (1):
-                Weight_Unit_Selected = 1;
+                weightUnitSelected = 1;
                 break;
             case (2):
-                Weight_Unit_Selected = 2;
+                weightUnitSelected = 2;
                 break;
         }
     }
 
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
+    @Override public void onNothingSelected(AdapterView<?> parent) {}
 
-    }
-
-    //TODO CAPTURE VALUES IN SHARED PREFERENCES
-    @Override
-    protected void onPause() {
+    @Override protected void onPause() {
 
         super.onPause();
     }
 
-    //TODO RESTORE VALUES FROM SHARED PREFERENCES
-    @Override
-    protected void onResume() {
+    @Override protected void onResume() {
         super.onResume();
         UpdateGUI();
     }
 
-    private void HideEverything() {
-        Label_PortionType.setVisibility(View.INVISIBLE);
-        RadioButton_Serving.setVisibility(View.INVISIBLE);
-        RadioButton_Weight.setVisibility(View.INVISIBLE);
-        Label_ServingNumber.setVisibility(View.INVISIBLE);
-        EditText_ServingNumber.setVisibility(View.INVISIBLE);
-        Label_Unit.setVisibility(View.INVISIBLE);
-        Spinner_Unit.setVisibility(View.INVISIBLE);
-        Label_Quantity.setVisibility(View.INVISIBLE);
-        EditText_Quantity.setVisibility(View.INVISIBLE);
-    }
-
-    private void ShowSaved() {
-        Label_PortionType.setVisibility(View.VISIBLE);
-        RadioButton_Serving.setVisibility(View.VISIBLE);
-        RadioButton_Weight.setVisibility(View.VISIBLE);
+    private void UpdateGUI() {
+        if (rbtnServing.isChecked()) {
+            HideWeight();
+            ShowServing();
+        } else if (rbtnWeight.isChecked()) {
+            HideServing();
+            ShowWeight();
+        }
     }
 
     private void ShowServing() {
-        Label_ServingNumber.setVisibility(View.VISIBLE);
-        EditText_ServingNumber.setVisibility(View.VISIBLE);
+        lblServingNum.setVisibility(View.VISIBLE);
+        etxtServingNum.setVisibility(View.VISIBLE);
     }
 
     private void HideServing() {
-        Label_ServingNumber.setVisibility(View.INVISIBLE);
-        EditText_ServingNumber.setVisibility(View.INVISIBLE);
+        lblServingNum.setVisibility(View.GONE);
+        etxtServingNum.setVisibility(View.GONE);
     }
 
     private void ShowWeight() {
-        Label_Unit.setVisibility(View.VISIBLE);
-        Spinner_Unit.setVisibility(View.VISIBLE);
-        Label_Quantity.setVisibility(View.VISIBLE);
-        EditText_Quantity.setVisibility(View.VISIBLE);
-        EditText_Quantity.setEnabled(true);
+        spinnerUnit.setVisibility(View.VISIBLE);
+        lblAmount.setVisibility(View.VISIBLE);
+        etxtAmount.setVisibility(View.VISIBLE);
     }
 
     private void HideWeight() {
-        Label_Unit.setVisibility(View.INVISIBLE);
-        Spinner_Unit.setVisibility(View.INVISIBLE);
-        Label_Quantity.setVisibility(View.INVISIBLE);
-        EditText_Quantity.setVisibility(View.INVISIBLE);
+        spinnerUnit.setVisibility(View.GONE);
+        lblAmount.setVisibility(View.GONE);
+        etxtAmount.setVisibility(View.GONE);
     }
 
-    private void UpdateGUI() {
-        if (CheckBox_SaveMeal.isChecked()) {
-            ShowSaved();
-            if (RadioButton_Serving.isChecked()) {
-                HideWeight();
-                ShowServing();
-            } else if (RadioButton_Weight.isChecked()) {
-                HideServing();
-                ShowWeight();
-            }
-        } else {
-            HideEverything();
-        }
-    }
+
 }
 */

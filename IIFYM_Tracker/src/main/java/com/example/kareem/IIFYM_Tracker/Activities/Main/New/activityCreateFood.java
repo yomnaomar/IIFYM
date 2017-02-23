@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -36,6 +35,7 @@ public class activityCreateFood extends AppCompatActivity implements View.OnClic
     private Button          buttonEnter, buttonCancel;
 
     // Variables
+    private boolean isDaily;
     private Context context;
     private int     weightUnitSelected = 0;
     boolean         fieldsOk;
@@ -44,11 +44,19 @@ public class activityCreateFood extends AppCompatActivity implements View.OnClic
     private SharedPreferenceHelper  myPrefs;
     private SQLiteConnector         DB_SQLite;
 
+
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_food);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+
+        // Intent
+        Intent intent = getIntent();
+        isDaily = intent.getBooleanExtra("isDaily",false);
+
+/*        if (isDaily)
+            toolbar.setTitle("Create new Food");
+        else
+            toolbar.setTitle("Add Food to today's log");*/
 
         // GUI
         initializeGUI();
@@ -109,8 +117,7 @@ public class activityCreateFood extends AppCompatActivity implements View.OnClic
         return valid;
     }
 
-    //Inserts Food from User_Old input to Food table in the Database
-    //Alerts the User_Old if a Food with the same meal_name already exists and makes no changes
+    //Inserts Food from User input to Food table in the Database
     private void Enter() {
         fieldsOk = validateFields();
         if(fieldsOk) {
@@ -145,6 +152,10 @@ public class activityCreateFood extends AppCompatActivity implements View.OnClic
                 Weight weight = new Weight(Weight_Quantity, weightUnitSelected);
                 DB_SQLite.createWeight(food, weight);
             }
+            // If User entered this activity through Add Daily, add this newly created food to daily items
+            if (isDaily){
+                DB_SQLite.createDailyItem(food.getId(), 1.0f);
+            }
             finish();
         }
         else {
@@ -174,49 +185,6 @@ public class activityCreateFood extends AppCompatActivity implements View.OnClic
         dialog.show();
     }
 
-    @Override protected void onPause() {
-        myPrefs.addPreference("temp_name_createfood",etxtName.getText().toString());
-        myPrefs.addPreference("temp_brand_createfood",etxtName.getText().toString());
-
-        myPrefs.addPreference("temp_calories_createfood", Float.parseFloat(etxtCalories.getText().toString()));
-        myPrefs.addPreference("temp_carbs_createfood",Float.parseFloat(etxtCarbs.getText().toString()));
-        myPrefs.addPreference("temp_protein_createfood",Float.parseFloat(etxtProtein.getText().toString()));
-        myPrefs.addPreference("temp_fat_createfood",Float.parseFloat(etxtFat.getText().toString()));
-
-        if(rbtnServing.isChecked()) {
-            myPrefs.addPreference("temp_portion_createfood", false); // Serving
-            myPrefs.addPreference("temp_serving_createfood", Float.parseFloat(etxtServingNum.getText().toString()));
-        }
-        else {
-            myPrefs.addPreference("temp_portion_createfood", true); // Weight
-            myPrefs.addPreference("temp_amount_createfood", Float.parseFloat(etxtAmount.getText().toString()));
-            myPrefs.addPreference("temp_unit_createfood", spinnerUnit.getSelectedItemPosition());
-        }
-        super.onPause();
-    }
-
-    @Override protected void onResume() {
-        super.onResume();
-        etxtName.setText(myPrefs.getStringValue("temp_name_createfood"));
-        etxtBrand.setText(myPrefs.getStringValue("temp_brand_createfood"));
-
-        etxtCalories.setText(myPrefs.getFloatValue("temp_calories_createfood") + "");
-        etxtCarbs.setText(myPrefs.getFloatValue("temp_carbs_createfood") + "");
-        etxtProtein.setText(myPrefs.getFloatValue("temp_protein_createfood") + "");
-        etxtFat.setText(myPrefs.getFloatValue("temp_fat_createfood") + "");
-
-        if(myPrefs.getBooleanValue("temp_portion_createfood")) { // Weight
-            rbtnWeight.setChecked(true);
-            etxtAmount.setText(myPrefs.getFloatValue("temp_amount_createfood") + "");
-            spinnerUnit.setSelection(myPrefs.getIntValue("temp_unit_createfood"));
-        }
-        else { // Serving
-            rbtnServing.setChecked(true);
-            etxtServingNum.setText(myPrefs.getFloatValue("temp_serving_createfood") + "");
-        }
-        UpdateGUI();
-    }
-
     @Override public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
         switch (position) {
             case (0):
@@ -237,9 +205,6 @@ public class activityCreateFood extends AppCompatActivity implements View.OnClic
         switch (view.getId()) {
             case R.id.btnEnter:
                 Enter();
-                break;
-            case R.id.btnCancel:
-                Cancel();
                 break;
             case R.id.rbtnServing:
                 UpdateGUI();
@@ -268,8 +233,6 @@ public class activityCreateFood extends AppCompatActivity implements View.OnClic
         // Buttons
         buttonEnter = (Button) findViewById(R.id.btnEnter);
         buttonEnter.setOnClickListener(this);
-        buttonCancel = (Button) findViewById(R.id.btnCancel);
-        buttonCancel.setOnClickListener(this);
 
         // SegmentedGroup & RadioButtons
         rbtnServing = (RadioButton) findViewById(R.id.rbtnServing);
@@ -279,7 +242,7 @@ public class activityCreateFood extends AppCompatActivity implements View.OnClic
         seggroupPortionType = (SegmentedGroup) findViewById(R.id.seggroupPortionType);
 
         // Spinner
-        spinnerUnit = (Spinner) findViewById(R.id.Spinner_Unit);
+        spinnerUnit = (Spinner) findViewById(R.id.spinnerUnit);
         ArrayAdapter<CharSequence> Spinner_Unit_Adapter = ArrayAdapter.createFromResource(this, R.array.weight_units_array, android.R.layout.simple_spinner_item);
         Spinner_Unit_Adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerUnit.setAdapter(Spinner_Unit_Adapter);

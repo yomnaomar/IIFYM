@@ -195,7 +195,7 @@ public class SQLiteConnector {
         newFood.put("carbs", f.getCarbs());
         newFood.put("protein", f.getProtein());
         newFood.put("fat", f.getFat());
-        newFood.put("proteinType", f.getPortionType());
+        newFood.put("portionType", f.getPortionType());
         newFood.put("isMeal", f.isMeal());
 
         Log.d("createFood", "Food with name " + f.getName() + " created");
@@ -480,7 +480,7 @@ public class SQLiteConnector {
     }
 
     // Creates DailyItem (will not check for duplicates)
-    public boolean createDailyItem(int fid, float multiplier) {
+    public boolean createDailyItem(long fid, float multiplier) {
         Cursor C = this.retrieveAllDailyItemsCursor();
         int position = C.getCount(); //insert to next position
 

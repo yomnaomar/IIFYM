@@ -20,24 +20,26 @@
 
         <LinearLayout
             android:orientation="horizontal"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content" >
 
             <TextView
-                android:layout_width="70dp"
+                android:layout_width="54dp"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="Name:"
                 android:id="@+id/lblName"
-                android:textColor="#000000" />
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="14sp" />
 
             <EditText
-                android:layout_width="215dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/etxtName"
                 android:selectAllOnFocus="true"
-                android:textColor="#525252"
-                android:hint="Food name" />
+                android:textColor="@color/colorPrimary"
+                android:hint="Food name"
+                android:textSize="14sp" />
 
         </LinearLayout>
 
@@ -47,21 +49,51 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:layout_width="70dp"
+                android:layout_width="54dp"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="Brand:"
                 android:id="@+id/lblBrand"
-                android:textColor="#000000" />
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="14sp" />
 
             <EditText
-                android:layout_width="215dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/etxtBrand"
                 android:selectAllOnFocus="true"
-                android:textColor="#525252"
+                android:textColor="@color/colorPrimary"
                 android:hint="Brand name"
-                android:layout_weight="1" />
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="Calories:"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/lblCalories"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="14sp" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:inputType="number"
+                android:ems="4"
+                android:id="@+id/etxtCalories"
+
+                android:textColor="?attr/colorPrimary"
+                android:textAlignment="center"
+                android:textSize="14sp"
+                android:maxLength="4" />
 
         </LinearLayout>
 
@@ -71,24 +103,72 @@
             android:layout_height="wrap_content" >
 
             <TextView
-                android:layout_width="70dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="Carbs:"
-                android:id="@+id/Label_Carbs"
-                android:textColor="#000000" />
+                android:id="@+id/lblCarbs"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="14sp" />
 
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:inputType="numberDecimal"
-                android:ems="5"
-                android:id="@+id/EditText_Carbs"
-                android:layout_alignParentTop="true"
-                android:layout_toEndOf="@+id/textView2"
-                android:textColor="#797979"
+                android:ems="3"
+                android:id="@+id/etxtCarbs"
+                android:textColor="@color/colorPrimary"
                 android:textAlignment="center"
-                android:hint="0" />
+                android:textSize="14sp"
+                android:maxLength="5" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Protein:"
+                android:id="@+id/lblProtein"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="14sp"
+                android:layout_weight="1" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="3"
+                android:id="@+id/etxtProtein"
+                android:layout_alignParentTop="true"
+                android:layout_toEndOf="@+id/textView"
+                android:textColor="@color/colorPrimary"
+                android:textAlignment="center"
+                android:inputType="numberDecimal"
+                android:textSize="14sp"
+                android:layout_weight="1"
+                android:maxLength="5" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Fat:"
+                android:id="@+id/lblFat"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="14sp"
+                android:layout_weight="1" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="3"
+                android:id="@+id/etxtFat"
+                android:layout_alignParentTop="true"
+                android:layout_toEndOf="@+id/textView3"
+                android:textColor="@color/colorPrimary"
+                android:textAlignment="center"
+                android:inputType="numberDecimal"
+                android:textSize="14sp"
+                android:layout_weight="1"
+                android:maxLength="5" />
 
         </LinearLayout>
 
@@ -97,52 +177,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
-            <TextView
-                android:layout_width="70dp"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Protein:"
-                android:id="@+id/Label_Protein"
-                android:textColor="#000000" />
-
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="5"
-                android:id="@+id/EditText_Protein"
-                android:layout_alignParentTop="true"
-                android:layout_toEndOf="@+id/textView"
-                android:textColor="#797979"
-                android:textAlignment="center"
-                android:hint="0"
-                android:inputType="numberDecimal" />
-
         </LinearLayout>
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" >
-
-            <TextView
-                android:layout_width="70dp"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Fat:"
-                android:id="@+id/Label_Fat"
-                android:textColor="#000000" />
-
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="5"
-                android:id="@+id/EditText_Fat"
-                android:layout_alignParentTop="true"
-                android:layout_toEndOf="@+id/textView3"
-                android:textColor="#797979"
-                android:textAlignment="center"
-                android:hint="0"
-                android:inputType="numberDecimal" />
 
         </LinearLayout>
 
@@ -193,20 +233,22 @@
                 android:text="Serving #:"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/Label_ServingNumber"
+                android:id="@+id/lblServingNum"
                 android:layout_weight="1"
-                android:textSize="18sp"
-                android:textColor="@color/black" />
+                android:textSize="14sp"
+                android:textColor="?attr/colorPrimaryDark" />
 
             <EditText
                 android:layout_width="98dp"
                 android:layout_height="wrap_content"
                 android:ems="5"
-                android:id="@+id/EditText_ServingNumber"
+                android:id="@+id/etxtServingNum"
                 android:textAlignment="center"
                 android:hint="1"
                 android:text="1"
-                android:inputType="numberDecimal" />
+                android:inputType="numberDecimal"
+                android:textColor="?attr/colorPrimary"
+                android:textSize="14sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -219,30 +261,33 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Quantity:"
-                android:id="@+id/Label_Quantity"
-                android:textColor="@color/text_color_selector"
-                android:layout_weight="0.10" />
+                android:text="Amount:"
+                android:id="@+id/lblAmount"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_weight="0.06"
+                android:textSize="14sp" />
 
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:inputType="number"
                 android:ems="5"
-                android:id="@+id/EditText_Quantity"
+                android:id="@+id/etxtAmount"
                 android:layout_alignParentTop="true"
                 android:layout_toEndOf="@+id/textView2"
-                android:textColor="#000000"
+                android:textColor="@color/colorPrimary"
                 android:textAlignment="center"
                 android:hint="100"
                 android:text="100"
-                android:enabled="true" />
+                android:enabled="true"
+                android:textSize="14sp" />
 
             <Spinner
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/Spinner_Unit"
-                android:layout_weight="0.10" />
+                android:layout_height="match_parent"
+                android:id="@+id/spinnerUnit"
+                android:layout_weight="0.10"
+                android:gravity="center_vertical|center" />
 
         </LinearLayout>
 
@@ -255,15 +300,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="Enter"
-                android:id="@+id/Button_Enter"
-                android:layout_weight="1"
-                android:background="@drawable/btn_iifym_style" />
-
-            <Button
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="Cancel"
-                android:id="@+id/Button_Cancel"
+                android:id="@+id/btnEnter"
                 android:layout_weight="1"
                 android:background="@drawable/btn_iifym_style" />
 

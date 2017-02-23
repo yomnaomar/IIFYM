@@ -63,7 +63,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 "(id           INTEGER PRIMARY KEY autoincrement, " +
                 "name          TEXT, " +
                 "brand         TEXT, " +
-                "calories      REAL, " +
+                "calories      INTEGER, " +
                 "carbs         REAL, " +
                 "protein       REAL, " +
                 "fat           REAL, " +
