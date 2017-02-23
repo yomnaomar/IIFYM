@@ -19,8 +19,6 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Activities.Main.New.activityCreateDailyFood" />
-        <activity
             android:name=".Activities.Main.Old.activityViewSavedItems"
             android:screenOrientation="portrait" />
         <activity

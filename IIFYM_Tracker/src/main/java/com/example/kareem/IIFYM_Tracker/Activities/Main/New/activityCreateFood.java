@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -163,6 +164,7 @@ public class activityCreateFood extends AppCompatActivity implements View.OnClic
         }
     }
 
+    // TODO Implement on back button pressed
     //Returns to activityMain without making any changes
     private void Cancel() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -183,6 +185,11 @@ public class activityCreateFood extends AppCompatActivity implements View.OnClic
         });
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+    @Override protected void onResume() {
+        super.onResume();
+        UpdateGUI();
     }
 
     @Override public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
@@ -229,6 +236,10 @@ public class activityCreateFood extends AppCompatActivity implements View.OnClic
         etxtFat = (EditText) findViewById(R.id.etxtFat);
         etxtServingNum = (EditText) findViewById(R.id.etxtServingNum);
         etxtAmount = (EditText) findViewById(R.id.etxtAmount);
+
+        etxtName.requestFocus();
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.showSoftInput(etxtName, InputMethodManager.SHOW_IMPLICIT);
 
         // Buttons
         buttonEnter = (Button) findViewById(R.id.btnEnter);

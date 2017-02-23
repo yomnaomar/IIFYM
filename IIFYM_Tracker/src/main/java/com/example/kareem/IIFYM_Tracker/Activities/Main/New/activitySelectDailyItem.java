@@ -40,6 +40,11 @@ public class activitySelectDailyItem extends AppCompatActivity implements Adapte
         context = getApplicationContext();
         DB_SQLite = new SQLiteConnector(context);
 
+        // GUI
+        intializeGUI();
+    }
+
+    private void intializeGUI() {
         // Search Functionality
         etxtSearch = (EditText) findViewById(R.id.etxtSearch);
         etxtSearch.addTextChangedListener(new TextWatcher() {

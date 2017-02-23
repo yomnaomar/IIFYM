@@ -56,7 +56,7 @@
             fab:fab_title="Add New Food"
             fab:fab_colorPressed="@color/fabWhitePressed"
             fab:fab_icon="@drawable/icon_food"
-            fab:fab_size="mini"/>
+            fab:fab_size="mini" />
 
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/fabAddNewMeal"
@@ -68,8 +68,7 @@
             fab:fab_icon="@drawable/icon_meal"
             fab:fab_size="mini"
             style="imageButtonStyle"
-            android:scaleType="fitCenter"
-            android:background="@drawable/icon_meal" />
+            android:scaleType="fitCenter" />
 
     </com.getbase.floatingactionbutton.FloatingActionsMenu>
 

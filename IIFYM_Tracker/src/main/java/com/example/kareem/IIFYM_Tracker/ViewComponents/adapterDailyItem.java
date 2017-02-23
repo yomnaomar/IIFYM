@@ -56,7 +56,7 @@ public class adapterDailyItem extends ArrayAdapter<DailyItem> {
         // Populate the data into the template view using the data object
         name.setText(dailyItem.getFood().getName());
         brand.setText(dailyItem.getFood().getBrand());
-        calories.setText(String.valueOf(Math.round(dailyItem.getFood().getCalories())));
+        calories.setText(String.valueOf(Math.round(dailyItem.getFood().getCalories())) + " kcal ");
         carbs.setText(String.valueOf(Math.round(dailyItem.getFood().getCarbs()) + " c "));
         protein.setText(String.valueOf(Math.round(dailyItem.getFood().getProtein()) + " p "));
         fat.setText(String.valueOf(Math.round(dailyItem.getFood().getFat()) + " f "));
