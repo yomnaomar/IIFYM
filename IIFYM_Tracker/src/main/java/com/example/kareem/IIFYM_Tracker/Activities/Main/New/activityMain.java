@@ -76,8 +76,8 @@ public class activityMain extends AppCompatActivity implements AdapterView.OnIte
 
         // GUI
         initializeGUI();
-        
-        // Initialize User
+
+        // User
         initializeUser();
     }
 
@@ -135,8 +135,8 @@ public class activityMain extends AppCompatActivity implements AdapterView.OnIte
         Toast toast = Toast.makeText(context, "Hello " + currentUser.getName() + "!", Toast.LENGTH_SHORT);
         toast.show();
 
-        isPercent = currentUser.isPercent();
-        Log.d("initializeUser","isPercent" + isPercent);
+        isPercent = currentUser.getIsPercent();
+        Log.d("initializeUser","isPercent " + isPercent);
 
         caloriesGoal = currentUser.getDailyCalories();
         carbsGoal = currentUser.getDailyCarbs();
@@ -160,7 +160,7 @@ public class activityMain extends AppCompatActivity implements AdapterView.OnIte
             int protein = Math.round(tempItem.getFood().getProtein());
             int fat = Math.round(tempItem.getFood().getFat());
 
-            caloriesCurrent +=calories;
+            caloriesCurrent += calories;
             carbsCurrent    += carbs;
             proteinCurrent  += protein;
             fatCurrent      += fat;
@@ -189,7 +189,7 @@ public class activityMain extends AppCompatActivity implements AdapterView.OnIte
         lblFatCurrent.setText(fatCurrent + "");
 
         // Updating ProgressBars
-        if(caloriesCurrent <= caloriesGoal) {
+        if(caloriesCurrent < caloriesGoal) {
             progressBarCalories.setProgress(100 * caloriesCurrent / caloriesGoal);
             lblCaloriesCurrent.setTextColor(Color.parseColor("#f57c00")); // ORANGE
         }
@@ -198,7 +198,7 @@ public class activityMain extends AppCompatActivity implements AdapterView.OnIte
             lblCaloriesCurrent.setTextColor(Color.parseColor("#D50000")); // RED
         }
 
-        if(carbsCurrent <= carbsGoal) {
+        if(carbsCurrent < carbsGoal) {
             progressBarCarbs.setProgress(100 * carbsCurrent / carbsGoal);
             lblCarbsCurrent.setTextColor(Color.parseColor("#f0c419")); // YELLOW
         }
@@ -206,7 +206,7 @@ public class activityMain extends AppCompatActivity implements AdapterView.OnIte
             progressBarCarbs.setProgress(100);
             lblCarbsCurrent.setTextColor(Color.parseColor("#D50000")); // RED
         }
-        if(proteinCurrent <= proteinGoal) {
+        if(proteinCurrent < proteinGoal) {
             progressBarProtein.setProgress(100 * proteinCurrent / proteinGoal);
             lblProteinCurrent.setTextColor(Color.parseColor("#f44336")); // Maroon
         }
@@ -214,7 +214,7 @@ public class activityMain extends AppCompatActivity implements AdapterView.OnIte
             progressBarProtein.setProgress(100);
             lblProteinCurrent.setTextColor(Color.parseColor("#D50000")); // RED
         }
-        if(fatCurrent <= fatGoal) {
+        if(fatCurrent < fatGoal) {
             progressBarFat.setProgress(100 * fatCurrent / fatGoal);
             lblFatCurrent.setTextColor(Color.parseColor("#66bb6a")); // Green
         }

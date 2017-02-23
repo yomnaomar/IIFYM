@@ -123,7 +123,8 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
                                 User userPost = dataSnapshot.getValue(User.class);
-                                isRegistered = userPost.isRegistered();
+                                isRegistered = userPost.getIsRegistered();
+                                Log.d("onDataChange", "User " + userPost);
 
                                 // User is Registered
                                 if (isRegistered) {

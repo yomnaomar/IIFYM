@@ -68,7 +68,7 @@ public class SQLiteConnector {
             ContentValues newUser = new ContentValues();
             newUser.put("uid",              u.getUid());
             newUser.put("email",            u.getEmail());
-            newUser.put("isRegistered",     u.isRegistered());
+            newUser.put("isRegistered",     u.getIsRegistered());
             newUser.put("name",             u.getName());
             newUser.put("dob",              u.getDob().toString());
             newUser.put("gender",           u.getGender());
@@ -79,7 +79,7 @@ public class SQLiteConnector {
             newUser.put("workoutFrequency", u.getWorkoutFreq());
             newUser.put("goal",             u.getGoal());
             newUser.put("dailyCalories",    u.getDailyCalories());
-            newUser.put("isPercent",        u.isPercent());
+            newUser.put("isPercent",        u.fromIntPercent());
             newUser.put("dailyCarbs",       u.getDailyCarbs());
             newUser.put("dailyProtein",     u.getDailyProtein());
             newUser.put("dailyFat",         u.getDailyFat());
@@ -131,7 +131,7 @@ public class SQLiteConnector {
             ContentValues updateUser = new ContentValues();
             updateUser.put("uid", u.getUid());
             updateUser.put("email", u.getEmail());
-            updateUser.put("isRegistered", u.isRegistered());
+            updateUser.put("isRegistered", u.getIsRegistered());
             updateUser.put("name", u.getName());
             updateUser.put("dob", u.getDob().toString());
             updateUser.put("gender", u.getGender());
@@ -142,7 +142,7 @@ public class SQLiteConnector {
             updateUser.put("workoutFrequency", u.getWorkoutFreq());
             updateUser.put("goal", u.getGoal());
             updateUser.put("dailyCalories", u.getDailyCalories());
-            updateUser.put("isPercent", u.isPercent());
+            updateUser.put("isPercent", u.getIsPercent());
             updateUser.put("dailyCarbs", u.getDailyCarbs());
             updateUser.put("dailyProtein", u.getDailyProtein());
             updateUser.put("dailyFat", u.getDailyFat());

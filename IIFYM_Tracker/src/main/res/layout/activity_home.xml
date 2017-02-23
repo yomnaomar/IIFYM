@@ -237,6 +237,7 @@
                     app:rcProgressColor="@color/CarbProgressColor"
                     app:rcMax="100"
                     app:rcProgress="0"
+                    app:rcRadius="10dp"
                     android:id="@+id/progressBarCarbs" />
 
             </LinearLayout>
@@ -314,7 +315,7 @@
                 <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
                     android:layout_height="17dp"
                     android:layout_width="match_parent"
-                    app:rcBackgroundPadding="3dp"
+                    app:rcBackgroundPadding="1dp"
                     app:rcBackgroundColor="@color/Progress_Bar_Background"
                     app:rcProgressColor="@color/ProteinProgessColor"
                     app:rcMax="100"
@@ -395,7 +396,7 @@
                 <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
                     android:layout_height="17dp"
                     android:layout_width="match_parent"
-                    app:rcBackgroundPadding="3dp"
+                    app:rcBackgroundPadding="1dp"
                     app:rcBackgroundColor="@color/Progress_Bar_Background"
                     app:rcProgressColor="@color/FatProgessColor"
                     app:rcMax="100"

@@ -95,7 +95,7 @@ public class User {
         this.uid = uid;
     }
 
-    public boolean isRegistered() {
+    public boolean getIsRegistered() {
         return isRegistered;
     }
 
@@ -193,9 +193,11 @@ public class User {
         this.dailyCalories = dailyCalories;
     }
 
-    public boolean isPercent() {
+    public boolean getIsPercent() {
         return isPercent;
     }
+
+    public int fromIntPercent() {if (isPercent) return 1; else return 0;}
 
     public void setPercent(boolean isPercent) {
         isPercent = isPercent;
