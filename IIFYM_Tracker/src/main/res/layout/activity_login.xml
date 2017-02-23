@@ -3,7 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/activity_vertical_margin"
+    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+    android:layout_marginRight="@dimen/activity_horizontal_margin"
+    android:layout_marginTop="@dimen/activity_vertical_margin">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -11,49 +15,9 @@
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/LoginScreen_Backgroud"
+            android:layout_height="match_parent"
             android:descendantFocusability="beforeDescendants"
             android:focusableInTouchMode="true" >
-
-            <TextView
-                android:text="@string/appName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/lblAppName"
-                android:textAppearance="@android:style/TextAppearance.Material.Display1"
-                android:layout_marginTop="16dp"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginStart="16dp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                android:layout_marginEnd="16dp"
-                app:layout_constraintRight_toRightOf="parent"
-                android:textColor="@color/colorPrimary" />
-
-            <TextView
-                android:text="@string/appSubtitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/lblAppSubtitle"
-                android:textAppearance="@android:style/TextAppearance.Material.Medium"
-                android:layout_marginEnd="16dp"
-                app:layout_constraintRight_toRightOf="parent"
-                android:layout_marginStart="16dp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/lblAppName"
-                android:textColor="@color/colorPrimary" />
-
-            <ImageView
-                app:srcCompat="@drawable/image_iifym"
-                android:id="@+id/iifym_logo_image"
-                android:layout_width="125dp"
-                android:layout_marginEnd="16dp"
-                app:layout_constraintRight_toRightOf="parent"
-                android:layout_marginStart="16dp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                android:layout_marginTop="8dp"
-                app:layout_constraintTop_toBottomOf="@+id/lblAppSubtitle"
-                android:layout_height="140dp" />
 
             <EditText
                 android:layout_width="wrap_content"
@@ -62,8 +26,6 @@
                 android:ems="13"
                 android:id="@+id/email_edittext"
                 android:hint="Email"
-                android:layout_marginTop="16dp"
-                app:layout_constraintTop_toBottomOf="@+id/iifym_logo_image"
                 android:layout_marginStart="16dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 android:layout_marginEnd="16dp"
@@ -71,7 +33,8 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionMode.Subtitle"
                 android:fontFamily="sans-serif"
                 android:textColorHint="?android:attr/textColorHint"
-                android:textColor="?attr/colorPrimary" />
+                android:textColor="?attr/colorPrimary"
+                tools:layout_editor_absoluteY="0dp" />
 
             <EditText
                 android:layout_width="wrap_content"
@@ -102,13 +65,14 @@
                 android:background="@drawable/btn_iifym_style"
                 android:layout_marginTop="8dp"
                 app:layout_constraintTop_toBottomOf="@+id/password_textview"
-                app:layout_constraintBottom_toTopOf="@+id/signup_textview"
-                android:layout_marginBottom="8dp"
-                android:layout_marginStart="96dp"
-                app:layout_constraintLeft_toLeftOf="parent"
                 android:layout_marginEnd="16dp"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintHorizontal_bias="0.63" />
+                android:layout_marginStart="16dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="16dp"
+                app:layout_constraintHorizontal_bias="0.75"
+                app:layout_constraintVertical_bias="0.060000002" />
 
             <Button
                 android:text="Login"
@@ -124,7 +88,8 @@
                 android:layout_marginEnd="96dp"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintHorizontal_bias="0.43" />
+                app:layout_constraintHorizontal_bias="0.43"
+                app:layout_constraintVertical_bias="0.85" />
 
             <TextView
                 android:text="Sign Up Using"
