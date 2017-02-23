@@ -121,10 +121,8 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
 
                                 // User is Registered
                                 if (isRegistered) {
-                                    // If local User is not found, create new User
-                                    if (!DB_SQLite.isExistingUser(uid)) {
-                                        DB_SQLite.createUser(userPost);
-                                    }
+                                    // Create new User, does nothing if user already exists
+                                    DB_SQLite.createUser(userPost);
                                     // Store user session in Preferences
                                     myPrefs.addPreference("session_uid", uid);
 
@@ -271,7 +269,7 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
     @Override protected void onPause() {
         super.onPause();
         unregisterReceiver(broadcast_reciever);
-        myPrefs.addPreference("temp_email",etxtEmail.getText().toString());
+        myPrefs.addPreference("temp_email_login",etxtEmail.getText().toString());
     }
 
     @Override protected void onResume() {
@@ -287,7 +285,7 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
             }
         };
         registerReceiver(broadcast_reciever, new IntentFilter("finish_activity"));
-        etxtEmail.setText(myPrefs.getStringValue("temp_email"));
+        etxtEmail.setText(myPrefs.getStringValue("temp_email_login"));
     }
 
     @Override public void onClick(View v) {

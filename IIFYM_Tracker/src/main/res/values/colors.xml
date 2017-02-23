@@ -11,8 +11,8 @@
     <color name="black">#000000</color>
     <color name="black_light">#333</color>
     <color name="grey_light">#A1A1A1</color>
-    <color name="CaloriesProgessColor">#f0c419</color>
-    <color name="CarbProgressColor">#f57c00</color>
+    <color name="CaloriesProgessColor">#f57c00</color>
+    <color name="CarbProgressColor">#f0c419</color>
     <color name="ProteinProgessColor">#f44336</color>
     <color name="FatProgessColor">#66bb6a</color>
     <color name="Progress_Bar_Background">#e0e0e0</color>

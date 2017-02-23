@@ -13,6 +13,12 @@ public class Weight {
         this.unit = unit;
     }
 
+    public Weight(int amount, int unit) {
+        this.amount = amount;
+        weightUnit w = weightUnit.Grams;
+        this.unit = w.fromInteger(unit);
+    }
+
     public int getAmount() {
         return amount;
     }

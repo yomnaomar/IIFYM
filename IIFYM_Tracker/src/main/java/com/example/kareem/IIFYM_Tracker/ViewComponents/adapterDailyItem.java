@@ -32,17 +32,17 @@ public class adapterDailyItem extends ArrayAdapter<DailyItem> {
     public View getView(final int position, View convertView, ViewGroup parent) {
         DB_SQLite = new SQLiteConnector(getContext());
 
-        // Get the data listitem for this position
+        // Get the data list_item for this position
         dailyItem = getItem(position);
 
-        final int meal_id = dailyItem.getFood().getId();
+        final long meal_id = dailyItem.getFood().getId();
         float multiplier = dailyItem.getMultiplier();
         Log.i("dailymeal adapter", "position: " + position + " meal id: " + meal_id);
         Log.i("dailymeal adapter", "multiplier: " + multiplier + " meal id: " + meal_id);
 
         // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.listitem, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_item, parent, false);
         }
         // Lookup view for data population
         TextView name = (TextView) convertView.findViewById(R.id.lblName);

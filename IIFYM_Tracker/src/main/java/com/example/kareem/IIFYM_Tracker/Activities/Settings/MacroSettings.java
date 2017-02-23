@@ -1,4 +1,7 @@
 package com.example.kareem.IIFYM_Tracker.Activities.Settings;
+
+import android.support.v7.app.AppCompatActivity;
+
 //
 //import android.content.Context;
 //import android.content.SharedPreferences;
@@ -33,7 +36,7 @@ package com.example.kareem.IIFYM_Tracker.Activities.Settings;
 //import tourguide.tourguide.ToolTip;
 //import tourguide.tourguide.TourGuide;
 //
-public class MacroSettings {}
+public class MacroSettings extends AppCompatActivity{}
 //public class MacroSettings extends AppCompatActivity implements View.OnFocusChangeListener{
 //
 //    String user_name;

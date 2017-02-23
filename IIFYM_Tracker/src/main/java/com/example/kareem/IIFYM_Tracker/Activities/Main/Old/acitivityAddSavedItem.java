@@ -25,7 +25,7 @@ public class acitivityAddSavedItem extends AppCompatActivity{}
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_saved_meal);
+        setContentView(R.layout.activity_add_saved_item);
 
         Label_Meal_Name = (TextView)findViewById(R.id.Label_Meal_Name);
         Label_Carbs = (TextView)findViewById(R.id.Label_Carbs);

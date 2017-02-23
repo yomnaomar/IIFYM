@@ -1,5 +1,6 @@
 package com.example.kareem.IIFYM_Tracker.Activities.Main.New;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -16,7 +17,7 @@ import com.example.kareem.IIFYM_Tracker.ViewComponents.adapterSavedItem;
 
 import java.util.ArrayList;
 
-public class activityAddDailyItem extends AppCompatActivity implements AdapterView.OnItemClickListener {
+public class activitySelectDailyItem extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     // Search Bar
     private EditText etxtSearch;
@@ -28,13 +29,15 @@ public class activityAddDailyItem extends AppCompatActivity implements AdapterVi
 
     // Database
     private SQLiteConnector DB_SQLite;
+    private Context context;
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_daily_item);
+        setContentView(R.layout.activity_select_daily_item);
         
         // Database
-        DB_SQLite = new SQLiteConnector(getApplicationContext());
+        context = getApplicationContext();
+        DB_SQLite = new SQLiteConnector(context);
 
         // List View
         arrSavedItems = DB_SQLite.retrieveAllFoods();
@@ -58,13 +61,18 @@ public class activityAddDailyItem extends AppCompatActivity implements AdapterVi
 
     // TODO implement
     @Override public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        /*Food M = (Food) parent.getItemAtPosition(position);
-        int M_ID = M.getId();
+        Food food = (Food) parent.getItemAtPosition(position);
+        long fid = food.getId();
 
-        Intent intent = new Intent(getBaseContext(), ViewMealActivity.class);
-        intent.putExtra("Meal_ID", M_ID);
-        intent.putExtra("isDaily", false);
-        startActivity(intent);*/
+        /*if (food.isMeal()) {
+            Intent intent = new Intent(getBaseContext(), AddDailyFoodActivity.class);
+            intent.putExtra("fid", fid);
+            startActivity(intent);
+        } else {
+            Intent intent = new Intent(getBaseContext(), AddDailyMealActivity.class);
+            intent.putExtra("fid", fid);
+            startActivity(intent);
+        }*/
     }
 
     //Updates adapterSavedItem and arrSavedItems

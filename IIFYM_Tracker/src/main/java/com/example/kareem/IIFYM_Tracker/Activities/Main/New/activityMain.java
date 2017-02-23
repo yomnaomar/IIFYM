@@ -55,16 +55,16 @@ public class activityMain extends AppCompatActivity implements AdapterView.OnIte
     public int      caloriesGoal,           carbsGoal,          proteinGoal,        fatGoal;
 
     // Database
-    private SharedPreferenceHelper          myPrefs;
-    private SQLiteConnector                 DB_SQLite;
-    private FirebaseAuth                    firebaseAuth;
-    private User                            currentUser;
-    private String                          uid;
+    private SharedPreferenceHelper  myPrefs;
+    private SQLiteConnector         DB_SQLite;
+    private FirebaseAuth            firebaseAuth;
+    private User                    currentUser;
+    private String                  uid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.content_home);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         context = getApplicationContext();
@@ -191,7 +191,7 @@ public class activityMain extends AppCompatActivity implements AdapterView.OnIte
         // Updating ProgressBars
         if(caloriesCurrent <= caloriesGoal) {
             progressBarCalories.setProgress(100 * caloriesCurrent / caloriesGoal);
-            lblCaloriesCurrent.setTextColor(Color.parseColor("#f0c419"));
+            lblCaloriesCurrent.setTextColor(Color.parseColor("#f57c00")); // ORANGE
         }
         else {
             progressBarCalories.setProgress(100);
@@ -200,7 +200,7 @@ public class activityMain extends AppCompatActivity implements AdapterView.OnIte
 
         if(carbsCurrent <= carbsGoal) {
             progressBarCarbs.setProgress(100 * carbsCurrent / carbsGoal);
-            lblCarbsCurrent.setTextColor(Color.parseColor("#f57c00"));
+            lblCarbsCurrent.setTextColor(Color.parseColor("#f0c419")); // YELLOW
         }
         else {
             progressBarCarbs.setProgress(100);
@@ -208,7 +208,7 @@ public class activityMain extends AppCompatActivity implements AdapterView.OnIte
         }
         if(proteinCurrent <= proteinGoal) {
             progressBarProtein.setProgress(100 * proteinCurrent / proteinGoal);
-            lblProteinCurrent.setTextColor(Color.parseColor("#f44336"));
+            lblProteinCurrent.setTextColor(Color.parseColor("#f44336")); // Maroon
         }
         else {
             progressBarProtein.setProgress(100);
@@ -216,7 +216,7 @@ public class activityMain extends AppCompatActivity implements AdapterView.OnIte
         }
         if(fatCurrent <= fatGoal) {
             progressBarFat.setProgress(100 * fatCurrent / fatGoal);
-            lblFatCurrent.setTextColor(Color.parseColor("#66bb6a"));
+            lblFatCurrent.setTextColor(Color.parseColor("#66bb6a")); // Green
         }
         else {
             progressBarFat.setProgress(100);
@@ -244,7 +244,7 @@ public class activityMain extends AppCompatActivity implements AdapterView.OnIte
     private void goToAddDailyItem() {
         Context context = getApplicationContext();
         Intent intent = new Intent();
-        intent.setClass(context,activityAddDailyItem.class);
+        intent.setClass(context,activitySelectDailyItem.class);
         startActivity(intent);
     }
 
@@ -258,7 +258,7 @@ public class activityMain extends AppCompatActivity implements AdapterView.OnIte
         /*DailyItem dailyItem = (DailyItem) parent.getItemAtPosition(position);
         int dailyItem_id = dailyItem.getFood().getId();
 
-        Intent intent = new Intent(getBaseContext(), ViewMealActivity.class);
+        Intent intent = new Intent(getBaseContext(), activityViewFood.class);
         intent.putExtra("id", dailyItem_id);
         intent.putExtra("position", position);
         intent.putExtra("isDaily", true);
@@ -266,7 +266,7 @@ public class activityMain extends AppCompatActivity implements AdapterView.OnIte
     }
 
     @Override public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar listitem clicks here. The action bar will
+        // Handle action bar list_item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
@@ -274,7 +274,7 @@ public class activityMain extends AppCompatActivity implements AdapterView.OnIte
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_MealSettings) {
             Intent intent = new Intent();
-            intent.setClassName(this, "com.example.kareem.IIFYM_Tracker.Activities.Main.Old.ViewSavedMealsActivity");
+            intent.setClassName(this, "com.example.kareem.IIFYM_Tracker.Activities.Main.Old.activityViewSavedItems");
             startActivity(intent);
             return true;
         }

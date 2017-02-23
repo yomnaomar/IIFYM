@@ -1,11 +1,12 @@
-package com.example.kareem.IIFYM_Tracker.Activities.Main.Old;
+package com.example.kareem.IIFYM_Tracker.Activities.Main.New;
 
 import android.support.v7.app.AppCompatActivity;
 
-public class activityAddFood extends AppCompatActivity{}
-//public class activityAddFood extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
+public class activityAddDailyFood extends AppCompatActivity {}
+/*
+public class activityAddDailyFood extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
-   /* private TextView Label_PortionType, Label_ServingNumber, Label_Unit, Label_Quantity;
+    private TextView Label_PortionType, Label_ServingNumber, Label_Unit, Label_Quantity;
     private EditText EditText_MealName, EditText_Carbs, EditText_Protein, EditText_Fat, EditText_ServingNumber, EditText_Quantity;
     private RadioButton RadioButton_Serving, RadioButton_Weight;
     private RadioGroup RadioGroup_PortionType;
@@ -13,17 +14,19 @@ public class activityAddFood extends AppCompatActivity{}
     private CheckBox CheckBox_SaveMeal;
     private Button Button_Enter, Button_Cancel;
 
-    private SQLiteConnector My_DB;
+    private SQLiteConnector DB_SQLite;
 
     private int Weight_Unit_Selected = 0;
 
-    String user_name;
-    User currentUser;
+    private User currentUser;
+    private String uid;
     boolean fieldsOk;
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    private SharedPreferenceHelper myPrefs;
+    private Context context;
+
+    @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_food);
+        setContentView(R.layout.activity_add_daily_food);
 
         //Labels
         Label_PortionType = (TextView) findViewById(R.id.Label_PortionType);
@@ -72,20 +75,20 @@ public class activityAddFood extends AppCompatActivity{}
         //setup views
         UpdateGUI();
 
-        My_DB = new SQLiteConnector(getApplicationContext());
-
-        currentUser = My_DB.retrieveUser(user_name);
-
+        context = getApplicationContext();
+        DB_SQLite = new SQLiteConnector(context);
+        uid = myPrefs.getStringValue("session_uid");
+        currentUser = DB_SQLite.retrieveUser(uid);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.Button_Enter:
-                Enter();
+                //Enter();
                 break;
             case R.id.Button_Cancel:
-                Cancel();
+                //Cancel();
                 break;
             case R.id.RadioButton_Serving:
                 UpdateGUI();
@@ -105,7 +108,8 @@ public class activityAddFood extends AppCompatActivity{}
         return true;
     }
 
-    //Inserts Food from User_Old input to Food table in the Database
+*/
+/*    //Inserts Food from User_Old input to Food table in the Database
     //Alerts the User_Old if a Food with the same meal_name already exists and makes no changes
     private void Enter() {
         fieldsOk = validate(new EditText[]{EditText_MealName, EditText_Carbs, EditText_Protein,EditText_Fat});
@@ -134,49 +138,30 @@ public class activityAddFood extends AppCompatActivity{}
         }
     }
 
-    private void InsertQuickMeal(String meal_name, float carbs, float protein, float fat, int indexofPortionType) {
-        Food newFood = new Food(meal_name, carbs, protein, fat, indexofPortionType, currentUser.getUser_id());
-
-        if (My_DB.insertQuickMeal(newFood)) { //TODO USE ANOTHER FUNCTION AFTER RE-IMPLEMENTATION
-            Food newFood_WithID = My_DB.getMeal(meal_name);//meal needs to be retrieved because ID is initialized in the DB
-            Log.i("Food Inserted", "ID: " + newFood_WithID.getMeal_id() + " Name:" + " " + newFood.getMeal_name());
-
-            Toast.makeText(this, "Food added", Toast.LENGTH_SHORT).show();
-
-            if(My_DB.insertDailyMeal(newFood_WithID.getMeal_id(),1.0f)) { //Insert new daily meal with multiplier = 1
-                //TODO perform error checking
-            }
-            finish();
-        } else {
-            Toast.makeText(this, "Food with the same name already exists", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-
     private void InsertSavedMeal(String meal_name, float carbs, float protein, float fat, int indexofPortionType) {
         //Initializing Food to be inserted in Database
         Food newFood = new Food(meal_name, carbs, protein, fat, indexofPortionType, currentUser.getUser_id());
 
-        if (My_DB.insertSavedMeal(newFood)) {
-            Food newFood_WithID = My_DB.getMeal(meal_name);//meal needs to be retrieved because ID is initialized in the DB
+        if (DB_SQLite.insertSavedMeal(newFood)) {
+            Food newFood_WithID = DB_SQLite.getMeal(meal_name);//meal needs to be retrieved because ID is initialized in the DB
             Log.i("Food Inserted", "ID: " + newFood_WithID.getMeal_id() + " Name:" + " " + newFood.getMeal_name());
 
             if (indexofPortionType == 0) { //Food is measured by servings
                 float Serving_Number = Float.parseFloat(EditText_ServingNumber.getText().toString());
-                if (My_DB.insertServing(newFood_WithID, Serving_Number)) {
+                if (DB_SQLite.insertServing(newFood_WithID, Serving_Number)) {
                     Log.i("Serving Inserted", "ID: " + newFood_WithID.getMeal_id() + " Name:" + " " + newFood.getMeal_name() + " Serving #: " + Serving_Number);
                 } else {
                     Toast.makeText(this, "Failed to insert serving", Toast.LENGTH_SHORT).show();
                 }
             } else if (indexofPortionType == 1) { //Food is measured by weight
                 int Weight_Quantity = Integer.parseInt(EditText_Quantity.getText().toString());
-                if (My_DB.insertWeight(newFood_WithID, Weight_Quantity, Weight_Unit_Selected)) {
+                if (DB_SQLite.insertWeight(newFood_WithID, Weight_Quantity, Weight_Unit_Selected)) {
                     Toast.makeText(this, "Weight added", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(this, "Failed to insert Weight", Toast.LENGTH_SHORT).show();
                 }
             }
-            if(My_DB.insertDailyMeal(newFood_WithID.getMeal_id(),1.0f)) { //Insert new daily meal with multiplier = 1
+            if(DB_SQLite.insertDailyMeal(newFood_WithID.getMeal_id(),1.0f)) { //Insert new daily meal with multiplier = 1
                 //TODO perform error checking
             }
             Toast.makeText(this, "Food added", Toast.LENGTH_SHORT).show();
@@ -209,7 +194,8 @@ public class activityAddFood extends AppCompatActivity{}
         });
         AlertDialog dialog = builder.create();
         dialog.show();
-    }
+    }*//*
+
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -302,4 +288,5 @@ public class activityAddFood extends AppCompatActivity{}
             HideEverything();
         }
     }
-}*/
+}
+*/

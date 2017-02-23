@@ -9,7 +9,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.kareem.IIFYM_Tracker.Activities.Main.New.activityAddDailyItem">
+    tools:context="com.example.kareem.IIFYM_Tracker.Activities.Main.New.activitySelectDailyItem">
 
     <LinearLayout
         android:orientation="vertical"
@@ -22,7 +22,7 @@
             android:inputType="textPersonName"
             android:ems="10"
             android:id="@+id/etxtSearch"
-            android:hint="Search Meals ..."
+            android:hint="Search ..."
             android:drawableLeft="?android:attr/actionModeWebSearchDrawable"
             tools:layout_editor_absoluteY="0dp"
             tools:layout_editor_absoluteX="0dp" />
@@ -46,8 +46,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         fab:fab_addButtonSize="mini"
-        fab:fab_expandDirection="up"
-        fab:fab_labelsPosition="left">
+        fab:fab_expandDirection="up">
 
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/fabAddNewFood"

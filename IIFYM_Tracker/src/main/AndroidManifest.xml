@@ -19,13 +19,13 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Activities.Main.Old.activityAddFood"
+            android:name=".Activities.Main.New.activityAddDailyFood"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activities.Main.Old.ViewSavedMealsActivity"
+            android:name=".Activities.Main.Old.activityViewSavedItems"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activities.Main.Old.ViewMealActivity"
+            android:name=".Activities.Main.Old.activityViewFood"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Activities.Settings.MacroSettings"
@@ -33,18 +33,15 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
         <activity android:name=".Activities.Settings.UserProfile_Mina" />
-        <activity android:name=".Activities.Settings.EditProfile_Mina" />
-        <activity
-            android:name=".Activities.Main.Old.SelectSavedMealActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".Activities.Settings.EditProfile_Mina" /><![CDATA[
         android:windowSoftInputMode="adjustPan" />
+        ]]>
         <activity
             android:name=".Activities.Main.Old.acitivityAddSavedItem"
             android:theme="@style/AppTheme.NoActionBar" />
         >>>>>>> master
         <activity
-            android:name=".Activities.Main.Old.activityCreateFood"
+            android:name=".Activities.Main.New.activityCreateFood"
             android:label="@string/title_activity_create_simple_meal"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Activities.User_Login_Authentification.activityLogin"
@@ -60,8 +57,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activities.Main.New.activityAddDailyItem"
-            android:label="Add an Item to your Daily List"></activity>
+        <activity android:name=".Activities.Main.New.activitySelectDailyItem"
+            android:label="Select an item to add"/>
+
     </application>
 
 </manifest>

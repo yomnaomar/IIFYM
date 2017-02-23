@@ -645,9 +645,9 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
 
     @Override protected void onPause() {
         if(rbtnCalories.isChecked())
-            myPrefs.addPreference("temp_display", 0); // Calories
+            myPrefs.addPreference("temp_display_registration", false); // Calories
         else
-            myPrefs.addPreference("temp_display", 1); // Macros
+            myPrefs.addPreference("temp_display_registration", true); // Macros
 
         signOut();
         super.onPause();
@@ -659,7 +659,13 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
         super.onResume();
         etxtCalories.setText(caloriesDefault + "");
 
-        if(myPrefs.getIntValue("temp_display") == 0) { // Calories
+        if(myPrefs.getBooleanValue("temp_display_registration")) { // Macros
+            rbtnMacros.setChecked(true);
+            etxtCarbs.setText(Math.round(carbsPercent * 0.01f * caloriesDefault/4) + "");
+            etxtProtein.setText(Math.round(proteinPercent * 0.01f * caloriesDefault/4) + "");
+            etxtFat.setText(Math.round(fatPercent * 0.01f * caloriesDefault/9) + "");
+        }
+        else { // Calories
             rbtnCalories.setChecked(true);
             etxtCarbs.setText(carbsPercent + "");
             etxtProtein.setText(proteinPercent + "");
@@ -672,12 +678,6 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
                 lblAmountTotal.setTextColor(Color.parseColor("#2E7D32")); // Green
             else
                 lblAmountTotal.setTextColor(Color.parseColor("#D50000")); // Red
-        }
-        else { // Macros
-            rbtnMacros.setChecked(true);
-            etxtCarbs.setText(Math.round(carbsPercent * 0.01f * caloriesDefault/4) + "");
-            etxtProtein.setText(Math.round(proteinPercent * 0.01f * caloriesDefault/4) + "");
-            etxtFat.setText(Math.round(fatPercent * 0.01f * caloriesDefault/9) + "");
         }
         updateGUI();
     }

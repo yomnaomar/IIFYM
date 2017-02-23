@@ -359,21 +359,21 @@ public class activityUserInfo extends AppCompatActivity implements View.OnClickL
     @Override protected void onPause() {
         readUserInput();
         unregisterReceiver(broadcast_reciever);
-        myPrefs.addPreference("temp_name",name);
-        myPrefs.addPreference("temp_dob",dob);
+        myPrefs.addPreference("temp_name_registration",name);
+        myPrefs.addPreference("temp_dob_registration",dob);
         if(rbtnGenderMale.isChecked())
-            myPrefs.addPreference("temp_gender",0); // Male
+            myPrefs.addPreference("temp_gender_registration",0); // Male
         else
-            myPrefs.addPreference("temp_gender",1); // Female
+            myPrefs.addPreference("temp_gender_registration",1); // Female
         if(rbtnMetric.isChecked())
-            myPrefs.addPreference("temp_unitsystem",0); // Metric
+            myPrefs.addPreference("temp_unitsystem_registration",0); // Metric
         else
-            myPrefs.addPreference("temp_unitsystem",1); // Imperial
-        myPrefs.addPreference("temp_weight",weight);
-        myPrefs.addPreference("temp_height1",height1);
-        myPrefs.addPreference("temp_height2",height2);
-        myPrefs.addPreference("temp_workoutfreq",workoutFreq);
-        myPrefs.addPreference("temp_goal",goal);
+            myPrefs.addPreference("temp_unitsystem_registration",1); // Imperial
+        myPrefs.addPreference("temp_weight_registration",weight);
+        myPrefs.addPreference("temp_height1_registration",height1);
+        myPrefs.addPreference("temp_height2_registration",height2);
+        myPrefs.addPreference("temp_workoutfreq_registration",workoutFreq);
+        myPrefs.addPreference("temp_goal_registration",goal);
 
         signOut();
         super.onPause();
@@ -391,35 +391,35 @@ public class activityUserInfo extends AppCompatActivity implements View.OnClickL
             }
         };
         registerReceiver(broadcast_reciever, new IntentFilter("finish_activity"));
-        etxtName.setText(myPrefs.getStringValue("temp_name"));
+        etxtName.setText(myPrefs.getStringValue("temp_name_registration"));
         Calendar newDate = Calendar.getInstance();
-        etxtDateOfBirth.setText(myPrefs.getStringValue("temp_dob", dateFormatter.format(newDate.getTime())));
-        if(myPrefs.getIntValue("temp_gender") == 0) // Male
+        etxtDateOfBirth.setText(myPrefs.getStringValue("temp_dob_registration", dateFormatter.format(newDate.getTime())));
+        if(myPrefs.getIntValue("temp_gender_registration") == 0) // Male
             rbtnGenderMale.setChecked(true);
         else
             rbtnGenderFemale.setChecked(true); // Female
-        if(myPrefs.getIntValue("temp_unitsystem") == 0) // Metric
+        if(myPrefs.getIntValue("temp_unitsystem_registration") == 0) // Metric
             rbtnMetric.setChecked(true);
         else
             rbtnGenderImperial.setChecked(true); // Imperial
 
-        if(myPrefs.getFloatValue("temp_weight") != 0)
-            etxtWeight.setText(myPrefs.getFloatValue("temp_weight") + "");
+        if(myPrefs.getFloatValue("temp_weight_registration") != 0)
+            etxtWeight.setText(myPrefs.getFloatValue("temp_weight_registration") + "");
         else
             etxtWeight.setText("");
 
-        if(myPrefs.getIntValue("temp_height1") != 0)
-            etxtHeightParam1.setText(myPrefs.getIntValue("temp_height1") + "");
+        if(myPrefs.getIntValue("temp_height1_registration") != 0)
+            etxtHeightParam1.setText(myPrefs.getIntValue("temp_height1_registration") + "");
         else
             etxtHeightParam1.setText("");
 
-        if(myPrefs.getIntValue("temp_height2") != 0)
-            etxtHeightParam2.setText(myPrefs.getIntValue("temp_height2") + "");
+        if(myPrefs.getIntValue("temp_height2_registration") != 0)
+            etxtHeightParam2.setText(myPrefs.getIntValue("temp_height2_registration") + "");
         else
             etxtHeightParam2.setText("");
 
-        spinnerWorkoutFreq.setSelection(myPrefs.getIntValue("temp_workoutfreq"));
-        spinnerGoals.setSelection(myPrefs.getIntValue("temp_goal"));
+        spinnerWorkoutFreq.setSelection(myPrefs.getIntValue("temp_workoutfreq_registration"));
+        spinnerGoals.setSelection(myPrefs.getIntValue("temp_goal_registration"));
     }
 
     private boolean verifyAge(){

@@ -21,15 +21,8 @@ public class activityLauncher extends AppCompatActivity {
 
         context = getApplicationContext();
         myPrefs = new SharedPreferenceHelper(context);
-        String session_uid = myPrefs.getStringValue("session_uid");
-        Log.d("Launcher","session_uid:" + session_uid);
-        if(session_uid.isEmpty()){
-            // Go to activityLogin
-            Intent intent = new Intent();
-            intent.setClass(context, activityLogin.class);
-            startActivity(intent);
-            finish();
-        }
+        
+ 
         else {
             // Go to activityMain
             Intent intent = new Intent();

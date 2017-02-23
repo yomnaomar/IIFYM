@@ -65,20 +65,20 @@
 
         <string name="pref_title_sync_frequency">Sync frequency</string>
         <string-array name="pref_sync_frequency_titles">
-            <listitem>15 minutes</listitem>
-            <listitem>30 minutes</listitem>
-            <listitem>1 hour</listitem>
-            <listitem>3 hours</listitem>
-            <listitem>6 hours</listitem>
-            <listitem>Never</listitem>
+            <list_item>15 minutes</list_item>
+            <list_item>30 minutes</list_item>
+            <list_item>1 hour</list_item>
+            <list_item>3 hours</list_item>
+            <list_item>6 hours</list_item>
+            <list_item>Never</list_item>
         </string-array>
         <string-array name="pref_sync_frequency_values">
-            <listitem>15</listitem>
-            <listitem>30</listitem>
-            <listitem>60</listitem>
-            <listitem>180</listitem>
-            <listitem>360</listitem>
-            <listitem>-1</listitem>
+            <list_item>15</list_item>
+            <list_item>30</list_item>
+            <list_item>60</list_item>
+            <list_item>180</list_item>
+            <list_item>360</list_item>
+            <list_item>-1</list_item>
         </string-array>
 
         <string name="pref_title_system_sync_settings">System sync settings</string>
@@ -122,6 +122,8 @@
         <item>cm</item>
     </string-array>
 
+    <string name="serving">Serving</string>
+
     <string name="title_activity_enter_saved_meal_quantity">EnterSavedMealQuantity</string>
     <string name="title_activity_select_meal_type">SelectMealTypeActivity</string>
     <string name="title_activity_create_simple_meal">CreateSimpleMealActivity</string>
@@ -130,6 +132,8 @@
     <string name="UserFocus">I want to focus on ...</string>
     <string name="UserMacrosTitle">Daily Nutritional Goals</string>
     <string name="MacroSettingsTitle">Change your Daily Nutritional Goals</string>
+
+
 
 
     <!-- TODO: Remove or change this placeholder text -->

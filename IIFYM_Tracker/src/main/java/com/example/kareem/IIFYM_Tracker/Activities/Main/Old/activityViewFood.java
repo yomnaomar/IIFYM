@@ -2,8 +2,8 @@ package com.example.kareem.IIFYM_Tracker.Activities.Main.Old;
 
 import android.support.v7.app.AppCompatActivity;
 
-public class ViewMealActivity extends AppCompatActivity {}
-/*public class ViewMealActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class activityViewFood extends AppCompatActivity {}
+/*public class activityViewFood extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     private EditText EditText_Meal_Name, EditText_Portion_Quantity, EditText_Carbs, EditText_Protein, EditText_Fat;
     private TextView Label_MealType, Label_Serving, Label_Calories;
     private Spinner Spinner_Unit;
@@ -25,8 +25,8 @@ public class ViewMealActivity extends AppCompatActivity {}
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_meal);
-        context = ViewMealActivity.this;
+        setContentView(R.layout.activity_view_food);
+        context = activityViewFood.this;
         My_DB = new SQLiteConnector(getApplicationContext());
         Meal_ID = getIntent().getIntExtra("Meal_ID", 0);
         isDaily = getIntent().getBooleanExtra("isDaily", false);

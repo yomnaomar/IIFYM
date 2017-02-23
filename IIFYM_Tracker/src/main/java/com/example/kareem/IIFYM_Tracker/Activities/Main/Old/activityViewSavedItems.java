@@ -2,29 +2,41 @@ package com.example.kareem.IIFYM_Tracker.Activities.Main.Old;
 
 import android.support.v7.app.AppCompatActivity;
 
-public class SelectSavedMealActivity extends AppCompatActivity {}
-/*public class SelectSavedMealActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
-    private EditText EditText_MealSearch;
+public class activityViewSavedItems extends AppCompatActivity {}
+//public class activityViewSavedItems extends AppCompatActivity implements AdapterView.OnItemClickListener {
+
+   /* private EditText EditText_MealSearch;
     private ArrayList<Food> arrayList_SavedFoods;
-    private adapterSavedItem My_SavedMealAdapter;
+    private SavedMealAdapter My_SavedMealAdapter;
     private ListView Meals_ListView;
     private SQLiteConnector My_DB;
 
     Portion_Type portion = null;
+    boolean is_daily = false;
 
+    FloatingActionButton addmeal_fab;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_select_saved_meal);
+        setContentView(R.layout.activity_view_saved_items);
 
         My_DB = new SQLiteConnector(getApplicationContext());
 
+
         arrayList_SavedFoods = new ArrayList<Food>();
         ConstructArrayList_SavedMeals();
-        My_SavedMealAdapter = new adapterSavedItem(this, arrayList_SavedFoods);
-        Meals_ListView = (ListView) findViewById(R.id.ListView_AddSavedMeals);
+        My_SavedMealAdapter = new SavedMealAdapter(this, arrayList_SavedFoods);
+        Meals_ListView = (ListView) findViewById(R.id.ListView_SavedMeals);
         Meals_ListView.setAdapter(My_SavedMealAdapter);
         Meals_ListView.setOnItemClickListener(this);
+
+        addmeal_fab = (FloatingActionButton)findViewById(R.id.addmeal_fab);
+        addmeal_fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(activityViewSavedItems.this,activityCreateFood.class));
+            }
+        });
 
         EditText_MealSearch = (EditText) findViewById(R.id.EditText_MealSearch);
         EditText_MealSearch.addTextChangedListener(new TextWatcher() {
@@ -42,38 +54,37 @@ public class SelectSavedMealActivity extends AppCompatActivity {}
         });
     }
 
-    //TODO IMPLEMENT THIS FUNCTION CORRECTLY
+
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Food M = (Food)parent.getItemAtPosition(position);
-        int meal_id = M.getMeal_id();
+        Food M = (Food) parent.getItemAtPosition(position);
+        int M_ID = M.getId();
 
-        Context context = getApplicationContext();
-        Intent intent = new Intent();
-        intent.setClass(context, acitivityAddSavedItem.class);
-        intent.putExtra("meal_id",meal_id);
+        Intent intent = new Intent(getBaseContext(), activityViewFood.class);
+        intent.putExtra("Meal_ID", M_ID);
+        intent.putExtra("isDaily", false);
         startActivity(intent);
     }
 
-    //Updates My_SavedMealAdapter
+    //Updates My_MealAdapter
     private void UpdateArrayList() {
         My_SavedMealAdapter.clear();
-        Cursor C = My_DB.getAllMealsSorted();
+        Cursor C = My_DB.retrieveAllFoods();
 
         int count = C.getCount();
         if (count > 0) {
             for (int i = 0; i < count; i++) {
                 C.moveToNext();
-                int     meal_id         = C.getInt(0);      //meal)id
-                String  meal_name       = C.getString(1);   //meal_name
-                String  date_created    = C.getString(2);   //date_created
-                float   carbs           = C.getFloat(3);      //icon_carbs
-                float   protein         = C.getFloat(4);      //icon_protein
-                float   fat             = C.getFloat(5);      //icon_fat
+                int meal_id = C.getInt(0);      //meal)id
+                String meal_name = C.getString(1);   //meal_name
+                String date_created = C.getString(2);   //date_created
+                float carbs = C.getFloat(3);      //icon_carbs
+                float protein = C.getFloat(4);      //icon_protein
+                float fat = C.getFloat(5);      //icon_fat
                 portion = portion.values()[C.getInt(6)];    //portion
-                int     user_id         = C.getInt(8);      //user_id
-                Food M = new Food(meal_id,meal_name,carbs,protein,fat,portion,user_id);
-                getFullMealNutrients(M);
+                int daily_consumption = C.getInt(7);    //daily_consumption
+                int user_id = C.getInt(8);      //user_id
+                Food M = new Food(meal_id, meal_name, carbs, protein, fat, portion);
                 My_SavedMealAdapter.add(M);
             }
         }
@@ -104,7 +115,6 @@ public class SelectSavedMealActivity extends AppCompatActivity {}
 
     @Override
     protected void onPause() {
-
         super.onPause();
     }
 
@@ -113,7 +123,6 @@ public class SelectSavedMealActivity extends AppCompatActivity {}
         super.onResume();
         UpdateArrayList();
     }
-
 
     //TODO USE THIS FUCNTION IN OTHER ACTIVITIES
     //Takes a meal "my_Food" and retrieves the full nutrient calculation of that meal from the database

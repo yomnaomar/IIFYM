@@ -61,7 +61,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
         String createTable_Food = "CREATE TABLE " + Table_Food + " " +
                 "(id           INTEGER PRIMARY KEY autoincrement, " +
-                "name          TEXT UNIQUE, " +
+                "name          TEXT, " +
                 "brand         TEXT, " +
                 "calories      REAL, " +
                 "carbs         REAL, " +

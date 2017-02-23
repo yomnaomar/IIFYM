@@ -185,29 +185,21 @@ public class SQLiteConnector {
         return false;
     }
 
-    // TODO verify ID of inserted food
-    // Returns True if Food was successfully inserted
-    // Returns False otherwise
-    public boolean createFood(Food f) {
-        if (!isExistingFood(f.getName())) {
-            ContentValues newFood = new ContentValues();
-            newFood.put("name",             f.getName());
-            newFood.put("brand",            f.getBrand());
-            newFood.put("calories",         f.getCalories());
-            newFood.put("carbs",            f.getCarbs());
-            newFood.put("protein",          f.getProtein());
-            newFood.put("fat",              f.getFat());
-            newFood.put("proteinType",      f.getPortionType());
-            newFood.put("isMeal",           f.isMeal());
+    // Returns ID of created Food
+    // Returns -1 otherwise
+    public long createFood(Food f) {
+        ContentValues newFood = new ContentValues();
+        newFood.put("name", f.getName());
+        newFood.put("brand", f.getBrand());
+        newFood.put("calories", f.getCalories());
+        newFood.put("carbs", f.getCarbs());
+        newFood.put("protein", f.getProtein());
+        newFood.put("fat", f.getFat());
+        newFood.put("proteinType", f.getPortionType());
+        newFood.put("isMeal", f.isMeal());
 
-            database.insert(Table_Food, null, newFood);
-            Log.d("createFood", "Food with name " + f.getName() + " created");
-            return true;
-        }
-        else {
-            Log.d("createFood", "Food with name " + f.getName() + " already exists");
-            return false;
-        }
+        Log.d("createFood", "Food with name " + f.getName() + " created");
+        return database.insert(Table_Food, null, newFood);
     }
 
     // Returns Food with name if found
@@ -232,7 +224,7 @@ public class SQLiteConnector {
 
     // Returns Food with id if found
     // Returns null otherwise
-    public Food retrieveFood(int id) {
+    public Food retrieveFood(long id) {
         Cursor C = database.rawQuery("SELECT * FROM " + Table_Food + " WHERE id = '" + id + "'", null);
         if (C.moveToFirst() && C != null) {
             Log.d("retrieveFood", "Food with id " + id + " retrieved");
@@ -545,7 +537,7 @@ public class SQLiteConnector {
         return C;
     }
 
-    // Return True if DailyItem with id = listitem.getId was updated successfully
+    // Return True if DailyItem with id = list_item.getId was updated successfully
     // Returns False otherwise
     public boolean updateDailyItem(DailyItem item) {
         Cursor C = database.rawQuery("SELECT * FROM " + Table_DailyItem + " WHERE id = " + item.getFood().getId()
