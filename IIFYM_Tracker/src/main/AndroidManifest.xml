@@ -19,7 +19,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Activities.Main.New.activityAddDailyFood"
+            android:name=".Activities.Main.New.activityCreateDailyFood"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Activities.Main.Old.activityViewSavedItems"
@@ -37,7 +37,7 @@
         android:windowSoftInputMode="adjustPan" />
         ]]>
         <activity
-            android:name=".Activities.Main.Old.acitivityAddSavedItem"
+            android:name=".Activities.Main.Old.acitivityAddDailyItem"
             android:theme="@style/AppTheme.NoActionBar" />
         >>>>>>> master
         <activity

@@ -2,8 +2,8 @@ package com.example.kareem.IIFYM_Tracker.Activities.Main.Old;
 
 import android.support.v7.app.AppCompatActivity;
 
-public class acitivityAddSavedItem extends AppCompatActivity{}
-/*public class acitivityAddSavedItem extends AppCompatActivity implements View.OnClickListener, TextWatcher {
+public class acitivityAddDailyItem extends AppCompatActivity{}
+/*public class acitivityAddDailyItem extends AppCompatActivity implements View.OnClickListener, TextWatcher {
 
     TextView Label_Meal_Name, Label_Carbs, Label_Protein, Label_Fat, Label_Calories, Label_Serving, Label_Weight_Unit;
     EditText EditText_Serving_Quantity,EditText_Weight_Quantity;
@@ -25,7 +25,7 @@ public class acitivityAddSavedItem extends AppCompatActivity{}
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_saved_item);
+        setContentView(R.layout.activity_add_daily_food);
 
         Label_Meal_Name = (TextView)findViewById(R.id.Label_Meal_Name);
         Label_Carbs = (TextView)findViewById(R.id.Label_Carbs);
