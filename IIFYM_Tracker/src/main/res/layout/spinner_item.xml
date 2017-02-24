@@ -6,7 +6,8 @@
     android:layout_height="48dp"
     android:gravity="left|center_vertical"
     android:textColor="@color/colorPrimary"
-    android:textSize="15sp"
+    android:textSize="14sp"
     android:paddingLeft="4dp"
     android:textIsSelectable="false"
-    android:textAlignment="textEnd" />
+    android:textAlignment="textEnd"
+    android:text="@string/firstname" />

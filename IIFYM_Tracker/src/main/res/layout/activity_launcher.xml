@@ -8,7 +8,6 @@
     tools:context="com.example.kareem.IIFYM_Tracker.Activities.User_Login_Authentification.activityLauncher">
 
     <ImageView
-        app:srcCompat="@drawable/image_iifym"
         android:id="@+id/imageView"
         android:layout_width="125dp"
         android:layout_marginTop="24dp"
@@ -20,6 +19,7 @@
         android:layout_marginBottom="16dp"
         app:layout_constraintVertical_bias="0.39"
         android:layout_height="140dp"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@mipmap/ic_launcher" />
 
 </android.support.constraint.ConstraintLayout>

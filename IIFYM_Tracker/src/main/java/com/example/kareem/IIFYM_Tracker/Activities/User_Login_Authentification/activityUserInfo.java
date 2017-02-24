@@ -35,21 +35,6 @@ import java.util.GregorianCalendar;
 import info.hoang8f.android.segmented.SegmentedGroup;
 
 public class activityUserInfo extends AppCompatActivity implements View.OnClickListener{
-//    OnClick (btnNext)
-//    {
-//      intent.putExtra("uid", uid);
-//      intent.putExtra("email", email);
-//      intent.putExtra("name", name);
-//      intent.putExtra("dob", dob);
-//      intent.putExtra("gender", gender);
-//      intent.putExtra("unitSystem", unitSystem);
-//      intent.putExtra("weight", weight);
-//      intent.putExtra("height1", height1);
-//      intent.putExtra("height2", height2);
-//      intent.putExtra("workoutFreq", workoutFreq);
-//      intent.putExtra("goal", goal);
-//      Go to userMacros
-//    }
 
     // GUI
     private String              uid, email;

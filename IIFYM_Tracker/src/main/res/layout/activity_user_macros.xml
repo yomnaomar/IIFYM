@@ -339,12 +339,12 @@
 
                     <ImageButton
                         android:id="@+id/btnReset"
-                        android:background="@drawable/icon_reset_selector"
                         android:layout_centerVertical="true"
                         android:layout_centerHorizontal="true"
                         android:scaleType="fitCenter"
-                        android:layout_width="28dp"
-                        android:layout_height="28dp" />
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:background="@drawable/icon_reset_selector" />
                 </RelativeLayout>
 
             </LinearLayout>
