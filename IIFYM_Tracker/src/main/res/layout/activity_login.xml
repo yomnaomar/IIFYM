@@ -105,7 +105,7 @@
                 app:layout_constraintLeft_toLeftOf="parent" />
 
             <ImageButton
-                app:srcCompat="@drawable/icon_facebook"
+                app:srcCompat="@drawable/ic_facebook"
                 android:id="@+id/facebook_signup_button"
                 android:background="@color/Transparent"
                 android:scaleType="centerCrop"
@@ -122,7 +122,7 @@
             <ImageButton
                 android:layout_width="35dp"
                 android:layout_height="35dp"
-                app:srcCompat="@drawable/icon_google"
+                app:srcCompat="@drawable/ic_google"
                 android:id="@+id/google_signup_button"
                 android:background="@color/Transparent"
                 android:scaleType="centerCrop"

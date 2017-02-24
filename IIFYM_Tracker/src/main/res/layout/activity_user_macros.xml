@@ -111,7 +111,7 @@
                         android:layout_centerVertical="true"
                         android:layout_centerHorizontal="true"
                         android:layout_width="25dp"
-                        app:srcCompat="@drawable/icon_info"
+                        app:srcCompat="@drawable/ic_info"
                         android:layout_height="25dp" />
                 </RelativeLayout>
 

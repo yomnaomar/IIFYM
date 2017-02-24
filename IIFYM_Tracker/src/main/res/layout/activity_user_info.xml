@@ -61,7 +61,7 @@
                     android:layout_weight="0.5"
                     android:drawablePadding="10dp"
                     android:textColor="?attr/colorPrimary"
-                    android:drawableEnd="@drawable/icon_calendar"
+                    android:drawableEnd="@drawable/ic_calendar"
                     android:layout_width="wrap_content"
                     android:gravity="center_vertical|center|end"
                     android:layout_gravity="end" />

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.kareem.IIFYM_Tracker.Activities.Main.New.activityCreateFood">
     <item
-        android:id="@+id/"
+        android:id="@+id/menu_save"
         android:orderInCategory="100"
         android:title="@string/Macro_settings"
         app:showAsAction="always"

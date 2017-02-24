@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:clickable="true"
         app:fabSize="mini"
-        app:srcCompat="@drawable/ic_mode_edit_black_24dp"
+        app:srcCompat="@drawable/ic_edit"
         tools:layout_editor_absoluteY="0dp"
         tools:layout_editor_absoluteX="308dp"
         android:id="@+id/edit_fab"

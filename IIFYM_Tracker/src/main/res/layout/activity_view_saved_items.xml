@@ -55,7 +55,7 @@
             fab:fab_colorNormal="@color/colorPrimaryLight"
             fab:fab_title="Add New Food"
             fab:fab_colorPressed="@color/fabWhitePressed"
-            fab:fab_icon="@drawable/icon_food"
+            fab:fab_icon="@drawable/ic_food"
             fab:fab_size="mini" />
 
         <com.getbase.floatingactionbutton.FloatingActionButton
@@ -65,7 +65,7 @@
             fab:fab_colorNormal="@color/colorPrimaryLight"
             fab:fab_title="Add New Meal"
             fab:fab_colorPressed="@color/fabWhitePressed"
-            fab:fab_icon="@drawable/icon_meal"
+            fab:fab_icon="@drawable/ic_meal"
             fab:fab_size="mini"
             style="imageButtonStyle"
             android:scaleType="fitCenter" />

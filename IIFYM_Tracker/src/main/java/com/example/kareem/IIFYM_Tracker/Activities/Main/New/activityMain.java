@@ -246,6 +246,7 @@ public class activityMain extends AppCompatActivity implements AdapterView.OnIte
         Intent intent = new Intent();
         intent.setClass(context,activitySelectDailyItem.class);
         startActivity(intent);
+        finish();
     }
 
     @Override public void onItemDeleted() {
@@ -276,6 +277,7 @@ public class activityMain extends AppCompatActivity implements AdapterView.OnIte
             Intent intent = new Intent();
             intent.setClassName(this, "com.example.kareem.IIFYM_Tracker.Activities.Main.Old.activityViewSavedItems");
             startActivity(intent);
+            finish();
             return true;
         }
         if(id==R.id.logout_menu_btn)
@@ -290,12 +292,14 @@ public class activityMain extends AppCompatActivity implements AdapterView.OnIte
         {
             Intent intent = new Intent(getApplicationContext(),UserProfile_Mina.class);
             startActivity(intent);
+            finish();
             return true;
         }
         if(id==R.id.action_MacroSettings)
         {
             Intent in = new Intent(getApplicationContext(),MacroSettings.class );
             startActivity(in);
+            finish();
             return true;
         }
         return super.onOptionsItemSelected(item);
