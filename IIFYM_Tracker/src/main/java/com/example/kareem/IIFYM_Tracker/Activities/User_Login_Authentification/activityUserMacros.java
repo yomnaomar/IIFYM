@@ -22,7 +22,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import com.example.kareem.IIFYM_Tracker.Activities.Main.New.activityMain;
+import com.example.kareem.IIFYM_Tracker.Activities.Main.New.activityHome;
 import com.example.kareem.IIFYM_Tracker.Models.User;
 import com.example.kareem.IIFYM_Tracker.Database.SQLiteConnector;
 import com.example.kareem.IIFYM_Tracker.Database.SharedPreferenceHelper;
@@ -428,7 +428,7 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
 
                         hideProgressDialog();
 
-                        // Go to activityMain
+                        // Go to activityHome
                         // Store user session in Preferences
                         myPrefs.addPreference("session_uid", uid);
                         Intent broadcastIntent = new Intent("finish_activity");
@@ -436,7 +436,7 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
 
                         Context context = getApplicationContext();
                         Intent intent = new Intent();
-                        intent.setClass(context, activityMain.class);
+                        intent.setClass(context, activityHome.class);
                         startActivity(intent);
                         finish();
                     }

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_view_daily_item"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.kareem.IIFYM_Tracker.Activities.Main.New.activityViewDailyItem">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="8dp">
+
+        <TextView
+            android:text="@string/lblName"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:id="@+id/lblName"
+            android:gravity="center_vertical"
+            android:textColor="@color/colorPrimary" />
+
+        <TextView
+            android:text="@string/lblBrand"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:id="@+id/lblBrand"
+            android:gravity="center_vertical"
+            android:textColor="@color/colorPrimary"/>
+
+        <TextView
+            android:text="@string/lblCalories"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:id="@+id/lblCalories"
+            android:gravity="center_vertical"
+            android:textColor="@color/colorPrimary"/>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="@string/lblCarbs"
+                android:layout_width="70dp"
+                android:layout_height="40dp"
+                android:id="@+id/lblCarbs"
+                android:gravity="center_vertical"
+                android:textColor="@color/colorPrimary"/>
+
+            <TextView
+                android:text="@string/lblProtein"
+                android:layout_width="70dp"
+                android:layout_height="40dp"
+                android:id="@+id/lblProtein"
+                android:gravity="center_vertical"
+                android:textColor="@color/colorPrimary" />
+
+            <TextView
+                android:text="@string/lblFat"
+                android:layout_width="70dp"
+                android:layout_height="40dp"
+                android:id="@+id/lblFat"
+                android:gravity="center_vertical"
+                android:textColor="@color/colorPrimary" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="@string/lblPortionAmount"
+                android:layout_width="70dp"
+                android:layout_height="40dp"
+                android:id="@+id/lblPortionAmount"
+                android:textSize="14sp"
+                android:gravity="center"
+                android:textAlignment="textStart"
+                android:textColor="@color/colorPrimary"/>
+
+            <TextView
+                android:text="@string/lblPortionType"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:id="@+id/lblPortionType"
+                android:textAlignment="textStart"
+                android:gravity="center"
+                android:textColor="@color/colorPrimary"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_vertical_margin">
+
+            <android.support.design.widget.FloatingActionButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                app:fabSize="mini"
+                app:srcCompat="@drawable/ic_delete"
+                android:id="@+id/fabDelete"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:scaleType="centerCrop" />
+
+            <TextView
+                android:text="@string/btnDelete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/lblDelete"
+                android:layout_weight="1"
+                android:layout_gravity="center" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -497,6 +497,18 @@ public class SQLiteConnector {
         return true;
     }
 
+    public DailyItem retrieveDailyItem (int position){
+        Cursor C = database.rawQuery("SELECT * FROM " + Table_DailyItem + " WHERE position = '" + position + "'", null);
+        if (C.moveToFirst() && C != null) {
+            Log.d("retrieveDailyItem", "DailyItem with position " + position + " retrieved");
+            return new DailyItem(C.getInt(0),
+                    C.getInt(1),
+                    C.getFloat(2));
+        }
+        Log.d("retrieveDailyItem", "DailyItem with position " + position + " not found");
+        return null;
+    }
+
     // Return an ArrayList<DailyItem> containing all DailyItems
     public ArrayList<DailyItem> retrieveAllDailyItems() {
         Cursor C = database.rawQuery("SELECT * FROM " + Table_DailyItem, null);
@@ -515,15 +527,11 @@ public class SQLiteConnector {
                 int     id          = C.getInt(1);
                 float   multiplier  = C.getFloat(2);
 
-                Food food = retrieveFood(id);
-
-                DailyItem dailyItem = new DailyItem(food,position,multiplier);
+                DailyItem dailyItem = new DailyItem(position,id,multiplier);
                 arrDailyItem.add(dailyItem);
 
-                Log.i("DailyItem Added:", "Name: "
-                        + dailyItem.getFood().getName() + " " + dailyItem.getFood().getId() + " "
-                        + dailyItem.getFood().getCarbs() + " " + dailyItem.getFood().getProtein() + " "
-                        + dailyItem.getFood().getFat() + " position: " + dailyItem.getPosition()
+                Log.i("DailyItem Added:", "position: " + dailyItem.getPosition()
+                        + " id: " + dailyItem.getId()
                         + " multiplier: " + dailyItem.getMultiplier());
             }
         }
@@ -540,19 +548,19 @@ public class SQLiteConnector {
     // Return True if DailyItem with id = list_item.getId was updated successfully
     // Returns False otherwise
     public boolean updateDailyItem(DailyItem item) {
-        Cursor C = database.rawQuery("SELECT * FROM " + Table_DailyItem + " WHERE id = " + item.getFood().getId()
+        Cursor C = database.rawQuery("SELECT * FROM " + Table_DailyItem + " WHERE id = " + item.getId()
                 + " AND position = " + item.getPosition(), null);
 
         if (C != null && C.moveToFirst()) {
             ContentValues updateDailyMeal = new ContentValues();
             updateDailyMeal.put("multiplier", item.getMultiplier());
 
-            database.update(Table_DailyItem, updateDailyMeal, "id = " + item.getFood().getId() + " AND position = " + item.getPosition(), null);
-            Log.d("updateDailyMeal", "DailyItem with id " + item.getFood().getId() + " updated");
+            database.update(Table_DailyItem, updateDailyMeal, "id = " + item.getId() + " position = " + item.getPosition(), null);
+            Log.d("updateDailyMeal", "DailyItem with id " + item.getId() + " updated");
             return true;
         }
         else {
-            Log.d("updateDailyMeal", "DailyItem with id " + item.getFood().getId() + " not found");
+            Log.d("updateDailyMeal", "DailyItem with id " + item.getId() + " not found");
             return false;
         }
     }

@@ -30,7 +30,8 @@
                 android:textColor="@color/colorPrimary"
                 android:hint="@string/hintName"
                 android:textSize="14sp"
-                android:textAlignment="textStart" />
+                android:textAlignment="textStart"
+                android:inputType="textCapSentences"/>
 
         </LinearLayout>
 
@@ -47,7 +48,8 @@
                 android:textColor="@color/colorPrimary"
                 android:hint="@string/hintBrand"
                 android:textSize="14sp"
-                android:textAlignment="textStart" />
+                android:textAlignment="textStart"
+                android:inputType="textCapSentences"/>
 
         </LinearLayout>
 
@@ -203,21 +205,6 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/spinnerUnit"
                 android:gravity="center_vertical|center" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <Button
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="Enter"
-                android:id="@+id/btnEnter"
-                android:layout_weight="1"
-                android:background="@drawable/btn_iifym_style" />
 
         </LinearLayout>
 

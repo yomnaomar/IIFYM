@@ -25,6 +25,7 @@ import com.example.kareem.IIFYM_Tracker.Activities.User_Login_Authentification.a
 import com.example.kareem.IIFYM_Tracker.Database.SQLiteConnector;
 import com.example.kareem.IIFYM_Tracker.Database.SharedPreferenceHelper;
 import com.example.kareem.IIFYM_Tracker.Models.DailyItem;
+import com.example.kareem.IIFYM_Tracker.Models.Food;
 import com.example.kareem.IIFYM_Tracker.Models.User;
 import com.example.kareem.IIFYM_Tracker.R;
 import com.example.kareem.IIFYM_Tracker.ViewComponents.OnListItemDeletedListener;
@@ -33,7 +34,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 
-public class activityMain extends AppCompatActivity implements AdapterView.OnItemClickListener, OnListItemDeletedListener {
+public class activityHome extends AppCompatActivity implements AdapterView.OnItemClickListener, OnListItemDeletedListener {
 
     // GUI
     private TextView lblCaloriesCurrent, lblCarbsCurrent, lblProteinCurrent, lblFatCurrent;
@@ -61,8 +62,7 @@ public class activityMain extends AppCompatActivity implements AdapterView.OnIte
     private User                    currentUser;
     private String                  uid;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_home);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -152,13 +152,20 @@ public class activityMain extends AppCompatActivity implements AdapterView.OnIte
 
     public void updateMacros(){
         // Updating "Current" Variables
+
+        // Reset to prevent accumulation
+        caloriesCurrent = 0;
+        carbsCurrent = 0;
+        proteinCurrent = 0;
+        fatCurrent = 0;
+
         int itemCount = adapterDailyItems.getCount();
         for (int i = 0; i < itemCount; i++) {
-            DailyItem tempItem = adapterDailyItems.getItem(i);
-            int calories = Math.round(tempItem.getFood().getCalories());
-            int carbs = Math.round(tempItem.getFood().getCarbs());
-            int protein = Math.round(tempItem.getFood().getProtein());
-            int fat = Math.round(tempItem.getFood().getFat());
+            Food tempFood = DB_SQLite.retrieveFood(adapterDailyItems.getItem(i).getId());
+            int calories = Math.round(tempFood.getCalories());
+            int carbs = Math.round(tempFood.getCarbs());
+            int protein = Math.round(tempFood.getProtein());
+            int fat = Math.round(tempFood.getFat());
 
             caloriesCurrent += calories;
             carbsCurrent    += carbs;
@@ -233,8 +240,8 @@ public class activityMain extends AppCompatActivity implements AdapterView.OnIte
 
     @Override protected void onResume() {
         super.onResume();
-        updateMacros();
         updateArrayList();
+        updateMacros();
     }
 
     @Override protected void onPause() {
@@ -246,7 +253,6 @@ public class activityMain extends AppCompatActivity implements AdapterView.OnIte
         Intent intent = new Intent();
         intent.setClass(context,activitySelectDailyItem.class);
         startActivity(intent);
-        finish();
     }
 
     @Override public void onItemDeleted() {
@@ -254,16 +260,14 @@ public class activityMain extends AppCompatActivity implements AdapterView.OnIte
         updateMacros();
     }
 
-    // TODO Implement
     @Override public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-        /*DailyItem dailyItem = (DailyItem) parent.getItemAtPosition(position);
-        int dailyItem_id = dailyItem.getFood().getId();
+        DailyItem dailyItem = (DailyItem) parent.getItemAtPosition(position);
+        long dailyItem_id = dailyItem.getId();
 
-        Intent intent = new Intent(getBaseContext(), activityViewFood.class);
+        Intent intent = new Intent(getBaseContext(), activityViewDailyItem.class);
         intent.putExtra("id", dailyItem_id);
         intent.putExtra("position", position);
-        intent.putExtra("isDaily", true);
-        startActivity(intent);*/
+        startActivity(intent);
     }
 
     @Override public boolean onOptionsItemSelected(MenuItem item) {
@@ -277,7 +281,6 @@ public class activityMain extends AppCompatActivity implements AdapterView.OnIte
             Intent intent = new Intent();
             intent.setClassName(this, "com.example.kareem.IIFYM_Tracker.Activities.Main.Old.activityViewSavedItems");
             startActivity(intent);
-            finish();
             return true;
         }
         if(id==R.id.logout_menu_btn)
@@ -285,21 +288,18 @@ public class activityMain extends AppCompatActivity implements AdapterView.OnIte
             signOut();
             Intent in = new Intent(getApplicationContext(), activityLogin.class);
             startActivity(in);
-            finish();
             return true;
         }
         if(id==R.id.profile_menu_btn)
         {
             Intent intent = new Intent(getApplicationContext(),UserProfile_Mina.class);
             startActivity(intent);
-            finish();
             return true;
         }
         if(id==R.id.action_MacroSettings)
         {
             Intent in = new Intent(getApplicationContext(),MacroSettings.class );
             startActivity(in);
-            finish();
             return true;
         }
         return super.onOptionsItemSelected(item);

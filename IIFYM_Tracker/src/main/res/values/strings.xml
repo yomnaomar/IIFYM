@@ -140,6 +140,12 @@
     <string name="hintFat">Fat (g)</string>
     <string name="hintServing">Serving size</string>
     <string name="hintAmount">Weight</string>
+    <string name="lblBrand">Brand</string>
+    <string name="lblName">Name</string>
+    <string name="lblPortionType">PortionType</string>
+    <string name="lblPortionAmount">Portion Amount</string>
+    <string name="btnDelete">Delete from daily log?</string>
+    <string name="lblSave">Save</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->

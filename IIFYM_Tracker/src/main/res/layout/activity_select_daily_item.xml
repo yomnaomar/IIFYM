@@ -19,13 +19,14 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName"
+            android:inputType="textCapSentences"
             android:ems="10"
             android:id="@+id/etxtSearch"
             android:hint="Search ..."
             android:drawableLeft="?android:attr/actionModeWebSearchDrawable"
             tools:layout_editor_absoluteY="0dp"
-            tools:layout_editor_absoluteX="0dp" />
+            tools:layout_editor_absoluteX="0dp"
+            />
 
         <ListView
             android:layout_width="match_parent"

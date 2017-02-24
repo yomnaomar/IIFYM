@@ -12,14 +12,11 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 
-import com.example.kareem.IIFYM_Tracker.Activities.Main.Old.activityViewSavedItems;
 import com.example.kareem.IIFYM_Tracker.Database.SQLiteConnector;
-import com.example.kareem.IIFYM_Tracker.Database.SharedPreferenceHelper;
 import com.example.kareem.IIFYM_Tracker.Models.Food;
 import com.example.kareem.IIFYM_Tracker.Models.Weight;
 import com.example.kareem.IIFYM_Tracker.R;
@@ -33,7 +30,6 @@ public class activityCreateFood extends AppCompatActivity implements View.OnClic
     private RadioButton     rbtnServing, rbtnWeight;
     private SegmentedGroup  seggroupPortionType;
     private Spinner         spinnerUnit;
-    private Button          buttonEnter, buttonCancel;
 
     // Variables
     private boolean isDaily;
@@ -42,9 +38,7 @@ public class activityCreateFood extends AppCompatActivity implements View.OnClic
     boolean         fieldsOk;
 
     // Database
-    private SharedPreferenceHelper  myPrefs;
     private SQLiteConnector         DB_SQLite;
-
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,7 +54,6 @@ public class activityCreateFood extends AppCompatActivity implements View.OnClic
         // Database
         context = getApplicationContext();
         DB_SQLite = new SQLiteConnector(context);
-        myPrefs = new SharedPreferenceHelper(context);
     }
 
     @Override public boolean onOptionsItemSelected(MenuItem item) {
@@ -69,7 +62,7 @@ public class activityCreateFood extends AppCompatActivity implements View.OnClic
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        if (id == R.id.menu_save) {
+        if (id == R.id.menu_add) {
             Enter();
             return true;
         }
@@ -79,7 +72,7 @@ public class activityCreateFood extends AppCompatActivity implements View.OnClic
 
     @Override public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_createfood, menu);
+        getMenuInflater().inflate(R.menu.menu_create_food, menu);
         return true;
     }
 
@@ -172,36 +165,13 @@ public class activityCreateFood extends AppCompatActivity implements View.OnClic
             if (isDaily){
                 DB_SQLite.createDailyItem(food.getId(), 1.0f);
             }
-            Intent intent = new Intent(getApplicationContext(),activityMain.class);
+            Intent intent = new Intent(getApplicationContext(),activityHome.class);
             startActivity(intent);
             finish();
         }
         else {
             showAlertDialog("Something went wrong","Unable to create food.");
         }
-    }
-
-    // TODO Implement on back button pressed
-    //Returns to activityMain without making any changes
-    private void Cancel() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Are you sure?")
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        // User_Old clicked Yes button
-                        Context context = getApplicationContext();
-                        Intent intent = new Intent();
-                        intent.setClass(context, activityViewSavedItems.class);
-                        startActivity(intent);
-                    }
-                });
-        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                // User_Old cancelled the dialog
-            }
-        });
-        AlertDialog dialog = builder.create();
-        dialog.show();
     }
 
     @Override protected void onResume() {
@@ -227,9 +197,6 @@ public class activityCreateFood extends AppCompatActivity implements View.OnClic
 
     @Override public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.btnEnter:
-                Enter();
-                break;
             case R.id.rbtnServing:
                 UpdateGUI();
                 break;
@@ -254,10 +221,6 @@ public class activityCreateFood extends AppCompatActivity implements View.OnClic
         etxtName.requestFocus();
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.showSoftInput(etxtName, InputMethodManager.SHOW_IMPLICIT);
-
-        // Buttons
-        buttonEnter = (Button) findViewById(R.id.btnEnter);
-        buttonEnter.setOnClickListener(this);
 
         // SegmentedGroup & RadioButtons
         rbtnServing = (RadioButton) findViewById(R.id.rbtnServing);
@@ -311,6 +274,29 @@ public class activityCreateFood extends AppCompatActivity implements View.OnClic
             @Override
             public void onClick(DialogInterface dialog, int id) {
                 dialog.dismiss();
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    @Override public void onBackPressed() {
+        Cancel();
+    }
+
+    //Returns to activityHome without making any changes
+    private void Cancel() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Cancel?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // User clicked Yes button
+                        finish();
+                    }
+                });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // User cancelled the dialog
             }
         });
         AlertDialog dialog = builder.create();

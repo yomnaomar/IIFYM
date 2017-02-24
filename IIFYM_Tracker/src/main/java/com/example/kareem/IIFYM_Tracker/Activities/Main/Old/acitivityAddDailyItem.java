@@ -69,7 +69,7 @@ public class acitivityAddDailyItem extends AppCompatActivity{}
         My_DB.insertDailyMeal(meal_id,multiplier);
         Context context = getApplicationContext();
         Intent intent = new Intent();
-        intent.setClass(context, activityMain.class);
+        intent.setClass(context, activityHome.class);
         startActivity(intent);
     }
 
@@ -81,7 +81,7 @@ public class acitivityAddDailyItem extends AppCompatActivity{}
                         // User_Old clicked Yes button
                         Context context = getApplicationContext();
                         Intent intent = new Intent();
-                        intent.setClass(context, activityMain.class);
+                        intent.setClass(context, activityHome.class);
                         startActivity(intent);
                     }
                 });
