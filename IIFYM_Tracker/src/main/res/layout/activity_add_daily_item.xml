@@ -31,7 +31,8 @@
                 android:id="@+id/textView5"
                 android:layout_weight="1"
                 android:textAppearance="@android:style/TextAppearance.Material.Medium"
-                android:textColor="@color/colorPrimary" />
+                android:textColor="@color/colorPrimary"
+                android:textSize="14sp" />
 
         </LinearLayout>
 
@@ -63,7 +64,8 @@
                 android:layout_weight="1"
                 android:textAppearance="@android:style/TextAppearance.Material.Medium"
                 android:textColor="@color/colorPrimaryDark"
-                android:layout_width="125dp" />
+                android:textSize="14sp"
+                android:layout_width="110dp" />
 
             <Space
                 android:layout_width="10dp"
@@ -77,7 +79,8 @@
                 android:layout_weight="1"
                 android:textAppearance="@android:style/TextAppearance.Material.Medium"
                 android:textColor="@color/colorPrimary"
-                android:layout_width="wrap_content" />
+                android:layout_width="wrap_content"
+                android:textSize="14sp" />
 
         </LinearLayout>
 
@@ -89,12 +92,13 @@
 
             <TextView
                 android:text="Carbs (g):"
-                android:layout_width="125dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/textView77"
                 android:layout_weight="1"
                 android:textAppearance="@android:style/TextAppearance.Material.Medium"
-                android:textColor="@color/colorPrimaryDark" />
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="14sp"
+                android:layout_width="110dp" />
 
             <Space
                 android:layout_width="10dp"
@@ -108,7 +112,8 @@
                 android:id="@+id/textView8"
                 android:layout_weight="1"
                 android:textAppearance="@android:style/TextAppearance.Material.Medium"
-                android:textColor="@color/colorPrimary" />
+                android:textColor="@color/colorPrimary"
+                android:textSize="14sp" />
 
         </LinearLayout>
 
@@ -120,12 +125,13 @@
 
             <TextView
                 android:text="Protein (g):"
-                android:layout_width="125dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/textView99"
                 android:layout_weight="1"
                 android:textAppearance="@android:style/TextAppearance.Material.Medium"
-                android:textColor="@color/colorPrimaryDark" />
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="14sp"
+                android:layout_width="110dp" />
 
             <Space
                 android:layout_width="10dp"
@@ -139,7 +145,8 @@
                 android:id="@+id/textView9"
                 android:layout_weight="1"
                 android:textAppearance="@android:style/TextAppearance.Material.Medium"
-                android:textColor="@color/colorPrimary" />
+                android:textColor="@color/colorPrimary"
+                android:textSize="14sp" />
 
         </LinearLayout>
 
@@ -151,12 +158,13 @@
 
             <TextView
                 android:text="Fat (g):"
-                android:layout_width="125dp"
+                android:layout_width="110dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/textView778"
                 android:layout_weight="1"
                 android:textAppearance="@android:style/TextAppearance.Material.Medium"
-                android:textColor="@color/colorPrimaryDark" />
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="14sp" />
 
             <Space
                 android:layout_width="10dp"
@@ -170,7 +178,8 @@
                 android:id="@+id/textView88"
                 android:layout_weight="1"
                 android:textAppearance="@android:style/TextAppearance.Material.Medium"
-                android:textColor="@color/colorPrimary" />
+                android:textColor="@color/colorPrimary"
+                android:textSize="14sp" />
 
         </LinearLayout>
 
@@ -187,19 +196,26 @@
                 android:layout_weight="1"
                 android:textAppearance="@android:style/TextAppearance.Material.Medium"
                 android:textColor="@color/colorPrimaryDark"
-                android:layout_width="111dp" />
+                android:textSize="14sp"
+                android:layout_width="110dp" />
+
+            <Space
+                android:layout_width="10dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
 
             <EditText
                 android:layout_height="wrap_content"
                 android:id="@+id/EditText_ServingNumber"
-                android:textAlignment="center"
+                android:textAlignment="textStart"
                 android:hint="0000"
                 android:inputType="numberDecimal"
                 android:textAppearance="@android:style/TextAppearance.Material.Medium"
                 android:textColorHint="@color/Custom_Grey"
                 android:maxLength="4"
-                android:ems="4"
-                android:layout_width="wrap_content" />
+                android:ems="3"
+                android:layout_width="45dp"
+                android:textSize="14sp" />
 
         </LinearLayout>
 

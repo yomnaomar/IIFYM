@@ -119,8 +119,8 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
         lblValueProtein = (TextView) findViewById(R.id.lblValueProtein);
         lblValueFat     = (TextView) findViewById(R.id.lblValueFat);
         btnFinish       = (Button) findViewById(R.id.btnFinish);
-        btnReset        = (ImageButton) findViewById(R.id.btnReset);
-        btnInfo         = (ImageButton) findViewById(R.id.btnInfo);
+/*        btnReset        = (ImageButton) findViewById(R.id.btnReset);
+        btnInfo         = (ImageButton) findViewById(R.id.btnInfo);*/
 
         seggroupDisplay.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
         {
@@ -133,8 +133,8 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
         addTextWatchers();
 
         btnFinish.setOnClickListener(this);
-        btnReset.setOnClickListener(this);
-        btnInfo.setOnClickListener(this);
+/*        btnReset.setOnClickListener(this);
+        btnInfo.setOnClickListener(this);*/
 
         // setup enter and exit animation
         mEnterAnimation = new AlphaAnimation(0f, 1f);

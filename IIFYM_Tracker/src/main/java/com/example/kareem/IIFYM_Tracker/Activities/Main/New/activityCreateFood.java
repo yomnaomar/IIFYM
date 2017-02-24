@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
@@ -14,7 +15,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import com.example.kareem.IIFYM_Tracker.Activities.Main.Old.activityViewSavedItems;
 import com.example.kareem.IIFYM_Tracker.Database.SQLiteConnector;
@@ -28,7 +28,6 @@ import info.hoang8f.android.segmented.SegmentedGroup;
 public class activityCreateFood extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
     // GUI
-    private TextView        lblServingNum, lblAmount;
     private EditText        etxtName, etxtBrand, etxtCalories, etxtCarbs, etxtProtein, etxtFat, etxtServingNum, etxtAmount;
     private RadioButton     rbtnServing, rbtnWeight;
     private SegmentedGroup  seggroupPortionType;
@@ -54,11 +53,6 @@ public class activityCreateFood extends AppCompatActivity implements View.OnClic
         Intent intent = getIntent();
         isDaily = intent.getBooleanExtra("isDaily",false);
 
-/*        if (isDaily)
-            toolbar.setTitle("Create new Food");
-        else
-            toolbar.setTitle("Add Food to today's log");*/
-
         // GUI
         initializeGUI();
 
@@ -66,6 +60,12 @@ public class activityCreateFood extends AppCompatActivity implements View.OnClic
         context = getApplicationContext();
         DB_SQLite = new SQLiteConnector(context);
         myPrefs = new SharedPreferenceHelper(context);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        return true;
     }
 
     // TODO Implement with additional customization features (user wishes to track calories only vs macros only
@@ -223,9 +223,6 @@ public class activityCreateFood extends AppCompatActivity implements View.OnClic
     }
 
     private void initializeGUI() {
-        // Labels
-        lblServingNum = (TextView) findViewById(R.id.lblServingNum);
-        lblAmount = (TextView) findViewById(R.id.lblAmount);
 
         // EditTexts
         etxtName = (EditText) findViewById(R.id.etxtName);
@@ -272,24 +269,20 @@ public class activityCreateFood extends AppCompatActivity implements View.OnClic
     }
 
     private void ShowServing() {
-        lblServingNum.setVisibility(View.VISIBLE);
         etxtServingNum.setVisibility(View.VISIBLE);
     }
 
     private void HideServing() {
-        lblServingNum.setVisibility(View.GONE);
         etxtServingNum.setVisibility(View.GONE);
     }
 
     private void ShowWeight() {
         spinnerUnit.setVisibility(View.VISIBLE);
-        lblAmount.setVisibility(View.VISIBLE);
         etxtAmount.setVisibility(View.VISIBLE);
     }
 
     private void HideWeight() {
         spinnerUnit.setVisibility(View.GONE);
-        lblAmount.setVisibility(View.GONE);
         etxtAmount.setVisibility(View.GONE);
     }
 

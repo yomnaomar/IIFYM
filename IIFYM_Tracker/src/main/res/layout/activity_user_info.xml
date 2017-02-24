@@ -337,10 +337,6 @@
 
             </LinearLayout>
 
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="25dp" />
-
             <Button
                 android:text="@string/btnNext"
                 android:layout_width="match_parent"
