@@ -23,22 +23,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
 
-            <TextView
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Name"
-                android:id="@+id/lblName"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="14sp"
-                android:layout_width="52dp" />
-
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/etxtName"
                 android:textColor="@color/colorPrimary"
-                android:hint="Required"
-                android:textSize="14sp" />
+                android:hint="@string/hintName"
+                android:textSize="14sp"
+                android:textAlignment="textStart" />
 
         </LinearLayout>
 
@@ -46,15 +38,6 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
-            <TextView
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Brand"
-                android:id="@+id/lblBrand"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="14sp"
-                android:layout_width="52dp" />
 
             <EditText
                 android:layout_width="match_parent"
@@ -62,8 +45,9 @@
                 android:id="@+id/etxtBrand"
                 android:selectAllOnFocus="true"
                 android:textColor="@color/colorPrimary"
-                android:hint="Optional"
-                android:textSize="14sp" />
+                android:hint="@string/hintBrand"
+                android:textSize="14sp"
+                android:textAlignment="textStart" />
 
         </LinearLayout>
 
@@ -72,27 +56,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <TextView
-                android:text="Calories"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:id="@+id/lblCalories"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="14sp"
-                android:layout_width="52dp" />
-
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:inputType="number"
-                android:ems="4"
+                android:ems="6"
                 android:id="@+id/etxtCalories"
 
                 android:textColor="?attr/colorPrimary"
-                android:textAlignment="center"
+                android:textAlignment="textStart"
                 android:textSize="14sp"
-                android:maxLength="4" />
+                android:hint="@string/hintCalories"
+                android:maxLength="10" />
 
         </LinearLayout>
 
@@ -101,89 +77,48 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" >
 
-            <TextView
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Carbs"
-                android:id="@+id/lblCarbs"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="14sp"
-                android:layout_weight="0.167"
-                android:layout_width="wrap_content" />
-
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="numberDecimal"
-                android:ems="3"
+                android:ems="6"
                 android:id="@+id/etxtCarbs"
                 android:textColor="@color/colorPrimary"
-                android:textAlignment="center"
+                android:textAlignment="textStart"
                 android:textSize="14sp"
-                android:maxLength="4"
-                android:layout_weight="0.167" />
-
-            <TextView
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Protein"
-                android:id="@+id/lblProtein"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="14sp"
+                android:maxLength="5"
                 android:layout_weight="0.167"
-                android:layout_width="wrap_content" />
+                android:hint="@string/hintCarbs" />
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="3"
+                android:ems="6"
                 android:id="@+id/etxtProtein"
                 android:layout_alignParentTop="true"
                 android:layout_toEndOf="@+id/textView"
                 android:textColor="@color/colorPrimary"
-                android:textAlignment="center"
+                android:textAlignment="textStart"
                 android:inputType="numberDecimal"
                 android:textSize="14sp"
                 android:layout_weight="0.167"
-                android:maxLength="4" />
-
-            <TextView
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Fat"
-                android:id="@+id/lblFat"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="14sp"
-                android:layout_weight="0.167"
-                android:layout_width="wrap_content" />
+                android:maxLength="4"
+                android:hint="@string/hintProtein" />
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="3"
+                android:ems="6"
                 android:id="@+id/etxtFat"
                 android:layout_alignParentTop="true"
                 android:layout_toEndOf="@+id/textView3"
                 android:textColor="@color/colorPrimary"
-                android:textAlignment="center"
+                android:textAlignment="textStart"
                 android:inputType="numberDecimal"
                 android:textSize="14sp"
                 android:layout_weight="0.167"
-                android:maxLength="5" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+                android:maxLength="5"
+                android:hint="@string/hintFat" />
 
         </LinearLayout>
 
@@ -230,24 +165,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
-            <TextView
-                android:text="Serving #:"
-                android:layout_height="wrap_content"
-                android:id="@+id/lblServingNum"
-                android:textSize="14sp"
-                android:textColor="?attr/colorPrimaryDark"
-                android:layout_width="75dp" />
-
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ems="5"
+                android:ems="6"
                 android:id="@+id/etxtServingNum"
-                android:textAlignment="center"
-                android:text="1"
+                android:textAlignment="textStart"
                 android:inputType="numberDecimal"
                 android:textColor="?attr/colorPrimary"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:hint="@string/hintServing" />
 
         </LinearLayout>
 
@@ -257,28 +184,19 @@
             android:layout_height="wrap_content"
             android:weightSum="1">
 
-            <TextView
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Amount:"
-                android:id="@+id/lblAmount"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="14sp"
-                android:layout_width="75dp" />
-
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:inputType="number"
-                android:ems="5"
+                android:ems="6"
                 android:id="@+id/etxtAmount"
                 android:layout_alignParentTop="true"
                 android:layout_toEndOf="@+id/textView2"
                 android:textColor="@color/colorPrimary"
-                android:textAlignment="center"
-                android:text="100"
+                android:textAlignment="textStart"
                 android:enabled="true"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:hint="@string/hintAmount" />
 
             <Spinner
                 android:layout_width="wrap_content"

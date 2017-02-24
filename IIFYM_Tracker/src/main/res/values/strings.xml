@@ -132,8 +132,14 @@
     <string name="UserFocus">I want to focus on ...</string>
     <string name="UserMacrosTitle">Daily Nutritional Goals</string>
     <string name="MacroSettingsTitle">Change your Daily Nutritional Goals</string>
-
-
+    <string name="hintCalories">Calories (kcal)</string>
+    <string name="hintBrand">Brand (optional)</string>
+    <string name="hintName">Food Name (required)</string>
+    <string name="hintCarbs">Carbs (g)</string>
+    <string name="hintProtein">Protein (g)</string>
+    <string name="hintFat">Fat (g)</string>
+    <string name="hintServing">Serving size</string>
+    <string name="hintAmount">Weight</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->
