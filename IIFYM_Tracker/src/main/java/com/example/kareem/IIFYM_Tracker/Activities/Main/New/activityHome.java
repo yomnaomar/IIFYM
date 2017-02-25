@@ -19,8 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
-import com.example.kareem.IIFYM_Tracker.Activities.Settings.MacroSettings;
-import com.example.kareem.IIFYM_Tracker.Activities.Settings.UserProfile_Mina;
+/*import com.example.kareem.IIFYM_Tracker.Activities.Settings.MacroSettings;*/
 import com.example.kareem.IIFYM_Tracker.Activities.User_Login_Authentification.activityLogin;
 import com.example.kareem.IIFYM_Tracker.Database.SQLiteConnector;
 import com.example.kareem.IIFYM_Tracker.Database.SharedPreferenceHelper;
@@ -278,9 +277,9 @@ public class activityHome extends AppCompatActivity implements AdapterView.OnIte
         Intent intent;
         switch (id){
             case (R.id.action_MacroSettings):
-                intent = new Intent(context,MacroSettings.class );
+            /*    intent = new Intent(context,MacroSettings.class );
                 startActivity(intent);
-                finish();
+                finish();*/
                 return true;
             case (R.id.action_MealSettings):
                 intent = new Intent(context, activityViewSavedItems.class);
@@ -288,9 +287,9 @@ public class activityHome extends AppCompatActivity implements AdapterView.OnIte
                 finish();
                 return true;
             case (R.id.profile_menu_btn):
-                intent = new Intent(context,UserProfile_Mina.class);
+                /*intent = new Intent(context,UserProfile_Mina.class);
                 startActivity(intent);
-                finish();
+                finish();*/
                 return true;
             case (R.id.logout_menu_btn):
                 signOut();
