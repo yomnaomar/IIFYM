@@ -33,8 +33,7 @@ public class activityViewDailyItem extends AppCompatActivity implements View.OnC
     // Database
     private SQLiteConnector DB_SQLite;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_daily_item);
 
@@ -68,10 +67,10 @@ public class activityViewDailyItem extends AppCompatActivity implements View.OnC
 
         lblName.setText(food.getName());
         lblBrand.setText(food.getBrand());
-        lblCalories.setText(food.getCalories() * dailyitem.getMultiplier() + " kcal");
-        lblCarbs.setText(food.getCarbs() * dailyitem.getMultiplier() + " c");
-        lblProtein.setText(food.getProtein() * dailyitem.getMultiplier() + " p");
-        lblFat.setText(food.getFat() * dailyitem.getMultiplier() + " f");
+        lblCalories.setText(food.getCalories() * dailyitem.getMultiplier() + "");
+        lblCarbs.setText(food.getCarbs() * dailyitem.getMultiplier() + "");
+        lblProtein.setText(food.getProtein() * dailyitem.getMultiplier() + "");
+        lblFat.setText(food.getFat() * dailyitem.getMultiplier() + "");
 
         if (food.getPortionType() == 0) { // Serving
             portionAmount = DB_SQLite.retrieveServing(food);
@@ -88,8 +87,7 @@ public class activityViewDailyItem extends AppCompatActivity implements View.OnC
         }
     }
 
-    @Override
-    public void onClick(View v) {
+    @Override public void onClick(View v) {
         switch (v.getId()) {
             case R.id.fabDelete:
                 deleteDailyItem();

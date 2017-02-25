@@ -58,6 +58,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <TextView
+                android:text="@string/lblkcal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView38"
+                android:textColor="@color/CaloriesProgessColor" />
+
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -70,7 +77,7 @@
                 android:textAlignment="textStart"
                 android:textSize="14sp"
                 android:hint="@string/hintCalories"
-                android:maxLength="10" />
+                android:maxLength="5" />
 
         </LinearLayout>
 
@@ -79,11 +86,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" >
 
+            <TextView
+                android:text="@string/lblC"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView2"
+                android:layout_weight="0.167"
+                android:textColor="@color/CarbProgressColor" />
+
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="numberDecimal"
-                android:ems="6"
+                android:ems="5"
                 android:id="@+id/etxtCarbs"
                 android:textColor="@color/colorPrimary"
                 android:textAlignment="textStart"
@@ -92,10 +107,18 @@
                 android:layout_weight="0.167"
                 android:hint="@string/hintCarbs" />
 
+            <TextView
+                android:text="@string/lblp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView19"
+                android:layout_weight="0.167"
+                android:textColor="@color/ProteinProgessColor" />
+
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="6"
+                android:ems="5"
                 android:id="@+id/etxtProtein"
                 android:layout_alignParentTop="true"
                 android:layout_toEndOf="@+id/textView"
@@ -104,13 +127,21 @@
                 android:inputType="numberDecimal"
                 android:textSize="14sp"
                 android:layout_weight="0.167"
-                android:maxLength="4"
+                android:maxLength="5"
                 android:hint="@string/hintProtein" />
+
+            <TextView
+                android:text="@string/lblf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView21"
+                android:layout_weight="0.167"
+                android:textColor="@color/FatProgessColor" />
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="6"
+                android:ems="5"
                 android:id="@+id/etxtFat"
                 android:layout_alignParentTop="true"
                 android:layout_toEndOf="@+id/textView3"
@@ -176,7 +207,8 @@
                 android:inputType="numberDecimal"
                 android:textColor="?attr/colorPrimary"
                 android:textSize="14sp"
-                android:hint="@string/hintServing" />
+                android:hint="@string/hintServing"
+                android:maxLength="4" />
 
         </LinearLayout>
 
@@ -192,13 +224,12 @@
                 android:inputType="number"
                 android:ems="6"
                 android:id="@+id/etxtAmount"
-                android:layout_alignParentTop="true"
-                android:layout_toEndOf="@+id/textView2"
                 android:textColor="@color/colorPrimary"
                 android:textAlignment="textStart"
                 android:enabled="true"
                 android:textSize="14sp"
-                android:hint="@string/hintAmount" />
+                android:hint="@string/hintAmount"
+                android:maxLength="4" />
 
             <Spinner
                 android:layout_width="wrap_content"

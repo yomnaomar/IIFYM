@@ -275,32 +275,28 @@ public class activityHome extends AppCompatActivity implements AdapterView.OnIte
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_MealSettings) {
-            Intent intent = new Intent();
-            intent.setClassName(this, "com.example.kareem.IIFYM_Tracker.Activities.Main.Old.activityViewSavedItems");
-            startActivity(intent);
-            return true;
-        }
-        if(id==R.id.logout_menu_btn)
-        {
-            signOut();
-            Intent in = new Intent(getApplicationContext(), activityLogin.class);
-            startActivity(in);
-            return true;
-        }
-        if(id==R.id.profile_menu_btn)
-        {
-            Intent intent = new Intent(getApplicationContext(),UserProfile_Mina.class);
-            startActivity(intent);
-            return true;
-        }
-        if(id==R.id.action_MacroSettings)
-        {
-            Intent in = new Intent(getApplicationContext(),MacroSettings.class );
-            startActivity(in);
-            return true;
+        Intent intent;
+        switch (id){
+            case (R.id.action_MacroSettings):
+                intent = new Intent(context,MacroSettings.class );
+                startActivity(intent);
+                finish();
+                return true;
+            case (R.id.action_MealSettings):
+                intent = new Intent(context, activityViewSavedItems.class);
+                startActivity(intent);
+                finish();
+                return true;
+            case (R.id.profile_menu_btn):
+                intent = new Intent(context,UserProfile_Mina.class);
+                startActivity(intent);
+                finish();
+                return true;
+            case (R.id.logout_menu_btn):
+                signOut();
+                intent = new Intent(context, activityLogin.class);
+                startActivity(intent);
+                finish();
         }
         return super.onOptionsItemSelected(item);
     }

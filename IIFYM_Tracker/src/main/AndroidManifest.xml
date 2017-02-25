@@ -17,9 +17,10 @@
             android:name=".Activities.Main.New.activityHome"
             android:label="@string/appName"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:launchMode="singleInstance"/>
         <activity
-            android:name=".Activities.Main.Old.activityViewSavedItems"
+            android:name=".Activities.Main.New.activityViewSavedItems"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Activities.Main.Old.activityViewFood"
@@ -59,7 +60,7 @@
         </activity>
         <activity
             android:name=".Activities.Main.New.activitySelectDailyItem"
-            android:label="Select an item to add" />
+            android:label="@string/toolbarSelectItemToAdd" />
         <activity android:name=".Activities.Main.New.activityViewDailyItem"></activity>
     </application>
 

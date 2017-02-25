@@ -23,8 +23,9 @@ public class Food {
         this.brand = brand;
         this.calories = calories;
         this.carbs = carbs;
-        this.fat = fat;
         this.protein = protein;
+        this.fat = fat;
+        this.portionType = portionType;
         this.isMeal = isMeal;
     }
 
@@ -36,8 +37,9 @@ public class Food {
         this.brand = brand;
         this.calories = calories;
         this.carbs = carbs;
-        this.fat = fat;
         this.protein = protein;
+        this.fat = fat;
+        this.portionType = portionType;
         if(isMeal == 0)
             this.isMeal = false;
         else
@@ -53,6 +55,7 @@ public class Food {
         this.carbs = carbs;
         this.fat = fat;
         this.protein = protein;
+        this.portionType = portionType;
         this.isMeal = isMeal;
     }
 

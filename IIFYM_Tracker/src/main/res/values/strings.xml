@@ -146,6 +146,11 @@
     <string name="lblPortionAmount">Portion Amount</string>
     <string name="btnDelete">Delete from daily log?</string>
     <string name="lblSave">Save</string>
+    <string name="lblC">c</string>
+    <string name="lblp">p</string>
+    <string name="lblf">f</string>
+    <string name="lblkcal">kcal</string>
+    <string name="toolbarSelectItemToAdd">Select an item to add</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->

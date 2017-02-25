@@ -1,7 +1,6 @@
 package com.example.kareem.IIFYM_Tracker.ViewComponents;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,7 +32,6 @@ public class adapterSavedItem extends ArrayAdapter<Food> {
         arrOriginalMeals = new ArrayList<Food>(foods);
         arrFilteredMeals = new ArrayList<Food>(foods);
 
-        // TODO check if this doesn't crash, if it does, return this to first line of getView
         DB_SQLite = new SQLiteConnector(getContext());
     }
 
@@ -76,7 +74,6 @@ public class adapterSavedItem extends ArrayAdapter<Food> {
             }
         } else if (food.getPortionType() == 1) { // Weight
             weight = DB_SQLite.retrieveWeight(food);
-            Log.d("Weight Retrieved: ", "ID: " + id + " Weight_quantity: " + weight.getAmount() + " weightUnit: " + weight.getUnit());
             portion.setText(weight.getAmount() + " " + weight.getUnit().Abbreviate());
         }
 

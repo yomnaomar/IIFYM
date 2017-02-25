@@ -3,7 +3,6 @@ package com.example.kareem.IIFYM_Tracker.Database;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 /**
  * Created by Kareem on 9/4/2016.
@@ -36,9 +35,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, 1);
     }
 
-    @Override
-    public void onCreate(SQLiteDatabase db) {
-        Log.d("SQLiteHelper","onCreate Called");
+    @Override public void onCreate(SQLiteDatabase db) {
 
         String createTable_User = "CREATE TABLE " + Table_User + " " +
                 "(uid               TEXT PRIMARY KEY, " +   // firebase uid = User ID
@@ -105,15 +102,11 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         db.execSQL(createTable_Serving);
         db.execSQL(createTable_DailyItem);
         db.execSQL(createTable_ComposedOf);
-        Log.d("SQLiteHelper", "SQLite tables created ");
     }
 
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-    }
+    @Override public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {}
 
-    @Override
-    public void onOpen(SQLiteDatabase db) {
+    @Override public void onOpen(SQLiteDatabase db) {
         super.onOpen(db);
         // Enable foreign key constraints
         db.execSQL("PRAGMA foreign_keys=ON;");

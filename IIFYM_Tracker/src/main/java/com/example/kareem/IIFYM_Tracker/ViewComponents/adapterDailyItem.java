@@ -1,7 +1,6 @@
 package com.example.kareem.IIFYM_Tracker.ViewComponents;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,14 +33,11 @@ public class adapterDailyItem extends ArrayAdapter<DailyItem> {
     public View getView(final int position, View convertView, ViewGroup parent) {
         DB_SQLite = new SQLiteConnector(getContext());
 
-
         // Get the data list_item for this position
         dailyItem = getItem(position);
 
         final long id = dailyItem.getId();
         float multiplier = dailyItem.getMultiplier();
-        Log.i("dailymeal adapter", "position: " + position + " id: " + id);
-        Log.i("dailymeal adapter", "multiplier: " + multiplier + " id: " + id);
 
         food = DB_SQLite.retrieveFood(id);
 

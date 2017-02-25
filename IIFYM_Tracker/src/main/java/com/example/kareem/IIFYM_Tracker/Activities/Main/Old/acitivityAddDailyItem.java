@@ -1,55 +1,74 @@
 package com.example.kareem.IIFYM_Tracker.Activities.Main.Old;
-
 import android.support.v7.app.AppCompatActivity;
 
-public class acitivityAddDailyItem extends AppCompatActivity{}
-/*public class acitivityAddDailyItem extends AppCompatActivity implements View.OnClickListener, TextWatcher {
+public class acitivityAddDailyItem extends AppCompatActivity {}
+/*
+package com.example.kareem.IIFYM_Tracker.Activities.Main.Old;
 
-    TextView Label_Meal_Name, Label_Carbs, Label_Protein, Label_Fat, Label_Calories, Label_Serving, Label_Weight_Unit;
-    EditText EditText_Serving_Quantity,EditText_Weight_Quantity;
-    Button Button_Done, Button_Cancel;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AppCompatActivity;
+import android.text.TextWatcher;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import com.example.kareem.IIFYM_Tracker.Database.SQLiteConnector;
+import com.example.kareem.IIFYM_Tracker.Database.SharedPreferenceHelper;
+import com.example.kareem.IIFYM_Tracker.Models.DailyItem;
+import com.example.kareem.IIFYM_Tracker.Models.Food;
+import com.example.kareem.IIFYM_Tracker.R;
+
+public class acitivityAddDailyItem extends AppCompatActivity implements View.OnClickListener, TextWatcher {
+
+    // GUI
+    private TextView    lblName, lblBrand, lblCalories, lblCarbs, lblProtein, lblFat, lblPortionAmount, lblPortionType;
+    private EditText    etxtPortionAmount;
+
     int meal_id;
     float base_carbs,base_protein,base_fat,base_calories;
     float new_carbs,new_protein,new_fat,new_calories;
 
-    float base_serving;
-    int   base_weight_quantity;
+    // Variables
+    private Context     context;
+    private long        id;
+    private int         position;
+    private Food        food;
+    private DailyItem   dailyitem;
+    private float       portionAmount;
 
-    float multiplier;
-    Food M;
+    // Database
+    private SQLiteConnector DB_SQLite;
 
-    private SQLiteConnector My_DB;
-    private SharedPreferences settings;
-    private boolean isServing;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_daily_item);
 
-        Label_Meal_Name = (TextView)findViewById(R.id.Label_Meal_Name);
-        Label_Carbs = (TextView)findViewById(R.id.Label_Carbs);
-        Label_Protein = (TextView)findViewById(R.id.Label_Protein);
-        Label_Fat = (TextView)findViewById(R.id.Label_Fat);
-        Label_Calories = (TextView)findViewById(R.id.Label_Calories);
-        Label_Serving = (TextView)findViewById(R.id.Label_Serving);
-        Label_Weight_Unit = (TextView)findViewById(R.id.Label_Weight_Unit);
-        EditText_Serving_Quantity = (EditText) findViewById(R.id.EditText_Serving_Quantity);
-        EditText_Serving_Quantity.addTextChangedListener(this);
-        EditText_Weight_Quantity = (EditText) findViewById(R.id.EditText_Weight_Quantity);
-        EditText_Weight_Quantity.addTextChangedListener(this);
+        // Intent
+        Intent intent = getIntent();
+        id = intent.getLongExtra("id", -1);
 
-        Button_Done = (Button)findViewById(R.id.Button_Done);
-        Button_Cancel = (Button)findViewById(R.id.Button_Cancel);
-        Button_Done.setOnClickListener(this);
-        Button_Cancel.setOnClickListener(this);
+        // Database
+        context = getApplicationContext();
+        DB_SQLite = new SQLiteConnector(context);
+        food = DB_SQLite.retrieveFood(id);
 
-        My_DB = new SQLiteConnector(getApplicationContext());
-        settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        // GUI
+        initializeGUI();
+    }
 
-        meal_id = getIntent().getIntExtra("meal_id",1);
-        M = My_DB.getMeal(meal_id);
-        InitializeViews();
+    private void initializeGUI() {
+        lblName = (TextView)findViewById(R.id.lblName);
+        lblBrand = (TextView) findViewById(R.id.lblBrand);
+        lblCalories = (TextView) findViewById(R.id.lblCalories);
+        lblCarbs = (TextView) findViewById(R.id.lblCarbs);
+        lblProtein = (TextView) findViewById(R.id.lblProtein);
+        lblFat = (TextView) findViewById(R.id.lblFat);
+        lblPortionType = (TextView) findViewById(R.id.lblPortionType);
+
+        etxtPortionAmount = (EditText) findViewById(R.id.etxtPortionAmount);
     }
 
     @Override
@@ -277,4 +296,5 @@ public class acitivityAddDailyItem extends AppCompatActivity{}
         EditText_Weight_Quantity.setVisibility(View.INVISIBLE);
         Label_Weight_Unit.setVisibility(View.INVISIBLE);
     }
-}*/
+}
+*/

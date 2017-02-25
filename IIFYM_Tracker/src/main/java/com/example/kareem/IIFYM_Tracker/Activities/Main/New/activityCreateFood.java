@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -141,6 +142,7 @@ public class activityCreateFood extends AppCompatActivity implements View.OnClic
             int radioButtonID = seggroupPortionType.getCheckedRadioButtonId();
             View radioButton = seggroupPortionType.findViewById(radioButtonID);
             int indexofPortionType = seggroupPortionType.indexOfChild(radioButton);
+            Log.d("Enter", "PortionType " + indexofPortionType);
 
             createFood(name, brand, calories, carbs, protein, fat, indexofPortionType);
         }

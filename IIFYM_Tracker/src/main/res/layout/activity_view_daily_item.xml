@@ -16,8 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="8dp">
+        android:layout_alignParentStart="true">
 
         <TextView
             android:text="@string/lblName"
@@ -35,13 +34,27 @@
             android:gravity="center_vertical"
             android:textColor="@color/colorPrimary"/>
 
-        <TextView
-            android:text="@string/lblCalories"
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:id="@+id/lblCalories"
-            android:gravity="center_vertical"
-            android:textColor="@color/colorPrimary"/>
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="@string/lblCalories"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:id="@+id/lblCalories"
+                android:gravity="center_vertical"
+                android:textColor="@color/colorPrimary" />
+
+            <TextView
+                android:text="@string/lblkcal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView39"
+                android:layout_marginLeft="5dp" />
+
+        </LinearLayout>
 
         <LinearLayout
             android:orientation="horizontal"
@@ -50,27 +63,50 @@
 
             <TextView
                 android:text="@string/lblCarbs"
-                android:layout_width="70dp"
+                android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:id="@+id/lblCarbs"
                 android:gravity="center_vertical"
                 android:textColor="@color/colorPrimary"/>
 
             <TextView
+                android:text="@string/lblC"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/lblc"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="5dp" />
+
+            <TextView
                 android:text="@string/lblProtein"
-                android:layout_width="70dp"
+                android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:id="@+id/lblProtein"
                 android:gravity="center_vertical"
                 android:textColor="@color/colorPrimary" />
 
             <TextView
+                android:text="@string/lblp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/lblp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="5dp" />
+
+            <TextView
                 android:text="@string/lblFat"
-                android:layout_width="70dp"
+                android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:id="@+id/lblFat"
                 android:gravity="center_vertical"
                 android:textColor="@color/colorPrimary" />
+
+            <TextView
+                android:text="@string/lblf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/lblf"
+                android:layout_marginLeft="5dp" />
 
         </LinearLayout>
 
@@ -101,22 +137,23 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/activity_vertical_margin">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
             <android.support.design.widget.FloatingActionButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:clickable="true"
                 app:fabSize="mini"
-                app:srcCompat="@drawable/ic_delete"
                 android:id="@+id/fabDelete"
+                android:scaleType="fitXY"
+                android:layout_gravity="bottom|right"
+                android:src="@drawable/ic_delete"
                 android:layout_weight="1"
-                android:layout_gravity="center"
-                android:scaleType="centerCrop" />
+                android:baselineAlignBottom="false"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true" />
 
             <TextView
                 android:text="@string/btnDelete"
@@ -124,9 +161,10 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/lblDelete"
                 android:layout_weight="1"
-                android:layout_gravity="center" />
-
-        </LinearLayout>
+                android:layout_gravity="center"
+                android:layout_alignParentBottom="true"
+                android:layout_toStartOf="@+id/fabDelete" />
+        </RelativeLayout>
 
     </LinearLayout>
 
