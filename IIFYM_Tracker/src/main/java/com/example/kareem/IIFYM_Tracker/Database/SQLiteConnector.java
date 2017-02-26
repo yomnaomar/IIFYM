@@ -174,14 +174,14 @@ public class SQLiteConnector {
 
     // Returns True if Food with name found
     // Returns False otherwise
-    public boolean isExistingFood (String name){
-        Cursor C = database.rawQuery("SELECT * FROM " + Table_Food + " WHERE name = '" + name + "'", null);
+    public boolean isExistingFood (long id){
+        Cursor C = database.rawQuery("SELECT * FROM " + Table_Food + " WHERE id = '" + id + "'", null);
         C.moveToFirst();
         if (C.getCount() != 0) {
-            Log.d("isExistingFood","Food with name " + name + " found");
+            Log.d("isExistingFood","Food with id " + id + " found");
             return true;
         }
-        Log.d("isExistingFood","Food with name " + name + " not found");
+        Log.d("isExistingFood","Food with id " + id + " not found");
         return false;
     }
 
@@ -211,7 +211,7 @@ public class SQLiteConnector {
             return new Food(C.getInt(0),
                     C.getString(1),
                     C.getString(2),
-                    C.getFloat(3),
+                    C.getInt(3),
                     C.getFloat(4),
                     C.getFloat(5),
                     C.getFloat(6),
@@ -231,7 +231,7 @@ public class SQLiteConnector {
             return new Food(C.getInt(0),
                     C.getString(1),
                     C.getString(2),
-                    C.getFloat(3),
+                    C.getInt(3),
                     C.getFloat(4),
                     C.getFloat(5),
                     C.getFloat(6),
@@ -245,7 +245,7 @@ public class SQLiteConnector {
     // Returns True if Food with name = f.getName was found and updated successfully
     // Returns False otherwise
     public boolean updateFood(Food f) {
-        if (isExistingFood(f.getName())) {
+        if (isExistingFood(f.getId())) {
             ContentValues updateFood = new ContentValues();
             updateFood.put("id",            f.getId());
             updateFood.put("name",          f.getName());
@@ -256,7 +256,7 @@ public class SQLiteConnector {
             updateFood.put("fat",           f.getFat());
             updateFood.put("portionType",   f.getPortionType());
             updateFood.put("isMeal",        f.isMeal());
-            database.update(Table_Food, updateFood, "name = '" + f.getName() + "'", null);
+            database.update(Table_Food, updateFood, "id = '" + f.getId() + "'", null);
             Log.d("updateFood", "Food with name " + f.getName() + " updated");
             return true;
         }
@@ -267,15 +267,16 @@ public class SQLiteConnector {
     }
 
     // Returns True if Food with name was found and deleted
+    // Also deletes food usages from other tables (trigger statements)
     // Returns False otherwise
-    public boolean deleteFood(String name) {
-        if (isExistingFood(name)){
-            database.delete(Table_Food, "name = '" + name + "'", null);
-            Log.d("deleteFood", "Food with name " + name + " deleted");
+    public boolean deleteFood(long id) {
+        if (isExistingFood(id)){
+            database.delete(Table_Food, "id = '" + id + "'", null);
+            Log.d("deleteFood", "Food with id " + id + " deleted");
             return true;
         }
         else {
-            Log.d("deleteFood", "Food with name " + name + " not found");
+            Log.d("deleteFood", "Food with id " + id + " not found");
             return false;
         }
     }
@@ -296,7 +297,7 @@ public class SQLiteConnector {
                 int     id          = C.getInt(0);
                 String  name        = C.getString(1);
                 String  brand       = C.getString(2);
-                float   calories    = C.getFloat(3);
+                int     calories    = C.getInt(3);
                 float   carbs       = C.getFloat(4);
                 float   protein     = C.getFloat(5);
                 float   fat         = C.getFloat(6);
@@ -391,7 +392,6 @@ public class SQLiteConnector {
             return false;
         }
     }
-
 
     // ----------    Table_Serving = "Serving"    ----------------
 

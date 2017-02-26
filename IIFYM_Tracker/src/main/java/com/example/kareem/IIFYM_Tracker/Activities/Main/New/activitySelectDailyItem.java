@@ -88,7 +88,10 @@ public class activitySelectDailyItem extends AppCompatActivity implements Adapte
 
     //Updates adapterSavedItem and arrSavedItems
     private void UpdateArrayList() {
+        adapterSavedItem.clear();
         arrSavedItems = DB_SQLite.retrieveAllFoods();
+        for (int i =0; i <arrSavedItems.size(); i++)
+            adapterSavedItem.add(arrSavedItems.get(i));
     }
 
     @Override protected void onResume() {

@@ -23,14 +23,14 @@ public class adapterSavedItem extends ArrayAdapter<Food> {
 
     private SQLiteConnector DB_SQLite;
 
-    private ArrayList<Food> arrOriginalMeals;
-    private ArrayList<Food> arrFilteredMeals;
+    private ArrayList<Food> arrOriginalItems;
+    private ArrayList<Food> arrFilteredItems;
     private Filter filter;
 
-    public adapterSavedItem(Context context, ArrayList<Food> foods) {
-        super(context, 0, foods);
-        arrOriginalMeals = new ArrayList<Food>(foods);
-        arrFilteredMeals = new ArrayList<Food>(foods);
+    public adapterSavedItem(Context context, ArrayList<Food> items) {
+        super(context, 0, items);
+        arrOriginalItems = new ArrayList(items);
+        arrFilteredItems = new ArrayList(items);
 
         DB_SQLite = new SQLiteConnector(getContext());
     }
@@ -95,12 +95,12 @@ public class adapterSavedItem extends ArrayAdapter<Food> {
             String prefix = constraint.toString().toLowerCase();
 
             if(prefix == null || prefix.length() == 0) {
-                ArrayList<Food> list = new ArrayList(arrOriginalMeals);
+                ArrayList<Food> list = new ArrayList(arrOriginalItems);
                 results.values = list;
                 results.count = list.size();
             }
             else {
-                final ArrayList<Food> list = new ArrayList(arrOriginalMeals);
+                final ArrayList<Food> list = new ArrayList(arrOriginalItems);
                 final ArrayList<Food> nlist = new ArrayList();
                 int count = list.size();
 
@@ -120,13 +120,13 @@ public class adapterSavedItem extends ArrayAdapter<Food> {
 
         @SuppressWarnings("unchecked") @Override
         protected void publishResults(CharSequence contraint, FilterResults results) {
-            arrFilteredMeals = (ArrayList<Food>)results.values;
+            arrFilteredItems = (ArrayList<Food>)results.values;
 
             clear();
-            int count = arrFilteredMeals.size();
+            int count = arrFilteredItems.size();
             for (int i=0; i<count; i++)
             {
-                Food food = arrFilteredMeals.get(i);
+                Food food = arrFilteredItems.get(i);
                 add(food);
             }
         }

@@ -8,7 +8,7 @@ public class Food {
     private long id;
     private String name;
     private String brand;
-    private float calories;
+    private int calories;
     private float carbs;
     private float protein;
     private float fat;
@@ -17,7 +17,7 @@ public class Food {
 
     // Constructor 1
     // isMeal is boolean
-    public Food(long id, String name, String brand, float calories, float carbs, float protein, float fat, int portionType, boolean isMeal) {
+    public Food(long id, String name, String brand, int calories, float carbs, float protein, float fat, int portionType, boolean isMeal) {
         this.id = id;
         this.name = name;
         this.brand = brand;
@@ -31,7 +31,7 @@ public class Food {
 
     // Constructor 2
     // isMeal is int
-    public Food(long id, String name, String brand, float calories, float carbs, float protein, float fat, int portionType, int isMeal) {
+    public Food(long id, String name, String brand, int calories, float carbs, float protein, float fat, int portionType, int isMeal) {
         this.id = id;
         this.name = name;
         this.brand = brand;
@@ -48,7 +48,7 @@ public class Food {
 
     // Constructor 3
     // id is not a requried parameter
-    public Food(String name, String brand, float calories, float carbs, float protein, float fat, int portionType, boolean isMeal) {
+    public Food(String name, String brand, int calories, float carbs, float protein, float fat, int portionType, boolean isMeal) {
         this.name = name;
         this.brand = brand;
         this.calories = calories;
@@ -83,11 +83,11 @@ public class Food {
         this.brand = brand;
     }
 
-    public float getCalories() {
+    public int getCalories() {
         return calories;
     }
 
-    public void setCalories(float calories) {
+    public void setCalories(int calories) {
         this.calories = calories;
     }
 

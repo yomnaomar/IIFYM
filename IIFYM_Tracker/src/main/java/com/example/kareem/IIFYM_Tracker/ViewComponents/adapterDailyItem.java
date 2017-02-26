@@ -20,26 +20,20 @@ import java.util.ArrayList;
  */
 public class adapterDailyItem extends ArrayAdapter<DailyItem> {
 
-    private SQLiteConnector DB_SQLite;
-
-    Food        food;
-    DailyItem   dailyItem;
-
-    public adapterDailyItem(Context context, ArrayList<DailyItem> meals) {
-        super(context, 0, meals);
+    public adapterDailyItem(Context context, ArrayList<DailyItem> dailyitems) {
+        super(context, 0, dailyitems);
     }
 
-    @Override
-    public View getView(final int position, View convertView, ViewGroup parent) {
-        DB_SQLite = new SQLiteConnector(getContext());
+    @Override public View getView(final int position, View convertView, ViewGroup parent) {
+        SQLiteConnector DB_SQLite = new SQLiteConnector(getContext());
 
         // Get the data list_item for this position
-        dailyItem = getItem(position);
+        DailyItem dailyItem = getItem(position);
 
         final long id = dailyItem.getId();
         float multiplier = dailyItem.getMultiplier();
 
-        food = DB_SQLite.retrieveFood(id);
+        Food food = DB_SQLite.retrieveFood(id);
 
         // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {

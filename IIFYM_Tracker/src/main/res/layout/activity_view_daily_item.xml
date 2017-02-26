@@ -68,7 +68,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/textView39"
-                        android:layout_marginLeft="5dp" />
+                        android:layout_marginLeft="5dp"
+                        android:textColor="@color/CaloriesProgessColor" />
 
                 </LinearLayout>
 
@@ -91,7 +92,8 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/lblc"
                         android:layout_marginRight="20dp"
-                        android:layout_marginLeft="5dp" />
+                        android:layout_marginLeft="5dp"
+                        android:textColor="@color/CarbProgressColor" />
 
                     <TextView
                         android:text="@string/lblProtein"
@@ -107,7 +109,8 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/lblp"
                         android:layout_marginRight="20dp"
-                        android:layout_marginLeft="5dp" />
+                        android:layout_marginLeft="5dp"
+                        android:textColor="@color/ProteinProgessColor" />
 
                     <TextView
                         android:text="@string/lblFat"
@@ -122,7 +125,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/lblf"
-                        android:layout_marginLeft="5dp" />
+                        android:layout_marginLeft="5dp"
+                        android:textColor="@color/FatProgessColor" />
 
                 </LinearLayout>
 
@@ -187,7 +191,7 @@
             android:layout_marginStart="16dp" />
 
         <TextView
-            android:text="@string/btnDelete"
+            android:text="@string/lblDeleteFromDaily"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/lblDelete"

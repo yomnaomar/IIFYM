@@ -284,7 +284,6 @@ public class activityHome extends AppCompatActivity implements AdapterView.OnIte
             case (R.id.action_MealSettings):
                 intent = new Intent(context, activityViewSavedItems.class);
                 startActivity(intent);
-                finish();
                 return true;
             case (R.id.profile_menu_btn):
                 /*intent = new Intent(context,UserProfile_Mina.class);

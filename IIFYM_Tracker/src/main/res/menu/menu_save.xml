@@ -1,0 +1,10 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.kareem.IIFYM_Tracker.Activities.Main.New.activityEditFood">
+
+    <item android:title="@string/lblSave"
+        android:icon="@drawable/ic_check"
+        android:id="@+id/menu_save"
+        app:showAsAction="always" />
+</menu>

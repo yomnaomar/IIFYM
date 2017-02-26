@@ -21,13 +21,14 @@
             android:launchMode="singleInstance"/>
         <activity
             android:name=".Activities.Main.New.activityViewSavedItems"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:label="@string/toolbarDatabaseManager"/>
         <activity
-            android:name=".Activities.Main.Old.activityViewFood"
+            android:name=".Activities.Main.New.activityEditFood"
+            android:label="@string/toolbarEditFood"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Activities.Settings.MacroSettings"
-            android:label="Nutrition Settings"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" /><![CDATA[
         android:windowSoftInputMode="adjustPan" />
@@ -38,22 +39,21 @@
         >>>>>>> master
         <activity
             android:name=".Activities.Main.New.activityCreateFood"
-            android:label="Create new Food" />
+            android:label="@string/toolbarCreateNewFood" />
         <activity
             android:name=".Activities.User_Login_Authentification.activityLogin"
             android:label="@string/appName" />
         <activity
             android:name=".Activities.User_Login_Authentification.activityUserInfo"
-            android:label="Register Yourself!" />
+            android:label="@string/toolbarUserInfo" />
         <activity
             android:name=".Activities.User_Login_Authentification.activityUserMacros"
-            android:label="Set your Daily Nutritional Goals" />
+            android:label="@string/toolbarUserMacros" />
         <activity
             android:name=".Activities.User_Login_Authentification.activityLauncher"
             android:label="IIFYM Tracker">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
