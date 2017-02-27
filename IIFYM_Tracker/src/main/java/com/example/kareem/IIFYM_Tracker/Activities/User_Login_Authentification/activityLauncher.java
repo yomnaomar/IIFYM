@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.example.kareem.IIFYM_Tracker.Activities.Main.New.activityMain;
+import com.example.kareem.IIFYM_Tracker.Activities.Main.New.activityHome;
 import com.example.kareem.IIFYM_Tracker.Database.SharedPreferenceHelper;
 import com.example.kareem.IIFYM_Tracker.R;
 
@@ -29,9 +29,9 @@ public class activityLauncher extends AppCompatActivity {
             finish();
         }
         else {
-            // Go to activityMain
+            // Go to activityHome
             Intent intent = new Intent();
-            intent.setClass(context, activityMain.class);
+            intent.setClass(context, activityHome.class);
             startActivity(intent);
             finish();
         }

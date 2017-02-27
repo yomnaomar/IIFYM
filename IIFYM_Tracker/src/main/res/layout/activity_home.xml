@@ -6,11 +6,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.kareem.IIFYM_Tracker.Activities.Main.New.activityMain"
+    tools:context="com.example.kareem.IIFYM_Tracker.Activities.Main.New.activityHome"
     android:layout_marginBottom="@dimen/activity_vertical_margin"
-    android:layout_marginTop="@dimen/activity_vertical_margin"
     android:layout_marginRight="@dimen/activity_horizontal_margin"
-    android:layout_marginLeft="@dimen/activity_horizontal_margin">
+    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+    android:layout_marginTop="5dp">
 
     <android.support.design.widget.FloatingActionButton
         android:layout_width="wrap_content"
@@ -21,8 +21,8 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         app:elevation="3dp"
-        app:fabSize="normal"
-        app:srcCompat="@drawable/ic_add_daily_item"
+        app:fabSize="mini"
+        app:srcCompat="@drawable/ic_add"
         android:layout_marginRight="5dp"
         android:layout_marginBottom="5dp"
         app:rippleColor="?attr/colorButtonNormal" />
@@ -120,7 +120,8 @@
                         android:gravity="left"
                         android:text="0"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@color/Custom_Grey" />
+                        android:textColor="@color/Custom_Grey"
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/lblCaloriesLeft"
@@ -131,21 +132,21 @@
                         android:text="500"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:textColor="@color/Custom_Grey"
-                        android:layout_weight="0.60" />
+                        android:layout_weight="0.60"
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/lblCaloriesGoal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentStart="false"
-                        android:layout_alignParentTop="false"
                         android:layout_weight="0.20"
                         android:gravity="right"
                         android:text="2000"
                         android:textAlignment="gravity"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:textColor="@color/Custom_Grey"
-                        android:layout_gravity="center" />
+                        android:layout_gravity="center"
+                        android:textSize="16sp" />
                 </LinearLayout>
 
                 <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
@@ -202,7 +203,8 @@
                         android:gravity="left"
                         android:text="100"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@color/Custom_Grey" />
+                        android:textColor="@color/Custom_Grey"
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/lblCarbsLeft"
@@ -213,20 +215,20 @@
                         android:gravity="center"
                         android:text="100"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@color/Custom_Grey" />
+                        android:textColor="@color/Custom_Grey"
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/lblCarbsGoal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentTop="true"
                         android:layout_weight="0.2"
                         android:gravity="right"
                         android:text="100"
                         android:textAlignment="gravity"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@color/Custom_Grey" />
+                        android:textColor="@color/Custom_Grey"
+                        android:textSize="16sp" />
                 </LinearLayout>
 
                 <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
@@ -285,7 +287,8 @@
                         android:gravity="left"
                         android:text="100"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@color/Custom_Grey" />
+                        android:textColor="@color/Custom_Grey"
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/lblProteinLeft"
@@ -296,7 +299,8 @@
                         android:gravity="center"
                         android:text="100"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@color/Custom_Grey" />
+                        android:textColor="@color/Custom_Grey"
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/lblProteinGoal"
@@ -309,7 +313,8 @@
                         android:text="100"
                         android:textAlignment="gravity"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@color/Custom_Grey" />
+                        android:textColor="@color/Custom_Grey"
+                        android:textSize="16sp" />
                 </LinearLayout>
 
                 <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
@@ -332,7 +337,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:weightSum="1">
+            android:weightSum="1"
+            android:layout_marginBottom="5dp">
 
 
             <ImageView
@@ -366,7 +372,8 @@
                         android:gravity="left"
                         android:text="100"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@color/Custom_Grey" />
+                        android:textColor="@color/Custom_Grey"
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/lblFatLeft"
@@ -377,7 +384,8 @@
                         android:gravity="center"
                         android:text="100"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@color/Custom_Grey" />
+                        android:textColor="@color/Custom_Grey"
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/lblFatGoal"
@@ -390,7 +398,8 @@
                         android:text="100"
                         android:textAlignment="gravity"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@color/Custom_Grey" />
+                        android:textColor="@color/Custom_Grey"
+                        android:textSize="16sp" />
                 </LinearLayout>
 
                 <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar

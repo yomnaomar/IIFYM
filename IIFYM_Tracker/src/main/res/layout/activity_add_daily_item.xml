@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".Activities.Main.New.activityCreateDailyFood">
+    tools:context=".Activities.Main.New.activitySelectDailyItem">
 
     <LinearLayout
         android:orientation="vertical"
@@ -28,7 +28,7 @@
                 android:text="Item Name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView5"
+                android:id="@+id/lblName"
                 android:layout_weight="1"
                 android:textAppearance="@android:style/TextAppearance.Material.Medium"
                 android:textColor="@color/colorPrimary"
@@ -215,7 +215,8 @@
                 android:maxLength="4"
                 android:ems="3"
                 android:layout_width="45dp"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                />
 
         </LinearLayout>
 
@@ -224,26 +225,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <Button
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="Enter"
-                android:id="@+id/Button_Enter"
-                android:layout_weight="1"
-                android:background="@drawable/btn_iifym_style" />
-
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1" />
-
-            <Button
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="Cancel"
-                android:id="@+id/Button_Cancel"
-                android:layout_weight="1"
-                android:background="@drawable/btn_iifym_style" />
 
         </LinearLayout>
 

@@ -11,15 +11,15 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 
-import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.example.kareem.IIFYM_Tracker.Database.SQLiteConnector;
 import com.example.kareem.IIFYM_Tracker.Models.Food;
 import com.example.kareem.IIFYM_Tracker.R;
 import com.example.kareem.IIFYM_Tracker.ViewComponents.adapterSavedItem;
+import com.getbase.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
-public class activitySelectDailyItem extends AppCompatActivity implements AdapterView.OnItemClickListener, View.OnClickListener {
+public class activityViewSavedItems extends AppCompatActivity implements AdapterView.OnItemClickListener, View.OnClickListener {
 
     // GUI
     private EditText                etxtSearch;
@@ -34,8 +34,8 @@ public class activitySelectDailyItem extends AppCompatActivity implements Adapte
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_select_daily_item);
-        
+        setContentView(R.layout.activity_view_saved_items);
+
         // Database
         context = getApplicationContext();
         DB_SQLite = new SQLiteConnector(context);
@@ -64,9 +64,9 @@ public class activitySelectDailyItem extends AppCompatActivity implements Adapte
         listviewSavedItems.setAdapter(adapterSavedItem);
         listviewSavedItems.setOnItemClickListener(this);
 
-        fabCreateFood = (FloatingActionButton) findViewById(R.id.fabAddNewFood);
+        fabCreateFood = (FloatingActionButton) findViewById(R.id.fabCreateNewFood);
         fabCreateFood.setOnClickListener(this);
-        fabCreateMeal = (FloatingActionButton) findViewById(R.id.fabAddNewMeal);
+        fabCreateMeal = (FloatingActionButton) findViewById(R.id.fabCreateNewMeal);
         fabCreateMeal.setOnClickListener(this);
     }
 
@@ -75,15 +75,16 @@ public class activitySelectDailyItem extends AppCompatActivity implements Adapte
         Food food = (Food) parent.getItemAtPosition(position);
         long fid = food.getId();
 
-        /*if (food.isMeal()) {
-            Intent intent = new Intent(getBaseContext(), AddDailyFoodActivity.class);
-            intent.putExtra("fid", fid);
+        if (!food.isMeal()) {
+            Intent intent = new Intent(getBaseContext(), activityEditFood.class);
+            intent.putExtra("id", fid);
             startActivity(intent);
-        } else {
-            Intent intent = new Intent(getBaseContext(), AddDailyMealActivity.class);
-            intent.putExtra("fid", fid);
-            startActivity(intent);
-        }*/
+        }
+        else if (food.isMeal()) {
+            /*Intent intent = new Intent(getBaseContext(), activityEditFood.class);
+            intent.putExtra("id", fid);
+            startActivity(intent);*/
+        }
     }
 
     //Updates adapterSavedItem and arrSavedItems
@@ -102,10 +103,10 @@ public class activitySelectDailyItem extends AppCompatActivity implements Adapte
     // TODO Implement fabAddNewMeal
     @Override public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.fabAddNewFood:
+            case R.id.fabCreateNewFood:
                 goToCreateNewFood();
                 break;
-            case R.id.fabAddNewMeal:
+            case R.id.fabCreateNewMeal:
                 // TODO Implement
                 break;
         }
@@ -113,8 +114,6 @@ public class activitySelectDailyItem extends AppCompatActivity implements Adapte
 
     public void goToCreateNewFood (){
         Intent intent = new Intent(context, activityCreateFood.class);
-        intent.putExtra("isDaily", true);
         startActivity(intent);
-        finish();
     }
 }

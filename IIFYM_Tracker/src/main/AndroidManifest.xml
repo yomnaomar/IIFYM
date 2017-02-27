@@ -14,23 +14,23 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".Activities.Main.New.activityMain"
+            android:name=".Activities.Main.New.activityHome"
             android:label="@string/appName"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:launchMode="singleInstance"/>
         <activity
-            android:name=".Activities.Main.Old.activityViewSavedItems"
-            android:screenOrientation="portrait" />
+            android:name=".Activities.Main.New.activityViewSavedItems"
+            android:screenOrientation="portrait"
+            android:label="@string/toolbarSavedItems"/>
         <activity
-            android:name=".Activities.Main.Old.activityViewFood"
+            android:name=".Activities.Main.New.activityEditFood"
+            android:label="@string/toolbarEditFood"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Activities.Settings.MacroSettings"
-            android:label="Nutrition Settings"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".Activities.Settings.UserProfile_Mina" />
-        <activity android:name=".Activities.Settings.EditProfile_Mina" /><![CDATA[
+            android:windowSoftInputMode="adjustPan" /><![CDATA[
         android:windowSoftInputMode="adjustPan" />
         ]]>
         <activity
@@ -39,23 +39,28 @@
         >>>>>>> master
         <activity
             android:name=".Activities.Main.New.activityCreateFood"
-            android:label="Create new Food" />
-        <activity android:name=".Activities.User_Login_Authentification.activityLogin"
-            android:label="@string/appName"/>
-        <activity android:name=".Activities.User_Login_Authentification.activityUserInfo"
-            android:label="Register Yourself!"/>
-        <activity android:name=".Activities.User_Login_Authentification.activityUserMacros"
-            android:label="Set your Daily Nutritional Goals"/>
-        <activity android:name=".Activities.User_Login_Authentification.activityLauncher"
+            android:label="@string/toolbarCreateNewFood" />
+        <activity
+            android:name=".Activities.User_Login_Authentification.activityLogin"
+            android:label="@string/appName" />
+        <activity
+            android:name=".Activities.User_Login_Authentification.activityUserInfo"
+            android:label="@string/toolbarUserInfo" />
+        <activity
+            android:name=".Activities.User_Login_Authentification.activityUserMacros"
+            android:label="@string/toolbarUserMacros" />
+        <activity
+            android:name=".Activities.User_Login_Authentification.activityLauncher"
             android:label="IIFYM Tracker">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activities.Main.New.activitySelectDailyItem"
-            android:label="Select an item to add"/>
-
+        <activity
+            android:name=".Activities.Main.New.activitySelectDailyItem"
+            android:label="@string/toolbarSelectItemToAdd" />
+        <activity android:name=".Activities.Main.New.activityViewDailyItem"></activity>
     </application>
 
 </manifest>

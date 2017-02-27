@@ -140,8 +140,24 @@
     <string name="hintFat">Fat (g)</string>
     <string name="hintServing">Serving size</string>
     <string name="hintAmount">Weight</string>
-
-
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="lblBrand">Brand</string>
+    <string name="lblName">Name</string>
+    <string name="lblPortionType">PortionType</string>
+    <string name="lblPortionAmount">Portion Amount</string>
+    <string name="lblSave">Save</string>
+    <string name="lblC">c</string>
+    <string name="lblp">p</string>
+    <string name="lblf">f</string>
+    <string name="lblkcal">kcal</string>
+    <string name="toolbarSelectItemToAdd">Select an item to add to daily log</string>
+    <string name="toolbarSavedItems">My saved food</string>
+    <string name="lblDeleteFromDaily">Delete from daily log?</string>
+    <string name="lblDeleteFromDatabase">Delete from database?</string>
+    <string name="toolbarCreateNewFood">Create new Food</string>
+    <string name="toolbarUserInfo">Register Yourself!</string>
+    <string name="toolbarUserMacros">Set your Daily Nutritional Goals</string>
+    <string name="toolbarEditFood">Edit food</string>
+    <string name="lblCreateNewMeal">Create New Meal</string>
+    <string name="lblDailyLog">Daily Log:</string>
 
 </resources>

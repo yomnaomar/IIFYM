@@ -6,22 +6,14 @@ package com.example.kareem.IIFYM_Tracker.Models;
 
 public class DailyItem {
 
-    private Food    food;
     private int     position;
+    private long    id;
     private float   multiplier;
 
-    public DailyItem(Food food, int position, float multiplier) {
-        this.food = food;
+    public DailyItem(int position, long id, float multiplier) {
         this.position = position;
+        this.id = id;
         this.multiplier = multiplier;
-    }
-
-    public Food getFood() {
-        return food;
-    }
-
-    public void setFood(Food food) {
-        this.food = food;
     }
 
     public int getPosition() {
@@ -30,6 +22,14 @@ public class DailyItem {
 
     public void setPosition(int position) {
         this.position = position;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public float getMultiplier() {

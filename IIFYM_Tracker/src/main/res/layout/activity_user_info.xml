@@ -19,7 +19,7 @@
                 android:layout_height="25dp" />
 
                 <EditText
-                    android:inputType="textPersonName"
+                    android:inputType="textCapSentences"
                     android:ems="8"
                     android:id="@+id/etxtName"
                     android:hint="@string/firstname"

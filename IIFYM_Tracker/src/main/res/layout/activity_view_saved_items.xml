@@ -9,7 +9,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.kareem.IIFYM_Tracker.Activities.Main.Old.activityViewSavedItems">
+    tools:context="com.example.kareem.IIFYM_Tracker.Activities.Main.New.activityViewSavedItems">
 
     <LinearLayout
         android:orientation="vertical"
@@ -49,21 +49,21 @@
         fab:fab_expandDirection="up">
 
         <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fabAddNewFood"
+            android:id="@+id/fabCreateNewFood"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             fab:fab_colorNormal="@color/colorPrimaryLight"
-            fab:fab_title="Add New Food"
+            fab:fab_title="@string/toolbarCreateNewFood"
             fab:fab_colorPressed="@color/fabWhitePressed"
             fab:fab_icon="@drawable/ic_food"
             fab:fab_size="mini" />
 
         <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fabAddNewMeal"
+            android:id="@+id/fabCreateNewMeal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             fab:fab_colorNormal="@color/colorPrimaryLight"
-            fab:fab_title="Add New Meal"
+            fab:fab_title="@string/lblCreateNewMeal"
             fab:fab_colorPressed="@color/fabWhitePressed"
             fab:fab_icon="@drawable/ic_meal"
             fab:fab_size="mini"

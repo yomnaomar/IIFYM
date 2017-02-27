@@ -11,30 +11,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.kareem.IIFYM_Tracker.Activities.Main.New.activitySelectDailyItem">
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:ems="10"
-            android:id="@+id/etxtSearch"
-            android:hint="Search ..."
-            android:drawableLeft="?android:attr/actionModeWebSearchDrawable"
-            tools:layout_editor_absoluteY="0dp"
-            tools:layout_editor_absoluteX="0dp" />
-
-        <ListView
-            android:layout_width="match_parent"
-            android:id="@+id/listviewSavedItems"
-            android:layout_height="match_parent"
-            tools:layout_editor_absoluteX="0dp"></ListView>
-
-    </LinearLayout>
-
     <com.getbase.floatingactionbutton.FloatingActionsMenu
         android:id="@+id/fabAddNew"
         android:layout_width="wrap_content"
@@ -72,5 +48,44 @@
             android:background="@drawable/ic_meal" />
 
     </com.getbase.floatingactionbutton.FloatingActionsMenu>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="50dp"
+                fab:srcCompat="@drawable/ic_search"
+                android:id="@+id/iconSearch"
+                android:scaleType="fitCenter" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="textCapSentences"
+                android:ems="10"
+                android:id="@+id/etxtSearch"
+                android:hint="Search ..."
+                tools:layout_editor_absoluteY="0dp"
+                tools:layout_editor_absoluteX="0dp"
+                android:layout_weight="0.75" />
+        </LinearLayout>
+
+        <ListView
+            android:layout_width="match_parent"
+            android:id="@+id/listviewSavedItems"
+            android:layout_height="match_parent"
+            tools:layout_editor_absoluteX="0dp"></ListView>
+
+    </LinearLayout>
 
 </RelativeLayout>

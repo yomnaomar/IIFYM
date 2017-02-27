@@ -16,7 +16,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
-import com.example.kareem.IIFYM_Tracker.Activities.Main.New.activityMain;
+import com.example.kareem.IIFYM_Tracker.Activities.Main.New.activityHome;
 import com.example.kareem.IIFYM_Tracker.Models.User;
 import com.example.kareem.IIFYM_Tracker.Database.SQLiteConnector;
 import com.example.kareem.IIFYM_Tracker.Database.SharedPreferenceHelper;
@@ -133,9 +133,9 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
                                     // Store user session in Preferences
                                     myPrefs.addPreference("session_uid", uid);
 
-                                    // Go to activityMain
+                                    // Go to activityHome
                                     Intent intent = new Intent();
-                                    intent.setClass(context, activityMain.class);
+                                    intent.setClass(context, activityHome.class);
                                     startActivity(intent);
                                     finish();
                                 }
