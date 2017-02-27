@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#1f3972</color>
+    <color name="colorPrimaryLight">#2b51a2</color>
     <color name="colorPrimaryDark">#192d5a</color>
     <color name="colorAccent">#1f3972</color>
     <color name="colorButtonBackground">#afb9d2</color>
@@ -21,8 +22,8 @@
     <color name="radio_button_selected_color">#1f3972</color>
     <color name="radio_button_unselected_color">#FFFFFF</color>
     <color name="SegmentedGroup_sc_unchecked_tint_color">#FFFFFF</color>
-    <color name="Custom_Red">#D50000</color>
-    <color name="Custom_Green">#2E7D32</color>
+    <color name="error_red">#FF0000</color>
+    <color name="correct_green">#2E7D32</color>
     <color name="Custom_Grey">#808080</color>
     <color name="fabBlackSemiTransparent">#B2000000</color>
     <color name="fabBackground">#e5e5e5</color>
@@ -33,5 +34,4 @@
     <color name="fabPinkPressed">#ec407a</color>
     <color name="fabBlue">#805677fc</color>
     <color name="fabBluePressed">#80738ffe</color>
-    <color name="colorPrimaryLight">#2b51a2</color>
 </resources>

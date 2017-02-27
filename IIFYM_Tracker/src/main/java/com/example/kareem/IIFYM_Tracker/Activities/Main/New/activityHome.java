@@ -201,7 +201,7 @@ public class activityHome extends AppCompatActivity implements AdapterView.OnIte
         }
         else {
             progressBarCalories.setProgress(100);
-            lblCaloriesCurrent.setTextColor(Color.parseColor("#D50000")); // RED
+            lblCaloriesCurrent.setTextColor(Color.parseColor("#FF0000")); // error_red
         }
 
         if(carbsCurrent < carbsGoal) {
@@ -210,7 +210,7 @@ public class activityHome extends AppCompatActivity implements AdapterView.OnIte
         }
         else {
             progressBarCarbs.setProgress(100);
-            lblCarbsCurrent.setTextColor(Color.parseColor("#D50000")); // RED
+            lblCarbsCurrent.setTextColor(Color.parseColor("#FF0000")); // error_red
         }
         if(proteinCurrent < proteinGoal) {
             progressBarProtein.setProgress(100 * proteinCurrent / proteinGoal);
@@ -218,7 +218,7 @@ public class activityHome extends AppCompatActivity implements AdapterView.OnIte
         }
         else {
             progressBarProtein.setProgress(100);
-            lblProteinCurrent.setTextColor(Color.parseColor("#D50000")); // RED
+            lblProteinCurrent.setTextColor(Color.parseColor("#FF0000")); // error_red
         }
         if(fatCurrent < fatGoal) {
             progressBarFat.setProgress(100 * fatCurrent / fatGoal);
@@ -226,7 +226,7 @@ public class activityHome extends AppCompatActivity implements AdapterView.OnIte
         }
         else {
             progressBarFat.setProgress(100);
-            lblFatCurrent.setTextColor(Color.parseColor("#D50000")); // RED
+            lblFatCurrent.setTextColor(Color.parseColor("#FF0000")); // error_red
         }
     }
 

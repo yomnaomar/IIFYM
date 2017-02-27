@@ -312,7 +312,7 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
             if (totalPercent == 100)
                 lblAmountTotal.setTextColor(Color.parseColor("#2E7D32")); // Green
             else
-                lblAmountTotal.setTextColor(Color.parseColor("#D50000")); // Red
+                lblAmountTotal.setTextColor(Color.parseColor("#FF0000")); // error_red
 
             addTextWatchers();
         }
@@ -369,7 +369,7 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
             if (totalPercent == 100)
                 lblAmountTotal.setTextColor(Color.parseColor("#2E7D32")); // Green
             else
-                lblAmountTotal.setTextColor(Color.parseColor("#D50000")); // Red
+                lblAmountTotal.setTextColor(Color.parseColor("#FF0000")); // error_red
 
             addTextWatchers();
         }
@@ -677,7 +677,7 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
             if (totalPercent == 100)
                 lblAmountTotal.setTextColor(Color.parseColor("#2E7D32")); // Green
             else
-                lblAmountTotal.setTextColor(Color.parseColor("#D50000")); // Red
+                lblAmountTotal.setTextColor(Color.parseColor("#FF0000")); // error_red
         }
         updateGUI();
     }
