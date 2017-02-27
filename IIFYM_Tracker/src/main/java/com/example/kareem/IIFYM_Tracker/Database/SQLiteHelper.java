@@ -110,6 +110,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         db.execSQL(createTable_DailyItem);
         db.execSQL(createTable_ComposedOf);
 
+        // TODO Delete me
         InputStreamReader file;
         try {
             file = new InputStreamReader(context.getAssets().open("usda_fooddb"));
