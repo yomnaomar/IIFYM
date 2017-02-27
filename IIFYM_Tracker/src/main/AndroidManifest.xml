@@ -22,7 +22,7 @@
         <activity
             android:name=".Activities.Main.New.activityViewSavedItems"
             android:screenOrientation="portrait"
-            android:label="@string/toolbarDatabaseManager"/>
+            android:label="@string/toolbarSavedItems"/>
         <activity
             android:name=".Activities.Main.New.activityEditFood"
             android:label="@string/toolbarEditFood"

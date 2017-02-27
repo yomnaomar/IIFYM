@@ -117,7 +117,7 @@ public class activityEditFood extends AppCompatActivity implements AdapterView.O
         } else if (food.getPortionType() == 1) { // Weight
             rbtnWeight.setChecked(true);
             Weight weight = DB_SQLite.retrieveWeight(food);
-            etxtAmount.setText(weight.getAmount());
+            etxtAmount.setText(weight.getAmount() + "");
             spinnerUnit.setSelection(weight.getUnit().getWeightInt());
         }
     }
@@ -182,8 +182,8 @@ public class activityEditFood extends AppCompatActivity implements AdapterView.O
         food.setBrand(etxtBrand.getText().toString());
         food.setCalories(Integer.parseInt(etxtCalories.getText().toString()));
         food.setCarbs(Float.parseFloat(etxtCarbs.getText().toString()));
-        food.setCarbs(Float.parseFloat(etxtProtein.getText().toString()));
-        food.setCarbs(Float.parseFloat(etxtFat.getText().toString()));
+        food.setProtein(Float.parseFloat(etxtProtein.getText().toString()));
+        food.setFat(Float.parseFloat(etxtFat.getText().toString()));
         if (rbtnServing.isChecked())
             food.setPortionType(0);
         else if (rbtnWeight.isChecked())
