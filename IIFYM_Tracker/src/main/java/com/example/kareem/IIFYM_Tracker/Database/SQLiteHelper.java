@@ -1,9 +1,11 @@
 package com.example.kareem.IIFYM_Tracker.Database;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
+
+import com.example.kareem.IIFYM_Tracker.R;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -110,41 +112,79 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         db.execSQL(createTable_DailyItem);
         db.execSQL(createTable_ComposedOf);
 
-        // TODO Delete me
         InputStreamReader file;
+        file = new InputStreamReader(context.getResources().openRawResource(R.raw.usda_fooddb));
+
+        BufferedReader buffer = new BufferedReader(file);
+        String line = "";
+
+        db.beginTransaction();
         try {
-            file = new InputStreamReader(context.getAssets().open("usda_fooddb"));
-
-            BufferedReader buffer = new BufferedReader(file);
-            String line = "";
-
-            /*db.beginTransaction();*/
-            try {
-                while ((line = buffer.readLine()) != null) {
+            while ((line = buffer.readLine()) != null) {
+                if (line.contains("\"")) {
                     String[] food = line.split("\"");
-                    String id = food[0].substring(0,food[0].length()-1);
-                    String name = food[1];
+                    String id = food[0].substring(0, food[0].length() - 1);
+                    String name = food[1].replaceAll("~","\"");
                     String details = food[2];
-                    String calories = details.split(",")[1];
-                    String carbs = details.split(",")[2];
-                    String protein = details.split(",")[3];
-                    String fat = details.split(",")[4];
+                    String calories = details.split(",")[1].replace("--","0");
+                    String carbs = details.split(",")[2].replace("--","0");
+                    String protein = details.split(",")[3].replace("--","0");
+                    String fat = details.split(",")[4].replace("--","0");
 
-                    Log.d("parseUSDA_FoodDB",   id + " " +
-                                                name + " " +
-                                                calories + " " +
-                                                carbs + " " +
-                                                protein + " " +
-                                                fat + " ");
+                    ContentValues newFood = new ContentValues();
+                    newFood.put("id", id);
+                    newFood.put("name", name);
+                    newFood.put("brand", "");                       // Empty
+                    newFood.put("calories", Integer.parseInt(calories));
+                    newFood.put("carbs", Float.parseFloat(carbs));
+                    newFood.put("protein", Float.parseFloat(protein));
+                    newFood.put("fat", Float.parseFloat(fat));
+                    newFood.put("portionType", 1);                  // Weight
+                    newFood.put("isMeal", false);                   // No
+
+                    db.insert(Table_Food, null, newFood);
+
+                    ContentValues newWeight = new ContentValues();
+                    newWeight.put("id", id);
+                    newWeight.put("amount", 100);   // 100
+                    newWeight.put("unit", 0);       // grams
+
+                    db.insert(Table_Weight, null, newWeight);
+                } else {
+                    String[] food = line.split(",");
+                    String id = food[0];
+                    String name = food[1].replaceAll("~","\"");
+                    String calories = food[2].replace("--","0");
+                    String carbs = food[3].replace("--","0");
+                    String protein = food[4].replace("--","0");
+                    String fat = food[5].replace("--","0");
+
+                    ContentValues newFood = new ContentValues();
+                    newFood.put("id", id);
+                    newFood.put("name", name);
+                    newFood.put("brand", "");                       // Empty
+                    newFood.put("calories", Integer.parseInt(calories));
+                    newFood.put("carbs", Float.parseFloat(carbs));
+                    newFood.put("protein", Float.parseFloat(protein));
+                    newFood.put("fat", Float.parseFloat(fat));
+                    newFood.put("portionType", 1);                  // Weight
+                    newFood.put("isMeal", false);                   // No
+
+                    db.insert(Table_Food, null, newFood);
+
+                    ContentValues newWeight = new ContentValues();
+                    newWeight.put("id", id);
+                    newWeight.put("amount", 100);   // 100
+                    newWeight.put("unit", 0);       // grams
+
+                    db.insert(Table_Weight, null, newWeight);
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
             }
-            /*db.setTransactionSuccessful();
-            db.endTransaction();*/
         } catch (IOException e) {
             e.printStackTrace();
         }
+        db.setTransactionSuccessful();
+        db.endTransaction();
     }
 
     @Override public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {}
@@ -154,6 +194,4 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         // Enable foreign key constraints
         db.execSQL("PRAGMA foreign_keys=ON;");
     }
-
-
 }

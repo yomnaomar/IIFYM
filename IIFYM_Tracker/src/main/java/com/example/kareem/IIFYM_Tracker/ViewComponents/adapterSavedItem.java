@@ -92,9 +92,9 @@ public class adapterSavedItem extends ArrayAdapter<Food> {
 
         @Override protected FilterResults performFiltering(CharSequence constraint) {
             FilterResults results = new FilterResults();
-            String prefix = constraint.toString().toLowerCase();
+            String search = constraint.toString().toLowerCase();
 
-            if(prefix == null || prefix.length() == 0) {
+            if(search == null || search.length() == 0) {
                 ArrayList<Food> list = new ArrayList(arrOriginalItems);
                 results.values = list;
                 results.count = list.size();
@@ -108,7 +108,7 @@ public class adapterSavedItem extends ArrayAdapter<Food> {
                     final Food food = list.get(i);
                     final String value = food.getName().toLowerCase();
 
-                    if(value.startsWith(prefix)){
+                    if(value.contains(search)){
                         nlist.add(food);
                     }
                 }

@@ -4,7 +4,7 @@
     tools:context="com.example.kareem.IIFYM_Tracker.Activities.Main.New.activityEditFood">
 
     <item android:title="@string/lblSave"
-        android:icon="@drawable/ic_check"
+        android:icon="@drawable/ic_save"
         android:id="@+id/menu_save"
         app:showAsAction="always" />
 </menu>
