@@ -35,7 +35,7 @@ public class activityViewDailyItem extends AppCompatActivity implements View.OnC
     private PieChartData            data;
 
     // TODO Implement listviewIngredients
-    //private adapterIngredient       adapterIngredients;
+    // private adapterIngredient       adapterIngredients;
     private ArrayList<Food>         arrIngredients;
     private ListView                listviewIngredients;
 
@@ -50,7 +50,8 @@ public class activityViewDailyItem extends AppCompatActivity implements View.OnC
     // Database
     private SQLiteConnector DB_SQLite;
 
-    @Override protected void onCreate(Bundle savedInstanceState) {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_daily_item);
 
@@ -70,14 +71,14 @@ public class activityViewDailyItem extends AppCompatActivity implements View.OnC
     }
 
     private void initializeGUI() {
-        lblName = (TextView) findViewById(R.id.lblName);
-        lblBrand = (TextView) findViewById(R.id.lblBrand);
-        lblCalories = (TextView) findViewById(R.id.lblCalories);
-        lblCarbs = (TextView) findViewById(R.id.lblCarbs);
-        lblProtein = (TextView) findViewById(R.id.lblProtein);
-        lblFat = (TextView) findViewById(R.id.lblFat);
-        lblPortionAmount = (TextView) findViewById(R.id.lblPortionAmount);
-        lblPortionType = (TextView) findViewById(R.id.lblPortionType);
+        lblName             = (TextView) findViewById(R.id.lblName);
+        lblBrand            = (TextView) findViewById(R.id.lblBrand);
+        lblCalories         = (TextView) findViewById(R.id.lblCalories);
+        lblCarbs            = (TextView) findViewById(R.id.lblCarbs);
+        lblProtein          = (TextView) findViewById(R.id.lblProtein);
+        lblFat              = (TextView) findViewById(R.id.lblFat);
+        lblPortionAmount    = (TextView) findViewById(R.id.lblPortionAmount);
+        lblPortionType      = (TextView) findViewById(R.id.lblPortionType);
 
         fabDelete = (FloatingActionButton) findViewById(R.id.fabDelete);
         fabDelete.setOnClickListener(this);
@@ -175,6 +176,4 @@ public class activityViewDailyItem extends AppCompatActivity implements View.OnC
         AlertDialog dialog = builder.create();
         dialog.show();
     }
-
-
 }

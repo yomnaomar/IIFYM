@@ -197,36 +197,36 @@ public class activityHome extends AppCompatActivity implements AdapterView.OnIte
         // Updating ProgressBars
         if(caloriesCurrent < caloriesGoal) {
             progressBarCalories.setProgress(100 * caloriesCurrent / caloriesGoal);
-            lblCaloriesCurrent.setTextColor(Color.parseColor("#f57c00")); // ORANGE
+            lblCaloriesCurrent.setTextColor(context.getResources().getColor(R.color.CaloriesProgessColor));
         }
         else {
             progressBarCalories.setProgress(100);
-            lblCaloriesCurrent.setTextColor(Color.parseColor("#FF0000")); // error_red
+            lblCaloriesCurrent.setTextColor(context.getResources().getColor(R.color.error_red));
         }
 
         if(carbsCurrent < carbsGoal) {
             progressBarCarbs.setProgress(100 * carbsCurrent / carbsGoal);
-            lblCarbsCurrent.setTextColor(Color.parseColor("#f0c419")); // YELLOW
+            lblCarbsCurrent.setTextColor(context.getResources().getColor(R.color.CarbProgressColor));
         }
         else {
             progressBarCarbs.setProgress(100);
-            lblCarbsCurrent.setTextColor(Color.parseColor("#FF0000")); // error_red
+            lblCarbsCurrent.setTextColor(context.getResources().getColor(R.color.error_red));
         }
         if(proteinCurrent < proteinGoal) {
             progressBarProtein.setProgress(100 * proteinCurrent / proteinGoal);
-            lblProteinCurrent.setTextColor(Color.parseColor("#f44336")); // Maroon
+            lblProteinCurrent.setTextColor(context.getResources().getColor(R.color.ProteinProgessColor));
         }
         else {
             progressBarProtein.setProgress(100);
-            lblProteinCurrent.setTextColor(Color.parseColor("#FF0000")); // error_red
+            lblProteinCurrent.setTextColor(context.getResources().getColor(R.color.error_red));
         }
         if(fatCurrent < fatGoal) {
             progressBarFat.setProgress(100 * fatCurrent / fatGoal);
-            lblFatCurrent.setTextColor(Color.parseColor("#66bb6a")); // Green
+            lblFatCurrent.setTextColor(context.getResources().getColor(R.color.FatProgessColor));
         }
         else {
             progressBarFat.setProgress(100);
-            lblFatCurrent.setTextColor(Color.parseColor("#FF0000")); // error_red
+            lblFatCurrent.setTextColor(context.getResources().getColor(R.color.error_red));
         }
     }
 

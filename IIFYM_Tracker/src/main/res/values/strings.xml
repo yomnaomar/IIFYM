@@ -153,11 +153,11 @@
     <string name="toolbarSavedItems">My saved food</string>
     <string name="lblDeleteFromDaily">Delete from daily log?</string>
     <string name="lblDeleteFromDatabase">Delete from database?</string>
-    <string name="toolbarCreateNewFood">Create new Food</string>
+    <string name="toolbarCreateNewFood">Create new food</string>
     <string name="toolbarUserInfo">Register Yourself!</string>
     <string name="toolbarUserMacros">Set your Daily Nutritional Goals</string>
     <string name="toolbarEditFood">Edit food</string>
-    <string name="lblCreateNewMeal">Create New Meal</string>
+    <string name="lblCreateNewMeal">Create new meal</string>
     <string name="lblDailyLog">Daily Log:</string>
 
 </resources>

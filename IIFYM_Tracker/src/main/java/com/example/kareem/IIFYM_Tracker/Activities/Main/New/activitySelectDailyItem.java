@@ -71,19 +71,14 @@ public class activitySelectDailyItem extends AppCompatActivity implements Adapte
     }
 
     // TODO implement
-    @Override public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Food food = (Food) parent.getItemAtPosition(position);
         long fid = food.getId();
 
-        /*if (food.isMeal()) {
-            Intent intent = new Intent(getBaseContext(), AddDailyFoodActivity.class);
-            intent.putExtra("fid", fid);
-            startActivity(intent);
-        } else {
-            Intent intent = new Intent(getBaseContext(), AddDailyMealActivity.class);
-            intent.putExtra("fid", fid);
-            startActivity(intent);
-        }*/
+        Intent intent = new Intent(getBaseContext(), activityAddDailyItem.class);
+        intent.putExtra("fid", fid);
+        startActivity(intent);
     }
 
     //Updates adapterSavedItem and arrSavedItems
