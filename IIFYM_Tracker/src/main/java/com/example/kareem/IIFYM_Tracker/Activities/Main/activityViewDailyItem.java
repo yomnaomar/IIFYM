@@ -46,6 +46,7 @@ public class activityViewDailyItem extends AppCompatActivity implements View.OnC
     private Food        food;
     private DailyItem   dailyitem;
     private float       portionAmount;
+    private float       portionMultiplier;
 
     // Database
     private SQLiteConnector DB_SQLite;
@@ -80,6 +81,8 @@ public class activityViewDailyItem extends AppCompatActivity implements View.OnC
         lblPortionAmount    = (TextView) findViewById(R.id.lblPortionAmount);
         lblPortionType      = (TextView) findViewById(R.id.lblPortionType);
 
+        portionMultiplier = dailyitem.getMultiplier();
+
         fabDelete = (FloatingActionButton) findViewById(R.id.fabDelete);
         fabDelete.setOnClickListener(this);
 
@@ -87,14 +90,20 @@ public class activityViewDailyItem extends AppCompatActivity implements View.OnC
         generatePieChartData();
 
         lblName.setText(food.getName());
-        lblBrand.setText(food.getBrand());
-        lblCalories.setText(food.getCalories() * dailyitem.getMultiplier() + "");
-        lblCarbs.setText(food.getCarbs() * dailyitem.getMultiplier() + "");
-        lblProtein.setText(food.getProtein() * dailyitem.getMultiplier() + "");
-        lblFat.setText(food.getFat() * dailyitem.getMultiplier() + "");
+        if(food.getBrand().isEmpty())
+            lblBrand.setVisibility(View.GONE);
+        else
+        {
+            lblBrand.setVisibility(View.VISIBLE);
+            lblBrand.setText(food.getBrand());
+        }
+        lblCalories.setText(Math.round(food.getCalories() * portionMultiplier) + "");
+        lblCarbs.setText(Math.round(food.getCarbs() * portionMultiplier) + "");
+        lblProtein.setText(Math.round(food.getProtein() * portionMultiplier) + "");
+        lblFat.setText(Math.round(food.getFat() * portionMultiplier) + "");
 
         if (food.getPortionType() == 0) { // Serving
-            portionAmount = DB_SQLite.retrieveServing(food);
+            portionAmount = DB_SQLite.retrieveServing(food) * portionMultiplier;
             lblPortionAmount.setText(portionAmount + "");
             if (portionAmount != 1.0f)
                 lblPortionType.setText("servings");
@@ -102,7 +111,7 @@ public class activityViewDailyItem extends AppCompatActivity implements View.OnC
                 lblPortionType.setText("serving");
         } else { // Weight
             Weight weight = DB_SQLite.retrieveWeight(food);
-            portionAmount = weight.getAmount();
+            portionAmount = weight.getAmount() * portionMultiplier;
             lblPortionAmount.setText(portionAmount + "");
             lblPortionType.setText(weight.getUnit().Abbreviate());
         }

@@ -51,10 +51,10 @@ public class adapterDailyItem extends ArrayAdapter<DailyItem> {
         // Populate the data into the template view using the data object
         name.setText(food.getName());
         brand.setText(food.getBrand());
-        calories.setText(String.valueOf(Math.round(food.getCalories())) + " kcal ");
-        carbs.setText(String.valueOf(Math.round(food.getCarbs()) + " c "));
-        protein.setText(String.valueOf(Math.round(food.getProtein()) + " p "));
-        fat.setText(String.valueOf(Math.round(food.getFat()) + " f "));
+        calories.setText(String.valueOf(Math.round(food.getCalories() * multiplier)) + " kcal ");
+        carbs.setText(String.valueOf(Math.round(food.getCarbs() * multiplier) + " c "));
+        protein.setText(String.valueOf(Math.round(food.getProtein() * multiplier) + " p "));
+        fat.setText(String.valueOf(Math.round(food.getFat() * multiplier) + " f "));
 
         if (food.getPortionType() == 0) {
             float serving_number = DB_SQLite.retrieveServing(food);

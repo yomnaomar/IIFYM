@@ -162,10 +162,11 @@ public class activityHome extends AppCompatActivity implements AdapterView.OnIte
         int itemCount = adapterDailyItems.getCount();
         for (int i = 0; i < itemCount; i++) {
             Food tempFood = DB_SQLite.retrieveFood(adapterDailyItems.getItem(i).getId());
-            int calories = Math.round(tempFood.getCalories());
-            int carbs = Math.round(tempFood.getCarbs());
-            int protein = Math.round(tempFood.getProtein());
-            int fat = Math.round(tempFood.getFat());
+            DailyItem tempDailyItem = DB_SQLite.retrieveDailyItem(i);
+            int calories = Math.round(tempFood.getCalories() * tempDailyItem.getMultiplier());
+            int carbs = Math.round(tempFood.getCarbs() * tempDailyItem.getMultiplier());
+            int protein = Math.round(tempFood.getProtein() * tempDailyItem.getMultiplier());
+            int fat = Math.round(tempFood.getFat() * tempDailyItem.getMultiplier());
 
             caloriesCurrent += calories;
             carbsCurrent    += carbs;

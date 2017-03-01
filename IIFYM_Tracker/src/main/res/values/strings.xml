@@ -164,5 +164,6 @@
     <string name="menuLogout">Logout</string>
     <string name="actionNutritionSettings">Nutrition Settings</string>
     <string name="actionMyFood">My Food</string>
+    <string name="toolbarAddDailyItem">Set Portion Amount</string>
 
 </resources>

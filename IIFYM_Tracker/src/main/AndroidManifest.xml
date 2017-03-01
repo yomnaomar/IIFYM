@@ -32,11 +32,9 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" /><![CDATA[
         android:windowSoftInputMode="adjustPan" />
-        ]]>
-        <activity
-            android:name=".Activities.Main.acitivityAddDailyItem"
-            android:theme="@style/AppTheme.NoActionBar" />
+
         >>>>>>> master
+        ]]>
         <activity
             android:name=".Activities.Main.activityCreateFood"
             android:label="@string/toolbarCreateNewFood" />
@@ -49,6 +47,9 @@
         <activity
             android:name=".Activities.UserLoginAuthentification.activityUserMacros"
             android:label="@string/toolbarUserMacros" />
+        <activity
+            android:name=".Activities.Main.activityAddDailyItem"
+            android:label="@string/toolbarAddDailyItem" />
         <activity
             android:name=".Activities.UserLoginAuthentification.activityLauncher"
             android:label="IIFYM Tracker">
