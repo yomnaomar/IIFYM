@@ -112,11 +112,11 @@ public class activityEditFood extends AppCompatActivity implements AdapterView.O
 
         if (food.getPortionType() == 0) { // Serving
             rbtnServing.setChecked(true);
-            float servingNum = DB_SQLite.retrieveServing(food);
+            float servingNum = DB_SQLite.retrieveServing(id);
             etxtPortionAmount.setText(servingNum + "");
         } else if (food.getPortionType() == 1) { // Weight
             rbtnWeight.setChecked(true);
-            Weight weight = DB_SQLite.retrieveWeight(food);
+            Weight weight = DB_SQLite.retrieveWeight(id);
             etxtPortionAmount.setText(weight.getAmount() + "");
             spinnerUnit.setSelection(weight.getUnit().getWeightInt());
         }
@@ -150,7 +150,8 @@ public class activityEditFood extends AppCompatActivity implements AdapterView.O
         int id = item.getItemId();
 
         if (id == R.id.menu_save) {
-            confirmActionSave();
+            if (validateFields())
+                confirmActionSave();
             return true;
         }
 
@@ -163,8 +164,8 @@ public class activityEditFood extends AppCompatActivity implements AdapterView.O
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         // User clicked Yes button
-                        saveChanges();
-                        finish();
+                            saveChanges();
+                            finish();
                     }
                 });
         builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -196,16 +197,16 @@ public class activityEditFood extends AppCompatActivity implements AdapterView.O
         switch (food.getPortionType()) {
             case (0): // Serving
                 float newServing = Float.parseFloat(etxtPortionAmount.getText().toString());
-                if (!DB_SQLite.updateServing(food, newServing)) {
-                    DB_SQLite.deleteWeight(food);
-                    DB_SQLite.createServing(food, newServing);
+                if (!DB_SQLite.updateServing(id, newServing)) {
+                    DB_SQLite.deleteWeight(id);
+                    DB_SQLite.createServing(id, newServing);
                 }
                 break;
             case (1): // Weight
                 Weight newWeight = new Weight(Integer.parseInt(etxtPortionAmount.getText().toString()), weightUnitSelected);
                 if (!DB_SQLite.updateWeight(food, newWeight)) {
-                    DB_SQLite.deleteServing(food);
-                    DB_SQLite.createWeight(food, newWeight);
+                    DB_SQLite.deleteServing(id);
+                    DB_SQLite.createWeight(id, newWeight);
                 }
                 break;
         }
@@ -241,9 +242,7 @@ public class activityEditFood extends AppCompatActivity implements AdapterView.O
 
     // TODO check that Food is not being used as a Meal ingredient before deleteing
     // TODO if true, then alert user and cancel delete opertaion
-    private boolean deleteRecords() {
-        return DB_SQLite.deleteFood(id);
-    }
+    private void deleteRecords() {DB_SQLite.deleteFood(id);}
 
     @Override public void onBackPressed() {
         Cancel();
@@ -266,6 +265,63 @@ public class activityEditFood extends AppCompatActivity implements AdapterView.O
         });
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+    private boolean validateFields() {
+        boolean valid = true;
+        if (etxtName.getText().toString().isEmpty()) {
+            etxtName.setError("Required");
+            valid = false;
+        } else
+            etxtName.setError(null);
+
+        if (etxtCalories.getText().toString().isEmpty()) {
+            etxtCalories.setError("Required");
+            valid = false;
+        } else
+            etxtCalories.setError(null);
+
+        if (etxtCarbs.getText().toString().isEmpty()) {
+            etxtCarbs.setError("Required");
+            valid = false;
+        } else
+            etxtCarbs.setError(null);
+
+        if (etxtProtein.getText().toString().isEmpty()) {
+            etxtProtein.setError("Required");
+            valid = false;
+        } else
+            etxtProtein.setError(null);
+
+        if (etxtFat.getText().toString().isEmpty()) {
+            etxtFat.setError("Required");
+            valid = false;
+        } else
+            etxtFat.setError(null);
+
+        if (rbtnServing.isChecked())
+        {
+            if (etxtPortionAmount.getText().toString().isEmpty())
+            {
+                etxtPortionAmount.setError("Required");
+                valid = false;
+            }
+            else
+                etxtPortionAmount.setError(null);
+        }
+        else
+        {
+            if (etxtPortionAmount.getText().toString().isEmpty())
+            {
+                etxtPortionAmount.setError("Required");
+                valid = false;
+            }
+            else
+            {
+                etxtPortionAmount.setError(null);
+            }
+        }
+        return valid;
     }
 
     @Override public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {

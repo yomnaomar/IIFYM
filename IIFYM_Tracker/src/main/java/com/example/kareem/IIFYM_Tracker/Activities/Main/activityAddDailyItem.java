@@ -97,7 +97,7 @@ public class activityAddDailyItem extends AppCompatActivity implements TextWatch
 
         if (portionType == 0) // Serving
         {
-            initialPortionServing = DB_SQLite.retrieveServing(food);
+            initialPortionServing = DB_SQLite.retrieveServing(fid);
             etxtPortionAmount.setText(initialPortionServing + "");
             etxtPortionAmount.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL | InputType.TYPE_CLASS_NUMBER);
             if (initialPortionServing != 1.0f)
@@ -107,7 +107,7 @@ public class activityAddDailyItem extends AppCompatActivity implements TextWatch
         }
         else if (portionType == 1)// Weight
         {
-            Weight weight = DB_SQLite.retrieveWeight(food);
+            Weight weight = DB_SQLite.retrieveWeight(fid);
             initialPortionWeight = weight.getAmount();
             etxtPortionAmount.setText(initialPortionWeight + "");
             etxtPortionAmount.setInputType(InputType.TYPE_CLASS_NUMBER);
@@ -125,12 +125,12 @@ public class activityAddDailyItem extends AppCompatActivity implements TextWatch
 
         if(portionType == 0) // Serving
         {
-            float servingNum = DB_SQLite.retrieveServing(food);
+            float servingNum = DB_SQLite.retrieveServing(fid);
             portionMultiplier = newPortionAmount / servingNum;
         }
         else // Weight
         {
-            Weight weight = DB_SQLite.retrieveWeight(food);
+            Weight weight = DB_SQLite.retrieveWeight(fid);
             portionMultiplier = newPortionAmount / weight.getAmount();
         }
 

@@ -33,6 +33,7 @@ public class activityCreateFood extends AppCompatActivity implements AdapterView
     private Spinner         spinnerUnit;
 
     // Variables
+    private long    id;
     private boolean isDaily;
     private Context context;
     private int     weightUnitSelected = 0;
@@ -149,15 +150,16 @@ public class activityCreateFood extends AppCompatActivity implements AdapterView
         Food food = new Food(name, brand, calories, carbs, protein, fat, indexofPortionType, false);
 
         food.setId(DB_SQLite.createFood(food));
+        id = food.getId();
         if (food.getId() != -1){
             if (indexofPortionType == 0) { // Food is measured by servings
                 float Serving_Number = Float.parseFloat(etxtPortionAmount.getText().toString());
-                DB_SQLite.createServing(food, Serving_Number);
+                DB_SQLite.createServing(id, Serving_Number);
             }
             else if (indexofPortionType == 1) { // Food is measured by weight
                 int Weight_Quantity = Integer.parseInt(etxtPortionAmount.getText().toString());
                 Weight weight = new Weight(Weight_Quantity, weightUnitSelected);
-                DB_SQLite.createWeight(food, weight);
+                DB_SQLite.createWeight(id, weight);
             }
             // If User entered this activity through Add Daily, add this newly created food to daily items
             if (isDaily){

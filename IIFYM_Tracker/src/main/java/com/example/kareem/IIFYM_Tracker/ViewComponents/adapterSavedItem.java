@@ -66,14 +66,14 @@ public class adapterSavedItem extends ArrayAdapter<Food> {
         Weight  weight;
 
         if (food.getPortionType() == 0) { // Serving
-            serving_number = DB_SQLite.retrieveServing(food);
+            serving_number = DB_SQLite.retrieveServing(id);
             if (serving_number == 1.0f) {
                 portion.setText(serving_number + " Serving");
             } else {
                 portion.setText(serving_number + " Servings");
             }
         } else if (food.getPortionType() == 1) { // Weight
-            weight = DB_SQLite.retrieveWeight(food);
+            weight = DB_SQLite.retrieveWeight(id);
             portion.setText(weight.getAmount() + " " + weight.getUnit().Abbreviate());
         }
 

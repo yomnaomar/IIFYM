@@ -100,14 +100,14 @@ public class activityViewDailyItem extends AppCompatActivity implements View.OnC
         lblFat.setText(Math.round(food.getFat() * portionMultiplier) + "");
 
         if (food.getPortionType() == 0) { // Serving
-            servingAmount = DB_SQLite.retrieveServing(food) * portionMultiplier;
+            servingAmount = DB_SQLite.retrieveServing(id) * portionMultiplier;
             lblPortionAmount.setText(servingAmount + "");
             if (servingAmount != 1.0f)
                 lblPortionType.setText("servings");
             else
                 lblPortionType.setText("serving");
         } else { // Weight
-            Weight weight = DB_SQLite.retrieveWeight(food);
+            Weight weight = DB_SQLite.retrieveWeight(id);
             weightAmount = Math.round(weight.getAmount() * portionMultiplier);
             lblPortionAmount.setText(weightAmount + "");
             lblPortionType.setText(weight.getUnit().Abbreviate());
