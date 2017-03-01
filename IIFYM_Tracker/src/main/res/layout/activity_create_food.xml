@@ -202,42 +202,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="6"
-                android:id="@+id/etxtServingNum"
-                android:textAlignment="textStart"
+                android:id="@+id/etxtPortionAmount"
+                android:textAlignment="center"
                 android:inputType="numberDecimal"
                 android:textColor="?attr/colorPrimary"
-                android:textSize="14sp"
-                android:hint="@string/hintServing"
-                android:maxLength="4" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:weightSum="1">
-
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:inputType="number"
-                android:ems="6"
-                android:id="@+id/etxtAmount"
-                android:textColor="@color/colorPrimary"
-                android:textAlignment="textStart"
-                android:enabled="true"
                 android:textSize="14sp"
                 android:hint="@string/hintAmount"
                 android:maxLength="4" />
 
             <Spinner
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/spinnerUnit"
-                android:gravity="center_vertical|center" />
-
+                android:gravity="center_vertical|center"
+                android:layout_weight="1" />
         </LinearLayout>
+
 
     </LinearLayout>
 

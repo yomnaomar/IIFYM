@@ -6,11 +6,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -28,7 +27,7 @@ import info.hoang8f.android.segmented.SegmentedGroup;
 public class activityCreateFood extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     // GUI
-    private EditText        etxtName, etxtBrand, etxtCalories, etxtCarbs, etxtProtein, etxtFat, etxtServingNum, etxtAmount;
+    private EditText        etxtName, etxtBrand, etxtCalories, etxtCarbs, etxtProtein, etxtFat, etxtPortionAmount;
     private RadioButton     rbtnServing, rbtnWeight;
     private SegmentedGroup  seggroupPortionType;
     private Spinner         spinnerUnit;
@@ -66,12 +65,7 @@ public class activityCreateFood extends AppCompatActivity implements AdapterView
         etxtCarbs = (EditText) findViewById(R.id.etxtCarbs);
         etxtProtein = (EditText) findViewById(R.id.etxtProtein);
         etxtFat = (EditText) findViewById(R.id.etxtFat);
-        etxtServingNum = (EditText) findViewById(R.id.etxtServingNum);
-        etxtAmount = (EditText) findViewById(R.id.etxtAmount);
-
-        etxtName.requestFocus();
-        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.showSoftInput(etxtName, InputMethodManager.SHOW_IMPLICIT);
+        etxtPortionAmount = (EditText) findViewById(R.id.etxtPortionAmount);
 
         // SegmentedGroup & RadioButtons
         rbtnServing = (RadioButton) findViewById(R.id.rbtnServing);
@@ -81,6 +75,7 @@ public class activityCreateFood extends AppCompatActivity implements AdapterView
         seggroupPortionType.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
         {
             @Override public void onCheckedChanged(RadioGroup group, int checkedId) {
+                etxtPortionAmount.setText("");
                 updateGUI();
             }
         });
@@ -101,30 +96,12 @@ public class activityCreateFood extends AppCompatActivity implements AdapterView
 
     private void updateGUI() {
         if (rbtnServing.isChecked()) {
-            HideWeight();
-            ShowServing();
+            etxtPortionAmount.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL | InputType.TYPE_CLASS_NUMBER);
+            spinnerUnit.setVisibility(View.GONE);
         } else if (rbtnWeight.isChecked()) {
-            HideServing();
-            ShowWeight();
+            etxtPortionAmount.setInputType(InputType.TYPE_CLASS_NUMBER);
+            spinnerUnit.setVisibility(View.VISIBLE);
         }
-    }
-
-    private void ShowServing() {
-        etxtServingNum.setVisibility(View.VISIBLE);
-    }
-
-    private void HideServing() {
-        etxtServingNum.setVisibility(View.GONE);
-    }
-
-    private void ShowWeight() {
-        spinnerUnit.setVisibility(View.VISIBLE);
-        etxtAmount.setVisibility(View.VISIBLE);
-    }
-
-    private void HideWeight() {
-        spinnerUnit.setVisibility(View.GONE);
-        etxtAmount.setVisibility(View.GONE);
     }
 
     @Override public boolean onCreateOptionsMenu(Menu menu) {
@@ -162,7 +139,6 @@ public class activityCreateFood extends AppCompatActivity implements AdapterView
             int radioButtonID = seggroupPortionType.getCheckedRadioButtonId();
             View radioButton = seggroupPortionType.findViewById(radioButtonID);
             int indexofPortionType = seggroupPortionType.indexOfChild(radioButton);
-            Log.d("Enter", "PortionType " + indexofPortionType);
 
             createFood(name, brand, calories, carbs, protein, fat, indexofPortionType);
         }
@@ -175,11 +151,11 @@ public class activityCreateFood extends AppCompatActivity implements AdapterView
         food.setId(DB_SQLite.createFood(food));
         if (food.getId() != -1){
             if (indexofPortionType == 0) { // Food is measured by servings
-                float Serving_Number = Float.parseFloat(etxtServingNum.getText().toString());
+                float Serving_Number = Float.parseFloat(etxtPortionAmount.getText().toString());
                 DB_SQLite.createServing(food, Serving_Number);
             }
             else if (indexofPortionType == 1) { // Food is measured by weight
-                int Weight_Quantity = Integer.parseInt(etxtAmount.getText().toString());
+                int Weight_Quantity = Integer.parseInt(etxtPortionAmount.getText().toString());
                 Weight weight = new Weight(Weight_Quantity, weightUnitSelected);
                 DB_SQLite.createWeight(food, weight);
             }
@@ -229,18 +205,26 @@ public class activityCreateFood extends AppCompatActivity implements AdapterView
         } else
             etxtFat.setError(null);
 
-        if (rbtnServing.isChecked()) {
-            if (etxtServingNum.getText().toString().isEmpty()) {
-                etxtServingNum.setError("Required");
+        if (rbtnServing.isChecked())
+        {
+            if (etxtPortionAmount.getText().toString().isEmpty())
+            {
+                etxtPortionAmount.setError("Required");
                 valid = false;
-            } else
-                etxtServingNum.setError(null);
-        } else {
-            if (etxtAmount.getText().toString().isEmpty()) {
-                etxtAmount.setError("Required");
+            }
+            else
+                etxtPortionAmount.setError(null);
+        }
+        else
+        {
+            if (etxtPortionAmount.getText().toString().isEmpty())
+            {
+                etxtPortionAmount.setError("Required");
                 valid = false;
-            } else {
-                etxtAmount.setError(null);
+            }
+            else
+            {
+                etxtPortionAmount.setError(null);
             }
         }
         return valid;

@@ -202,12 +202,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="6"
-                android:id="@+id/etxtAmount"
-                android:textAlignment="textStart"
+                android:id="@+id/etxtPortionAmount"
+                android:textAlignment="center"
                 android:inputType="numberDecimal"
                 android:textColor="?attr/colorPrimary"
                 android:textSize="14sp"
-                android:hint="@string/hintServing"
+                android:hint="@string/hintAmount"
                 android:maxLength="4" />
 
             <Spinner

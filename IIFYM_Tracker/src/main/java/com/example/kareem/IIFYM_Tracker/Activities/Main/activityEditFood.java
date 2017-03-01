@@ -29,7 +29,7 @@ import info.hoang8f.android.segmented.SegmentedGroup;
 public class activityEditFood extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener {
 
     // GUI
-    private EditText                etxtName, etxtBrand, etxtCalories, etxtCarbs, etxtProtein, etxtFat, etxtAmount;
+    private EditText                etxtName, etxtBrand, etxtCalories, etxtCarbs, etxtProtein, etxtFat, etxtPortionAmount;
     private RadioButton             rbtnServing, rbtnWeight;
     private SegmentedGroup          seggroupPortionType;
     private Spinner                 spinnerUnit;
@@ -70,7 +70,7 @@ public class activityEditFood extends AppCompatActivity implements AdapterView.O
         etxtCarbs = (EditText) findViewById(R.id.etxtCarbs);
         etxtProtein = (EditText) findViewById(R.id.etxtProtein);
         etxtFat = (EditText) findViewById(R.id.etxtFat);
-        etxtAmount = (EditText) findViewById(R.id.etxtAmount);
+        etxtPortionAmount = (EditText) findViewById(R.id.etxtPortionAmount);
 
         etxtName.requestFocus();
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -84,7 +84,7 @@ public class activityEditFood extends AppCompatActivity implements AdapterView.O
         seggroupPortionType.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
         {
             @Override public void onCheckedChanged(RadioGroup group, int checkedId) {
-                etxtAmount.setText("");
+                etxtPortionAmount.setText("");
                 updateGUI();
             }
         });
@@ -113,11 +113,11 @@ public class activityEditFood extends AppCompatActivity implements AdapterView.O
         if (food.getPortionType() == 0) { // Serving
             rbtnServing.setChecked(true);
             float servingNum = DB_SQLite.retrieveServing(food);
-            etxtAmount.setText(servingNum + "");
+            etxtPortionAmount.setText(servingNum + "");
         } else if (food.getPortionType() == 1) { // Weight
             rbtnWeight.setChecked(true);
             Weight weight = DB_SQLite.retrieveWeight(food);
-            etxtAmount.setText(weight.getAmount() + "");
+            etxtPortionAmount.setText(weight.getAmount() + "");
             spinnerUnit.setSelection(weight.getUnit().getWeightInt());
         }
     }
@@ -129,10 +129,10 @@ public class activityEditFood extends AppCompatActivity implements AdapterView.O
 
     private void updateGUI() {
         if (rbtnServing.isChecked()) {
-            etxtAmount.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
+            etxtPortionAmount.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL | InputType.TYPE_CLASS_NUMBER);
             spinnerUnit.setVisibility(View.GONE);
         } else if (rbtnWeight.isChecked()) {
-            etxtAmount.setInputType(InputType.TYPE_CLASS_NUMBER);
+            etxtPortionAmount.setInputType(InputType.TYPE_CLASS_NUMBER);
             spinnerUnit.setVisibility(View.VISIBLE);
         }
     }
@@ -195,14 +195,14 @@ public class activityEditFood extends AppCompatActivity implements AdapterView.O
         // Else create a new one and delete the other
         switch (food.getPortionType()) {
             case (0): // Serving
-                float newServing = Float.parseFloat(etxtAmount.getText().toString());
+                float newServing = Float.parseFloat(etxtPortionAmount.getText().toString());
                 if (!DB_SQLite.updateServing(food, newServing)) {
                     DB_SQLite.deleteWeight(food);
                     DB_SQLite.createServing(food, newServing);
                 }
                 break;
             case (1): // Weight
-                Weight newWeight = new Weight(Integer.parseInt(etxtAmount.getText().toString()), weightUnitSelected);
+                Weight newWeight = new Weight(Integer.parseInt(etxtPortionAmount.getText().toString()), weightUnitSelected);
                 if (!DB_SQLite.updateWeight(food, newWeight)) {
                     DB_SQLite.deleteServing(food);
                     DB_SQLite.createWeight(food, newWeight);

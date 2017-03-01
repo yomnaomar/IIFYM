@@ -2,12 +2,11 @@ package com.example.kareem.IIFYM_Tracker.Activities.Main;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -136,7 +135,6 @@ public class activityHome extends AppCompatActivity implements AdapterView.OnIte
         toast.show();
 
         isPercent = currentUser.getIsPercent();
-        Log.d("initializeUser","isPercent " + isPercent);
 
         caloriesGoal = currentUser.getDailyCalories();
         carbsGoal = currentUser.getDailyCarbs();
@@ -200,35 +198,43 @@ public class activityHome extends AppCompatActivity implements AdapterView.OnIte
         if(caloriesCurrent < caloriesGoal) {
             progressBarCalories.setProgress(100 * caloriesCurrent / caloriesGoal);
             lblCaloriesCurrent.setTextColor(context.getResources().getColor(R.color.CaloriesProgessColor));
+            lblCaloriesCurrent.setTypeface(null, Typeface.NORMAL);
         }
         else {
             progressBarCalories.setProgress(100);
             lblCaloriesCurrent.setTextColor(context.getResources().getColor(R.color.error_red));
+            lblCaloriesCurrent.setTypeface(null, Typeface.BOLD);
         }
 
         if(carbsCurrent < carbsGoal) {
             progressBarCarbs.setProgress(100 * carbsCurrent / carbsGoal);
             lblCarbsCurrent.setTextColor(context.getResources().getColor(R.color.CarbProgressColor));
+            lblCarbsCurrent.setTypeface(null, Typeface.NORMAL);
         }
         else {
             progressBarCarbs.setProgress(100);
             lblCarbsCurrent.setTextColor(context.getResources().getColor(R.color.error_red));
+            lblCarbsCurrent.setTypeface(null, Typeface.BOLD);
         }
         if(proteinCurrent < proteinGoal) {
             progressBarProtein.setProgress(100 * proteinCurrent / proteinGoal);
             lblProteinCurrent.setTextColor(context.getResources().getColor(R.color.ProteinProgessColor));
+            lblProteinCurrent.setTypeface(null, Typeface.NORMAL);
         }
         else {
             progressBarProtein.setProgress(100);
             lblProteinCurrent.setTextColor(context.getResources().getColor(R.color.error_red));
+            lblProteinCurrent.setTypeface(null, Typeface.BOLD);
         }
         if(fatCurrent < fatGoal) {
             progressBarFat.setProgress(100 * fatCurrent / fatGoal);
             lblFatCurrent.setTextColor(context.getResources().getColor(R.color.FatProgessColor));
+            lblFatCurrent.setTypeface(null, Typeface.NORMAL);
         }
         else {
             progressBarFat.setProgress(100);
             lblFatCurrent.setTextColor(context.getResources().getColor(R.color.error_red));
+            lblFatCurrent.setTypeface(null, Typeface.BOLD);
         }
     }
 
@@ -310,8 +316,6 @@ public class activityHome extends AppCompatActivity implements AdapterView.OnIte
 
     private void signOut() {
         myPrefs.addPreference("session_uid", "");
-        Log.d("Main_SignOut","session_uid removed");
-        Log.d("Main_SignOut","checking ... " + myPrefs.getStringValue("session_uid"));
         firebaseAuth.signOut();
     }
 }

@@ -3,7 +3,6 @@ package com.example.kareem.IIFYM_Tracker.Activities.Main;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
@@ -19,11 +18,8 @@ import com.example.kareem.IIFYM_Tracker.Models.Weight;
 import com.example.kareem.IIFYM_Tracker.R;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import lecho.lib.hellocharts.model.PieChartData;
-import lecho.lib.hellocharts.model.SliceValue;
-import lecho.lib.hellocharts.util.ChartUtils;
 import lecho.lib.hellocharts.view.PieChartView;
 
 public class activityViewDailyItem extends AppCompatActivity implements View.OnClickListener {
@@ -45,7 +41,8 @@ public class activityViewDailyItem extends AppCompatActivity implements View.OnC
     private int         position;
     private Food        food;
     private DailyItem   dailyitem;
-    private float       portionAmount;
+    private float       servingAmount;
+    private int         weightAmount;
     private float       portionMultiplier;
 
     // Database
@@ -86,8 +83,8 @@ public class activityViewDailyItem extends AppCompatActivity implements View.OnC
         fabDelete = (FloatingActionButton) findViewById(R.id.fabDelete);
         fabDelete.setOnClickListener(this);
 
-        chart = (PieChartView)findViewById(R.id.piechartMacros);
-        generatePieChartData();
+        // chart = (PieChartView)findViewById(R.id.piechartMacros);
+        // generatePieChartData();
 
         lblName.setText(food.getName());
         if(food.getBrand().isEmpty())
@@ -103,26 +100,52 @@ public class activityViewDailyItem extends AppCompatActivity implements View.OnC
         lblFat.setText(Math.round(food.getFat() * portionMultiplier) + "");
 
         if (food.getPortionType() == 0) { // Serving
-            portionAmount = DB_SQLite.retrieveServing(food) * portionMultiplier;
-            lblPortionAmount.setText(portionAmount + "");
-            if (portionAmount != 1.0f)
+            servingAmount = DB_SQLite.retrieveServing(food) * portionMultiplier;
+            lblPortionAmount.setText(servingAmount + "");
+            if (servingAmount != 1.0f)
                 lblPortionType.setText("servings");
             else
                 lblPortionType.setText("serving");
         } else { // Weight
             Weight weight = DB_SQLite.retrieveWeight(food);
-            portionAmount = weight.getAmount() * portionMultiplier;
-            lblPortionAmount.setText(portionAmount + "");
+            weightAmount = Math.round(weight.getAmount() * portionMultiplier);
+            lblPortionAmount.setText(weightAmount + "");
             lblPortionType.setText(weight.getUnit().Abbreviate());
         }
     }
 
-    private void generatePieChartData() {
+    @Override public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.fabDelete:
+                deleteDailyItem();
+                break;
+        }
+    }
 
-        float total = food.getCarbs() + food.getProtein() + food.getFat();
-        float percentCarbs = Math.round(food.getCarbs() / total * 100);
-        float percentProtein = Math.round(food.getProtein() / total * 100);
-        float percentFat = Math.round(food.getFat() / total * 100);
+    private void deleteDailyItem() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Are you sure you want to delete this item from your daily log?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        DB_SQLite.deleteDailyItem(position);
+                        finish();
+                    }
+                });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // User cancelled the dialog
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    /*    private void generatePieChartData() {
+
+        float total = food.getCarbs()*4 + food.getProtein()*4 + food.getFat()*9;
+        float percentCarbs = Math.round(food.getCarbs()*4 / total * 100);
+        float percentProtein = Math.round(food.getProtein()*4 / total * 100);
+        float percentFat = Math.round(food.getFat()*9 / total * 100);
 
         List<SliceValue> values = new ArrayList<>();
 
@@ -158,31 +181,5 @@ public class activityViewDailyItem extends AppCompatActivity implements View.OnC
         chart.animate();
         chart.animationDataUpdate(2f);
         chart.setPieChartData(data);
-    }
-
-    @Override public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.fabDelete:
-                deleteDailyItem();
-                break;
-        }
-    }
-
-    private void deleteDailyItem() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Are you sure you want to delete this item from your daily log?")
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        DB_SQLite.deleteDailyItem(position);
-                        finish();
-                    }
-                });
-        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                // User cancelled the dialog
-            }
-        });
-        AlertDialog dialog = builder.create();
-        dialog.show();
-    }
+    }*/
 }

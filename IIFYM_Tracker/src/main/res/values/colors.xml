@@ -13,8 +13,8 @@
     <color name="black_light">#333</color>
     <color name="grey_light">#A1A1A1</color>
     <color name="CaloriesProgessColor">#EF6C00</color>
-    <color name="CarbProgressColor">#EAC807</color>
-    <color name="ProteinProgessColor">#FF4040</color>
+    <color name="CarbProgressColor">#FFB300</color>
+    <color name="ProteinProgessColor">#F44336</color>
     <color name="FatProgessColor">#66bb6a</color>
     <color name="Progress_Bar_Background">#e0e0e0</color>
     <color name="Transparent">#00ffffff</color>
@@ -22,7 +22,7 @@
     <color name="radio_button_selected_color">#1f3972</color>
     <color name="radio_button_unselected_color">#FFFFFF</color>
     <color name="SegmentedGroup_sc_unchecked_tint_color">#FFFFFF</color>
-    <color name="error_red">#FF0000</color>
+    <color name="error_red">#D50000</color>
     <color name="correct_green">#2E7D32</color>
     <color name="Custom_Grey">#808080</color>
     <color name="fabBlackSemiTransparent">#B2000000</color>
@@ -34,7 +34,4 @@
     <color name="fabPinkPressed">#ec407a</color>
     <color name="fabBlue">#805677fc</color>
     <color name="fabBluePressed">#80738ffe</color>
-    <!--<color name="CarbProgressColor">#f0c419</color>-->
-    <!--<color name="ProteinProgessColor">#f44336</color>-->
-    <!--<color name="FatProgessColor">#66bb6a</color>-->
 </resources>

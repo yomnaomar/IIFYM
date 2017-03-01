@@ -143,11 +143,12 @@
                         android:layout_height="wrap_content"
                         android:ems="4"
                         android:id="@+id/etxtPortionAmount"
-                        android:hint="0000"
+                        android:hint="@string/hintAmount"
                         android:gravity="center_vertical|center_horizontal|center"
                         android:textAppearance="@android:style/TextAppearance.Material.Small"
                         android:maxLength="4"
-                        android:inputType="numberDecimal" />
+                        android:inputType="number"
+                        android:textAlignment="center" />
 
                     <TextView
                         android:text="@string/lblPortionType"

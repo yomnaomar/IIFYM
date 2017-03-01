@@ -9,7 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -98,20 +97,20 @@ public class activityAddDailyItem extends AppCompatActivity implements TextWatch
 
         if (portionType == 0) // Serving
         {
-            etxtPortionAmount.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
             initialPortionServing = DB_SQLite.retrieveServing(food);
             etxtPortionAmount.setText(initialPortionServing + "");
+            etxtPortionAmount.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL | InputType.TYPE_CLASS_NUMBER);
             if (initialPortionServing != 1.0f)
-                lblPortionType.setText("servings");
+                lblPortionType.setText("Servings");
             else
-                lblPortionType.setText("serving");
+                lblPortionType.setText("Serving");
         }
         else if (portionType == 1)// Weight
         {
-            etxtPortionAmount.setInputType(InputType.TYPE_CLASS_NUMBER);
             Weight weight = DB_SQLite.retrieveWeight(food);
             initialPortionWeight = weight.getAmount();
             etxtPortionAmount.setText(initialPortionWeight + "");
+            etxtPortionAmount.setInputType(InputType.TYPE_CLASS_NUMBER);
             lblPortionType.setText(weight.getUnit().Abbreviate());
         }
 
@@ -128,13 +127,11 @@ public class activityAddDailyItem extends AppCompatActivity implements TextWatch
         {
             float servingNum = DB_SQLite.retrieveServing(food);
             portionMultiplier = newPortionAmount / servingNum;
-            Log.d("activityAddDailyItem", portionMultiplier + "");
         }
         else // Weight
         {
             Weight weight = DB_SQLite.retrieveWeight(food);
             portionMultiplier = newPortionAmount / weight.getAmount();
-            Log.d("activityAddDailyItem", portionMultiplier + "");
         }
 
         DecimalFormat df = new DecimalFormat("#.##");
