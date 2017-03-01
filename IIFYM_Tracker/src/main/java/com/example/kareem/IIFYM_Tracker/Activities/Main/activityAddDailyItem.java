@@ -1,4 +1,4 @@
-package com.example.kareem.IIFYM_Tracker.Activities.Main.New;
+package com.example.kareem.IIFYM_Tracker.Activities.Main;
 
 import android.content.Context;
 import android.content.Intent;
