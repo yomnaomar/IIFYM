@@ -1,4 +1,4 @@
-package com.example.kareem.IIFYM_Tracker.Activities.Main.New;
+package com.example.kareem.IIFYM_Tracker.Activities.Main;
 
 import android.content.Context;
 import android.content.Intent;
@@ -19,8 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
-/*import com.example.kareem.IIFYM_Tracker.Activities.Settings.MacroSettings;*/
-import com.example.kareem.IIFYM_Tracker.Activities.User_Login_Authentification.activityLogin;
+import com.example.kareem.IIFYM_Tracker.Activities.UserLoginAuthentification.activityLogin;
 import com.example.kareem.IIFYM_Tracker.Database.SQLiteConnector;
 import com.example.kareem.IIFYM_Tracker.Database.SharedPreferenceHelper;
 import com.example.kareem.IIFYM_Tracker.Models.DailyItem;
@@ -32,6 +31,8 @@ import com.example.kareem.IIFYM_Tracker.ViewComponents.adapterDailyItem;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
+
+/*import com.example.kareem.IIFYM_Tracker.Activities.Settings.MacroSettings;*/
 
 public class activityHome extends AppCompatActivity implements AdapterView.OnItemClickListener, OnListItemDeletedListener {
 
@@ -276,21 +277,22 @@ public class activityHome extends AppCompatActivity implements AdapterView.OnIte
         int id = item.getItemId();
         Intent intent;
         switch (id){
-            case (R.id.action_MacroSettings):
+            case (R.id.actionNutritionSettings):
             /*    intent = new Intent(context,MacroSettings.class );
                 startActivity(intent);
                 finish();*/
                 return true;
-            case (R.id.action_MealSettings):
-                intent = new Intent(context, activityViewSavedItems.class);
+            case (R.id.actionFoodManager):
+                intent = new Intent(context, activityFoodManager.class);
                 startActivity(intent);
                 return true;
-            case (R.id.profile_menu_btn):
-                /*intent = new Intent(context,UserProfile_Mina.class);
-                startActivity(intent);
-                finish();*/
+            case (R.id.menuAccount):
+
                 return true;
-            case (R.id.logout_menu_btn):
+            case (R.id.menuSettings):
+
+                return true;
+            case (R.id.menuLogout):
                 signOut();
                 intent = new Intent(context, activityLogin.class);
                 startActivity(intent);
@@ -301,19 +303,8 @@ public class activityHome extends AppCompatActivity implements AdapterView.OnIte
 
     @Override public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_home_woman, menu);
+        getMenuInflater().inflate(R.menu.menu_home, menu);
         return true;
-    }
-
-    @Override public boolean onPrepareOptionsMenu(Menu menu) {
-        menu.clear();
-        if (currentUser.getGender() == 0) { //Male
-            getMenuInflater().inflate(R.menu.menu_home_man, menu);
-        }
-        else {
-            getMenuInflater().inflate(R.menu.menu_home_woman, menu);
-        }
-        return super.onPrepareOptionsMenu(menu);
     }
 
     private void signOut() {

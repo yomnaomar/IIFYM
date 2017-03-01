@@ -1,4 +1,4 @@
-package com.example.kareem.IIFYM_Tracker.Activities.User_Login_Authentification;
+package com.example.kareem.IIFYM_Tracker.Activities.UserLoginAuthentification;
 
 import android.app.DatePickerDialog;
 import android.content.BroadcastReceiver;

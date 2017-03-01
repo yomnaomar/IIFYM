@@ -159,5 +159,10 @@
     <string name="toolbarEditFood">Edit food</string>
     <string name="lblCreateNewMeal">Create new meal</string>
     <string name="lblDailyLog">Daily Log:</string>
+    <string name="menuSettings">IIFYM Settings</string>
+    <string name="menuAccount">My Account</string>
+    <string name="menuLogout">Logout</string>
+    <string name="actionNutritionSettings">Nutrition Settings</string>
+    <string name="actionMyFood">My Food</string>
 
 </resources>

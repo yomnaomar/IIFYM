@@ -1,4 +1,4 @@
-package com.example.kareem.IIFYM_Tracker.Activities.User_Login_Authentification;
+package com.example.kareem.IIFYM_Tracker.Activities.UserLoginAuthentification;
 
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
@@ -16,7 +16,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
-import com.example.kareem.IIFYM_Tracker.Activities.Main.New.activityHome;
+import com.example.kareem.IIFYM_Tracker.Activities.Main.activityHome;
 import com.example.kareem.IIFYM_Tracker.Database.SQLiteConnector;
 import com.example.kareem.IIFYM_Tracker.Database.SharedPreferenceHelper;
 import com.example.kareem.IIFYM_Tracker.Models.User;

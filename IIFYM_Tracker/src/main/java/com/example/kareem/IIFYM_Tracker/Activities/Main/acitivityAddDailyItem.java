@@ -1,4 +1,4 @@
-package com.example.kareem.IIFYM_Tracker.Activities.Main.Old;
+package com.example.kareem.IIFYM_Tracker.Activities.Main;
 import android.support.v7.app.AppCompatActivity;
 
 public class acitivityAddDailyItem extends AppCompatActivity {}

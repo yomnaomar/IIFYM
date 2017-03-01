@@ -2,25 +2,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.kareem.IIFYM_Tracker.HomeActivity">
-    <item android:title="Logout"
-        android:id="@+id/logout_menu_btn" />
+    <item android:title="@string/menuSettings"
+        android:id="@+id/menuSettings" />
+    <item android:title="@string/menuAccount"
+        android:id="@+id/menuAccount" />
+    <item android:title="@string/menuLogout"
+        android:id="@+id/menuLogout" />
     <item
-        android:id="@+id/action_MacroSettings"
+        android:id="@+id/actionNutritionSettings"
         android:orderInCategory="100"
-        android:title="@string/Macro_settings"
+        android:title="@string/actionNutritionSettings"
         app:showAsAction="always"
         android:icon="@drawable/ic_macro_settings"
         />
     <item
-        android:id="@+id/action_MealSettings"
+        android:id="@+id/actionFoodManager"
         android:orderInCategory="100"
-        android:title="@string/Meal_settings"
+        android:title="@string/actionMyFood"
         app:showAsAction="always"
         android:icon="@drawable/ic_meal_settings"
         />
-    <item android:title="Profile"
-        android:id="@+id/profile_menu_btn"
-        app:showAsAction="always"
-        android:icon="@drawable/ic_male_user"
-        android:orderInCategory="101" />
 </menu>

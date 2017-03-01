@@ -1,11 +1,11 @@
-package com.example.kareem.IIFYM_Tracker.Activities.User_Login_Authentification;
+package com.example.kareem.IIFYM_Tracker.Activities.UserLoginAuthentification;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.example.kareem.IIFYM_Tracker.Activities.Main.New.activityHome;
+import com.example.kareem.IIFYM_Tracker.Activities.Main.activityHome;
 import com.example.kareem.IIFYM_Tracker.Database.SharedPreferenceHelper;
 import com.example.kareem.IIFYM_Tracker.R;
 

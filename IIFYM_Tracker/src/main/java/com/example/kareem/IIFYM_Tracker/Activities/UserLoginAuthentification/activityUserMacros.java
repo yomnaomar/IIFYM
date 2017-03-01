@@ -1,4 +1,4 @@
-package com.example.kareem.IIFYM_Tracker.Activities.User_Login_Authentification;
+package com.example.kareem.IIFYM_Tracker.Activities.UserLoginAuthentification;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -22,7 +22,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import com.example.kareem.IIFYM_Tracker.Activities.Main.New.activityHome;
+import com.example.kareem.IIFYM_Tracker.Activities.Main.activityHome;
 import com.example.kareem.IIFYM_Tracker.Models.User;
 import com.example.kareem.IIFYM_Tracker.Database.SQLiteConnector;
 import com.example.kareem.IIFYM_Tracker.Database.SharedPreferenceHelper;

@@ -14,17 +14,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".Activities.Main.New.activityHome"
+            android:name=".Activities.Main.activityHome"
             android:label="@string/appName"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
             android:launchMode="singleInstance"/>
         <activity
-            android:name=".Activities.Main.New.activityViewSavedItems"
+            android:name=".Activities.Main.activityFoodManager"
             android:screenOrientation="portrait"
             android:label="@string/toolbarSavedItems"/>
         <activity
-            android:name=".Activities.Main.New.activityEditFood"
+            android:name=".Activities.Main.activityEditFood"
             android:label="@string/toolbarEditFood"
             android:screenOrientation="portrait" />
         <activity
@@ -34,23 +34,23 @@
         android:windowSoftInputMode="adjustPan" />
         ]]>
         <activity
-            android:name=".Activities.Main.Old.acitivityAddDailyItem"
+            android:name=".Activities.Main.acitivityAddDailyItem"
             android:theme="@style/AppTheme.NoActionBar" />
         >>>>>>> master
         <activity
-            android:name=".Activities.Main.New.activityCreateFood"
+            android:name=".Activities.Main.activityCreateFood"
             android:label="@string/toolbarCreateNewFood" />
         <activity
-            android:name=".Activities.User_Login_Authentification.activityLogin"
+            android:name=".Activities.UserLoginAuthentification.activityLogin"
             android:label="@string/appName" />
         <activity
-            android:name=".Activities.User_Login_Authentification.activityUserInfo"
+            android:name=".Activities.UserLoginAuthentification.activityUserInfo"
             android:label="@string/toolbarUserInfo" />
         <activity
-            android:name=".Activities.User_Login_Authentification.activityUserMacros"
+            android:name=".Activities.UserLoginAuthentification.activityUserMacros"
             android:label="@string/toolbarUserMacros" />
         <activity
-            android:name=".Activities.User_Login_Authentification.activityLauncher"
+            android:name=".Activities.UserLoginAuthentification.activityLauncher"
             android:label="IIFYM Tracker">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -58,9 +58,9 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activities.Main.New.activitySelectDailyItem"
+            android:name=".Activities.Main.activitySelectDailyItem"
             android:label="@string/toolbarSelectItemToAdd" />
-        <activity android:name=".Activities.Main.New.activityViewDailyItem"></activity>
+        <activity android:name=".Activities.Main.activityViewDailyItem"></activity>
     </application>
 
 </manifest>
