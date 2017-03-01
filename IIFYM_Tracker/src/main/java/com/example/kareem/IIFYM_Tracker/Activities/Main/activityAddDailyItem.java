@@ -19,7 +19,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.kareem.IIFYM_Tracker.Database.SQLiteConnector;
-import com.example.kareem.IIFYM_Tracker.Models.DailyItem;
 import com.example.kareem.IIFYM_Tracker.Models.Food;
 import com.example.kareem.IIFYM_Tracker.Models.Weight;
 import com.example.kareem.IIFYM_Tracker.R;
@@ -47,7 +46,8 @@ public class activityAddDailyItem extends AppCompatActivity implements TextWatch
     private Context         context;
     private long            fid;
     private Food            food;
-    private float           initialPortionAmount;
+    private float           initialPortionServing;
+    private int             initialPortionWeight;
     private float           newPortionAmount;
     private float           portionMultiplier = 1.0f;
     private int             portionType;
@@ -98,34 +98,24 @@ public class activityAddDailyItem extends AppCompatActivity implements TextWatch
 
         if (portionType == 0) // Serving
         {
-            initialPortionAmount = DB_SQLite.retrieveServing(food);
-            etxtPortionAmount.setText(initialPortionAmount + "");
-            if (initialPortionAmount != 1.0f)
+            etxtPortionAmount.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
+            initialPortionServing = DB_SQLite.retrieveServing(food);
+            etxtPortionAmount.setText(initialPortionServing + "");
+            if (initialPortionServing != 1.0f)
                 lblPortionType.setText("servings");
             else
                 lblPortionType.setText("serving");
         }
-        else // Weight
+        else if (portionType == 1)// Weight
         {
+            etxtPortionAmount.setInputType(InputType.TYPE_CLASS_NUMBER);
             Weight weight = DB_SQLite.retrieveWeight(food);
-            initialPortionAmount = weight.getAmount();
-            etxtPortionAmount.setText(initialPortionAmount + "");
+            initialPortionWeight = weight.getAmount();
+            etxtPortionAmount.setText(initialPortionWeight + "");
             lblPortionType.setText(weight.getUnit().Abbreviate());
         }
 
         etxtPortionAmount.addTextChangedListener(this);
-    }
-
-    @Override protected void onResume() {
-        super.onResume();
-        updateGUI();
-    }
-
-    private void updateGUI() {
-        if (portionType == 0) // Serving
-            etxtPortionAmount.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
-        else if (portionType == 1) // Weight
-            etxtPortionAmount.setInputType(InputType.TYPE_CLASS_NUMBER);
     }
 
     @Override public void onTextChanged(CharSequence s, int start, int before, int count) {

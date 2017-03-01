@@ -58,6 +58,7 @@ public class SQLiteConnector {
             return true;
         }
         Log.d("isExistingUser","User with uid " + uid + " not found");
+        C.close();
         return false;
     }
 
@@ -99,27 +100,30 @@ public class SQLiteConnector {
     public User retrieveUser(String uid) {
         Cursor C = database.rawQuery("SELECT * FROM " + Table_User + " WHERE uid = '" + uid + "'", null);
         if (C.moveToFirst() && C != null) {
+            User user = new User(C.getString(0),
+                            C.getString(1),
+                            C.getInt(2),
+                            C.getString(3),
+                            C.getString(4),
+                            C.getInt(5),
+                            C.getInt(6),
+                            C.getFloat(7),
+                            C.getInt(8),
+                            C.getInt(9),
+                            C.getInt(10),
+                            C.getInt(11),
+                            C.getInt(12),
+                            C.getInt(13),
+                            C.getInt(14),
+                            C.getInt(15),
+                            C.getInt(16));
             Log.d("retrieveUser", "User with uid " + uid + " retrieved");
-            return new User(C.getString(0),
-                    C.getString(1),
-                    C.getInt(2),
-                    C.getString(3),
-                    C.getString(4),
-                    C.getInt(5),
-                    C.getInt(6),
-                    C.getFloat(7),
-                    C.getInt(8),
-                    C.getInt(9),
-                    C.getInt(10),
-                    C.getInt(11),
-                    C.getInt(12),
-                    C.getInt(13),
-                    C.getInt(14),
-                    C.getInt(15),
-                    C.getInt(16));
+            C.close();
+            return user;
         }
         else {
             Log.d("retrieveUser", "User with uid " + uid + " not found");
+            C.close();
             return null;
         }
     }
@@ -179,9 +183,11 @@ public class SQLiteConnector {
         C.moveToFirst();
         if (C.getCount() != 0) {
             Log.d("isExistingFood","Food with id " + id + " found");
+            C.close();
             return true;
         }
         Log.d("isExistingFood","Food with id " + id + " not found");
+        C.close();
         return false;
     }
 
@@ -207,18 +213,21 @@ public class SQLiteConnector {
     public Food retrieveFood(String name) {
         Cursor C = database.rawQuery("SELECT * FROM " + Table_Food + " WHERE name = '" + name + "'", null);
         if (C.moveToFirst() && C != null) {
+            Food food = new Food(C.getInt(0),
+                            C.getString(1),
+                            C.getString(2),
+                            C.getInt(3),
+                            C.getFloat(4),
+                            C.getFloat(5),
+                            C.getFloat(6),
+                            C.getInt(7),
+                            C.getInt(8));
             Log.d("retrieveFood", "Food with name " + name + " retrieved");
-            return new Food(C.getInt(0),
-                    C.getString(1),
-                    C.getString(2),
-                    C.getInt(3),
-                    C.getFloat(4),
-                    C.getFloat(5),
-                    C.getFloat(6),
-                    C.getInt(7),
-                    C.getInt(8));
+            C.close();
+            return food;
         }
         Log.d("retrieveFood", "Food with name " + name + " not found");
+        C.close();
         return null;
     }
 
@@ -227,18 +236,21 @@ public class SQLiteConnector {
     public Food retrieveFood(long id) {
         Cursor C = database.rawQuery("SELECT * FROM " + Table_Food + " WHERE id = '" + id + "'", null);
         if (C.moveToFirst() && C != null) {
+            Food food = new Food(C.getInt(0),
+                                C.getString(1),
+                                C.getString(2),
+                                C.getInt(3),
+                                C.getFloat(4),
+                                C.getFloat(5),
+                                C.getFloat(6),
+                                C.getInt(7),
+                                C.getInt(8));
             Log.d("retrieveFood", "Food with id " + id + " retrieved");
-            return new Food(C.getInt(0),
-                    C.getString(1),
-                    C.getString(2),
-                    C.getInt(3),
-                    C.getFloat(4),
-                    C.getFloat(5),
-                    C.getFloat(6),
-                    C.getInt(7),
-                    C.getInt(8));
+            C.close();
+            return food;
         }
         Log.d("retrieveFood", "Food with id " + id + " not found");
+        C.close();
         return null;
     }
 
@@ -311,6 +323,7 @@ public class SQLiteConnector {
                 Log.i("food Added:", "Name: " + name);
             }
         }
+        C.close();
         return arrFood;
     }
 
@@ -323,9 +336,11 @@ public class SQLiteConnector {
         C.moveToFirst();
         if (C.getCount() != 0) {
             Log.d("isExistingWeight","Weight with id " + f.getId() + " and name " + f.getName() + " found");
+            C.close();
             return true;
         }
         Log.d("isExistingWeight","Weight with id " + f.getId() + " not found");
+        C.close();
         return false;
     }
 
@@ -353,11 +368,14 @@ public class SQLiteConnector {
         if (C.moveToFirst() && C != null) {
             Log.d("retrieveWeight", "Weight with id " + f.getId() + " and name " + f.getName() + " retrieved");
             weightUnit w = weightUnit.Grams;
-            return new Weight(C.getInt(1),
-                    w.fromInteger(C.getInt(2)));
+            Weight weight = new Weight(C.getInt(1),
+                                    w.fromInteger(C.getInt(2)));
+            C.close();
+            return weight;
         }
         else {
             Log.d("retrieveWeight", "Weight with id " + f.getId() + " not found");
+            C.close();
             return null;
         }
     }
@@ -402,9 +420,11 @@ public class SQLiteConnector {
         C.moveToFirst();
         if (C.getCount() != 0) {
             Log.d("isExistingServing", "Serving with id " + f.getId() + " and name " + f.getName() + " found");
+            C.close();
             return true;
         }
         Log.d("isExistingServing", "Sering with id " + f.getId() + " not found");
+        C.close();
         return false;
     }
 
@@ -431,9 +451,11 @@ public class SQLiteConnector {
         if (C != null && C.moveToFirst()) {
             float servingNum = C.getFloat(1); //serving_number
             Log.d("updateUser", "Serving with id " + f.getId() + " retrieved");
+            C.close();
             return servingNum;
         }
         Log.d("retrieveUser", "Serving with id " + f.getId() + " not found");
+        C.close();
         return 0;
     }
 
@@ -473,9 +495,11 @@ public class SQLiteConnector {
         C.moveToFirst();
         if (C.getCount() != 0) {
             Log.d("isExistingDailyItem", "DailyItem with position " + position + " exists");
+            C.close();
             return true;
         }
         Log.d("isExistingDailyItem", "DailyItem with position " + position + " not found");
+        C.close();
         return false;
     }
 
@@ -483,6 +507,7 @@ public class SQLiteConnector {
     public boolean createDailyItem(long fid, float multiplier) {
         Cursor C = this.retrieveAllDailyItemsCursor();
         int position = C.getCount(); //insert to next position
+        C.close();
 
         ContentValues newDailyItem = new ContentValues();
         newDailyItem.put("position", position);
@@ -501,11 +526,14 @@ public class SQLiteConnector {
         Cursor C = database.rawQuery("SELECT * FROM " + Table_DailyItem + " WHERE position = '" + position + "'", null);
         if (C.moveToFirst() && C != null) {
             Log.d("retrieveDailyItem", "DailyItem with position " + position + " retrieved");
-            return new DailyItem(C.getInt(0),
-                    C.getInt(1),
-                    C.getFloat(2));
+            DailyItem dailyitem = new DailyItem(C.getInt(0),
+                                                C.getInt(1),
+                                                C.getFloat(2));
+            C.close();
+            return dailyitem;
         }
         Log.d("retrieveDailyItem", "DailyItem with position " + position + " not found");
+        C.close();
         return null;
     }
 
@@ -535,6 +563,7 @@ public class SQLiteConnector {
                         + " multiplier: " + dailyItem.getMultiplier());
             }
         }
+        C.close();
         return arrDailyItem;
     }
 
@@ -542,6 +571,7 @@ public class SQLiteConnector {
     private Cursor retrieveAllDailyItemsCursor() {
         Cursor C = database.rawQuery("SELECT * FROM " + Table_DailyItem, null);
         Log.d("retrieveAllDailyItems", "All Daily Items Retrieved");
+        C.close();
         return C;
     }
 
@@ -557,10 +587,12 @@ public class SQLiteConnector {
 
             database.update(Table_DailyItem, updateDailyMeal, "id = " + item.getId() + " position = " + item.getPosition(), null);
             Log.d("updateDailyMeal", "DailyItem with id " + item.getId() + " updated");
+            C.close();
             return true;
         }
         else {
             Log.d("updateDailyMeal", "DailyItem with id " + item.getId() + " not found");
+            C.close();
             return false;
         }
     }
@@ -597,23 +629,7 @@ public class SQLiteConnector {
                 Log.d("updateDailyItmPositions", ""+j);
             }
         }
-    }
-
-    // TODO verify that this function does not need to pass ID as param
-    // TODO verify that the comment in the function is false
-    // Returns the multiplier of a DailyItem with position = position and id = id
-    // Returns default = 1 if not found
-    public float getMultiplier(int position) {
-        Cursor C = database.rawQuery("SELECT multiplier FROM " + Table_DailyItem +
-                " WHERE position = " + position, null); //position = position + 1 because dailymealadapater positions start at 0, where as DB positions start at 1
-        if (C.moveToFirst()) {
-            float multiplier = C.getFloat(0);
-            Log.d("getMultiplier", "Retrieved multiplier: " + multiplier +
-                    " of DailyItem with position: " + position);
-            return multiplier;
-        }
-        Log.d("getMultiplier", "Empty Cursor, retrieved default multiplier = 1");
-        return 1;
+        C.close();
     }
 
     // TODO Implement helper functions
