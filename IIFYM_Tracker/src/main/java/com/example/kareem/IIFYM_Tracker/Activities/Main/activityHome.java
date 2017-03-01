@@ -197,44 +197,44 @@ public class activityHome extends AppCompatActivity implements AdapterView.OnIte
         // Updating ProgressBars
         if(caloriesCurrent < caloriesGoal) {
             progressBarCalories.setProgress(100 * caloriesCurrent / caloriesGoal);
-            lblCaloriesCurrent.setTextColor(context.getResources().getColor(R.color.CaloriesProgessColor));
-            lblCaloriesCurrent.setTypeface(null, Typeface.NORMAL);
+            lblCaloriesLeft.setTextColor(context.getResources().getColor(R.color.CaloriesProgessColor));
+            lblCaloriesLeft.setTypeface(null, Typeface.NORMAL);
         }
         else {
             progressBarCalories.setProgress(100);
-            lblCaloriesCurrent.setTextColor(context.getResources().getColor(R.color.error_red));
-            lblCaloriesCurrent.setTypeface(null, Typeface.BOLD);
+            lblCaloriesLeft.setTextColor(context.getResources().getColor(R.color.error_red));
+            lblCaloriesLeft.setTypeface(null, Typeface.BOLD);
         }
 
         if(carbsCurrent < carbsGoal) {
             progressBarCarbs.setProgress(100 * carbsCurrent / carbsGoal);
-            lblCarbsCurrent.setTextColor(context.getResources().getColor(R.color.CarbProgressColor));
-            lblCarbsCurrent.setTypeface(null, Typeface.NORMAL);
+            lblCarbsLeft.setTextColor(context.getResources().getColor(R.color.CarbProgressColor));
+            lblCarbsLeft.setTypeface(null, Typeface.NORMAL);
         }
         else {
             progressBarCarbs.setProgress(100);
-            lblCarbsCurrent.setTextColor(context.getResources().getColor(R.color.error_red));
-            lblCarbsCurrent.setTypeface(null, Typeface.BOLD);
+            lblCarbsLeft.setTextColor(context.getResources().getColor(R.color.error_red));
+            lblCarbsLeft.setTypeface(null, Typeface.BOLD);
         }
         if(proteinCurrent < proteinGoal) {
             progressBarProtein.setProgress(100 * proteinCurrent / proteinGoal);
-            lblProteinCurrent.setTextColor(context.getResources().getColor(R.color.ProteinProgessColor));
-            lblProteinCurrent.setTypeface(null, Typeface.NORMAL);
+            lblProteinLeft.setTextColor(context.getResources().getColor(R.color.ProteinProgessColor));
+            lblProteinLeft.setTypeface(null, Typeface.NORMAL);
         }
         else {
             progressBarProtein.setProgress(100);
-            lblProteinCurrent.setTextColor(context.getResources().getColor(R.color.error_red));
-            lblProteinCurrent.setTypeface(null, Typeface.BOLD);
+            lblProteinLeft.setTextColor(context.getResources().getColor(R.color.error_red));
+            lblProteinLeft.setTypeface(null, Typeface.BOLD);
         }
         if(fatCurrent < fatGoal) {
             progressBarFat.setProgress(100 * fatCurrent / fatGoal);
-            lblFatCurrent.setTextColor(context.getResources().getColor(R.color.FatProgessColor));
-            lblFatCurrent.setTypeface(null, Typeface.NORMAL);
+            lblFatLeft.setTextColor(context.getResources().getColor(R.color.FatProgessColor));
+            lblFatLeft.setTypeface(null, Typeface.NORMAL);
         }
         else {
             progressBarFat.setProgress(100);
-            lblFatCurrent.setTextColor(context.getResources().getColor(R.color.error_red));
-            lblFatCurrent.setTypeface(null, Typeface.BOLD);
+            lblFatLeft.setTextColor(context.getResources().getColor(R.color.error_red));
+            lblFatLeft.setTypeface(null, Typeface.BOLD);
         }
     }
 
