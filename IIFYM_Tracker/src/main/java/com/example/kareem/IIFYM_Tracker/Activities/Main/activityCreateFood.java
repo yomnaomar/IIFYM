@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.InputFilter;
 import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,11 +17,13 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.kareem.IIFYM_Tracker.Database.SQLiteConnector;
 import com.example.kareem.IIFYM_Tracker.Models.Food;
 import com.example.kareem.IIFYM_Tracker.Models.Weight;
 import com.example.kareem.IIFYM_Tracker.R;
+import com.example.kareem.IIFYM_Tracker.ViewComponents.DecimalDigitsInputFilter;
 
 import info.hoang8f.android.segmented.SegmentedGroup;
 
@@ -72,6 +75,11 @@ public class activityCreateFood extends AppCompatActivity implements AdapterView
         rbtnServing = (RadioButton) findViewById(R.id.rbtnServing);
         rbtnWeight = (RadioButton) findViewById(R.id.rbtnWeight);
         seggroupPortionType = (SegmentedGroup) findViewById(R.id.seggroupPortionType);
+
+        etxtCarbs.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(4,1)});
+        etxtProtein.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(4,1)});
+        etxtFat.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(4,1)});
+        etxtPortionAmount.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(4,1)});
 
         seggroupPortionType.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
         {
@@ -167,6 +175,7 @@ public class activityCreateFood extends AppCompatActivity implements AdapterView
                 Intent intent = new Intent(getApplicationContext(), activityHome.class);
                 startActivity(intent);
             }
+            Toast.makeText(context,"New food created",Toast.LENGTH_SHORT).show();
             finish();
         }
         else {

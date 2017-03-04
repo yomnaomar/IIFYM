@@ -337,22 +337,6 @@
 
             </LinearLayout>
 
-            <Button
-                android:text="@string/btnNext"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/btnNext"
-                android:layout_gravity="center_vertical|center_horizontal"
-                android:background="@drawable/btn_iifym_style"
-                android:textColorHint="?attr/colorPrimary"
-                android:paddingStart="@dimen/activity_horizontal_margin"
-                android:paddingEnd="@dimen/activity_horizontal_margin"
-                android:textColor="?attr/colorPrimary"
-                android:layout_marginTop="@dimen/activity_horizontal_margin"
-                android:layout_weight="1"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:layout_marginRight="@dimen/activity_vertical_margin" />
-
         </LinearLayout>
     </ScrollView>
 

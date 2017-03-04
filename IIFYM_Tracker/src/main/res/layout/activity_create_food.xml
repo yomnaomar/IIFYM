@@ -103,7 +103,6 @@
                 android:textColor="@color/colorPrimary"
                 android:textAlignment="textStart"
                 android:textSize="14sp"
-                android:maxLength="5"
                 android:layout_weight="0.167"
                 android:hint="@string/hintCarbs" />
 
@@ -127,7 +126,6 @@
                 android:inputType="numberDecimal"
                 android:textSize="14sp"
                 android:layout_weight="0.167"
-                android:maxLength="5"
                 android:hint="@string/hintProtein" />
 
             <TextView
@@ -150,7 +148,6 @@
                 android:inputType="numberDecimal"
                 android:textSize="14sp"
                 android:layout_weight="0.167"
-                android:maxLength="5"
                 android:hint="@string/hintFat" />
 
         </LinearLayout>
@@ -207,8 +204,7 @@
                 android:inputType="numberDecimal"
                 android:textColor="?attr/colorPrimary"
                 android:textSize="14sp"
-                android:hint="@string/hintAmount"
-                android:maxLength="4" />
+                android:hint="@string/hintAmount" />
 
             <Spinner
                 android:layout_width="match_parent"

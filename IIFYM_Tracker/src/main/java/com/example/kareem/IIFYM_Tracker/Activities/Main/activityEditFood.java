@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.InputFilter;
 import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,11 +19,13 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.kareem.IIFYM_Tracker.Database.SQLiteConnector;
 import com.example.kareem.IIFYM_Tracker.Models.Food;
 import com.example.kareem.IIFYM_Tracker.Models.Weight;
 import com.example.kareem.IIFYM_Tracker.R;
+import com.example.kareem.IIFYM_Tracker.ViewComponents.DecimalDigitsInputFilter;
 
 import info.hoang8f.android.segmented.SegmentedGroup;
 
@@ -71,6 +74,11 @@ public class activityEditFood extends AppCompatActivity implements AdapterView.O
         etxtProtein = (EditText) findViewById(R.id.etxtProtein);
         etxtFat = (EditText) findViewById(R.id.etxtFat);
         etxtPortionAmount = (EditText) findViewById(R.id.etxtPortionAmount);
+
+        etxtCarbs.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(4,1)});
+        etxtProtein.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(4,1)});
+        etxtFat.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(4,1)});
+        etxtPortionAmount.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(4,1)});
 
         etxtName.requestFocus();
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -165,6 +173,7 @@ public class activityEditFood extends AppCompatActivity implements AdapterView.O
                     public void onClick(DialogInterface dialog, int id) {
                         // User clicked Yes button
                             saveChanges();
+                            Toast.makeText(context,"Saved changes",Toast.LENGTH_SHORT).show();
                             finish();
                     }
                 });
@@ -228,6 +237,7 @@ public class activityEditFood extends AppCompatActivity implements AdapterView.O
                     public void onClick(DialogInterface dialog, int id) {
                         // User clicked Yes button
                         deleteRecords();
+                        Toast.makeText(context,"Food deleted",Toast.LENGTH_SHORT).show();
                         finish();
                     }
                 });

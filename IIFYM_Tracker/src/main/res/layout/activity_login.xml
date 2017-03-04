@@ -57,13 +57,12 @@
                 android:textColor="?attr/colorPrimary" />
 
             <Button
-                android:text="@string/btnImNew"
+                android:text="@string/btnRegister"
                 android:layout_width="95dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/Button_Register"
                 android:textColor="#192D5A"
                 android:background="@drawable/btn_iifym_style"
-                android:layout_marginTop="8dp"
                 app:layout_constraintTop_toBottomOf="@+id/password_textview"
                 android:layout_marginEnd="16dp"
                 app:layout_constraintRight_toRightOf="parent"
@@ -71,25 +70,7 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_marginBottom="16dp"
-                app:layout_constraintHorizontal_bias="0.75"
                 app:layout_constraintVertical_bias="0.060000002" />
-
-            <Button
-                android:text="Login"
-                android:layout_width="95dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/Button_Login"
-                android:textColor="#192D5A"
-                android:background="@drawable/btn_iifym_style"
-                android:layout_marginTop="8dp"
-                app:layout_constraintTop_toBottomOf="@+id/password_textview"
-                app:layout_constraintBottom_toTopOf="@+id/signup_textview"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="96dp"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintHorizontal_bias="0.43"
-                app:layout_constraintVertical_bias="0.85" />
 
             <TextView
                 android:text="Sign Up Using"
@@ -97,12 +78,12 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/signup_textview"
                 android:textColor="@color/colorPrimary"
-                android:layout_marginTop="80dp"
-                app:layout_constraintTop_toBottomOf="@+id/password_textview"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
                 app:layout_constraintRight_toRightOf="parent"
                 android:layout_marginStart="16dp"
-                app:layout_constraintLeft_toLeftOf="parent" />
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/Button_Register" />
 
             <ImageButton
                 app:srcCompat="@drawable/ic_facebook"

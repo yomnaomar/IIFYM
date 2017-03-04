@@ -13,6 +13,9 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
@@ -172,7 +175,6 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
         etxtPassword = (EditText) findViewById(R.id.password_textview);
 
         // Buttons
-        findViewById(R.id.Button_Login).setOnClickListener(this);
         findViewById(R.id.Button_Register).setOnClickListener(this);
     }
 
@@ -299,9 +301,24 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
         int i = v.getId();
         if (i == R.id.Button_Register) {
             createAccount(etxtEmail.getText().toString().trim(), etxtPassword.getText().toString().trim());
-        } else if (i == R.id.Button_Login) {
-            signIn(etxtEmail.getText().toString().trim(), etxtPassword.getText().toString().trim());
         }
+    }
+
+    @Override public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_user_login, menu);
+        return true;
+    }
+
+    @Override public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_login:
+                signIn(etxtEmail.getText().toString().trim(), etxtPassword.getText().toString().trim());
+                break;
+            default:
+                break;
+        }
+        return true;
     }
 
     private void showAlertDialog(String title, String message){

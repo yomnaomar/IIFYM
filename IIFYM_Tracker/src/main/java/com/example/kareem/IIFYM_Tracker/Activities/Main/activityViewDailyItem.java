@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.kareem.IIFYM_Tracker.Database.SQLiteConnector;
 import com.example.kareem.IIFYM_Tracker.Models.DailyItem;
@@ -128,6 +129,7 @@ public class activityViewDailyItem extends AppCompatActivity implements View.OnC
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         DB_SQLite.deleteDailyItem(position);
+                        Toast.makeText(context,"Food deleted from daily log",Toast.LENGTH_SHORT).show();
                         finish();
                     }
                 });

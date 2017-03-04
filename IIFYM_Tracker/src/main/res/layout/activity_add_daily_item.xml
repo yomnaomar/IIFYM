@@ -146,7 +146,6 @@
                         android:hint="@string/hintAmount"
                         android:gravity="center_vertical|center_horizontal|center"
                         android:textAppearance="@android:style/TextAppearance.Material.Small"
-                        android:maxLength="4"
                         android:inputType="number"
                         android:textAlignment="center" />
 

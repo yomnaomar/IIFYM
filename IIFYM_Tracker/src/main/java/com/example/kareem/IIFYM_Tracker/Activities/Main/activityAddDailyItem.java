@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.Menu;
@@ -16,11 +17,13 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.kareem.IIFYM_Tracker.Database.SQLiteConnector;
 import com.example.kareem.IIFYM_Tracker.Models.Food;
 import com.example.kareem.IIFYM_Tracker.Models.Weight;
 import com.example.kareem.IIFYM_Tracker.R;
+import com.example.kareem.IIFYM_Tracker.ViewComponents.DecimalDigitsInputFilter;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
@@ -95,6 +98,10 @@ public class activityAddDailyItem extends AppCompatActivity implements TextWatch
         lblProtein.setText(food.getProtein() + "");
         lblFat.setText(food.getFat() + "");
 
+        lblCarbs.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(3,1)});
+        lblProtein.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(3,1)});
+        lblFat.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(3,1)});
+
         if (portionType == 0) // Serving
         {
             initialPortionServing = DB_SQLite.retrieveServing(fid);
@@ -114,6 +121,7 @@ public class activityAddDailyItem extends AppCompatActivity implements TextWatch
             lblPortionType.setText(weight.getUnit().Abbreviate());
         }
 
+        etxtPortionAmount.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(4,1)});
         etxtPortionAmount.addTextChangedListener(this);
     }
 
@@ -145,6 +153,7 @@ public class activityAddDailyItem extends AppCompatActivity implements TextWatch
     //Inserts DailyItem into User's Daily Log
     private void Enter() {
         DB_SQLite.createDailyItem(fid, portionMultiplier);
+        Toast.makeText(context,"Food added to daily log",Toast.LENGTH_SHORT).show();
         finish();
     }
 

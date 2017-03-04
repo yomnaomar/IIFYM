@@ -7,7 +7,6 @@
     <!--activityLogin -->
     <string name="appName">IIFYM Tracker</string>
     <string name="appSubtitle">If It Fits Your Macros</string>
-    <string name="btnImNew">I\'m New!</string>
 
     <!--activityUserInfo -->
     <string name="userRegistration">User Registration</string>
@@ -26,7 +25,6 @@
     <string name="cm">cm</string>
     <string name="workoutFrequency">Workout\nFrequency</string>
     <string name="goals">Goals</string>
-    <string name="btnNext">Next</string>
 
     <string-array name="array_Goals">
         <item>Lose fat</item>
@@ -49,7 +47,6 @@
     <string name="lblProtein">Protein</string>
     <string name="lblFat">Fat</string>
     <string name="lblTotal">Total</string>
-    <string name="btnFinish">Finish</string>
 
     <string name="symbolKcal">kcal</string>
     <string name="symbolPercent">%</string>
@@ -154,8 +151,8 @@
     <string name="lblDeleteFromDaily">Delete from daily log?</string>
     <string name="lblDeleteFromDatabase">Delete from database?</string>
     <string name="toolbarCreateNewFood">Create new food</string>
-    <string name="toolbarUserInfo">Register Yourself!</string>
-    <string name="toolbarUserMacros">Set your Daily Nutritional Goals</string>
+    <string name="toolbarUserInfo">User Info</string>
+    <string name="toolbarUserMacros">Nutrition Goals</string>
     <string name="toolbarEditFood">Edit food</string>
     <string name="lblCreateNewMeal">Create new meal</string>
     <string name="lblDailyLog">Daily Log:</string>
@@ -165,5 +162,8 @@
     <string name="actionNutritionSettings">Nutrition Settings</string>
     <string name="actionMyFood">My Food</string>
     <string name="toolbarAddDailyItem">Set Portion Amount</string>
+    <string name="btnRegister">Register</string>
+    <string name="menu_next">Next</string>
+    <string name="menu_finish">Finish</string>
 
 </resources>

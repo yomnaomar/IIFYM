@@ -12,10 +12,12 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
@@ -23,9 +25,9 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.example.kareem.IIFYM_Tracker.Activities.Main.activityHome;
-import com.example.kareem.IIFYM_Tracker.Models.User;
 import com.example.kareem.IIFYM_Tracker.Database.SQLiteConnector;
 import com.example.kareem.IIFYM_Tracker.Database.SharedPreferenceHelper;
+import com.example.kareem.IIFYM_Tracker.Models.User;
 import com.example.kareem.IIFYM_Tracker.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseError;
@@ -47,8 +49,7 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
     private SegmentedGroup  seggroupDisplay;
     private RadioButton     rbtnCalories, rbtnMacros;
     private EditText        etxtCalories, etxtCarbs, etxtProtein, etxtFat;
-    private TextView        lblTitle, lblUnitCarbs, lblUnitProtein, lblUnitFat, lblTotal, lblAmountTotal, lblPercentTotal, lblValueCarbs, lblValueProtein, lblValueFat;
-    private Button          btnFinish;
+    private TextView        lblUnitCarbs, lblUnitProtein, lblUnitFat, lblTotal, lblAmountTotal, lblPercentTotal, lblValueCarbs, lblValueProtein, lblValueFat;
     private ImageButton     btnReset, btnInfo;
     private Animation       mEnterAnimation, mExitAnimation;
     private ProgressDialog  progressDialog;
@@ -118,7 +119,6 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
         lblValueCarbs   = (TextView) findViewById(R.id.lblValueCarbs);
         lblValueProtein = (TextView) findViewById(R.id.lblValueProtein);
         lblValueFat     = (TextView) findViewById(R.id.lblValueFat);
-        btnFinish       = (Button) findViewById(R.id.btnFinish);
 /*        btnReset        = (ImageButton) findViewById(R.id.btnReset);
         btnInfo         = (ImageButton) findViewById(R.id.btnInfo);*/
 
@@ -132,7 +132,6 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
 
         addTextWatchers();
 
-        btnFinish.setOnClickListener(this);
 /*        btnReset.setOnClickListener(this);
         btnInfo.setOnClickListener(this);*/
 
@@ -334,14 +333,28 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
         }
     }
 
+    @Override public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_user_macros, menu);
+        return true;
+    }
+
+    @Override public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_user_macros:
+                Finish();
+                break;
+            default:
+                break;
+        }
+        return true;
+    }
+
     @Override public void onClick(View v) {
         switch(v.getId())
         {
             case R.id.btnReset:
                 defaultValues();
-                break;
-            case R.id.btnFinish:
-                Finish();
                 break;
         }
     }
@@ -451,20 +464,6 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
 
     //TODO Implement Tour Guide
     private void beginChainTourGuide() {
-        ChainTourGuide tourGuide1 = ChainTourGuide.init(this)
-                .setToolTip(new ToolTip()
-                        .setTitle("Set your goals")
-                        .setDescription("It's time to set you daily goal intake")
-                        .setGravity(Gravity.BOTTOM)
-                        .setBackgroundColor(Color.parseColor("#c0392b"))
-                )
-                .setOverlay(new Overlay()
-                        .setBackgroundColor(Color.parseColor("#EE2c3e50"))
-                        .setEnterAnimation(mEnterAnimation)
-                        .setExitAnimation(mExitAnimation)
-                )
-                .playLater(lblTitle);
-
         ChainTourGuide tourGuide2 = ChainTourGuide.init(this)
                 .setToolTip(new ToolTip()
                         .setTitle("Calories vs Macros")
@@ -494,7 +493,7 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
                 .playLater(etxtCarbs);
 
         Sequence sequence = new Sequence.SequenceBuilder()
-                .add(tourGuide1, tourGuide2, tourGuide3)
+                .add(tourGuide2, tourGuide3)
                 .setDefaultOverlay(new Overlay())
                 .setDefaultPointer(null)
                 .setContinueMethod(Sequence.ContinueMethod.Overlay)

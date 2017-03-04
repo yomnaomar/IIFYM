@@ -11,9 +11,11 @@ import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -44,7 +46,6 @@ public class activityUserInfo extends AppCompatActivity implements View.OnClickL
     private RadioButton         rbtnGenderMale, rbtnGenderFemale, rbtnMetric, rbtnGenderImperial;
     private SegmentedGroup      seggroupUnitSystem;
     private Spinner             spinnerWorkoutFreq, spinnerGoals;
-    private Button              btnNext;
     private DatePickerDialog    datePickerDialog;
     private SimpleDateFormat    dateFormatter;
 
@@ -230,7 +231,6 @@ public class activityUserInfo extends AppCompatActivity implements View.OnClickL
         rbtnGenderImperial  = (RadioButton)findViewById(R.id.rbtnImperial);
         spinnerWorkoutFreq  = (Spinner)findViewById(R.id.spinnerWorkoutFreq);
         spinnerGoals        = (Spinner)findViewById(R.id.spinnerGoals);
-        btnNext             = (Button)findViewById(R.id.btnNext);
 
         etxtDateOfBirth.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -266,20 +266,32 @@ public class activityUserInfo extends AppCompatActivity implements View.OnClickL
 
         spinnerWorkoutFreq.setAdapter(adapterWorkoutFreq);
         spinnerGoals.setAdapter(adapterGoals);
+    }
 
-        btnNext.setOnClickListener(this);
+    @Override public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_user_info, menu);
+        return true;
+    }
+
+    @Override public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_user_info:
+                if(validateFields()) {
+                    readUserInput();
+                    goToUserMacros();
+                }
+                break;
+            default:
+                break;
+        }
+        return true;
     }
 
     @Override public void onClick(View v) {
         switch (v.getId()) {
             case R.id.etxtDateOfBirth:
                 datePickerDialog.show();
-                break;
-            case R.id.btnNext:
-                if(validateFields()) {
-                    readUserInput();
-                    goToUserMacros();
-                }
                 break;
         }
     }
