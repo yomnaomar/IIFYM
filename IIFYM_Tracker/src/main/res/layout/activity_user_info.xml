@@ -29,7 +29,8 @@
                     android:textColorHint="?android:attr/textColorHint"
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp" />
+                    android:layout_height="50dp"
+                android:textSize="14sp" />
 
             <LinearLayout
                 android:orientation="horizontal"
@@ -46,39 +47,27 @@
                     android:id="@+id/lblDOB"
                     android:textAppearance="@android:style/TextAppearance.Medium"
                     android:textColor="?attr/colorPrimary"
-                    android:layout_gravity="center_vertical|center_horizontal" />
+                    android:layout_gravity="center_vertical|center_horizontal"
+                    android:textSize="14sp" />
 
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="150dp"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="end"
-                    android:gravity="end"
-                    android:layout_weight="0.26">
+                <EditText
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:text="@string/dateInitial"
+                    android:ems="3"
+                    android:id="@+id/etxtDateOfBirth"
+                    android:textColor="?attr/colorPrimary"
+                    android:layout_width="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="14sp"
+                    android:gravity="right"
+                    android:layout_gravity="center" />
 
-                    <ImageView
-                        android:layout_width="55dp"
-                        android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/ic_calendar"
-                        android:id="@+id/icon_calendar"
-                        android:paddingBottom="15dp"
-                        android:paddingLeft="10dp"
-                        android:paddingTop="10dp"
-                        android:layout_gravity="center_vertical|center_horizontal|center"
-                        android:layout_weight="0.25" />
-
-                    <EditText
-                        android:layout_height="wrap_content"
-                        android:inputType="textPersonName"
-                        android:text="@string/dateInitial"
-                        android:ems="3"
-                        android:id="@+id/etxtDateOfBirth"
-                        android:textColor="?attr/colorPrimary"
-                        android:layout_width="wrap_content"
-                        android:gravity="center_vertical|center_horizontal|center"
-                        android:layout_weight="1.08" />
-
-                </LinearLayout>
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/ic_calendar"
+                    android:id="@+id/icon_calendar" />
 
             </LinearLayout>
 
@@ -97,7 +86,8 @@
                     android:layout_weight="0.5"
                     android:textAppearance="@android:style/TextAppearance.Medium"
                     android:layout_gravity="center_vertical|center_horizontal"
-                    android:textColor="?attr/colorPrimary" />
+                    android:textColor="?attr/colorPrimary"
+                    android:textSize="14sp" />
 
                 <info.hoang8f.android.segmented.SegmentedGroup
                     android:id="@+id/seggroupGender"
@@ -147,7 +137,8 @@
                     android:layout_weight="0.5"
                     android:layout_gravity="center_vertical|center_horizontal"
                     android:textAppearance="@android:style/TextAppearance.Medium"
-                    android:textColor="?attr/colorPrimary" />
+                    android:textColor="?attr/colorPrimary"
+                    android:textSize="14sp" />
 
                 <info.hoang8f.android.segmented.SegmentedGroup
                     android:id="@+id/seggroupUnitSystem"
@@ -208,7 +199,8 @@
                         android:textAlignment="center"
                         android:gravity="center"
                         android:textColor="?attr/colorPrimary"
-                        android:maxLength="3" />
+                        android:maxLength="3"
+                        android:textSize="14sp" />
 
                     <TextView
                         android:text="@string/cm"
@@ -236,7 +228,8 @@
                         android:gravity="center"
                         android:layout_gravity="center"
                         android:maxLength="2"
-                        android:textColor="?attr/colorPrimary" />
+                        android:textColor="?attr/colorPrimary"
+                        android:textSize="14sp" />
 
                     <TextView
                         android:text="in"
@@ -272,7 +265,8 @@
                         android:layout_weight="0.8"
                         android:textAlignment="center"
                         android:layout_gravity="center"
-                        android:maxLength="7" />
+                        android:maxLength="7"
+                        android:textSize="14sp" />
 
                     <TextView
                         android:text="@string/kg"
@@ -302,7 +296,8 @@
                     android:id="@+id/lblWorkoutFreq"
                     android:textAppearance="@android:style/TextAppearance.Medium"
                     android:textColor="?attr/colorPrimary"
-                    android:layout_gravity="center" />
+                    android:layout_gravity="center"
+                    android:textSize="14sp" />
 
                 <Spinner
                     android:layout_height="wrap_content"
@@ -328,7 +323,8 @@
                     android:id="@+id/lblGoals"
                     android:textAppearance="@android:style/TextAppearance.Medium"
                     android:textColor="?attr/colorPrimary"
-                    android:layout_gravity="center" />
+                    android:layout_gravity="center"
+                    android:textSize="14sp" />
 
                 <Spinner
                     android:layout_width="match_parent"

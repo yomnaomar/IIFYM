@@ -4,6 +4,8 @@
     tools:context="com.example.kareem.IIFYM_Tracker.HomeActivity">
     <item android:title="@string/menuSettings"
         android:id="@+id/menuSettings" />
+    <item android:title="@string/menuProfile"
+        android:id="@+id/menuProfile" />
     <item android:title="@string/menuAccount"
         android:id="@+id/menuAccount" />
     <item android:title="@string/menuLogout"

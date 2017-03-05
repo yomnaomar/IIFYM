@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
+import com.example.kareem.IIFYM_Tracker.Activities.Settings.activityNutritionSettings;
 import com.example.kareem.IIFYM_Tracker.Activities.UserLoginAuthentification.activityLogin;
 import com.example.kareem.IIFYM_Tracker.Database.SQLiteConnector;
 import com.example.kareem.IIFYM_Tracker.Database.SharedPreferenceHelper;
@@ -285,9 +286,8 @@ public class activityHome extends AppCompatActivity implements AdapterView.OnIte
         Intent intent;
         switch (id){
             case (R.id.actionNutritionSettings):
-            /*    intent = new Intent(context,MacroSettings.class );
+                intent = new Intent(context,activityNutritionSettings.class );
                 startActivity(intent);
-                finish();*/
                 return true;
             case (R.id.actionFoodManager):
                 intent = new Intent(context, activityFoodManager.class);

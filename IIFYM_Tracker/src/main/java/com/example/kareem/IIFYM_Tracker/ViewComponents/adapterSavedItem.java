@@ -57,6 +57,8 @@ public class adapterSavedItem extends ArrayAdapter<Food> {
         // Populate the data into the template view using the data object
         name.setText(food.getName());
         brand.setText(food.getBrand());
+        if (brand.getText().toString().isEmpty())
+            brand.setVisibility(View.GONE);
         calories.setText(String.valueOf(food.getCalories()));
         carbs.setText(String.valueOf(food.getCarbs()));
         protein.setText(String.valueOf(food.getProtein()));

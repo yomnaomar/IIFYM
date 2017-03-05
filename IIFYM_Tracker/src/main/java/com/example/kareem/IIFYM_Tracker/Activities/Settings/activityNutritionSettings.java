@@ -1,9 +1,8 @@
-package com.example.kareem.IIFYM_Tracker.Activities.UserLoginAuthentification;
+package com.example.kareem.IIFYM_Tracker.Activities.Settings;
 
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -25,12 +24,10 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.kareem.IIFYM_Tracker.Activities.Main.activityHome;
 import com.example.kareem.IIFYM_Tracker.Database.SQLiteConnector;
 import com.example.kareem.IIFYM_Tracker.Database.SharedPreferenceHelper;
 import com.example.kareem.IIFYM_Tracker.Models.User;
 import com.example.kareem.IIFYM_Tracker.R;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -44,7 +41,7 @@ import tourguide.tourguide.Overlay;
 import tourguide.tourguide.Sequence;
 import tourguide.tourguide.ToolTip;
 
-public class activityUserMacros extends AppCompatActivity implements View.OnClickListener, TextWatcher {
+public class activityNutritionSettings extends AppCompatActivity implements View.OnClickListener, TextWatcher {
 
     // GUI
     private SegmentedGroup  seggroupDisplay;
@@ -59,7 +56,8 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
     // Final Variables (Cannot be changed)
     private int             gender, unitSystem, height1, height2, workoutFreq, goal ,BMR;
     private float           weight;
-    private String          uid, email, name, dob;
+    private boolean         isPercent;
+    private String          uid, dob;
     private int             caloriesDefault;
     private final int       carbsPercentDefault = 50, proteinPercentDefault = 25, fatPercentDefault = 25;
     private Context         context;
@@ -68,38 +66,66 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
     private int             totalPercent, calories, carbs, protein, fat, carbsPercent, proteinPercent, fatPercent;
     private int             carbsOld, proteinOld, fatOld;
     private boolean         carbsChanged, proteinChanged, fatChanged;
+    private User            user;
 
     // Database
     private SharedPreferenceHelper  myPrefs;
     private SQLiteConnector         DB_SQLite;
-    private FirebaseAuth            firebaseAuth;
     private DatabaseReference       firebaseDbRef;
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_macros);
+        setContentView(R.layout.activity_nutrition_settings);
 
         // Database
         context = getApplicationContext();
         myPrefs = new SharedPreferenceHelper(context);
-        firebaseAuth = FirebaseAuth.getInstance();
         firebaseDbRef = FirebaseDatabase.getInstance().getReference();
         DB_SQLite = new SQLiteConnector(context);
 
         // Data from previous Login activities
-        getIntentData();
-
-        // Calculate values to be displayed
-        getBMR();
+        getUserData();
 
         // GUI
         initializeGUI();
 
-        // Set and display default values
-        defaultValues();
+        // Set values to User's stored preferences
+        setInitialValues();
+
+        // Set up TextWatchers and OnClickListeners after initializing values to prevent overwriting
+        finalizeGUI();
 
         // UI guide
         // beginChainTourGuide();
+    }
+
+    private void getUserData() {
+        uid = myPrefs.getStringValue("session_uid");
+        user = DB_SQLite.retrieveUser(uid);
+
+        dob = user.getDob();
+        gender = user.getGender();
+        unitSystem = user.getUnitSystem();
+        weight = user.getWeight();
+        height1 = user.getHeight1();
+        height2 = user.getHeight2();
+        workoutFreq = user.getWorkoutFreq();
+        goal = user.getGoal();
+        calories = user.getDailyCalories();
+        isPercent = user.getIsPercent();
+        if (isPercent)
+        {
+            carbsPercent = user.getDailyCarbs();
+            proteinPercent = user.getDailyProtein();
+            fatPercent = user.getDailyFat();
+            totalPercent = carbsPercent + proteinPercent +fatPercent;
+        }
+        else
+        {
+            carbs = user.getDailyCarbs();
+            protein = user.getDailyProtein();
+            fat = user.getDailyFat();
+        }
     }
 
     private void initializeGUI() {
@@ -121,16 +147,6 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
         btnReset        = (ImageButton) findViewById(R.id.btnReset);
         btnInfo         = (ImageButton) findViewById(R.id.btnInfo);
 
-        seggroupDisplay.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
-        {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                updateGUI();
-                defaultValues();
-            }});
-
-        addTextWatchers();
-
         btnReset.setOnClickListener(this);
         btnInfo.setOnClickListener(this);
 
@@ -142,6 +158,50 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
         mExitAnimation = new AlphaAnimation(1f, 0f);
         mExitAnimation.setDuration(600);
         mExitAnimation.setFillAfter(true);
+    }
+
+    private void setInitialValues(){
+        etxtCalories.setText(calories + "");
+
+        if(isPercent) // Calories
+        {
+            rbtnCalories.setChecked(true);
+
+            etxtCarbs.setText(carbsPercent + "");
+            etxtProtein.setText(proteinPercent + "");
+            etxtFat.setText(fatPercent + "");
+
+            lblValueCarbs.setText("~" + Math.round(carbsPercent * 0.01f * calories/4) + " g");
+            lblValueProtein.setText("~" + Math.round(proteinPercent * 0.01f * calories/4) + " g");
+            lblValueFat.setText("~" + Math.round(fatPercent * 0.01f * calories/9) + " g");
+            lblAmountTotal.setText(totalPercent + "");
+            if (totalPercent == 100)
+                lblAmountTotal.setTextColor(context.getResources().getColor(R.color.correct_green));
+            else
+                lblAmountTotal.setTextColor(context.getResources().getColor(R.color.error_red));
+        }
+        else // Macros
+        {
+            rbtnMacros.setChecked(true);
+
+            etxtCarbs.setText(carbs + "");
+            etxtProtein.setText(protein + "");
+            etxtFat.setText(fat + "");
+
+        }
+        updateGUI();
+    }
+
+    private void finalizeGUI() {
+        seggroupDisplay.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+        {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                updateGUI();
+                defaultValues();
+            }});
+
+        addTextWatchers();
     }
 
     private void updateGUI() {
@@ -330,23 +390,6 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
         }
     }
 
-    @Override public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_user_macros, menu);
-        return true;
-    }
-
-    @Override public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_user_macros:
-                Finish();
-                break;
-            default:
-                break;
-        }
-        return true;
-    }
-
     @Override public void onClick(View v) {
         switch(v.getId())
         {
@@ -358,6 +401,9 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
 
     private void defaultValues() {
         if (rbtnCalories.isChecked()) {
+            // Calculate values to be displayed
+            getBMR();
+
             // Macronutrient ratio default
             calories = caloriesDefault;
             carbsPercent = carbsPercentDefault;
@@ -409,108 +455,6 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
             lblAmountTotal.setError(null);
         }
         Toast.makeText(context, "Defaulted", Toast.LENGTH_SHORT).show();
-    }
-
-    private void Finish(){
-        // Validate Fields
-        if(validateFields()){
-            final User user;
-            if (rbtnCalories.isChecked()) {
-                user = new User(uid, email, true, name, dob, gender,
-                        unitSystem, weight, height1, height2, workoutFreq,
-                        goal, calories, true, carbsPercent, proteinPercent, fatPercent);
-            }
-            else {
-                user = new User(uid, email, true, name, dob, gender,
-                        unitSystem, weight, height1, height2, workoutFreq,
-                        goal, calories, false, carbs, protein, fat);
-            }
-
-            showProgressDialog();
-            Log.i("RegisterUser","adding user data: " + uid);
-            Log.i("RegisterUser", user + "");
-            firebaseDbRef.child("users").child(uid).setValue(user, new DatabaseReference.CompletionListener() {
-                public void onComplete(DatabaseError error, DatabaseReference ref) {
-                    Log.d("RegisterUser","Value was set. Error = " + error);
-
-                    // No error
-                    if (error == null) {
-                        DB_SQLite.createUser(user);
-
-                        hideProgressDialog();
-
-                        // Go to activityHome
-                        // Store user session in Preferences
-                        myPrefs.addPreference("session_uid", uid);
-                        Intent broadcastIntent = new Intent("finish_activity");
-                        sendBroadcast(broadcastIntent);
-
-                        Context context = getApplicationContext();
-                        Intent intent = new Intent();
-                        intent.setClass(context, activityHome.class);
-                        startActivity(intent);
-                        finish();
-                    }
-                    // Error writing to database
-                    else {
-                        showAlertDialog("Network Error","Please check your network connection and try again");
-                    }
-                }
-            });
-        }
-    }
-
-    //TODO Implement Tour Guide
-    private void beginChainTourGuide() {
-        ChainTourGuide tourGuide2 = ChainTourGuide.init(this)
-                .setToolTip(new ToolTip()
-                        .setTitle("Calories vs Macros")
-                        .setDescription("What would you like to focus on?")
-                        .setGravity(Gravity.BOTTOM)
-                )
-                .setOverlay(new Overlay()
-                        .setBackgroundColor(Color.parseColor("#EE2c3e50"))
-                        .setEnterAnimation(mEnterAnimation)
-                        .setExitAnimation(mExitAnimation)
-                )
-                .playLater(seggroupDisplay);
-
-
-        ChainTourGuide tourGuide3 = ChainTourGuide.init(this)
-                .setToolTip(new ToolTip()
-                        .setTitle("Don't worry")
-                        .setDescription("If you don't know where to start, " +
-                                "here's a recommended starting point")
-                        .setGravity(Gravity.BOTTOM | Gravity.RIGHT)
-                )
-                .setOverlay(new Overlay()
-                        .setBackgroundColor(Color.parseColor("#EE2c3e50"))
-                        .setEnterAnimation(mEnterAnimation)
-                        .setExitAnimation(mExitAnimation)
-                )
-                .playLater(etxtCarbs);
-
-        Sequence sequence = new Sequence.SequenceBuilder()
-                .add(tourGuide2, tourGuide3)
-                .setDefaultOverlay(new Overlay())
-                .setDefaultPointer(null)
-                .setContinueMethod(Sequence.ContinueMethod.Overlay)
-                .build();
-        ChainTourGuide.init(this).playInSequence(sequence);
-    }
-
-    private void getIntentData() {
-        uid = getIntent().getStringExtra("uid");
-        email = getIntent().getStringExtra("email");
-        name = getIntent().getStringExtra("name");
-        dob = getIntent().getStringExtra("dob");
-        gender = getIntent().getIntExtra("gender", 0);
-        unitSystem = getIntent().getIntExtra("unitSystem", 0);
-        weight = getIntent().getFloatExtra("weight", 0.0f);
-        height1 = getIntent().getIntExtra("height1", 0);
-        height2 = getIntent().getIntExtra("height2", 0);
-        workoutFreq = getIntent().getIntExtra("workoutFreq", 0);
-        goal = getIntent().getIntExtra("goal", 0);
     }
 
     private void getBMR() {
@@ -574,6 +518,104 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
         // Gain weight
         else if (goal == 2)
             caloriesDefault += 250.0;
+    }
+
+    @Override public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_nutrition_settings, menu);
+        return true;
+    }
+
+    @Override public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_save:
+                saveAndFinish();
+                break;
+            default:
+                break;
+        }
+        return true;
+    }
+
+    private void saveAndFinish(){
+        // Validate Fields
+        if(validateFields()){
+            if (rbtnCalories.isChecked()) {
+                user.setDailyCalories(calories);
+                user.setDailyCarbs(carbsPercent);
+                user.setDailyProtein(proteinPercent);
+                user.setDailyFat(fatPercent);
+                user.setPercent(true);
+            }
+            else {
+                user.setDailyCalories(calories);
+                user.setDailyCarbs(carbs);
+                user.setDailyProtein(protein);
+                user.setDailyFat(fat);
+                user.setPercent(false);
+            }
+
+            showProgressDialog();
+            Log.i("RegisterUser","updating user data: " + uid);
+            Log.i("RegisterUser", user + "");
+            firebaseDbRef.child("users").child(uid).setValue(user, new DatabaseReference.CompletionListener() {
+                public void onComplete(DatabaseError error, DatabaseReference ref) {
+                    Log.d("RegisterUser","Value was set. Error = " + error);
+
+                    // No error
+                    if (error == null) {
+                        DB_SQLite.updateUser(user);
+
+                        hideProgressDialog();
+
+                        finish();
+                    }
+                    // Error writing to database
+                    else {
+                        showAlertDialog("Network Error","Please check your network connection and try again");
+                    }
+                }
+            });
+        }
+    }
+
+    //TODO Implement Tour Guide
+    private void beginChainTourGuide() {
+        ChainTourGuide tourGuide2 = ChainTourGuide.init(this)
+                .setToolTip(new ToolTip()
+                        .setTitle("Calories vs Macros")
+                        .setDescription("What would you like to focus on?")
+                        .setGravity(Gravity.BOTTOM)
+                )
+                .setOverlay(new Overlay()
+                        .setBackgroundColor(Color.parseColor("#EE2c3e50"))
+                        .setEnterAnimation(mEnterAnimation)
+                        .setExitAnimation(mExitAnimation)
+                )
+                .playLater(seggroupDisplay);
+
+
+        ChainTourGuide tourGuide3 = ChainTourGuide.init(this)
+                .setToolTip(new ToolTip()
+                        .setTitle("Don't worry")
+                        .setDescription("If you don't know where to start, " +
+                                "here's a recommended starting point")
+                        .setGravity(Gravity.BOTTOM | Gravity.RIGHT)
+                )
+                .setOverlay(new Overlay()
+                        .setBackgroundColor(Color.parseColor("#EE2c3e50"))
+                        .setEnterAnimation(mEnterAnimation)
+                        .setExitAnimation(mExitAnimation)
+                )
+                .playLater(etxtCarbs);
+
+        Sequence sequence = new Sequence.SequenceBuilder()
+                .add(tourGuide2, tourGuide3)
+                .setDefaultOverlay(new Overlay())
+                .setDefaultPointer(null)
+                .setContinueMethod(Sequence.ContinueMethod.Overlay)
+                .build();
+        ChainTourGuide.init(this).playInSequence(sequence);
     }
 
     private int getAge (int _year, int _month, int _day) {
@@ -640,55 +682,8 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
         return valid;
     }
 
-    @Override protected void onPause() {
-        if(rbtnCalories.isChecked())
-            myPrefs.addPreference("temp_display_registration", false); // Calories
-        else
-            myPrefs.addPreference("temp_display_registration", true); // Macros
-
-        signOut();
-        super.onPause();
-    }
-
-    @Override protected void onResume() {
-        // Load preferences
-        // If preferences unavailable, set defaults
-        super.onResume();
-        etxtCalories.setText(caloriesDefault + "");
-
-        if(myPrefs.getBooleanValue("temp_display_registration")) { // Macros
-            rbtnMacros.setChecked(true);
-
-            etxtCarbs.setText(carbs + "");
-            etxtProtein.setText(protein + "");
-            etxtFat.setText(fat + "");
-        }
-        else { // Calories
-            rbtnCalories.setChecked(true);
-
-            etxtCarbs.setText(carbsPercent + "");
-            etxtProtein.setText(proteinPercent + "");
-            etxtFat.setText(fatPercent + "");
-
-            lblValueCarbs.setText("~" + Math.round(carbsPercent * 0.01f * caloriesDefault/4) + " g");
-            lblValueProtein.setText("~" + Math.round(proteinPercent * 0.01f * caloriesDefault/4) + " g");
-            lblValueFat.setText("~" + Math.round(fatPercent * 0.01f * caloriesDefault/9) + " g");
-            lblAmountTotal.setText(totalPercent + "");
-            if (totalPercent == 100)
-                lblAmountTotal.setTextColor(Color.parseColor("#2E7D32")); // Green
-            else
-                lblAmountTotal.setTextColor(Color.parseColor("#FF0000")); // error_red
-        }
-        updateGUI();
-    }
-
-    private void signOut() {
-        Log.d("UserInfo","Signed out");
-        firebaseAuth.signOut();
-    }
-
     private void showAlertDialog(String title, String message){
-        AlertDialog.Builder builder = new AlertDialog.Builder(activityUserMacros.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(activityNutritionSettings.this);
         builder.setTitle(title)
                 .setMessage(message);
         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {

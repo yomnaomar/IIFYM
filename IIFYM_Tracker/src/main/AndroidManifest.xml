@@ -16,25 +16,21 @@
         <activity
             android:name=".Activities.Main.activityHome"
             android:label="@string/appName"
+            android:launchMode="singleInstance"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:launchMode="singleInstance"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Activities.Main.activityFoodManager"
-            android:screenOrientation="portrait"
-            android:label="@string/toolbarSavedItems"/>
+            android:label="@string/toolbarSavedItems"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.Settings.activityNutritionSettings"
+            android:label="@string/actionNutritionSettings"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Activities.Main.activityEditFood"
             android:label="@string/toolbarEditFood"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".Activities.Settings.MacroSettings"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" /><![CDATA[
-        android:windowSoftInputMode="adjustPan" />
-
-        >>>>>>> master
-        ]]>
         <activity
             android:name=".Activities.Main.activityCreateFood"
             android:label="@string/toolbarCreateNewFood" />
@@ -55,13 +51,14 @@
             android:label="IIFYM Tracker">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".Activities.Main.activitySelectDailyItem"
             android:label="@string/toolbarSelectItemToAdd" />
-        <activity android:name=".Activities.Main.activityViewDailyItem"></activity>
+        <activity android:name=".Activities.Main.activityViewDailyItem" />
     </application>
 
 </manifest>

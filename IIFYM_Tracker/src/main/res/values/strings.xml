@@ -156,14 +156,15 @@
     <string name="toolbarEditFood">Edit food</string>
     <string name="lblCreateNewMeal">Create new meal</string>
     <string name="lblDailyLog">Daily Log:</string>
-    <string name="menuSettings">IIFYM Settings</string>
-    <string name="menuAccount">My Account</string>
+    <string name="menuSettings">Settings</string>
+    <string name="menuAccount">Account</string>
     <string name="menuLogout">Logout</string>
     <string name="actionNutritionSettings">Nutrition Settings</string>
     <string name="actionMyFood">My Food</string>
     <string name="toolbarAddDailyItem">Set Portion Amount</string>
     <string name="btnRegister">Register</string>
-    <string name="menu_next">Next</string>
-    <string name="menu_finish">Finish</string>
+    <string name="menuNext">Next</string>
+    <string name="menuFinish">Finish</string>
+    <string name="menuProfile">Profile</string>
 
 </resources>
