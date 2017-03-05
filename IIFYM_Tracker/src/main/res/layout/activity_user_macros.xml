@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1"
+    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+    android:layout_marginRight="@dimen/activity_horizontal_margin"
+    android:layout_marginTop="@dimen/activity_vertical_margin"
+    android:layout_marginBottom="@dimen/activity_vertical_margin">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/activity_vertical_margin"
+                android:gravity="right|center_horizontal|center"
+                android:layout_gravity="center_vertical|center_horizontal|center">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.25"
+                    android:layout_gravity="right"
+                    android:gravity="right"
+                    android:paddingRight="15dp">
+
+                    <ImageButton
+                        android:id="@+id/btnInfo"
+                        android:layout_gravity="right"
+                        android:background="@drawable/icon_info_selector"
+                        android:layout_width="25dp"
+                        app:srcCompat="@drawable/ic_info"
+                        android:layout_height="25dp"
+                        android:layout_centerVertical="true"
+                        android:layout_toStartOf="@+id/seggroupDisplay"
+                        android:scaleType="fitCenter" />
+                </RelativeLayout>
+
+                <info.hoang8f.android.segmented.SegmentedGroup
+                    android:id="@+id/seggroupDisplay"
+                    android:layout_width="150dp"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    app:sc_border_width="2dp"
+                    app:sc_corner_radius="10dp"
+                    android:layout_gravity="center_vertical|center_horizontal|center"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center_vertical|center_horizontal|center">
+
+                    <RadioButton
+                        android:id="@+id/rbtnCalories"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/radioBtnCalories"
+                        style="@style/RadioButton"
+                        android:layout_gravity="center_vertical|center_horizontal"
+                        android:checked="true" />
+
+                    <RadioButton
+                        android:id="@+id/rbtnMacros"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/radioBtnMacros"
+                        style="@style/RadioButton"
+                        android:layout_gravity="center_vertical|center_horizontal"
+                        android:checked="false" />
+
+                </info.hoang8f.android.segmented.SegmentedGroup>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.25"
+                    android:gravity="left"
+                    android:layout_gravity="left"
+                    android:paddingLeft="15dp">
+
+                    <ImageButton
+                        android:id="@+id/btnReset"
+                        android:scaleType="fitCenter"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:background="@drawable/icon_reset_selector" />
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:gravity="center_vertical|center_horizontal|center"
+                android:layout_gravity="center_vertical|center_horizontal|center">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:id="@+id/linearlayoutCalories"
+                    android:layout_height="match_parent"
+                    android:weightSum="1">
+
+                    <EditText
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:ems="1"
+                        android:id="@+id/etxtCalories"
+                        android:textAppearance="@android:style/TextAppearance.Material.Small"
+                        android:textColorHint="?android:attr/textColorHint"
+                        android:layout_gravity="center_vertical|center_horizontal"
+                        android:gravity="center_vertical|center"
+                        android:text="xy"
+                        android:maxLength="5"
+                        android:textColor="@color/colorPrimary"
+                        android:layout_width="75dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/lblCalories"
+                        android:textAppearance="@android:style/TextAppearance.Material.Small"
+                        android:layout_gravity="center_vertical|center_horizontal"
+                        android:gravity="left|center_vertical"
+                        android:text="@string/lblCalories"
+                        android:textColor="@color/colorPrimary" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:id="@+id/linearlayoutCarbs"
+                    android:layout_height="match_parent"
+                    android:weightSum="1">
+
+                    <EditText
+                        android:layout_width="75dp"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:ems="1"
+                        android:id="@+id/etxtCarbs"
+                        android:textAppearance="@android:style/TextAppearance.Material.Small"
+                        android:textColorHint="?android:attr/textColorHint"
+                        android:layout_gravity="center_vertical|center_horizontal"
+                        android:gravity="center"
+                        android:text="50"
+                        android:maxLength="4"
+                        android:textColor="@color/colorPrimary" />
+
+                    <TextView
+                        android:text="@string/lblCarbs"
+                        android:layout_width="75dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/lblCarbs"
+                        android:textAppearance="@android:style/TextAppearance.Material.Small"
+                        android:layout_gravity="center_vertical|center_horizontal"
+                        android:gravity="left|center_vertical"
+                        android:textColor="@color/colorPrimary" />
+
+                    <TextView
+                        android:text="(xxx g)"
+                        android:layout_width="75dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/lblValueCarbs"
+                        android:layout_gravity="center_vertical|center_horizontal"
+                        android:gravity="center_vertical|center"
+                        android:textColor="@color/Custom_Grey"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:id="@+id/linearlayoutProtein"
+                    android:layout_height="match_parent">
+
+                    <EditText
+                        android:layout_width="75dp"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:ems="1"
+                        android:id="@+id/etxtProtein"
+                        android:textAppearance="@android:style/TextAppearance.Material.Small"
+                        android:textColorHint="?android:attr/textColorHint"
+                        android:layout_gravity="center_vertical|center_horizontal"
+                        android:gravity="center"
+                        android:text="25"
+                        android:maxLength="4"
+                        android:textColor="@color/colorPrimary" />
+
+                    <TextView
+                        android:text="@string/lblProtein"
+                        android:layout_width="75dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/lblProtein"
+                        android:textAppearance="@android:style/TextAppearance.Material.Small"
+                        android:layout_gravity="center_vertical|center_horizontal"
+                        android:gravity="left|center_vertical"
+                        android:textColor="@color/colorPrimary" />
+
+                    <TextView
+                        android:text="(yyy g)"
+                        android:layout_width="75dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/lblValueProtein"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:textColor="@color/Custom_Grey"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:id="@+id/linearlayoutFat"
+                    android:layout_height="match_parent"
+                    android:weightSum="1">
+
+                    <EditText
+                        android:layout_width="75dp"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:ems="1"
+                        android:id="@+id/etxtFat"
+                        android:textAppearance="@android:style/TextAppearance.Material.Small"
+                        android:textColorHint="?android:attr/textColorHint"
+                        android:layout_gravity="center_vertical|center_horizontal"
+                        android:text="25"
+                        android:maxLength="4"
+                        android:gravity="center"
+                        android:textColor="@color/colorPrimary" />
+
+                    <TextView
+                        android:text="@string/lblFat"
+                        android:layout_width="75dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/lblFat"
+                        android:textAppearance="@android:style/TextAppearance.Material.Small"
+                        android:layout_gravity="center_vertical|center_horizontal"
+                        android:gravity="left|center_vertical"
+                        android:textColor="@color/colorPrimary" />
+
+                    <TextView
+                        android:text="(zzz g)"
+                        android:layout_width="75dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/lblValueFat"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:textAppearance="@android:style/TextAppearance.Material.Small"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:id="@+id/linearlayoutTotal"
+                    android:layout_height="match_parent"
+                    android:weightSum="1"
+                    android:paddingTop="7dp">
+
+                    <TextView
+                        android:layout_width="75dp"
+                        android:layout_height="wrap_content"
+                        android:ems="4"
+                        android:id="@+id/lblAmountTotal"
+                        android:textAppearance="@android:style/TextAppearance.Material.Small"
+                        android:hint="100"
+                        android:layout_gravity="center_vertical|center_horizontal"
+                        android:gravity="center"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/lblTotal"
+                        android:textAppearance="@android:style/TextAppearance.Material.Small"
+                        android:layout_gravity="center_vertical|center_horizontal"
+                        android:text="@string/lblTotal"
+                        android:gravity="left|center_vertical"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

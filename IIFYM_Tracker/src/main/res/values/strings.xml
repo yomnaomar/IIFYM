@@ -42,11 +42,11 @@
 
     <string name="userMacros_FeelFree">Feel free to change your macros to your liking\n(But make sure they add up!)</string>
     <string name="userMacros_MacroRecommendation">If you are unsure of what your daily intake should be, IIFYM gives you a good starting point specific to your body!</string>
-    <string name="lblCalories">Calories</string>
-    <string name="lblCarbs">Carbs</string>
-    <string name="lblProtein">Protein</string>
-    <string name="lblFat">Fat</string>
-    <string name="lblTotal">Total</string>
+    <string name="lblCalories">Calories (kcal)</string>
+    <string name="lblCarbs">Carbs (%)</string>
+    <string name="lblProtein">Protein (%)</string>
+    <string name="lblFat">Fat (%)</string>
+    <string name="lblTotal">Total (%)</string>
 
     <string name="symbolKcal">kcal</string>
     <string name="symbolPercent">%</string>
