@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.example.kareem.IIFYM_Tracker.Models.DailyItem;
 import com.example.kareem.IIFYM_Tracker.Models.Food;
@@ -240,29 +241,9 @@ public class SQLiteConnector {
     private void incrementFoodFrequency(long id) {
         final String query = "UPDATE " + SQLiteHelper.Table_Food + " SET " +
                 " frequency = frequency + 1" +
-                " WHERE id = '" + id + "'";
-        database.rawQuery(query, null);
-    }
-
-    // Returns true if all usages of Food with id = id were deleted
-    // Returns false otherwise
-    public boolean deleteAllChildren(long id) {
-        if (isExistingFood(id)){
-            deleteDailyItems(id);
-            deleteWeight(id);
-            deleteServing(id);
-            deleteFood(id);
-            return true;
-        }
-        return false;
-    }
-
-    public ArrayList<Food> retrieveAllFoods() {
-        final String query = "SELECT id, name, brand, calories, carbs, protein, fat, portionType, isMeal" +
-                " FROM " + SQLiteHelper.Table_Food +
-                " ORDER BY name COLLATE NOCASE ASC";
-        Cursor results = database.rawQuery(query, null);
-        return instantiateFoodList(results);
+                " WHERE id = " + id;
+        Log.d("incrementFoodFrequency", "frequency incremented");
+        database.execSQL(query);
     }
 
     /**
@@ -275,7 +256,7 @@ public class SQLiteConnector {
     public ArrayList<Food> searchFood(String search, final int count) {
         search = "%" + search.replace(" ", "%") + "%";
         final String escSearch = DatabaseUtils.sqlEscapeString(search);
-        final String query = "SELECT id, name, brand, calories, carbs, protein, fat, portionType, isMeal" +
+        final String query = "SELECT *" +
                 " FROM " + SQLiteHelper.Table_Food +
                 " WHERE name || ' ' || brand LIKE " + escSearch +
                 " OR brand || ' ' || name LIKE " + escSearch +
@@ -291,12 +272,13 @@ public class SQLiteConnector {
      * @return
      */
     public ArrayList<Food> retrieveFrequentFood(final int count) {
-        final String query = "SELECT id, name, brand, calories, carbs, protein, fat, portionType, isMeal" +
+        final String query = "SELECT * " +
                 " FROM " + SQLiteHelper.Table_Food +
                 " WHERE frequency > 0" +
                 " ORDER BY frequency DESC" +
                 " LIMIT " + count;
         Cursor results = database.rawQuery(query, null);
+        Log.d("retrieveFrequentFood",results.getCount() + "");
         return instantiateFoodList(results);
     }
 
@@ -315,6 +297,9 @@ public class SQLiteConnector {
         float   fat         = result.getFloat(6);
         int     portionType = result.getInt(7);
         int     isMeal      = result.getInt(8);
+        int     frequency   = result.getInt(9);
+
+        Log.d("instantiateFood", "frequency " + frequency);
 
         Food food = new Food(id, name, brand, calories, carbs, protein, fat, portionType, isMeal);
         return food;
@@ -565,7 +550,6 @@ public class SQLiteConnector {
         return arrDailyItem;
     }
 
-
     /**
      * Return true if DailyItem with id = list_item.getFood_id was updated successfully
      * Returns false otherwise
@@ -587,7 +571,6 @@ public class SQLiteConnector {
         return updated;
     }
 
-
     /**
      * Returns true if DailyItem with a given id was found and deleted
      * Returns false otherwise
@@ -602,18 +585,6 @@ public class SQLiteConnector {
         }
         return deleted;
     }
-
-    /**
-     * Returns true if at least one DailyItem with a given food_id is found and deleted
-     * Returns false otherwise
-     * @param food_id
-     * @return
-     */
-    public boolean deleteDailyItems(long food_id) {
-        int deleted = database.delete(SQLiteHelper.Table_DailyItem, "id = " + food_id, null);
-        return deleted > 0;
-    }
-
 
     // TODO Implement helper functions
     //----------    SQLiteHelper.Table_ComposedOf = "ComposedOf"    ----------------

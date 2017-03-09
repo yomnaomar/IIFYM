@@ -39,6 +39,7 @@ public class activityViewDailyItem extends AppCompatActivity implements View.OnC
     // Variables
     private Context     context;
     private int         id;
+    private long        food_id;
     private Food        food;
     private DailyItem   dailyitem;
     private float       servingAmount;
@@ -61,7 +62,8 @@ public class activityViewDailyItem extends AppCompatActivity implements View.OnC
         context = getApplicationContext();
         DB_SQLite = new SQLiteConnector(context);
         dailyitem = DB_SQLite.retrieveDailyItem(id);
-        food = DB_SQLite.retrieveFood(dailyitem.getFood_id());
+        food_id = dailyitem.getFood_id();
+        food = DB_SQLite.retrieveFood(food_id);
 
         // GUI
         initializeGUI();
@@ -99,14 +101,14 @@ public class activityViewDailyItem extends AppCompatActivity implements View.OnC
         lblFat.setText(Math.round(food.getFat() * portionMultiplier) + "");
 
         if (food.getPortionType() == 0) { // Serving
-            servingAmount = DB_SQLite.retrieveServing(id) * portionMultiplier;
+            servingAmount = DB_SQLite.retrieveServing(food_id) * portionMultiplier;
             lblPortionAmount.setText(servingAmount + "");
             if (servingAmount != 1.0f)
                 lblPortionType.setText("servings");
             else
                 lblPortionType.setText("serving");
         } else { // Weight
-            Weight weight = DB_SQLite.retrieveWeight(id);
+            Weight weight = DB_SQLite.retrieveWeight(food_id);
             weightAmount = Math.round(weight.getAmount() * portionMultiplier);
             lblPortionAmount.setText(weightAmount + "");
             lblPortionType.setText(weight.getUnit().Abbreviate());

@@ -58,16 +58,17 @@
                     android:id="@+id/etxtDateOfBirth"
                     android:textColor="?attr/colorPrimary"
                     android:layout_width="wrap_content"
-                    android:layout_weight="1"
                     android:textSize="14sp"
-                    android:gravity="right"
-                    android:layout_gravity="center" />
+                    android:gravity="right|center"
+                    android:layout_gravity="right|center_vertical"
+                    android:layout_weight="0.58" />
 
                 <ImageView
                     android:layout_width="25dp"
                     android:layout_height="wrap_content"
                     app:srcCompat="@drawable/ic_calendar"
-                    android:id="@+id/icon_calendar" />
+                    android:id="@+id/icon_calendar"
+                    android:layout_gravity="right" />
 
             </LinearLayout>
 
