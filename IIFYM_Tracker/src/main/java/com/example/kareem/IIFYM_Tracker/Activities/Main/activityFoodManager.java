@@ -10,11 +10,12 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.kareem.IIFYM_Tracker.Database.SQLiteConnector;
 import com.example.kareem.IIFYM_Tracker.Models.Food;
 import com.example.kareem.IIFYM_Tracker.R;
-import com.example.kareem.IIFYM_Tracker.ViewComponents.adapterSavedItem;
+import com.example.kareem.IIFYM_Tracker.ViewComponents.AdapterSavedItem;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -23,8 +24,8 @@ public class activityFoodManager extends AppCompatActivity implements AdapterVie
 
     // GUI
     private EditText                etxtSearch;
-    private ArrayList<Food>         arrSavedItems;
-    private adapterSavedItem        adapterSavedItem;
+    private TextView                lblFrequent;
+    private AdapterSavedItem        adapterSavedItem;
     private ListView                listviewSavedItems;
     private FloatingActionButton    fabCreateFood, fabCreateMeal;
 
@@ -44,12 +45,18 @@ public class activityFoodManager extends AppCompatActivity implements AdapterVie
         intializeGUI();
     }
 
+    @Override protected void onResume() {
+        super.onResume();
+        final String search = etxtSearch.getText().toString();
+        filterSavedItems(search);
+    }
+
     private void intializeGUI() {
         // Search Functionality
         etxtSearch = (EditText) findViewById(R.id.etxtSearch);
         etxtSearch.addTextChangedListener(new TextWatcher() {
             @Override public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
-                adapterSavedItem.getFilter().filter(cs);
+                filterSavedItems(cs.toString());
             }
 
             @Override public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) { }
@@ -57,9 +64,10 @@ public class activityFoodManager extends AppCompatActivity implements AdapterVie
             @Override public void afterTextChanged(Editable arg0) {}
         });
 
+        lblFrequent = (TextView) findViewById(R.id.lblFrequent);
+
         // List View
-        arrSavedItems = DB_SQLite.retrieveAllFoods();
-        adapterSavedItem = new adapterSavedItem(this, arrSavedItems);
+        adapterSavedItem = new AdapterSavedItem(this);
         listviewSavedItems = (ListView) findViewById(R.id.listviewSavedItems);
         listviewSavedItems.setAdapter(adapterSavedItem);
         listviewSavedItems.setOnItemClickListener(this);
@@ -87,17 +95,22 @@ public class activityFoodManager extends AppCompatActivity implements AdapterVie
         }
     }
 
-    //Updates adapterSavedItem and arrSavedItems
-    private void UpdateArrayList() {
+    //Updates AdapterSavedItem and arrSavedItems
+    private void filterSavedItems(final String search) {
         adapterSavedItem.clear();
-        arrSavedItems = DB_SQLite.retrieveAllFoods();
-        for (int i =0; i <arrSavedItems.size(); i++)
-            adapterSavedItem.add(arrSavedItems.get(i));
-    }
+        ArrayList<Food> arrSavedItems;
 
-    @Override protected void onResume() {
-        super.onResume();
-        UpdateArrayList();
+        if (search.isEmpty()) {
+            lblFrequent.setVisibility(View.VISIBLE);
+            arrSavedItems = DB_SQLite.retrieveFrequentFood(20);
+        } else {
+            lblFrequent.setVisibility(View.GONE);
+            arrSavedItems = DB_SQLite.searchFood(search, 20);
+        }
+
+        for (int i = 0; i < arrSavedItems.size(); i++) {
+            adapterSavedItem.add(arrSavedItems.get(i));
+        }
     }
 
     // TODO Implement fabAddNewMeal

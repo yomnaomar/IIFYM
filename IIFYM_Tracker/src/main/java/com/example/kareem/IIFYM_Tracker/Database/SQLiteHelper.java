@@ -22,12 +22,12 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     // Names
     private static final String DATABASE_NAME       = "DB_IIFYM";
 
-    private static final String Table_User          = "User";
-    private static final String Table_Food          = "Food";
-    private static final String Table_Weight        = "Weight";
-    private static final String Table_Serving       = "Serving";
-    private static final String Table_DailyItem     = "DailyItem";
-    private static final String Table_ComposedOf    = "ComposedOf";
+    public static final String Table_User          = "User";
+    public static final String Table_Food          = "Food";
+    public static final String Table_Weight        = "Weight";
+    public static final String Table_Serving       = "Serving";
+    public static final String Table_DailyItem     = "DailyItem";
+    public static final String Table_ComposedOf    = "ComposedOf";
 
     private static SQLiteHelper sInstance;
     private Context context;
@@ -74,7 +74,8 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 "protein       REAL, " +
                 "fat           REAL, " +
                 "portionType   INTEGER, " +     // 0 - Serving, 1 - Weight, 2 - None
-                "isMeal        INTEGER);";
+                "isMeal        INTEGER, " +
+                "frequency     INTEGER);";
 
         String createTable_Weight = "CREATE TABLE " + Table_Weight + " " +
                 "(id            INTEGER PRIMARY KEY, " +
@@ -90,13 +91,13 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         //ON UPDATE is not needed because the id will never be updated, it is hidden from the user
 
         String createTable_DailyItem = "CREATE TABLE " + Table_DailyItem + " " +
-                "(position      INTEGER PRIMARY KEY, " +
-                "id             INTEGER, " +
+                "(id            INTEGER PRIMARY KEY autoincrement, " +
+                "food_id        INTEGER, " +
                 "multiplier     REAL, " +
-                "CONSTRAINT food_id_fk FOREIGN KEY(id) REFERENCES " + Table_Food + " (id) ON DELETE CASCADE);";
+                "CONSTRAINT food_id_fk FOREIGN KEY(food_id) REFERENCES " + Table_Food + " (id) ON DELETE CASCADE);";
 
         String createTable_ComposedOf = "CREATE TABLE " + Table_ComposedOf + " " +
-                "(mid           INTEGER, " +    // mid = Food ID
+                "(mid           INTEGER, " +    // mid = Meal ID
                 "fid            INTEGER, " +    // fid = Food ID
                 "multiplier     REAL, " +
                 "CONSTRAINT composed_id_pk PRIMARY KEY(mid, fid), " +

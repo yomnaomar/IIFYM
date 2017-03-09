@@ -38,8 +38,8 @@ public class activityViewDailyItem extends AppCompatActivity implements View.OnC
 
     // Variables
     private Context     context;
-    private long        id;
-    private int         position;
+    private int         id;
+    private long        food_id;
     private Food        food;
     private DailyItem   dailyitem;
     private float       servingAmount;
@@ -56,14 +56,14 @@ public class activityViewDailyItem extends AppCompatActivity implements View.OnC
 
         // Intent
         Intent intent = getIntent();
-        id = intent.getLongExtra("id", -1);
-        position = intent.getIntExtra("position", -1);
+        id = intent.getIntExtra("id", -1);
 
         // Database
         context = getApplicationContext();
         DB_SQLite = new SQLiteConnector(context);
-        food = DB_SQLite.retrieveFood(id);
-        dailyitem = DB_SQLite.retrieveDailyItem(position);
+        dailyitem = DB_SQLite.retrieveDailyItem(id);
+        food_id = dailyitem.getFood_id();
+        food = DB_SQLite.retrieveFood(food_id);
 
         // GUI
         initializeGUI();
@@ -101,14 +101,14 @@ public class activityViewDailyItem extends AppCompatActivity implements View.OnC
         lblFat.setText(Math.round(food.getFat() * portionMultiplier) + "");
 
         if (food.getPortionType() == 0) { // Serving
-            servingAmount = DB_SQLite.retrieveServing(id) * portionMultiplier;
+            servingAmount = DB_SQLite.retrieveServing(food_id) * portionMultiplier;
             lblPortionAmount.setText(servingAmount + "");
             if (servingAmount != 1.0f)
                 lblPortionType.setText("servings");
             else
                 lblPortionType.setText("serving");
         } else { // Weight
-            Weight weight = DB_SQLite.retrieveWeight(id);
+            Weight weight = DB_SQLite.retrieveWeight(food_id);
             weightAmount = Math.round(weight.getAmount() * portionMultiplier);
             lblPortionAmount.setText(weightAmount + "");
             lblPortionType.setText(weight.getUnit().Abbreviate());
@@ -128,7 +128,7 @@ public class activityViewDailyItem extends AppCompatActivity implements View.OnC
         builder.setMessage("Are you sure you want to delete this item from your daily log?")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        DB_SQLite.deleteDailyItem(position);
+                        DB_SQLite.deleteDailyItem(id);
                         Toast.makeText(context,"Food deleted from daily log",Toast.LENGTH_SHORT).show();
                         finish();
                     }

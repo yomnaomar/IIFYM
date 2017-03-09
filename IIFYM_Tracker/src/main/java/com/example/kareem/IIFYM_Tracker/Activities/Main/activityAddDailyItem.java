@@ -126,10 +126,11 @@ public class activityAddDailyItem extends AppCompatActivity implements TextWatch
     }
 
     @Override public void onTextChanged(CharSequence s, int start, int before, int count) {
-        if(etxtPortionAmount.getText().toString().isEmpty())
-            newPortionAmount = 0;
-        else
+        try {
             newPortionAmount = Float.parseFloat(etxtPortionAmount.getText().toString());
+        } catch(NumberFormatException e) {
+            newPortionAmount = 0;
+        }
 
         if(portionType == 0) // Serving
         {

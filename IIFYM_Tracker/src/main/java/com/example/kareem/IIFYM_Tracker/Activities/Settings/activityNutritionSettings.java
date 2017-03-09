@@ -61,6 +61,7 @@ public class activityNutritionSettings extends AppCompatActivity implements View
     private int             caloriesDefault;
     private final int       carbsPercentDefault = 50, proteinPercentDefault = 25, fatPercentDefault = 25;
     private Context         context;
+    private ChainTourGuide  tourguide;
 
     // Dynamic Variables (Can be changed)
     private int             totalPercent, calories, carbs, protein, fat, carbsPercent, proteinPercent, fatPercent;
@@ -94,9 +95,6 @@ public class activityNutritionSettings extends AppCompatActivity implements View
 
         // Set up TextWatchers and OnClickListeners after initializing values to prevent overwriting
         finalizeGUI();
-
-        // UI guide
-        // beginChainTourGuide();
     }
 
     private void getUserData() {
@@ -393,6 +391,9 @@ public class activityNutritionSettings extends AppCompatActivity implements View
     @Override public void onClick(View v) {
         switch(v.getId())
         {
+            case R.id.btnInfo:
+                beginChainTourGuide();
+                break;
             case R.id.btnReset:
                 defaultValues();
                 break;
@@ -579,43 +580,50 @@ public class activityNutritionSettings extends AppCompatActivity implements View
         }
     }
 
-    //TODO Implement Tour Guide
     private void beginChainTourGuide() {
-        ChainTourGuide tourGuide2 = ChainTourGuide.init(this)
+        Overlay overlay = new Overlay()
+                .setBackgroundColor(Color.parseColor("#EE2c3e50"))
+                .setEnterAnimation(mEnterAnimation)
+                .setExitAnimation(mExitAnimation);
+
+
+        ChainTourGuide tourGuide1 = ChainTourGuide.init(this)
                 .setToolTip(new ToolTip()
                         .setTitle("Calories vs Macros")
                         .setDescription("What would you like to focus on?")
                         .setGravity(Gravity.BOTTOM)
                 )
-                .setOverlay(new Overlay()
-                        .setBackgroundColor(Color.parseColor("#EE2c3e50"))
-                        .setEnterAnimation(mEnterAnimation)
-                        .setExitAnimation(mExitAnimation)
-                )
+                .setOverlay(overlay)
                 .playLater(seggroupDisplay);
 
 
-        ChainTourGuide tourGuide3 = ChainTourGuide.init(this)
+        ChainTourGuide tourGuide2 = ChainTourGuide.init(this)
                 .setToolTip(new ToolTip()
                         .setTitle("Don't worry")
                         .setDescription("If you don't know where to start, " +
                                 "here's a recommended starting point")
                         .setGravity(Gravity.BOTTOM | Gravity.RIGHT)
                 )
-                .setOverlay(new Overlay()
-                        .setBackgroundColor(Color.parseColor("#EE2c3e50"))
-                        .setEnterAnimation(mEnterAnimation)
-                        .setExitAnimation(mExitAnimation)
-                )
+                .setOverlay(overlay)
                 .playLater(etxtCarbs);
 
+        ChainTourGuide tourGuide3 = ChainTourGuide.init(this)
+                .setToolTip(new ToolTip()
+                        .setTitle("Reset")
+                        .setDescription("Press the reset button to return the values back to recommended")
+                        .setGravity(Gravity.BOTTOM)
+                )
+                .setOverlay(overlay)
+                .playLater(btnReset);
+
         Sequence sequence = new Sequence.SequenceBuilder()
-                .add(tourGuide2, tourGuide3)
+                .add(tourGuide1, tourGuide2, tourGuide3)
                 .setDefaultOverlay(new Overlay())
                 .setDefaultPointer(null)
                 .setContinueMethod(Sequence.ContinueMethod.Overlay)
                 .build();
-        ChainTourGuide.init(this).playInSequence(sequence);
+
+        tourguide = ChainTourGuide.init(this).playInSequence(sequence);
     }
 
     private int getAge (int _year, int _month, int _day) {
