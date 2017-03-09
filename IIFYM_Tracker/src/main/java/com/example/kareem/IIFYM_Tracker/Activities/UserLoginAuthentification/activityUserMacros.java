@@ -427,7 +427,7 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
             }
 
             showProgressDialog();
-            Log.i("RegisterUser","adding user data: " + uid);
+            Log.i("RegisterUser","adding user data: " + user.toString());
             Log.i("RegisterUser", user + "");
             firebaseDbRef.child("users").child(uid).setValue(user, new DatabaseReference.CompletionListener() {
                 public void onComplete(DatabaseError error, DatabaseReference ref) {

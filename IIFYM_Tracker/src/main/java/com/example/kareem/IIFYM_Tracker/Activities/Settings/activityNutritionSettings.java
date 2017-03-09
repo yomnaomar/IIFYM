@@ -126,6 +126,8 @@ public class activityNutritionSettings extends AppCompatActivity implements View
             protein = user.getDailyProtein();
             fat = user.getDailyFat();
         }
+
+        Log.d("getUserData", user.toString());
     }
 
     private void initializeGUI() {
@@ -230,10 +232,12 @@ public class activityNutritionSettings extends AppCompatActivity implements View
     }
 
     @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        Log.d("beforeTextChanged", "Capturing Old Values");
         captureOldValues();
     }
 
     @Override public void onTextChanged(CharSequence s, int start, int before, int count) {
+        Log.d("onTextChanged", "Updating Values");
         captureNewValues();
         compareValues();
         updateValues();
@@ -540,31 +544,30 @@ public class activityNutritionSettings extends AppCompatActivity implements View
     private void saveAndFinish(){
         // Validate Fields
         if(validateFields()){
+            final User updateuser;
             if (rbtnCalories.isChecked()) {
-                user.setDailyCalories(calories);
-                user.setDailyCarbs(carbsPercent);
-                user.setDailyProtein(proteinPercent);
-                user.setDailyFat(fatPercent);
-                user.setPercent(true);
+                updateuser = new User(uid, user.getEmail(), true, user.getName(), dob, gender,
+                        unitSystem, weight, height1, height2, workoutFreq,
+                        goal, calories, true, carbsPercent, proteinPercent, fatPercent);
             }
             else {
-                user.setDailyCalories(calories);
-                user.setDailyCarbs(carbs);
-                user.setDailyProtein(protein);
-                user.setDailyFat(fat);
-                user.setPercent(false);
+                updateuser = new User(uid, user.getEmail(), true, user.getName(), dob, gender,
+                        unitSystem, weight, height1, height2, workoutFreq,
+                        goal, calories, false, carbs, protein, fat);
             }
+
+            Log.d("saveAndFinish", "isPercent " + updateuser.getIsPercent());
 
             showProgressDialog();
             Log.i("RegisterUser","updating user data: " + uid);
-            Log.i("RegisterUser", user + "");
-            firebaseDbRef.child("users").child(uid).setValue(user, new DatabaseReference.CompletionListener() {
+            Log.i("RegisterUser", updateuser + "");
+            firebaseDbRef.child("users").child(uid).setValue(updateuser, new DatabaseReference.CompletionListener() {
                 public void onComplete(DatabaseError error, DatabaseReference ref) {
                     Log.d("RegisterUser","Value was set. Error = " + error);
 
                     // No error
                     if (error == null) {
-                        DB_SQLite.updateUser(user);
+                        DB_SQLite.updateUser(updateuser);
 
                         hideProgressDialog();
 

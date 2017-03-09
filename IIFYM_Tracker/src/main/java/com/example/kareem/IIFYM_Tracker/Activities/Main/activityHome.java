@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,7 +16,6 @@ import android.view.animation.Animation;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
 import com.example.kareem.IIFYM_Tracker.Activities.Settings.activityNutritionSettings;
@@ -131,10 +131,6 @@ public class activityHome extends AppCompatActivity implements AdapterView.OnIte
         uid = myPrefs.getStringValue("session_uid");
         currentUser = DB_SQLite.retrieveUser(uid);
 
-        // User Greetings
-        Toast toast = Toast.makeText(context, "Hello " + currentUser.getName() + "!", Toast.LENGTH_SHORT);
-        toast.show();
-
         isPercent = currentUser.getIsPercent();
 
         caloriesGoal = currentUser.getDailyCalories();
@@ -143,10 +139,12 @@ public class activityHome extends AppCompatActivity implements AdapterView.OnIte
         fatGoal = currentUser.getDailyFat();
 
         if (isPercent){ // Convert from percentage to grams
-            carbsGoal = carbsGoal*caloriesGoal/400;
-            proteinGoal = proteinGoal*caloriesGoal/400;
-            fatGoal = fatGoal*caloriesGoal/900;
+            carbsGoal = (carbsGoal*caloriesGoal)/400;
+            proteinGoal = (proteinGoal*caloriesGoal)/400;
+            fatGoal = (fatGoal*caloriesGoal)/900;
         }
+
+        Log.d("initializeUser", currentUser.toString());
     }
 
     public void updateMacros(){
@@ -248,6 +246,7 @@ public class activityHome extends AppCompatActivity implements AdapterView.OnIte
 
     @Override protected void onResume() {
         super.onResume();
+        initializeUser();
         updateArrayList();
         updateMacros();
     }
