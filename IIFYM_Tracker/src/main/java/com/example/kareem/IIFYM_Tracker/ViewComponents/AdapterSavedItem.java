@@ -19,19 +19,12 @@ import java.util.ArrayList;
  * Created by Kareem on 9/13/2016.
  */
 
-public class adapterSavedItem extends ArrayAdapter<Food> {
+public class AdapterSavedItem extends ArrayAdapter<Food> {
 
     private SQLiteConnector DB_SQLite;
 
-    private ArrayList<Food> arrOriginalItems;
-    private ArrayList<Food> arrFilteredItems;
-    private Filter filter;
-
-    public adapterSavedItem(Context context, ArrayList<Food> items) {
-        super(context, 0, items);
-        arrOriginalItems = new ArrayList(items);
-        arrFilteredItems = new ArrayList(items);
-
+    public AdapterSavedItem(Context context) {
+        super(context, 0);
         DB_SQLite = new SQLiteConnector(getContext());
     }
 
@@ -57,8 +50,6 @@ public class adapterSavedItem extends ArrayAdapter<Food> {
         // Populate the data into the template view using the data object
         name.setText(food.getName());
         brand.setText(food.getBrand());
-        if (brand.getText().toString().isEmpty())
-            brand.setVisibility(View.GONE);
         calories.setText(String.valueOf(food.getCalories()));
         carbs.setText(String.valueOf(food.getCarbs()));
         protein.setText(String.valueOf(food.getProtein()));
@@ -81,56 +72,5 @@ public class adapterSavedItem extends ArrayAdapter<Food> {
 
         // Return the completed view to render on screen
         return convertView;
-    }
-
-    @Override public Filter getFilter() {
-        if (filter == null)
-            filter = new myFilter();
-
-        return filter;
-    }
-
-    private class myFilter extends Filter {
-
-        @Override protected FilterResults performFiltering(CharSequence constraint) {
-            FilterResults results = new FilterResults();
-            String search = constraint.toString().toLowerCase();
-
-            if(search == null || search.length() == 0) {
-                ArrayList<Food> list = new ArrayList(arrOriginalItems);
-                results.values = list;
-                results.count = list.size();
-            }
-            else {
-                final ArrayList<Food> list = new ArrayList(arrOriginalItems);
-                final ArrayList<Food> nlist = new ArrayList();
-                int count = list.size();
-
-                for (int i=0; i<count; i++){
-                    final Food food = list.get(i);
-                    final String value = food.getName().toLowerCase();
-
-                    if(value.contains(search)){
-                        nlist.add(food);
-                    }
-                }
-                results.values = nlist;
-                results.count = nlist.size();
-            }
-            return results;
-        }
-
-        @SuppressWarnings("unchecked") @Override
-        protected void publishResults(CharSequence contraint, FilterResults results) {
-            arrFilteredItems = (ArrayList<Food>)results.values;
-
-            clear();
-            int count = arrFilteredItems.size();
-            for (int i=0; i<count; i++)
-            {
-                Food food = arrFilteredItems.get(i);
-                add(food);
-            }
-        }
     }
 }

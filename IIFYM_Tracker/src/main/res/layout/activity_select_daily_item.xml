@@ -42,6 +42,12 @@
                 android:layout_weight="0.75" />
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/lblFrequent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/lblFrequent" />
+
         <ListView
             android:layout_width="match_parent"
             android:id="@+id/listviewSavedItems"

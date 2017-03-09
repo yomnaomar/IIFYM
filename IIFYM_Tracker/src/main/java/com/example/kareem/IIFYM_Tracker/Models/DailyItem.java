@@ -6,30 +6,30 @@ package com.example.kareem.IIFYM_Tracker.Models;
 
 public class DailyItem {
 
-    private int     position;
-    private long    id;
+    private int     id;
+    private long    food_id;
     private float   multiplier;
 
-    public DailyItem(int position, long id, float multiplier) {
-        this.position = position;
+    public DailyItem(int id, long food_id, float multiplier) {
         this.id = id;
+        this.food_id = food_id;
         this.multiplier = multiplier;
     }
 
-    public int getPosition() {
-        return position;
-    }
-
-    public void setPosition(int position) {
-        this.position = position;
-    }
-
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
+    }
+
+    public long getFood_id() {
+        return food_id;
+    }
+
+    public void setFood_id(long food_id) {
+        this.food_id = food_id;
     }
 
     public float getMultiplier() {

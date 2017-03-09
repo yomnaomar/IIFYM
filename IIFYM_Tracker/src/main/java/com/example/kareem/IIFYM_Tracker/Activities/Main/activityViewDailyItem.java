@@ -38,8 +38,7 @@ public class activityViewDailyItem extends AppCompatActivity implements View.OnC
 
     // Variables
     private Context     context;
-    private long        id;
-    private int         position;
+    private int         id;
     private Food        food;
     private DailyItem   dailyitem;
     private float       servingAmount;
@@ -56,14 +55,13 @@ public class activityViewDailyItem extends AppCompatActivity implements View.OnC
 
         // Intent
         Intent intent = getIntent();
-        id = intent.getLongExtra("id", -1);
-        position = intent.getIntExtra("position", -1);
+        id = intent.getIntExtra("id", -1);
 
         // Database
         context = getApplicationContext();
         DB_SQLite = new SQLiteConnector(context);
-        food = DB_SQLite.retrieveFood(id);
-        dailyitem = DB_SQLite.retrieveDailyItem(position);
+        dailyitem = DB_SQLite.retrieveDailyItem(id);
+        food = DB_SQLite.retrieveFood(dailyitem.getFood_id());
 
         // GUI
         initializeGUI();
@@ -128,7 +126,7 @@ public class activityViewDailyItem extends AppCompatActivity implements View.OnC
         builder.setMessage("Are you sure you want to delete this item from your daily log?")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        DB_SQLite.deleteDailyItem(position);
+                        DB_SQLite.deleteDailyItem(id);
                         Toast.makeText(context,"Food deleted from daily log",Toast.LENGTH_SHORT).show();
                         finish();
                     }
