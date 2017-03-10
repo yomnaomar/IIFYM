@@ -166,5 +166,6 @@
     <string name="menuNext">Next</string>
     <string name="menuFinish">Finish</string>
     <string name="menuProfile">Profile</string>
+    <string name="lblFrequent">Frequent meals</string>
 
 </resources>

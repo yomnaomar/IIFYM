@@ -18,9 +18,9 @@ import java.util.ArrayList;
 /**
  * Created by Kareem on 9/13/2016.
  */
-public class adapterDailyItem extends ArrayAdapter<DailyItem> {
+public class AdapterDailyItem extends ArrayAdapter<DailyItem> {
 
-    public adapterDailyItem(Context context, ArrayList<DailyItem> dailyitems) {
+    public AdapterDailyItem(Context context, ArrayList<DailyItem> dailyitems) {
         super(context, 0, dailyitems);
     }
 
@@ -30,10 +30,10 @@ public class adapterDailyItem extends ArrayAdapter<DailyItem> {
         // Get the data list_item for this position
         DailyItem dailyItem = getItem(position);
 
-        final long id = dailyItem.getId();
+        final long food_id = dailyItem.getFood_id();
         float multiplier = dailyItem.getMultiplier();
 
-        Food food = DB_SQLite.retrieveFood(id);
+        Food food = DB_SQLite.retrieveFood(food_id);
 
         // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
@@ -51,15 +51,13 @@ public class adapterDailyItem extends ArrayAdapter<DailyItem> {
         // Populate the data into the template view using the data object
         name.setText(food.getName());
         brand.setText(food.getBrand());
-        if (brand.getText().toString().isEmpty())
-            brand.setVisibility(View.GONE);
         calories.setText(String.valueOf(Math.round(food.getCalories() * multiplier)) + " kcal ");
         carbs.setText(String.valueOf(Math.round(food.getCarbs() * multiplier) + " c "));
         protein.setText(String.valueOf(Math.round(food.getProtein() * multiplier) + " p "));
         fat.setText(String.valueOf(Math.round(food.getFat() * multiplier) + " f "));
 
         if (food.getPortionType() == 0) {
-            float serving_number = DB_SQLite.retrieveServing(id);
+            float serving_number = DB_SQLite.retrieveServing(food_id);
             float serving_post_multiplication = serving_number * multiplier;
             if (serving_post_multiplication == 1.0f) {
                 portion.setText(serving_post_multiplication + " Serving");
@@ -67,7 +65,7 @@ public class adapterDailyItem extends ArrayAdapter<DailyItem> {
                 portion.setText(serving_post_multiplication + " Servings");
             }
         } else if (food.getPortionType() == 1) {
-            Weight weight = DB_SQLite.retrieveWeight(id);
+            Weight weight = DB_SQLite.retrieveWeight(food_id);
             int weight_post_multiplication = Math.round(weight.getAmount() * multiplier);
             weight.setAmount(weight_post_multiplication);
             portion.setText(weight.getAmount() + " " + weight.getUnit().Abbreviate());

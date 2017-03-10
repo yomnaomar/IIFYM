@@ -21,7 +21,7 @@
       </entry>
       <entry key="CommitDialog">
         <PlaceSettings>
-          <option name="EXPAND_BY_DEFAULT" value="false" />
+          <option name="ENABLE_SYNC_SCROLL" value="false" />
         </PlaceSettings>
       </entry>
       <entry key="Default">

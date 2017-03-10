@@ -27,7 +27,7 @@ import com.example.kareem.IIFYM_Tracker.Models.Food;
 import com.example.kareem.IIFYM_Tracker.Models.User;
 import com.example.kareem.IIFYM_Tracker.R;
 import com.example.kareem.IIFYM_Tracker.ViewComponents.OnListItemDeletedListener;
-import com.example.kareem.IIFYM_Tracker.ViewComponents.adapterDailyItem;
+import com.example.kareem.IIFYM_Tracker.ViewComponents.AdapterDailyItem;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
@@ -42,7 +42,7 @@ public class activityHome extends AppCompatActivity implements AdapterView.OnIte
     private TextView lblCaloriesGoal,    lblCarbsGoal,    lblProteinGoal,    lblFatGoal;
 
     private ArrayList<DailyItem>    arrDailyItems;
-    private adapterDailyItem        adapterDailyItems;
+    private AdapterDailyItem adapterDailyItems;
     private ListView                listViewDailyItems;
     private RoundCornerProgressBar  progressBarCalories, progressBarCarbs, progressBarProtein, progressBarFat;
     private Animation               mEnterAnimation, mExitAnimation;
@@ -111,7 +111,7 @@ public class activityHome extends AppCompatActivity implements AdapterView.OnIte
         });
 
         arrDailyItems = new ArrayList<DailyItem>();
-        adapterDailyItems = new adapterDailyItem(this, arrDailyItems);
+        adapterDailyItems = new AdapterDailyItem(this, arrDailyItems);
 
         listViewDailyItems = (ListView) findViewById(R.id.listviewDailyItems);
         listViewDailyItems.setAdapter(adapterDailyItems);
@@ -158,8 +158,9 @@ public class activityHome extends AppCompatActivity implements AdapterView.OnIte
 
         int itemCount = adapterDailyItems.getCount();
         for (int i = 0; i < itemCount; i++) {
-            Food tempFood = DB_SQLite.retrieveFood(adapterDailyItems.getItem(i).getId());
-            DailyItem tempDailyItem = DB_SQLite.retrieveDailyItem(i);
+            DailyItem dailyItem = adapterDailyItems.getItem(i);
+            Food tempFood = DB_SQLite.retrieveFood(dailyItem.getFood_id());
+            DailyItem tempDailyItem = DB_SQLite.retrieveDailyItem(dailyItem.getId());
             int calories = Math.round(tempFood.getCalories() * tempDailyItem.getMultiplier());
             int carbs = Math.round(tempFood.getCarbs() * tempDailyItem.getMultiplier());
             int protein = Math.round(tempFood.getProtein() * tempDailyItem.getMultiplier());
@@ -267,13 +268,12 @@ public class activityHome extends AppCompatActivity implements AdapterView.OnIte
         updateMacros();
     }
 
-    @Override public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+    @Override public void onItemClick(AdapterView<?> parent, View view, final int position, long row_id) {
         DailyItem dailyItem = (DailyItem) parent.getItemAtPosition(position);
-        long dailyItem_id = dailyItem.getId();
+        int id = dailyItem.getId();
 
         Intent intent = new Intent(getBaseContext(), activityViewDailyItem.class);
-        intent.putExtra("id", dailyItem_id);
-        intent.putExtra("position", position);
+        intent.putExtra("id", id);
         startActivity(intent);
     }
 

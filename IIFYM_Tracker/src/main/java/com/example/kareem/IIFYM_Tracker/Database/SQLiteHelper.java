@@ -9,6 +9,7 @@ import com.example.kareem.IIFYM_Tracker.R;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 
 /**
@@ -22,12 +23,12 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     // Names
     private static final String DATABASE_NAME       = "DB_IIFYM";
 
-    private static final String Table_User          = "User";
-    private static final String Table_Food          = "Food";
-    private static final String Table_Weight        = "Weight";
-    private static final String Table_Serving       = "Serving";
-    private static final String Table_DailyItem     = "DailyItem";
-    private static final String Table_ComposedOf    = "ComposedOf";
+    public static final String Table_User          = "User";
+    public static final String Table_Food          = "Food";
+    public static final String Table_Weight        = "Weight";
+    public static final String Table_Serving       = "Serving";
+    public static final String Table_DailyItem     = "DailyItem";
+    public static final String Table_ComposedOf    = "ComposedOf";
 
     private static SQLiteHelper sInstance;
     private Context context;
@@ -44,7 +45,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         this.context = context;
     }
 
-    @Override public void onCreate(SQLiteDatabase db) {
+    @Override public void onCreate(final SQLiteDatabase db) {
 
         String createTable_User = "CREATE TABLE " + Table_User + " " +
                 "(uid               TEXT PRIMARY KEY, " +   // firebase uid = User ID
@@ -74,7 +75,8 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 "protein       REAL, " +
                 "fat           REAL, " +
                 "portionType   INTEGER, " +     // 0 - Serving, 1 - Weight, 2 - None
-                "isMeal        INTEGER);";
+                "isMeal        INTEGER, " +
+                "frequency     INTEGER);";
 
         String createTable_Weight = "CREATE TABLE " + Table_Weight + " " +
                 "(id            INTEGER PRIMARY KEY, " +
@@ -90,13 +92,13 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         //ON UPDATE is not needed because the id will never be updated, it is hidden from the user
 
         String createTable_DailyItem = "CREATE TABLE " + Table_DailyItem + " " +
-                "(position      INTEGER PRIMARY KEY, " +
-                "id             INTEGER, " +
+                "(id            INTEGER PRIMARY KEY autoincrement, " +
+                "food_id        INTEGER, " +
                 "multiplier     REAL, " +
-                "CONSTRAINT food_id_fk FOREIGN KEY(id) REFERENCES " + Table_Food + " (id) ON DELETE CASCADE);";
+                "CONSTRAINT food_id_fk FOREIGN KEY(food_id) REFERENCES " + Table_Food + " (id) ON DELETE CASCADE);";
 
         String createTable_ComposedOf = "CREATE TABLE " + Table_ComposedOf + " " +
-                "(mid           INTEGER, " +    // mid = Food ID
+                "(mid           INTEGER, " +    // mid = Meal ID
                 "fid            INTEGER, " +    // fid = Food ID
                 "multiplier     REAL, " +
                 "CONSTRAINT composed_id_pk PRIMARY KEY(mid, fid), " +
@@ -112,79 +114,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         db.execSQL(createTable_DailyItem);
         db.execSQL(createTable_ComposedOf);
 
-        InputStreamReader file;
-        file = new InputStreamReader(context.getResources().openRawResource(R.raw.usda_fooddb));
-
-        BufferedReader buffer = new BufferedReader(file);
-        String line = "";
-
-        db.beginTransaction();
-        try {
-            while ((line = buffer.readLine()) != null) {
-                if (line.contains("\"")) {
-                    String[] food = line.split("\"");
-                    String id = food[0].substring(0, food[0].length() - 1);
-                    String name = food[1].replaceAll("~","\"");
-                    String details = food[2];
-                    String calories = details.split(",")[1].replace("--","0");
-                    String carbs = details.split(",")[2].replace("--","0");
-                    String protein = details.split(",")[3].replace("--","0");
-                    String fat = details.split(",")[4].replace("--","0");
-
-                    ContentValues newFood = new ContentValues();
-                    newFood.put("id", id);
-                    newFood.put("name", name);
-                    newFood.put("brand", "");                       // Empty
-                    newFood.put("calories", Integer.parseInt(calories));
-                    newFood.put("carbs", Float.parseFloat(carbs));
-                    newFood.put("protein", Float.parseFloat(protein));
-                    newFood.put("fat", Float.parseFloat(fat));
-                    newFood.put("portionType", 1);                  // Weight
-                    newFood.put("isMeal", false);                   // No
-
-                    db.insert(Table_Food, null, newFood);
-
-                    ContentValues newWeight = new ContentValues();
-                    newWeight.put("id", id);
-                    newWeight.put("amount", 100);   // 100
-                    newWeight.put("unit", 0);       // grams
-
-                    db.insert(Table_Weight, null, newWeight);
-                } else {
-                    String[] food = line.split(",");
-                    String id = food[0];
-                    String name = food[1].replaceAll("~","\"");
-                    String calories = food[2].replace("--","0");
-                    String carbs = food[3].replace("--","0");
-                    String protein = food[4].replace("--","0");
-                    String fat = food[5].replace("--","0");
-
-                    ContentValues newFood = new ContentValues();
-                    newFood.put("id", id);
-                    newFood.put("name", name);
-                    newFood.put("brand", "");                       // Empty
-                    newFood.put("calories", Integer.parseInt(calories));
-                    newFood.put("carbs", Float.parseFloat(carbs));
-                    newFood.put("protein", Float.parseFloat(protein));
-                    newFood.put("fat", Float.parseFloat(fat));
-                    newFood.put("portionType", 1);                  // Weight
-                    newFood.put("isMeal", false);                   // No
-
-                    db.insert(Table_Food, null, newFood);
-
-                    ContentValues newWeight = new ContentValues();
-                    newWeight.put("id", id);
-                    newWeight.put("amount", 100);   // 100
-                    newWeight.put("unit", 0);       // grams
-
-                    db.insert(Table_Weight, null, newWeight);
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        db.setTransactionSuccessful();
-        db.endTransaction();
+        registerFoodDatabase(db, R.raw.usda);
     }
 
     @Override public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {}
@@ -193,5 +123,47 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         super.onOpen(db);
         // Enable foreign key constraints
         db.execSQL("PRAGMA foreign_keys=ON;");
+    }
+
+    /**
+     * Parses a food file dump and inserts it's contents into the SQL database.
+     * @param db
+     * @param file_identifier
+     *   Entries must be separated with a line break.
+     *   Each line must be in the format
+     *     (string, string, integer,  decimal, decimal, decimal)
+     *
+     *   Representing
+     *     (brand,  name,   calories, carbs,   protein, fat)
+     *
+     *   For example
+     *     ("MOUNDS", "Candy Bar", 486, 58.59, 4.6, 26.6)
+     */
+    private void registerFoodDatabase(SQLiteDatabase db, int file_identifier) {
+        try {
+            db.beginTransaction();
+
+            final InputStream resource = context.getResources().openRawResource(file_identifier);
+            final InputStreamReader file = new InputStreamReader(resource);
+            final BufferedReader buffer = new BufferedReader(file);
+
+            String line;
+            while ((line = buffer.readLine()) != null) {
+                db.execSQL("INSERT INTO " + Table_Food + " " +
+                        "(brand, name, calories, carbs, protein, fat) " +
+                        "VALUES " + line);
+
+                ContentValues newWeight = new ContentValues();
+                newWeight.put("amount", 100);   // 100
+                newWeight.put("unit", 0);       // grams
+
+                db.insert(Table_Weight, null, newWeight);
+            }
+
+            db.setTransactionSuccessful();
+            db.endTransaction();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
