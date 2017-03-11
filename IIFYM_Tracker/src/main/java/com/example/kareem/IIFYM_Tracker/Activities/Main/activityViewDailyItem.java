@@ -127,9 +127,11 @@ public class activityViewDailyItem extends AppCompatActivity implements View.OnC
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Are you sure you want to delete this item from your daily log?")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        DB_SQLite.deleteDailyItem(id);
-                        Toast.makeText(context,"Food deleted from daily log",Toast.LENGTH_SHORT).show();
+                    public void onClick(DialogInterface dialog, int view_id) {
+                        if (DB_SQLite.deleteDailyItem(id) != -1)
+                            Toast.makeText(context, "Food deleted from daily log", Toast.LENGTH_SHORT).show();
+                        else
+                            Toast.makeText(context, "Unable to delete from log", Toast.LENGTH_SHORT).show();
                         finish();
                     }
                 });
@@ -141,47 +143,4 @@ public class activityViewDailyItem extends AppCompatActivity implements View.OnC
         AlertDialog dialog = builder.create();
         dialog.show();
     }
-
-    /*    private void generatePieChartData() {
-
-        float total = food.getCarbs()*4 + food.getProtein()*4 + food.getFat()*9;
-        float percentCarbs = Math.round(food.getCarbs()*4 / total * 100);
-        float percentProtein = Math.round(food.getProtein()*4 / total * 100);
-        float percentFat = Math.round(food.getFat()*9 / total * 100);
-
-        List<SliceValue> values = new ArrayList<>();
-
-        SliceValue sliceValue_carbs = new SliceValue(percentCarbs, Color.parseColor("#f0c419"));
-        sliceValue_carbs.setLabel(percentCarbs + "%");
-        values.add(sliceValue_carbs);
-
-        SliceValue sliceValue_prot = new SliceValue(percentProtein, Color.parseColor("#f44336"));
-        sliceValue_prot.setLabel(percentProtein + "%");
-        values.add(sliceValue_prot);
-
-        SliceValue sliceValue_fat = new SliceValue(percentFat, Color.parseColor("#66bb6a"));
-        sliceValue_fat.setLabel(percentFat + "%");
-        values.add(sliceValue_fat);
-
-        data = new PieChartData(values);
-
-        chart.setCircleFillRatio(0.5f);
-        data.setHasLabelsOutside(true);
-        data.setHasLabels(true);
-        data.setHasCenterCircle(false);
-
-        data.setSlicesSpacing(2);
-
-        // Get font size from dimens.xml and convert it to sp(library uses sp values).
-        data.setCenterText1FontSize(ChartUtils.px2sp(getResources().getDisplayMetrics().scaledDensity,
-                (int) getResources().getDimension(R.dimen.pie_chart_text1_size)));
-
-        // Get font size from dimens.xml and convert it to sp(library uses sp values).
-        data.setCenterText2FontSize(ChartUtils.px2sp(getResources().getDisplayMetrics().scaledDensity,
-                (int) getResources().getDimension(R.dimen.pie_chart_text2_size)));
-
-        chart.animate();
-        chart.animationDataUpdate(2f);
-        chart.setPieChartData(data);
-    }*/
 }

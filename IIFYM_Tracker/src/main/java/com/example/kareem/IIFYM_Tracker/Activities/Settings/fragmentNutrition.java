@@ -4,17 +4,18 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.Menu;
-import android.view.MenuInflater;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.EditText;
@@ -41,7 +42,15 @@ import tourguide.tourguide.Overlay;
 import tourguide.tourguide.Sequence;
 import tourguide.tourguide.ToolTip;
 
-public class activityNutritionSettings extends AppCompatActivity implements View.OnClickListener, TextWatcher {
+/**
+ * A simple {@link Fragment} subclass.
+ * Activities that contain this fragment must implement the
+ * {@link fragmentNutrition.OnFragmentInteractionListener} interface
+ * to handle interaction events.
+ * Use the {@link fragmentNutrition#newInstance} factory method to
+ * create an instance of this fragment.
+ */
+public class fragmentNutrition extends Fragment implements View.OnClickListener, TextWatcher {
 
     // GUI
     private SegmentedGroup  seggroupDisplay;
@@ -74,12 +83,50 @@ public class activityNutritionSettings extends AppCompatActivity implements View
     private SQLiteConnector         DB_SQLite;
     private DatabaseReference       firebaseDbRef;
 
-    @Override protected void onCreate(Bundle savedInstanceState) {
+    // TODO: Rename parameter arguments, choose names that match
+    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private static final String ARG_PARAM1 = "param1";
+    private static final String ARG_PARAM2 = "param2";
+
+    // TODO: Rename and change types of parameters
+    private String mParam1;
+    private String mParam2;
+
+    private OnFragmentInteractionListener mListener;
+    private View view;
+
+    public fragmentNutrition() {
+        // Required empty public constructor
+    }
+
+    /**
+     * Use this factory method to create a new instance of
+     * this fragment using the provided parameters.
+     *
+     * @param param1 Parameter 1.
+     * @param param2 Parameter 2.
+     * @return A new instance of fragment fragmentNutrition.
+     */
+    // TODO: Rename and change types and number of parameters
+    public static fragmentNutrition newInstance(String param1, String param2) {
+        fragmentNutrition fragment = new fragmentNutrition();
+        Bundle args = new Bundle();
+        args.putString(ARG_PARAM1, param1);
+        args.putString(ARG_PARAM2, param2);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_nutrition_settings);
+        if (getArguments() != null) {
+            mParam1 = getArguments().getString(ARG_PARAM1);
+            mParam2 = getArguments().getString(ARG_PARAM2);
+        }
 
         // Database
-        context = getApplicationContext();
+        context = getActivity().getApplicationContext();
         myPrefs = new SharedPreferenceHelper(context);
         firebaseDbRef = FirebaseDatabase.getInstance().getReference();
         DB_SQLite = new SQLiteConnector(context);
@@ -87,14 +134,14 @@ public class activityNutritionSettings extends AppCompatActivity implements View
         // Data from previous Login activities
         getUserData();
 
-        // GUI
-        initializeGUI();
+/*        // GUI
+        initializeGUI();*/
 
-        // Set values to User's stored preferences
+/*        // Set values to User's stored preferences
         setInitialValues();
 
         // Set up TextWatchers and OnClickListeners after initializing values to prevent overwriting
-        finalizeGUI();
+        finalizeGUI();*/
     }
 
     private void getUserData() {
@@ -129,79 +176,15 @@ public class activityNutritionSettings extends AppCompatActivity implements View
     }
 
     private void initializeGUI() {
-        seggroupDisplay = (SegmentedGroup) findViewById(R.id.seggroupDisplay);
-        rbtnCalories    = (RadioButton) findViewById(R.id.rbtnCalories);
-        rbtnMacros      = (RadioButton) findViewById(R.id.rbtnMacros);
-        etxtCalories    = (EditText) findViewById(R.id.etxtCalories);
-        etxtCarbs       = (EditText) findViewById(R.id.etxtCarbs);
-        etxtProtein     = (EditText) findViewById(R.id.etxtProtein);
-        etxtFat         = (EditText) findViewById(R.id.etxtFat);
-        lblCarbs        = (TextView) findViewById(R.id.lblCarbs);
-        lblProtein      = (TextView) findViewById(R.id.lblProtein);
-        lblFat          = (TextView) findViewById(R.id.lblFat);
-        lblTotal        = (TextView) findViewById(R.id.lblTotal);
-        lblAmountTotal  = (TextView) findViewById(R.id.lblAmountTotal);
-        lblValueCarbs   = (TextView) findViewById(R.id.lblValueCarbs);
-        lblValueProtein = (TextView) findViewById(R.id.lblValueProtein);
-        lblValueFat     = (TextView) findViewById(R.id.lblValueFat);
-        btnReset        = (ImageButton) findViewById(R.id.btnReset);
-        btnInfo         = (ImageButton) findViewById(R.id.btnInfo);
 
-        btnReset.setOnClickListener(this);
-        btnInfo.setOnClickListener(this);
-
-        // setup enter and exit animation
-        mEnterAnimation = new AlphaAnimation(0f, 1f);
-        mEnterAnimation.setDuration(600);
-        mEnterAnimation.setFillAfter(true);
-
-        mExitAnimation = new AlphaAnimation(1f, 0f);
-        mExitAnimation.setDuration(600);
-        mExitAnimation.setFillAfter(true);
     }
 
     private void setInitialValues(){
-        etxtCalories.setText(calories + "");
 
-        if(isPercent) // Calories
-        {
-            rbtnCalories.setChecked(true);
-
-            etxtCarbs.setText(carbsPercent + "");
-            etxtProtein.setText(proteinPercent + "");
-            etxtFat.setText(fatPercent + "");
-
-            lblValueCarbs.setText("~" + Math.round(carbsPercent * 0.01f * calories/4) + " g");
-            lblValueProtein.setText("~" + Math.round(proteinPercent * 0.01f * calories/4) + " g");
-            lblValueFat.setText("~" + Math.round(fatPercent * 0.01f * calories/9) + " g");
-            lblAmountTotal.setText(totalPercent + "");
-            if (totalPercent == 100)
-                lblAmountTotal.setTextColor(context.getResources().getColor(R.color.correct_green));
-            else
-                lblAmountTotal.setTextColor(context.getResources().getColor(R.color.error_red));
-        }
-        else // Macros
-        {
-            rbtnMacros.setChecked(true);
-
-            etxtCarbs.setText(carbs + "");
-            etxtProtein.setText(protein + "");
-            etxtFat.setText(fat + "");
-
-        }
-        updateGUI();
     }
 
     private void finalizeGUI() {
-        seggroupDisplay.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
-        {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                updateGUI();
-                defaultValues();
-            }});
 
-        addTextWatchers();
     }
 
     private void updateGUI() {
@@ -404,10 +387,22 @@ public class activityNutritionSettings extends AppCompatActivity implements View
         }
     }
 
+    @Override public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_save:
+                saveAndFinish();
+                break;
+            default:
+                break;
+        }
+        return true;
+    }
+
     private void defaultValues() {
+        // Calculate values to be displayed
+        getBMR();
+
         if (rbtnCalories.isChecked()) {
-            // Calculate values to be displayed
-            getBMR();
 
             // Macronutrient ratio default
             calories = caloriesDefault;
@@ -447,6 +442,7 @@ public class activityNutritionSettings extends AppCompatActivity implements View
             etxtProtein.setText(protein + "");
             etxtFat.setText(fat + "");
 
+            Log.d("dividebyzero", carbs + calories + "");
             lblValueCarbs.setText("~" + Math.round(carbs * 4 * 100 / calories) + " %");
             lblValueProtein.setText("~" + Math.round(protein * 4 * 100 / calories)  + " %");
             lblValueFat.setText("~" + Math.round(fat * 9 * 100 / calories) + " %");
@@ -490,6 +486,8 @@ public class activityNutritionSettings extends AppCompatActivity implements View
         else
             BMR = (int) (10*valWeight + 6.25*valHeight + 5*valAge - 161.0);
 
+        Log.d("BMR", BMR + "");
+
         // Activity Factor Multiplier
         // None (little or no exercise)
         if (workoutFreq == 0)
@@ -525,23 +523,6 @@ public class activityNutritionSettings extends AppCompatActivity implements View
             caloriesDefault += 250.0;
     }
 
-    @Override public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_nutrition_settings, menu);
-        return true;
-    }
-
-    @Override public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_save:
-                saveAndFinish();
-                break;
-            default:
-                break;
-        }
-        return true;
-    }
-
     private void saveAndFinish(){
         // Validate Fields
         if(validateFields()){
@@ -559,7 +540,7 @@ public class activityNutritionSettings extends AppCompatActivity implements View
 
             Log.d("saveAndFinish", "isPercent " + updateuser.getIsPercent());
 
-            showProgressDialog();
+            //showProgressDialog();
             Log.i("RegisterUser","updating user data: " + uid);
             Log.i("RegisterUser", updateuser + "");
             firebaseDbRef.child("users").child(uid).setValue(updateuser, new DatabaseReference.CompletionListener() {
@@ -572,11 +553,11 @@ public class activityNutritionSettings extends AppCompatActivity implements View
 
                         hideProgressDialog();
 
-                        finish();
+                        //finish();
                     }
                     // Error writing to database
                     else {
-                        showAlertDialog("Network Error","Please check your network connection and try again");
+                        //showAlertDialog("Network Error","Please check your network connection and try again");
                     }
                 }
             });
@@ -590,7 +571,7 @@ public class activityNutritionSettings extends AppCompatActivity implements View
                 .setExitAnimation(mExitAnimation);
 
 
-        ChainTourGuide tourGuide1 = ChainTourGuide.init(this)
+        ChainTourGuide tourGuide1 = ChainTourGuide.init(getActivity())
                 .setToolTip(new ToolTip()
                         .setTitle("Calories vs Macros")
                         .setDescription("What would you like to focus on?")
@@ -600,7 +581,7 @@ public class activityNutritionSettings extends AppCompatActivity implements View
                 .playLater(seggroupDisplay);
 
 
-        ChainTourGuide tourGuide2 = ChainTourGuide.init(this)
+        ChainTourGuide tourGuide2 = ChainTourGuide.init(getActivity())
                 .setToolTip(new ToolTip()
                         .setTitle("Don't worry")
                         .setDescription("If you don't know where to start, " +
@@ -610,7 +591,7 @@ public class activityNutritionSettings extends AppCompatActivity implements View
                 .setOverlay(overlay)
                 .playLater(etxtCarbs);
 
-        ChainTourGuide tourGuide3 = ChainTourGuide.init(this)
+        ChainTourGuide tourGuide3 = ChainTourGuide.init(getActivity())
                 .setToolTip(new ToolTip()
                         .setTitle("Reset")
                         .setDescription("Press the reset button to return the values back to recommended")
@@ -626,7 +607,7 @@ public class activityNutritionSettings extends AppCompatActivity implements View
                 .setContinueMethod(Sequence.ContinueMethod.Overlay)
                 .build();
 
-        tourguide = ChainTourGuide.init(this).playInSequence(sequence);
+        tourguide = ChainTourGuide.init(getActivity()).playInSequence(sequence);
     }
 
     private int getAge (int _year, int _month, int _day) {
@@ -665,7 +646,7 @@ public class activityNutritionSettings extends AppCompatActivity implements View
 
     public void showProgressDialog() {
         if (progressDialog == null) {
-            progressDialog = new ProgressDialog(this);
+            progressDialog = new ProgressDialog(getActivity());
             progressDialog.setMessage("Loading");
             progressDialog.setIndeterminate(true);
         }
@@ -694,7 +675,7 @@ public class activityNutritionSettings extends AppCompatActivity implements View
     }
 
     private void showAlertDialog(String title, String message){
-        AlertDialog.Builder builder = new AlertDialog.Builder(activityNutritionSettings.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(title)
                 .setMessage(message);
         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
@@ -709,5 +690,121 @@ public class activityNutritionSettings extends AppCompatActivity implements View
 
     @Override public void afterTextChanged(Editable s) {
 
+    }
+
+    @Override public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        view = inflater.inflate(R.layout.fragment_nutrition, container, false);
+        seggroupDisplay = (SegmentedGroup) view.findViewById(R.id.seggroupDisplay);
+        rbtnCalories    = (RadioButton) view.findViewById(R.id.rbtnCalories);
+        rbtnMacros      = (RadioButton) view.findViewById(R.id.rbtnMacros);
+        etxtCalories    = (EditText) view.findViewById(R.id.etxtCalories);
+        etxtCarbs       = (EditText) view.findViewById(R.id.etxtCarbs);
+        etxtProtein     = (EditText) view.findViewById(R.id.etxtProtein);
+        etxtFat         = (EditText) view.findViewById(R.id.etxtFat);
+        lblCarbs        = (TextView) view.findViewById(R.id.lblCarbs);
+        lblProtein      = (TextView) view.findViewById(R.id.lblProtein);
+        lblFat          = (TextView) view.findViewById(R.id.lblFat);
+        lblTotal        = (TextView) view.findViewById(R.id.lblTotal);
+        lblAmountTotal  = (TextView) view.findViewById(R.id.lblAmountTotal);
+        lblValueCarbs   = (TextView) view.findViewById(R.id.lblValueCarbs);
+        lblValueProtein = (TextView) view.findViewById(R.id.lblValueProtein);
+        lblValueFat     = (TextView) view.findViewById(R.id.lblValueFat);
+        btnReset        = (ImageButton) view.findViewById(R.id.btnReset);
+        btnInfo         = (ImageButton) view.findViewById(R.id.btnInfo);
+
+        btnReset.setOnClickListener(this);
+        btnInfo.setOnClickListener(this);
+
+        // setup enter and exit animation
+        mEnterAnimation = new AlphaAnimation(0f, 1f);
+        mEnterAnimation.setDuration(600);
+        mEnterAnimation.setFillAfter(true);
+
+        mExitAnimation = new AlphaAnimation(1f, 0f);
+        mExitAnimation.setDuration(600);
+        mExitAnimation.setFillAfter(true);
+
+        etxtCalories.setText(calories + "");
+
+        if(isPercent) // Calories
+        {
+            rbtnCalories.setChecked(true);
+
+            etxtCarbs.setText(carbsPercent + "");
+            etxtProtein.setText(proteinPercent + "");
+            etxtFat.setText(fatPercent + "");
+
+            lblValueCarbs.setText("~" + Math.round(carbsPercent * 0.01f * calories/4) + " g");
+            lblValueProtein.setText("~" + Math.round(proteinPercent * 0.01f * calories/4) + " g");
+            lblValueFat.setText("~" + Math.round(fatPercent * 0.01f * calories/9) + " g");
+            lblAmountTotal.setText(totalPercent + "");
+            if (totalPercent == 100)
+                lblAmountTotal.setTextColor(context.getResources().getColor(R.color.correct_green));
+            else
+                lblAmountTotal.setTextColor(context.getResources().getColor(R.color.error_red));
+        }
+        else // Macros
+        {
+            rbtnMacros.setChecked(true);
+
+            etxtCarbs.setText(carbs + "");
+            etxtProtein.setText(protein + "");
+            etxtFat.setText(fat + "");
+
+        }
+        updateGUI();
+
+        seggroupDisplay.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+        {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                updateGUI();
+                defaultValues();
+            }});
+
+        addTextWatchers();
+
+        return view;
+    }
+
+    // TODO: Rename method, update argument and hook method into UI event
+    public void onButtonPressed(Uri uri) {
+        if (mListener != null) {
+            mListener.onFragmentInteraction(uri);
+        }
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnFragmentInteractionListener) {
+            mListener = (OnFragmentInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
+
+    /**
+     * This interface must be implemented by activities that contain this
+     * fragment to allow an interaction in this fragment to be communicated
+     * to the activity and potentially other fragments contained in that
+     * activity.
+     * <p>
+     * See the Android Training lesson <a href=
+     * "http://developer.android.com/training/basics/fragments/communicating.html"
+     * >Communicating with Other Fragments</a> for more information.
+     */
+    public interface OnFragmentInteractionListener {
+        // TODO: Update argument type and name
+        void onFragmentInteraction(Uri uri);
     }
 }

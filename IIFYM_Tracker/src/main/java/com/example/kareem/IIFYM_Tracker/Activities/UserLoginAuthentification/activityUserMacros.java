@@ -54,6 +54,7 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
     private ImageButton     btnReset, btnInfo;
     private Animation       mEnterAnimation, mExitAnimation;
     private ProgressDialog  progressDialog;
+    private Menu            menu;
 
     // Variables
     // Final Variables (Cannot be changed)
@@ -332,6 +333,7 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
     }
 
     @Override public boolean onCreateOptionsMenu(Menu menu) {
+        this.menu = menu;
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_user_macros, menu);
         return true;
@@ -431,7 +433,7 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
             }
 
             showProgressDialog();
-            Log.i("RegisterUser","adding user data: " + uid);
+            Log.i("RegisterUser","adding user data: " + user.toString());
             Log.i("RegisterUser", user + "");
             firebaseDbRef.child("users").child(uid).setValue(user, new DatabaseReference.CompletionListener() {
                 public void onComplete(DatabaseError error, DatabaseReference ref) {
@@ -470,6 +472,18 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
                 .setEnterAnimation(mEnterAnimation)
                 .setExitAnimation(mExitAnimation);
 
+/*        Overlay overlayLast = new Overlay()
+                .setBackgroundColor(Color.parseColor("#EE2c3e50"))
+                .setEnterAnimation(mEnterAnimation)
+                .setExitAnimation(mExitAnimation)
+                .setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        MenuInflater inflater = getMenuInflater();
+                        inflater.inflate(R.menu.menu_user_macros, menu);
+                        tourguide.cleanUp();
+                    }
+                });*/
 
         ChainTourGuide tourGuide1 = ChainTourGuide.init(this)
                 .setToolTip(new ToolTip()

@@ -19,17 +19,17 @@
             android:layout_height="match_parent">
 
             <EditText
-                    android:inputType="textCapSentences"
-                    android:ems="8"
-                    android:id="@+id/etxtName"
-                    android:hint="@string/firstname"
-                    android:textAppearance="@android:style/TextAppearance.Medium"
-                    android:textColor="?attr/colorPrimary"
-                    android:layout_weight="1"
-                    android:textColorHint="?android:attr/textColorHint"
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                android:inputType="textCapSentences"
+                android:ems="8"
+                android:id="@+id/etxtName"
+                android:hint="@string/firstname"
+                android:textAppearance="@android:style/TextAppearance.Medium"
+                android:textColor="?attr/colorPrimary"
+                android:layout_weight="1"
+                android:textColorHint="?android:attr/textColorHint"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
                 android:textSize="14sp" />
 
             <RelativeLayout

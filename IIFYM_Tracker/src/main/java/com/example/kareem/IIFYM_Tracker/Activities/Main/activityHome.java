@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,10 +16,9 @@ import android.view.animation.Animation;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
-import com.example.kareem.IIFYM_Tracker.Activities.Settings.activityNutritionSettings;
+import com.example.kareem.IIFYM_Tracker.Activities.Settings.activitySettings;
 import com.example.kareem.IIFYM_Tracker.Activities.UserLoginAuthentification.activityLogin;
 import com.example.kareem.IIFYM_Tracker.Database.SQLiteConnector;
 import com.example.kareem.IIFYM_Tracker.Database.SharedPreferenceHelper;
@@ -26,8 +26,8 @@ import com.example.kareem.IIFYM_Tracker.Models.DailyItem;
 import com.example.kareem.IIFYM_Tracker.Models.Food;
 import com.example.kareem.IIFYM_Tracker.Models.User;
 import com.example.kareem.IIFYM_Tracker.R;
-import com.example.kareem.IIFYM_Tracker.ViewComponents.OnListItemDeletedListener;
 import com.example.kareem.IIFYM_Tracker.ViewComponents.AdapterDailyItem;
+import com.example.kareem.IIFYM_Tracker.ViewComponents.OnListItemDeletedListener;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
@@ -131,10 +131,6 @@ public class activityHome extends AppCompatActivity implements AdapterView.OnIte
         uid = myPrefs.getStringValue("session_uid");
         currentUser = DB_SQLite.retrieveUser(uid);
 
-        // User Greetings
-        Toast toast = Toast.makeText(context, "Hello " + currentUser.getName() + "!", Toast.LENGTH_SHORT);
-        toast.show();
-
         isPercent = currentUser.getIsPercent();
 
         caloriesGoal = currentUser.getDailyCalories();
@@ -143,15 +139,15 @@ public class activityHome extends AppCompatActivity implements AdapterView.OnIte
         fatGoal = currentUser.getDailyFat();
 
         if (isPercent){ // Convert from percentage to grams
-            carbsGoal = carbsGoal*caloriesGoal/400;
-            proteinGoal = proteinGoal*caloriesGoal/400;
-            fatGoal = fatGoal*caloriesGoal/900;
+            carbsGoal = (carbsGoal*caloriesGoal)/400;
+            proteinGoal = (proteinGoal*caloriesGoal)/400;
+            fatGoal = (fatGoal*caloriesGoal)/900;
         }
+
+        Log.d("initializeUser", currentUser.toString());
     }
 
     public void updateMacros(){
-        // Updating "Current" Variables
-
         // Reset to prevent accumulation
         caloriesCurrent = 0;
         carbsCurrent = 0;
@@ -249,6 +245,7 @@ public class activityHome extends AppCompatActivity implements AdapterView.OnIte
 
     @Override protected void onResume() {
         super.onResume();
+        initializeUser();
         updateArrayList();
         updateMacros();
     }
@@ -286,7 +283,7 @@ public class activityHome extends AppCompatActivity implements AdapterView.OnIte
         Intent intent;
         switch (id){
             case (R.id.actionNutritionSettings):
-                intent = new Intent(context,activityNutritionSettings.class );
+                intent = new Intent(context,activitySettings.class );
                 startActivity(intent);
                 return true;
             case (R.id.actionFoodManager):
@@ -304,6 +301,7 @@ public class activityHome extends AppCompatActivity implements AdapterView.OnIte
                 intent = new Intent(context, activityLogin.class);
                 startActivity(intent);
                 finish();
+                break;
         }
         return super.onOptionsItemSelected(item);
     }

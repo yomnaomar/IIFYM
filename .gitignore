@@ -29,6 +29,9 @@ Thumbs.db
 *.iml
 .idea
 .gradle
+.idea/libraries
+.idea/modules.xml
+
 build/
 
 #NDK

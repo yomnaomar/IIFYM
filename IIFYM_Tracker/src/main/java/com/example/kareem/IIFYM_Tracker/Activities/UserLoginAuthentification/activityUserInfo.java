@@ -355,7 +355,6 @@ public class activityUserInfo extends AppCompatActivity implements View.OnClickL
 
     @Override protected void onPause() {
         readUserInput();
-        unregisterReceiver(broadcast_reciever);
         myPrefs.addPreference("temp_name_registration",name);
         myPrefs.addPreference("temp_dob_registration",dob);
         if(rbtnGenderMale.isChecked())
@@ -383,8 +382,10 @@ public class activityUserInfo extends AppCompatActivity implements View.OnClickL
             @Override
             public void onReceive(Context arg0, Intent intent) {
                 String action = intent.getAction();
-                if (action.equals("finish_activity"))
+                if (action.equals("finish_activity")) {
+                    unregisterReceiver(this);
                     finish();
+                }
             }
         };
         registerReceiver(broadcast_reciever, new IntentFilter("finish_activity"));
