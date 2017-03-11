@@ -18,7 +18,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
-import com.example.kareem.IIFYM_Tracker.Activities.Settings.activityNutritionSettings;
+import com.example.kareem.IIFYM_Tracker.Activities.Settings.activitySettings;
 import com.example.kareem.IIFYM_Tracker.Activities.UserLoginAuthentification.activityLogin;
 import com.example.kareem.IIFYM_Tracker.Database.SQLiteConnector;
 import com.example.kareem.IIFYM_Tracker.Database.SharedPreferenceHelper;
@@ -26,8 +26,8 @@ import com.example.kareem.IIFYM_Tracker.Models.DailyItem;
 import com.example.kareem.IIFYM_Tracker.Models.Food;
 import com.example.kareem.IIFYM_Tracker.Models.User;
 import com.example.kareem.IIFYM_Tracker.R;
-import com.example.kareem.IIFYM_Tracker.ViewComponents.OnListItemDeletedListener;
 import com.example.kareem.IIFYM_Tracker.ViewComponents.AdapterDailyItem;
+import com.example.kareem.IIFYM_Tracker.ViewComponents.OnListItemDeletedListener;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
@@ -285,7 +285,7 @@ public class activityHome extends AppCompatActivity implements AdapterView.OnIte
         Intent intent;
         switch (id){
             case (R.id.actionNutritionSettings):
-                intent = new Intent(context,activityNutritionSettings.class );
+                intent = new Intent(context,activitySettings.class );
                 startActivity(intent);
                 return true;
             case (R.id.actionFoodManager):
