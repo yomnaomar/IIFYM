@@ -2,14 +2,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.kareem.IIFYM_Tracker.HomeActivity">
-    <item android:title="@string/menuSettings"
-        android:id="@+id/menuSettings" />
-    <item android:title="@string/menuProfile"
-        android:id="@+id/menuProfile" />
-    <item android:title="@string/menuAccount"
-        android:id="@+id/menuAccount" />
-    <item android:title="@string/menuLogout"
-        android:id="@+id/menuLogout" />
     <item
         android:id="@+id/actionNutritionSettings"
         android:orderInCategory="100"
@@ -24,4 +16,8 @@
         app:showAsAction="always"
         android:icon="@drawable/ic_meal_settings"
         />
+    <item android:title="@string/menuAccount"
+        android:id="@+id/menuAccount" />
+    <item android:title="@string/menuLogout"
+        android:id="@+id/menuLogout" />
 </menu>

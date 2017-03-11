@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+    android:layout_marginRight="@dimen/activity_horizontal_margin"
+    android:layout_marginTop="@dimen/activity_vertical_margin"
+    android:layout_marginBottom="@dimen/activity_vertical_margin">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <EditText
+                android:inputType="textCapSentences"
+                android:ems="8"
+                android:id="@+id/etxtName"
+                android:hint="@string/firstname"
+                android:textAppearance="@android:style/TextAppearance.Medium"
+                android:textColor="?attr/colorPrimary"
+                android:layout_weight="1"
+                android:textColorHint="?android:attr/textColorHint"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:textSize="14sp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <EditText
+                    android:layout_height="50dp"
+                    android:inputType="textPersonName"
+                    android:text="@string/dateInitial"
+                    android:ems="3"
+                    android:id="@+id/etxtDateOfBirth"
+                    android:textColor="?attr/colorPrimary"
+                    android:textSize="14sp"
+                    android:gravity="right|center_vertical"
+                    android:layout_gravity="right|center_vertical"
+                    android:drawableRight="@drawable/drawable_ic_calendar"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_width="110dp" />
+
+                <TextView
+                    android:text="@string/dateOfBirth"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/lblDOB"
+                    android:textAppearance="@android:style/TextAppearance.Medium"
+                    android:textColor="?attr/colorPrimary"
+                    android:layout_gravity="center_vertical|center_horizontal"
+                    android:textSize="14sp"
+                    android:layout_alignBaseline="@+id/etxtDateOfBirth"
+                    android:layout_alignBottom="@+id/etxtDateOfBirth"
+                    android:layout_alignParentStart="true" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/linearlayoutGender"
+                android:layout_weight="0.5">
+
+                <TextView
+                    android:text="@string/gender"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/lblGender"
+                    android:layout_weight="0.5"
+                    android:textAppearance="@android:style/TextAppearance.Medium"
+                    android:layout_gravity="center_vertical|center_horizontal"
+                    android:textColor="?attr/colorPrimary"
+                    android:textSize="14sp" />
+
+                <info.hoang8f.android.segmented.SegmentedGroup
+                    android:id="@+id/seggroupGender"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="horizontal"
+                    app:sc_border_width="2dp"
+                    app:sc_corner_radius="10dp"
+                    android:layout_gravity="right|center"
+                    android:layout_weight="0.5"
+                    android:gravity="right|center">
+
+                    <RadioButton
+                        android:id="@+id/rbtnGenderMale"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/male"
+                        style="@style/RadioButton"
+                        android:checked="true"
+                        android:layout_gravity="center_vertical|center_horizontal" />
+
+                    <RadioButton
+                        android:id="@+id/rbtnGenderFemale"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/female"
+                        style="@style/RadioButton"
+                        android:layout_gravity="center_vertical|center_horizontal" />
+
+                </info.hoang8f.android.segmented.SegmentedGroup>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:layout_editor_absoluteY="8dp"
+                tools:layout_editor_absoluteX="8dp"
+                android:id="@+id/linearlayoutUnitSystem">
+
+                <TextView
+                    android:text="@string/unitSystem"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/lblUnitSystem"
+                    android:layout_weight="0.5"
+                    android:layout_gravity="center_vertical|center_horizontal"
+                    android:textAppearance="@android:style/TextAppearance.Medium"
+                    android:textColor="?attr/colorPrimary"
+                    android:textSize="14sp" />
+
+                <info.hoang8f.android.segmented.SegmentedGroup
+                    android:id="@+id/seggroupUnitSystem"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="horizontal"
+                    app:sc_border_width="2dp"
+                    app:sc_corner_radius="10dp"
+                    android:layout_gravity="right|center"
+                    android:layout_weight="0.5"
+                    android:gravity="right|center">
+
+                    <RadioButton
+                        android:id="@+id/rbtnMetric"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/metric"
+                        style="@style/RadioButton"
+                        android:checked="true"
+                        android:layout_gravity="center_vertical|center_horizontal" />
+
+                    <RadioButton
+                        android:id="@+id/rbtnImperial"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/imperial"
+                        style="@style/RadioButton"
+                        android:layout_gravity="center_vertical|center_horizontal" />
+
+                </info.hoang8f.android.segmented.SegmentedGroup>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:id="@+id/linearlayoutHeightWeight">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:id="@+id/linearlayoutHeight">
+
+                    <EditText
+                        android:layout_height="wrap_content"
+                        android:inputType="number|numberDecimal"
+                        android:ems="1"
+                        android:id="@+id/etxtHeightParam1"
+                        android:hint="@string/height"
+                        android:textColorHint="?android:attr/textColorHint"
+                        android:layout_width="wrap_content"
+                        android:layout_weight="0.8"
+                        android:layout_gravity="center"
+                        android:textAlignment="center"
+                        android:gravity="center"
+                        android:textColor="?attr/colorPrimary"
+                        android:maxLength="3"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:text="@string/cm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/lblHeightUnit1"
+                        android:textAppearance="@android:style/TextAppearance.Small"
+                        android:textColor="?attr/colorPrimary"
+                        android:layout_weight="0.2"
+                        android:layout_gravity="center_vertical|center_horizontal"
+                        android:visibility="visible"
+                        android:gravity="center" />
+
+                    <EditText
+                        android:layout_height="wrap_content"
+                        android:inputType="number|numberDecimal"
+                        android:ems="1"
+                        android:id="@+id/etxtHeightParam2"
+                        android:hint="Height"
+                        android:textColorHint="?android:attr/textColorHint"
+                        android:layout_width="wrap_content"
+                        android:layout_weight="0"
+                        android:visibility="gone"
+                        android:textAlignment="center"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:maxLength="2"
+                        android:textColor="?attr/colorPrimary"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:text="in"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/lblHeightUnit2"
+                        android:textAppearance="@android:style/TextAppearance.Small"
+                        android:textColor="?attr/colorPrimary"
+                        android:layout_weight="0"
+                        android:visibility="gone"
+                        android:gravity="center"
+                        android:layout_gravity="center" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:id="@+id/linearlayoutWeight">
+
+                    <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:inputType="number|numberDecimal"
+                        android:ems="1"
+                        android:id="@+id/etxtWeight"
+                        android:textAppearance="@android:style/TextAppearance.Medium"
+                        android:hint="@string/weight"
+                        android:textColor="?attr/colorPrimary"
+                        android:textColorHint="?android:attr/textColorHint"
+                        android:layout_weight="0.8"
+                        android:textAlignment="center"
+                        android:layout_gravity="center"
+                        android:maxLength="7"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:text="@string/kg"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/lblWeightUnit"
+                        android:textAppearance="@android:style/TextAppearance.Small"
+                        android:textColor="?attr/colorPrimary"
+                        android:layout_weight="0.2"
+                        android:gravity="center"
+                        android:layout_gravity="center" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:id="@+id/linearlayoutWorkoutFreq"
+                android:layout_weight="0.5">
+
+                <TextView
+                    android:text="@string/workoutFrequency"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/lblWorkoutFreq"
+                    android:textAppearance="@android:style/TextAppearance.Medium"
+                    android:textColor="?attr/colorPrimary"
+                    android:layout_gravity="center"
+                    android:textSize="14sp" />
+
+                <Spinner
+                    android:layout_height="wrap_content"
+                    android:id="@+id/spinnerWorkoutFreq"
+                    android:layout_gravity="right|center_vertical"
+                    android:layout_width="match_parent"
+                    android:layout_weight="0.8"
+                    android:textAlignment="textEnd"
+                    android:gravity="right|center_vertical" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:id="@+id/linearlayoutGoals"
+                android:layout_weight="0.5">
+
+                <TextView
+                    android:text="@string/goals"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/lblGoals"
+                    android:textAppearance="@android:style/TextAppearance.Medium"
+                    android:textColor="?attr/colorPrimary"
+                    android:layout_gravity="center"
+                    android:textSize="14sp" />
+
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/spinnerGoals"
+                    android:layout_gravity="right|center_vertical"
+                    android:layout_weight="0.8"
+                    android:textAlignment="textEnd"
+                    android:gravity="right|center_vertical" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

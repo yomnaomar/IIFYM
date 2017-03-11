@@ -15,7 +15,7 @@ import com.example.kareem.IIFYM_Tracker.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class activitySettings extends AppCompatActivity implements fragmentNutrition.OnFragmentInteractionListener{
+public class activitySettings extends AppCompatActivity implements fragmentNutrition.OnFragmentInteractionListener, fragmentProfile.OnFragmentInteractionListener, fragmentAppSettings.OnFragmentInteractionListener {
 
     private Toolbar toolbar;
     private TabLayout tabLayout;
@@ -41,22 +41,19 @@ public class activitySettings extends AppCompatActivity implements fragmentNutri
 
     private void setupTabIcons() {
         tabLayout.getTabAt(0).setIcon(R.drawable.ic_macro_settings);
-        /*tabLayout.getTabAt(1).setIcon(tabIcons[1]);
-        tabLayout.getTabAt(2).setIcon(tabIcons[2]);*/
+        tabLayout.getTabAt(1).setIcon(R.drawable.ic_male_user);
+        //tabLayout.getTabAt(2).setIcon(tabIcons[2]);
     }
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new fragmentNutrition(), "");
-/*        adapter.addFragment(new TwoFragment(), "TWO");
-        adapter.addFragment(new ThreeFragment(), "THREE");*/
+        adapter.addFragment(new fragmentNutrition(), "Goals");
+        adapter.addFragment(new fragmentProfile(), "Profile");
+        adapter.addFragment(new fragmentAppSettings(), "Settings");
         viewPager.setAdapter(adapter);
     }
 
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-
-    }
+    @Override public void onFragmentInteraction(Uri uri) {}
 
     class ViewPagerAdapter extends FragmentPagerAdapter {
         private final List<Fragment> mFragmentList = new ArrayList<>();

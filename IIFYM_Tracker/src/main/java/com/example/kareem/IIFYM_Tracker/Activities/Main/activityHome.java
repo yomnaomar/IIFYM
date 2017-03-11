@@ -301,6 +301,7 @@ public class activityHome extends AppCompatActivity implements AdapterView.OnIte
                 intent = new Intent(context, activityLogin.class);
                 startActivity(intent);
                 finish();
+                break;
         }
         return super.onOptionsItemSelected(item);
     }

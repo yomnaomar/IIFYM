@@ -13,6 +13,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
@@ -333,6 +334,8 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
 
     @Override public boolean onCreateOptionsMenu(Menu menu) {
         this.menu = menu;
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_user_macros, menu);
         return true;
     }
 
