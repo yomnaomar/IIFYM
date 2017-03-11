@@ -1,5 +1,6 @@
 package com.example.kareem.IIFYM_Tracker.Activities.Settings;
 
+import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -10,6 +11,9 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
+import com.example.kareem.IIFYM_Tracker.Database.SQLiteConnector;
+import com.example.kareem.IIFYM_Tracker.Database.SharedPreferenceHelper;
+import com.example.kareem.IIFYM_Tracker.Models.User;
 import com.example.kareem.IIFYM_Tracker.R;
 
 import java.util.ArrayList;
@@ -17,9 +21,19 @@ import java.util.List;
 
 public class activitySettings extends AppCompatActivity implements fragmentNutrition.OnFragmentInteractionListener, fragmentProfile.OnFragmentInteractionListener, fragmentAppSettings.OnFragmentInteractionListener {
 
+    // GUI
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager viewPager;
+
+    // Database
+    private SQLiteConnector DB_SQLite;
+    private SharedPreferenceHelper myPrefs;
+
+    // Variables
+    private Context         context;
+    private User            user;
+    private String          uid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,20 +43,26 @@ public class activitySettings extends AppCompatActivity implements fragmentNutri
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-/*        getSupportActionBar().setDisplayHomeAsUpEnabled(true);*/
-
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
 
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
         setupTabIcons();
+
+        context = getApplicationContext();
+        myPrefs = new SharedPreferenceHelper(context);
+        uid = myPrefs.getStringValue("session_uid");
+        user = DB_SQLite.retrieveUser(uid);
     }
 
     private void setupTabIcons() {
         tabLayout.getTabAt(0).setIcon(R.drawable.ic_macro_settings);
-        tabLayout.getTabAt(1).setIcon(R.drawable.ic_male_user);
-        //tabLayout.getTabAt(2).setIcon(tabIcons[2]);
+        if (user.getGender() == 0) // Male
+            tabLayout.getTabAt(1).setIcon(R.drawable.ic_male_user);
+        else
+            tabLayout.getTabAt(1).setIcon(R.drawable.ic_female_user);
+//        tabLayout.getTabAt(2).setIcon(R.drawable.;
     }
 
     private void setupViewPager(ViewPager viewPager) {
