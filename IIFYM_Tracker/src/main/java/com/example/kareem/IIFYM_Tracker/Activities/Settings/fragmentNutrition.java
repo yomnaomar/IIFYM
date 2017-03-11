@@ -13,8 +13,6 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -387,12 +385,6 @@ public class fragmentNutrition extends Fragment implements View.OnClickListener,
                 defaultValues();
                 break;
         }
-    }
-
-    @Override public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_nutrition_settings, menu);
-        return true;
     }
 
     @Override public boolean onOptionsItemSelected(MenuItem item) {

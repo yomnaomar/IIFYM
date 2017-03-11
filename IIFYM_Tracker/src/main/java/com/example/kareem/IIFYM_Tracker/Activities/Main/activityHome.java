@@ -148,8 +148,6 @@ public class activityHome extends AppCompatActivity implements AdapterView.OnIte
     }
 
     public void updateMacros(){
-        // Updating "Current" Variables
-
         // Reset to prevent accumulation
         caloriesCurrent = 0;
         carbsCurrent = 0;

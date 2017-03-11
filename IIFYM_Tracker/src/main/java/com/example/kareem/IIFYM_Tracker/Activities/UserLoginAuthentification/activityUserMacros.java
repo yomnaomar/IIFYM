@@ -13,7 +13,6 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
@@ -54,6 +53,7 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
     private ImageButton     btnReset, btnInfo;
     private Animation       mEnterAnimation, mExitAnimation;
     private ProgressDialog  progressDialog;
+    private Menu            menu;
 
     // Variables
     // Final Variables (Cannot be changed)
@@ -332,8 +332,7 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
     }
 
     @Override public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_user_macros, menu);
+        this.menu = menu;
         return true;
     }
 
@@ -470,6 +469,18 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
                 .setEnterAnimation(mEnterAnimation)
                 .setExitAnimation(mExitAnimation);
 
+/*        Overlay overlayLast = new Overlay()
+                .setBackgroundColor(Color.parseColor("#EE2c3e50"))
+                .setEnterAnimation(mEnterAnimation)
+                .setExitAnimation(mExitAnimation)
+                .setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        MenuInflater inflater = getMenuInflater();
+                        inflater.inflate(R.menu.menu_user_macros, menu);
+                        tourguide.cleanUp();
+                    }
+                });*/
 
         ChainTourGuide tourGuide1 = ChainTourGuide.init(this)
                 .setToolTip(new ToolTip()
