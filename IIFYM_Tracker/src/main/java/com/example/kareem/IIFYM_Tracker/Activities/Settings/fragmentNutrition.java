@@ -13,11 +13,11 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
@@ -58,8 +58,11 @@ public class fragmentNutrition extends Fragment implements View.OnClickListener,
     private EditText        etxtCalories, etxtCarbs, etxtProtein, etxtFat;
     private TextView        lblCarbs, lblProtein, lblFat, lblTotal, lblAmountTotal, lblValueCarbs, lblValueProtein, lblValueFat;
     private ImageButton     btnReset, btnInfo;
+    private Button          btnSave;
     private Animation       mEnterAnimation, mExitAnimation;
     private ProgressDialog  progressDialog;
+    private OnFragmentInteractionListener mListener;
+    private View            view;
 
     // Variables
     // Final Variables (Cannot be changed)
@@ -83,21 +86,14 @@ public class fragmentNutrition extends Fragment implements View.OnClickListener,
     private SQLiteConnector         DB_SQLite;
     private DatabaseReference       firebaseDbRef;
 
-    // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
-    private OnFragmentInteractionListener mListener;
-    private View view;
-
-    public fragmentNutrition() {
-        // Required empty public constructor
-    }
+    // Required empty public constructor
+    public fragmentNutrition() {}
 
     /**
      * Use this factory method to create a new instance of
@@ -107,7 +103,6 @@ public class fragmentNutrition extends Fragment implements View.OnClickListener,
      * @param param2 Parameter 2.
      * @return A new instance of fragment fragmentNutrition.
      */
-    // TODO: Rename and change types and number of parameters
     public static fragmentNutrition newInstance(String param1, String param2) {
         fragmentNutrition fragment = new fragmentNutrition();
         Bundle args = new Bundle();
@@ -133,15 +128,6 @@ public class fragmentNutrition extends Fragment implements View.OnClickListener,
 
         // Data from previous Login activities
         getUserData();
-
-/*        // GUI
-        initializeGUI();*/
-
-/*        // Set values to User's stored preferences
-        setInitialValues();
-
-        // Set up TextWatchers and OnClickListeners after initializing values to prevent overwriting
-        finalizeGUI();*/
     }
 
     private void getUserData() {
@@ -171,20 +157,100 @@ public class fragmentNutrition extends Fragment implements View.OnClickListener,
             protein = user.getDailyProtein();
             fat = user.getDailyFat();
         }
+    }
 
-        Log.d("getUserData", user.toString());
+    @Override public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                       Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        view = inflater.inflate(R.layout.fragment_nutrition, container, false);
+        // GUI
+        initializeGUI();
+
+        // Set values to User's stored preferences
+        setInitialValues();
+
+        // Set up TextWatchers and OnClickListeners after initializing values to prevent overwriting
+        finalizeGUI();
+
+        return view;
     }
 
     private void initializeGUI() {
+        seggroupDisplay = (SegmentedGroup) view.findViewById(R.id.seggroupDisplay);
+        rbtnCalories    = (RadioButton) view.findViewById(R.id.rbtnCalories);
+        rbtnMacros      = (RadioButton) view.findViewById(R.id.rbtnMacros);
+        etxtCalories    = (EditText) view.findViewById(R.id.etxtCalories);
+        etxtCarbs       = (EditText) view.findViewById(R.id.etxtCarbs);
+        etxtProtein     = (EditText) view.findViewById(R.id.etxtProtein);
+        etxtFat         = (EditText) view.findViewById(R.id.etxtFat);
+        lblCarbs        = (TextView) view.findViewById(R.id.lblCarbs);
+        lblProtein      = (TextView) view.findViewById(R.id.lblProtein);
+        lblFat          = (TextView) view.findViewById(R.id.lblFat);
+        lblTotal        = (TextView) view.findViewById(R.id.lblTotal);
+        lblAmountTotal  = (TextView) view.findViewById(R.id.lblAmountTotal);
+        lblValueCarbs   = (TextView) view.findViewById(R.id.lblValueCarbs);
+        lblValueProtein = (TextView) view.findViewById(R.id.lblValueProtein);
+        lblValueFat     = (TextView) view.findViewById(R.id.lblValueFat);
+        btnReset        = (ImageButton) view.findViewById(R.id.btnReset);
+        btnInfo         = (ImageButton) view.findViewById(R.id.btnInfo);
+        btnSave         = (Button) view.findViewById(R.id.btnSave);
 
+        btnReset.setOnClickListener(this);
+        btnInfo.setOnClickListener(this);
+        btnSave.setOnClickListener(this);
+
+        // setup enter and exit animation
+        mEnterAnimation = new AlphaAnimation(0f, 1f);
+        mEnterAnimation.setDuration(600);
+        mEnterAnimation.setFillAfter(true);
+
+        mExitAnimation = new AlphaAnimation(1f, 0f);
+        mExitAnimation.setDuration(600);
+        mExitAnimation.setFillAfter(true);
     }
 
     private void setInitialValues(){
+        etxtCalories.setText(calories + "");
 
+        if(isPercent) // Calories
+        {
+            rbtnCalories.setChecked(true);
+
+            etxtCarbs.setText(carbsPercent + "");
+            etxtProtein.setText(proteinPercent + "");
+            etxtFat.setText(fatPercent + "");
+
+            lblValueCarbs.setText("~" + Math.round(carbsPercent * 0.01f * calories/4) + " g");
+            lblValueProtein.setText("~" + Math.round(proteinPercent * 0.01f * calories/4) + " g");
+            lblValueFat.setText("~" + Math.round(fatPercent * 0.01f * calories/9) + " g");
+            lblAmountTotal.setText(totalPercent + "");
+            if (totalPercent == 100)
+                lblAmountTotal.setTextColor(context.getResources().getColor(R.color.correct_green));
+            else
+                lblAmountTotal.setTextColor(context.getResources().getColor(R.color.error_red));
+        }
+        else // Macros
+        {
+            rbtnMacros.setChecked(true);
+
+            etxtCarbs.setText(carbs + "");
+            etxtProtein.setText(protein + "");
+            etxtFat.setText(fat + "");
+
+        }
+        updateGUI();
     }
 
     private void finalizeGUI() {
+        seggroupDisplay.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+        {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                updateGUI();
+                defaultValues();
+            }});
 
+        addTextWatchers();
     }
 
     private void updateGUI() {
@@ -213,12 +279,10 @@ public class fragmentNutrition extends Fragment implements View.OnClickListener,
     }
 
     @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-        Log.d("beforeTextChanged", "Capturing Old Values");
         captureOldValues();
     }
 
     @Override public void onTextChanged(CharSequence s, int start, int before, int count) {
-        Log.d("onTextChanged", "Updating Values");
         captureNewValues();
         compareValues();
         updateValues();
@@ -378,24 +442,50 @@ public class fragmentNutrition extends Fragment implements View.OnClickListener,
     @Override public void onClick(View v) {
         switch(v.getId())
         {
+            case R.id.btnReset:
+                dialogResetGoals();
+                break;
+            case R.id.btnSave:
+                dialogSaveGoals();
+                break;
             case R.id.btnInfo:
                 beginChainTourGuide();
-                break;
-            case R.id.btnReset:
-                defaultValues();
                 break;
         }
     }
 
-    @Override public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_save:
-                saveAndFinish();
-                break;
-            default:
-                break;
-        }
-        return true;
+    private void dialogResetGoals() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setMessage("Reset goals to recommended?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int view_id) {
+                        defaultValues();
+                    }
+                });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // User cancelled the dialog
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    private void dialogSaveGoals() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setMessage("Save goals?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int view_id) {
+                        saveAndFinish();
+                    }
+                });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // User cancelled the dialog
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     private void defaultValues() {
@@ -523,6 +613,23 @@ public class fragmentNutrition extends Fragment implements View.OnClickListener,
             caloriesDefault += 250.0;
     }
 
+    private int getAge (int _year, int _month, int _day) {
+        GregorianCalendar cal = new GregorianCalendar();
+        int y, m, d, a;
+
+        y = cal.get(Calendar.YEAR);
+        m = cal.get(Calendar.MONTH);
+        d = cal.get(Calendar.DAY_OF_MONTH);
+        cal.set(_year, _month, _day);
+        a = y - cal.get(Calendar.YEAR);
+        if ((m < cal.get(Calendar.MONTH))
+                || ((m == cal.get(Calendar.MONTH)) && (d < cal
+                .get(Calendar.DAY_OF_MONTH)))) {
+            --a;
+        }
+        return a;
+    }
+
     private void saveAndFinish(){
         // Validate Fields
         if(validateFields()){
@@ -538,14 +645,10 @@ public class fragmentNutrition extends Fragment implements View.OnClickListener,
                         goal, calories, false, carbs, protein, fat);
             }
 
-            Log.d("saveAndFinish", "isPercent " + updateuser.getIsPercent());
+            showProgressDialog();
 
-            //showProgressDialog();
-            Log.i("RegisterUser","updating user data: " + uid);
-            Log.i("RegisterUser", updateuser + "");
             firebaseDbRef.child("users").child(uid).setValue(updateuser, new DatabaseReference.CompletionListener() {
                 public void onComplete(DatabaseError error, DatabaseReference ref) {
-                    Log.d("RegisterUser","Value was set. Error = " + error);
 
                     // No error
                     if (error == null) {
@@ -553,11 +656,11 @@ public class fragmentNutrition extends Fragment implements View.OnClickListener,
 
                         hideProgressDialog();
 
-                        //finish();
+                        Toast.makeText(context, "Saved", Toast.LENGTH_SHORT).show();
                     }
                     // Error writing to database
                     else {
-                        //showAlertDialog("Network Error","Please check your network connection and try again");
+                        showAlertDialog("Network Error","Please check your network connection and try again");
                     }
                 }
             });
@@ -608,23 +711,6 @@ public class fragmentNutrition extends Fragment implements View.OnClickListener,
                 .build();
 
         tourguide = ChainTourGuide.init(getActivity()).playInSequence(sequence);
-    }
-
-    private int getAge (int _year, int _month, int _day) {
-        GregorianCalendar cal = new GregorianCalendar();
-        int y, m, d, a;
-
-        y = cal.get(Calendar.YEAR);
-        m = cal.get(Calendar.MONTH);
-        d = cal.get(Calendar.DAY_OF_MONTH);
-        cal.set(_year, _month, _day);
-        a = y - cal.get(Calendar.YEAR);
-        if ((m < cal.get(Calendar.MONTH))
-                || ((m == cal.get(Calendar.MONTH)) && (d < cal
-                .get(Calendar.DAY_OF_MONTH)))) {
-            --a;
-        }
-        return a;
     }
 
     private void addTextWatchers() {
@@ -692,92 +778,7 @@ public class fragmentNutrition extends Fragment implements View.OnClickListener,
 
     }
 
-    @Override public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_nutrition, container, false);
-        seggroupDisplay = (SegmentedGroup) view.findViewById(R.id.seggroupDisplay);
-        rbtnCalories    = (RadioButton) view.findViewById(R.id.rbtnCalories);
-        rbtnMacros      = (RadioButton) view.findViewById(R.id.rbtnMacros);
-        etxtCalories    = (EditText) view.findViewById(R.id.etxtCalories);
-        etxtCarbs       = (EditText) view.findViewById(R.id.etxtCarbs);
-        etxtProtein     = (EditText) view.findViewById(R.id.etxtProtein);
-        etxtFat         = (EditText) view.findViewById(R.id.etxtFat);
-        lblCarbs        = (TextView) view.findViewById(R.id.lblCarbs);
-        lblProtein      = (TextView) view.findViewById(R.id.lblProtein);
-        lblFat          = (TextView) view.findViewById(R.id.lblFat);
-        lblTotal        = (TextView) view.findViewById(R.id.lblTotal);
-        lblAmountTotal  = (TextView) view.findViewById(R.id.lblAmountTotal);
-        lblValueCarbs   = (TextView) view.findViewById(R.id.lblValueCarbs);
-        lblValueProtein = (TextView) view.findViewById(R.id.lblValueProtein);
-        lblValueFat     = (TextView) view.findViewById(R.id.lblValueFat);
-        btnReset        = (ImageButton) view.findViewById(R.id.btnReset);
-        btnInfo         = (ImageButton) view.findViewById(R.id.btnInfo);
-
-        btnReset.setOnClickListener(this);
-        btnInfo.setOnClickListener(this);
-
-        // setup enter and exit animation
-        mEnterAnimation = new AlphaAnimation(0f, 1f);
-        mEnterAnimation.setDuration(600);
-        mEnterAnimation.setFillAfter(true);
-
-        mExitAnimation = new AlphaAnimation(1f, 0f);
-        mExitAnimation.setDuration(600);
-        mExitAnimation.setFillAfter(true);
-
-        etxtCalories.setText(calories + "");
-
-        if(isPercent) // Calories
-        {
-            rbtnCalories.setChecked(true);
-
-            etxtCarbs.setText(carbsPercent + "");
-            etxtProtein.setText(proteinPercent + "");
-            etxtFat.setText(fatPercent + "");
-
-            lblValueCarbs.setText("~" + Math.round(carbsPercent * 0.01f * calories/4) + " g");
-            lblValueProtein.setText("~" + Math.round(proteinPercent * 0.01f * calories/4) + " g");
-            lblValueFat.setText("~" + Math.round(fatPercent * 0.01f * calories/9) + " g");
-            lblAmountTotal.setText(totalPercent + "");
-            if (totalPercent == 100)
-                lblAmountTotal.setTextColor(context.getResources().getColor(R.color.correct_green));
-            else
-                lblAmountTotal.setTextColor(context.getResources().getColor(R.color.error_red));
-        }
-        else // Macros
-        {
-            rbtnMacros.setChecked(true);
-
-            etxtCarbs.setText(carbs + "");
-            etxtProtein.setText(protein + "");
-            etxtFat.setText(fat + "");
-
-        }
-        updateGUI();
-
-        seggroupDisplay.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
-        {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                updateGUI();
-                defaultValues();
-            }});
-
-        addTextWatchers();
-
-        return view;
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
-    @Override
-    public void onAttach(Context context) {
+    @Override public void onAttach(Context context) {
         super.onAttach(context);
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
@@ -787,8 +788,7 @@ public class fragmentNutrition extends Fragment implements View.OnClickListener,
         }
     }
 
-    @Override
-    public void onDetach() {
+    @Override public void onDetach() {
         super.onDetach();
         mListener = null;
     }

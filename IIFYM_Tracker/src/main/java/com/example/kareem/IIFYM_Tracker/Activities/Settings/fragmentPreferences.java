@@ -13,12 +13,12 @@ import com.example.kareem.IIFYM_Tracker.R;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link fragmentAppSettings.OnFragmentInteractionListener} interface
+ * {@link fragmentPreferences.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link fragmentAppSettings#newInstance} factory method to
+ * Use the {@link fragmentPreferences#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class fragmentAppSettings extends Fragment {
+public class fragmentPreferences extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -30,7 +30,7 @@ public class fragmentAppSettings extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public fragmentAppSettings() {
+    public fragmentPreferences() {
         // Required empty public constructor
     }
 
@@ -40,11 +40,11 @@ public class fragmentAppSettings extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment fragmentAppSettings.
+     * @return A new instance of fragment fragmentPreferences.
      */
     // TODO: Rename and change types and number of parameters
-    public static fragmentAppSettings newInstance(String param1, String param2) {
-        fragmentAppSettings fragment = new fragmentAppSettings();
+    public static fragmentPreferences newInstance(String param1, String param2) {
+        fragmentPreferences fragment = new fragmentPreferences();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);

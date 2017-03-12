@@ -283,14 +283,31 @@
                         android:textSize="12sp" />
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
                         android:id="@+id/lblTotal"
-                        android:textAppearance="@android:style/TextAppearance.Material.Small"
+                        android:layout_width="75dp"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical|center_horizontal"
-                        android:text="@string/lblTotal"
                         android:gravity="left|center_vertical"
+                        android:text="@string/lblTotal"
+                        android:textAppearance="@android:style/TextAppearance.Material.Small"
                         android:textSize="12sp" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="35dp">
+
+                        <Button
+                            android:id="@+id/btnSave"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:layout_alignParentTop="true"
+                            android:layout_centerHorizontal="true"
+                            android:layout_gravity="right"
+                            android:background="@drawable/btn_iifym_style"
+                            android:gravity="right"
+                            android:text="Save"
+                            android:textAlignment="center" />
+                    </RelativeLayout>
 
                 </LinearLayout>
 

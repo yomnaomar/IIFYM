@@ -290,12 +290,6 @@ public class activityHome extends AppCompatActivity implements AdapterView.OnIte
                 intent = new Intent(context, activityFoodManager.class);
                 startActivity(intent);
                 return true;
-            case (R.id.menuAccount):
-
-                return true;
-            case (R.id.menuSettings):
-
-                return true;
             case (R.id.menuLogout):
                 signOut();
                 intent = new Intent(context, activityLogin.class);

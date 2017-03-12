@@ -19,7 +19,7 @@ import com.example.kareem.IIFYM_Tracker.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class activitySettings extends AppCompatActivity implements fragmentNutrition.OnFragmentInteractionListener, fragmentProfile.OnFragmentInteractionListener, fragmentAppSettings.OnFragmentInteractionListener {
+public class activitySettings extends AppCompatActivity implements fragmentNutrition.OnFragmentInteractionListener, fragmentProfile.OnFragmentInteractionListener, fragmentPreferences.OnFragmentInteractionListener {
 
     // GUI
     private Toolbar toolbar;
@@ -40,6 +40,12 @@ public class activitySettings extends AppCompatActivity implements fragmentNutri
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
+        context = getApplicationContext();
+        DB_SQLite = new SQLiteConnector(context);
+        myPrefs = new SharedPreferenceHelper(context);
+        uid = myPrefs.getStringValue("session_uid");
+        user = DB_SQLite.retrieveUser(uid);
+
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -49,11 +55,6 @@ public class activitySettings extends AppCompatActivity implements fragmentNutri
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
         setupTabIcons();
-
-        context = getApplicationContext();
-        myPrefs = new SharedPreferenceHelper(context);
-        uid = myPrefs.getStringValue("session_uid");
-        user = DB_SQLite.retrieveUser(uid);
     }
 
     private void setupTabIcons() {
@@ -69,7 +70,7 @@ public class activitySettings extends AppCompatActivity implements fragmentNutri
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new fragmentNutrition(), "Goals");
         adapter.addFragment(new fragmentProfile(), "Profile");
-        adapter.addFragment(new fragmentAppSettings(), "Settings");
+        adapter.addFragment(new fragmentPreferences(), "Preferences");
         viewPager.setAdapter(adapter);
     }
 

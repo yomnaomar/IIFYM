@@ -16,8 +16,6 @@
         app:showAsAction="always"
         android:icon="@drawable/ic_meal_settings"
         />
-    <item android:title="@string/menuAccount"
-        android:id="@+id/menuAccount" />
     <item android:title="@string/menuLogout"
         android:id="@+id/menuLogout" />
 </menu>
