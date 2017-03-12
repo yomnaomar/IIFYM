@@ -58,7 +58,11 @@
         <activity
             android:name=".Activities.Main.activitySelectDailyItem"
             android:label="@string/toolbarSelectItemToAdd" />
-        <activity android:name=".Activities.Main.activityViewDailyItem" />
+        <activity android:name=".Activities.Main.activityViewDailyItem"
+            />
+        <activity
+            android:name=".Activities.Settings.activitySettings"
+            android:theme="@style/settingsTheme"/>
     </application>
 
 </manifest>

@@ -277,7 +277,6 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
 
     @Override protected void onPause() {
         super.onPause();
-        unregisterReceiver(broadcast_reciever);
         myPrefs.addPreference("temp_email_login",etxtEmail.getText().toString());
     }
 
@@ -289,6 +288,7 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
             public void onReceive(Context arg0, Intent intent) {
                 String action = intent.getAction();
                 if (action.equals("finish_activity")) {
+                    unregisterReceiver(this);
                     finish();
                 }
             }

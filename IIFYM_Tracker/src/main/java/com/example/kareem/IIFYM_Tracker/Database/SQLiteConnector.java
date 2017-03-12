@@ -577,13 +577,8 @@ public class SQLiteConnector {
      * @param id PRIMARY KEY
      * @return
      */
-    public boolean deleteDailyItem(int id) {
-        boolean deleted = false;
-        if (isExistingDailyItem(id)) {
-            database.delete(SQLiteHelper.Table_DailyItem, "id = " + id, null);
-            deleted = true;
-        }
-        return deleted;
+    public int deleteDailyItem(int id) {
+        return database.delete(SQLiteHelper.Table_DailyItem, "id = '" + id + "'", null);
     }
 
     // TODO Implement helper functions

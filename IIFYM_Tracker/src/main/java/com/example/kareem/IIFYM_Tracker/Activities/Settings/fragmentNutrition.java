@@ -4,19 +4,20 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
@@ -41,7 +42,15 @@ import tourguide.tourguide.Overlay;
 import tourguide.tourguide.Sequence;
 import tourguide.tourguide.ToolTip;
 
-public class activityNutritionSettings extends AppCompatActivity implements View.OnClickListener, TextWatcher {
+/**
+ * A simple {@link Fragment} subclass.
+ * Activities that contain this fragment must implement the
+ * {@link fragmentNutrition.OnFragmentInteractionListener} interface
+ * to handle interaction events.
+ * Use the {@link fragmentNutrition#newInstance} factory method to
+ * create an instance of this fragment.
+ */
+public class fragmentNutrition extends Fragment implements View.OnClickListener, TextWatcher {
 
     // GUI
     private SegmentedGroup  seggroupDisplay;
@@ -49,8 +58,11 @@ public class activityNutritionSettings extends AppCompatActivity implements View
     private EditText        etxtCalories, etxtCarbs, etxtProtein, etxtFat;
     private TextView        lblCarbs, lblProtein, lblFat, lblTotal, lblAmountTotal, lblValueCarbs, lblValueProtein, lblValueFat;
     private ImageButton     btnReset, btnInfo;
+    private Button          btnSave;
     private Animation       mEnterAnimation, mExitAnimation;
     private ProgressDialog  progressDialog;
+    private OnFragmentInteractionListener mListener;
+    private View            view;
 
     // Variables
     // Final Variables (Cannot be changed)
@@ -74,27 +86,48 @@ public class activityNutritionSettings extends AppCompatActivity implements View
     private SQLiteConnector         DB_SQLite;
     private DatabaseReference       firebaseDbRef;
 
-    @Override protected void onCreate(Bundle savedInstanceState) {
+    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private static final String ARG_PARAM1 = "param1";
+    private static final String ARG_PARAM2 = "param2";
+    private String mParam1;
+    private String mParam2;
+
+    // Required empty public constructor
+    public fragmentNutrition() {}
+
+    /**
+     * Use this factory method to create a new instance of
+     * this fragment using the provided parameters.
+     *
+     * @param param1 Parameter 1.
+     * @param param2 Parameter 2.
+     * @return A new instance of fragment fragmentNutrition.
+     */
+    public static fragmentNutrition newInstance(String param1, String param2) {
+        fragmentNutrition fragment = new fragmentNutrition();
+        Bundle args = new Bundle();
+        args.putString(ARG_PARAM1, param1);
+        args.putString(ARG_PARAM2, param2);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_nutrition_settings);
+        if (getArguments() != null) {
+            mParam1 = getArguments().getString(ARG_PARAM1);
+            mParam2 = getArguments().getString(ARG_PARAM2);
+        }
 
         // Database
-        context = getApplicationContext();
+        context = getActivity().getApplicationContext();
         myPrefs = new SharedPreferenceHelper(context);
         firebaseDbRef = FirebaseDatabase.getInstance().getReference();
         DB_SQLite = new SQLiteConnector(context);
 
         // Data from previous Login activities
         getUserData();
-
-        // GUI
-        initializeGUI();
-
-        // Set values to User's stored preferences
-        setInitialValues();
-
-        // Set up TextWatchers and OnClickListeners after initializing values to prevent overwriting
-        finalizeGUI();
     }
 
     private void getUserData() {
@@ -124,31 +157,47 @@ public class activityNutritionSettings extends AppCompatActivity implements View
             protein = user.getDailyProtein();
             fat = user.getDailyFat();
         }
+    }
 
-        Log.d("getUserData", user.toString());
+    @Override public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                       Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        view = inflater.inflate(R.layout.fragment_nutrition, container, false);
+        // GUI
+        initializeGUI();
+
+        // Set values to User's stored preferences
+        setInitialValues();
+
+        // Set up TextWatchers and OnClickListeners after initializing values to prevent overwriting
+        finalizeGUI();
+
+        return view;
     }
 
     private void initializeGUI() {
-        seggroupDisplay = (SegmentedGroup) findViewById(R.id.seggroupDisplay);
-        rbtnCalories    = (RadioButton) findViewById(R.id.rbtnCalories);
-        rbtnMacros      = (RadioButton) findViewById(R.id.rbtnMacros);
-        etxtCalories    = (EditText) findViewById(R.id.etxtCalories);
-        etxtCarbs       = (EditText) findViewById(R.id.etxtCarbs);
-        etxtProtein     = (EditText) findViewById(R.id.etxtProtein);
-        etxtFat         = (EditText) findViewById(R.id.etxtFat);
-        lblCarbs        = (TextView) findViewById(R.id.lblCarbs);
-        lblProtein      = (TextView) findViewById(R.id.lblProtein);
-        lblFat          = (TextView) findViewById(R.id.lblFat);
-        lblTotal        = (TextView) findViewById(R.id.lblTotal);
-        lblAmountTotal  = (TextView) findViewById(R.id.lblAmountTotal);
-        lblValueCarbs   = (TextView) findViewById(R.id.lblValueCarbs);
-        lblValueProtein = (TextView) findViewById(R.id.lblValueProtein);
-        lblValueFat     = (TextView) findViewById(R.id.lblValueFat);
-        btnReset        = (ImageButton) findViewById(R.id.btnReset);
-        btnInfo         = (ImageButton) findViewById(R.id.btnInfo);
+        seggroupDisplay = (SegmentedGroup) view.findViewById(R.id.seggroupDisplay);
+        rbtnCalories    = (RadioButton) view.findViewById(R.id.rbtnCalories);
+        rbtnMacros      = (RadioButton) view.findViewById(R.id.rbtnMacros);
+        etxtCalories    = (EditText) view.findViewById(R.id.etxtCalories);
+        etxtCarbs       = (EditText) view.findViewById(R.id.etxtCarbs);
+        etxtProtein     = (EditText) view.findViewById(R.id.etxtProtein);
+        etxtFat         = (EditText) view.findViewById(R.id.etxtFat);
+        lblCarbs        = (TextView) view.findViewById(R.id.lblCarbs);
+        lblProtein      = (TextView) view.findViewById(R.id.lblProtein);
+        lblFat          = (TextView) view.findViewById(R.id.lblFat);
+        lblTotal        = (TextView) view.findViewById(R.id.lblTotal);
+        lblAmountTotal  = (TextView) view.findViewById(R.id.lblAmountTotal);
+        lblValueCarbs   = (TextView) view.findViewById(R.id.lblValueCarbs);
+        lblValueProtein = (TextView) view.findViewById(R.id.lblValueProtein);
+        lblValueFat     = (TextView) view.findViewById(R.id.lblValueFat);
+        btnReset        = (ImageButton) view.findViewById(R.id.btnReset);
+        btnInfo         = (ImageButton) view.findViewById(R.id.btnInfo);
+        btnSave         = (Button) view.findViewById(R.id.btnSave);
 
         btnReset.setOnClickListener(this);
         btnInfo.setOnClickListener(this);
+        btnSave.setOnClickListener(this);
 
         // setup enter and exit animation
         mEnterAnimation = new AlphaAnimation(0f, 1f);
@@ -230,12 +279,10 @@ public class activityNutritionSettings extends AppCompatActivity implements View
     }
 
     @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-        Log.d("beforeTextChanged", "Capturing Old Values");
         captureOldValues();
     }
 
     @Override public void onTextChanged(CharSequence s, int start, int before, int count) {
-        Log.d("onTextChanged", "Updating Values");
         captureNewValues();
         compareValues();
         updateValues();
@@ -395,19 +442,57 @@ public class activityNutritionSettings extends AppCompatActivity implements View
     @Override public void onClick(View v) {
         switch(v.getId())
         {
+            case R.id.btnReset:
+                dialogResetGoals();
+                break;
+            case R.id.btnSave:
+                dialogSaveGoals();
+                break;
             case R.id.btnInfo:
                 beginChainTourGuide();
-                break;
-            case R.id.btnReset:
-                defaultValues();
                 break;
         }
     }
 
+    private void dialogResetGoals() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setMessage("Reset goals to recommended?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int view_id) {
+                        defaultValues();
+                    }
+                });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // User cancelled the dialog
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    private void dialogSaveGoals() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setMessage("Save goals?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int view_id) {
+                        saveAndFinish();
+                    }
+                });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // User cancelled the dialog
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
     private void defaultValues() {
+        // Calculate values to be displayed
+        getBMR();
+
         if (rbtnCalories.isChecked()) {
-            // Calculate values to be displayed
-            getBMR();
 
             // Macronutrient ratio default
             calories = caloriesDefault;
@@ -447,6 +532,7 @@ public class activityNutritionSettings extends AppCompatActivity implements View
             etxtProtein.setText(protein + "");
             etxtFat.setText(fat + "");
 
+            Log.d("dividebyzero", carbs + calories + "");
             lblValueCarbs.setText("~" + Math.round(carbs * 4 * 100 / calories) + " %");
             lblValueProtein.setText("~" + Math.round(protein * 4 * 100 / calories)  + " %");
             lblValueFat.setText("~" + Math.round(fat * 9 * 100 / calories) + " %");
@@ -490,6 +576,8 @@ public class activityNutritionSettings extends AppCompatActivity implements View
         else
             BMR = (int) (10*valWeight + 6.25*valHeight + 5*valAge - 161.0);
 
+        Log.d("BMR", BMR + "");
+
         // Activity Factor Multiplier
         // None (little or no exercise)
         if (workoutFreq == 0)
@@ -525,21 +613,21 @@ public class activityNutritionSettings extends AppCompatActivity implements View
             caloriesDefault += 250.0;
     }
 
-    @Override public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_nutrition_settings, menu);
-        return true;
-    }
+    private int getAge (int _year, int _month, int _day) {
+        GregorianCalendar cal = new GregorianCalendar();
+        int y, m, d, a;
 
-    @Override public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_save:
-                saveAndFinish();
-                break;
-            default:
-                break;
+        y = cal.get(Calendar.YEAR);
+        m = cal.get(Calendar.MONTH);
+        d = cal.get(Calendar.DAY_OF_MONTH);
+        cal.set(_year, _month, _day);
+        a = y - cal.get(Calendar.YEAR);
+        if ((m < cal.get(Calendar.MONTH))
+                || ((m == cal.get(Calendar.MONTH)) && (d < cal
+                .get(Calendar.DAY_OF_MONTH)))) {
+            --a;
         }
-        return true;
+        return a;
     }
 
     private void saveAndFinish(){
@@ -557,14 +645,10 @@ public class activityNutritionSettings extends AppCompatActivity implements View
                         goal, calories, false, carbs, protein, fat);
             }
 
-            Log.d("saveAndFinish", "isPercent " + updateuser.getIsPercent());
-
             showProgressDialog();
-            Log.i("RegisterUser","updating user data: " + uid);
-            Log.i("RegisterUser", updateuser + "");
+
             firebaseDbRef.child("users").child(uid).setValue(updateuser, new DatabaseReference.CompletionListener() {
                 public void onComplete(DatabaseError error, DatabaseReference ref) {
-                    Log.d("RegisterUser","Value was set. Error = " + error);
 
                     // No error
                     if (error == null) {
@@ -572,7 +656,7 @@ public class activityNutritionSettings extends AppCompatActivity implements View
 
                         hideProgressDialog();
 
-                        finish();
+                        Toast.makeText(context, "Saved", Toast.LENGTH_SHORT).show();
                     }
                     // Error writing to database
                     else {
@@ -590,7 +674,7 @@ public class activityNutritionSettings extends AppCompatActivity implements View
                 .setExitAnimation(mExitAnimation);
 
 
-        ChainTourGuide tourGuide1 = ChainTourGuide.init(this)
+        ChainTourGuide tourGuide1 = ChainTourGuide.init(getActivity())
                 .setToolTip(new ToolTip()
                         .setTitle("Calories vs Macros")
                         .setDescription("What would you like to focus on?")
@@ -600,7 +684,7 @@ public class activityNutritionSettings extends AppCompatActivity implements View
                 .playLater(seggroupDisplay);
 
 
-        ChainTourGuide tourGuide2 = ChainTourGuide.init(this)
+        ChainTourGuide tourGuide2 = ChainTourGuide.init(getActivity())
                 .setToolTip(new ToolTip()
                         .setTitle("Don't worry")
                         .setDescription("If you don't know where to start, " +
@@ -610,7 +694,7 @@ public class activityNutritionSettings extends AppCompatActivity implements View
                 .setOverlay(overlay)
                 .playLater(etxtCarbs);
 
-        ChainTourGuide tourGuide3 = ChainTourGuide.init(this)
+        ChainTourGuide tourGuide3 = ChainTourGuide.init(getActivity())
                 .setToolTip(new ToolTip()
                         .setTitle("Reset")
                         .setDescription("Press the reset button to return the values back to recommended")
@@ -626,24 +710,7 @@ public class activityNutritionSettings extends AppCompatActivity implements View
                 .setContinueMethod(Sequence.ContinueMethod.Overlay)
                 .build();
 
-        tourguide = ChainTourGuide.init(this).playInSequence(sequence);
-    }
-
-    private int getAge (int _year, int _month, int _day) {
-        GregorianCalendar cal = new GregorianCalendar();
-        int y, m, d, a;
-
-        y = cal.get(Calendar.YEAR);
-        m = cal.get(Calendar.MONTH);
-        d = cal.get(Calendar.DAY_OF_MONTH);
-        cal.set(_year, _month, _day);
-        a = y - cal.get(Calendar.YEAR);
-        if ((m < cal.get(Calendar.MONTH))
-                || ((m == cal.get(Calendar.MONTH)) && (d < cal
-                .get(Calendar.DAY_OF_MONTH)))) {
-            --a;
-        }
-        return a;
+        tourguide = ChainTourGuide.init(getActivity()).playInSequence(sequence);
     }
 
     private void addTextWatchers() {
@@ -665,7 +732,7 @@ public class activityNutritionSettings extends AppCompatActivity implements View
 
     public void showProgressDialog() {
         if (progressDialog == null) {
-            progressDialog = new ProgressDialog(this);
+            progressDialog = new ProgressDialog(getActivity());
             progressDialog.setMessage("Loading");
             progressDialog.setIndeterminate(true);
         }
@@ -694,7 +761,7 @@ public class activityNutritionSettings extends AppCompatActivity implements View
     }
 
     private void showAlertDialog(String title, String message){
-        AlertDialog.Builder builder = new AlertDialog.Builder(activityNutritionSettings.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(title)
                 .setMessage(message);
         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
@@ -709,5 +776,35 @@ public class activityNutritionSettings extends AppCompatActivity implements View
 
     @Override public void afterTextChanged(Editable s) {
 
+    }
+
+    @Override public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnFragmentInteractionListener) {
+            mListener = (OnFragmentInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
+    }
+
+    @Override public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
+
+    /**
+     * This interface must be implemented by activities that contain this
+     * fragment to allow an interaction in this fragment to be communicated
+     * to the activity and potentially other fragments contained in that
+     * activity.
+     * <p>
+     * See the Android Training lesson <a href=
+     * "http://developer.android.com/training/basics/fragments/communicating.html"
+     * >Communicating with Other Fragments</a> for more information.
+     */
+    public interface OnFragmentInteractionListener {
+        // TODO: Update argument type and name
+        void onFragmentInteraction(Uri uri);
     }
 }
