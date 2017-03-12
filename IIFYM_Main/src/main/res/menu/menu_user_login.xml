@@ -1,0 +1,10 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.kareem.IIFYM.Activities.UserLoginAuthentification.activityLogin">
+    <item
+        android:id="@+id/menu_login"
+        android:orderInCategory="100"
+        android:title="@string/title_activity_login"
+        app:showAsAction="always" />
+</menu>
