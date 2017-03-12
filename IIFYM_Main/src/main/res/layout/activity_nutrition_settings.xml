@@ -200,7 +200,7 @@
                     android:layout_gravity="right|center_vertical"
                     android:layout_width="match_parent"
                     android:layout_weight="0.8"
-                    android:textAlignment="right"
+                    android:textAlignment="textEnd"
                     android:gravity="right|center_vertical" />
             </LinearLayout>
 
@@ -227,7 +227,7 @@
                     android:id="@+id/spinnerGoals"
                     android:layout_gravity="right|center_vertical"
                     android:layout_weight="0.8"
-                    android:textAlignment="right"
+                    android:textAlignment="textEnd"
                     android:gravity="right|center_vertical" />
 
             </LinearLayout>
