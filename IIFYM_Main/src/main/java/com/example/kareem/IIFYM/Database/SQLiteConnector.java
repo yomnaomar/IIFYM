@@ -278,7 +278,6 @@ public class SQLiteConnector {
                 " ORDER BY frequency DESC" +
                 " LIMIT " + count;
         Cursor results = database.rawQuery(query, null);
-        Log.d("retrieveFrequentFood",results.getCount() + "");
         return instantiateFoodList(results);
     }
 
@@ -298,8 +297,6 @@ public class SQLiteConnector {
         int     portionType = result.getInt(7);
         int     isMeal      = result.getInt(8);
         int     frequency   = result.getInt(9);
-
-        Log.d("instantiateFood", "frequency " + frequency);
 
         Food food = new Food(id, name, brand, calories, carbs, protein, fat, portionType, isMeal);
         return food;

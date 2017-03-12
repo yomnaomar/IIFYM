@@ -1,6 +1,7 @@
 package com.example.kareem.IIFYM.Activities.Settings;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -8,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -19,7 +21,7 @@ import com.example.kareem.IIFYM.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class activitySettings extends AppCompatActivity implements fragmentNutrition.OnFragmentInteractionListener, fragmentProfile.OnFragmentInteractionListener, fragmentPreferences.OnFragmentInteractionListener {
+public class activitySettings extends AppCompatActivity implements fragmentGoals.OnFragmentInteractionListener, fragmentProfile.OnFragmentInteractionListener, fragmentPreferences.OnFragmentInteractionListener {
 
     // GUI
     private Toolbar toolbar;
@@ -31,9 +33,9 @@ public class activitySettings extends AppCompatActivity implements fragmentNutri
     private SharedPreferenceHelper myPrefs;
 
     // Variables
-    private Context         context;
-    private User            user;
-    private String          uid;
+    private Context             context;
+    private User                user;
+    private String              uid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +59,20 @@ public class activitySettings extends AppCompatActivity implements fragmentNutri
         setupTabIcons();
     }
 
+    public void showSaveDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Save goals?");
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+
+                dialog.dismiss();
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
     private void setupTabIcons() {
         tabLayout.getTabAt(0).setIcon(R.drawable.ic_macro_settings);
         if (user.getGender() == 0) // Male
@@ -67,11 +83,32 @@ public class activitySettings extends AppCompatActivity implements fragmentNutri
     }
 
     private void setupViewPager(ViewPager viewPager) {
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new fragmentNutrition(), "Goals");
+        final ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        adapter.addFragment(new fragmentGoals(), "Goals");
         adapter.addFragment(new fragmentProfile(), "Profile");
         adapter.addFragment(new fragmentPreferences(), "Preferences");
         viewPager.setAdapter(adapter);
+
+        viewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+            @Override
+            public void onPageSelected(int position) {
+
+                switch (position) {
+                    case 0:
+                        fragmentGoals fragmentToShow = (fragmentGoals)adapter.getItem(position);
+                        fragmentToShow.onResumeFragment();
+                        break;
+                    case 1:
+                        /*fragmentGoals fragmentToShow = (fragmentGoals)adapter.getItem(position);
+                        fragmentToShow.onResumeFragment();*/
+                        break;
+                    case 2:
+                        /*fragmentGoals fragmentToShow = (fragmentGoals)adapter.getItem(position);
+                        fragmentToShow.onResumeFragment();*/
+                        break;
+                }
+            }
+        });
     }
 
     @Override public void onFragmentInteraction(Uri uri) {}
