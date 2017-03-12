@@ -273,8 +273,8 @@ public class fragmentNutrition extends Fragment implements View.OnClickListener,
             lblProtein.setText("Protein (g)");
             lblFat.setText("Fat (g)");
 
-            lblTotal.setVisibility(View.GONE);
-            lblAmountTotal.setVisibility(View.GONE);
+            lblTotal.setVisibility(View.INVISIBLE);
+            lblAmountTotal.setVisibility(View.INVISIBLE);
         }
     }
 
