@@ -79,7 +79,9 @@
             fab:fab_title="@string/toolbarCreateNewFood"
             fab:fab_colorPressed="@color/fabWhitePressed"
             fab:fab_icon="@drawable/ic_food"
-            fab:fab_size="mini" />
+            fab:fab_size="mini"
+            style="imageButtonStyle"
+            android:scaleType="fitCenter"/>
 
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/fabCreateNewMeal"
@@ -91,7 +93,7 @@
             fab:fab_icon="@drawable/ic_meal"
             fab:fab_size="mini"
             style="imageButtonStyle"
-            android:scaleType="fitCenter" />
+            android:scaleType="fitCenter"/>
 
     </com.getbase.floatingactionbutton.FloatingActionsMenu>
 

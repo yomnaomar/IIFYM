@@ -39,6 +39,11 @@ public class activitySettings extends AppCompatActivity implements fragmentNutri
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+        context = getApplicationContext();
+        myPrefs = new SharedPreferenceHelper(context);
+        uid = myPrefs.getStringValue("session_uid");
+        user = DB_SQLite.retrieveUser(uid);
+
 
         context = getApplicationContext();
         DB_SQLite = new SQLiteConnector(context);
@@ -63,7 +68,7 @@ public class activitySettings extends AppCompatActivity implements fragmentNutri
             tabLayout.getTabAt(1).setIcon(R.drawable.ic_male_user);
         else
             tabLayout.getTabAt(1).setIcon(R.drawable.ic_female_user);
-//        tabLayout.getTabAt(2).setIcon(R.drawable.;
+        tabLayout.getTabAt(2).setIcon(R.drawable.ic_preferences);
     }
 
     private void setupViewPager(ViewPager viewPager) {
