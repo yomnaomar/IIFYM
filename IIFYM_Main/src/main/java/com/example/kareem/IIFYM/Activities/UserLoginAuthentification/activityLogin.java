@@ -145,11 +145,11 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
 
                                 // User is not Registered
                                 else {
-                                    // Go to activityUserInfo
+                                    // Go to activityRegisterProfile
                                     Intent intent = new Intent();
                                     intent.putExtra("uid", uid);
                                     intent.putExtra("email", email);
-                                    intent.setClass(context, activityUserInfo.class);
+                                    intent.setClass(context, activityRegisterProfile.class);
                                     startActivity(intent);
                                 }
                             }

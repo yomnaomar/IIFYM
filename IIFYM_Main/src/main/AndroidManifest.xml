@@ -24,10 +24,6 @@
             android:label="@string/toolbarSavedItems"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.example.kareem.IIFYM.Activities.Settings.activityNutritionSettings"
-            android:label="@string/actionNutritionSettings"
-            android:screenOrientation="portrait" />
-        <activity
             android:name="com.example.kareem.IIFYM.Activities.Main.activityEditFood"
             android:label="@string/toolbarEditFood"
             android:screenOrientation="portrait" />
@@ -38,10 +34,10 @@
             android:name="com.example.kareem.IIFYM.Activities.UserLoginAuthentification.activityLogin"
             android:label="@string/appName" />
         <activity
-            android:name="com.example.kareem.IIFYM.Activities.UserLoginAuthentification.activityUserInfo"
+            android:name="com.example.kareem.IIFYM.Activities.UserLoginAuthentification.activityRegisterProfile"
             android:label="@string/toolbarUserInfo" />
         <activity
-            android:name="com.example.kareem.IIFYM.Activities.UserLoginAuthentification.activityUserMacros"
+            android:name="com.example.kareem.IIFYM.Activities.UserLoginAuthentification.activityRegisterGoals"
             android:label="@string/toolbarUserMacros" />
         <activity
             android:name="com.example.kareem.IIFYM.Activities.Main.activityAddDailyItem"

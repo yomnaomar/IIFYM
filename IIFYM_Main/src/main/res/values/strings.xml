@@ -8,7 +8,7 @@
     <string name="appName">IIFYM</string>
     <string name="appSubtitle">If It Fits Your Macros</string>
 
-    <!--activityUserInfo -->
+    <!--activityRegisterProfile -->
     <string name="userRegistration">User Registration</string>
     <string name="firstname">Firstname</string>
     <string name="dateOfBirth">Date of Birth</string>
@@ -24,7 +24,7 @@
     <string name="height">Height</string>
     <string name="cm">cm</string>
     <string name="workoutFrequency">Workout\nFrequency</string>
-    <string name="goals">Goals</string>
+    <string name="goals">Goal</string>
 
     <string-array name="array_Goals">
         <item>Lose fat</item>
@@ -168,7 +168,6 @@
     <string name="menuProfile">Profile</string>
     <string name="lblFrequent">Frequent meals</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="lblComingSoon">Coming Soon!</string>
 
 </resources>
