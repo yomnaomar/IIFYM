@@ -44,7 +44,7 @@ import tourguide.tourguide.Overlay;
 import tourguide.tourguide.Sequence;
 import tourguide.tourguide.ToolTip;
 
-public class activityUserMacros extends AppCompatActivity implements View.OnClickListener, TextWatcher {
+public class activityRegisterGoals extends AppCompatActivity implements View.OnClickListener, TextWatcher {
 
     // GUI
     private SegmentedGroup  seggroupDisplay;
@@ -714,7 +714,7 @@ public class activityUserMacros extends AppCompatActivity implements View.OnClic
     }
 
     private void showAlertDialog(String title, String message){
-        AlertDialog.Builder builder = new AlertDialog.Builder(activityUserMacros.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(activityRegisterGoals.this);
         builder.setTitle(title)
                 .setMessage(message);
         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {

@@ -35,7 +35,7 @@ import java.util.GregorianCalendar;
 
 import info.hoang8f.android.segmented.SegmentedGroup;
 
-public class activityUserInfo extends AppCompatActivity implements View.OnClickListener, com.wdullaer.materialdatetimepicker.date.DatePickerDialog.OnDateSetListener {
+public class activityRegisterProfile extends AppCompatActivity implements View.OnClickListener, com.wdullaer.materialdatetimepicker.date.DatePickerDialog.OnDateSetListener {
 
     // GUI
     private String              uid, email;
@@ -138,7 +138,7 @@ public class activityUserInfo extends AppCompatActivity implements View.OnClickL
         intent.putExtra("height2", height2);
         intent.putExtra("workoutFreq", workoutFreq);
         intent.putExtra("goal", goal);
-        intent.setClass(context, activityUserMacros.class);
+        intent.setClass(context, activityRegisterGoals.class);
         startActivity(intent);
     }
 
