@@ -150,8 +150,8 @@ public class SQLiteHelper extends SQLiteOpenHelper {
             String line;
             while ((line = buffer.readLine()) != null) {
                 db.execSQL("INSERT INTO " + Table_Food + " " +
-                        "(brand, name, calories, carbs, protein, fat) " +
-                        "VALUES " + line);
+                        "(brand, name, calories, carbs, protein, fat, portionType) " +
+                        "VALUES " + line.replace( ")" , ", 1)" ));
 
                 ContentValues newWeight = new ContentValues();
                 newWeight.put("amount", 100);   // 100

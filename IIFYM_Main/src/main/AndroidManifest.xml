@@ -24,10 +24,6 @@
             android:label="@string/toolbarSavedItems"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.example.kareem.IIFYM.Activities.Settings.activityNutritionSettings"
-            android:label="@string/actionNutritionSettings"
-            android:screenOrientation="portrait" />
-        <activity
             android:name="com.example.kareem.IIFYM.Activities.Main.activityEditFood"
             android:label="@string/toolbarEditFood"
             android:screenOrientation="portrait" />
