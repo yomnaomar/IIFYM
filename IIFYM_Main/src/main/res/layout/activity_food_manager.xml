@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_add_daily_item"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.kareem.IIFYM.Activities.Main.activityFoodManager">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="50dp"
+                fab:srcCompat="@drawable/ic_search"
+                android:id="@+id/iconSearch"
+                android:scaleType="fitCenter" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="textCapSentences"
+                android:ems="10"
+                android:id="@+id/etxtSearch"
+                android:hint="Search ..."
+                tools:layout_editor_absoluteY="0dp"
+                tools:layout_editor_absoluteX="0dp"
+                android:layout_weight="0.75" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/lblFrequent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/lblFrequent"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="3dp" />
+
+        <ListView
+            android:layout_width="match_parent"
+            android:id="@+id/listviewSavedItems"
+            android:layout_height="match_parent"
+            tools:layout_editor_absoluteX="0dp"></ListView>
+
+    </LinearLayout>
+
+    <com.getbase.floatingactionbutton.FloatingActionsMenu
+        android:id="@+id/fabAddNew"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        fab:fab_addButtonColorNormal="@color/colorPrimary"
+        fab:fab_addButtonColorPressed="@color/fabWhitePressed"
+        fab:fab_addButtonPlusIconColor="@color/fabWhite"
+        fab:fab_labelStyle="@style/menu_labels_style"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        fab:fab_addButtonSize="mini"
+        fab:fab_expandDirection="up">
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabCreateNewFood"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="@color/colorPrimaryLight"
+            fab:fab_title="@string/toolbarCreateNewFood"
+            fab:fab_colorPressed="@color/fabWhitePressed"
+            fab:fab_icon="@drawable/ic_food"
+            fab:fab_size="mini" />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabCreateNewMeal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="@color/colorPrimaryLight"
+            fab:fab_title="@string/lblCreateNewMeal"
+            fab:fab_colorPressed="@color/fabWhitePressed"
+            fab:fab_icon="@drawable/ic_meal"
+            fab:fab_size="mini"
+            style="imageButtonStyle"
+            android:scaleType="fitCenter" />
+
+    </com.getbase.floatingactionbutton.FloatingActionsMenu>
+
+</RelativeLayout>

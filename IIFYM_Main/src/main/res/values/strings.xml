@@ -1,0 +1,174 @@
+<resources>
+    <string name="action_settings">Settings</string>
+    <string name="Macro_settings">Marco Settings</string>
+    <string name="Meal_settings">Meal Settings</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <!--activityLogin -->
+    <string name="appName">IIFYM</string>
+    <string name="appSubtitle">If It Fits Your Macros</string>
+
+    <!--activityUserInfo -->
+    <string name="userRegistration">User Registration</string>
+    <string name="firstname">Firstname</string>
+    <string name="dateOfBirth">Date of Birth</string>
+    <string name="dateInitial">01-01-2000</string>
+    <string name="gender">Gender</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="unitSystem">Unit System</string>
+    <string name="imperial">Imperial</string>
+    <string name="metric">Metric</string>
+    <string name="weight">Weight</string>
+    <string name="kg">kg</string>
+    <string name="height">Height</string>
+    <string name="cm">cm</string>
+    <string name="workoutFrequency">Workout\nFrequency</string>
+    <string name="goals">Goals</string>
+
+    <string-array name="array_Goals">
+        <item>Lose fat</item>
+        <item>Maintenance</item>
+        <item>Gain muscle</item>
+    </string-array>
+
+    <string-array name="array_WorkoutFreq">
+        <item>None (little or no exercise)</item>
+        <item>Low (1-3 times/week)</item>
+        <item>Medium (3-5 days/week)</item>
+        <item>High (6-7 days/week)</item>
+        <item>Very High (physical job or 7+ times/week)</item>
+    </string-array>
+
+    <string name="userMacros_FeelFree">Feel free to change your macros to your liking\n(But make sure they add up!)</string>
+    <string name="userMacros_MacroRecommendation">If you are unsure of what your daily intake should be, IIFYM gives you a good starting point specific to your body!</string>
+    <string name="lblCalories">Calories (kcal)</string>
+    <string name="lblCarbs">Carbs (%)</string>
+    <string name="lblProtein">Protein (%)</string>
+    <string name="lblFat">Fat (%)</string>
+    <string name="lblTotal">Total (%)</string>
+
+    <string name="symbolKcal">kcal</string>
+    <string name="symbolPercent">%</string>
+    <string name="symbolGrams">g</string>
+    <string name="radioBtnGrams">Grams</string>
+    <string name="radioBtnPercent">Percent</string>
+    <string name="radioBtnCalories">Calories</string>
+    <string name="radioBtnMacros">Macros</string>
+    <string name="btnReset">Reset</string>
+
+    <!--    &lt;!&ndash; Example settings for Data & Sync &ndash;&gt;
+        <string name="pref_header_data_sync">Data &amp; sync</string>
+
+        <string name="pref_title_sync_frequency">Sync frequency</string>
+        <string-array name="pref_sync_frequency_titles">
+            <list_item>15 minutes</list_item>
+            <list_item>30 minutes</list_item>
+            <list_item>1 hour</list_item>
+            <list_item>3 hours</list_item>
+            <list_item>6 hours</list_item>
+            <list_item>Never</list_item>
+        </string-array>
+        <string-array name="pref_sync_frequency_values">
+            <list_item>15</list_item>
+            <list_item>30</list_item>
+            <list_item>60</list_item>
+            <list_item>180</list_item>
+            <list_item>360</list_item>
+            <list_item>-1</list_item>
+        </string-array>
+
+        <string name="pref_title_system_sync_settings">System sync settings</string>
+
+        &lt;!&ndash; Example settings for Notifications &ndash;&gt;
+        <string name="pref_header_notifications">Notifications</string>
+
+        <string name="pref_title_new_message_notifications">New message notifications</string>
+
+        <string name="pref_title_ringtone">Ringtone</string>
+        <string name="pref_ringtone_silent">Silent</string>
+
+        <string name="pref_title_vibrate">Vibrate</string>
+        <string name="CarbPreferenceDefault">200</string>
+        <string name="ProteinPreferenceDefault">100</string>
+        <string name="FatPreferenceDefault">50</string>
+        <string name="macropreference_file_key">MacroPreferenceFile</string>-->
+
+
+    <!-- login fragments-->
+    <string name="frag1text">Welcome</string>
+    <string name="frag2text">Profile</string>
+    <string name="frag3text">Goals and Preferences</string>
+    <string name="title_activity_login">Login</string>
+
+    <!-- spinners-->
+
+    <string-array name="weight_units_array">
+        <item>Grams (g)</item>
+        <item>Ounces (oz)</item>
+        <item>Milliliter (ml)</item>
+    </string-array>
+
+    <string-array name="bodyweight_units_array">
+        <item>Kilograms (kg)</item>
+        <item>Pounds (lbs)</item>
+    </string-array>
+
+    <string-array name="height_units_array">
+        <item>feet/inches</item>
+        <item>cm</item>
+    </string-array>
+
+    <string name="serving">Serving</string>
+
+    <string name="title_activity_enter_saved_meal_quantity">EnterSavedMealQuantity</string>
+    <string name="title_activity_select_meal_type">SelectMealTypeActivity</string>
+    <string name="title_activity_create_simple_meal">CreateSimpleMealActivity</string>
+    <string name="emailpassword_status_fmt">Email User: %s</string>
+    <string name="firebase_status_fmt">Firebase User: %s</string>
+    <string name="UserFocus">I want to focus on ...</string>
+    <string name="UserMacrosTitle">Daily Nutritional Goals</string>
+    <string name="MacroSettingsTitle">Change your Daily Nutritional Goals</string>
+    <string name="hintCalories">Calories (kcal)</string>
+    <string name="hintBrand">Brand (optional)</string>
+    <string name="hintName">Food Name (required)</string>
+    <string name="hintCarbs">Carbs (g)</string>
+    <string name="hintProtein">Protein (g)</string>
+    <string name="hintFat">Fat (g)</string>
+    <string name="hintServing">Serving size</string>
+    <string name="hintAmount">Amount</string>
+    <string name="lblBrand">Brand</string>
+    <string name="lblName">Name</string>
+    <string name="lblPortionType">PortionType</string>
+    <string name="lblPortionAmount">Portion Amount</string>
+    <string name="lblSave">Save</string>
+    <string name="lblC">c</string>
+    <string name="lblp">p</string>
+    <string name="lblf">f</string>
+    <string name="lblkcal">kcal</string>
+    <string name="toolbarSelectItemToAdd">Select an item to add to daily log</string>
+    <string name="toolbarSavedItems">My saved food</string>
+    <string name="lblDeleteFromDaily">Delete from daily log?</string>
+    <string name="lblDeleteFromDatabase">Delete from database?</string>
+    <string name="toolbarCreateNewFood">Create new food</string>
+    <string name="toolbarUserInfo">User Info</string>
+    <string name="toolbarUserMacros">Nutrition Goals</string>
+    <string name="toolbarEditFood">Edit food</string>
+    <string name="lblCreateNewMeal">Create new meal</string>
+    <string name="lblDailyLog">Daily Log:</string>
+    <string name="menuSettings">Settings</string>
+    <string name="menuAccount">Account</string>
+    <string name="menuLogout">Logout</string>
+    <string name="actionNutritionSettings">Nutrition Settings</string>
+    <string name="actionMyFood">My Food</string>
+    <string name="toolbarAddDailyItem">Set Portion Amount</string>
+    <string name="btnRegister">Register</string>
+    <string name="menuNext">Next</string>
+    <string name="menuFinish">Finish</string>
+    <string name="menuProfile">Profile</string>
+    <string name="lblFrequent">Frequent meals</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>
