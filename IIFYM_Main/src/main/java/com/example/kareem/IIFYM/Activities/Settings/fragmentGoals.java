@@ -57,8 +57,7 @@ public class fragmentGoals extends Fragment implements View.OnClickListener, Tex
     private RadioButton     rbtnCalories, rbtnMacros;
     private EditText        etxtCalories, etxtCarbs, etxtProtein, etxtFat;
     private TextView        lblCarbs, lblProtein, lblFat, lblTotal, lblAmountTotal, lblValueCarbs, lblValueProtein, lblValueFat;
-    private ImageButton     btnReset, btnInfo;
-    private Button          btnSave;
+    private ImageButton     btnReset, btnInfo, btnSave;
     private Animation       mEnterAnimation, mExitAnimation;
     private ProgressDialog  progressDialog;
     private OnFragmentInteractionListener mListener;
@@ -194,7 +193,7 @@ public class fragmentGoals extends Fragment implements View.OnClickListener, Tex
         lblValueFat     = (TextView) view.findViewById(R.id.lblValueFat);
         btnReset        = (ImageButton) view.findViewById(R.id.btnReset);
         btnInfo         = (ImageButton) view.findViewById(R.id.btnInfo);
-        btnSave         = (Button) view.findViewById(R.id.btnSave);
+        btnSave         = (ImageButton) view.findViewById(R.id.btnSave);
         linearLayoutRoot= (LinearLayout) view.findViewById(R.id.linearLayoutRoot);
 
         btnReset.setOnClickListener(this);

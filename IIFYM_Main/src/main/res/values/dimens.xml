@@ -11,5 +11,8 @@
 
     <!--<dimen name="design_fab_size_mini" tools:override="true">60dp</dimen>-->
     <!--<dimen name="design_fab_size_normal" tools:override="true">50dp</dimen>-->
-    <dimen name="design_fab_image_size" tools:override="true">20dp</dimen>
+    <dimen name="design_fab_image_size" tools:override="true">17dp</dimen>
+    <dimen name="labels_text_size">15sp</dimen>
+    <dimen name="fab_size_normal">56dp</dimen>
+    <dimen name="fab_size_mini">40dp</dimen>
 </resources>

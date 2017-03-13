@@ -16,7 +16,7 @@ import com.example.kareem.IIFYM.Database.SQLiteConnector;
 import com.example.kareem.IIFYM.Models.Food;
 import com.example.kareem.IIFYM.R;
 import com.example.kareem.IIFYM.ViewComponents.AdapterSavedItem;
-import com.getbase.floatingactionbutton.FloatingActionButton;
+import com.github.clans.fab.FloatingActionButton;
 
 import java.util.ArrayList;
 
@@ -72,9 +72,9 @@ public class activitySelectDailyItem extends AppCompatActivity implements Adapte
         listviewSavedItems.setAdapter(adapterSavedItem);
         listviewSavedItems.setOnItemClickListener(this);
 
-        fabCreateFood = (FloatingActionButton) findViewById(R.id.fabAddNewFood);
+        fabCreateFood = (FloatingActionButton) findViewById(R.id.fabCreateNewFood);
         fabCreateFood.setOnClickListener(this);
-        fabCreateMeal = (FloatingActionButton) findViewById(R.id.fabAddNewMeal);
+        fabCreateMeal = (FloatingActionButton) findViewById(R.id.fabCreateNewMeal);
         fabCreateMeal.setOnClickListener(this);
     }
 
@@ -109,10 +109,10 @@ public class activitySelectDailyItem extends AppCompatActivity implements Adapte
     // TODO Implement fabAddNewMeal
     @Override public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.fabAddNewFood:
+            case R.id.fabCreateNewFood:
                 goToCreateNewFood();
                 break;
-            case R.id.fabAddNewMeal:
+            case R.id.fabCreateNewMeal:
                 // TODO Implement
                 break;
         }

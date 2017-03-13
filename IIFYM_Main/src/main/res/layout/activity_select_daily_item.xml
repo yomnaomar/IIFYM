@@ -58,42 +58,55 @@
 
     </LinearLayout>
 
-    <com.getbase.floatingactionbutton.FloatingActionsMenu
-        android:id="@+id/fabAddNew"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        fab:fab_addButtonColorNormal="@color/colorPrimary"
-        fab:fab_addButtonColorPressed="@color/fabWhitePressed"
-        fab:fab_addButtonPlusIconColor="@color/fabWhite"
-        fab:fab_labelStyle="@style/menu_labels_style"
+    <com.github.clans.fab.FloatingActionMenu
+        android:id="@+id/fabCreateNew"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        fab:fab_addButtonSize="mini"
-        fab:fab_expandDirection="up">
+        fab:menu_animationDelayPerItem="50"
+        fab:menu_backgroundColor="#c8fcfcfc"
+        fab:menu_buttonSpacing="0dp"
+        fab:menu_colorNormal="@color/colorPrimary"
+        fab:menu_colorPressed="@color/fabWhitePressed"
+        fab:menu_colorRipple="#99FFFFFF"
+        fab:menu_fab_hide_animation="@anim/hide_to_bottom"
+        fab:menu_fab_show_animation="@anim/show_from_bottom"
+        fab:menu_fab_size="mini"
+        fab:menu_labels_hideAnimation="@anim/fab_slide_out_to_right"
+        fab:menu_labels_showAnimation="@anim/fab_slide_in_from_right"
+        fab:menu_labels_style="@style/menu_labels_style"
+        fab:menu_openDirection="up"
+        fab:menu_shadowColor="#66000000"
+        fab:menu_shadowRadius="4dp"
+        fab:menu_shadowXOffset="1dp"
+        fab:menu_shadowYOffset="3dp"
+        fab:menu_showShadow="true">
 
-        <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fabAddNewFood"
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fabCreateNewFood"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            fab:fab_colorNormal="@color/colorPrimaryLight"
-            fab:fab_title="@string/toolbarCreateNewFood"
-            fab:fab_colorPressed="@color/fabWhitePressed"
-            fab:fab_icon="@drawable/ic_food"
-            fab:fab_size="mini"/>
+            android:src="@drawable/ic_food"
+            fab:fab_colorNormal="@color/Transparent"
+            fab:fab_label="@string/toolbarCreateNewFood"
+            fab:fab_showShadow="false"
+            fab:fab_size="normal"
+            fab:menu_colorPressed="@color/fabWhitePressed"
+            fab:menu_colorRipple="#99FFFFFF" />
 
-        <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fabAddNewMeal"
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fabCreateNewMeal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            fab:fab_colorNormal="@color/colorPrimaryLight"
-            fab:fab_title="@string/lblCreateNewMeal"
-            fab:fab_colorPressed="@color/fabWhitePressed"
-            fab:fab_icon="@drawable/ic_meal"
-            fab:fab_size="mini"
-            style="imageButtonStyle"
-            android:scaleType="fitCenter"
-            android:background="@drawable/ic_meal" />
+            android:src="@drawable/ic_meal"
+            fab:fab_colorNormal="@color/Transparent"
+            fab:fab_label="@string/lblCreateNewMeal"
+            fab:fab_showShadow="false"
+            fab:fab_size="normal"
+            fab:menu_colorPressed="@color/fabWhitePressed"
+            fab:menu_colorRipple="#99FFFFFF" />
 
-    </com.getbase.floatingactionbutton.FloatingActionsMenu>
+    </com.github.clans.fab.FloatingActionMenu>
 
 </RelativeLayout>
