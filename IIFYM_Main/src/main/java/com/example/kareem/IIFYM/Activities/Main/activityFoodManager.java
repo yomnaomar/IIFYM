@@ -22,6 +22,7 @@ import java.util.ArrayList;
 
 public class activityFoodManager extends AppCompatActivity implements AdapterView.OnItemClickListener, View.OnClickListener {
 
+    // TODO DELETE THIS (PUSHING PURPOSES)
     // GUI
     private EditText                etxtSearch;
     private TextView                lblFrequent;
