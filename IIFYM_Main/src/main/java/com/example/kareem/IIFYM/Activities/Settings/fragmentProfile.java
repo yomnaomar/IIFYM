@@ -1,6 +1,5 @@
 package com.example.kareem.IIFYM.Activities.Settings;
 
-import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.net.Uri;
@@ -16,7 +15,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -32,16 +30,17 @@ import com.example.kareem.IIFYM.ViewComponents.DecimalDigitsInputFilter;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
+import com.wdullaer.materialdatetimepicker.date.DatePickerDialog.OnDateSetListener;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 
 import info.hoang8f.android.segmented.SegmentedGroup;
 
 
-public class fragmentProfile extends Fragment implements View.OnClickListener {
+public class fragmentProfile extends Fragment implements View.OnClickListener, OnDateSetListener {
 
     // GUI
     private String              uid;
@@ -51,7 +50,6 @@ public class fragmentProfile extends Fragment implements View.OnClickListener {
     private RadioButton         rbtnGenderMale, rbtnGenderFemale, rbtnMetric, rbtnGenderImperial;
     private SegmentedGroup      seggroupUnitSystem;
     private Spinner             spinnerWorkoutFreq, spinnerGoals;
-    private DatePickerDialog    datePickerDialog;
     private SimpleDateFormat    dateFormatter;
     private LinearLayout        linearLayoutRoot;
     private View                view;
@@ -174,17 +172,13 @@ public class fragmentProfile extends Fragment implements View.OnClickListener {
         etxtDateOfBirth.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if(hasFocus){
-                    datePickerDialog.show();
-                }
+                if(hasFocus)
+                    showDatePicker();
             }
         });
-        etxtDateOfBirth.setInputType(InputType.TYPE_NULL);
         dateFormatter = new SimpleDateFormat("dd-MM-yyyy");
-
-        etxtDateOfBirth.setText(dateFormatter.format(new Date()));
+        etxtDateOfBirth.setInputType(InputType.TYPE_NULL);
         etxtDateOfBirth.setOnClickListener(this);
-        setDateTimeField();
 
         etxtWeight.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(4,2)});
 
@@ -256,12 +250,29 @@ public class fragmentProfile extends Fragment implements View.OnClickListener {
     @Override public void onClick(View v) {
         switch (v.getId()) {
             case R.id.etxtDateOfBirth:
-                datePickerDialog.show();
+                showDatePicker();
                 break;
             case R.id.btnSave:
                 updateUser();
                 break;
         }
+    }
+
+    private void showDatePicker() {
+        String ageArr[] = dob.split("-");
+        GregorianCalendar cal = new GregorianCalendar();
+        cal.set(Integer.parseInt(ageArr[2]),
+                Integer.parseInt(ageArr[1]) - 1,
+                Integer.parseInt(ageArr[0]));
+        DatePickerDialog dpd = DatePickerDialog.newInstance(
+                this,
+                cal.get(Calendar.YEAR),
+                cal.get(Calendar.MONTH),
+                cal.get(Calendar.DAY_OF_MONTH)
+        );
+        dpd.setVersion(DatePickerDialog.Version.VERSION_1);
+        dpd.showYearPickerFirst(true);
+        dpd.show(getFragmentManager(), "Datepickerdialog");
     }
 
     private void updateUser() {
@@ -440,22 +451,6 @@ public class fragmentProfile extends Fragment implements View.OnClickListener {
         return true;
     }
 
-    private void setDateTimeField() {
-        Calendar newCalendar = Calendar.getInstance();
-        datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
-
-            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                Calendar newDate = Calendar.getInstance();
-                newDate.set(year, monthOfYear, dayOfMonth);
-                etxtDateOfBirth.setText(dateFormatter.format(newDate.getTime()));
-                if(etxtDateOfBirth.getError() != null) {
-                    etxtDateOfBirth.setError(null);
-                }
-            }
-
-        }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
-    }
-
     private void unitSystemChange() {
         if(rbtnMetric.isChecked()) // Metric
         {
@@ -510,6 +505,16 @@ public class fragmentProfile extends Fragment implements View.OnClickListener {
     public void hideProgressDialog() {
         if (progressDialog != null && progressDialog.isShowing()) {
             progressDialog.dismiss();
+        }
+    }
+
+    @Override public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
+        GregorianCalendar cal = new GregorianCalendar();
+        cal.set(year,monthOfYear,dayOfMonth);
+        String date = dateFormatter.format(cal.getTime());
+        etxtDateOfBirth.setText(date);
+        if(etxtDateOfBirth.getError() != null) {
+            etxtDateOfBirth.setError(null);
         }
     }
 

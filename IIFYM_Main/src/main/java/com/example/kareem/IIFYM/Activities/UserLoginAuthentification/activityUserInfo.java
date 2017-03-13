@@ -1,6 +1,5 @@
 package com.example.kareem.IIFYM.Activities.UserLoginAuthentification;
 
-import android.app.DatePickerDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -16,7 +15,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -28,6 +26,7 @@ import com.example.kareem.IIFYM.Database.SharedPreferenceHelper;
 import com.example.kareem.IIFYM.R;
 import com.example.kareem.IIFYM.ViewComponents.DecimalDigitsInputFilter;
 import com.google.firebase.auth.FirebaseAuth;
+import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -36,7 +35,7 @@ import java.util.GregorianCalendar;
 
 import info.hoang8f.android.segmented.SegmentedGroup;
 
-public class activityUserInfo extends AppCompatActivity implements View.OnClickListener{
+public class activityUserInfo extends AppCompatActivity implements View.OnClickListener, com.wdullaer.materialdatetimepicker.date.DatePickerDialog.OnDateSetListener {
 
     // GUI
     private String              uid, email;
@@ -46,7 +45,7 @@ public class activityUserInfo extends AppCompatActivity implements View.OnClickL
     private RadioButton         rbtnGenderMale, rbtnGenderFemale, rbtnMetric, rbtnGenderImperial;
     private SegmentedGroup      seggroupUnitSystem;
     private Spinner             spinnerWorkoutFreq, spinnerGoals;
-    private DatePickerDialog    datePickerDialog;
+
     private SimpleDateFormat    dateFormatter;
 
     // Variables
@@ -236,16 +235,14 @@ public class activityUserInfo extends AppCompatActivity implements View.OnClickL
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if(hasFocus){
-                    datePickerDialog.show();
+                    showDatePicker();
                 }
             }
         });
-        etxtDateOfBirth.setInputType(InputType.TYPE_NULL);
         dateFormatter = new SimpleDateFormat("dd-MM-yyyy");
-
+        etxtDateOfBirth.setInputType(InputType.TYPE_NULL);
         etxtDateOfBirth.setText(dateFormatter.format(new Date()));
         etxtDateOfBirth.setOnClickListener(this);
-        setDateTimeField();
 
         etxtWeight.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(4,2)});
 
@@ -291,25 +288,26 @@ public class activityUserInfo extends AppCompatActivity implements View.OnClickL
     @Override public void onClick(View v) {
         switch (v.getId()) {
             case R.id.etxtDateOfBirth:
-                datePickerDialog.show();
+                showDatePicker();
                 break;
         }
     }
 
-    private void setDateTimeField() {
-        Calendar newCalendar = Calendar.getInstance();
-        datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
-
-            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                Calendar newDate = Calendar.getInstance();
-                newDate.set(year, monthOfYear, dayOfMonth);
-                etxtDateOfBirth.setText(dateFormatter.format(newDate.getTime()));
-                if(etxtDateOfBirth.getError() != null) {
-                    etxtDateOfBirth.setError(null);
-                }
-            }
-
-        }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
+    private void showDatePicker() {
+        String ageArr[] = etxtDateOfBirth.getText().toString().split("-");
+        GregorianCalendar cal = new GregorianCalendar();
+        cal.set(Integer.parseInt(ageArr[2]),
+                Integer.parseInt(ageArr[1]) - 1,
+                Integer.parseInt(ageArr[0]));
+        DatePickerDialog dpd = DatePickerDialog.newInstance(
+                this,
+                cal.get(Calendar.YEAR),
+                cal.get(Calendar.MONTH),
+                cal.get(Calendar.DAY_OF_MONTH)
+        );
+        dpd.setVersion(DatePickerDialog.Version.VERSION_1);
+        dpd.showYearPickerFirst(true);
+        dpd.show(getSupportFragmentManager(), "Datepickerdialog");
     }
 
     private void unitSystemChange() {
@@ -354,23 +352,6 @@ public class activityUserInfo extends AppCompatActivity implements View.OnClickL
     }
 
     @Override protected void onPause() {
-        readUserInput();
-        myPrefs.addPreference("temp_name_registration",name);
-        myPrefs.addPreference("temp_dob_registration",dob);
-        if(rbtnGenderMale.isChecked())
-            myPrefs.addPreference("temp_gender_registration",0); // Male
-        else
-            myPrefs.addPreference("temp_gender_registration",1); // Female
-        if(rbtnMetric.isChecked())
-            myPrefs.addPreference("temp_unitsystem_registration",0); // Metric
-        else
-            myPrefs.addPreference("temp_unitsystem_registration",1); // Imperial
-        myPrefs.addPreference("temp_weight_registration",weight);
-        myPrefs.addPreference("temp_height1_registration",height1);
-        myPrefs.addPreference("temp_height2_registration",height2);
-        myPrefs.addPreference("temp_workoutfreq_registration",workoutFreq);
-        myPrefs.addPreference("temp_goal_registration",goal);
-
         signOut();
         super.onPause();
     }
@@ -389,35 +370,6 @@ public class activityUserInfo extends AppCompatActivity implements View.OnClickL
             }
         };
         registerReceiver(broadcast_reciever, new IntentFilter("finish_activity"));
-        etxtName.setText(myPrefs.getStringValue("temp_name_registration"));
-        Calendar newDate = Calendar.getInstance();
-        etxtDateOfBirth.setText(myPrefs.getStringValue("temp_dob_registration", dateFormatter.format(newDate.getTime())));
-        if(myPrefs.getIntValue("temp_gender_registration") == 0) // Male
-            rbtnGenderMale.setChecked(true);
-        else
-            rbtnGenderFemale.setChecked(true); // Female
-        if(myPrefs.getIntValue("temp_unitsystem_registration") == 0) // Metric
-            rbtnMetric.setChecked(true);
-        else
-            rbtnGenderImperial.setChecked(true); // Imperial
-
-        if(myPrefs.getFloatValue("temp_weight_registration") != 0)
-            etxtWeight.setText(myPrefs.getFloatValue("temp_weight_registration") + "");
-        else
-            etxtWeight.setText("");
-
-        if(myPrefs.getIntValue("temp_height1_registration") != 0)
-            etxtHeightParam1.setText(myPrefs.getIntValue("temp_height1_registration") + "");
-        else
-            etxtHeightParam1.setText("");
-
-        if(myPrefs.getIntValue("temp_height2_registration") != 0)
-            etxtHeightParam2.setText(myPrefs.getIntValue("temp_height2_registration") + "");
-        else
-            etxtHeightParam2.setText("");
-
-        spinnerWorkoutFreq.setSelection(myPrefs.getIntValue("temp_workoutfreq_registration"));
-        spinnerGoals.setSelection(myPrefs.getIntValue("temp_goal_registration"));
     }
 
     private boolean verifyAge(){
@@ -443,5 +395,15 @@ public class activityUserInfo extends AppCompatActivity implements View.OnClickL
     private void signOut() {
         Log.d("UserInfo","Signed out");
         firebaseAuth.signOut();
+    }
+
+    @Override public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
+        GregorianCalendar cal = new GregorianCalendar();
+        cal.set(year,monthOfYear,dayOfMonth);
+        String date = dateFormatter.format(cal.getTime());
+        etxtDateOfBirth.setText(date);
+        if(etxtDateOfBirth.getError() != null) {
+            etxtDateOfBirth.setError(null);
+        }
     }
 }
