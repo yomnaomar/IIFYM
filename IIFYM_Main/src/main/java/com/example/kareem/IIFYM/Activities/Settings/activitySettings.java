@@ -43,13 +43,7 @@ public class activitySettings extends AppCompatActivity implements fragmentGoals
         setContentView(R.layout.activity_settings);
         context = getApplicationContext();
         myPrefs = new SharedPreferenceHelper(context);
-        uid = myPrefs.getStringValue("session_uid");
-        user = DB_SQLite.retrieveUser(uid);
-
-
-        context = getApplicationContext();
         DB_SQLite = new SQLiteConnector(context);
-        myPrefs = new SharedPreferenceHelper(context);
         uid = myPrefs.getStringValue("session_uid");
         user = DB_SQLite.retrieveUser(uid);
 
