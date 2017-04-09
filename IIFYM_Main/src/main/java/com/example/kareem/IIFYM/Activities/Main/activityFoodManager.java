@@ -22,7 +22,6 @@ import java.util.ArrayList;
 
 public class activityFoodManager extends AppCompatActivity implements AdapterView.OnItemClickListener, View.OnClickListener {
 
-    // TODO DELETE THIS (PUSHING PURPOSES)
     // GUI
     private EditText                etxtSearch;
     private TextView                lblFrequent;
@@ -32,7 +31,7 @@ public class activityFoodManager extends AppCompatActivity implements AdapterVie
 
     // Database
     private SQLiteConnector DB_SQLite;
-    private Context context;
+    private Context         context;
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,7 +59,7 @@ public class activityFoodManager extends AppCompatActivity implements AdapterVie
                 filterSavedItems(cs.toString());
             }
 
-            @Override public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) { }
+            @Override public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {}
 
             @Override public void afterTextChanged(Editable arg0) {}
         });
@@ -79,7 +78,7 @@ public class activityFoodManager extends AppCompatActivity implements AdapterVie
         fabCreateMeal.setOnClickListener(this);
     }
 
-    // TODO implement
+    // TODO implement case where Food is Meal
     @Override public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Food food = (Food) parent.getItemAtPosition(position);
         long fid = food.getId();
@@ -90,13 +89,13 @@ public class activityFoodManager extends AppCompatActivity implements AdapterVie
             startActivity(intent);
         }
         else if (food.isMeal()) {
-            /*Intent intent = new Intent(getBaseContext(), activityEditFood.class);
-            intent.putExtra("id", fid);
-            startActivity(intent);*/
+            // TODO implement case where Food is Meal
         }
     }
 
-    //Updates AdapterSavedItem and arrSavedItems
+    // Updates adapterSavedItem and arrSavedItems to display either:
+    // 1. Frequent Foods when search is empty
+    // 2. Filtered Foods when user uses the search functionality
     private void filterSavedItems(final String search) {
         adapterSavedItem.clear();
         ArrayList<Food> arrSavedItems;
@@ -114,7 +113,7 @@ public class activityFoodManager extends AppCompatActivity implements AdapterVie
         }
     }
 
-    // TODO Implement fabAddNewMeal
+    // TODO Implement case where fabAddNewMeal
     @Override public void onClick(View v) {
         switch (v.getId()) {
             case R.id.fabCreateNewFood:

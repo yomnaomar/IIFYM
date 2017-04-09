@@ -248,7 +248,6 @@ public class SQLiteConnector {
 
     /**
      * Searches for Food by their name and brand given a search query.
-     * ArrayList's length is limited by the count parameter.
      * @param search    Search query to filter results by
      * @param count     Maximum number of results to return
      * @return
@@ -266,8 +265,7 @@ public class SQLiteConnector {
     }
 
     /**
-     * Searches for Food by their name and brand given a search query.
-     * ArrayList's length is limited by the count parameter.
+     * Searches for Food and sorts by frequency (descending).
      * @param count     Maximum number of results to return
      * @return
      */
@@ -279,6 +277,26 @@ public class SQLiteConnector {
                 " LIMIT " + count;
         Cursor results = database.rawQuery(query, null);
         return instantiateFoodList(results);
+    }
+
+    /**
+     * Creates an ArrayList of new instances of Food from a cursor result set.
+     * @param results
+     * @return
+     */
+    private ArrayList<Food> instantiateFoodList(final Cursor results) {
+        int count = results.getCount();
+        ArrayList<Food> arrFood = new ArrayList();
+
+        if (count > 0) {
+            for (int i = 0; i < count; i++) {
+                results.moveToNext();
+                final Food food = instantiateFood(results);
+                arrFood.add(food);
+            }
+        }
+        results.close();
+        return arrFood;
     }
 
     /**
@@ -302,25 +320,6 @@ public class SQLiteConnector {
         return food;
     }
 
-    /**
-     * Creates an ArrayList of new instances of Food from a cursor result set.
-     * @param results
-     * @return
-     */
-    private ArrayList<Food> instantiateFoodList(final Cursor results) {
-        int count = results.getCount();
-        ArrayList<Food> arrFood = new ArrayList();
-
-        if (count > 0) {
-            for (int i = 0; i < count; i++) {
-                results.moveToNext();
-                final Food food = instantiateFood(results);
-                arrFood.add(food);
-            }
-        }
-        results.close();
-        return arrFood;
-    }
     
     // ----------    SQLiteHelper.Table_Weight = "Weight"    ----------------
 
