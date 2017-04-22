@@ -23,6 +23,7 @@ import com.example.kareem.IIFYM.Activities.UserLoginAuthentification.activityLog
 import com.example.kareem.IIFYM.Database.SQLiteConnector;
 import com.example.kareem.IIFYM.Database.SharedPreferenceHelper;
 import com.example.kareem.IIFYM.Models.DailyItem;
+import com.example.kareem.IIFYM.Models.DateHelper;
 import com.example.kareem.IIFYM.Models.Food;
 import com.example.kareem.IIFYM.Models.User;
 import com.example.kareem.IIFYM.R;
@@ -238,7 +239,7 @@ public class activityHome extends AppCompatActivity implements AdapterView.OnIte
 
     public void updateArrayList() {
         adapterDailyItems.clear();
-        arrDailyItems = DB_SQLite.retrieveAllDailyItems();
+        arrDailyItems = DB_SQLite.retrieveAllDailyItems(DateHelper.getTodaysDate());
         for (int i =0; i <arrDailyItems.size(); i++)
             adapterDailyItems.add(arrDailyItems.get(i));
     }

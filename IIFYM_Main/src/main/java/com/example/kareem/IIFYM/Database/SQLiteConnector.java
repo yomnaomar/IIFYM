@@ -8,10 +8,11 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.example.kareem.IIFYM.Models.DailyItem;
+import com.example.kareem.IIFYM.Models.DateHelper;
 import com.example.kareem.IIFYM.Models.Food;
 import com.example.kareem.IIFYM.Models.User;
 import com.example.kareem.IIFYM.Models.Weight;
-import com.example.kareem.IIFYM.Models.weightUnit;
+import com.example.kareem.IIFYM.Models.WeightUnit;
 
 import java.util.ArrayList;
 
@@ -356,7 +357,7 @@ public class SQLiteConnector {
     public Weight retrieveWeight(long id) {
         Cursor C = database.rawQuery("SELECT * FROM " + SQLiteHelper.Table_Weight + " WHERE id = " + id, null);
         if (C.moveToFirst() && C != null) {
-            weightUnit w = weightUnit.Grams;
+            WeightUnit w = WeightUnit.Grams;
             Weight weight = new Weight(C.getInt(1),
                                     w.fromInteger(C.getInt(2)));
             C.close();
@@ -488,9 +489,13 @@ public class SQLiteConnector {
      * @return
      */
     public boolean createDailyItem(long food_id, float multiplier) {
+
         ContentValues newDailyItem = new ContentValues();
         newDailyItem.put("food_id", food_id);
         newDailyItem.put("multiplier", multiplier);
+        newDailyItem.put("date", DateHelper.getTodaysDate());
+
+        Log.d("createDailyItem", DateHelper.getTodaysDate());
 
         long id = database.insert(SQLiteHelper.Table_DailyItem, null, newDailyItem);
         if (id != -1) {
@@ -506,15 +511,16 @@ public class SQLiteConnector {
      * @return
      */
     public DailyItem retrieveDailyItem (final int id){
-        Cursor C = database.rawQuery("SELECT food_id, multiplier" +
-                " FROM " + SQLiteHelper.Table_DailyItem +
+        Cursor C = database.rawQuery("SELECT * FROM " +
+                SQLiteHelper.Table_DailyItem +
                 " WHERE id = " + id, null);
         DailyItem dailyitem = null;
 
         if (C.moveToFirst() && C != null) {
             final int food_id = C.getInt(0);
             final float multiplier = C.getFloat(1);
-            dailyitem = new DailyItem(id, food_id, multiplier);
+            final String date = C.getString(2);
+            dailyitem = new DailyItem(id, food_id, multiplier, date);
             C.close();
         }
         C.close();
@@ -537,8 +543,38 @@ public class SQLiteConnector {
                 int     id          = C.getInt(0);
                 int     food_id     = C.getInt(1);
                 float   multiplier  = C.getFloat(2);
+                String  date        = C.getString(2);
 
-                DailyItem dailyItem = new DailyItem(id, food_id, multiplier);
+                DailyItem dailyItem = new DailyItem(id, food_id, multiplier, date);
+                arrDailyItem.add(dailyItem);
+            }
+        }
+        C.close();
+        return arrDailyItem;
+    }
+
+    /**
+     * Return an ArrayList<DailyItem> containing all DailyItems of a target date
+     * @return
+     */
+    public ArrayList<DailyItem> retrieveAllDailyItems(String targetDate) {
+        Cursor C = database.rawQuery("SELECT * FROM " + SQLiteHelper.Table_DailyItem +
+                " WHERE date = '" + targetDate + "'", null);
+
+        int count = C.getCount();
+        Log.d("retrieveAllDailyItems", "Count: "+ C.getCount() + " TargetDate: " + targetDate);
+        ArrayList<DailyItem> arrDailyItem = new ArrayList();
+
+        if (count > 0) {
+            for (int i = 0; i < count; i++) {
+                C.moveToNext();
+
+                int     id          = C.getInt(0);
+                int     food_id     = C.getInt(1);
+                float   multiplier  = C.getFloat(2);
+                String  date        = C.getString(2);
+
+                DailyItem dailyItem = new DailyItem(id, food_id, multiplier, date);
                 arrDailyItem.add(dailyItem);
             }
         }

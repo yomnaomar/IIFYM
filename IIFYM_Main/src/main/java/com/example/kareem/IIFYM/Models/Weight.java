@@ -6,16 +6,16 @@ package com.example.kareem.IIFYM.Models;
 
 public class Weight {
     private int amount;
-    private weightUnit unit;
+    private WeightUnit unit;
 
-    public Weight(int amount, weightUnit unit) {
+    public Weight(int amount, WeightUnit unit) {
         this.amount = amount;
         this.unit = unit;
     }
 
     public Weight(int amount, int unit) {
         this.amount = amount;
-        weightUnit w = weightUnit.Grams;
+        WeightUnit w = WeightUnit.Grams;
         this.unit = w.fromInteger(unit);
     }
 
@@ -27,11 +27,11 @@ public class Weight {
         this.amount = amount;
     }
 
-    public weightUnit getUnit() {
+    public WeightUnit getUnit() {
         return unit;
     }
 
-    public void setUnit(weightUnit unit) {
+    public void setUnit(WeightUnit unit) {
         this.unit = unit;
     }
 }

@@ -76,7 +76,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 "fat           REAL, " +
                 "portionType   INTEGER, " +     // 0 - Serving, 1 - Weight, 2 - None
                 "isMeal        INTEGER, " +
-                "frequency     INTEGER);";
+                "frequency     INTEGER DEFAULT 0);";
 
         String createTable_Weight = "CREATE TABLE " + Table_Weight + " " +
                 "(id            INTEGER PRIMARY KEY, " +
@@ -95,6 +95,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 "(id            INTEGER PRIMARY KEY autoincrement, " +
                 "food_id        INTEGER, " +
                 "multiplier     REAL, " +
+                "date           TEXT, " +
                 "CONSTRAINT food_id_fk FOREIGN KEY(food_id) REFERENCES " + Table_Food + " (id) ON DELETE CASCADE);";
 
         String createTable_ComposedOf = "CREATE TABLE " + Table_ComposedOf + " " +
