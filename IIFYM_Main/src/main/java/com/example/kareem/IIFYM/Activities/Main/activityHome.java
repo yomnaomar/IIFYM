@@ -29,6 +29,7 @@ public class activityHome extends AppCompatActivity {
     // GUI
     private TabLayout tabLayout;
     private ViewPager viewPager;
+    private ViewPagerAdapter viewPagerAdapter;
     private View fabAddDailyItem;
 
     // Variables
@@ -108,18 +109,31 @@ public class activityHome extends AppCompatActivity {
         firebaseAuth.signOut();
     }
 
+    /**
+     * Creates the pages and tabs of Today, Yesterday, and Tomorrow.
+     * @param viewPager
+     */
     private void setupViewPager(ViewPager viewPager) {
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(createFragmentDay(-1), "Yesterday");
-        adapter.addFragment(createFragmentDay(0), "Today");
-        adapter.addFragment(createFragmentDay(1), "Tomorrow");
-        viewPager.setAdapter(adapter);
+        viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+        // Yesterday
+        createFragment(-1);
+        // Today
+        createFragment(0);
+        // Tomorrow
+        createFragment(1);
+        viewPager.setAdapter(viewPagerAdapter);
+        viewPager.setCurrentItem(1);
     }
 
-    private fragmentDay createFragmentDay(int relativeDay) {
-        fragmentDay frag = new fragmentDay();
-        frag.setDate(DateHelper.getDateRelativeToToday(relativeDay));
-        return frag;
+    /**
+     * Creates a new day page relative to today.
+     * @param relative 0 today, negative before today, positive after today.
+     */
+    public void createFragment(int relative) {
+        fragmentDay fragmentYesterday = new fragmentDay();
+        DateHelper.StringDate day = DateHelper.getDateRelativeToToday(relative);
+        fragmentYesterday.setDate(day.date);
+        viewPagerAdapter.addFragment(fragmentYesterday, day.text);
     }
 
     class ViewPagerAdapter extends FragmentPagerAdapter {
