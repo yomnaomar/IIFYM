@@ -41,4 +41,22 @@ public class DateHelper {
         calendar.setTimeInMillis(System.currentTimeMillis());
         return formatter.format(calendar.getTime());
     }
+
+    /**
+     * Return the date N days ago from today's date in specified format.
+     * @return String representing date in specified format
+     */
+    public static String getDateRelativeToToday(int relative)
+    {
+        // Create a DateFormatter object for displaying date in specified format.
+        SimpleDateFormat formatter = new SimpleDateFormat(dateformat);
+
+        // Create a calendar object that will convert the date and time value in milliseconds to date.
+        Calendar calendar = Calendar.getInstance();
+
+        final long dayInMillis = 24 * 60 * 60 * 1000;
+        calendar.setTimeInMillis(System.currentTimeMillis() + (relative * dayInMillis));
+
+        return formatter.format(calendar.getTime());
+    }
 }
