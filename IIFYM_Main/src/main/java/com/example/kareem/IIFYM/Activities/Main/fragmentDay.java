@@ -91,7 +91,6 @@ public class fragmentDay extends Fragment implements AdapterView.OnItemClickList
 
     private void initializeGUI() {
         lblSelectedDate = (TextView) view.findViewById(R.id.lblSelectedDate);
-        lblSelectedDate.setText(this.datePretty);
 
         lblCaloriesCurrent = (TextView) view.findViewById(R.id.lblCaloriesCurrent);
         lblCaloriesLeft = (TextView) view.findViewById(R.id.lblCaloriesLeft);
@@ -151,7 +150,9 @@ public class fragmentDay extends Fragment implements AdapterView.OnItemClickList
         Log.d("initializeUser", currentUser.toString());
     }
 
-    public void updateMacros() {
+    private void updateMacros() {
+        lblSelectedDate.setText(this.datePretty);
+
         // Reset to prevent accumulation
         caloriesCurrent = 0;
         carbsCurrent = 0;
@@ -240,18 +241,23 @@ public class fragmentDay extends Fragment implements AdapterView.OnItemClickList
         }
     }
 
-    public void updateArrayList() {
+    private void updateArrayList() {
         adapterDailyItems.clear();
         arrDailyItems = DB_SQLite.retrieveAllDailyItems(date);
-        for (int i =0; i <arrDailyItems.size(); i++)
+        for (int i = 0; i <arrDailyItems.size(); i++) {
             adapterDailyItems.add(arrDailyItems.get(i));
+        }
+    }
+
+    public void render() {
+        updateArrayList();
+        updateMacros();
     }
 
     @Override public void onResume() {
         super.onResume();
         initializeUser();
-        updateArrayList();
-        updateMacros();
+        render();
     }
 
     @Override public void onPause() {
@@ -259,8 +265,7 @@ public class fragmentDay extends Fragment implements AdapterView.OnItemClickList
     }
 
     @Override public void onItemDeleted() {
-        updateArrayList();
-        updateMacros();
+        render();
     }
 
     @Override public void onItemClick(AdapterView<?> parent, View view, final int position, long row_id) {

@@ -22,18 +22,15 @@ import com.example.kareem.IIFYM.Models.DateHelper;
 import com.example.kareem.IIFYM.R;
 import com.google.firebase.auth.FirebaseAuth;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class activityHome extends AppCompatActivity {
     // GUI
-    private TabLayout tabLayout;
     private ViewPager viewPager;
-    private ViewPagerAdapter viewPagerAdapter;
+    private InfinitePagerAdapter viewPagerAdapter;
     private View fabAddDailyItem;
 
     // Variables
     private Context context;
+    private int selectedRelativeDay = 0; // relative to today in days
 
     // Database
     private SharedPreferenceHelper myPrefs;
@@ -110,55 +107,71 @@ public class activityHome extends AppCompatActivity {
      * Creates the pages and tabs of Today, Yesterday, and Tomorrow.
      * @param viewPager
      */
-    private void setupViewPager(ViewPager viewPager) {
-        viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-        // Yesterday
-        createFragment(-1);
-        // Today
-        createFragment(0);
-        // Tomorrow
-        createFragment(1);
+    private void setupViewPager(final ViewPager viewPager) {
+        final fragmentDay[] fragments = new fragmentDay[] {
+                createFragment(selectedRelativeDay - 1),
+                createFragment(selectedRelativeDay),
+                createFragment(selectedRelativeDay + 1)
+        };
+        viewPagerAdapter = new InfinitePagerAdapter(getSupportFragmentManager(), fragments);
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrollStateChanged(int state) {
+                if (state == ViewPager.SCROLL_STATE_IDLE) {
+                    int currPage = viewPager.getCurrentItem();
+                    if (currPage < 1) {
+                        selectedRelativeDay -= 1;
+                    } else if (currPage > 1) {
+                        selectedRelativeDay += 1;
+                    }
+                    fragments[0].setDate(DateHelper.getDateRelativeToToday(selectedRelativeDay - 1));
+                    fragments[0].render();
+                    fragments[1].setDate(DateHelper.getDateRelativeToToday(selectedRelativeDay));
+                    fragments[1].render();
+                    fragments[2].setDate(DateHelper.getDateRelativeToToday(selectedRelativeDay + 1));
+                    fragments[2].render();
+                    viewPager.setCurrentItem(1, false);
+                }
+            }
+
+            @Override
+            public void onPageScrolled(int arg0, float arg1, int arg2) {}
+
+            @Override
+            public void onPageSelected(int arg0) {}
+        });
         viewPager.setAdapter(viewPagerAdapter);
         viewPager.setCurrentItem(1);
     }
 
     /**
-     * Creates a new day page relative to today.
+     * Returns a new Fragment page `relative` to today.
      * @param relative 0 today, negative before today, positive after today.
+     * @return
      */
-    public void createFragment(int relative) {
-        fragmentDay fragmentYesterday = new fragmentDay();
+    private fragmentDay createFragment(int relative) {
+        fragmentDay f = new fragmentDay();
         DateHelper.StringDate day = DateHelper.getDateRelativeToToday(relative);
-        fragmentYesterday.setDate(day);
-        viewPagerAdapter.addFragment(fragmentYesterday, day.text);
+        f.setDate(day);
+        return f;
     }
 
-    class ViewPagerAdapter extends FragmentPagerAdapter {
-        private final List<Fragment> mFragmentList = new ArrayList<>();
-        private final List<String> mFragmentTitleList = new ArrayList<>();
+    class InfinitePagerAdapter extends FragmentPagerAdapter {
+        Fragment[] fragments;
 
-        public ViewPagerAdapter(FragmentManager manager) {
+        public InfinitePagerAdapter(FragmentManager manager, Fragment[] fragments) {
             super(manager);
+            this.fragments = fragments;
         }
 
         @Override
         public Fragment getItem(int position) {
-            return mFragmentList.get(position);
+            return fragments[position];
         }
 
         @Override
         public int getCount() {
-            return mFragmentList.size();
-        }
-
-        public void addFragment(Fragment fragment, String title) {
-            mFragmentList.add(fragment);
-            mFragmentTitleList.add(title);
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return mFragmentTitleList.get(position);
+            return fragments.length;
         }
     }
 }
