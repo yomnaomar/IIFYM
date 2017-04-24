@@ -72,13 +72,30 @@
                 android:layout_marginBottom="16dp"
                 app:layout_constraintVertical_bias="0.060000002" />
 
+            <Button
+                android:id="@+id/button_forgot"
+                android:layout_width="95dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="16dp"
+                android:background="@drawable/btn_iifym_style"
+                android:text="@string/btnForgotPassword"
+                android:textColor="#192D5A"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/password_textview"
+                app:layout_constraintVertical_bias="0.060000002"
+                android:layout_marginTop="72dp" />
+
             <TextView
                 android:text="Sign Up Using"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/signup_textview"
                 android:textColor="@color/colorPrimary"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="96dp"
                 android:layout_marginEnd="16dp"
                 app:layout_constraintRight_toRightOf="parent"
                 android:layout_marginStart="16dp"

@@ -176,6 +176,7 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
 
         // Buttons
         findViewById(R.id.Button_Register).setOnClickListener(this);
+        findViewById(R.id.button_forgot).setOnClickListener(this);
     }
 
     private void createAccount(String email, String password) {
@@ -262,6 +263,26 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
                 });
     }
 
+    /**
+     * Sends mail to a given `email` prompting to reset password.
+     * @param email Email address to send mail to.
+     */
+    private void forgotPassword(String email) {
+        showProgressDialog();
+        firebaseAuth.sendPasswordResetEmail(email)
+            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    hideProgressDialog();
+                    if (task.isSuccessful()) {
+
+                    } else {
+
+                    }
+                }
+            });
+    }
+
     @Override public void onStop(){
         if (firebaseAuthListener != null){
             firebaseAuth.removeAuthStateListener(firebaseAuthListener);
@@ -277,7 +298,7 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
 
     @Override protected void onPause() {
         super.onPause();
-        myPrefs.addPreference("temp_email_login",etxtEmail.getText().toString());
+        myPrefs.addPreference("temp_email_login", etxtEmail.getText().toString());
     }
 
     @Override protected void onResume() {
@@ -299,8 +320,14 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
 
     @Override public void onClick(View v) {
         int i = v.getId();
-        if (i == R.id.Button_Register) {
-            createAccount(etxtEmail.getText().toString().trim(), etxtPassword.getText().toString().trim());
+        switch (i) {
+            case R.id.Button_Register:
+                createAccount(etxtEmail.getText().toString().trim(), etxtPassword.getText().toString().trim());
+                break;
+            case R.id.button_forgot:
+                final String email = etxtEmail.getText().toString().trim();
+                forgotPassword(email);
+                break;
         }
     }
 

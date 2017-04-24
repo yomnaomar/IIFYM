@@ -169,5 +169,6 @@
     <string name="lblFrequent">Frequent meals</string>
 
     <string name="lblComingSoon">Coming Soon!</string>
+    <string name="btnForgotPassword">Forgot Password</string>
 
 </resources>
