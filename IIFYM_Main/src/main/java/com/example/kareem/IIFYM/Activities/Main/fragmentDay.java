@@ -21,6 +21,7 @@ import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
 import com.example.kareem.IIFYM.Database.SQLiteConnector;
 import com.example.kareem.IIFYM.Database.SharedPreferenceHelper;
 import com.example.kareem.IIFYM.Models.DailyItem;
+import com.example.kareem.IIFYM.Models.DateHelper;
 import com.example.kareem.IIFYM.Models.Food;
 import com.example.kareem.IIFYM.Models.User;
 import com.example.kareem.IIFYM.R;
@@ -32,12 +33,13 @@ import java.util.ArrayList;
 public class fragmentDay extends Fragment implements AdapterView.OnItemClickListener, OnListItemDeletedListener {
 
     // GUI
+    private TextView lblSelectedDate;
     private TextView lblCaloriesCurrent, lblCarbsCurrent, lblProteinCurrent, lblFatCurrent;
     private TextView lblCaloriesLeft,    lblCarbsLeft,    lblProteinLeft,    lblFatLeft;
     private TextView lblCaloriesGoal,    lblCarbsGoal,    lblProteinGoal,    lblFatGoal;
 
     private ArrayList<DailyItem>    arrDailyItems;
-    private AdapterDailyItem adapterDailyItems;
+    private AdapterDailyItem        adapterDailyItems;
     private ListView                listViewDailyItems;
     private RoundCornerProgressBar  progressBarCalories, progressBarCarbs, progressBarProtein, progressBarFat;
     private Animation               mEnterAnimation, mExitAnimation;
@@ -47,6 +49,7 @@ public class fragmentDay extends Fragment implements AdapterView.OnItemClickList
     private FragmentActivity activity;
     private Context context;
     private String date;
+    private String datePretty;
     public boolean  isPercent;
     public int      caloriesCurrent = 0,    carbsCurrent = 0,   proteinCurrent = 0, fatCurrent = 0;
     public int      caloriesLeft = 0,       carbsLeft = 0,      proteinLeft = 0,    fatLeft = 0;
@@ -60,9 +63,9 @@ public class fragmentDay extends Fragment implements AdapterView.OnItemClickList
 
     public fragmentDay() {}
 
-    public fragmentDay setDate(String date) {
-        this.date = date;
-        return this;
+    public void setDate(DateHelper.StringDate day) {
+        this.date = day.date;
+        this.datePretty = day.text;
     }
 
     @Override
@@ -87,6 +90,9 @@ public class fragmentDay extends Fragment implements AdapterView.OnItemClickList
     }
 
     private void initializeGUI() {
+        lblSelectedDate = (TextView) view.findViewById(R.id.lblSelectedDate);
+        lblSelectedDate.setText(this.datePretty);
+
         lblCaloriesCurrent = (TextView) view.findViewById(R.id.lblCaloriesCurrent);
         lblCaloriesLeft = (TextView) view.findViewById(R.id.lblCaloriesLeft);
         lblCaloriesGoal = (TextView) view.findViewById(R.id.lblCaloriesGoal);
@@ -145,7 +151,7 @@ public class fragmentDay extends Fragment implements AdapterView.OnItemClickList
         Log.d("initializeUser", currentUser.toString());
     }
 
-    public void updateMacros(){
+    public void updateMacros() {
         // Reset to prevent accumulation
         caloriesCurrent = 0;
         carbsCurrent = 0;

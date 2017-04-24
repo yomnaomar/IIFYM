@@ -51,9 +51,6 @@ public class activityHome extends AppCompatActivity {
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
 
-        tabLayout = (TabLayout) findViewById(R.id.tablayout);
-        tabLayout.setupWithViewPager(viewPager);
-
         fabAddDailyItem = (FloatingActionButton) findViewById(R.id.fabAddDailyItem);
         fabAddDailyItem.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -132,7 +129,7 @@ public class activityHome extends AppCompatActivity {
     public void createFragment(int relative) {
         fragmentDay fragmentYesterday = new fragmentDay();
         DateHelper.StringDate day = DateHelper.getDateRelativeToToday(relative);
-        fragmentYesterday.setDate(day.date);
+        fragmentYesterday.setDate(day);
         viewPagerAdapter.addFragment(fragmentYesterday, day.text);
     }
 
