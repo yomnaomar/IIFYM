@@ -11,22 +11,14 @@
     android:layout_marginRight="@dimen/activity_horizontal_margin"
     android:layout_marginLeft="@dimen/activity_horizontal_margin"
     android:layout_marginTop="5dp">
-    <TextView
-        android:text="Today"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/lblSelectedDate"
-        android:textSize="18dp"
-        android:textColor="@color/black_light"
-        android:textStyle="bold"
-        android:layout_weight="0.2" />
 
     <LinearLayout
         android:id="@+id/linearlayoutBase"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_marginTop="32dp">
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
 
         <!--<LinearLayout
             android:orientation="horizontal"
@@ -121,11 +113,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:layout_weight="0.6"
                         android:gravity="center"
                         android:text="500"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:textColor="@color/Custom_Grey"
-                        android:layout_weight="0.6"
                         android:textSize="16sp" />
 
                     <TextView
@@ -416,4 +408,5 @@
             android:id="@+id/listviewDailyItems" />
 
     </LinearLayout>
+
 </RelativeLayout>

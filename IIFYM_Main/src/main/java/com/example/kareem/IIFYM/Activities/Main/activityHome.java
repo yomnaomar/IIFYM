@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -14,6 +13,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.example.kareem.IIFYM.Activities.Settings.activitySettings;
 import com.example.kareem.IIFYM.Activities.UserLoginAuthentification.activityLogin;
@@ -22,15 +23,17 @@ import com.example.kareem.IIFYM.Models.DateHelper;
 import com.example.kareem.IIFYM.R;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class activityHome extends AppCompatActivity {
+public class activityHome extends AppCompatActivity implements View.OnClickListener{
     // GUI
-    private ViewPager viewPager;
-    private InfinitePagerAdapter viewPagerAdapter;
-    private View fabAddDailyItem;
+    private TextView                lblSelectedDate;
+    private ViewPager               viewPager;
+    private InfinitePagerAdapter    viewPagerAdapter;
+    private FloatingActionButton    fabAddDailyItem;
+    private ImageButton             imagebtn_next, imagebtn_prev;
 
     // Variables
-    private Context context;
-    private int selectedRelativeDay = 0; // relative to today in days
+    private Context             context;
+    private int                 selectedRelativeDay = 0; // relative to today in days
 
     // Database
     private SharedPreferenceHelper myPrefs;
@@ -45,8 +48,12 @@ public class activityHome extends AppCompatActivity {
         Toolbar toolbarMain = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbarMain);
 
-        viewPager = (ViewPager) findViewById(R.id.viewpager);
-        setupViewPager(viewPager);
+        lblSelectedDate = (TextView) findViewById(R.id.lblSelectedDate);
+        imagebtn_next = (ImageButton) findViewById(R.id.imagebtn_next);
+        imagebtn_next.setOnClickListener(this);
+
+        imagebtn_prev = (ImageButton) findViewById(R.id.imagebtn_prev);
+        imagebtn_prev.setOnClickListener(this);
 
         fabAddDailyItem = (FloatingActionButton) findViewById(R.id.fabAddDailyItem);
         fabAddDailyItem.setOnClickListener(new View.OnClickListener() {
@@ -54,6 +61,9 @@ public class activityHome extends AppCompatActivity {
                 goToAddDailyItem();
             }
         });
+
+        viewPager = (ViewPager) findViewById(R.id.viewpager);
+        setupViewPager(viewPager);
 
         // Database
         myPrefs = new SharedPreferenceHelper(context);
@@ -114,6 +124,9 @@ public class activityHome extends AppCompatActivity {
                 createFragment(selectedRelativeDay + 1)
         };
         viewPagerAdapter = new InfinitePagerAdapter(getSupportFragmentManager(), fragments);
+
+        lblSelectedDate.setText(DateHelper.getDateRelativeToToday(selectedRelativeDay).text);
+
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrollStateChanged(int state) {
@@ -130,7 +143,17 @@ public class activityHome extends AppCompatActivity {
                     fragments[1].render();
                     fragments[2].setDate(DateHelper.getDateRelativeToToday(selectedRelativeDay + 1));
                     fragments[2].render();
+
                     viewPager.setCurrentItem(1, false);
+                }
+                if (state == ViewPager.SCROLL_STATE_SETTLING){
+                    int currPage = viewPager.getCurrentItem();
+                    if (currPage < 1) {
+                        currPage = selectedRelativeDay - 1;
+                    } else if (currPage > 1) {
+                        currPage = selectedRelativeDay + 1;
+                    }
+                    lblSelectedDate.setText(DateHelper.getDateRelativeToToday(currPage).text);
                 }
             }
 
@@ -173,5 +196,30 @@ public class activityHome extends AppCompatActivity {
         public int getCount() {
             return fragments.length;
         }
+    }
+
+    @Override public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.imagebtn_next:
+                goToNext();
+                break;
+            case R.id.imagebtn_prev:
+                goToPrev();
+                break;
+        }
+    }
+
+    /**
+     * Passes page index to go to
+     */
+    private void goToNext() {
+        viewPager.setCurrentItem(2);
+    }
+
+    /**
+     * Passes page index to go to
+     */
+    private void goToPrev() {
+        viewPager.setCurrentItem(0);
     }
 }

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
@@ -30,10 +29,9 @@ import com.example.kareem.IIFYM.ViewComponents.OnListItemDeletedListener;
 
 import java.util.ArrayList;
 
-public class fragmentDay extends Fragment implements AdapterView.OnItemClickListener, OnListItemDeletedListener {
+public class fragmentDay extends Fragment implements AdapterView.OnItemClickListener, OnListItemDeletedListener{
 
     // GUI
-    private TextView lblSelectedDate;
     private TextView lblCaloriesCurrent, lblCarbsCurrent, lblProteinCurrent, lblFatCurrent;
     private TextView lblCaloriesLeft,    lblCarbsLeft,    lblProteinLeft,    lblFatLeft;
     private TextView lblCaloriesGoal,    lblCarbsGoal,    lblProteinGoal,    lblFatGoal;
@@ -46,10 +44,10 @@ public class fragmentDay extends Fragment implements AdapterView.OnItemClickList
 
     // Variables
     private View view;
-    private FragmentActivity activity;
-    private Context context;
-    private String date;
-    private String datePretty;
+    private FragmentActivity    activity;
+    private Context             context;
+    private String              date;
+
     public boolean  isPercent;
     public int      caloriesCurrent = 0,    carbsCurrent = 0,   proteinCurrent = 0, fatCurrent = 0;
     public int      caloriesLeft = 0,       carbsLeft = 0,      proteinLeft = 0,    fatLeft = 0;
@@ -65,7 +63,6 @@ public class fragmentDay extends Fragment implements AdapterView.OnItemClickList
 
     public void setDate(DateHelper.StringDate day) {
         this.date = day.date;
-        this.datePretty = day.text;
     }
 
     @Override
@@ -90,7 +87,7 @@ public class fragmentDay extends Fragment implements AdapterView.OnItemClickList
     }
 
     private void initializeGUI() {
-        lblSelectedDate = (TextView) view.findViewById(R.id.lblSelectedDate);
+        ;
 
         lblCaloriesCurrent = (TextView) view.findViewById(R.id.lblCaloriesCurrent);
         lblCaloriesLeft = (TextView) view.findViewById(R.id.lblCaloriesLeft);
@@ -151,8 +148,6 @@ public class fragmentDay extends Fragment implements AdapterView.OnItemClickList
     }
 
     private void updateMacros() {
-        lblSelectedDate.setText(this.datePretty);
-
         // Reset to prevent accumulation
         caloriesCurrent = 0;
         carbsCurrent = 0;
@@ -276,5 +271,4 @@ public class fragmentDay extends Fragment implements AdapterView.OnItemClickList
         intent.putExtra("id", id);
         startActivity(intent);
     }
-
 }
