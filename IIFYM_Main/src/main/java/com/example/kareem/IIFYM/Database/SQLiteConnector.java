@@ -517,9 +517,9 @@ public class SQLiteConnector {
         DailyItem dailyitem = null;
 
         if (C.moveToFirst() && C != null) {
-            final int food_id = C.getInt(0);
-            final float multiplier = C.getFloat(1);
-            final String date = C.getString(2);
+            int     food_id     = C.getInt(1);
+            float   multiplier  = C.getFloat(2);
+            String  date        = C.getString(3);
             dailyitem = new DailyItem(id, food_id, multiplier, date);
             C.close();
         }
@@ -543,7 +543,7 @@ public class SQLiteConnector {
                 int     id          = C.getInt(0);
                 int     food_id     = C.getInt(1);
                 float   multiplier  = C.getFloat(2);
-                String  date        = C.getString(2);
+                String  date        = C.getString(3);
 
                 DailyItem dailyItem = new DailyItem(id, food_id, multiplier, date);
                 arrDailyItem.add(dailyItem);
@@ -572,7 +572,7 @@ public class SQLiteConnector {
                 int     id          = C.getInt(0);
                 int     food_id     = C.getInt(1);
                 float   multiplier  = C.getFloat(2);
-                String  date        = C.getString(2);
+                String  date        = C.getString(3);
 
                 DailyItem dailyItem = new DailyItem(id, food_id, multiplier, date);
                 arrDailyItem.add(dailyItem);
