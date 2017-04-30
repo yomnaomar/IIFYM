@@ -9,32 +9,34 @@
     tools:context="com.example.kareem.IIFYM.Activities.Main.activityHome">
 
     <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabAddDailyItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:clickable="true"
-        android:id="@+id/fabAddDailyItem"
-        android:baselineAlignBottom="false"
-        android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="5dp"
+        android:baselineAlignBottom="false"
+        android:clickable="true"
         app:elevation="3dp"
         app:fabSize="mini"
-        app:srcCompat="@drawable/ic_add"
-        android:layout_marginRight="5dp"
-        android:layout_marginBottom="5dp"
-        app:rippleColor="?attr/colorButtonNormal" />
+        app:rippleColor="?attr/colorButtonNormal"
+        app:srcCompat="@drawable/ic_add" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="25dp"
-        android:layout_marginBottom="5dp"
         android:orientation="horizontal"
-        android:id="@+id/linearLayout">
+        android:id="@+id/linearLayout"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
 
         <ImageButton
             android:id="@+id/imagebtn_prev"
             android:layout_width="30dp"
             android:layout_height="match_parent"
             android:layout_alignBottom="@+id/lblSelectedDate"
+            android:layout_margin="3dp"
             android:background="#00000000"
             app:srcCompat="@mipmap/ic_previous" />
 
@@ -47,7 +49,7 @@
             android:layout_weight="1"
             android:text="Today"
             android:textAlignment="center"
-            android:textColor="@color/black_light"
+            android:textColor="?attr/colorPrimary"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -58,6 +60,7 @@
             android:layout_alignBottom="@+id/lblSelectedDate"
             android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
+            android:layout_margin="3dp"
             android:background="#00000000"
             app:srcCompat="@mipmap/ic_next" />
     </LinearLayout>

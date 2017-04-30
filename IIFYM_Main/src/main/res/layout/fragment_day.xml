@@ -16,9 +16,11 @@
         android:id="@+id/linearlayoutBase"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true">
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:orientation="vertical">
 
         <!--<LinearLayout
             android:orientation="horizontal"
@@ -76,11 +78,11 @@
                 android:id="@+id/iconCalories"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
-                android:scaleType="centerInside"
-                app:srcCompat="@drawable/ic_calories"
+                android:layout_weight="0.20"
                 android:paddingRight="2.5dp"
                 android:paddingTop="5dp"
-                android:layout_weight="0.20" />
+                android:scaleType="centerInside"
+                app:srcCompat="@drawable/ic_calories" />
 
             <LinearLayout
                 android:id="@+id/linearLayoutCaloriesProgressBar"
@@ -124,26 +126,26 @@
                         android:id="@+id/lblCaloriesGoal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:layout_weight="0.2"
                         android:gravity="right"
                         android:text="2000"
                         android:textAlignment="gravity"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:textColor="@color/Custom_Grey"
-                        android:layout_gravity="center"
                         android:textSize="16sp" />
                 </LinearLayout>
 
                 <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
-                    android:layout_height="17dp"
+                    android:id="@+id/progressBarCalories"
                     android:layout_width="match_parent"
-                    app:rcBackgroundPadding="1dp"
+                    android:layout_height="17dp"
                     app:rcBackgroundColor="@color/Progress_Bar_Background"
-                    app:rcProgressColor="@color/CaloriesProgessColor"
+                    app:rcBackgroundPadding="1dp"
                     app:rcMax="100"
                     app:rcProgress="0"
-                    app:rcRadius="10dp"
-                    android:id= "@+id/progressBarCalories"/>
+                    app:rcProgressColor="@color/CaloriesProgessColor"
+                    app:rcRadius="10dp" />
 
             </LinearLayout>
 
@@ -161,9 +163,9 @@
                 android:id="@+id/iconCarbs"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
+                android:layout_weight="0.2"
                 android:scaleType="centerInside"
-                app:srcCompat="@drawable/ic_carbs"
-                android:layout_weight="0.2" />
+                app:srcCompat="@drawable/ic_carbs" />
 
             <LinearLayout
                 android:id="@+id/linearLayoutCarbsProgressBar"
@@ -217,15 +219,15 @@
                 </LinearLayout>
 
                 <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
-                    android:layout_height="17dp"
+                    android:id="@+id/progressBarCarbs"
                     android:layout_width="match_parent"
-                    app:rcBackgroundPadding="1dp"
+                    android:layout_height="17dp"
                     app:rcBackgroundColor="@color/Progress_Bar_Background"
-                    app:rcProgressColor="@color/CarbProgressColor"
+                    app:rcBackgroundPadding="1dp"
                     app:rcMax="100"
                     app:rcProgress="0"
-                    app:rcRadius="10dp"
-                    android:id="@+id/progressBarCarbs" />
+                    app:rcProgressColor="@color/CarbProgressColor"
+                    app:rcRadius="10dp" />
 
             </LinearLayout>
 
@@ -243,11 +245,11 @@
                 android:id="@+id/iconProtein"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
+                android:layout_weight="0.2"
                 android:paddingLeft="3dp"
                 android:paddingRight="3dp"
                 android:scaleType="centerInside"
-                app:srcCompat="@drawable/ic_protein"
-                android:layout_weight="0.2" />
+                app:srcCompat="@drawable/ic_protein" />
 
             <LinearLayout
                 android:id="@+id/linearLayoutProteinProgressBar"
@@ -303,15 +305,15 @@
                 </LinearLayout>
 
                 <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
-                    android:layout_height="17dp"
+                    android:id="@+id/progressBarProtein"
                     android:layout_width="match_parent"
-                    app:rcBackgroundPadding="1dp"
+                    android:layout_height="17dp"
                     app:rcBackgroundColor="@color/Progress_Bar_Background"
-                    app:rcProgressColor="@color/ProteinProgessColor"
+                    app:rcBackgroundPadding="1dp"
                     app:rcMax="100"
                     app:rcProgress="0"
-                    app:rcRadius="10dp"
-                    android:id="@+id/progressBarProtein" />
+                    app:rcProgressColor="@color/ProteinProgessColor"
+                    app:rcRadius="10dp" />
 
             </LinearLayout>
 
@@ -321,18 +323,18 @@
             android:id="@+id/linearlayoutFat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
             android:orientation="horizontal"
-            android:weightSum="1"
-            android:layout_marginBottom="5dp">
+            android:weightSum="1">
 
 
             <ImageView
                 android:id="@+id/iconFat"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
+                android:layout_weight="0.2"
                 android:scaleType="centerInside"
-                app:srcCompat="@drawable/ic_fat"
-                android:layout_weight="0.2" />
+                app:srcCompat="@drawable/ic_fat" />
 
             <LinearLayout
                 android:id="@+id/linearLayoutFatProgressBar"
@@ -388,24 +390,24 @@
                 </LinearLayout>
 
                 <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
-                    android:layout_height="17dp"
+                    android:id="@+id/progressBarFat"
                     android:layout_width="match_parent"
-                    app:rcBackgroundPadding="1dp"
+                    android:layout_height="17dp"
                     app:rcBackgroundColor="@color/Progress_Bar_Background"
-                    app:rcProgressColor="@color/FatProgessColor"
+                    app:rcBackgroundPadding="1dp"
                     app:rcMax="100"
                     app:rcProgress="0"
-                    app:rcRadius="10dp"
-                    android:id="@+id/progressBarFat" />
+                    app:rcProgressColor="@color/FatProgessColor"
+                    app:rcRadius="10dp" />
 
             </LinearLayout>
 
         </LinearLayout>
 
         <ListView
+            android:id="@+id/listviewDailyItems"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/listviewDailyItems" />
+            android:layout_height="match_parent" />
 
     </LinearLayout>
 

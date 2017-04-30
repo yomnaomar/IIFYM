@@ -34,6 +34,7 @@ public class activityHome extends AppCompatActivity implements View.OnClickListe
     // Variables
     private Context             context;
     private int                 selectedRelativeDay = 0; // relative to today in days
+    private fragmentDay[] fragments;
 
     // Database
     private SharedPreferenceHelper myPrefs;
@@ -84,6 +85,9 @@ public class activityHome extends AppCompatActivity implements View.OnClickListe
         int id = item.getItemId();
         Intent intent;
         switch (id){
+            case (R.id.actionToday):
+                goToToday();
+                return true;
             case (R.id.actionNutritionSettings):
                 intent = new Intent(context,activitySettings.class );
                 startActivity(intent);
@@ -118,7 +122,7 @@ public class activityHome extends AppCompatActivity implements View.OnClickListe
      * @param viewPager
      */
     private void setupViewPager(final ViewPager viewPager) {
-        final fragmentDay[] fragments = new fragmentDay[] {
+       fragments = new fragmentDay[] {
                 createFragment(selectedRelativeDay - 1),
                 createFragment(selectedRelativeDay),
                 createFragment(selectedRelativeDay + 1)
@@ -163,6 +167,7 @@ public class activityHome extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onPageSelected(int arg0) {}
         });
+
         viewPager.setAdapter(viewPagerAdapter);
         viewPager.setCurrentItem(1);
     }
@@ -221,5 +226,22 @@ public class activityHome extends AppCompatActivity implements View.OnClickListe
      */
     private void goToPrev() {
         viewPager.setCurrentItem(0);
+    }
+
+    /**
+     * Will call onPageSelected() in setUpViewPager()
+     */
+    private void goToToday() {
+        selectedRelativeDay = 0;
+
+        fragments[0].setDate(DateHelper.getDateRelativeToToday(selectedRelativeDay - 1));
+        fragments[0].render();
+        fragments[1].setDate(DateHelper.getDateRelativeToToday(selectedRelativeDay));
+        fragments[1].render();
+        fragments[2].setDate(DateHelper.getDateRelativeToToday(selectedRelativeDay + 1));
+        fragments[2].render();
+
+        viewPager.setCurrentItem(1, false);
+        lblSelectedDate.setText(DateHelper.getDateRelativeToToday(0).text);
     }
 }
