@@ -6,423 +6,70 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.kareem.IIFYM.Activities.Main.activityHome"
-    android:layout_marginBottom="@dimen/activity_vertical_margin"
-    android:layout_marginRight="@dimen/activity_horizontal_margin"
-    android:layout_marginLeft="@dimen/activity_horizontal_margin"
-    android:layout_marginTop="5dp">
+    tools:context="com.example.kareem.IIFYM.Activities.Main.activityHome">
 
     <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabAddDailyItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:clickable="true"
-        android:id="@+id/fabAddDailyItem"
-        android:baselineAlignBottom="false"
-        android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="5dp"
+        android:baselineAlignBottom="false"
+        android:clickable="true"
         app:elevation="3dp"
         app:fabSize="mini"
-        app:srcCompat="@drawable/ic_add"
-        android:layout_marginRight="5dp"
-        android:layout_marginBottom="5dp"
-        app:rippleColor="?attr/colorButtonNormal" />
+        app:rippleColor="?attr/colorButtonNormal"
+        app:srcCompat="@drawable/ic_add" />
 
     <LinearLayout
-        android:id="@+id/linearlayoutBase"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
+        android:layout_height="25dp"
+        android:orientation="horizontal"
+        android:id="@+id/linearLayout"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true">
 
-        <!--<LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/linearlayoutLabels">
-
-            <Space
-                android:layout_width="35dp"
-                android:layout_height="20dp"
-                android:layout_weight="0.2" />
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="0.8"
-                android:weightSum="1">
-
-                <TextView
-                    android:text="Food"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/textView42"
-                    android:layout_weight="0.2" />
-
-                <TextView
-                    android:text="+               Left               ="
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/textView43"
-                    android:textAlignment="center"
-                    android:layout_weight="0.6" />
-
-                <TextView
-                    android:text="Goal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/textView44"
-                    android:layout_weight="0.2"
-                    android:textAlignment="viewEnd" />
-            </LinearLayout>
-
-        </LinearLayout>-->
-
-        <LinearLayout
-            android:id="@+id/linearlayoutCalories"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="1">
-
-
-            <ImageView
-                android:id="@+id/iconCalories"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:scaleType="centerInside"
-                app:srcCompat="@drawable/ic_calories"
-                android:paddingRight="2.5dp"
-                android:paddingTop="5dp"
-                android:layout_weight="0.20" />
-
-            <LinearLayout
-                android:id="@+id/linearLayoutCaloriesProgressBar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.8"
-                android:orientation="vertical"
-                android:weightSum="1">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="1">
-
-                    <TextView
-                        android:id="@+id/lblCaloriesCurrent"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="0.2"
-                        android:gravity="left"
-                        android:text="0"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@color/Custom_Grey"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:id="@+id/lblCaloriesLeft"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:text="500"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@color/Custom_Grey"
-                        android:layout_weight="0.6"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:id="@+id/lblCaloriesGoal"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.2"
-                        android:gravity="right"
-                        android:text="2000"
-                        android:textAlignment="gravity"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@color/Custom_Grey"
-                        android:layout_gravity="center"
-                        android:textSize="16sp" />
-                </LinearLayout>
-
-                <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
-                    android:layout_height="17dp"
-                    android:layout_width="match_parent"
-                    app:rcBackgroundPadding="1dp"
-                    app:rcBackgroundColor="@color/Progress_Bar_Background"
-                    app:rcProgressColor="@color/CaloriesProgessColor"
-                    app:rcMax="100"
-                    app:rcProgress="0"
-                    app:rcRadius="10dp"
-                    android:id= "@+id/progressBarCalories"/>
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/linearlayoutCarbs"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="1">
-
-
-            <ImageView
-                android:id="@+id/iconCarbs"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:scaleType="centerInside"
-                app:srcCompat="@drawable/ic_carbs"
-                android:layout_weight="0.2" />
-
-            <LinearLayout
-                android:id="@+id/linearLayoutCarbsProgressBar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.8"
-                android:orientation="vertical"
-                android:weightSum="1">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="1">
-
-                    <TextView
-                        android:id="@+id/lblCarbsCurrent"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="0.20"
-                        android:gravity="left"
-                        android:text="100"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@color/Custom_Grey"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:id="@+id/lblCarbsLeft"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="0.6"
-                        android:gravity="center"
-                        android:text="100"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@color/Custom_Grey"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:id="@+id/lblCarbsGoal"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.2"
-                        android:gravity="right"
-                        android:text="100"
-                        android:textAlignment="gravity"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@color/Custom_Grey"
-                        android:textSize="16sp" />
-                </LinearLayout>
-
-                <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
-                    android:layout_height="17dp"
-                    android:layout_width="match_parent"
-                    app:rcBackgroundPadding="1dp"
-                    app:rcBackgroundColor="@color/Progress_Bar_Background"
-                    app:rcProgressColor="@color/CarbProgressColor"
-                    app:rcMax="100"
-                    app:rcProgress="0"
-                    app:rcRadius="10dp"
-                    android:id="@+id/progressBarCarbs" />
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/linearlayoutProtein"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="1">
-
-
-            <ImageView
-                android:id="@+id/iconProtein"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:paddingLeft="3dp"
-                android:paddingRight="3dp"
-                android:scaleType="centerInside"
-                app:srcCompat="@drawable/ic_protein"
-                android:layout_weight="0.2" />
-
-            <LinearLayout
-                android:id="@+id/linearLayoutProteinProgressBar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.8"
-                android:orientation="vertical"
-                android:weightSum="1">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="1">
-
-                    <TextView
-                        android:id="@+id/lblProteinCurrent"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="0.2"
-                        android:gravity="left"
-                        android:text="100"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@color/Custom_Grey"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:id="@+id/lblProteinLeft"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="0.6"
-                        android:gravity="center"
-                        android:text="100"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@color/Custom_Grey"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:id="@+id/lblProteinGoal"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentTop="true"
-                        android:layout_weight="0.2"
-                        android:gravity="right"
-                        android:text="100"
-                        android:textAlignment="gravity"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@color/Custom_Grey"
-                        android:textSize="16sp" />
-                </LinearLayout>
-
-                <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
-                    android:layout_height="17dp"
-                    android:layout_width="match_parent"
-                    app:rcBackgroundPadding="1dp"
-                    app:rcBackgroundColor="@color/Progress_Bar_Background"
-                    app:rcProgressColor="@color/ProteinProgessColor"
-                    app:rcMax="100"
-                    app:rcProgress="0"
-                    app:rcRadius="10dp"
-                    android:id="@+id/progressBarProtein" />
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/linearlayoutFat"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="1"
-            android:layout_marginBottom="5dp">
-
-
-            <ImageView
-                android:id="@+id/iconFat"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:scaleType="centerInside"
-                app:srcCompat="@drawable/ic_fat"
-                android:layout_weight="0.2" />
-
-            <LinearLayout
-                android:id="@+id/linearLayoutFatProgressBar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.8"
-                android:orientation="vertical"
-                android:weightSum="1">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="1">
-
-                    <TextView
-                        android:id="@+id/lblFatCurrent"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="0.2"
-                        android:gravity="left"
-                        android:text="100"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@color/Custom_Grey"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:id="@+id/lblFatLeft"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="0.6"
-                        android:gravity="center"
-                        android:text="100"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@color/Custom_Grey"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:id="@+id/lblFatGoal"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentTop="true"
-                        android:layout_weight="0.2"
-                        android:gravity="right"
-                        android:text="100"
-                        android:textAlignment="gravity"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@color/Custom_Grey"
-                        android:textSize="16sp" />
-                </LinearLayout>
-
-                <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
-                    android:layout_height="17dp"
-                    android:layout_width="match_parent"
-                    app:rcBackgroundPadding="1dp"
-                    app:rcBackgroundColor="@color/Progress_Bar_Background"
-                    app:rcProgressColor="@color/FatProgessColor"
-                    app:rcMax="100"
-                    app:rcProgress="0"
-                    app:rcRadius="10dp"
-                    android:id="@+id/progressBarFat" />
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <ListView
-            android:layout_width="match_parent"
+        <ImageButton
+            android:id="@+id/imagebtn_prev"
+            android:layout_width="30dp"
             android:layout_height="match_parent"
-            android:id="@+id/listviewDailyItems" />
+            android:layout_alignBottom="@+id/lblSelectedDate"
+            android:layout_margin="3dp"
+            android:background="#00000000"
+            app:srcCompat="@mipmap/ic_previous" />
 
+        <TextView
+            android:id="@+id/lblSelectedDate"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_weight="1"
+            android:text="Today"
+            android:textAlignment="center"
+            android:textColor="?attr/colorPrimary"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <ImageButton
+            android:id="@+id/imagebtn_next"
+            android:layout_width="30dp"
+            android:layout_height="match_parent"
+            android:layout_alignBottom="@+id/lblSelectedDate"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_margin="3dp"
+            android:background="#00000000"
+            app:srcCompat="@mipmap/ic_next" />
     </LinearLayout>
 
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_below="@+id/linearLayout" />
 </RelativeLayout>
 

@@ -16,7 +16,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -28,7 +27,7 @@ import com.example.kareem.IIFYM.Database.SQLiteConnector;
 import com.example.kareem.IIFYM.Database.SharedPreferenceHelper;
 import com.example.kareem.IIFYM.Models.User;
 import com.example.kareem.IIFYM.R;
-import com.example.kareem.IIFYM.ViewComponents.fragmentHelper;
+import com.example.kareem.IIFYM.ViewComponents.SettingsFragmentHelper;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -50,7 +49,7 @@ import tourguide.tourguide.ToolTip;
  * Use the {@link fragmentGoals#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class fragmentGoals extends Fragment implements View.OnClickListener, TextWatcher, fragmentHelper {
+public class fragmentGoals extends Fragment implements View.OnClickListener, TextWatcher, SettingsFragmentHelper {
 
     // GUI
     private SegmentedGroup  seggroupDisplay;

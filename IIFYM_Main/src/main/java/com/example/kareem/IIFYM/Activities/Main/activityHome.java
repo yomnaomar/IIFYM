@@ -2,107 +2,59 @@ package com.example.kareem.IIFYM.Activities.Main;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
-import android.widget.AdapterView;
-import android.widget.ListView;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
 import com.example.kareem.IIFYM.Activities.Settings.activitySettings;
 import com.example.kareem.IIFYM.Activities.UserLoginAuthentification.activityLogin;
-import com.example.kareem.IIFYM.Database.SQLiteConnector;
 import com.example.kareem.IIFYM.Database.SharedPreferenceHelper;
-import com.example.kareem.IIFYM.Models.DailyItem;
 import com.example.kareem.IIFYM.Models.DateHelper;
-import com.example.kareem.IIFYM.Models.Food;
-import com.example.kareem.IIFYM.Models.User;
 import com.example.kareem.IIFYM.R;
-import com.example.kareem.IIFYM.ViewComponents.AdapterDailyItem;
-import com.example.kareem.IIFYM.ViewComponents.OnListItemDeletedListener;
 import com.google.firebase.auth.FirebaseAuth;
 
-import java.util.ArrayList;
-
-/*import com.example.kareem.IIFYM_Tracker.Activities.Settings.MacroSettings;*/
-
-public class activityHome extends AppCompatActivity implements AdapterView.OnItemClickListener, OnListItemDeletedListener {
-
+public class activityHome extends AppCompatActivity implements View.OnClickListener{
     // GUI
-    private TextView lblCaloriesCurrent, lblCarbsCurrent, lblProteinCurrent, lblFatCurrent;
-    private TextView lblCaloriesLeft,    lblCarbsLeft,    lblProteinLeft,    lblFatLeft;
-    private TextView lblCaloriesGoal,    lblCarbsGoal,    lblProteinGoal,    lblFatGoal;
-
-    private ArrayList<DailyItem>    arrDailyItems;
-    private AdapterDailyItem adapterDailyItems;
-    private ListView                listViewDailyItems;
-    private RoundCornerProgressBar  progressBarCalories, progressBarCarbs, progressBarProtein, progressBarFat;
-    private Animation               mEnterAnimation, mExitAnimation;
+    private TextView                lblSelectedDate;
+    private ViewPager               viewPager;
+    private InfinitePagerAdapter    viewPagerAdapter;
     private FloatingActionButton    fabAddDailyItem;
+    private ImageButton             imagebtn_next, imagebtn_prev;
 
     // Variables
-    private Context context;
-    public boolean  isPercent;
-    public int      caloriesCurrent = 0,    carbsCurrent = 0,   proteinCurrent = 0, fatCurrent = 0;
-    public int      caloriesLeft = 0,       carbsLeft = 0,      proteinLeft = 0,    fatLeft = 0;
-    public int      caloriesGoal,           carbsGoal,          proteinGoal,        fatGoal;
+    private Context             context;
+    private int                 selectedRelativeDay = 0; // relative to today in days
+    private fragmentDay[] fragments;
 
     // Database
-    private SharedPreferenceHelper  myPrefs;
-    private SQLiteConnector         DB_SQLite;
-    private FirebaseAuth            firebaseAuth;
-    private User                    currentUser;
-    private String                  uid;
+    private SharedPreferenceHelper myPrefs;
+    private FirebaseAuth firebaseAuth;
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.content_home);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
         context = getApplicationContext();
 
-        // Database
-        myPrefs = new SharedPreferenceHelper(context);
-        DB_SQLite = new SQLiteConnector(context);
-        firebaseAuth = FirebaseAuth.getInstance();
+        setContentView(R.layout.content_home);
 
-        // GUI
-        initializeGUI();
+        Toolbar toolbarMain = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbarMain);
 
-        // User
-        initializeUser();
-    }
+        lblSelectedDate = (TextView) findViewById(R.id.lblSelectedDate);
+        imagebtn_next = (ImageButton) findViewById(R.id.imagebtn_next);
+        imagebtn_next.setOnClickListener(this);
 
-    private void initializeGUI() {
-        lblCaloriesCurrent = (TextView) findViewById(R.id.lblCaloriesCurrent);
-        lblCaloriesLeft = (TextView) findViewById(R.id.lblCaloriesLeft);
-        lblCaloriesGoal = (TextView) findViewById(R.id.lblCaloriesGoal);
-
-        lblCarbsCurrent = (TextView) findViewById(R.id.lblCarbsCurrent);
-        lblCarbsLeft = (TextView) findViewById(R.id.lblCarbsLeft);
-        lblCarbsGoal = (TextView) findViewById(R.id.lblCarbsGoal);
-
-        lblProteinCurrent = (TextView) findViewById(R.id.lblProteinCurrent);
-        lblProteinLeft = (TextView) findViewById(R.id.lblProteinLeft);
-        lblProteinGoal = (TextView) findViewById(R.id.lblProteinGoal);
-
-        lblFatCurrent = (TextView) findViewById(R.id.lblFatCurrent);
-        lblFatLeft = (TextView) findViewById(R.id.lblFatLeft);
-        lblFatGoal = (TextView) findViewById(R.id.lblFatGoal);
-
-        progressBarCalories = (RoundCornerProgressBar) findViewById(R.id.progressBarCalories);
-        progressBarCarbs = (RoundCornerProgressBar) findViewById(R.id.progressBarCarbs);
-        progressBarProtein = (RoundCornerProgressBar) findViewById(R.id.progressBarProtein);
-        progressBarFat = (RoundCornerProgressBar) findViewById(R.id.progressBarFat);
+        imagebtn_prev = (ImageButton) findViewById(R.id.imagebtn_prev);
+        imagebtn_prev.setOnClickListener(this);
 
         fabAddDailyItem = (FloatingActionButton) findViewById(R.id.fabAddDailyItem);
         fabAddDailyItem.setOnClickListener(new View.OnClickListener() {
@@ -111,168 +63,18 @@ public class activityHome extends AppCompatActivity implements AdapterView.OnIte
             }
         });
 
-        arrDailyItems = new ArrayList<DailyItem>();
-        adapterDailyItems = new AdapterDailyItem(this, arrDailyItems);
+        viewPager = (ViewPager) findViewById(R.id.viewpager);
+        setupViewPager(viewPager);
 
-        listViewDailyItems = (ListView) findViewById(R.id.listviewDailyItems);
-        listViewDailyItems.setAdapter(adapterDailyItems);
-        listViewDailyItems.setOnItemClickListener(this);
-
-        // Setup enter and exit animation
-        mEnterAnimation = new AlphaAnimation(0f, 1f);
-        mEnterAnimation.setDuration(600);
-        mEnterAnimation.setFillAfter(true);
-
-        mExitAnimation = new AlphaAnimation(1f, 0f);
-        mExitAnimation.setDuration(600);
-        mExitAnimation.setFillAfter(true);
-    }
-
-    private void initializeUser() {
-        uid = myPrefs.getStringValue("session_uid");
-        currentUser = DB_SQLite.retrieveUser(uid);
-
-        isPercent = currentUser.getIsPercent();
-
-        caloriesGoal = currentUser.getDailyCalories();
-        carbsGoal = currentUser.getDailyCarbs();
-        proteinGoal = currentUser.getDailyProtein();
-        fatGoal = currentUser.getDailyFat();
-
-        if (isPercent){ // Convert from percentage to grams
-            carbsGoal = (carbsGoal*caloriesGoal)/400;
-            proteinGoal = (proteinGoal*caloriesGoal)/400;
-            fatGoal = (fatGoal*caloriesGoal)/900;
-        }
-
-        Log.d("initializeUser", currentUser.toString());
-    }
-
-    public void updateMacros(){
-        // Reset to prevent accumulation
-        caloriesCurrent = 0;
-        carbsCurrent = 0;
-        proteinCurrent = 0;
-        fatCurrent = 0;
-
-        int itemCount = adapterDailyItems.getCount();
-        for (int i = 0; i < itemCount; i++) {
-            DailyItem dailyItem = adapterDailyItems.getItem(i);
-            Food tempFood = DB_SQLite.retrieveFood(dailyItem.getFood_id());
-            DailyItem tempDailyItem = DB_SQLite.retrieveDailyItem(dailyItem.getId());
-            int calories = Math.round(tempFood.getCalories() * tempDailyItem.getMultiplier());
-            int carbs = Math.round(tempFood.getCarbs() * tempDailyItem.getMultiplier());
-            int protein = Math.round(tempFood.getProtein() * tempDailyItem.getMultiplier());
-            int fat = Math.round(tempFood.getFat() * tempDailyItem.getMultiplier());
-
-            caloriesCurrent += calories;
-            carbsCurrent    += carbs;
-            proteinCurrent  += protein;
-            fatCurrent      += fat;
-        }
-
-        // Updating "Left" Variables
-        caloriesLeft = caloriesGoal - caloriesCurrent;
-        carbsLeft = carbsGoal - carbsCurrent;
-        proteinLeft = proteinGoal - proteinCurrent;
-        fatLeft = fatGoal - fatCurrent;
-
-        // Updating Labels
-        lblCaloriesGoal.setText(caloriesGoal + "");
-        lblCarbsGoal.setText(carbsGoal + "");
-        lblProteinGoal.setText(proteinGoal + "");
-        lblFatGoal.setText(fatGoal + "");
-
-        lblCaloriesLeft.setText(caloriesLeft + "");
-        lblCarbsLeft.setText(carbsLeft + "");
-        lblProteinLeft.setText(proteinLeft + "");
-        lblFatLeft.setText(fatLeft + "");
-
-        lblCaloriesCurrent.setText(caloriesCurrent + "");
-        lblCarbsCurrent.setText(carbsCurrent + "");
-        lblProteinCurrent.setText(proteinCurrent + "");
-        lblFatCurrent.setText(fatCurrent + "");
-
-        // Updating ProgressBars
-        if(caloriesCurrent < caloriesGoal) {
-            progressBarCalories.setProgress(100 * caloriesCurrent / caloriesGoal);
-            lblCaloriesLeft.setTextColor(context.getResources().getColor(R.color.CaloriesProgessColor));
-            lblCaloriesLeft.setTypeface(null, Typeface.NORMAL);
-        }
-        else {
-            progressBarCalories.setProgress(100);
-            lblCaloriesLeft.setTextColor(context.getResources().getColor(R.color.error_red));
-            lblCaloriesLeft.setTypeface(null, Typeface.BOLD);
-        }
-
-        if(carbsCurrent < carbsGoal) {
-            progressBarCarbs.setProgress(100 * carbsCurrent / carbsGoal);
-            lblCarbsLeft.setTextColor(context.getResources().getColor(R.color.CarbProgressColor));
-            lblCarbsLeft.setTypeface(null, Typeface.NORMAL);
-        }
-        else {
-            progressBarCarbs.setProgress(100);
-            lblCarbsLeft.setTextColor(context.getResources().getColor(R.color.error_red));
-            lblCarbsLeft.setTypeface(null, Typeface.BOLD);
-        }
-        if(proteinCurrent < proteinGoal) {
-            progressBarProtein.setProgress(100 * proteinCurrent / proteinGoal);
-            lblProteinLeft.setTextColor(context.getResources().getColor(R.color.ProteinProgessColor));
-            lblProteinLeft.setTypeface(null, Typeface.NORMAL);
-        }
-        else {
-            progressBarProtein.setProgress(100);
-            lblProteinLeft.setTextColor(context.getResources().getColor(R.color.error_red));
-            lblProteinLeft.setTypeface(null, Typeface.BOLD);
-        }
-        if(fatCurrent < fatGoal) {
-            progressBarFat.setProgress(100 * fatCurrent / fatGoal);
-            lblFatLeft.setTextColor(context.getResources().getColor(R.color.FatProgessColor));
-            lblFatLeft.setTypeface(null, Typeface.NORMAL);
-        }
-        else {
-            progressBarFat.setProgress(100);
-            lblFatLeft.setTextColor(context.getResources().getColor(R.color.error_red));
-            lblFatLeft.setTypeface(null, Typeface.BOLD);
-        }
-    }
-
-    public void updateArrayList() {
-        adapterDailyItems.clear();
-        arrDailyItems = DB_SQLite.retrieveAllDailyItems(DateHelper.getTodaysDate());
-        for (int i =0; i <arrDailyItems.size(); i++)
-            adapterDailyItems.add(arrDailyItems.get(i));
-    }
-
-    @Override protected void onResume() {
-        super.onResume();
-        initializeUser();
-        updateArrayList();
-        updateMacros();
-    }
-
-    @Override protected void onPause() {
-        super.onPause();
+        // Database
+        myPrefs = new SharedPreferenceHelper(context);
+        firebaseAuth = FirebaseAuth.getInstance();
     }
 
     private void goToAddDailyItem() {
         Context context = getApplicationContext();
         Intent intent = new Intent();
         intent.setClass(context,activitySelectDailyItem.class);
-        startActivity(intent);
-    }
-
-    @Override public void onItemDeleted() {
-        updateArrayList();
-        updateMacros();
-    }
-
-    @Override public void onItemClick(AdapterView<?> parent, View view, final int position, long row_id) {
-        DailyItem dailyItem = (DailyItem) parent.getItemAtPosition(position);
-        int id = dailyItem.getId();
-
-        Intent intent = new Intent(getBaseContext(), activityViewDailyItem.class);
-        intent.putExtra("id", id);
         startActivity(intent);
     }
 
@@ -283,6 +85,9 @@ public class activityHome extends AppCompatActivity implements AdapterView.OnIte
         int id = item.getItemId();
         Intent intent;
         switch (id){
+            case (R.id.actionToday):
+                goToToday();
+                return true;
             case (R.id.actionNutritionSettings):
                 intent = new Intent(context,activitySettings.class );
                 startActivity(intent);
@@ -310,5 +115,133 @@ public class activityHome extends AppCompatActivity implements AdapterView.OnIte
     private void signOut() {
         myPrefs.addPreference("session_uid", "");
         firebaseAuth.signOut();
+    }
+
+    /**
+     * Creates the pages and tabs of Today, Yesterday, and Tomorrow.
+     * @param viewPager
+     */
+    private void setupViewPager(final ViewPager viewPager) {
+       fragments = new fragmentDay[] {
+                createFragment(selectedRelativeDay - 1),
+                createFragment(selectedRelativeDay),
+                createFragment(selectedRelativeDay + 1)
+        };
+        viewPagerAdapter = new InfinitePagerAdapter(getSupportFragmentManager(), fragments);
+
+        lblSelectedDate.setText(DateHelper.getDateRelativeToToday(selectedRelativeDay).text);
+
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrollStateChanged(int state) {
+                if (state == ViewPager.SCROLL_STATE_IDLE) {
+                    int currPage = viewPager.getCurrentItem();
+                    if (currPage < 1) {
+                        selectedRelativeDay -= 1;
+                    } else if (currPage > 1) {
+                        selectedRelativeDay += 1;
+                    }
+                    fragments[0].setDate(DateHelper.getDateRelativeToToday(selectedRelativeDay - 1));
+                    fragments[0].render();
+                    fragments[1].setDate(DateHelper.getDateRelativeToToday(selectedRelativeDay));
+                    fragments[1].render();
+                    fragments[2].setDate(DateHelper.getDateRelativeToToday(selectedRelativeDay + 1));
+                    fragments[2].render();
+
+                    viewPager.setCurrentItem(1, false);
+                }
+                if (state == ViewPager.SCROLL_STATE_SETTLING){
+                    int currPage = viewPager.getCurrentItem();
+                    if (currPage < 1) {
+                        currPage = selectedRelativeDay - 1;
+                    } else if (currPage > 1) {
+                        currPage = selectedRelativeDay + 1;
+                    }
+                    lblSelectedDate.setText(DateHelper.getDateRelativeToToday(currPage).text);
+                }
+            }
+
+            @Override
+            public void onPageScrolled(int arg0, float arg1, int arg2) {}
+
+            @Override
+            public void onPageSelected(int arg0) {}
+        });
+
+        viewPager.setAdapter(viewPagerAdapter);
+        viewPager.setCurrentItem(1);
+    }
+
+    /**
+     * Returns a new Fragment page `relative` to today.
+     * @param relative 0 today, negative before today, positive after today.
+     * @return
+     */
+    private fragmentDay createFragment(int relative) {
+        fragmentDay f = new fragmentDay();
+        DateHelper.StringDate day = DateHelper.getDateRelativeToToday(relative);
+        f.setDate(day);
+        return f;
+    }
+
+    class InfinitePagerAdapter extends FragmentPagerAdapter {
+        Fragment[] fragments;
+
+        public InfinitePagerAdapter(FragmentManager manager, Fragment[] fragments) {
+            super(manager);
+            this.fragments = fragments;
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return fragments[position];
+        }
+
+        @Override
+        public int getCount() {
+            return fragments.length;
+        }
+    }
+
+    @Override public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.imagebtn_next:
+                goToNext();
+                break;
+            case R.id.imagebtn_prev:
+                goToPrev();
+                break;
+        }
+    }
+
+    /**
+     * Passes page index to go to
+     */
+    private void goToNext() {
+        viewPager.setCurrentItem(2);
+    }
+
+    /**
+     * Passes page index to go to
+     */
+    private void goToPrev() {
+        viewPager.setCurrentItem(0);
+    }
+
+    /**
+     * Will call onPageSelected() in setUpViewPager()
+     */
+    private void goToToday() {
+        selectedRelativeDay = 0;
+
+        fragments[0].setDate(DateHelper.getDateRelativeToToday(selectedRelativeDay - 1));
+        fragments[0].render();
+        fragments[1].setDate(DateHelper.getDateRelativeToToday(selectedRelativeDay));
+        fragments[1].render();
+        fragments[2].setDate(DateHelper.getDateRelativeToToday(selectedRelativeDay + 1));
+        fragments[2].render();
+
+        viewPager.setCurrentItem(1, false);
+        lblSelectedDate.setText(DateHelper.getDateRelativeToToday(0).text);
     }
 }

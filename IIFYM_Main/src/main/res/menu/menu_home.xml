@@ -1,17 +1,23 @@
+
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.kareem.IIFYM.HomeActivity">
     <item
+        android:id="@+id/actionToday"
+        android:icon="@mipmap/ic_today"
+        android:orderInCategory="101"
+        android:title="@string/actionToday"
+        app:showAsAction="always" />
+    <item
         android:id="@+id/actionNutritionSettings"
-        android:orderInCategory="100"
-        android:title="@string/actionNutritionSettings"
-        app:showAsAction="always"
         android:icon="@drawable/ic_settings"
-        />
+        android:orderInCategory="101"
+        android:title="@string/actionNutritionSettings"
+        app:showAsAction="always" />
     <item
         android:id="@+id/actionFoodManager"
-        android:orderInCategory="100"
+        android:orderInCategory="101"
         android:title="@string/actionMyFood"
         app:showAsAction="always"
         android:icon="@drawable/ic_meal_settings"
