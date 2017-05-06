@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.karimchehab.IIFYM">
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_INTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_INTERNAL__STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/appName"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name="com.karimchehab.IIFYM.Activities.Main.activityHome"
+            android:label="@string/appName"
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.karimchehab.IIFYM.Activities.Main.activityFoodManager"
+            android:label="@string/toolbarSavedItems"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.karimchehab.IIFYM.Activities.Main.activityEditFood"
+            android:label="@string/toolbarEditFood"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.karimchehab.IIFYM.Activities.Main.activityCreateFood"
+            android:label="@string/toolbarCreateNewFood" />
+        <activity
+            android:name="com.karimchehab.IIFYM.Activities.UserLoginAuthentification.activityLogin"
+            android:label="@string/appName" />
+        <activity
+            android:name="com.karimchehab.IIFYM.Activities.UserLoginAuthentification.activityRegisterProfile"
+            android:label="@string/toolbarUserInfo" />
+        <activity
+            android:name="com.karimchehab.IIFYM.Activities.UserLoginAuthentification.activityRegisterGoals"
+            android:label="@string/toolbarUserMacros" />
+        <activity
+            android:name="com.karimchehab.IIFYM.Activities.Main.activityAddDailyItem"
+            android:label="@string/toolbarAddDailyItem" />
+        <activity
+            android:name="com.karimchehab.IIFYM.Activities.UserLoginAuthentification.activityLauncher"
+            android:label="IIFYM">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.karimchehab.IIFYM.Activities.Main.activitySelectDailyItem"
+            android:label="@string/toolbarSelectItemToAdd" />
+        <activity android:name="com.karimchehab.IIFYM.Activities.Main.activityViewDailyItem" />
+        <activity
+            android:name="com.karimchehab.IIFYM.Activities.Settings.activitySettings"
+            android:theme="@style/settingsTheme" />
+    </application>
+
+</manifest>

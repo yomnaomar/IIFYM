@@ -1,1 +1,3 @@
-include ':IIFYM_Main', ':ProgressBar_Library', ':MaterialDateTimePicker_Library'
+include ':IIFYM', ':ProgressBar', ':MaterialDateTimePicker'
+project(':ProgressBar').projectDir = new File('./libs/ProgressBar')
+project(':MaterialDateTimePicker').projectDir = new File('./libs/MaterialDateTimePicker')
