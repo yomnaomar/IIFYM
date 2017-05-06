@@ -55,6 +55,7 @@ public class activitySettings extends AppCompatActivity implements fragmentGoals
 
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
+        tabLayout.setTabTextColors(getColor(R.color.grey_light),getColor(R.color.white));
         setupTabIcons();
     }
 
