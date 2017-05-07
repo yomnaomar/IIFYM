@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +19,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 
 import com.karimchehab.IIFYM.Activities.Main.activityHome;
 import com.karimchehab.IIFYM.Database.SQLiteConnector;
@@ -79,6 +81,7 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
 //    }
 
     // GUI
+    private View            loginLinearLayout;
     private ProgressDialog  progressDialog;
     private EditText        etxtEmail, etxtPassword;
 
@@ -170,7 +173,9 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
 
         // GUI
         setContentView(R.layout.activity_login);
+
         // Views
+        loginLinearLayout = findViewById(R.id.loginLinearLayout);
         etxtEmail = (EditText) findViewById(R.id.email_edittext);
         etxtPassword = (EditText) findViewById(R.id.password_textview);
 
@@ -267,20 +272,45 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
      * Sends mail to a given `email` prompting to reset password.
      * @param email Email address to send mail to.
      */
-    private void forgotPassword(String email) {
+    private void handleForgotPasswordButton(final String email) {
+        if (!validateEmail()) {
+            return;
+        }
+        new AlertDialog.Builder(this)
+            .setTitle("Forgot Password")
+            .setMessage("Would you like to send an email to reset your password?")
+            .setIcon(android.R.drawable.ic_dialog_alert)
+            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {
+                    sendForgotPasswordEmail(email);
+                }})
+            .setNegativeButton(android.R.string.no, null).show();
+    }
+
+    private void sendForgotPasswordEmail(String email) {
         showProgressDialog();
         firebaseAuth.sendPasswordResetEmail(email)
-            .addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-                    hideProgressDialog();
-                    if (task.isSuccessful()) {
-
-                    } else {
-
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        hideProgressDialog();
+                        if (task.isSuccessful()) {
+                            Snackbar.make(
+                                    loginLinearLayout,
+                                    "Email has been delivered to your inbox",
+                                    Snackbar.LENGTH_LONG
+                                )
+                                .show();
+                        } else {
+                            Snackbar.make(
+                                    loginLinearLayout,
+                                    "Something went wrong, we could not send the email",
+                                    Snackbar.LENGTH_LONG
+                                )
+                                .show();
+                        }
                     }
-                }
-            });
+                });
     }
 
     @Override public void onStop(){
@@ -326,7 +356,7 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
                 break;
             case R.id.button_forgot:
                 final String email = etxtEmail.getText().toString().trim();
-                forgotPassword(email);
+                handleForgotPasswordButton(email);
                 break;
         }
     }
@@ -363,25 +393,41 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
     }
 
     private boolean validateForms() {
-        boolean valid = true;
+        return validateEmail() && validatePassword();
+    }
 
+    /**
+     * Returns whether or not the email address field is valid.
+     *
+     * If invalid, it also notifies the user visually.
+     * @return
+     */
+    private boolean validateEmail() {
         String email = etxtEmail.getText().toString();
         if (TextUtils.isEmpty(email)) {
             etxtEmail.setError("Required");
-            valid = false;
+            return false;
         } else {
             etxtEmail.setError(null);
+            return true;
         }
+    }
 
+    /**
+     * Returns whether or not the password field is valid.
+     *
+     * If invalid, it also notifies the user visually.
+     * @return
+     */
+    private boolean validatePassword() {
         String password = etxtPassword.getText().toString();
         if (TextUtils.isEmpty(password)) {
             etxtPassword.setError("Required");
-            valid = false;
+            return false;
         } else {
             etxtPassword.setError(null);
+            return true;
         }
-
-        return valid;
     }
 
     public void showProgressDialog() {
