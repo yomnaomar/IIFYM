@@ -2,6 +2,8 @@ package com.karimchehab.IIFYM.Activities.Settings;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -276,43 +278,66 @@ public class fragmentProfile extends Fragment implements View.OnClickListener, O
     }
 
     private void updateUser() {
-        if (validateFields()) {
-            readUserInput();
+        if (isNetworkStatusAvialable(context)) {
+            if (validateFields()) {
+                readUserInput();
 
-            user.setName(name);
-            user.setDob(dob);
-            user.setGender(gender);
-            user.setUnitSystem(unitSystem);
-            user.setHeight1(height1);
-            user.setHeight2(height2);
-            user.setWeight(weight);
-            user.setWorkoutFreq(workoutFreq);
-            user.setGoal(goal);
+                user.setName(name);
+                user.setDob(dob);
+                user.setGender(gender);
+                user.setUnitSystem(unitSystem);
+                user.setHeight1(height1);
+                user.setHeight2(height2);
+                user.setWeight(weight);
+                user.setWorkoutFreq(workoutFreq);
+                user.setGoal(goal);
 
-            showProgressDialog();
+                showProgressDialog();
 
-            firebaseDbRef.child("users").child(uid).setValue(user, new DatabaseReference.CompletionListener() {
-                public void onComplete(DatabaseError error, DatabaseReference ref) {
+                firebaseDbRef.child("users").child(uid).setValue(user, new DatabaseReference.CompletionListener() {
+                    public void onComplete(DatabaseError error, DatabaseReference ref) {
 
-                    // No error
-                    if (error == null) {
-                        DB_SQLite.updateUser(user);
+                        // No error
+                        if (error == null) {
+                            DB_SQLite.updateUser(user);
 
-                        hideProgressDialog();
+                            hideProgressDialog();
 
-                        Snackbar snackbar = Snackbar
-                                .make(linearLayoutRoot, "Profile updated", Snackbar.LENGTH_SHORT);
+                            Snackbar snackbar = Snackbar
+                                    .make(linearLayoutRoot, "Profile updated", Snackbar.LENGTH_SHORT);
 
-                        View snackBarView = snackbar.getView();
-                        snackBarView.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-                        snackbar.show();
+                            View snackBarView = snackbar.getView();
+                            snackBarView.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                            snackbar.show();
+                        }
+                        // Error writing to database
+                        else {
+                        }
                     }
-                    // Error writing to database
-                    else {
-                    }
-                }
-            });
+                });
+            }
+            else {
+                //TODO Show alertdialog indicating failed to save, replace snackbar with alert dialog
+                Snackbar snackbar = Snackbar
+                        .make(linearLayoutRoot, "Could not update profile. No internet connection.", Snackbar.LENGTH_SHORT);
+
+                View snackBarView = snackbar.getView();
+                snackBarView.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                snackbar.show();
+            }
         }
+    }
+
+    public static boolean isNetworkStatusAvialable (Context context) {
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivityManager != null)
+        {
+            NetworkInfo netInfos = connectivityManager.getActiveNetworkInfo();
+            if(netInfos != null)
+                if(netInfos.isConnected())
+                    return true;
+        }
+        return false;
     }
 
     private void readUserInput() {

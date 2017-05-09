@@ -670,7 +670,7 @@ public class fragmentGoals extends Fragment implements View.OnClickListener, Tex
         else {
             //TODO Show alertdialog indicating failed to save, replace snackbar with alert dialog
             Snackbar snackbar = Snackbar
-                    .make(linearLayoutRoot, "Goals updated", Snackbar.LENGTH_SHORT);
+                    .make(linearLayoutRoot, "Could not update goals. No internet connection.", Snackbar.LENGTH_SHORT);
 
             View snackBarView = snackbar.getView();
             snackBarView.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
