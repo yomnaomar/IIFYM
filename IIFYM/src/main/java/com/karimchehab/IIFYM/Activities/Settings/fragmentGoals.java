@@ -2,11 +2,15 @@ package com.karimchehab.IIFYM.Activities.Settings;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -23,14 +27,14 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.karimchehab.IIFYM.Database.SQLiteConnector;
 import com.karimchehab.IIFYM.Database.SharedPreferenceHelper;
 import com.karimchehab.IIFYM.Models.User;
 import com.karimchehab.IIFYM.R;
 import com.karimchehab.IIFYM.ViewComponents.SettingsFragmentHelper;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -443,7 +447,7 @@ public class fragmentGoals extends Fragment implements View.OnClickListener, Tex
         switch(v.getId())
         {
             case R.id.btnReset:
-                resetGoals();
+                showGoalsResetAlertDialog("Reset Goals","Are you sure you want to reset your daily goals to default?");
                 break;
             case R.id.btnSave:
                 saveGoals();
@@ -452,6 +456,27 @@ public class fragmentGoals extends Fragment implements View.OnClickListener, Tex
                 beginChainTourGuide();
                 break;
         }
+    }
+
+    private void showGoalsResetAlertDialog(String title, String message){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle(title)
+                .setMessage(message);
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.dismiss();
+                resetGoals();
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.dismiss();
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     public void resetGoals() {
@@ -603,43 +628,47 @@ public class fragmentGoals extends Fragment implements View.OnClickListener, Tex
     }
 
     public void saveGoals(){
-        // Validate Fields
-        if(validateFields()){
-            final User updateuser;
-            if (rbtnCalories.isChecked()) {
-                updateuser = new User(uid, user.getEmail(), true, user.getName(), dob, gender,
-                        unitSystem, weight, height1, height2, workoutFreq,
-                        goal, calories, true, carbsPercent, proteinPercent, fatPercent);
-            }
-            else {
-                updateuser = new User(uid, user.getEmail(), true, user.getName(), dob, gender,
-                        unitSystem, weight, height1, height2, workoutFreq,
-                        goal, calories, false, carbs, protein, fat);
-            }
-
-            showProgressDialog();
-
-            firebaseDbRef.child("users").child(uid).setValue(updateuser, new DatabaseReference.CompletionListener() {
-                public void onComplete(DatabaseError error, DatabaseReference ref) {
-
-                    // No error
-                    if (error == null) {
-                        DB_SQLite.updateUser(updateuser);
-
-                        hideProgressDialog();
-
-                        Snackbar snackbar = Snackbar
-                                .make(linearLayoutRoot, "Goals updated", Snackbar.LENGTH_SHORT);
-
-                        View snackBarView = snackbar.getView();
-                        snackBarView.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-                        snackbar.show();
-                    }
-                    // Error writing to database
-                    else {
-                    }
+        if (isNetworkStatusAvialable(context)) {
+            // Validate Fields
+            if (validateFields()) {
+                final User updateuser;
+                if (rbtnCalories.isChecked()) {
+                    updateuser = new User(uid, user.getEmail(), true, user.getName(), dob, gender,
+                            unitSystem, weight, height1, height2, workoutFreq,
+                            goal, calories, true, carbsPercent, proteinPercent, fatPercent);
+                } else {
+                    updateuser = new User(uid, user.getEmail(), true, user.getName(), dob, gender,
+                            unitSystem, weight, height1, height2, workoutFreq,
+                            goal, calories, false, carbs, protein, fat);
                 }
-            });
+
+                showProgressDialog();
+
+                firebaseDbRef.child("users").child(uid).setValue(updateuser, new DatabaseReference.CompletionListener() {
+                    public void onComplete(DatabaseError error, DatabaseReference ref) {
+
+                        // No error
+                        if (error == null) {
+                            DB_SQLite.updateUser(updateuser);
+
+                            hideProgressDialog();
+
+                            Snackbar snackbar = Snackbar
+                                    .make(linearLayoutRoot, "Goals updated", Snackbar.LENGTH_SHORT);
+
+                            View snackBarView = snackbar.getView();
+                            snackBarView.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                            snackbar.show();
+                        }
+                        // Error writing to database
+                        else {
+                        }
+                    }
+                });
+            }
+        }
+        else {
+            //TODO Show alertdialog indicating failed to save
         }
     }
 
@@ -686,6 +715,18 @@ public class fragmentGoals extends Fragment implements View.OnClickListener, Tex
                 .build();
 
         tourguide = ChainTourGuide.init(getActivity()).playInSequence(sequence);
+    }
+
+    public static boolean isNetworkStatusAvialable (Context context) {
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivityManager != null)
+        {
+            NetworkInfo netInfos = connectivityManager.getActiveNetworkInfo();
+            if(netInfos != null)
+                if(netInfos.isConnected())
+                    return true;
+        }
+        return false;
     }
 
     private void addTextWatchers() {
@@ -753,7 +794,6 @@ public class fragmentGoals extends Fragment implements View.OnClickListener, Tex
         super.onDetach();
         mListener = null;
     }
-
 
     @Override public void onResumeFragment() {
         // User Data

@@ -149,8 +149,9 @@ public class activityHome extends AppCompatActivity implements View.OnClickListe
                     fragments[2].render();
 
                     viewPager.setCurrentItem(1, false);
+                    lblSelectedDate.setText(DateHelper.getDateRelativeToToday(currPage).text);
                 }
-                if (state == ViewPager.SCROLL_STATE_SETTLING){
+                /*if (state == ViewPager.SCROLL_STATE_SETTLING){
                     int currPage = viewPager.getCurrentItem();
                     if (currPage < 1) {
                         currPage = selectedRelativeDay - 1;
@@ -158,7 +159,7 @@ public class activityHome extends AppCompatActivity implements View.OnClickListe
                         currPage = selectedRelativeDay + 1;
                     }
                     lblSelectedDate.setText(DateHelper.getDateRelativeToToday(currPage).text);
-                }
+                }*/
             }
 
             @Override

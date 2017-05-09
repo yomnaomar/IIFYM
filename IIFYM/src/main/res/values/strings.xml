@@ -171,5 +171,6 @@
     <string name="lblComingSoon">Coming Soon!</string>
     <string name="btnForgotPassword">Forgot Password</string>
     <string name="actionToday">Go to today</string>
+    <string name="btnOk">Ok</string>
 
 </resources>

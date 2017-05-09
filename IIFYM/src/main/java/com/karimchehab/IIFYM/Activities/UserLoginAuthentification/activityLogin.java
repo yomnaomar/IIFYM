@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -358,8 +360,13 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
                 createAccount(etxtEmail.getText().toString().trim(), etxtPassword.getText().toString().trim());
                 break;
             case R.id.button_forgot:
-                final String email = etxtEmail.getText().toString().trim();
-                handleForgotPasswordButton(email);
+                if(isNetworkStatusAvialable (getApplicationContext())) {
+                    final String email = etxtEmail.getText().toString().trim();
+                    handleForgotPasswordButton(email);
+                }
+                else {
+                    showAlertDialog("No Internet Connection","Please check your internet connection and try again.");
+                }
                 break;
         }
     }
@@ -431,6 +438,18 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
             etxtPassword.setError(null);
             return true;
         }
+    }
+
+    public static boolean isNetworkStatusAvialable (Context context) {
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivityManager != null)
+        {
+            NetworkInfo netInfos = connectivityManager.getActiveNetworkInfo();
+            if(netInfos != null)
+                if(netInfos.isConnected())
+                    return true;
+        }
+        return false;
     }
 
     public void showProgressDialog() {
