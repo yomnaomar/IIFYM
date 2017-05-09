@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -19,13 +21,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 
-import com.karimchehab.IIFYM.Activities.Main.activityHome;
-import com.karimchehab.IIFYM.Database.SQLiteConnector;
-import com.karimchehab.IIFYM.Database.SharedPreferenceHelper;
-import com.karimchehab.IIFYM.Models.User;
-import com.karimchehab.IIFYM.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseNetworkException;
@@ -41,6 +37,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.karimchehab.IIFYM.Activities.Main.activityHome;
+import com.karimchehab.IIFYM.Database.SQLiteConnector;
+import com.karimchehab.IIFYM.Database.SharedPreferenceHelper;
+import com.karimchehab.IIFYM.Models.User;
+import com.karimchehab.IIFYM.R;
 
 public class activityLogin extends AppCompatActivity implements View.OnClickListener {
 //    ------ Creating a New User ------
@@ -287,30 +288,34 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
             .setNegativeButton(android.R.string.no, null).show();
     }
 
-    private void sendForgotPasswordEmail(String email) {
+    private void sendForgotPasswordEmail(final String email) {
         showProgressDialog();
-        firebaseAuth.sendPasswordResetEmail(email)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        hideProgressDialog();
-                        if (task.isSuccessful()) {
-                            Snackbar.make(
-                                    loginLinearLayout,
-                                    "Email has been delivered to your inbox",
-                                    Snackbar.LENGTH_LONG
-                                )
-                                .show();
-                        } else {
-                            Snackbar.make(
-                                    loginLinearLayout,
-                                    "Something went wrong, we could not send the email",
-                                    Snackbar.LENGTH_LONG
-                                )
-                                .show();
+            firebaseAuth.sendPasswordResetEmail(email)
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            hideProgressDialog();
+                            if (task.isSuccessful()) {
+                                Snackbar snackbar = Snackbar.make(
+                                        loginLinearLayout,
+                                        "Email has been delivered to " + email,
+                                        Snackbar.LENGTH_LONG
+                                );
+                                View snackBarView = snackbar.getView();
+                                snackBarView.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                                snackbar.show();
+                            } else {
+                                Snackbar snackbar = Snackbar.make(
+                                        loginLinearLayout,
+                                        "Something went wrong, we could not send the email to " + email,
+                                        Snackbar.LENGTH_LONG
+                                );
+                                View snackBarView = snackbar.getView();
+                                snackBarView.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                                snackbar.show();
+                            }
                         }
-                    }
-                });
+                    });
     }
 
     @Override public void onStop(){
@@ -355,8 +360,13 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
                 createAccount(etxtEmail.getText().toString().trim(), etxtPassword.getText().toString().trim());
                 break;
             case R.id.button_forgot:
-                final String email = etxtEmail.getText().toString().trim();
-                handleForgotPasswordButton(email);
+                if(isNetworkStatusAvialable (getApplicationContext())) {
+                    final String email = etxtEmail.getText().toString().trim();
+                    handleForgotPasswordButton(email);
+                }
+                else {
+                    showAlertDialog("No Internet Connection","Please check your internet connection and try again.");
+                }
                 break;
         }
     }
@@ -428,6 +438,18 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
             etxtPassword.setError(null);
             return true;
         }
+    }
+
+    public static boolean isNetworkStatusAvialable (Context context) {
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivityManager != null)
+        {
+            NetworkInfo netInfos = connectivityManager.getActiveNetworkInfo();
+            if(netInfos != null)
+                if(netInfos.isConnected())
+                    return true;
+        }
+        return false;
     }
 
     public void showProgressDialog() {
