@@ -92,8 +92,7 @@
             fab:fab_label="@string/toolbarCreateNewFood"
             fab:fab_showShadow="false"
             fab:fab_size="normal"
-            fab:fab_colorPressed="@color/colorPrimaryLight"
-            fab:fab_colorRipple="#99FFFFFF" />
+            fab:fab_colorPressed="@color/colorPrimaryLight" />
 
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/fabCreateNewMeal"
@@ -104,8 +103,7 @@
             fab:fab_label="@string/lblCreateNewMeal"
             fab:fab_showShadow="false"
             fab:fab_size="normal"
-            fab:fab_colorPressed="@color/colorPrimaryLight"
-            fab:fab_colorRipple="#99FFFFFF" />
+            fab:fab_colorPressed="@color/colorPrimaryLight" />
 
     </com.github.clans.fab.FloatingActionMenu>
 
