@@ -21,10 +21,18 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseNetworkException;
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
@@ -32,6 +40,7 @@ import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -43,7 +52,7 @@ import com.karimchehab.IIFYM.Database.SharedPreferenceHelper;
 import com.karimchehab.IIFYM.Models.User;
 import com.karimchehab.IIFYM.R;
 
-public class activityLogin extends AppCompatActivity implements View.OnClickListener {
+public class activityLogin extends AppCompatActivity implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener {
 //    ------ Creating a New User ------
 //    Firebase SetValue ->
 //    {
@@ -98,6 +107,9 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
     private DatabaseReference               firebaseDbRef;
     private FirebaseAuth.AuthStateListener  firebaseAuthListener;
 
+    private GoogleApiClient                 mGoogleApiClient;
+    private static final int                RC_SIGN_IN = 9001;
+
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -111,6 +123,8 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
         DB_SQLite = new SQLiteConnector(context);
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseDbRef = FirebaseDatabase.getInstance().getReference();
+
+        setupGoogleSignIn();
 
         // Handles Signing in
         firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -182,6 +196,7 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
 
         // Buttons
         findViewById(R.id.Button_Register).setOnClickListener(this);
+        findViewById(R.id.btnGoogleSignIn).setOnClickListener(this);
         findViewById(R.id.button_forgot).setOnClickListener(this);
     }
 
@@ -237,7 +252,7 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
                 });
     }
 
-    private void signIn(String email, String password) {
+    private void signInUserPass(String email, String password) {
         if (!validateForms())
             return;
 
@@ -359,6 +374,9 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
             case R.id.Button_Register:
                 createAccount(etxtEmail.getText().toString().trim(), etxtPassword.getText().toString().trim());
                 break;
+            case R.id.btnGoogleSignIn:
+                signInGoogle();
+                break;
             case R.id.button_forgot:
                 if(isNetworkStatusAvialable (getApplicationContext())) {
                     final String email = etxtEmail.getText().toString().trim();
@@ -380,7 +398,7 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
     @Override public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_login:
-                signIn(etxtEmail.getText().toString().trim(), etxtPassword.getText().toString().trim());
+                signInUserPass(etxtEmail.getText().toString().trim(), etxtPassword.getText().toString().trim());
                 break;
             default:
                 break;
@@ -471,5 +489,76 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
     private void signOut() {
         Log.d("UserInfo","Signed out");
         firebaseAuth.signOut();
+    }
+
+    private void setupGoogleSignIn(){
+        // Configure sign-in to request the user's ID, email address, and basic
+        // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.iifym_server_client_id))
+                .requestEmail()
+                .build();
+
+        // Build a GoogleApiClient with access to the Google Sign-In API and the
+        // options specified by gso.
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .enableAutoManage(this, this)
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .build();
+    }
+
+    private void signInGoogle() {
+        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+        startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
+        if (requestCode == RC_SIGN_IN) {
+            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+            if (result.isSuccess()) {
+                // Google Sign In was successful, authenticate with Firebase
+                Log.d("onActivityResult", "Success");
+                GoogleSignInAccount account = result.getSignInAccount();
+                firebaseAuthWithGoogle(account);
+            } else {
+                // Google Sign In failed, update UI appropriately
+                // ...
+                Log.d("onActivityResult", "Failed");
+            }
+        }
+    }
+
+    private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
+        Log.d("firebaseAuthWithGoogle", "Account ID" + acct.getId());
+
+        AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
+        firebaseAuth.signInWithCredential(credential)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d("signInWithCredential", "Success");
+                            FirebaseUser user = firebaseAuth.getCurrentUser();
+
+
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w("signInWithCredential", "Failed", task.getException());
+                            Toast.makeText(activityLogin.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+        Toast.makeText(activityLogin.this, "Connection failed.",
+                Toast.LENGTH_SHORT).show();
     }
 }
