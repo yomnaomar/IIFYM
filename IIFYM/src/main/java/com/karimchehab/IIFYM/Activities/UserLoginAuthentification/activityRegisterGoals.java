@@ -104,6 +104,100 @@ public class activityRegisterGoals extends AppCompatActivity implements View.OnC
         beginChainTourGuide();
     }
 
+    private void getIntentData() {
+        uid = getIntent().getStringExtra("uid");
+        email = getIntent().getStringExtra("email");
+        name = getIntent().getStringExtra("name");
+        dob = getIntent().getStringExtra("dob");
+        gender = getIntent().getIntExtra("gender", 0);
+        unitSystem = getIntent().getIntExtra("unitSystem", 0);
+        weight = getIntent().getFloatExtra("weight", 0.0f);
+        height1 = getIntent().getIntExtra("height1", 0);
+        height2 = getIntent().getIntExtra("height2", 0);
+        workoutFreq = getIntent().getIntExtra("workoutFreq", 0);
+        goal = getIntent().getIntExtra("goal", 0);
+    }
+
+    private void getBMR() {
+        // MALE:   BMR = (10 x weight in kg) + (6.25 x height in cm) – (5 x age in years) + 5
+        // FEMALE: BMR = (10 x weight in kg) + (6.25 x height in cm)  – (5 x age in years) - 161
+        // Store weight/height in local variables in order to perform unit conversion if needed
+        float valWeight = weight;
+        int valHeight = height1;
+
+        // Need to convert to Metric in order to calculate BMR
+        if(unitSystem == 1) // Imperial
+        {
+            // Convert LB to KG
+            valWeight /= 2.2046226218;
+            // Convert Feet/Inches to CM
+            valHeight = (int) ((30.48 * valHeight) + (2.54 * height2));
+        }
+
+        // Parse Date of Birth string
+        String ageArr[] = dob.split("-");
+
+        // Obtain Age value from Date of Birth String
+        int valAge = getAge(Integer.parseInt(ageArr[2]), Integer.parseInt(ageArr[1]), Integer.parseInt(ageArr[0]));
+
+        // Obtain Gender
+        if (gender == 0) // Male
+            BMR = (int) (10*valWeight + 6.25*valHeight + 5*valAge + 5.0);
+        else
+            BMR = (int) (10*valWeight + 6.25*valHeight + 5*valAge - 161.0);
+
+        // Activity Factor Multiplier
+        // None (little or no exercise)
+        if (workoutFreq == 0)
+            caloriesDefault = (int) (BMR * 1.2);
+
+            // Low (1-3 times/week)
+        else if (workoutFreq == 1)
+            caloriesDefault = (int) (BMR * 1.35);
+
+            // Medium (3-5 days/week)
+        else if (workoutFreq == 2)
+            caloriesDefault = (int) (BMR * 1.5);
+
+            // High (6-7 days/week)
+        else if (workoutFreq == 3)
+            caloriesDefault = (int) (BMR * 1.7);
+
+            // Very High (physical job or 7+ times/week)
+        else if (workoutFreq == 4)
+            caloriesDefault = (int) (BMR * 1.9);
+
+        // Weight goals
+        // Lose weight
+        if (goal == 0)
+            caloriesDefault -= 250.0;
+
+            // Maintain weight
+        else if (goal == 1)
+        {} // Do nothing
+
+        // Gain weight
+        else if (goal == 2)
+            caloriesDefault += 250.0;
+    }
+
+    private int getAge (int _year, int _month, int _day) {
+        GregorianCalendar cal = new GregorianCalendar();
+        int y, m, d, a;
+
+        y = cal.get(Calendar.YEAR);
+        m = cal.get(Calendar.MONTH);
+        d = cal.get(Calendar.DAY_OF_MONTH);
+        cal.set(_year, _month, _day);
+        a = y - cal.get(Calendar.YEAR);
+        if ((m < cal.get(Calendar.MONTH))
+                || ((m == cal.get(Calendar.MONTH)) && (d < cal
+                .get(Calendar.DAY_OF_MONTH)))) {
+            --a;
+        }
+        return a;
+    }
+
     private void initializeGUI() {
         seggroupDisplay = (SegmentedGroup) findViewById(R.id.seggroupDisplay);
         rbtnCalories    = (RadioButton) findViewById(R.id.rbtnCalories);
@@ -169,6 +263,61 @@ public class activityRegisterGoals extends AppCompatActivity implements View.OnC
             lblTotal.setVisibility(View.GONE);
             lblAmountTotal.setVisibility(View.GONE);
         }
+    }
+
+    private void defaultValues() {
+        if (rbtnCalories.isChecked()) {
+            // Macronutrient ratio default
+            calories = caloriesDefault;
+            carbsPercent = carbsPercentDefault;
+            proteinPercent = proteinPercentDefault;
+            fatPercent = fatPercentDefault;
+            totalPercent = carbsPercent + proteinPercent + fatPercent;
+
+            removeTextWatchers();
+
+            etxtCalories.setText(calories + "");
+            etxtCarbs.setText(carbsPercent + "");
+            etxtProtein.setText(proteinPercent + "");
+            etxtFat.setText(fatPercent + "");
+
+            lblValueCarbs.setText("~" + Math.round(carbsPercent * 0.01f * calories / 4) + " g");
+            lblValueProtein.setText("~" + Math.round(proteinPercent * 0.01f * calories / 4) + " g");
+            lblValueFat.setText("~" + Math.round(fatPercent * 0.01f * calories / 9) + " g");
+            lblAmountTotal.setText(totalPercent + "");
+            if (totalPercent == 100)
+                lblAmountTotal.setTextColor(Color.parseColor("#2E7D32")); // Green
+            else
+                lblAmountTotal.setTextColor(Color.parseColor("#FF0000")); // error_red
+
+            addTextWatchers();
+        }
+        else {
+            calories = caloriesDefault;
+            carbs = Math.round((carbsPercentDefault * 0.01f * calories) / 4);
+            protein = Math.round((proteinPercentDefault * 0.01f * calories) / 4);
+            fat = Math.round((fatPercentDefault * 0.01f * calories) / 9);
+
+            removeTextWatchers();
+
+            etxtCalories.setText(calories + "");
+            etxtCarbs.setText(carbs + "");
+            etxtProtein.setText(protein + "");
+            etxtFat.setText(fat + "");
+
+            lblValueCarbs.setText("~" + Math.round(carbs * 4 * 100 / calories) + " %");
+            lblValueProtein.setText("~" + Math.round(protein * 4 * 100 / calories)  + " %");
+            lblValueFat.setText("~" + Math.round(fat * 9 * 100 / calories) + " %");
+
+            addTextWatchers();
+        }
+
+        if ((carbsPercent + proteinPercent + fatPercent) != 100) {
+            lblAmountTotal.setError("Must equal 100");
+        } else {
+            lblAmountTotal.setError(null);
+        }
+        Toast.makeText(context, "Goals reset to recommended", Toast.LENGTH_SHORT).show();
     }
 
     @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -350,73 +499,6 @@ public class activityRegisterGoals extends AppCompatActivity implements View.OnC
         return true;
     }
 
-    @Override public void onClick(View v) {
-        switch(v.getId())
-        {
-            case R.id.btnInfo:
-                beginChainTourGuide();
-                break;
-            case R.id.btnReset:
-                defaultValues();
-                break;
-        }
-    }
-
-    private void defaultValues() {
-        if (rbtnCalories.isChecked()) {
-            // Macronutrient ratio default
-            calories = caloriesDefault;
-            carbsPercent = carbsPercentDefault;
-            proteinPercent = proteinPercentDefault;
-            fatPercent = fatPercentDefault;
-            totalPercent = carbsPercent + proteinPercent + fatPercent;
-
-            removeTextWatchers();
-
-            etxtCalories.setText(calories + "");
-            etxtCarbs.setText(carbsPercent + "");
-            etxtProtein.setText(proteinPercent + "");
-            etxtFat.setText(fatPercent + "");
-
-            lblValueCarbs.setText("~" + Math.round(carbsPercent * 0.01f * calories / 4) + " g");
-            lblValueProtein.setText("~" + Math.round(proteinPercent * 0.01f * calories / 4) + " g");
-            lblValueFat.setText("~" + Math.round(fatPercent * 0.01f * calories / 9) + " g");
-            lblAmountTotal.setText(totalPercent + "");
-            if (totalPercent == 100)
-                lblAmountTotal.setTextColor(Color.parseColor("#2E7D32")); // Green
-            else
-                lblAmountTotal.setTextColor(Color.parseColor("#FF0000")); // error_red
-
-            addTextWatchers();
-        }
-        else {
-            calories = caloriesDefault;
-            carbs = Math.round((carbsPercentDefault * 0.01f * calories) / 4);
-            protein = Math.round((proteinPercentDefault * 0.01f * calories) / 4);
-            fat = Math.round((fatPercentDefault * 0.01f * calories) / 9);
-
-            removeTextWatchers();
-
-            etxtCalories.setText(calories + "");
-            etxtCarbs.setText(carbs + "");
-            etxtProtein.setText(protein + "");
-            etxtFat.setText(fat + "");
-
-            lblValueCarbs.setText("~" + Math.round(carbs * 4 * 100 / calories) + " %");
-            lblValueProtein.setText("~" + Math.round(protein * 4 * 100 / calories)  + " %");
-            lblValueFat.setText("~" + Math.round(fat * 9 * 100 / calories) + " %");
-
-            addTextWatchers();
-        }
-
-        if ((carbsPercent + proteinPercent + fatPercent) != 100) {
-            lblAmountTotal.setError("Must equal 100");
-        } else {
-            lblAmountTotal.setError(null);
-        }
-        Toast.makeText(context, "Goals reset to recommended", Toast.LENGTH_SHORT).show();
-    }
-
     private void Finish(){
         // Validate Fields
         if(validateFields()){
@@ -463,6 +545,18 @@ public class activityRegisterGoals extends AppCompatActivity implements View.OnC
                     }
                 }
             });
+        }
+    }
+
+    @Override public void onClick(View v) {
+        switch(v.getId())
+        {
+            case R.id.btnInfo:
+                beginChainTourGuide();
+                break;
+            case R.id.btnReset:
+                defaultValues();
+                break;
         }
     }
 
@@ -522,100 +616,6 @@ public class activityRegisterGoals extends AppCompatActivity implements View.OnC
                 .build();
 
         tourguide = ChainTourGuide.init(this).playInSequence(sequence);
-    }
-
-    private void getIntentData() {
-        uid = getIntent().getStringExtra("uid");
-        email = getIntent().getStringExtra("email");
-        name = getIntent().getStringExtra("name");
-        dob = getIntent().getStringExtra("dob");
-        gender = getIntent().getIntExtra("gender", 0);
-        unitSystem = getIntent().getIntExtra("unitSystem", 0);
-        weight = getIntent().getFloatExtra("weight", 0.0f);
-        height1 = getIntent().getIntExtra("height1", 0);
-        height2 = getIntent().getIntExtra("height2", 0);
-        workoutFreq = getIntent().getIntExtra("workoutFreq", 0);
-        goal = getIntent().getIntExtra("goal", 0);
-    }
-
-    private void getBMR() {
-        // MALE:   BMR = (10 x weight in kg) + (6.25 x height in cm) – (5 x age in years) + 5
-        // FEMALE: BMR = (10 x weight in kg) + (6.25 x height in cm)  – (5 x age in years) - 161
-        // Store weight/height in local variables in order to perform unit conversion if needed
-        float valWeight = weight;
-        int valHeight = height1;
-
-        // Need to convert to Metric in order to calculate BMR
-        if(unitSystem == 1) // Imperial
-        {
-            // Convert LB to KG
-            valWeight /= 2.2046226218;
-            // Convert Feet/Inches to CM
-            valHeight = (int) ((30.48 * valHeight) + (2.54 * height2));
-        }
-
-        // Parse Date of Birth string
-        String ageArr[] = dob.split("-");
-
-        // Obtain Age value from Date of Birth String
-        int valAge = getAge(Integer.parseInt(ageArr[2]), Integer.parseInt(ageArr[1]), Integer.parseInt(ageArr[0]));
-
-        // Obtain Gender
-        if (gender == 0) // Male
-            BMR = (int) (10*valWeight + 6.25*valHeight + 5*valAge + 5.0);
-        else
-            BMR = (int) (10*valWeight + 6.25*valHeight + 5*valAge - 161.0);
-
-        // Activity Factor Multiplier
-        // None (little or no exercise)
-        if (workoutFreq == 0)
-            caloriesDefault = (int) (BMR * 1.2);
-
-            // Low (1-3 times/week)
-        else if (workoutFreq == 1)
-            caloriesDefault = (int) (BMR * 1.35);
-
-            // Medium (3-5 days/week)
-        else if (workoutFreq == 2)
-            caloriesDefault = (int) (BMR * 1.5);
-
-            // High (6-7 days/week)
-        else if (workoutFreq == 3)
-            caloriesDefault = (int) (BMR * 1.7);
-
-            // Very High (physical job or 7+ times/week)
-        else if (workoutFreq == 4)
-            caloriesDefault = (int) (BMR * 1.9);
-
-        // Weight goals
-        // Lose weight
-        if (goal == 0)
-            caloriesDefault -= 250.0;
-
-            // Maintain weight
-        else if (goal == 1)
-        {} // Do nothing
-
-        // Gain weight
-        else if (goal == 2)
-            caloriesDefault += 250.0;
-    }
-
-    private int getAge (int _year, int _month, int _day) {
-        GregorianCalendar cal = new GregorianCalendar();
-        int y, m, d, a;
-
-        y = cal.get(Calendar.YEAR);
-        m = cal.get(Calendar.MONTH);
-        d = cal.get(Calendar.DAY_OF_MONTH);
-        cal.set(_year, _month, _day);
-        a = y - cal.get(Calendar.YEAR);
-        if ((m < cal.get(Calendar.MONTH))
-                || ((m == cal.get(Calendar.MONTH)) && (d < cal
-                .get(Calendar.DAY_OF_MONTH)))) {
-            --a;
-        }
-        return a;
     }
 
     private void addTextWatchers() {

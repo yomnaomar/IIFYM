@@ -78,6 +78,59 @@ public class activityRegisterProfile extends AppCompatActivity implements View.O
         firebaseAuth = FirebaseAuth.getInstance();
     }
 
+    private void initializeGUI() {
+        etxtName            = (EditText)findViewById(R.id.etxtName);
+        etxtDateOfBirth     = (EditText) findViewById(R.id.etxtDateOfBirth);
+        etxtWeight          = (EditText)findViewById(R.id.etxtWeight);
+        etxtHeightParam1    = (EditText)findViewById(R.id.etxtHeightParam1);
+        etxtHeightParam2    = (EditText)findViewById(R.id.etxtHeightParam2);
+        lblWeightUnit       = (TextView)findViewById(R.id.lblWeightUnit);
+        lblHeightUnit1      = (TextView)findViewById(R.id.lblHeightUnit1);
+        lblHeightUnit2      = (TextView)findViewById(R.id.lblHeightUnit2);
+        linearlayoutHeight  = (LinearLayout)findViewById(R.id.linearlayoutHeight);
+        linearlayoutWeight  = (LinearLayout)findViewById(R.id.linearlayoutWeight);
+        seggroupUnitSystem  = (SegmentedGroup) findViewById(R.id.seggroupUnitSystem);
+        rbtnGenderMale      = (RadioButton)findViewById(R.id.rbtnGenderMale);
+        rbtnGenderFemale    = (RadioButton)findViewById(R.id.rbtnGenderFemale);
+        rbtnMetric          = (RadioButton)findViewById(R.id.rbtnMetric);
+        rbtnGenderImperial  = (RadioButton)findViewById(R.id.rbtnImperial);
+        spinnerWorkoutFreq  = (Spinner)findViewById(R.id.spinnerWorkoutFreq);
+        spinnerGoals        = (Spinner)findViewById(R.id.spinnerGoals);
+
+        etxtDateOfBirth.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus){
+                    showDatePicker();
+                }
+            }
+        });
+        dateFormatter = new SimpleDateFormat("dd-MM-yyyy");
+        etxtDateOfBirth.setInputType(InputType.TYPE_NULL);
+        etxtDateOfBirth.setText(dateFormatter.format(new Date()));
+        etxtDateOfBirth.setOnClickListener(this);
+
+        etxtWeight.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(4,2)});
+
+        seggroupUnitSystem.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                unitSystemChange();
+            }
+        });
+
+        ArrayAdapter<CharSequence> adapterWorkoutFreq = ArrayAdapter.createFromResource(this,
+                R.array.array_WorkoutFreq, R.layout.spinner_item);
+        adapterWorkoutFreq.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        ArrayAdapter<CharSequence> adapterGoals = ArrayAdapter.createFromResource(this,
+                R.array.array_Goals, R.layout.spinner_item);
+        adapterGoals.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        spinnerWorkoutFreq.setAdapter(adapterWorkoutFreq);
+        spinnerGoals.setAdapter(adapterGoals);
+    }
+
     private void readUserInput() {
         name = etxtName.getText().toString();
 
@@ -122,24 +175,6 @@ public class activityRegisterProfile extends AppCompatActivity implements View.O
 
         workoutFreq = spinnerWorkoutFreq.getSelectedItemPosition();
         goal = spinnerGoals.getSelectedItemPosition();
-    }
-
-    private void goToUserMacros() {
-        context = getApplicationContext();
-        Intent intent = new Intent();
-        intent.putExtra("uid", uid);
-        intent.putExtra("email", email);
-        intent.putExtra("name", name);
-        intent.putExtra("dob", dob);
-        intent.putExtra("gender", gender);
-        intent.putExtra("unitSystem", unitSystem);
-        intent.putExtra("weight", weight);
-        intent.putExtra("height1", height1);
-        intent.putExtra("height2", height2);
-        intent.putExtra("workoutFreq", workoutFreq);
-        intent.putExtra("goal", goal);
-        intent.setClass(context, activityRegisterGoals.class);
-        startActivity(intent);
     }
 
     private boolean validateFields() {
@@ -212,59 +247,6 @@ public class activityRegisterProfile extends AppCompatActivity implements View.O
         return valid;
     }
 
-    private void initializeGUI() {
-        etxtName            = (EditText)findViewById(R.id.etxtName);
-        etxtDateOfBirth     = (EditText) findViewById(R.id.etxtDateOfBirth);
-        etxtWeight          = (EditText)findViewById(R.id.etxtWeight);
-        etxtHeightParam1    = (EditText)findViewById(R.id.etxtHeightParam1);
-        etxtHeightParam2    = (EditText)findViewById(R.id.etxtHeightParam2);
-        lblWeightUnit       = (TextView)findViewById(R.id.lblWeightUnit);
-        lblHeightUnit1      = (TextView)findViewById(R.id.lblHeightUnit1);
-        lblHeightUnit2      = (TextView)findViewById(R.id.lblHeightUnit2);
-        linearlayoutHeight  = (LinearLayout)findViewById(R.id.linearlayoutHeight);
-        linearlayoutWeight  = (LinearLayout)findViewById(R.id.linearlayoutWeight);
-        seggroupUnitSystem  = (SegmentedGroup) findViewById(R.id.seggroupUnitSystem);
-        rbtnGenderMale      = (RadioButton)findViewById(R.id.rbtnGenderMale);
-        rbtnGenderFemale    = (RadioButton)findViewById(R.id.rbtnGenderFemale);
-        rbtnMetric          = (RadioButton)findViewById(R.id.rbtnMetric);
-        rbtnGenderImperial  = (RadioButton)findViewById(R.id.rbtnImperial);
-        spinnerWorkoutFreq  = (Spinner)findViewById(R.id.spinnerWorkoutFreq);
-        spinnerGoals        = (Spinner)findViewById(R.id.spinnerGoals);
-
-        etxtDateOfBirth.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if(hasFocus){
-                    showDatePicker();
-                }
-            }
-        });
-        dateFormatter = new SimpleDateFormat("dd-MM-yyyy");
-        etxtDateOfBirth.setInputType(InputType.TYPE_NULL);
-        etxtDateOfBirth.setText(dateFormatter.format(new Date()));
-        etxtDateOfBirth.setOnClickListener(this);
-
-        etxtWeight.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(4,2)});
-
-        seggroupUnitSystem.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                unitSystemChange();
-            }
-        });
-
-        ArrayAdapter<CharSequence> adapterWorkoutFreq = ArrayAdapter.createFromResource(this,
-                R.array.array_WorkoutFreq, R.layout.spinner_item);
-        adapterWorkoutFreq.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        ArrayAdapter<CharSequence> adapterGoals = ArrayAdapter.createFromResource(this,
-                R.array.array_Goals, R.layout.spinner_item);
-        adapterGoals.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        spinnerWorkoutFreq.setAdapter(adapterWorkoutFreq);
-        spinnerGoals.setAdapter(adapterGoals);
-    }
-
     @Override public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_user_info, menu);
@@ -283,6 +265,24 @@ public class activityRegisterProfile extends AppCompatActivity implements View.O
                 break;
         }
         return true;
+    }
+
+    private void goToUserMacros() {
+        context = getApplicationContext();
+        Intent intent = new Intent();
+        intent.putExtra("uid", uid);
+        intent.putExtra("email", email);
+        intent.putExtra("name", name);
+        intent.putExtra("dob", dob);
+        intent.putExtra("gender", gender);
+        intent.putExtra("unitSystem", unitSystem);
+        intent.putExtra("weight", weight);
+        intent.putExtra("height1", height1);
+        intent.putExtra("height2", height2);
+        intent.putExtra("workoutFreq", workoutFreq);
+        intent.putExtra("goal", goal);
+        intent.setClass(context, activityRegisterGoals.class);
+        startActivity(intent);
     }
 
     @Override public void onClick(View v) {

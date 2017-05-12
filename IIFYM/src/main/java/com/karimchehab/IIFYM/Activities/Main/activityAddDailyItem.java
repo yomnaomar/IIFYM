@@ -151,13 +151,6 @@ public class activityAddDailyItem extends AppCompatActivity implements TextWatch
         lblFat.setText(df.format(food.getFat() * portionMultiplier) + "");
     }
 
-    //Inserts DailyItem into User's Daily Log
-    private void Enter() {
-        DB_SQLite.createDailyItem(fid, portionMultiplier);
-        Toast.makeText(context,"Food added to daily log",Toast.LENGTH_SHORT).show();
-        finish();
-    }
-
     @Override public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_save, menu);
@@ -175,12 +168,15 @@ public class activityAddDailyItem extends AppCompatActivity implements TextWatch
         return true;
     }
 
-    @Override public void onBackPressed() {
-        Cancel();
+    // Inserts DailyItem into User's Daily Log
+    private void Enter() {
+        DB_SQLite.createDailyItem(fid, portionMultiplier);
+        Toast.makeText(context,"Food added to daily log",Toast.LENGTH_SHORT).show();
+        finish();
     }
 
-    //Returns to activityHome without making any changes
-    private void Cancel() {
+    // Returns to activityHome without making any changes
+    @Override public void onBackPressed() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Cancel?")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -198,7 +194,9 @@ public class activityAddDailyItem extends AppCompatActivity implements TextWatch
         dialog.show();
     }
 
+    // Unused
     @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
+    // Unused
     @Override public void afterTextChanged(Editable s) {}
 }

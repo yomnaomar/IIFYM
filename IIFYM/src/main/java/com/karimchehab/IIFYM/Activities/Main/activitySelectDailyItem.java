@@ -45,12 +45,6 @@ public class activitySelectDailyItem extends AppCompatActivity implements Adapte
         initializeGUI();
     }
 
-    @Override protected void onResume() {
-            super.onResume();
-            final String search = etxtSearch.getText().toString();
-            filterSavedItems(search);
-    }
-
     private void initializeGUI() {
         // Search Functionality
         etxtSearch = (EditText) findViewById(R.id.etxtSearch);
@@ -78,14 +72,10 @@ public class activitySelectDailyItem extends AppCompatActivity implements Adapte
         fabCreateMeal.setOnClickListener(this);
     }
 
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Food food = (Food) parent.getItemAtPosition(position);
-        long fid = food.getId();
-
-        Intent intent = new Intent(getBaseContext(), activityAddDailyItem.class);
-        intent.putExtra("fid", fid);
-        startActivity(intent);
+    @Override protected void onResume() {
+        super.onResume();
+        final String search = etxtSearch.getText().toString();
+        filterSavedItems(search);
     }
 
     //Updates AdapterSavedItem and arrSavedItems
@@ -104,6 +94,15 @@ public class activitySelectDailyItem extends AppCompatActivity implements Adapte
         for (int i = 0; i < arrSavedItems.size(); i++) {
             adapterSavedItem.add(arrSavedItems.get(i));
         }
+    }
+
+    @Override public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Food food = (Food) parent.getItemAtPosition(position);
+        long fid = food.getId();
+
+        Intent intent = new Intent(getBaseContext(), activityAddDailyItem.class);
+        intent.putExtra("fid", fid);
+        startActivity(intent);
     }
 
     // TODO Implement fabAddNewMeal
