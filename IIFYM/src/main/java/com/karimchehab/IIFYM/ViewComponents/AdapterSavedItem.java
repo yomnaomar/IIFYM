@@ -47,10 +47,14 @@ public class AdapterSavedItem extends ArrayAdapter<Food> {
         // Populate the data into the template view using the data object
         name.setText(food.getName());
         brand.setText(food.getBrand());
-        calories.setText(String.valueOf(food.getCalories()));
-        carbs.setText(String.valueOf(food.getCarbs()));
-        protein.setText(String.valueOf(food.getProtein()));
-        fat.setText(String.valueOf(food.getFat()));
+        if (food.getBrand().isEmpty())
+            brand.setVisibility(View.GONE);
+        else
+            brand.setVisibility(View.VISIBLE);
+        calories.setText(String.valueOf(food.getCalories()) + " cals");
+        carbs.setText(String.valueOf(food.getCarbs()) + " c");
+        protein.setText(String.valueOf(food.getProtein()) + " p");
+        fat.setText(String.valueOf(food.getFat()) + " f");
 
         float   serving_number;
         Weight  weight;

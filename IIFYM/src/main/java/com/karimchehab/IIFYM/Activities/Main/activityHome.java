@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -34,7 +35,7 @@ public class activityHome extends AppCompatActivity implements View.OnClickListe
     // Variables
     private Context             context;
     private int                 selectedRelativeDay = 0; // relative to today in days
-    private fragmentDay[] fragments;
+    private fragmentDay[]       fragments;
 
     // Database
     private SharedPreferenceHelper myPrefs;
@@ -149,9 +150,8 @@ public class activityHome extends AppCompatActivity implements View.OnClickListe
                     fragments[2].render();
 
                     viewPager.setCurrentItem(1, false);
-                    lblSelectedDate.setText(DateHelper.getDateRelativeToToday(currPage).text);
                 }
-                /*if (state == ViewPager.SCROLL_STATE_SETTLING){
+                if (state == ViewPager.SCROLL_STATE_SETTLING){
                     int currPage = viewPager.getCurrentItem();
                     if (currPage < 1) {
                         currPage = selectedRelativeDay - 1;
@@ -159,7 +159,7 @@ public class activityHome extends AppCompatActivity implements View.OnClickListe
                         currPage = selectedRelativeDay + 1;
                     }
                     lblSelectedDate.setText(DateHelper.getDateRelativeToToday(currPage).text);
-                }*/
+                }
             }
 
             @Override
@@ -244,5 +244,12 @@ public class activityHome extends AppCompatActivity implements View.OnClickListe
 
         viewPager.setCurrentItem(1, false);
         lblSelectedDate.setText(DateHelper.getDateRelativeToToday(0).text);
+
+        Snackbar snackbar = Snackbar
+                .make(viewPager, "Today selected", Snackbar.LENGTH_SHORT);
+
+        View snackBarView = snackbar.getView();
+        snackBarView.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+        snackbar.show();
     }
 }
