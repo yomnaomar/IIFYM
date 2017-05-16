@@ -406,4 +406,9 @@ public class activityRegisterProfile extends AppCompatActivity implements View.O
             etxtDateOfBirth.setError(null);
         }
     }
+
+    @Override public void onBackPressed() {
+        super.onBackPressed();
+        signOut();
+    }
 }

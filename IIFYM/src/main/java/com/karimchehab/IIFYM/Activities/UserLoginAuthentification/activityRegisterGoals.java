@@ -730,4 +730,9 @@ public class activityRegisterGoals extends AppCompatActivity implements View.OnC
     @Override public void afterTextChanged(Editable s) {
 
     }
+
+    @Override public void onBackPressed() {
+        super.onBackPressed();
+        signOut();
+    }
 }
