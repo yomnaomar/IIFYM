@@ -66,7 +66,7 @@ public class activityEditFood extends AppCompatActivity implements AdapterView.O
     }
 
     private void initializeGUI(){
-        //EditText
+        // EditText
         etxtName = (EditText) findViewById(R.id.etxtName);
         etxtBrand = (EditText) findViewById(R.id.etxtBrand);
         etxtCalories = (EditText) findViewById(R.id.etxtCalories);
@@ -105,11 +105,12 @@ public class activityEditFood extends AppCompatActivity implements AdapterView.O
         spinnerUnit.setSelection(0); // default selection value
         spinnerUnit.setOnItemSelectedListener(this);
 
-        //Floating Action Button
+        // Floating Action Button
         fabDelete = (FloatingActionButton) findViewById(R.id.fabDelete);
         fabDelete.setOnClickListener(this);
     }
 
+    // Retrieves data from the database and populates GUI appropriately
     private void populateGUI() {
         etxtName.setText(food.getName());
         etxtBrand.setText(food.getBrand());
@@ -254,14 +255,10 @@ public class activityEditFood extends AppCompatActivity implements AdapterView.O
     // TODO if true, then alert user and cancel delete opertaion
     private void deleteRecords() {DB_SQLite.deleteFood(id);}
 
-    @Override public void onBackPressed() {
-        Cancel();
-    }
-
     //Returns to activityHome without making any changes
-    private void Cancel() {
+    @Override public void onBackPressed() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Discard changes?")
+        builder.setMessage("Cancel?")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         // User clicked Yes button
@@ -348,5 +345,6 @@ public class activityEditFood extends AppCompatActivity implements AdapterView.O
         }
     }
 
+    // Unused
     @Override public void onNothingSelected(AdapterView<?> adapterView) {}
 }

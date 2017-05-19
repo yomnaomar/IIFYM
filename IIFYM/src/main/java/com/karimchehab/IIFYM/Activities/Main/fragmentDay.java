@@ -147,6 +147,17 @@ public class fragmentDay extends Fragment implements AdapterView.OnItemClickList
         Log.d("initializeUser", currentUser.toString());
     }
 
+    @Override public void onResume() {
+        super.onResume();
+        initializeUser();
+        render();
+    }
+
+    public void render() {
+        updateArrayList();
+        updateMacros();
+    }
+
     private void updateMacros() {
         // Reset to prevent accumulation
         caloriesCurrent = 0;
@@ -242,17 +253,6 @@ public class fragmentDay extends Fragment implements AdapterView.OnItemClickList
         for (int i = 0; i <arrDailyItems.size(); i++) {
             adapterDailyItems.add(arrDailyItems.get(i));
         }
-    }
-
-    public void render() {
-        updateArrayList();
-        updateMacros();
-    }
-
-    @Override public void onResume() {
-        super.onResume();
-        initializeUser();
-        render();
     }
 
     @Override public void onPause() {

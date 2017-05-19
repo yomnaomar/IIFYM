@@ -133,7 +133,7 @@ public class activityCreateFood extends AppCompatActivity implements AdapterView
         return super.onOptionsItemSelected(item);
     }
 
-    //Inserts Food from User input to Food table in the Database
+    // Inserts Food from User input to Food table in the Database
     private void Enter() {
         boolean fieldsOk = validateFields();
         if(fieldsOk) {
@@ -241,12 +241,8 @@ public class activityCreateFood extends AppCompatActivity implements AdapterView
         return valid;
     }
 
+    // Returns to activityHome without making any changes
     @Override public void onBackPressed() {
-        Cancel();
-    }
-
-    //Returns to activityHome without making any changes
-    private void Cancel() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Cancel?")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -292,5 +288,6 @@ public class activityCreateFood extends AppCompatActivity implements AdapterView
         }
     }
 
+    // Used
     @Override public void onNothingSelected(AdapterView<?> adapterView) {}
 }

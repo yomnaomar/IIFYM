@@ -115,22 +115,6 @@ public class fragmentProfile extends Fragment implements View.OnClickListener, O
         DB_SQLite = new SQLiteConnector(context);
     }
 
-    private void getUserData() {
-        uid = myPrefs.getStringValue("session_uid");
-        user = DB_SQLite.retrieveUser(uid);
-        Log.d("getUserData", user.toString());
-
-        name = user.getName();
-        dob = user.getDob();
-        gender = user.getGender();
-        unitSystem = user.getUnitSystem();
-        weight = user.getWeight();
-        height1 = user.getHeight1();
-        height2 = user.getHeight2();
-        workoutFreq = user.getWorkoutFreq();
-        goal = user.getGoal();
-    }
-
     @Override public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -203,6 +187,22 @@ public class fragmentProfile extends Fragment implements View.OnClickListener, O
         spinnerGoals.setAdapter(adapterGoals);
     }
 
+    private void getUserData() {
+        uid = myPrefs.getStringValue("session_uid");
+        user = DB_SQLite.retrieveUser(uid);
+        Log.d("getUserData", user.toString());
+
+        name = user.getName();
+        dob = user.getDob();
+        gender = user.getGender();
+        unitSystem = user.getUnitSystem();
+        weight = user.getWeight();
+        height1 = user.getHeight1();
+        height2 = user.getHeight2();
+        workoutFreq = user.getWorkoutFreq();
+        goal = user.getGoal();
+    }
+
     private void setInitialValues() {
         etxtName.setText(name);
         etxtDateOfBirth.setText(dob);
@@ -232,21 +232,6 @@ public class fragmentProfile extends Fragment implements View.OnClickListener, O
 
         spinnerWorkoutFreq.setSelection(workoutFreq);
         spinnerGoals.setSelection(goal);
-    }
-
-    @Override public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override public void onDetach() {
-        super.onDetach();
-        mListener = null;
     }
 
     @Override public void onClick(View v) {
@@ -541,6 +526,21 @@ public class fragmentProfile extends Fragment implements View.OnClickListener, O
         if(etxtDateOfBirth.getError() != null) {
             etxtDateOfBirth.setError(null);
         }
+    }
+
+    @Override public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnFragmentInteractionListener) {
+            mListener = (OnFragmentInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
+    }
+
+    @Override public void onDetach() {
+        super.onDetach();
+        mListener = null;
     }
 
     /**
