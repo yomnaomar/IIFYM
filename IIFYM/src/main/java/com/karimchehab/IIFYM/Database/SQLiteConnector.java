@@ -613,7 +613,6 @@ public class SQLiteConnector {
         return database.delete(SQLiteHelper.Table_DailyItem, "id = '" + id + "'", null);
     }
 
-    // TODO Implement helper functions
     //----------    SQLiteHelper.Table_ComposedOf = "ComposedOf"    ----------------
 
 /*    public Cursor getMealId(long mid) {
