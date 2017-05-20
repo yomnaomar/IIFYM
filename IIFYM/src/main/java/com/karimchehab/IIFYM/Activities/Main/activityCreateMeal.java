@@ -8,6 +8,10 @@ import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -27,7 +31,7 @@ import java.util.ArrayList;
 
 import info.hoang8f.android.segmented.SegmentedGroup;
 
-public class activityCreateMeal extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
+public class activityCreateMeal extends AppCompatActivity implements AdapterView.OnItemSelectedListener, TextWatcher {
 
     // GUI
     private ListView            listviewIngredients;
@@ -36,7 +40,6 @@ public class activityCreateMeal extends AppCompatActivity implements View.OnClic
     private TextView            lblCalories, lblCarbs, lblProtein, lblFat;
     private RadioButton         rbtnServing, rbtnWeight;
     private SegmentedGroup      seggroupPortionType;
-    private Button              btnCreateMeal;
 
     // Variables
     Context                     context;
@@ -89,45 +92,42 @@ public class activityCreateMeal extends AppCompatActivity implements View.OnClic
         rbtnServing = (RadioButton) findViewById(R.id.rbtnServing);
         rbtnWeight = (RadioButton) findViewById(R.id.rbtnWeight);
         seggroupPortionType = (SegmentedGroup) findViewById(R.id.seggroupPortionType);
-
-        btnCreateMeal       = (Button)findViewById(R.id.btnCreateMeal);
-        btnCreateMeal.setOnClickListener(this);
     }
 
     private void initializeAdapaterIngredients() {
         adapterIngredients.clear();
         for (int i = 0; i < ingredientCount; i++) {
             adapterIngredients.add(ingredients[i]);
+            View view = listviewIngredients.getChildAt(i);
+            EditText etxtPortionAmount = (EditText) view.findViewById(R.id.etxtPortionAmount);
+            etxtPortionAmount.addTextChangedListener(this);
         }
     }
 
     private void populateGUI() {
+        setMealNutrition();
+    }
+
+    private void setMealNutrition() {
         int calories = 0;
         int carbs = 0;
         int protein = 0;
         int fat = 0;
 
+        float[] multipliers = captureMultipliers();
+
         for (int i = 0; i < ingredientCount; i++){
             Food food = DB_SQLite.retrieveFood(ingredients[i]);
-            calories += food.getCalories();
-            carbs += food.getCarbs();
-            protein += food.getProtein();
-            fat += food.getFat();
+                calories += food.getCalories() * multipliers[i];
+                carbs += food.getCarbs() * multipliers[i];
+                protein += food.getProtein() * multipliers[i];
+                fat += food.getFat() * multipliers[i];
         }
 
         lblCalories.setText(calories + "");
         lblCarbs.setText(carbs + "");
         lblProtein.setText(protein + "");
         lblFat.setText(fat + "");
-    }
-
-
-
-    @Override public void onClick(View v) {
-        switch (v){
-            case R.id.btnCreateMeal:
-                createMeal();
-        }
     }
 
     public void createMeal() {
@@ -179,11 +179,44 @@ public class activityCreateMeal extends AppCompatActivity implements View.OnClic
     private float[] captureMultipliers() {
         float[] multipliers = new float[ingredientCount];
         for (int i = 0; i<ingredientCount; i++){
+            Food food = DB_SQLite.retrieveFood(ingredients[i]);
+
             View view = listviewIngredients.getChildAt(i);
-            EditText editText = (EditText) view.findViewById(R.id.etxtPortionAmount);
-            multipliers[i] = Float.parseFloat(editText.getText().toString());
+            EditText etxtPortionAmount = (EditText) view.findViewById(R.id.etxtPortionAmount);
+            float portionAmount = 0;
+
+            if (food.getPortionType() == 0) // Serving
+            {
+                portionAmount = DB_SQLite.retrieveServing(food.getId());
+            }
+            else if (food.getPortionType() == 1) // Weight
+            {
+                Weight weight = DB_SQLite.retrieveWeight(food.getId());
+                portionAmount = weight.getAmount();
+            }
+            multipliers[i] = Float.parseFloat(etxtPortionAmount.getText().toString()) / portionAmount;
         }
         return multipliers;
+    }
+
+    @Override public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_create_food, menu);
+        return true;
+    }
+
+    @Override public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar list_item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        if (id == R.id.menu_add) {
+            createMeal();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     private boolean validateFields() {
@@ -249,4 +282,14 @@ public class activityCreateMeal extends AppCompatActivity implements View.OnClic
     }
 
     @Override public void onNothingSelected(AdapterView<?> adapterView) {}
+
+    @Override public void onTextChanged(CharSequence s, int start, int before, int count) {
+        setMealNutrition();
+    }
+
+    @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+    @Override public void afterTextChanged(Editable s) {
+
+    }
 }

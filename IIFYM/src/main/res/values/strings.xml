@@ -174,5 +174,6 @@
     <string name="btnOk">Ok</string>
 
     <string name="lblSelectedFoods"><u>Selected Foods</u></string>
+    <string name="toolbarCreateNewMeal">Create new meal</string>
 
 </resources>
