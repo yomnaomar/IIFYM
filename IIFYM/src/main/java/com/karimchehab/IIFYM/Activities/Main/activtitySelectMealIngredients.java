@@ -70,7 +70,7 @@ public class activtitySelectMealIngredients extends AppCompatActivity implements
         // List View
         adapterSelectedFoods = new AdapterSavedItem(this);
         listviewSelectedFoods = (ListView) findViewById(R.id.listviewSelectedFoods);
-        listviewSavedItems.setAdapter(adapterSelectedFoods);
+        listviewSelectedFoods.setAdapter(adapterSelectedFoods);
         //TODO Implement Swipe to delete
 
         adapterSavedItem = new AdapterSavedItem(this);
@@ -105,10 +105,10 @@ public class activtitySelectMealIngredients extends AppCompatActivity implements
         for (int i = 0; i < ingredientCount; i ++){
             ingredients[i] = adapterSelectedFoods.getItem(i).getId();
         }
-        intent.putExtra("ingredients", ingredients);
-        intent.putExtra("isDaily", isDaily);
-        Intent intent = new Intent(getApplicationContext(), activityCreateMeal.class);
-        startActivity(intent);
+        Intent newIntent = new Intent(getApplicationContext(), activityCreateMeal.class);
+        newIntent.putExtra("ingredients", ingredients);
+        newIntent.putExtra("isDaily", isDaily);
+        startActivity(newIntent);
     }
 
     @Override protected void onResume() {
