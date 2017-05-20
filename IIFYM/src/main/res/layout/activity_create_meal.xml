@@ -1,9 +1,253 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.karimchehab.IIFYM.Activities.Main.activityCreateMeal">
+    android:layout_marginBottom="@dimen/activity_vertical_margin"
+    android:layout_marginLeft="@dimen/activity_vertical_margin"
+    android:layout_marginRight="@dimen/activity_vertical_margin"
+    android:layout_marginTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
+    tools:context="com.karimchehab.IIFYM.Activities.Main.activityCreateMeal"
+    tools:layout_editor_absoluteX="0dp"
+    tools:layout_editor_absoluteY="81dp">
 
-</android.support.constraint.ConstraintLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:layout_editor_absoluteX="115dp"
+                tools:layout_editor_absoluteY="42dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/lblSelectedFoods"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/lblSelectedFoods"
+                        android:textAppearance="@android:style/TextAppearance.Material.Medium"
+                        android:textColor="?attr/colorPrimary"
+                        android:textStyle="bold" />
+
+                    <ListView
+                        android:id="@+id/listviewSelectedFoods"
+                        android:layout_width="match_parent"
+                        android:layout_height="130dp"
+                        tools:layout_editor_absoluteX="0dp"></ListView>
+
+                </LinearLayout>
+            </ScrollView>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/colorPrimary"
+                android:orientation="horizontal">
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/etxtMealName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="15"
+                    android:hint="Meal Name"
+                    android:inputType="text"
+
+                    android:maxLength="5"
+                    android:textAlignment="textStart"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="?attr/colorPrimary"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/etxtMealBrand"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="15"
+                    android:hint="Meal Brand"
+                    android:inputType="text"
+
+                    android:maxLength="5"
+                    android:textAlignment="textStart"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="?attr/colorPrimary"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/lblCalories"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:gravity="center_vertical"
+                    android:text="@string/lblCalories"
+                    android:textColor="@color/colorPrimary" />
+
+                <TextView
+                    android:id="@+id/textView39"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="@string/lblkcal"
+                    android:textColor="@color/CaloriesProgessColor" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/lblCarbs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:gravity="center_vertical"
+                    android:text="@string/lblCarbs"
+                    android:textColor="@color/colorPrimary" />
+
+                <TextView
+                    android:id="@+id/lblc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="20dp"
+                    android:text="@string/lblC"
+                    android:textColor="@color/CarbProgressColor" />
+
+                <TextView
+                    android:id="@+id/lblProtein"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:gravity="center_vertical"
+                    android:text="@string/lblProtein"
+                    android:textColor="@color/colorPrimary" />
+
+                <TextView
+                    android:id="@+id/lblp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="20dp"
+                    android:text="@string/lblp"
+                    android:textColor="@color/ProteinProgessColor" />
+
+                <TextView
+                    android:id="@+id/lblFat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:gravity="center_vertical"
+                    android:text="@string/lblFat"
+                    android:textColor="@color/colorPrimary" />
+
+                <TextView
+                    android:id="@+id/lblf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="@string/lblf"
+                    android:textColor="@color/FatProgessColor" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <info.hoang8f.android.segmented.SegmentedGroup
+                    android:id="@+id/seggroupPortionType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    app:sc_border_width="2dp"
+                    app:sc_corner_radius="10dp">
+
+                    <RadioButton
+                        android:id="@+id/rbtnServing"
+                        style="@style/RadioButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical|center_horizontal"
+                        android:checked="true"
+                        android:text="@string/serving" />
+
+                    <RadioButton
+                        android:id="@+id/rbtnWeight"
+                        style="@style/RadioButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical|center_horizontal"
+                        android:text="@string/weight" />
+
+                </info.hoang8f.android.segmented.SegmentedGroup>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/etxtPortionAmount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="6"
+                    android:hint="@string/hintAmount"
+                    android:inputType="numberDecimal"
+                    android:textAlignment="center"
+                    android:textColor="?attr/colorPrimary"
+                    android:textSize="14sp" />
+
+                <Spinner
+                    android:id="@+id/spinnerUnit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical|center" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
