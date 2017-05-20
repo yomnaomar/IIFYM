@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,7 +31,7 @@ import com.karimchehab.IIFYM.ViewComponents.AdapterIngredients;
 
 import info.hoang8f.android.segmented.SegmentedGroup;
 
-public class activityCreateMeal extends AppCompatActivity implements AdapterView.OnItemSelectedListener, TextWatcher{
+public class activityCreateMeal extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     // GUI
     private ListView            listviewIngredients;
@@ -81,7 +82,7 @@ public class activityCreateMeal extends AppCompatActivity implements AdapterView
         adapterIngredients = new AdapterIngredients(this);
         listviewIngredients = (ListView) findViewById(R.id.listviewIngredients);
         listviewIngredients.setAdapter(adapterIngredients);
-        initializeAdapaterIngredients();
+        initializeAdapterIngredients();
 
         etxtName            = (EditText)findViewById(R.id.etxtName);
         etxtBrand           = (EditText)findViewById(R.id.etxtBrand);
@@ -113,7 +114,7 @@ public class activityCreateMeal extends AppCompatActivity implements AdapterView
         spinnerUnit.setOnItemSelectedListener(this);
     }
 
-    private void initializeAdapaterIngredients() {
+    private void initializeAdapterIngredients() {
         adapterIngredients.clear();
         for (int i = 0; i < ingredientCount; i++) {
             adapterIngredients.add(DB_SQLite.retrieveFood(ingredients[i]));
@@ -121,8 +122,24 @@ public class activityCreateMeal extends AppCompatActivity implements AdapterView
         for (int i = 0; i <ingredientCount; i++){
             View view = listviewIngredients.getAdapter().getView(i, null, null);
             EditText etxtPortionAmount = (EditText) view.findViewById(R.id.etxtAmount);
+            etxtPortionAmount.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-            etxtPortionAmount.addTextChangedListener(this);
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    Log.d("activityCreateMeal","onTextChanged Listener Called");
+                    setMealNutrition();
+                    adapterIngredients.notifyDataSetChanged();
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+
+                }
+            });
         }
     }
 
@@ -138,7 +155,7 @@ public class activityCreateMeal extends AppCompatActivity implements AdapterView
 
         float[] multipliers = captureMultipliers();
 
-        for (int i = 0; i < ingredientCount; i++){
+        for (int i = 0; i < ingredientCount; i++) {
             Food food = DB_SQLite.retrieveFood(ingredients[i]);
                 calories += food.getCalories() * multipliers[i];
                 carbs += food.getCarbs() * multipliers[i];
@@ -203,8 +220,8 @@ public class activityCreateMeal extends AppCompatActivity implements AdapterView
         for (int i = 0; i<ingredientCount; i++){
             Food food = DB_SQLite.retrieveFood(ingredients[i]);
 
-            View view = listviewIngredients.getChildAt(i);
-            EditText etxtPortionAmount = (EditText) view.findViewById(R.id.etxtPortionAmount);
+            View view = listviewIngredients.getAdapter().getView(i, null, null);
+            EditText etxtPortionAmount = (EditText) view.findViewById(R.id.etxtAmount);
             float portionAmount = 0;
 
             if (food.getPortionType() == 0) // Serving
@@ -319,14 +336,4 @@ public class activityCreateMeal extends AppCompatActivity implements AdapterView
     }
 
     @Override public void onNothingSelected(AdapterView<?> adapterView) {}
-
-    @Override public void onTextChanged(CharSequence s, int start, int before, int count) {
-        setMealNutrition();
-    }
-
-    @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-
-    @Override public void afterTextChanged(Editable s) {
-
-    }
 }
