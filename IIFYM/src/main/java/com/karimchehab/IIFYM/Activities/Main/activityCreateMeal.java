@@ -7,14 +7,18 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,7 +30,7 @@ import com.karimchehab.IIFYM.ViewComponents.AdapterIngredients;
 
 import info.hoang8f.android.segmented.SegmentedGroup;
 
-public class activityCreateMeal extends AppCompatActivity implements AdapterView.OnItemSelectedListener, TextWatcher {
+public class activityCreateMeal extends AppCompatActivity implements AdapterView.OnItemSelectedListener, TextWatcher{
 
     // GUI
     private ListView            listviewIngredients;
@@ -35,6 +39,7 @@ public class activityCreateMeal extends AppCompatActivity implements AdapterView
     private TextView            lblCalories, lblCarbs, lblProtein, lblFat;
     private RadioButton         rbtnServing, rbtnWeight;
     private SegmentedGroup      seggroupPortionType;
+    private Spinner             spinnerUnit;
 
     // Variables
     Context                     context;
@@ -53,8 +58,9 @@ public class activityCreateMeal extends AppCompatActivity implements AdapterView
 
         // Intent
         Intent intent = getIntent();
-        ingredients = intent.getLongArrayExtra("ingredients");
         isDaily = intent.getBooleanExtra("isDaily",false);
+        ingredients = intent.getLongArrayExtra("ingredients");
+        ingredientCount = ingredients.length;
 
         setupDatabase();
 
@@ -71,6 +77,8 @@ public class activityCreateMeal extends AppCompatActivity implements AdapterView
 
     private void initializeGUI() {
 
+        // List View
+        adapterIngredients = new AdapterIngredients(this);
         listviewIngredients = (ListView) findViewById(R.id.listviewIngredients);
         listviewIngredients.setAdapter(adapterIngredients);
         initializeAdapaterIngredients();
@@ -87,6 +95,22 @@ public class activityCreateMeal extends AppCompatActivity implements AdapterView
         rbtnServing = (RadioButton) findViewById(R.id.rbtnServing);
         rbtnWeight = (RadioButton) findViewById(R.id.rbtnWeight);
         seggroupPortionType = (SegmentedGroup) findViewById(R.id.seggroupPortionType);
+
+        seggroupPortionType.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+        {
+            @Override public void onCheckedChanged(RadioGroup group, int checkedId) {
+                etxtPortionAmount.setText("");
+                updateGUI();
+            }
+        });
+
+        // Spinner
+        spinnerUnit = (Spinner) findViewById(R.id.spinnerUnit);
+        ArrayAdapter<CharSequence> Spinner_Unit_Adapter = ArrayAdapter.createFromResource(this, R.array.weight_units_array, android.R.layout.simple_spinner_item);
+        Spinner_Unit_Adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerUnit.setAdapter(Spinner_Unit_Adapter);
+        spinnerUnit.setSelection(0); // default selection value
+        spinnerUnit.setOnItemSelectedListener(this);
     }
 
     private void initializeAdapaterIngredients() {
@@ -192,6 +216,21 @@ public class activityCreateMeal extends AppCompatActivity implements AdapterView
             multipliers[i] = Float.parseFloat(etxtPortionAmount.getText().toString()) / portionAmount;
         }
         return multipliers;
+    }
+
+    @Override protected void onResume() {
+        super.onResume();
+        updateGUI();
+    }
+
+    private void updateGUI() {
+        if (rbtnServing.isChecked()) {
+            etxtPortionAmount.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL | InputType.TYPE_CLASS_NUMBER);
+            spinnerUnit.setVisibility(View.GONE);
+        } else if (rbtnWeight.isChecked()) {
+            etxtPortionAmount.setInputType(InputType.TYPE_CLASS_NUMBER);
+            spinnerUnit.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override public boolean onCreateOptionsMenu(Menu menu) {

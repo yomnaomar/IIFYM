@@ -113,9 +113,16 @@ public class activitySelectDailyItem extends AppCompatActivity implements Adapte
                 goToCreateNewFood();
                 break;
             case R.id.fabCreateNewMeal:
-                // TODO Implement
+                goToCreateNewMeal();
                 break;
         }
+    }
+
+    private void goToCreateNewMeal() {
+        Intent intent = new Intent(context, activtitySelectMealIngredients.class);
+        intent.putExtra("isDaily", true);
+        startActivity(intent);
+        finish();
     }
 
     public void goToCreateNewFood (){

@@ -113,19 +113,23 @@ public class activityFoodManager extends AppCompatActivity implements AdapterVie
         }
     }
 
-    // TODO Implement case where fabAddNewMeal
     @Override public void onClick(View v) {
         switch (v.getId()) {
             case R.id.fabCreateNewFood:
                 goToCreateNewFood();
                 break;
             case R.id.fabCreateNewMeal:
-                // TODO Implement
+                goToCreateNewMeal();
                 break;
         }
     }
 
-    public void goToCreateNewFood (){
+    private void goToCreateNewMeal() {
+        Intent intent = new Intent(context, activtitySelectMealIngredients.class);
+        startActivity(intent);
+    }
+
+    public void goToCreateNewFood(){
         Intent intent = new Intent(context, activityCreateFood.class);
         startActivity(intent);
     }
