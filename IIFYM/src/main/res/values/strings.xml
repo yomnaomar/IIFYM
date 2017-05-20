@@ -173,4 +173,6 @@
     <string name="actionToday">Go to today</string>
     <string name="btnOk">Ok</string>
 
+    <string name="lblSelectedFoods"><u>Selected Foods</u></string>
+
 </resources>
