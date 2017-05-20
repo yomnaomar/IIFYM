@@ -106,7 +106,6 @@ public class activitySelectDailyItem extends AppCompatActivity implements Adapte
         }
     }
 
-    // TODO Implement fabAddNewMeal
     @Override public void onClick(View v) {
         switch (v.getId()) {
             case R.id.fabCreateNewFood:
