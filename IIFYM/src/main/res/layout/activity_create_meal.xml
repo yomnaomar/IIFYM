@@ -34,16 +34,16 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/lblSelectedFoods"
+                        android:id="@+id/lblMealIngredients"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/lblSelectedFoods"
+                        android:text="@string/lblMealIngredients"
                         android:textAppearance="@android:style/TextAppearance.Material.Medium"
                         android:textColor="?attr/colorPrimary"
                         android:textStyle="bold" />
 
                     <ListView
-                        android:id="@+id/listviewSelectedFoods"
+                        android:id="@+id/listviewIngredients"
                         android:layout_width="match_parent"
                         android:layout_height="130dp"
                         tools:layout_editor_absoluteX="0dp"></ListView>
@@ -93,7 +93,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="15"
-                    android:hint="Meal Brand"
+                    android:hint="Brand"
                     android:inputType="text"
 
                     android:maxLength="5"

@@ -3,9 +3,7 @@ package com.karimchehab.IIFYM.Activities.Main;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -14,7 +12,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RadioButton;
@@ -25,9 +22,7 @@ import com.karimchehab.IIFYM.Database.SQLiteConnector;
 import com.karimchehab.IIFYM.Models.Food;
 import com.karimchehab.IIFYM.Models.Weight;
 import com.karimchehab.IIFYM.R;
-import com.karimchehab.IIFYM.ViewComponents.AdapterSavedItem;
-
-import java.util.ArrayList;
+import com.karimchehab.IIFYM.ViewComponents.AdapterIngredients;
 
 import info.hoang8f.android.segmented.SegmentedGroup;
 
@@ -97,7 +92,7 @@ public class activityCreateMeal extends AppCompatActivity implements AdapterView
     private void initializeAdapaterIngredients() {
         adapterIngredients.clear();
         for (int i = 0; i < ingredientCount; i++) {
-            adapterIngredients.add(ingredients[i]);
+            adapterIngredients.add(DB_SQLite.retrieveFood(ingredients[i]));
             View view = listviewIngredients.getChildAt(i);
             EditText etxtPortionAmount = (EditText) view.findViewById(R.id.etxtPortionAmount);
             etxtPortionAmount.addTextChangedListener(this);

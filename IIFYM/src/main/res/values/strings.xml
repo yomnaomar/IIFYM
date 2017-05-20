@@ -175,5 +175,6 @@
 
     <string name="lblSelectedFoods"><u>Selected Foods</u></string>
     <string name="toolbarCreateNewMeal">Create new meal</string>
+    <string name="lblMealIngredients">Meal Ingredients</string>
 
 </resources>
