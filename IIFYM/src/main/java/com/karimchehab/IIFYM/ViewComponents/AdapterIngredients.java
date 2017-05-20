@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.karimchehab.IIFYM.Database.SQLiteConnector;
@@ -41,11 +42,12 @@ public class AdapterIngredients extends ArrayAdapter<Food> {
         TextView carbs = (TextView) convertView.findViewById(R.id.lblCarbs);
         TextView protein = (TextView) convertView.findViewById(R.id.lblProtein);
         TextView fat = (TextView) convertView.findViewById(R.id.lblFat);
-        TextView portion = (TextView) convertView.findViewById(R.id.lblPortionDetails);
+        TextView portionType = (TextView) convertView.findViewById(R.id.lblPortionType);
+        EditText amount = (EditText) convertView.findViewById(R.id.etxtAmount);
 
         // Populate the data into the template view using the data object
-        name.setText(food.getName());
-        brand.setText(food.getBrand());
+        name.setText(food.getName() + "");
+        brand.setText(food.getBrand() + "");
         if (food.getBrand().isEmpty())
             brand.setVisibility(View.GONE);
         else
@@ -61,13 +63,16 @@ public class AdapterIngredients extends ArrayAdapter<Food> {
         if (food.getPortionType() == 0) { // Serving
             serving_number = DB_SQLite.retrieveServing(id);
             if (serving_number == 1.0f) {
-                portion.setText(serving_number + " Serving");
+                amount.setText(serving_number + "");
+                portionType. setText(" Serving");
             } else {
-                portion.setText(serving_number + " Servings");
+                amount.setText(serving_number + "");
+                portionType. setText(" Servings");
             }
         } else if (food.getPortionType() == 1) { // Weight
             weight = DB_SQLite.retrieveWeight(id);
-            portion.setText(weight.getAmount() + " " + weight.getUnit().Abbreviate());
+            amount.setText(weight.getAmount() + " ");
+            portionType.setText(weight.getUnit().Abbreviate() + "");
         }
 
         // Return the completed view to render on screen

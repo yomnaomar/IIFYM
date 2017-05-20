@@ -118,12 +118,12 @@ public class activityCreateMeal extends AppCompatActivity implements AdapterView
         for (int i = 0; i < ingredientCount; i++) {
             adapterIngredients.add(DB_SQLite.retrieveFood(ingredients[i]));
         }
-//        adapterIngredients.notifyDataSetChanged();
-//        for (int i = 0; i <ingredientCount; i++){
-//            View view = listviewIngredients.getChildAt(i);
-//            EditText etxtPortionAmount = (EditText) view.findViewById(R.id.etxtPortionAmount);
-//            etxtPortionAmount.addTextChangedListener(this);
-//        }
+        for (int i = 0; i <ingredientCount; i++){
+            View view = listviewIngredients.getAdapter().getView(i, null, null);
+            EditText etxtPortionAmount = (EditText) view.findViewById(R.id.etxtAmount);
+
+            etxtPortionAmount.addTextChangedListener(this);
+        }
     }
 
     private void populateGUI() {
