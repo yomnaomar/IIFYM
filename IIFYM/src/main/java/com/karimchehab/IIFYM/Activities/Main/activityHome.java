@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.karimchehab.IIFYM.Activities.Settings.activitySettings;
 import com.karimchehab.IIFYM.Activities.UserLoginAuthentification.activityLogin;
@@ -245,11 +246,6 @@ public class activityHome extends AppCompatActivity implements View.OnClickListe
         viewPager.setCurrentItem(1, false);
         lblSelectedDate.setText(DateHelper.getDateRelativeToToday(0).text);
 
-        Snackbar snackbar = Snackbar
-                .make(viewPager, "Today selected", Snackbar.LENGTH_SHORT);
-
-        View snackBarView = snackbar.getView();
-        snackBarView.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-        snackbar.show();
+        Toast.makeText(context,"Today Selected",Toast.LENGTH_SHORT).show();
     }
 }

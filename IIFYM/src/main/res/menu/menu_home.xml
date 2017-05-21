@@ -5,7 +5,7 @@
     tools:context="com.karimchehab.IIFYM.HomeActivity">
     <item
         android:id="@+id/actionToday"
-        android:icon="@mipmap/ic_today"
+        android:icon="@drawable/ic_today"
         android:orderInCategory="101"
         android:title="@string/actionToday"
         app:showAsAction="always" />
