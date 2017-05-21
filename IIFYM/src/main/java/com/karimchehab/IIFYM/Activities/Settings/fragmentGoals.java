@@ -63,7 +63,7 @@ public class fragmentGoals extends Fragment implements View.OnClickListener, Tex
     private ImageButton     btnReset, btnInfo, btnSave;
     private Animation       mEnterAnimation, mExitAnimation;
     private ProgressDialog  progressDialog;
-    private OnFragmentInteractionListener mListener;
+    private OnFragmentInteractionListener mListener; // Used - do not delete
     private View            view;
     private LinearLayout    linearLayoutRoot;
 
@@ -76,7 +76,7 @@ public class fragmentGoals extends Fragment implements View.OnClickListener, Tex
     private int             caloriesDefault;
     private final int       carbsPercentDefault = 50, proteinPercentDefault = 25, fatPercentDefault = 25;
     private Context         context;
-    private ChainTourGuide  tourguide;
+    private ChainTourGuide  tourguide; // Used - do not delete
 
     // Dynamic Variables (Can be changed)
     private int             totalPercent, calories, carbs, protein, fat, carbsPercent, proteinPercent, fatPercent;
@@ -282,6 +282,154 @@ public class fragmentGoals extends Fragment implements View.OnClickListener, Tex
         }
     }
 
+    public void resetGoals() {
+        // Calculate values to be displayed
+        getBMR();
+
+        if (rbtnCalories.isChecked()) {
+
+            // Macronutrient ratio default
+            calories = caloriesDefault;
+            carbsPercent = carbsPercentDefault;
+            proteinPercent = proteinPercentDefault;
+            fatPercent = fatPercentDefault;
+            totalPercent = carbsPercent + proteinPercent + fatPercent;
+
+            removeTextWatchers();
+
+            etxtCalories.setText(calories + "");
+            etxtCarbs.setText(carbsPercent + "");
+            etxtProtein.setText(proteinPercent + "");
+            etxtFat.setText(fatPercent + "");
+
+            lblValueCarbs.setText("~" + Math.round(carbsPercent * 0.01f * calories / 4) + " g");
+            lblValueProtein.setText("~" + Math.round(proteinPercent * 0.01f * calories / 4) + " g");
+            lblValueFat.setText("~" + Math.round(fatPercent * 0.01f * calories / 9) + " g");
+            lblAmountTotal.setText(totalPercent + "");
+            if (totalPercent == 100)
+                lblAmountTotal.setTextColor(Color.parseColor("#2E7D32")); // Green
+            else
+                lblAmountTotal.setTextColor(Color.parseColor("#FF0000")); // error_red
+
+            addTextWatchers();
+        }
+        else {
+            calories = caloriesDefault;
+            carbs = Math.round((carbsPercentDefault * 0.01f * calories) / 4);
+            protein = Math.round((proteinPercentDefault * 0.01f * calories) / 4);
+            fat = Math.round((fatPercentDefault * 0.01f * calories) / 9);
+
+            removeTextWatchers();
+
+            etxtCalories.setText(calories + "");
+            etxtCarbs.setText(carbs + "");
+            etxtProtein.setText(protein + "");
+            etxtFat.setText(fat + "");
+
+            Log.d("dividebyzero", carbs + calories + "");
+            lblValueCarbs.setText("~" + Math.round(carbs * 4 * 100 / calories) + " %");
+            lblValueProtein.setText("~" + Math.round(protein * 4 * 100 / calories)  + " %");
+            lblValueFat.setText("~" + Math.round(fat * 9 * 100 / calories) + " %");
+
+            addTextWatchers();
+        }
+
+        if ((carbsPercent + proteinPercent + fatPercent) != 100) {
+            lblAmountTotal.setError("Must equal 100");
+        } else {
+            lblAmountTotal.setError(null);
+        }
+
+        Snackbar snackbar = Snackbar
+                .make(linearLayoutRoot, "Goals reset to recommended", Snackbar.LENGTH_SHORT);
+
+        View snackBarView = snackbar.getView();
+        snackBarView.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+        snackbar.show();
+    }
+
+    private void getBMR() {
+        // MALE:   BMR = (10 x weight in kg) + (6.25 x height in cm) – (5 x age in years) + 5
+        // FEMALE: BMR = (10 x weight in kg) + (6.25 x height in cm)  – (5 x age in years) - 161
+        // Store weight/height in local variables in order to perform unit conversion if needed
+        float valWeight = weight;
+        int valHeight = height1;
+
+        // Need to convert to Metric in order to calculate BMR
+        if(unitSystem == 1) // Imperial
+        {
+            // Convert LB to KG
+            valWeight /= 2.2046226218;
+            // Convert Feet/Inches to CM
+            valHeight = (int) ((30.48 * valHeight) + (2.54 * height2));
+        }
+
+        // Parse Date of Birth string
+        String ageArr[] = dob.split("-");
+
+        // Obtain Age value from Date of Birth String
+        int valAge = getAge(Integer.parseInt(ageArr[2]), Integer.parseInt(ageArr[1]), Integer.parseInt(ageArr[0]));
+
+        // Obtain Gender
+        if (gender == 0) // Male
+            BMR = (int) (10*valWeight + 6.25*valHeight + 5*valAge + 5.0);
+        else
+            BMR = (int) (10*valWeight + 6.25*valHeight + 5*valAge - 161.0);
+
+        Log.d("BMR", BMR + "");
+
+        // Activity Factor Multiplier
+        // None (little or no exercise)
+        if (workoutFreq == 0)
+            caloriesDefault = (int) (BMR * 1.2);
+
+            // Low (1-3 times/week)
+        else if (workoutFreq == 1)
+            caloriesDefault = (int) (BMR * 1.35);
+
+            // Medium (3-5 days/week)
+        else if (workoutFreq == 2)
+            caloriesDefault = (int) (BMR * 1.5);
+
+            // High (6-7 days/week)
+        else if (workoutFreq == 3)
+            caloriesDefault = (int) (BMR * 1.7);
+
+            // Very High (physical job or 7+ times/week)
+        else if (workoutFreq == 4)
+            caloriesDefault = (int) (BMR * 1.9);
+
+        // Weight goals
+        // Lose weight
+        if (goal == 0)
+            caloriesDefault -= 250.0;
+
+            // Maintain weight
+        else if (goal == 1)
+        {} // Do nothing
+
+        // Gain weight
+        else if (goal == 2)
+            caloriesDefault += 250.0;
+    }
+
+    private int getAge (int _year, int _month, int _day) {
+        GregorianCalendar cal = new GregorianCalendar();
+        int y, m, d, a;
+
+        y = cal.get(Calendar.YEAR);
+        m = cal.get(Calendar.MONTH);
+        d = cal.get(Calendar.DAY_OF_MONTH);
+        cal.set(_year, _month, _day);
+        a = y - cal.get(Calendar.YEAR);
+        if ((m < cal.get(Calendar.MONTH))
+                || ((m == cal.get(Calendar.MONTH)) && (d < cal
+                .get(Calendar.DAY_OF_MONTH)))) {
+            --a;
+        }
+        return a;
+    }
+
     @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {
         captureOldValues();
     }
@@ -443,11 +591,25 @@ public class fragmentGoals extends Fragment implements View.OnClickListener, Tex
         }
     }
 
+    private boolean validateFields() {
+        boolean valid = true;
+
+        if(rbtnCalories.isChecked()) {
+            if ((carbsPercent + proteinPercent + fatPercent) != 100) {
+                lblAmountTotal.setError("Must equal 100");
+                valid = false;
+            } else {
+                lblAmountTotal.setError(null);
+            }
+        }
+        return valid;
+    }
+
     @Override public void onClick(View v) {
         switch(v.getId())
         {
             case R.id.btnReset:
-                showGoalsResetAlertDialog("Reset Goals","Are you sure you want to reset your daily goals to default?");
+                showResetDialog("Reset Goals","Are you sure you want to reset your daily goals to default?");
                 break;
             case R.id.btnSave:
                 saveGoals();
@@ -458,7 +620,7 @@ public class fragmentGoals extends Fragment implements View.OnClickListener, Tex
         }
     }
 
-    private void showGoalsResetAlertDialog(String title, String message){
+    private void showResetDialog(String title, String message){
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(title)
                 .setMessage(message);
@@ -477,154 +639,6 @@ public class fragmentGoals extends Fragment implements View.OnClickListener, Tex
         });
         AlertDialog dialog = builder.create();
         dialog.show();
-    }
-
-    public void resetGoals() {
-        // Calculate values to be displayed
-        getBMR();
-
-        if (rbtnCalories.isChecked()) {
-
-            // Macronutrient ratio default
-            calories = caloriesDefault;
-            carbsPercent = carbsPercentDefault;
-            proteinPercent = proteinPercentDefault;
-            fatPercent = fatPercentDefault;
-            totalPercent = carbsPercent + proteinPercent + fatPercent;
-
-            removeTextWatchers();
-
-            etxtCalories.setText(calories + "");
-            etxtCarbs.setText(carbsPercent + "");
-            etxtProtein.setText(proteinPercent + "");
-            etxtFat.setText(fatPercent + "");
-
-            lblValueCarbs.setText("~" + Math.round(carbsPercent * 0.01f * calories / 4) + " g");
-            lblValueProtein.setText("~" + Math.round(proteinPercent * 0.01f * calories / 4) + " g");
-            lblValueFat.setText("~" + Math.round(fatPercent * 0.01f * calories / 9) + " g");
-            lblAmountTotal.setText(totalPercent + "");
-            if (totalPercent == 100)
-                lblAmountTotal.setTextColor(Color.parseColor("#2E7D32")); // Green
-            else
-                lblAmountTotal.setTextColor(Color.parseColor("#FF0000")); // error_red
-
-            addTextWatchers();
-        }
-        else {
-            calories = caloriesDefault;
-            carbs = Math.round((carbsPercentDefault * 0.01f * calories) / 4);
-            protein = Math.round((proteinPercentDefault * 0.01f * calories) / 4);
-            fat = Math.round((fatPercentDefault * 0.01f * calories) / 9);
-
-            removeTextWatchers();
-
-            etxtCalories.setText(calories + "");
-            etxtCarbs.setText(carbs + "");
-            etxtProtein.setText(protein + "");
-            etxtFat.setText(fat + "");
-
-            Log.d("dividebyzero", carbs + calories + "");
-            lblValueCarbs.setText("~" + Math.round(carbs * 4 * 100 / calories) + " %");
-            lblValueProtein.setText("~" + Math.round(protein * 4 * 100 / calories)  + " %");
-            lblValueFat.setText("~" + Math.round(fat * 9 * 100 / calories) + " %");
-
-            addTextWatchers();
-        }
-
-        if ((carbsPercent + proteinPercent + fatPercent) != 100) {
-            lblAmountTotal.setError("Must equal 100");
-        } else {
-            lblAmountTotal.setError(null);
-        }
-
-        Snackbar snackbar = Snackbar
-                .make(linearLayoutRoot, "Goals reset to recommended", Snackbar.LENGTH_SHORT);
-
-        View snackBarView = snackbar.getView();
-        snackBarView.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-        snackbar.show();
-    }
-
-    private void getBMR() {
-        // MALE:   BMR = (10 x weight in kg) + (6.25 x height in cm) – (5 x age in years) + 5
-        // FEMALE: BMR = (10 x weight in kg) + (6.25 x height in cm)  – (5 x age in years) - 161
-        // Store weight/height in local variables in order to perform unit conversion if needed
-        float valWeight = weight;
-        int valHeight = height1;
-
-        // Need to convert to Metric in order to calculate BMR
-        if(unitSystem == 1) // Imperial
-        {
-            // Convert LB to KG
-            valWeight /= 2.2046226218;
-            // Convert Feet/Inches to CM
-            valHeight = (int) ((30.48 * valHeight) + (2.54 * height2));
-        }
-
-        // Parse Date of Birth string
-        String ageArr[] = dob.split("-");
-
-        // Obtain Age value from Date of Birth String
-        int valAge = getAge(Integer.parseInt(ageArr[2]), Integer.parseInt(ageArr[1]), Integer.parseInt(ageArr[0]));
-
-        // Obtain Gender
-        if (gender == 0) // Male
-            BMR = (int) (10*valWeight + 6.25*valHeight + 5*valAge + 5.0);
-        else
-            BMR = (int) (10*valWeight + 6.25*valHeight + 5*valAge - 161.0);
-
-        Log.d("BMR", BMR + "");
-
-        // Activity Factor Multiplier
-        // None (little or no exercise)
-        if (workoutFreq == 0)
-            caloriesDefault = (int) (BMR * 1.2);
-
-            // Low (1-3 times/week)
-        else if (workoutFreq == 1)
-            caloriesDefault = (int) (BMR * 1.35);
-
-            // Medium (3-5 days/week)
-        else if (workoutFreq == 2)
-            caloriesDefault = (int) (BMR * 1.5);
-
-            // High (6-7 days/week)
-        else if (workoutFreq == 3)
-            caloriesDefault = (int) (BMR * 1.7);
-
-            // Very High (physical job or 7+ times/week)
-        else if (workoutFreq == 4)
-            caloriesDefault = (int) (BMR * 1.9);
-
-        // Weight goals
-        // Lose weight
-        if (goal == 0)
-            caloriesDefault -= 250.0;
-
-            // Maintain weight
-        else if (goal == 1)
-        {} // Do nothing
-
-        // Gain weight
-        else if (goal == 2)
-            caloriesDefault += 250.0;
-    }
-
-    private int getAge (int _year, int _month, int _day) {
-        GregorianCalendar cal = new GregorianCalendar();
-        int y, m, d, a;
-
-        y = cal.get(Calendar.YEAR);
-        m = cal.get(Calendar.MONTH);
-        d = cal.get(Calendar.DAY_OF_MONTH);
-        cal.set(_year, _month, _day);
-        a = y - cal.get(Calendar.YEAR);
-        if ((m < cal.get(Calendar.MONTH))
-                || ((m == cal.get(Calendar.MONTH)) && (d < cal
-                .get(Calendar.DAY_OF_MONTH)))) {
-            --a;
-        }
-        return a;
     }
 
     public void saveGoals(){
@@ -678,6 +692,18 @@ public class fragmentGoals extends Fragment implements View.OnClickListener, Tex
         }
     }
 
+    public static boolean isNetworkStatusAvialable (Context context) {
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivityManager != null)
+        {
+            NetworkInfo netInfos = connectivityManager.getActiveNetworkInfo();
+            if(netInfos != null)
+                if(netInfos.isConnected())
+                    return true;
+        }
+        return false;
+    }
+
     private void beginChainTourGuide() {
         Overlay overlay = new Overlay()
                 .setBackgroundColor(Color.parseColor("#EE2c3e50"))
@@ -723,18 +749,6 @@ public class fragmentGoals extends Fragment implements View.OnClickListener, Tex
         tourguide = ChainTourGuide.init(getActivity()).playInSequence(sequence);
     }
 
-    public static boolean isNetworkStatusAvialable (Context context) {
-        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        if (connectivityManager != null)
-        {
-            NetworkInfo netInfos = connectivityManager.getActiveNetworkInfo();
-            if(netInfos != null)
-                if(netInfos.isConnected())
-                    return true;
-        }
-        return false;
-    }
-
     private void addTextWatchers() {
         if(rbtnCalories.isChecked()) // Calories
         {
@@ -766,24 +780,6 @@ public class fragmentGoals extends Fragment implements View.OnClickListener, Tex
         if (progressDialog != null && progressDialog.isShowing()) {
             progressDialog.dismiss();
         }
-    }
-
-    private boolean validateFields() {
-        boolean valid = true;
-
-        if(rbtnCalories.isChecked()) {
-            if ((carbsPercent + proteinPercent + fatPercent) != 100) {
-                lblAmountTotal.setError("Must equal 100");
-                valid = false;
-            } else {
-                lblAmountTotal.setError(null);
-            }
-        }
-        return valid;
-    }
-
-    @Override public void afterTextChanged(Editable s) {
-
     }
 
     @Override public void onAttach(Context context) {
@@ -822,5 +818,10 @@ public class fragmentGoals extends Fragment implements View.OnClickListener, Tex
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    // Unused
+    @Override public void afterTextChanged(Editable s) {
+
     }
 }

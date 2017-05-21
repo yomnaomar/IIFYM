@@ -7,6 +7,7 @@
     <!--activityLogin -->
     <string name="appName">IIFYM</string>
     <string name="appSubtitle">If It Fits Your Macros</string>
+    <string name="iifym_server_client_id">930699920107-vd13bav441l7d5vlr6v3onf0b3r5htme.apps.googleusercontent.com</string>
 
     <!--activityRegisterProfile -->
     <string name="userRegistration">User Registration</string>
@@ -169,7 +170,7 @@
     <string name="lblFrequent">Frequent meals</string>
 
     <string name="lblComingSoon">Coming Soon!</string>
-    <string name="btnForgotPassword">Forgot Password</string>
+    <string name="btnForgotPassword">Forgot your password?</string>
     <string name="actionToday">Go to today</string>
     <string name="btnOk">Ok</string>
     <string name="btnCancel">Cancel</string>

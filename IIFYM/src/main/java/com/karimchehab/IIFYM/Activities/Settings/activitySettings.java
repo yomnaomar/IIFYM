@@ -59,6 +59,7 @@ public class activitySettings extends AppCompatActivity implements fragmentGoals
         setupTabIcons();
     }
 
+    // TODO use dialogFragment to implement this correctly
     public void showSaveDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Save goals?");
@@ -71,15 +72,6 @@ public class activitySettings extends AppCompatActivity implements fragmentGoals
         });
         AlertDialog dialog = builder.create();
         dialog.show();
-    }
-
-    private void setupTabIcons() {
-        tabLayout.getTabAt(0).setIcon(R.drawable.ic_macro_settings);
-        if (user.getGender() == 0) // Male
-            tabLayout.getTabAt(1).setIcon(R.drawable.ic_male_user);
-        else
-            tabLayout.getTabAt(1).setIcon(R.drawable.ic_female_user);
-        tabLayout.getTabAt(2).setIcon(R.drawable.ic_preferences);
     }
 
     private void setupViewPager(ViewPager viewPager) {
@@ -109,6 +101,15 @@ public class activitySettings extends AppCompatActivity implements fragmentGoals
                 }
             }
         });
+    }
+
+    private void setupTabIcons() {
+        tabLayout.getTabAt(0).setIcon(R.drawable.ic_macro_settings);
+        if (user.getGender() == 0) // Male
+            tabLayout.getTabAt(1).setIcon(R.drawable.ic_male_user);
+        else
+            tabLayout.getTabAt(1).setIcon(R.drawable.ic_female_user);
+        tabLayout.getTabAt(2).setIcon(R.drawable.ic_preferences);
     }
 
     @Override public void onFragmentInteraction(Uri uri) {}
