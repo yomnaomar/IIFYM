@@ -5,11 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import com.karimchehab.IIFYM.Database.SQLiteConnector;
-import com.karimchehab.IIFYM.Models.Food;
+import com.karimchehab.IIFYM.Models.Ingredient;
 import com.karimchehab.IIFYM.Models.Weight;
 import com.karimchehab.IIFYM.R;
 
@@ -17,7 +16,7 @@ import com.karimchehab.IIFYM.R;
  * Created by Kareem on 20-May-17.
  */
 
-public class AdapterIngredients extends ArrayAdapter<Food> {
+public class AdapterIngredients extends ArrayAdapter<Ingredient> {
     private SQLiteConnector DB_SQLite;
 
     public AdapterIngredients(Context context) {
@@ -28,8 +27,8 @@ public class AdapterIngredients extends ArrayAdapter<Food> {
     @Override public View getView(int position, View convertView, ViewGroup parent) {
 
         // Get the data list_item for this position
-        Food food = getItem(position);
-        long id = food.getId();
+        Ingredient ingredient = getItem(position);
+        long id = ingredient.getId();
 
         // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
@@ -43,37 +42,42 @@ public class AdapterIngredients extends ArrayAdapter<Food> {
         TextView protein = (TextView) convertView.findViewById(R.id.lblProtein);
         TextView fat = (TextView) convertView.findViewById(R.id.lblFat);
         TextView portionType = (TextView) convertView.findViewById(R.id.lblPortionType);
-        EditText amount = (EditText) convertView.findViewById(R.id.etxtAmount);
+        TextView portionAmount = (TextView) convertView.findViewById(R.id.lblPortionAmount);
 
         // Populate the data into the template view using the data object
-        name.setText(food.getName() + "");
-        brand.setText(food.getBrand() + "");
-        if (food.getBrand().isEmpty())
+        name.setText(ingredient.getName() + "");
+        brand.setText(ingredient.getBrand() + "");
+        if (ingredient.getBrand().isEmpty())
             brand.setVisibility(View.GONE);
         else
             brand.setVisibility(View.VISIBLE);
-        calories.setText(String.valueOf(food.getCalories()) + " cals");
-        carbs.setText(String.valueOf(food.getCarbs()) + " c");
-        protein.setText(String.valueOf(food.getProtein()) + " p");
-        fat.setText(String.valueOf(food.getFat()) + " f");
 
         float   serving_number;
         Weight  weight;
 
-        if (food.getPortionType() == 0) { // Serving
+        float multiplier = ingredient.getMultiplier();
+
+        if (ingredient.getPortionType() == 0) { // Serving
             serving_number = DB_SQLite.retrieveServing(id);
-            if (serving_number == 1.0f) {
-                amount.setText(serving_number + "");
+            if (serving_number * multiplier == 1.0f) {
+                portionAmount.setText(serving_number * multiplier + "");
                 portionType. setText(" Serving");
             } else {
-                amount.setText(serving_number + "");
+                portionAmount.setText(serving_number * multiplier + "");
                 portionType. setText(" Servings");
             }
-        } else if (food.getPortionType() == 1) { // Weight
+        } else if (ingredient.getPortionType() == 1) { // Weight
             weight = DB_SQLite.retrieveWeight(id);
-            amount.setText(weight.getAmount() + " ");
+            portionAmount.setText(weight.getAmount() * multiplier + " ");
             portionType.setText(weight.getUnit().Abbreviate() + "");
         }
+
+
+
+        calories.setText(String.valueOf(Math.round(ingredient.getCalories() * multiplier)) + " cals");
+        carbs.setText(String.valueOf(Math.round(ingredient.getCarbs() * multiplier)) + " c");
+        protein.setText(String.valueOf(Math.round(ingredient.getProtein() * multiplier)) + " p");
+        fat.setText(String.valueOf(Math.round(ingredient.getFat() * multiplier)) + " f");
 
         // Return the completed view to render on screen
         return convertView;

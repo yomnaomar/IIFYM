@@ -46,15 +46,15 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <EditText
-                    android:id="@+id/etxtAmount"
+                <TextView
+                    android:id="@+id/lblPortionAmount"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:ems="10"
-                    android:hint="Amount"
-                    android:inputType="number|numberSigned|numberDecimal"
-                    android:textAppearance="@android:style/TextAppearance.Material.Small" />
+                    android:text="Portion Amount"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/lblPortionType"

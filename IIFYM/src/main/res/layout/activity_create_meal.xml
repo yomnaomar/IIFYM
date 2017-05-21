@@ -68,14 +68,13 @@
                 android:orientation="horizontal">
 
                 <EditText
-                    android:id="@+id/etxtMealName"
+                    android:id="@+id/etxtName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="15"
                     android:hint="Meal Name"
                     android:inputType="text"
 
-                    android:maxLength="5"
                     android:textAlignment="textStart"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="?attr/colorPrimary"
@@ -89,14 +88,13 @@
                 android:orientation="horizontal">
 
                 <EditText
-                    android:id="@+id/etxtMealBrand"
+                    android:id="@+id/etxtBrand"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="15"
                     android:hint="Brand"
                     android:inputType="text"
 
-                    android:maxLength="5"
                     android:textAlignment="textStart"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="?attr/colorPrimary"

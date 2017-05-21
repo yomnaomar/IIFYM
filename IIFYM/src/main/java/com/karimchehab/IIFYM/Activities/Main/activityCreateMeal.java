@@ -1,15 +1,14 @@
 package com.karimchehab.IIFYM.Activities.Main;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
 import android.text.InputType;
-import android.text.TextWatcher;
-import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,9 +24,12 @@ import android.widget.Toast;
 
 import com.karimchehab.IIFYM.Database.SQLiteConnector;
 import com.karimchehab.IIFYM.Models.Food;
+import com.karimchehab.IIFYM.Models.Ingredient;
 import com.karimchehab.IIFYM.Models.Weight;
 import com.karimchehab.IIFYM.R;
 import com.karimchehab.IIFYM.ViewComponents.AdapterIngredients;
+
+import java.util.ArrayList;
 
 import info.hoang8f.android.segmented.SegmentedGroup;
 
@@ -44,6 +46,7 @@ public class activityCreateMeal extends AppCompatActivity implements AdapterView
 
     // Variables
     Context                     context;
+    ArrayList<Ingredient>       arrIngredients;
     private long[]              ingredients;
     private int                 ingredientCount;
     private int                 weightUnitSelected;
@@ -57,32 +60,49 @@ public class activityCreateMeal extends AppCompatActivity implements AdapterView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_meal);
 
-        // Intent
-        Intent intent = getIntent();
-        isDaily = intent.getBooleanExtra("isDaily",false);
-        ingredients = intent.getLongArrayExtra("ingredients");
-        ingredientCount = ingredients.length;
-
-        setupDatabase();
+        initializeDatabase();
+        initializeData();
 
         // GUI
         initializeGUI();
         populateGUI();
     }
 
-    private void setupDatabase() {
+    private void initializeDatabase() {
         // Database
         context = getApplicationContext();
         DB_SQLite = new SQLiteConnector(context);
     }
 
+    private void initializeData() {
+        // Intent
+        Intent intent = getIntent();
+        isDaily = intent.getBooleanExtra("isDaily",false);
+        ingredients = intent.getLongArrayExtra("ingredients"); // list of ID's of ingredients
+        ingredientCount = ingredients.length;
+
+        arrIngredients = new ArrayList<>();
+        for (int i = 0; i <ingredientCount; i++){
+            Food food = DB_SQLite.retrieveFood(ingredients[i]);
+            Ingredient ingredient = new Ingredient(food, 1.0f);
+            arrIngredients.add(ingredient);
+        }
+    }
+
     private void initializeGUI() {
 
-        // List View
+        // Adapter
         adapterIngredients = new AdapterIngredients(this);
+        adapterIngredients.addAll(arrIngredients);
+        // List View
         listviewIngredients = (ListView) findViewById(R.id.listviewIngredients);
         listviewIngredients.setAdapter(adapterIngredients);
-        initializeAdapterIngredients();
+        listviewIngredients.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                createDialog(position).show();
+            }
+        });
 
         etxtName            = (EditText)findViewById(R.id.etxtName);
         etxtBrand           = (EditText)findViewById(R.id.etxtBrand);
@@ -114,53 +134,20 @@ public class activityCreateMeal extends AppCompatActivity implements AdapterView
         spinnerUnit.setOnItemSelectedListener(this);
     }
 
-    private void initializeAdapterIngredients() {
-        adapterIngredients.clear();
-        for (int i = 0; i < ingredientCount; i++) {
-            adapterIngredients.add(DB_SQLite.retrieveFood(ingredients[i]));
-        }
-        for (int i = 0; i <ingredientCount; i++){
-            View view = listviewIngredients.getAdapter().getView(i, null, null);
-            EditText etxtPortionAmount = (EditText) view.findViewById(R.id.etxtAmount);
-            etxtPortionAmount.addTextChangedListener(new TextWatcher() {
-                @Override
-                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-                }
-
-                @Override
-                public void onTextChanged(CharSequence s, int start, int before, int count) {
-                    Log.d("activityCreateMeal","onTextChanged Listener Called");
-                    setMealNutrition();
-                    adapterIngredients.notifyDataSetChanged();
-                }
-
-                @Override
-                public void afterTextChanged(Editable s) {
-
-                }
-            });
-        }
-    }
-
     private void populateGUI() {
-        setMealNutrition();
-    }
-
-    private void setMealNutrition() {
         int calories = 0;
         int carbs = 0;
         int protein = 0;
         int fat = 0;
 
-        float[] multipliers = captureMultipliers();
-
         for (int i = 0; i < ingredientCount; i++) {
-            Food food = DB_SQLite.retrieveFood(ingredients[i]);
-                calories += food.getCalories() * multipliers[i];
-                carbs += food.getCarbs() * multipliers[i];
-                protein += food.getProtein() * multipliers[i];
-                fat += food.getFat() * multipliers[i];
+            Ingredient ingredient = arrIngredients.get(i);
+            float multiplier = ingredient.getMultiplier();
+
+            calories += ingredient.getCalories() * multiplier;
+            carbs += ingredient.getCarbs() * multiplier;
+            protein += ingredient.getProtein() * multiplier;
+            fat += ingredient.getFat() * multiplier;
         }
 
         lblCalories.setText(calories + "");
@@ -218,22 +205,7 @@ public class activityCreateMeal extends AppCompatActivity implements AdapterView
     private float[] captureMultipliers() {
         float[] multipliers = new float[ingredientCount];
         for (int i = 0; i<ingredientCount; i++){
-            Food food = DB_SQLite.retrieveFood(ingredients[i]);
-
-            View view = listviewIngredients.getAdapter().getView(i, null, null);
-            EditText etxtPortionAmount = (EditText) view.findViewById(R.id.etxtAmount);
-            float portionAmount = 0;
-
-            if (food.getPortionType() == 0) // Serving
-            {
-                portionAmount = DB_SQLite.retrieveServing(food.getId());
-            }
-            else if (food.getPortionType() == 1) // Weight
-            {
-                Weight weight = DB_SQLite.retrieveWeight(food.getId());
-                portionAmount = weight.getAmount();
-            }
-            multipliers[i] = Float.parseFloat(etxtPortionAmount.getText().toString()) / portionAmount;
+            multipliers[i] = arrIngredients.get(i).getMultiplier();
         }
         return multipliers;
     }
@@ -281,15 +253,6 @@ public class activityCreateMeal extends AppCompatActivity implements AdapterView
         } else
             etxtName.setError(null);
 
-        for (int i = 0; i < ingredientCount; i++){
-            View view = listviewIngredients.getChildAt(i);
-            EditText editText = (EditText) view.findViewById(R.id.etxtPortionAmount);
-            if (editText.getText().toString().isEmpty()){
-                etxtPortionAmount.setError("Required");
-                valid = false;
-            }
-        }
-
         if (rbtnServing.isChecked()) {
             if (etxtPortionAmount.getText().toString().isEmpty()) {
                 etxtPortionAmount.setError("Required");
@@ -319,6 +282,47 @@ public class activityCreateMeal extends AppCompatActivity implements AdapterView
         });
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+    // Passes the position of the element clicked
+    public Dialog createDialog(final int position) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final LayoutInflater inflater = getLayoutInflater();
+        final View view = inflater.inflate(R.layout.dialog_set_amount_meal, null);
+        builder.setView(view)
+                // Add action buttons
+                .setPositiveButton(R.string.btnOk, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                        // Update multiplier
+                        Ingredient ingredient = adapterIngredients.getItem(position);
+                        EditText etxtAmount = (EditText) view.findViewById(R.id.etxtAmount);
+                        float amount = Float.parseFloat(etxtAmount.getText().toString());
+                        int portionType = ingredient.getPortionType();
+                        if (portionType == 0 ) // Serving
+                        {
+                            float serving = DB_SQLite.retrieveServing(ingredient.getId());
+                            float multiplier = amount / serving ;
+                            arrIngredients.get(position).setMultiplier(multiplier);
+                        }
+                        else if (portionType == 1 ) // Weight
+                        {
+                            float weight = DB_SQLite.retrieveWeight(ingredient.getId()).getAmount();
+                            float multiplier = amount / weight;
+                            arrIngredients.get(position).setMultiplier(multiplier);
+                        }
+                        adapterIngredients.notifyDataSetChanged();
+                        populateGUI();
+                    }
+                })
+                .setNegativeButton(R.string.btnCancel, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // Do nothing
+                        dialog.dismiss();
+                    }
+                });
+        return builder.create();
     }
 
     @Override public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {

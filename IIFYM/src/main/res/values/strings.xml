@@ -172,6 +172,7 @@
     <string name="btnForgotPassword">Forgot Password</string>
     <string name="actionToday">Go to today</string>
     <string name="btnOk">Ok</string>
+    <string name="btnCancel">Cancel</string>
 
     <string name="lblSelectedFoods"><u>Selected Foods</u></string>
     <string name="toolbarCreateNewMeal">Create new meal</string>
