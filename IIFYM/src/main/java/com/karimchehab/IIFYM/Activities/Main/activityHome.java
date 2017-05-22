@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -18,12 +17,12 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.karimchehab.IIFYM.Activities.Settings.activitySettings;
 import com.karimchehab.IIFYM.Activities.UserLoginAuthentification.activityLogin;
 import com.karimchehab.IIFYM.Database.SharedPreferenceHelper;
 import com.karimchehab.IIFYM.Models.DateHelper;
 import com.karimchehab.IIFYM.R;
-import com.google.firebase.auth.FirebaseAuth;
 
 public class activityHome extends AppCompatActivity implements View.OnClickListener{
     // GUI
@@ -113,11 +112,6 @@ public class activityHome extends AppCompatActivity implements View.OnClickListe
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_home, menu);
         return true;
-    }
-
-    private void signOut() {
-        myPrefs.addPreference("session_uid", "");
-        firebaseAuth.signOut();
     }
 
     /**
@@ -231,34 +225,6 @@ public class activityHome extends AppCompatActivity implements View.OnClickListe
         viewPager.setCurrentItem(0);
     }
 
-    @Override public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar list_item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        Intent intent;
-        switch (id){
-            case (R.id.actionToday):
-                goToToday();
-                return true;
-            case (R.id.actionNutritionSettings):
-                intent = new Intent(context,activitySettings.class );
-                startActivity(intent);
-                return true;
-            case (R.id.actionFoodManager):
-                intent = new Intent(context, activityFoodManager.class);
-                startActivity(intent);
-                return true;
-            case (R.id.menuLogout):
-                signOut();
-                intent = new Intent(context, activityLogin.class);
-                startActivity(intent);
-                finish();
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
     /**
      * Will call onPageSelected() in setUpViewPager()
      */
@@ -277,12 +243,6 @@ public class activityHome extends AppCompatActivity implements View.OnClickListe
 
         Toast.makeText(context,"Today Selected",Toast.LENGTH_SHORT).show();
         Toast.makeText(this,"Today selected",Toast.LENGTH_SHORT).show();
-    }
-
-    @Override public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_home, menu);
-        return true;
     }
 
     private void signOut() {

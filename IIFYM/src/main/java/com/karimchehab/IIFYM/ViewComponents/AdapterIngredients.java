@@ -32,7 +32,7 @@ public class AdapterIngredients extends ArrayAdapter<Ingredient> {
 
         // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.meal_ingredient, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_item, parent, false);
         }
         // Lookup view for data population
         TextView name = (TextView) convertView.findViewById(R.id.lblName);
@@ -41,8 +41,7 @@ public class AdapterIngredients extends ArrayAdapter<Ingredient> {
         TextView carbs = (TextView) convertView.findViewById(R.id.lblCarbs);
         TextView protein = (TextView) convertView.findViewById(R.id.lblProtein);
         TextView fat = (TextView) convertView.findViewById(R.id.lblFat);
-        TextView portionType = (TextView) convertView.findViewById(R.id.lblPortionType);
-        TextView portionAmount = (TextView) convertView.findViewById(R.id.lblPortionAmount);
+        TextView portion = (TextView) convertView.findViewById(R.id.lblPortionDetails);
 
         // Populate the data into the template view using the data object
         name.setText(ingredient.getName() + "");
@@ -60,16 +59,13 @@ public class AdapterIngredients extends ArrayAdapter<Ingredient> {
         if (ingredient.getPortionType() == 0) { // Serving
             serving_number = DB_SQLite.retrieveServing(id);
             if (serving_number * multiplier == 1.0f) {
-                portionAmount.setText(serving_number * multiplier + "");
-                portionType. setText(" Serving");
+                portion.setText(serving_number * multiplier + " Serving");
             } else {
-                portionAmount.setText(serving_number * multiplier + "");
-                portionType. setText(" Servings");
+                portion.setText(serving_number * multiplier + " Servings");
             }
         } else if (ingredient.getPortionType() == 1) { // Weight
             weight = DB_SQLite.retrieveWeight(id);
-            portionAmount.setText(weight.getAmount() * multiplier + " ");
-            portionType.setText(weight.getUnit().Abbreviate() + "");
+            portion.setText(weight.getAmount() * multiplier + " " + weight.getUnit().Abbreviate());
         }
 
 
