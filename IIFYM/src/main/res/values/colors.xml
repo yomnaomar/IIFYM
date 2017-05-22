@@ -11,7 +11,7 @@
     <color name="green_light">#308A24</color>
     <color name="black">#000000</color>
     <color name="black_light">#333</color>
-    <color name="grey_light">#A1A1A1</color>
+    <color name="grey_light">#a1a1a1</color>
     <color name="CaloriesProgessColor">#EF6C00</color>
     <color name="CarbProgressColor">#FFB300</color>
     <color name="ProteinProgessColor">#F44336</color>

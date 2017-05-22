@@ -83,11 +83,6 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
     }
 
     private void initializeGUI() {
-        // Setting Action Bar Icon
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayShowHomeEnabled(true);
-        actionBar.setIcon(R.mipmap.ic_action_bar);
-
         // GUI
         setContentView(R.layout.activity_login);
 

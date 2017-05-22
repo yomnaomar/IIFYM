@@ -12,18 +12,43 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
-        <android.support.constraint.ConstraintLayout
-            android:id="@+id/loginConstraintLayout"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:descendantFocusability="beforeDescendants"
-            android:focusableInTouchMode="true">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|center_horizontal|center"
+                android:gravity="center_vertical|center_horizontal|center"
+                android:text="IIFYM"
+                android:textAppearance="@android:style/TextAppearance.Material.Large"
+                android:textColor="@color/colorPrimary"
+                android:textSize="30sp" />
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|center_horizontal|center"
+                android:gravity="center_vertical|center_horizontal|center"
+                android:text="If It Fits Your Macros"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                app:srcCompat="@mipmap/ic_logo" />
 
             <EditText
                 android:id="@+id/email_edittext"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:layout_marginStart="16dp"
@@ -40,7 +65,7 @@
 
             <EditText
                 android:id="@+id/password_textview"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 android:layout_marginEnd="16dp"
@@ -59,34 +84,57 @@
                 app:layout_constraintVertical_bias="0.0" />
 
             <Button
+                android:id="@+id/btnLogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|center_horizontal|center"
+                android:layout_marginBottom="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/common_google_signin_btn_icon_light_normal_background"
+                android:drawableLeft="@mipmap/ic_mail"
+                android:drawablePadding="10dp"
+                android:elevation="0dp"
+                android:shadowColor="@color/grey_light"
+                android:shadowDx="5dp"
+                android:shadowDy="5dp"
+                android:shadowRadius="5dp"
+                android:text="Login"
+                android:textColor="#192D5A" />
+
+            <Button
                 android:id="@+id/Button_Register"
-                android:layout_width="95dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 android:layout_marginEnd="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="8dp"
                 android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
                 android:background="@drawable/btn_iifym_style"
                 android:text="@string/btnRegister"
                 android:textColor="#192D5A"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_bias="0.158"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/password_textview"
-                app:layout_constraintVertical_bias="0.101"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginRight="8dp"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintHorizontal_bias="0.158" />
+                app:layout_constraintTop_toBottomOf="@+id/password_textview"
+                app:layout_constraintVertical_bias="0.101" />
 
             <Button
                 android:id="@+id/button_forgot"
-                android:layout_width="100dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="16dp"
                 android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
                 android:background="@drawable/btn_iifym_style"
                 android:capitalize="none"
                 android:text="@string/btnForgotPassword"
@@ -95,23 +143,13 @@
                 app:layout_constraintHorizontal_bias="0.517"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                android:layout_marginTop="16dp"
                 app:layout_constraintTop_toBottomOf="@+id/Button_Register"
                 app:layout_constraintVertical_bias="1.0" />
 
-            <android.support.constraint.Guideline
-                android:id="@+id/guideline2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_begin="20dp"
-                tools:layout_editor_absoluteX="0dp"
-                tools:layout_editor_absoluteY="20dp" />
-
             <com.google.android.gms.common.SignInButton
                 android:id="@+id/btnGoogleSignIn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_marginBottom="16dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="16dp"
@@ -122,8 +160,7 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/password_textview"
                 app:layout_constraintVertical_bias="0.109" />
-
-        </android.support.constraint.ConstraintLayout>
+        </LinearLayout>
     </ScrollView>
 
 </LinearLayout>
