@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -16,32 +18,37 @@ import com.karimchehab.IIFYM.Database.SQLiteConnector;
 import com.karimchehab.IIFYM.Models.Food;
 import com.karimchehab.IIFYM.R;
 import com.karimchehab.IIFYM.ViewComponents.AdapterSavedItem;
-import com.github.clans.fab.FloatingActionButton;
 
 import java.util.ArrayList;
 
-public class activitySelectDailyItem extends AppCompatActivity implements AdapterView.OnItemClickListener, View.OnClickListener {
+public class activtitySelectMealIngredients extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     // GUI
     private EditText                etxtSearch;
     private TextView                lblFrequent;
-    private AdapterSavedItem        adapterSavedItem;
-    private ListView                listviewSavedItems;
-    private FloatingActionButton    fabCreateFood, fabCreateMeal;
+    private AdapterSavedItem        adapterSelectedFoods, adapterSavedItem;
+    private ListView                listviewSelectedFoods, listviewSavedItems;
 
     // Database
     private SQLiteConnector DB_SQLite;
     private Context context;
 
+    // Variables
+    private boolean isDaily;
+    private Intent  intent;
+
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_select_daily_item);
-        
+        setContentView(R.layout.activity_activtity_select_meal_ingredients);
+
+        // Intent
+        intent = getIntent();
+        isDaily = intent.getBooleanExtra("isDaily",false);
+
         // Database
         context = getApplicationContext();
         DB_SQLite = new SQLiteConnector(context);
 
-        // GUI
         initializeGUI();
     }
 
@@ -53,7 +60,7 @@ public class activitySelectDailyItem extends AppCompatActivity implements Adapte
                 filterSavedItems(cs.toString());
             }
 
-            @Override public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) { }
+            @Override public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {}
 
             @Override public void afterTextChanged(Editable arg0) {}
         });
@@ -61,15 +68,47 @@ public class activitySelectDailyItem extends AppCompatActivity implements Adapte
         lblFrequent = (TextView) findViewById(R.id.lblFrequent);
 
         // List View
+        adapterSelectedFoods = new AdapterSavedItem(this);
+        listviewSelectedFoods = (ListView) findViewById(R.id.listviewSelectedFoods);
+        listviewSelectedFoods.setAdapter(adapterSelectedFoods);
+        //TODO Implement Swipe to delete
+
         adapterSavedItem = new AdapterSavedItem(this);
         listviewSavedItems = (ListView) findViewById(R.id.listviewSavedItems);
         listviewSavedItems.setAdapter(adapterSavedItem);
         listviewSavedItems.setOnItemClickListener(this);
+    }
 
-        fabCreateFood = (FloatingActionButton) findViewById(R.id.fabCreateNewFood);
-        fabCreateFood.setOnClickListener(this);
-        fabCreateMeal = (FloatingActionButton) findViewById(R.id.fabCreateNewMeal);
-        fabCreateMeal.setOnClickListener(this);
+    @Override public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_select_meal_ingredients, menu);
+        return true;
+    }
+
+    @Override public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar list_item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        if (id == R.id.menu_next) {
+            goToActivityCreateMeal();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void goToActivityCreateMeal() {
+        int ingredientCount = adapterSelectedFoods.getCount();
+        long[] ingredients = new long[ingredientCount];
+        for (int i = 0; i < ingredientCount; i ++){
+            ingredients[i] = adapterSelectedFoods.getItem(i).getId();
+        }
+        Intent newIntent = new Intent(getApplicationContext(), activityCreateMeal.class);
+        newIntent.putExtra("ingredients", ingredients);
+        newIntent.putExtra("isDaily", isDaily);
+        startActivity(newIntent);
     }
 
     @Override protected void onResume() {
@@ -78,7 +117,9 @@ public class activitySelectDailyItem extends AppCompatActivity implements Adapte
         filterSavedItems(search);
     }
 
-    //Updates AdapterSavedItem and arrSavedItems
+    // Updates adapterSavedItem and arrSavedItems to display either:
+    // 1. Frequent Foods when search is empty
+    // 2. Filtered Foods when user uses the search functionality
     private void filterSavedItems(final String search) {
         adapterSavedItem.clear();
         ArrayList<Food> arrSavedItems;
@@ -98,36 +139,6 @@ public class activitySelectDailyItem extends AppCompatActivity implements Adapte
 
     @Override public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Food food = (Food) parent.getItemAtPosition(position);
-        long fid = food.getId();
-
-        Intent intent = new Intent(getBaseContext(), activityAddDailyItem.class);
-        intent.putExtra("fid", fid);
-        startActivity(intent);
-    }
-
-    // TODO Implement fabAddNewMeal
-    @Override public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.fabCreateNewFood:
-                goToCreateNewFood();
-                break;
-            case R.id.fabCreateNewMeal:
-                goToCreateNewMeal();
-                break;
-        }
-    }
-
-    private void goToCreateNewMeal() {
-        Intent intent = new Intent(context, activtitySelectMealIngredients.class);
-        intent.putExtra("isDaily", true);
-        startActivity(intent);
-        finish();
-    }
-
-    public void goToCreateNewFood (){
-        Intent intent = new Intent(context, activityCreateFood.class);
-        intent.putExtra("isDaily", true);
-        startActivity(intent);
-        finish();
+        adapterSelectedFoods.add(food);
     }
 }

@@ -80,6 +80,40 @@ public class activityHome extends AppCompatActivity implements View.OnClickListe
         startActivity(intent);
     }
 
+    @Override public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar list_item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        Intent intent;
+        switch (id){
+            case (R.id.actionToday):
+                goToToday();
+                return true;
+            case (R.id.actionNutritionSettings):
+                intent = new Intent(context,activitySettings.class );
+                startActivity(intent);
+                return true;
+            case (R.id.actionFoodManager):
+                intent = new Intent(context, activityFoodManager.class);
+                startActivity(intent);
+                return true;
+            case (R.id.menuLogout):
+                signOut();
+                intent = new Intent(context, activityLogin.class);
+                startActivity(intent);
+                finish();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_home, menu);
+        return true;
+    }
+
     /**
      * Creates the pages and tabs of Today, Yesterday, and Tomorrow.
      * @param viewPager
@@ -191,34 +225,6 @@ public class activityHome extends AppCompatActivity implements View.OnClickListe
         viewPager.setCurrentItem(0);
     }
 
-    @Override public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar list_item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        Intent intent;
-        switch (id){
-            case (R.id.actionToday):
-                goToToday();
-                return true;
-            case (R.id.actionNutritionSettings):
-                intent = new Intent(context,activitySettings.class );
-                startActivity(intent);
-                return true;
-            case (R.id.actionFoodManager):
-                intent = new Intent(context, activityFoodManager.class);
-                startActivity(intent);
-                return true;
-            case (R.id.menuLogout):
-                signOut();
-                intent = new Intent(context, activityLogin.class);
-                startActivity(intent);
-                finish();
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
     /**
      * Will call onPageSelected() in setUpViewPager()
      */
@@ -235,13 +241,8 @@ public class activityHome extends AppCompatActivity implements View.OnClickListe
         viewPager.setCurrentItem(1, false);
         lblSelectedDate.setText(DateHelper.getDateRelativeToToday(0).text);
 
+        Toast.makeText(context,"Today Selected",Toast.LENGTH_SHORT).show();
         Toast.makeText(this,"Today selected",Toast.LENGTH_SHORT).show();
-    }
-
-    @Override public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_home, menu);
-        return true;
     }
 
     private void signOut() {

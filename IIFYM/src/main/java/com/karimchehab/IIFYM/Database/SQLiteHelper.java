@@ -28,7 +28,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     public static final String Table_Weight        = "Weight";
     public static final String Table_Serving       = "Serving";
     public static final String Table_DailyItem     = "DailyItem";
-    public static final String Table_ComposedOf    = "ComposedOf";
+    public static final String Table_Ingredient = "Ingredient";
 
     private static SQLiteHelper sInstance;
     private Context context;
@@ -98,7 +98,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 "date           TEXT, " +
                 "CONSTRAINT food_id_fk FOREIGN KEY(food_id) REFERENCES " + Table_Food + " (id) ON DELETE CASCADE);";
 
-        String createTable_ComposedOf = "CREATE TABLE " + Table_ComposedOf + " " +
+        String createTable_Ingredient = "CREATE TABLE " + Table_Ingredient + " " +
                 "(mid           INTEGER, " +    // mid = Meal ID
                 "fid            INTEGER, " +    // fid = Food ID
                 "multiplier     REAL, " +
@@ -113,7 +113,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         db.execSQL(createTable_Weight);
         db.execSQL(createTable_Serving);
         db.execSQL(createTable_DailyItem);
-        db.execSQL(createTable_ComposedOf);
+        db.execSQL(createTable_Ingredient);
 
         registerFoodDatabase(db, R.raw.usda);
     }

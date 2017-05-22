@@ -613,43 +613,117 @@ public class SQLiteConnector {
         return database.delete(SQLiteHelper.Table_DailyItem, "id = '" + id + "'", null);
     }
 
-    // TODO Implement helper functions
-    //----------    SQLiteHelper.Table_ComposedOf = "ComposedOf"    ----------------
+    //----------    SQLiteHelper.Table_Ingredient = "Ingredient"    ----------------
 
-/*    public Cursor getMealId(long mid) {
-        Cursor C = database.rawQuery("SELECT * FROM " + SQLiteHelper.Table_ComposedOf + " WHERE mid = " + mid, null);
-        return C;
-    }
+    /**
+     * Returns an ArrayList<Food> which contains food which match the id's from the input parameter
+     * @param id
+     * @return
+     */
+    public ArrayList<Food> retrieveFoods(long[] id) {
 
-    //Returns an array of ints which correspond to all meals which compose a complex meal with ID complex_id
-    //Check for error conditions
-    public int[] getFoodList(long mid) {
-        Cursor C = database.rawQuery("SELECT * FROM " + SQLiteHelper.Table_ComposedOf + " Where mid = " + mid, null);
-        int[] Meal_ID_List = new int[C.getCount()];
-        if(C.moveToFirst()){
-            for (int i =0; i<C.getCount();i++){
-                Meal_ID_List[i] = C.getInt(0);
-                C.moveToNext();
+        ArrayList<Food> foods = new ArrayList<>();
+        StringBuilder query = new StringBuilder("SELECT * FROM " + SQLiteHelper.Table_Food + " WHERE id IN (");
+        for (int i = 0; i<id.length; i++) {
+            query.append(id[i] + ",");
+        }
+        query.append(")");
+        Cursor result = database.rawQuery(query.toString(), null);
+
+        if (result.moveToFirst() && result != null) {
+            for (int i = 0; i < result.getCount(); i++) {
+                foods.add(instantiateFood(result));
+                result.moveToNext();
             }
         }
-        return Meal_ID_List;
+        result.close();
+        return foods;
     }
 
-    public void deleteComposedMealID(long mid) {
-        database.rawQuery("DELETE * FROM" + SQLiteHelper.Table_ComposedOf + "WHERE mid =" + mid, null);
+    /**
+     * Creates a Meal by creating a Food and adding its Ingredients to the database
+     * Requires params Food to be created, list of ID's of its ingredients and a corresponding list of multipliers of the Ingredients
+     * Returns ID of the Food created
+     * @param food, id
+     * @return
+     */
+    public long createMeal (Food food, long[] id, float[] multipliers){
+        long mid = createFood(food);
+        for (int i = 0; i < id.length; i++) {
+            long fid = id[i];
+            float multiplier = multipliers[i];
+            createIngredient(mid, fid, multiplier);
+        }
+        return mid;
     }
 
-    public void deleteComposedComplexID(long mid) {
-        database.rawQuery("DELETE * FROM" + SQLiteHelper.Table_ComposedOf + "WHERE mid =" + mid, null);
+    /**
+     // Adds an ingredient with Meal ID = mid and Food ID = fid
+     * @param mid, fid
+     * @return
+     */
+    private void createIngredient(long mid, long fid, float multiplier){
+        ContentValues newIngredient = new ContentValues();
+        newIngredient.put("mid", mid);
+        newIngredient.put("fid", fid);
+        newIngredient.put("multiplier", multiplier);
+        database.insert(SQLiteHelper.Table_Ingredient, null, newIngredient);
     }
 
-    public boolean insertComposedOf(long meal_id, long complex_id) {
-        database.rawQuery("Insert Into " + SQLiteHelper.Table_ComposedOf + "(meal_id,complex_id) Values (" + meal_id + "," + complex_id + ");", null);
-        return true;
+    /**
+     * Returns an array of Food which are Ingredients of the Meal with ID = mid
+     * @param mid
+     * @return
+     */
+    public ArrayList<Food> retrieveIngredients(long mid){
+        ArrayList<Food> foods = new ArrayList<>();
+
+        Cursor C = database.rawQuery("SELECT * FROM " + SQLiteHelper.Table_Ingredient +
+                " WHERE mid = '" + mid + "'", null);
+
+        int count = C.getCount();
+        Log.d("retrieveIngredients", "Count: "+ C.getCount() + " Mid: " + mid);
+
+        if (count > 0) {
+            for (int i = 0; i < count; i++) {
+                C.moveToNext();
+                foods.add(instantiateFood(C));
+            }
+        }
+        C.close();
+        return foods;
     }
 
-    public Cursor getWeightTuple(long meal_id) {
-        Cursor C = database.rawQuery("Select * From " + SQLiteHelper.Table_Weight + "Where meal_id = " + meal_id, null);
-        return C;
-    }*/
+    /**
+     * Returns an array of float values which contain the corresponding multiplier of each ingredient
+     * @param mid
+     * @return
+     */
+    public float[] retrieveIngredientMultipliers(long mid){
+        Cursor C = database.rawQuery("SELECT * FROM " + SQLiteHelper.Table_Ingredient +
+                " WHERE mid = '" + mid + "'", null);
+
+        int count = C.getCount();
+        float[] multipliers = new float[count];
+        Log.d("getIngredMultipliers", "Count: "+ C.getCount() + " Mid: " + mid);
+
+        if (count > 0) {
+            for (int i = 0; i < count; i++) {
+                C.moveToNext();
+                multipliers[i] = C.getFloat(2);
+            }
+        }
+        C.close();
+        return multipliers;
+    }
+
+    /**
+     // Deletes all Ingredients corresponding to Meal ID = mid
+     * @param mid
+     * @return
+     */
+    public int deleteIngredients(long mid){
+        return database.delete(SQLiteHelper.Table_DailyItem, "mid = '" + mid + "'", null);
+    }
+
 }
