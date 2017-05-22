@@ -68,12 +68,10 @@ public class AdapterIngredients extends ArrayAdapter<Ingredient> {
             portion.setText(weight.getAmount() * multiplier + " " + weight.getUnit().Abbreviate());
         }
 
-
-
-        calories.setText(String.valueOf(Math.round(ingredient.getCalories() * multiplier)) + " cals");
-        carbs.setText(String.valueOf(Math.round(ingredient.getCarbs() * multiplier)) + " c");
-        protein.setText(String.valueOf(Math.round(ingredient.getProtein() * multiplier)) + " p");
-        fat.setText(String.valueOf(Math.round(ingredient.getFat() * multiplier)) + " f");
+        calories.setText(String.valueOf(ingredient.getCalories() * multiplier) + " cals");
+        carbs.setText(String.valueOf(ingredient.getCarbs() * multiplier) + " c");
+        protein.setText(String.valueOf(ingredient.getProtein() * multiplier) + " p");
+        fat.setText(String.valueOf(ingredient.getFat() * multiplier) + " f");
 
         // Return the completed view to render on screen
         return convertView;

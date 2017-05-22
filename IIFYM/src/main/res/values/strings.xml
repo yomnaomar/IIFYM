@@ -175,7 +175,7 @@
     <string name="btnOk">Ok</string>
     <string name="btnCancel">Cancel</string>
 
-    <string name="lblSelectedFoods"><u>Selected Foods</u></string>
+    <string name="lblSelectedFoods">Selected Foods</string>
     <string name="toolbarCreateNewMeal">Create new meal</string>
     <string name="lblMealIngredients">Meal Ingredients</string>
 

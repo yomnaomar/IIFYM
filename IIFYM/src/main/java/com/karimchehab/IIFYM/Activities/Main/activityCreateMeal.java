@@ -136,9 +136,9 @@ public class activityCreateMeal extends AppCompatActivity implements AdapterView
 
     private void populateGUI() {
         int calories = 0;
-        int carbs = 0;
-        int protein = 0;
-        int fat = 0;
+        float carbs = 0;
+        float protein = 0;
+        float fat = 0;
 
         for (int i = 0; i < ingredientCount; i++) {
             Ingredient ingredient = arrIngredients.get(i);
