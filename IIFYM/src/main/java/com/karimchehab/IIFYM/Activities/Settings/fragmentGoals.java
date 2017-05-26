@@ -172,8 +172,6 @@ public class fragmentGoals extends Fragment implements View.OnClickListener, Tex
         // Set values to User's stored preferences
         setInitialValues();
 
-        updateValues();
-
         // Set up TextWatchers and OnClickListeners after initializing values to prevent overwriting
         finalizeGUI();
 
@@ -243,6 +241,9 @@ public class fragmentGoals extends Fragment implements View.OnClickListener, Tex
             etxtProtein.setText(protein + "");
             etxtFat.setText(fat + "");
 
+            lblValueCarbs.setText("~" + Math.round(carbs * 4 * 100 / calories) + " %");
+            lblValueProtein.setText("~" + Math.round(protein * 4 * 100 / calories)  + " %");
+            lblValueFat.setText("~" + Math.round(fat * 9 * 100 / calories) + " %");
         }
         updateGUI();
     }

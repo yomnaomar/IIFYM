@@ -16,18 +16,16 @@ import com.karimchehab.IIFYM.Database.SQLiteConnector;
 import com.karimchehab.IIFYM.Models.Food;
 import com.karimchehab.IIFYM.R;
 import com.karimchehab.IIFYM.ViewComponents.AdapterSavedItem;
-import com.github.clans.fab.FloatingActionButton;
 
 import java.util.ArrayList;
 
-public class activityFoodManager extends AppCompatActivity implements AdapterView.OnItemClickListener, View.OnClickListener {
+public class activityFoodManager extends AppCompatActivity implements AdapterView.OnItemClickListener{
 
     // GUI
     private EditText                etxtSearch;
     private TextView                lblFrequent;
     private AdapterSavedItem        adapterSavedItem;
     private ListView                listviewSavedItems;
-    private FloatingActionButton    fabCreateFood, fabCreateMeal;
 
     // Database
     private SQLiteConnector DB_SQLite;
@@ -71,11 +69,6 @@ public class activityFoodManager extends AppCompatActivity implements AdapterVie
         listviewSavedItems = (ListView) findViewById(R.id.listviewSavedItems);
         listviewSavedItems.setAdapter(adapterSavedItem);
         listviewSavedItems.setOnItemClickListener(this);
-
-        fabCreateFood = (FloatingActionButton) findViewById(R.id.fabCreateNewFood);
-        fabCreateFood.setOnClickListener(this);
-        fabCreateMeal = (FloatingActionButton) findViewById(R.id.fabCreateNewMeal);
-        fabCreateMeal.setOnClickListener(this);
     }
 
     // TODO implement case where Food is Meal
@@ -111,26 +104,5 @@ public class activityFoodManager extends AppCompatActivity implements AdapterVie
         for (int i = 0; i < arrSavedItems.size(); i++) {
             adapterSavedItem.add(arrSavedItems.get(i));
         }
-    }
-
-    @Override public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.fabCreateNewFood:
-                goToCreateNewFood();
-                break;
-            case R.id.fabCreateNewMeal:
-                goToCreateNewMeal();
-                break;
-        }
-    }
-
-    private void goToCreateNewMeal() {
-        Intent intent = new Intent(context, activtitySelectMealIngredients.class);
-        startActivity(intent);
-    }
-
-    public void goToCreateNewFood(){
-        Intent intent = new Intent(context, activityCreateFood.class);
-        startActivity(intent);
     }
 }
