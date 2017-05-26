@@ -57,7 +57,7 @@
         <activity android:name=".Activities.Main.activityViewDailyItem" />
         <activity
             android:name=".Activities.Settings.activitySettings"
-            android:theme="@style/settingsTheme" />
+            android:label="Settings"/>
         <activity
             android:name=".Activities.Main.activityCreateMeal"
             android:label="@string/toolbarCreateNewMeal" />

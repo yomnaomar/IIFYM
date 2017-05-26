@@ -260,7 +260,7 @@ public class User {
         return "User{" +
                 "uid='" + uid + '\'' +
                 ", isRegistered=" + isRegistered +
-                ", ic_email_signin='" + email + '\'' +
+                ", email='" + email + '\'' +
                 ", name='" + name + '\'' +
                 ", dob=" + dob +
                 ", gender=" + gender +

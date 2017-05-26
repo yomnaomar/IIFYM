@@ -149,7 +149,7 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
      "UIO9XpMc3BR2sNTzNcdlDJ7rrtD3" :
      {
      "uid"         :   "UIO9XpMc3BR2sNTzNcdlDJ7rrtD3",
-     "ic_email_signin"       :   "example@gmail.com",
+     "email"       :   "example@gmail.com",
      "registered"  :   true
      }
      }
@@ -166,7 +166,7 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
      else if (Not Registered)
      {
      intent.putExtra("uid", uid);
-     intent.putExtra("ic_email_signin", ic_email_signin);
+     intent.putExtra("email", email);
      Go to UserInfo
      }
      }
@@ -221,7 +221,7 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
                                     // Go to activityRegisterProfile
                                     Intent intent = new Intent();
                                     intent.putExtra("uid", uid);
-                                    intent.putExtra("ic_email_signin", email);
+                                    intent.putExtra("email", email);
                                     intent.setClass(context, activityRegisterProfile.class);
                                     startActivity(intent);
                                 }
@@ -242,7 +242,7 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
                                                     // Email verification sent to user
                                                 }
                                                 else {
-                                                    showAlertDialog("Oops!","There was an error sending the verification ic_email_signin");
+                                                    showAlertDialog("Oops!","There was an error sending the verification email");
                                                 }
                                             }
                                         });
@@ -290,7 +290,7 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
                                                 // Email verification sent to user
                                             }
                                             else {
-                                                showAlertDialog("Oops!","There was an error sending the verification ic_email_signin");
+                                                showAlertDialog("Oops!","There was an error sending the verification email");
                                             }
                                         }
                                     });
@@ -333,7 +333,7 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
                         } else {
                             Snackbar snackbar = Snackbar.make(
                                     loginLinearLayout,
-                                    "Something went wrong, we could not send the ic_email_signin to " + email,
+                                    "Something went wrong, we could not send the email to " + email,
                                     Snackbar.LENGTH_LONG
                             );
                             View snackBarView = snackbar.getView();
@@ -369,7 +369,7 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
 
                             } catch (FirebaseAuthInvalidCredentialsException E) {
                                 // TODO if(getProvider() != Email), check his providers, and tell him his options
-                                // TODO else -his provider is ic_email_signin but he typed wrong password-
+                                // TODO else -his provider is email but he typed wrong password-
                                 showAlertDialog("Failed to sign in", "Invalid username or password");
 
                             } catch (Exception e) {
@@ -382,7 +382,7 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
     }
 
     /**
-     * Sends mail to a given `ic_email_signin` prompting to reset password.
+     * Sends mail to a given `email` prompting to reset password.
      * @param email Email address to send mail to.
      */
     private void handleForgotPasswordButton(final String email) {
@@ -391,7 +391,7 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
         }
         new AlertDialog.Builder(this)
                 .setTitle("Forgot Password")
-                .setMessage("Would you like to send an ic_email_signin to reset your password?")
+                .setMessage("Would you like to send an email to reset your password?")
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
@@ -406,7 +406,7 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
     private void setupGoogleSignIn(){
         Log.d("setupGoogleSignIn", "Setting up Google Sign In");
 
-        // Configure sign-in to request the user's ID, ic_email_signin address, and basic
+        // Configure sign-in to request the user's ID, email address, and basic
         // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.iifym_server_client_id))
@@ -497,7 +497,7 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
     }
 
     /**
-     * Returns whether or not the ic_email_signin address field is valid.
+     * Returns whether or not the email address field is valid.
      *
      * If invalid, it also notifies the user visually.
      * @return

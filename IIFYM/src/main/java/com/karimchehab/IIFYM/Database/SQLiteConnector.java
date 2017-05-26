@@ -59,7 +59,7 @@ public class SQLiteConnector {
         if (!isExistingUser(u.getUid())) {
             ContentValues newUser = new ContentValues();
             newUser.put("uid",              u.getUid());
-            newUser.put("ic_email_signin",            u.getEmail());
+            newUser.put("email",            u.getEmail());
             newUser.put("isRegistered",     u.getIsRegistered());
             newUser.put("name",             u.getName());
             newUser.put("dob",              u.getDob().toString());
@@ -121,7 +121,7 @@ public class SQLiteConnector {
         if (isExistingUser(u.getUid())) {
             ContentValues updateUser = new ContentValues();
             updateUser.put("uid", u.getUid());
-            updateUser.put("ic_email_signin", u.getEmail());
+            updateUser.put("email", u.getEmail());
             updateUser.put("isRegistered", u.getIsRegistered());
             updateUser.put("name", u.getName());
             updateUser.put("dob", u.getDob().toString());

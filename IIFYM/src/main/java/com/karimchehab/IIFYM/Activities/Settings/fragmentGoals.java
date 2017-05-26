@@ -16,6 +16,9 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
@@ -56,38 +59,38 @@ import tourguide.tourguide.ToolTip;
 public class fragmentGoals extends Fragment implements View.OnClickListener, TextWatcher, SettingsFragmentHelper {
 
     // GUI
-    private SegmentedGroup  seggroupDisplay;
-    private RadioButton     rbtnCalories, rbtnMacros;
-    private EditText        etxtCalories, etxtCarbs, etxtProtein, etxtFat;
-    private TextView        lblCarbs, lblProtein, lblFat, lblTotal, lblAmountTotal, lblValueCarbs, lblValueProtein, lblValueFat;
-    private ImageButton     btnReset, btnInfo, btnSave;
-    private Animation       mEnterAnimation, mExitAnimation;
-    private ProgressDialog  progressDialog;
+    private SegmentedGroup seggroupDisplay;
+    private RadioButton rbtnCalories, rbtnMacros;
+    private EditText etxtCalories, etxtCarbs, etxtProtein, etxtFat;
+    private TextView lblCarbs, lblProtein, lblFat, lblTotal, lblAmountTotal, lblValueCarbs, lblValueProtein, lblValueFat;
+    private ImageButton btnReset, btnInfo;
+    private Animation mEnterAnimation, mExitAnimation;
+    private ProgressDialog progressDialog;
     private OnFragmentInteractionListener mListener; // Used - do not delete
-    private View            view;
-    private LinearLayout    linearLayoutRoot;
+    private View view;
+    private LinearLayout linearLayoutRoot;
 
     // Variables
     // Final Variables (Cannot be changed)
-    private int             gender, unitSystem, height1, height2, workoutFreq, goal ,BMR;
-    private float           weight;
-    private boolean         isPercent;
-    private String          uid, dob;
-    private int             caloriesDefault;
-    private final int       carbsPercentDefault = 50, proteinPercentDefault = 25, fatPercentDefault = 25;
-    private Context         context;
-    private ChainTourGuide  tourguide; // Used - do not delete
+    private int gender, unitSystem, height1, height2, workoutFreq, goal, BMR;
+    private float weight;
+    private boolean isPercent;
+    private String uid, dob;
+    private int caloriesDefault;
+    private final int carbsPercentDefault = 50, proteinPercentDefault = 25, fatPercentDefault = 25;
+    private Context context;
+    private ChainTourGuide tourguide; // Used - do not delete
 
     // Dynamic Variables (Can be changed)
-    private int             totalPercent, calories, carbs, protein, fat, carbsPercent, proteinPercent, fatPercent;
-    private int             carbsOld, proteinOld, fatOld;
-    private boolean         carbsChanged, proteinChanged, fatChanged;
-    private User            user;
+    private int totalPercent, calories, carbs, protein, fat, carbsPercent, proteinPercent, fatPercent;
+    private int carbsOld, proteinOld, fatOld;
+    private boolean carbsChanged, proteinChanged, fatChanged;
+    private User user;
 
     // Database
-    private SharedPreferenceHelper  myPrefs;
-    private SQLiteConnector         DB_SQLite;
-    private DatabaseReference       firebaseDbRef;
+    private SharedPreferenceHelper myPrefs;
+    private SQLiteConnector DB_SQLite;
+    private DatabaseReference firebaseDbRef;
 
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -96,7 +99,8 @@ public class fragmentGoals extends Fragment implements View.OnClickListener, Tex
     private String mParam2;
 
     // Required empty public constructor
-    public fragmentGoals() {}
+    public fragmentGoals() {
+    }
 
     /**
      * Use this factory method to create a new instance of
@@ -131,6 +135,9 @@ public class fragmentGoals extends Fragment implements View.OnClickListener, Tex
 
         // User Data
         getUserData();
+
+        // Options Menu
+        setHasOptionsMenu(true);
     }
 
     private void getUserData() {
@@ -147,23 +154,21 @@ public class fragmentGoals extends Fragment implements View.OnClickListener, Tex
         goal = user.getGoal();
         calories = user.getDailyCalories();
         isPercent = user.getIsPercent();
-        if (isPercent)
-        {
+        if (isPercent) {
             carbsPercent = user.getDailyCarbs();
             proteinPercent = user.getDailyProtein();
             fatPercent = user.getDailyFat();
-            totalPercent = carbsPercent + proteinPercent +fatPercent;
-        }
-        else
-        {
+            totalPercent = carbsPercent + proteinPercent + fatPercent;
+        } else {
             carbs = user.getDailyCarbs();
             protein = user.getDailyProtein();
             fat = user.getDailyFat();
         }
     }
 
-    @Override public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                       Bundle savedInstanceState) {
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_goals, container, false);
         // GUI
@@ -180,28 +185,26 @@ public class fragmentGoals extends Fragment implements View.OnClickListener, Tex
 
     private void initializeGUI() {
         seggroupDisplay = (SegmentedGroup) view.findViewById(R.id.seggroupDisplay);
-        rbtnCalories    = (RadioButton) view.findViewById(R.id.rbtnCalories);
-        rbtnMacros      = (RadioButton) view.findViewById(R.id.rbtnMacros);
-        etxtCalories    = (EditText) view.findViewById(R.id.etxtCalories);
-        etxtCarbs       = (EditText) view.findViewById(R.id.etxtCarbs);
-        etxtProtein     = (EditText) view.findViewById(R.id.etxtProtein);
-        etxtFat         = (EditText) view.findViewById(R.id.etxtFat);
-        lblCarbs        = (TextView) view.findViewById(R.id.lblCarbs);
-        lblProtein      = (TextView) view.findViewById(R.id.lblProtein);
-        lblFat          = (TextView) view.findViewById(R.id.lblFat);
-        lblTotal        = (TextView) view.findViewById(R.id.lblTotal);
-        lblAmountTotal  = (TextView) view.findViewById(R.id.lblAmountTotal);
-        lblValueCarbs   = (TextView) view.findViewById(R.id.lblValueCarbs);
+        rbtnCalories = (RadioButton) view.findViewById(R.id.rbtnCalories);
+        rbtnMacros = (RadioButton) view.findViewById(R.id.rbtnMacros);
+        etxtCalories = (EditText) view.findViewById(R.id.etxtCalories);
+        etxtCarbs = (EditText) view.findViewById(R.id.etxtCarbs);
+        etxtProtein = (EditText) view.findViewById(R.id.etxtProtein);
+        etxtFat = (EditText) view.findViewById(R.id.etxtFat);
+        lblCarbs = (TextView) view.findViewById(R.id.lblCarbs);
+        lblProtein = (TextView) view.findViewById(R.id.lblProtein);
+        lblFat = (TextView) view.findViewById(R.id.lblFat);
+        lblTotal = (TextView) view.findViewById(R.id.lblTotal);
+        lblAmountTotal = (TextView) view.findViewById(R.id.lblAmountTotal);
+        lblValueCarbs = (TextView) view.findViewById(R.id.lblValueCarbs);
         lblValueProtein = (TextView) view.findViewById(R.id.lblValueProtein);
-        lblValueFat     = (TextView) view.findViewById(R.id.lblValueFat);
-        btnReset        = (ImageButton) view.findViewById(R.id.btnReset);
-        btnInfo         = (ImageButton) view.findViewById(R.id.btnInfo);
-        btnSave         = (ImageButton) view.findViewById(R.id.btnSave);
-        linearLayoutRoot= (LinearLayout) view.findViewById(R.id.linearLayoutRoot);
+        lblValueFat = (TextView) view.findViewById(R.id.lblValueFat);
+        btnReset = (ImageButton) view.findViewById(R.id.btnReset);
+        btnInfo = (ImageButton) view.findViewById(R.id.btnInfo);
+        linearLayoutRoot = (LinearLayout) view.findViewById(R.id.linearLayoutRoot);
 
         btnReset.setOnClickListener(this);
         btnInfo.setOnClickListener(this);
-        btnSave.setOnClickListener(this);
 
         // setup enter and exit animation
         mEnterAnimation = new AlphaAnimation(0f, 1f);
@@ -213,10 +216,10 @@ public class fragmentGoals extends Fragment implements View.OnClickListener, Tex
         mExitAnimation.setFillAfter(true);
     }
 
-    private void setInitialValues(){
+    private void setInitialValues() {
         etxtCalories.setText(calories + "");
 
-        if(isPercent) // Calories
+        if (isPercent) // Calories
         {
             rbtnCalories.setChecked(true);
 
@@ -224,16 +227,15 @@ public class fragmentGoals extends Fragment implements View.OnClickListener, Tex
             etxtProtein.setText(proteinPercent + "");
             etxtFat.setText(fatPercent + "");
 
-            lblValueCarbs.setText("~" + Math.round(carbsPercent * 0.01f * calories/4) + " g");
-            lblValueProtein.setText("~" + Math.round(proteinPercent * 0.01f * calories/4) + " g");
-            lblValueFat.setText("~" + Math.round(fatPercent * 0.01f * calories/9) + " g");
+            lblValueCarbs.setText("~" + Math.round(carbsPercent * 0.01f * calories / 4) + " g");
+            lblValueProtein.setText("~" + Math.round(proteinPercent * 0.01f * calories / 4) + " g");
+            lblValueFat.setText("~" + Math.round(fatPercent * 0.01f * calories / 9) + " g");
             lblAmountTotal.setText(totalPercent + "");
             if (totalPercent == 100)
                 lblAmountTotal.setTextColor(context.getResources().getColor(R.color.correct_green));
             else
                 lblAmountTotal.setTextColor(context.getResources().getColor(R.color.error_red));
-        }
-        else // Macros
+        } else // Macros
         {
             rbtnMacros.setChecked(true);
 
@@ -242,27 +244,26 @@ public class fragmentGoals extends Fragment implements View.OnClickListener, Tex
             etxtFat.setText(fat + "");
 
             lblValueCarbs.setText("~" + Math.round(carbs * 4 * 100 / calories) + " %");
-            lblValueProtein.setText("~" + Math.round(protein * 4 * 100 / calories)  + " %");
+            lblValueProtein.setText("~" + Math.round(protein * 4 * 100 / calories) + " %");
             lblValueFat.setText("~" + Math.round(fat * 9 * 100 / calories) + " %");
         }
         updateGUI();
     }
 
     private void finalizeGUI() {
-        seggroupDisplay.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
-        {
+        seggroupDisplay.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 updateGUI();
                 resetGoals();
-            }});
+            }
+        });
 
         addTextWatchers();
     }
 
     private void updateGUI() {
-        if(rbtnCalories.isChecked())
-        {
+        if (rbtnCalories.isChecked()) {
             etxtCalories.setEnabled(true);
 
             lblCarbs.setText("Carbs (%)");
@@ -271,9 +272,7 @@ public class fragmentGoals extends Fragment implements View.OnClickListener, Tex
 
             lblTotal.setVisibility(View.VISIBLE);
             lblAmountTotal.setVisibility(View.VISIBLE);
-        }
-        else
-        {
+        } else {
             etxtCalories.setEnabled(false);
 
             lblCarbs.setText("Carbs (g)");
@@ -315,8 +314,7 @@ public class fragmentGoals extends Fragment implements View.OnClickListener, Tex
                 lblAmountTotal.setTextColor(Color.parseColor("#FF0000")); // error_red
 
             addTextWatchers();
-        }
-        else {
+        } else {
             calories = caloriesDefault;
             carbs = Math.round((carbsPercentDefault * 0.01f * calories) / 4);
             protein = Math.round((proteinPercentDefault * 0.01f * calories) / 4);
@@ -331,7 +329,7 @@ public class fragmentGoals extends Fragment implements View.OnClickListener, Tex
 
             Log.d("dividebyzero", carbs + calories + "");
             lblValueCarbs.setText("~" + Math.round(carbs * 4 * 100 / calories) + " %");
-            lblValueProtein.setText("~" + Math.round(protein * 4 * 100 / calories)  + " %");
+            lblValueProtein.setText("~" + Math.round(protein * 4 * 100 / calories) + " %");
             lblValueFat.setText("~" + Math.round(fat * 9 * 100 / calories) + " %");
 
             addTextWatchers();
@@ -359,7 +357,7 @@ public class fragmentGoals extends Fragment implements View.OnClickListener, Tex
         int valHeight = height1;
 
         // Need to convert to Metric in order to calculate BMR
-        if(unitSystem == 1) // Imperial
+        if (unitSystem == 1) // Imperial
         {
             // Convert LB to KG
             valWeight /= 2.2046226218;
@@ -375,9 +373,9 @@ public class fragmentGoals extends Fragment implements View.OnClickListener, Tex
 
         // Obtain Gender
         if (gender == 0) // Male
-            BMR = (int) (10*valWeight + 6.25*valHeight + 5*valAge + 5.0);
+            BMR = (int) (10 * valWeight + 6.25 * valHeight + 5 * valAge + 5.0);
         else
-            BMR = (int) (10*valWeight + 6.25*valHeight + 5*valAge - 161.0);
+            BMR = (int) (10 * valWeight + 6.25 * valHeight + 5 * valAge - 161.0);
 
         Log.d("BMR", BMR + "");
 
@@ -408,15 +406,15 @@ public class fragmentGoals extends Fragment implements View.OnClickListener, Tex
             caloriesDefault -= 250.0;
 
             // Maintain weight
-        else if (goal == 1)
-        {} // Do nothing
+        else if (goal == 1) {
+        } // Do nothing
 
         // Gain weight
         else if (goal == 2)
             caloriesDefault += 250.0;
     }
 
-    private int getAge (int _year, int _month, int _day) {
+    private int getAge(int _year, int _month, int _day) {
         GregorianCalendar cal = new GregorianCalendar();
         int y, m, d, a;
 
@@ -433,11 +431,13 @@ public class fragmentGoals extends Fragment implements View.OnClickListener, Tex
         return a;
     }
 
-    @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
         captureOldValues();
     }
 
-    @Override public void onTextChanged(CharSequence s, int start, int before, int count) {
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
         captureNewValues();
         compareValues();
         updateValues();
@@ -445,7 +445,7 @@ public class fragmentGoals extends Fragment implements View.OnClickListener, Tex
     }
 
     private void captureOldValues() {
-        if(rbtnCalories.isChecked()) {
+        if (rbtnCalories.isChecked()) {
             String carbP = etxtCarbs.getText().toString();
             if (carbP.isEmpty())
                 carbsOld = 0;
@@ -464,8 +464,7 @@ public class fragmentGoals extends Fragment implements View.OnClickListener, Tex
             else
                 fatOld = Integer.parseInt(fatP);
             totalPercent = carbsPercent + proteinPercent + fatPercent;
-        }
-        else {
+        } else {
             String carbP = etxtCarbs.getText().toString();
             if (carbP.isEmpty())
                 carbsOld = 0;
@@ -484,12 +483,12 @@ public class fragmentGoals extends Fragment implements View.OnClickListener, Tex
             else
                 fatOld = Integer.parseInt(fatP);
 
-            calories = Math.round(carbs*4 + protein*4 + fat*9);
+            calories = Math.round(carbs * 4 + protein * 4 + fat * 9);
         }
     }
 
-    private void captureNewValues(){
-        if(rbtnCalories.isChecked()) {
+    private void captureNewValues() {
+        if (rbtnCalories.isChecked()) {
             String currentCals = etxtCalories.getText().toString();
             if (currentCals.isEmpty())
                 calories = 0;
@@ -514,8 +513,7 @@ public class fragmentGoals extends Fragment implements View.OnClickListener, Tex
             else
                 fatPercent = Integer.parseInt(fatP);
             totalPercent = carbsPercent + proteinPercent + fatPercent;
-        }
-        else {
+        } else {
             String carbP = etxtCarbs.getText().toString();
             if (carbP.isEmpty())
                 carbs = 0;
@@ -534,7 +532,7 @@ public class fragmentGoals extends Fragment implements View.OnClickListener, Tex
             else
                 fat = Integer.parseInt(fatP);
 
-            calories = Math.round(carbs*4 + protein*4 + fat*9);
+            calories = Math.round(carbs * 4 + protein * 4 + fat * 9);
         }
     }
 
@@ -553,8 +551,8 @@ public class fragmentGoals extends Fragment implements View.OnClickListener, Tex
             fatChanged = false;
     }
 
-    private void updateValues(){
-        if(rbtnCalories.isChecked()) // Calories
+    private void updateValues() {
+        if (rbtnCalories.isChecked()) // Calories
         {
             removeTextWatchers();
 
@@ -565,9 +563,9 @@ public class fragmentGoals extends Fragment implements View.OnClickListener, Tex
             if (!fatChanged)
                 etxtFat.setText(fatPercent + "");
 
-            lblValueCarbs.setText("~" + Math.round(carbsPercent * 0.01f * calories/4) + " g");
-            lblValueProtein.setText("~" + Math.round(proteinPercent * 0.01f * calories/4) + " g");
-            lblValueFat.setText("~" + Math.round(fatPercent * 0.01f * calories/9) + " g");
+            lblValueCarbs.setText("~" + Math.round(carbsPercent * 0.01f * calories / 4) + " g");
+            lblValueProtein.setText("~" + Math.round(proteinPercent * 0.01f * calories / 4) + " g");
+            lblValueFat.setText("~" + Math.round(fatPercent * 0.01f * calories / 9) + " g");
             lblAmountTotal.setText(totalPercent + "");
             if (totalPercent == 100)
                 lblAmountTotal.setTextColor(Color.parseColor("#2E7D32")); // Green
@@ -575,17 +573,15 @@ public class fragmentGoals extends Fragment implements View.OnClickListener, Tex
                 lblAmountTotal.setTextColor(Color.parseColor("#FF0000")); // error_red
 
             addTextWatchers();
-        }
-        else if (rbtnMacros.isChecked()) // Macros
+        } else if (rbtnMacros.isChecked()) // Macros
         {
             removeTextWatchers();
             etxtCalories.setText((calories) + "");
-            if(calories != 0) {
+            if (calories != 0) {
                 lblValueCarbs.setText("~" + Math.round(carbs * 4 * 100 / calories) + " %");
                 lblValueProtein.setText("~" + Math.round(protein * 4 * 100 / calories) + " %");
                 lblValueFat.setText("~" + Math.round(fat * 9 * 100 / calories) + " %");
-            }
-            else {
+            } else {
                 lblValueCarbs.setText("~0 %");
                 lblValueProtein.setText("~0 %");
                 lblValueFat.setText("~0 %");
@@ -597,7 +593,7 @@ public class fragmentGoals extends Fragment implements View.OnClickListener, Tex
     private boolean validateFields() {
         boolean valid = true;
 
-        if(rbtnCalories.isChecked()) {
+        if (rbtnCalories.isChecked()) {
             if ((carbsPercent + proteinPercent + fatPercent) != 100) {
                 lblAmountTotal.setError("Must equal 100");
                 valid = false;
@@ -608,14 +604,11 @@ public class fragmentGoals extends Fragment implements View.OnClickListener, Tex
         return valid;
     }
 
-    @Override public void onClick(View v) {
-        switch(v.getId())
-        {
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
             case R.id.btnReset:
-                showResetDialog("Reset Goals","Are you sure you want to reset your daily goals to default?");
-                break;
-            case R.id.btnSave:
-                saveGoals();
+                showResetDialog("Reset Goals", "Are you sure you want to reset your daily goals to default?");
                 break;
             case R.id.btnInfo:
                 beginChainTourGuide();
@@ -623,7 +616,7 @@ public class fragmentGoals extends Fragment implements View.OnClickListener, Tex
         }
     }
 
-    private void showResetDialog(String title, String message){
+    private void showResetDialog(String title, String message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(title)
                 .setMessage(message);
@@ -644,7 +637,7 @@ public class fragmentGoals extends Fragment implements View.OnClickListener, Tex
         dialog.show();
     }
 
-    public void saveGoals(){
+    public void saveGoals() {
         if (isNetworkStatusAvialable(context)) {
             // Validate Fields
             if (validateFields()) {
@@ -683,8 +676,7 @@ public class fragmentGoals extends Fragment implements View.OnClickListener, Tex
                     }
                 });
             }
-        }
-        else {
+        } else {
             //TODO Show alertdialog indicating failed to save, replace snackbar with alert dialog
             Snackbar snackbar = Snackbar
                     .make(linearLayoutRoot, "Could not update goals. No internet connection.", Snackbar.LENGTH_SHORT);
@@ -695,13 +687,12 @@ public class fragmentGoals extends Fragment implements View.OnClickListener, Tex
         }
     }
 
-    public static boolean isNetworkStatusAvialable (Context context) {
+    public static boolean isNetworkStatusAvialable(Context context) {
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        if (connectivityManager != null)
-        {
+        if (connectivityManager != null) {
             NetworkInfo netInfos = connectivityManager.getActiveNetworkInfo();
-            if(netInfos != null)
-                if(netInfos.isConnected())
+            if (netInfos != null)
+                if (netInfos.isConnected())
                     return true;
         }
         return false;
@@ -753,7 +744,7 @@ public class fragmentGoals extends Fragment implements View.OnClickListener, Tex
     }
 
     private void addTextWatchers() {
-        if(rbtnCalories.isChecked()) // Calories
+        if (rbtnCalories.isChecked()) // Calories
         {
             etxtCalories.addTextChangedListener(this);
         }
@@ -762,7 +753,7 @@ public class fragmentGoals extends Fragment implements View.OnClickListener, Tex
         etxtFat.addTextChangedListener(this);
     }
 
-    private void removeTextWatchers(){
+    private void removeTextWatchers() {
         etxtCalories.removeTextChangedListener(this);
         etxtCarbs.removeTextChangedListener(this);
         etxtProtein.removeTextChangedListener(this);
@@ -785,7 +776,8 @@ public class fragmentGoals extends Fragment implements View.OnClickListener, Tex
         }
     }
 
-    @Override public void onAttach(Context context) {
+    @Override
+    public void onAttach(Context context) {
         super.onAttach(context);
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
@@ -795,12 +787,14 @@ public class fragmentGoals extends Fragment implements View.OnClickListener, Tex
         }
     }
 
-    @Override public void onDetach() {
+    @Override
+    public void onDetach() {
         super.onDetach();
         mListener = null;
     }
 
-    @Override public void onResumeFragment() {
+    @Override
+    public void onResumeFragment() {
         // User Data
         getUserData();
 
@@ -824,7 +818,24 @@ public class fragmentGoals extends Fragment implements View.OnClickListener, Tex
     }
 
     // Unused
-    @Override public void afterTextChanged(Editable s) {
+    @Override
+    public void afterTextChanged(Editable s) {
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case (R.id.menu_save_floppy):
+                saveGoals();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        menu.clear();
+        inflater.inflate(R.menu.menu_save_settings, menu);
     }
 }

@@ -45,7 +45,7 @@ public class FirebaseHelper {
      "UIO9XpMc3BR2sNTzNcdlDJ7rrtD3" :
      {
      "uid"         :   "UIO9XpMc3BR2sNTzNcdlDJ7rrtD3",
-     "ic_email_signin"       :   "example@gmail.com",
+     "email"       :   "example@gmail.com",
      "registered"  :   true
      }
      }
@@ -62,7 +62,7 @@ public class FirebaseHelper {
      else if (Not Registered)
      {
      intent.putExtra("uid", uid);
-     intent.putExtra("ic_email_signin", ic_email_signin);
+     intent.putExtra("email", email);
      Go to UserInfo
      }
      }
@@ -83,7 +83,7 @@ public class FirebaseHelper {
                 if (firebaseUser != null) {
 
                     final String uid = firebaseUser.getUid();
-                    final String ic_email_signin = firebaseUser.getEmail();
+                    final String email = firebaseUser.getEmail();
 
                     // Get User data to check if Registered
                     firebaseDbRef.child("users").child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -117,7 +117,7 @@ public class FirebaseHelper {
                                     // Go to activityRegisterProfile
                                     Intent intent = new Intent();
                                     intent.putExtra("uid", uid);
-                                    intent.putExtra("ic_email_signin", ic_email_signin);
+                                    intent.putExtra("email", email);
                                     intent.setClass(context, activityRegisterProfile.class);
                                     startActivity(intent);
                                 }
@@ -138,7 +138,7 @@ public class FirebaseHelper {
                                                     // Email verification sent to user
                                                 }
                                                 else {
-                                                    showAlertDialog("Oops!","There was an error sending the verification ic_email_signin");
+                                                    showAlertDialog("Oops!","There was an error sending the verification email");
                                                 }
                                             }
                                         });

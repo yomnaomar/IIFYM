@@ -1,41 +1,41 @@
 package com.karimchehab.IIFYM.Activities.Settings;
 
 import android.content.Context;
-import android.content.DialogInterface;
+import android.graphics.drawable.Icon;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
+import android.view.Menu;
 
 import com.karimchehab.IIFYM.Database.SQLiteConnector;
 import com.karimchehab.IIFYM.Database.SharedPreferenceHelper;
 import com.karimchehab.IIFYM.Models.User;
 import com.karimchehab.IIFYM.R;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class activitySettings extends AppCompatActivity implements fragmentGoals.OnFragmentInteractionListener, fragmentProfile.OnFragmentInteractionListener, fragmentPreferences.OnFragmentInteractionListener {
+public class activitySettings extends ActionBarActivity implements fragmentGoals.OnFragmentInteractionListener, fragmentProfile.OnFragmentInteractionListener, fragmentPreferences.OnFragmentInteractionListener, ActionBar.TabListener {
 
     // GUI
-    private Toolbar toolbar;
-    private TabLayout tabLayout;
     private ViewPager viewPager;
+    private tabsAdapter myTabAdapter;
+    private ActionBar actionBar;
+
+    // Tab Titles & Icons
+    private String[] tabs = {"Goals", "Profile", "Preferences"};
+    private int[] maleIcons = {R.drawable.ic_macro_settings, R.drawable.ic_male_user, R.drawable.ic_preferences};
+    private int[] femaleIcons = {R.drawable.ic_macro_settings, R.drawable.ic_female_user, R.drawable.ic_preferences};
 
     // Database
     private SQLiteConnector DB_SQLite;
     private SharedPreferenceHelper myPrefs;
 
     // Variables
-    private Context             context;
-    private User                user;
-    private String              uid;
+    private Context context;
+    private User    user;
+    private String  uid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,99 +47,45 @@ public class activitySettings extends AppCompatActivity implements fragmentGoals
         uid = myPrefs.getStringValue("session_uid");
         user = DB_SQLite.retrieveUser(uid);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
+        // Tab Initialization
         viewPager = (ViewPager) findViewById(R.id.viewpager);
-        setupViewPager(viewPager);
+        actionBar = getSupportActionBar();
+        myTabAdapter = new tabsAdapter(getSupportFragmentManager());
 
-        tabLayout = (TabLayout) findViewById(R.id.tabs);
-        tabLayout.setupWithViewPager(viewPager);
-        tabLayout.setTabTextColors(getColor(R.color.grey_light),getColor(R.color.white));
-        setupTabIcons();
-    }
+        viewPager.setAdapter(myTabAdapter);
+        actionBar.setHomeButtonEnabled(false);
+        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
-    // TODO use dialogFragment to implement this correctly
-    public void showSaveDialog(){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Save goals?");
-        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int id) {
+        // Adding Tabs
+        for (int i = 0; i < tabs.length; i++) {
+            if (user.getGender() == 0)
+                actionBar.addTab(actionBar.newTab().setText(tabs[i]).setIcon(maleIcons[i]).setTabListener(this));
+            else
+                actionBar.addTab(actionBar.newTab().setText(tabs[i]).setIcon(femaleIcons[i]).setTabListener(this));
+        }
 
-                dialog.dismiss();
+        // Swiping Tabs
+        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+
+            @Override public void onPageSelected(int position) {
+                // On changing the tab, make the respected tab selected
+                actionBar.setSelectedNavigationItem(position);
             }
-        });
-        AlertDialog dialog = builder.create();
-        dialog.show();
-    }
 
-    private void setupViewPager(ViewPager viewPager) {
-        final ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new fragmentGoals(), "Goals");
-        adapter.addFragment(new fragmentProfile(), "Profile");
-        adapter.addFragment(new fragmentPreferences(), "Preferences");
-        viewPager.setAdapter(adapter);
+            @Override public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {}
 
-        viewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
-            @Override
-            public void onPageSelected(int position) {
-
-                switch (position) {
-                    case 0:
-                        fragmentGoals fragmentToShow = (fragmentGoals)adapter.getItem(position);
-                        fragmentToShow.onResumeFragment();
-                        break;
-                    case 1:
-                        /*fragmentGoals fragmentToShow = (fragmentGoals)adapter.getItem(position);
-                        fragmentToShow.onResumeFragment();*/
-                        break;
-                    case 2:
-                        /*fragmentGoals fragmentToShow = (fragmentGoals)adapter.getItem(position);
-                        fragmentToShow.onResumeFragment();*/
-                        break;
-                }
-            }
+            @Override public void onPageScrollStateChanged(int state) {}
         });
     }
 
-    private void setupTabIcons() {
-        tabLayout.getTabAt(0).setIcon(R.drawable.ic_macro_settings);
-        if (user.getGender() == 0) // Male
-            tabLayout.getTabAt(1).setIcon(R.drawable.ic_male_user);
-        else
-            tabLayout.getTabAt(1).setIcon(R.drawable.ic_female_user);
-        tabLayout.getTabAt(2).setIcon(R.drawable.ic_preferences);
+    @Override public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
+        // On tab selected, show respected fragment view
+        viewPager.setCurrentItem(tab.getPosition());
     }
 
-    @Override public void onFragmentInteraction(Uri uri) {}
+    @Override public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {}
 
-    class ViewPagerAdapter extends FragmentPagerAdapter {
-        private final List<Fragment> mFragmentList = new ArrayList<>();
-        private final List<String> mFragmentTitleList = new ArrayList<>();
+    @Override public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {}
 
-        public ViewPagerAdapter(FragmentManager manager) {
-            super(manager);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            return mFragmentList.get(position);
-        }
-
-        @Override
-        public int getCount() {
-            return mFragmentList.size();
-        }
-
-        public void addFragment(Fragment fragment, String title) {
-            mFragmentList.add(fragment);
-            mFragmentTitleList.add(title);
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return mFragmentTitleList.get(position);
-        }
-    }
+    @Override  public void onFragmentInteraction(Uri uri) {}
 }

@@ -106,7 +106,7 @@ public class activityRegisterGoals extends AppCompatActivity implements View.OnC
 
     private void getIntentData() {
         uid = getIntent().getStringExtra("uid");
-        email = getIntent().getStringExtra("ic_email_signin");
+        email = getIntent().getStringExtra("email");
         name = getIntent().getStringExtra("name");
         dob = getIntent().getStringExtra("dob");
         gender = getIntent().getIntExtra("gender", 0);

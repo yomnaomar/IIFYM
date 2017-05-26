@@ -13,6 +13,9 @@ import android.text.InputType;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -55,7 +58,6 @@ public class fragmentProfile extends Fragment implements View.OnClickListener, O
     private SimpleDateFormat    dateFormatter;
     private LinearLayout        linearLayoutRoot;
     private View                view;
-    private Button              btnSave;
     private ProgressDialog      progressDialog;
 
     // Variables
@@ -113,6 +115,9 @@ public class fragmentProfile extends Fragment implements View.OnClickListener, O
         myPrefs = new SharedPreferenceHelper(context);
         firebaseDbRef = FirebaseDatabase.getInstance().getReference();
         DB_SQLite = new SQLiteConnector(context);
+
+        // Options Menu
+        setHasOptionsMenu(true);
     }
 
     @Override public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -150,10 +155,7 @@ public class fragmentProfile extends Fragment implements View.OnClickListener, O
         rbtnGenderImperial  = (RadioButton)view.findViewById(R.id.rbtnImperial);
         spinnerWorkoutFreq  = (Spinner)view.findViewById(R.id.spinnerWorkoutFreq);
         spinnerGoals        = (Spinner)view.findViewById(R.id.spinnerGoals);
-        btnSave             = (Button) view.findViewById(R.id.btnSave);
         linearLayoutRoot    = (LinearLayout)view.findViewById(R.id.linearLayoutRoot);
-
-        btnSave.setOnClickListener(this);
 
         etxtDateOfBirth.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -238,9 +240,6 @@ public class fragmentProfile extends Fragment implements View.OnClickListener, O
         switch (v.getId()) {
             case R.id.etxtDateOfBirth:
                 showDatePicker();
-                break;
-            case R.id.btnSave:
-                updateUser();
                 break;
         }
     }
@@ -556,5 +555,22 @@ public class fragmentProfile extends Fragment implements View.OnClickListener, O
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case (R.id.menu_save_floppy):
+                updateUser();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        menu.clear();
+        inflater.inflate(R.menu.menu_save_settings, menu);
     }
 }
