@@ -49,7 +49,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
         String createTable_User = "CREATE TABLE " + Table_User + " " +
                 "(uid               TEXT PRIMARY KEY, " +   // firebase uid = User ID
-                "email              TEXT, " +
+                "ic_email_signin              TEXT, " +
                 "isRegistered       INTEGER, " +            // 0 = no 1 = yes
                 "name               TEXT, " +
                 "dob                TEXT, " +               // dd/mm/yyyy

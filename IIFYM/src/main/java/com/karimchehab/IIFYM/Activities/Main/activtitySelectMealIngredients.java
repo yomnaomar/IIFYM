@@ -118,8 +118,8 @@ public class activtitySelectMealIngredients extends AppCompatActivity implements
     }
 
     // Updates adapterSavedItem and arrSavedItems to display either:
-    // 1. Frequent Foods when search is empty
-    // 2. Filtered Foods when user uses the search functionality
+    // 1. Frequent Foods when ic_google_signin is empty
+    // 2. Filtered Foods when user uses the ic_google_signin functionality
     private void filterSavedItems(final String search) {
         adapterSavedItem.clear();
         ArrayList<Food> arrSavedItems;

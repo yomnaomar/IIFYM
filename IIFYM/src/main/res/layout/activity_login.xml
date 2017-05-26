@@ -20,39 +20,39 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView4"
+                android:id="@+id/appName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical|center_horizontal|center"
-                android:gravity="center_vertical|center_horizontal|center"
-                android:text="IIFYM"
-                android:textAppearance="@android:style/TextAppearance.Material.Large"
+                android:layout_marginBottom="8dp"
+                android:gravity="center"
+                android:text="@string/appName"
                 android:textColor="@color/colorPrimary"
                 android:textSize="30sp" />
 
             <TextView
-                android:id="@+id/textView5"
+                android:id="@+id/textView9"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical|center_horizontal|center"
-                android:gravity="center_vertical|center_horizontal|center"
+                android:layout_marginBottom="8dp"
+                android:gravity="center"
                 android:text="If It Fits Your Macros"
                 android:textColor="@color/colorPrimary"
-                android:textSize="16sp" />
+                android:textSize="18sp" />
 
             <ImageView
                 android:id="@+id/AppLogo"
                 android:layout_width="match_parent"
                 android:layout_height="125dp"
-                android:layout_marginTop="5dp"
                 app:srcCompat="@drawable/iifym_logo" />
 
             <EditText
                 android:id="@+id/email_edittext"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
                 android:ems="13"
                 android:fontFamily="sans-serif"
                 android:hint="Email"
@@ -62,16 +62,15 @@
                 android:textColorHint="?android:attr/textColorHint"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="8dp" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
                 android:id="@+id/password_textview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
                 android:ems="13"
                 android:fontFamily="sans-serif"
                 android:hint="Password"
@@ -88,28 +87,28 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/activity_vertical_margin"
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/btnLogin"
+                    android:id="@+id/btnEmailLoginIn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="8dp"
-                    android:layout_marginStart="16dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="16dp"
                     android:layout_marginTop="16dp"
                     android:layout_weight="1"
                     android:background="@drawable/common_google_signin_btn_icon_light_normal_background"
-                    android:drawableLeft="@android:drawable/sym_action_email"
-                    android:drawablePadding="10dp"
-                    android:elevation="0dp"
+                    android:drawableLeft="@drawable/ic_email_signin"
+                    android:drawablePadding="16dp"
+                    android:drawingCacheQuality="high"
                     android:hint="Sign in"
+                    android:paddingLeft="16dp"
                     android:shadowColor="#6f6f6f"
-                    android:textColorHint="#6f6f6f" />
+                    android:textColorHint="#6f6f6f"/>
 
-                <com.google.android.gms.common.SignInButton
+                <Button
                     android:id="@+id/btnGoogleSignIn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -118,54 +117,36 @@
                     android:layout_marginRight="16dp"
                     android:layout_marginTop="16dp"
                     android:layout_weight="1"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintHorizontal_bias="0.834"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/password_textview"
-                    app:layout_constraintVertical_bias="0.109" />
+                    android:background="@drawable/common_google_signin_btn_icon_light_normal_background"
+                    android:drawableLeft="@drawable/ic_google_signin"
+                    android:drawablePadding="16dp"
+                    android:drawingCacheQuality="high"
+                    android:hint="Sign in"
+                    android:paddingLeft="16dp"
+                    android:shadowColor="#6f6f6f"
+                    android:textColorHint="#6f6f6f" />
+
             </LinearLayout>
 
-            <Button
-                android:id="@+id/Button_Register"
+            <TextView
+                android:id="@+id/txtRegister"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/btn_iifym_style"
-                android:text="@string/btnRegister"
-                android:textColor="#192D5A"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHorizontal_bias="0.158"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/password_textview"
-                app:layout_constraintVertical_bias="0.101" />
+                android:layout_height="30dp"
+                android:layout_gravity="center_vertical|center_horizontal|center"
+                android:layout_weight="1"
+                android:gravity="center_vertical|center_horizontal|center"
+                android:text="New User? Register Here!"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold" />
 
-            <Button
-                android:id="@+id/button_forgot"
+            <TextView
+                android:id="@+id/txtForgotPassword"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/btn_iifym_style"
-                android:capitalize="none"
-                android:text="@string/btnForgotPassword"
-                android:textColor="#192D5A"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHorizontal_bias="0.517"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/Button_Register"
-                app:layout_constraintVertical_bias="1.0" />
+                android:layout_height="30dp"
+                android:gravity="center_vertical|center_horizontal|center"
+                android:text="Forgot Your Password?"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold" />
 
         </LinearLayout>
     </ScrollView>

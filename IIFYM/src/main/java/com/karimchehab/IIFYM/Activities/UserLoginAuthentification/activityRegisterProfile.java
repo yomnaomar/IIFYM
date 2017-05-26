@@ -67,7 +67,7 @@ public class activityRegisterProfile extends AppCompatActivity implements View.O
 
         // Data from previous activity
         uid = getIntent().getStringExtra("uid");
-        email = getIntent().getStringExtra("email");
+        email = getIntent().getStringExtra("ic_email_signin");
 
         // GUI
         initializeGUI();
@@ -271,7 +271,7 @@ public class activityRegisterProfile extends AppCompatActivity implements View.O
         context = getApplicationContext();
         Intent intent = new Intent();
         intent.putExtra("uid", uid);
-        intent.putExtra("email", email);
+        intent.putExtra("ic_email_signin", email);
         intent.putExtra("name", name);
         intent.putExtra("dob", dob);
         intent.putExtra("gender", gender);
