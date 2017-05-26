@@ -21,7 +21,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Activities.Main.activityFoodManager"
-            android:label="@string/toolbarSavedItems"
+            android:label="@string/toolbarTapOnAnItemToEdit"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Activities.Main.activityEditFood"

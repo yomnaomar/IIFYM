@@ -148,14 +148,15 @@
     <string name="lblf">f</string>
     <string name="lblkcal">kcal</string>
     <string name="toolbarSelectItemToAdd">Select an item to add to daily log</string>
-    <string name="toolbarSavedItems">My saved food</string>
+    <string name="toolbarTapOnAnItemToEdit">Tap on an item to edit</string>
     <string name="lblDeleteFromDaily">Delete from daily log?</string>
     <string name="lblDeleteFromDatabase">Delete from database?</string>
     <string name="toolbarCreateNewFood">Create new food</string>
     <string name="toolbarUserInfo">User Info</string>
     <string name="toolbarUserMacros">Nutrition Goals</string>
     <string name="toolbarEditFood">Edit food</string>
-    <string name="lblCreateNewMeal">Create new meal</string>
+    <string name="lblNewFood">New Food</string>
+    <string name="lblNewMeal">New Meal</string>
     <string name="lblDailyLog">Daily Log:</string>
     <string name="menuSettings">Settings</string>
     <string name="menuAccount">Account</string>

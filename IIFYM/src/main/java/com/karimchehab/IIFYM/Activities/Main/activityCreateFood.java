@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -34,6 +35,7 @@ public class activityCreateFood extends AppCompatActivity implements AdapterView
     private RadioButton     rbtnServing, rbtnWeight;
     private SegmentedGroup  seggroupPortionType;
     private Spinner         spinnerUnit;
+    private CheckBox        cbIsDaily;
 
     // Variables
     private long    id;
@@ -47,10 +49,6 @@ public class activityCreateFood extends AppCompatActivity implements AdapterView
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_food);
-
-        // Intent
-        Intent intent = getIntent();
-        isDaily = intent.getBooleanExtra("isDaily",false);
 
         // Database
         context = getApplicationContext();
@@ -96,6 +94,9 @@ public class activityCreateFood extends AppCompatActivity implements AdapterView
         spinnerUnit.setAdapter(Spinner_Unit_Adapter);
         spinnerUnit.setSelection(0); // default selection value
         spinnerUnit.setOnItemSelectedListener(this);
+
+        // CheckBox
+        cbIsDaily = (CheckBox) findViewById(R.id.cbIsDaily);
     }
 
     @Override protected void onResume() {
@@ -149,6 +150,9 @@ public class activityCreateFood extends AppCompatActivity implements AdapterView
             View radioButton = seggroupPortionType.findViewById(radioButtonID);
             int indexofPortionType = seggroupPortionType.indexOfChild(radioButton);
 
+            // CheckBox (Add to log?)
+            isDaily = cbIsDaily.isChecked();
+
             createFood(name, brand, calories, carbs, protein, fat, indexofPortionType);
         }
     }
@@ -174,9 +178,14 @@ public class activityCreateFood extends AppCompatActivity implements AdapterView
                 DB_SQLite.createDailyItem(food.getId(), 1.0f);
                 Intent intent = new Intent(getApplicationContext(), activityHome.class);
                 startActivity(intent);
+                Toast.makeText(context,"Food created & added to log",Toast.LENGTH_SHORT).show();
+                finish();
             }
-            Toast.makeText(context,"New food created",Toast.LENGTH_SHORT).show();
-            finish();
+            else {
+                Toast.makeText(context,"Food created",Toast.LENGTH_SHORT).show();
+                finish();
+            }
+
         }
         else {
             showAlertDialog("Something went wrong","Unable to create food.");

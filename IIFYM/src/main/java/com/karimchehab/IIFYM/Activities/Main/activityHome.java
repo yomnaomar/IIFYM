@@ -241,7 +241,6 @@ public class activityHome extends AppCompatActivity implements View.OnClickListe
         viewPager.setCurrentItem(1, false);
         lblSelectedDate.setText(DateHelper.getDateRelativeToToday(0).text);
 
-        Toast.makeText(context,"Today Selected",Toast.LENGTH_SHORT).show();
         Toast.makeText(this,"Today selected",Toast.LENGTH_SHORT).show();
     }
 

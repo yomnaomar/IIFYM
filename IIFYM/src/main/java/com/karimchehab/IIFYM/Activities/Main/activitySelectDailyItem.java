@@ -119,14 +119,12 @@ public class activitySelectDailyItem extends AppCompatActivity implements Adapte
 
     private void goToCreateNewMeal() {
         Intent intent = new Intent(context, activtitySelectMealIngredients.class);
-        intent.putExtra("isDaily", true);
         startActivity(intent);
         finish();
     }
 
     public void goToCreateNewFood (){
         Intent intent = new Intent(context, activityCreateFood.class);
-        intent.putExtra("isDaily", true);
         startActivity(intent);
         finish();
     }

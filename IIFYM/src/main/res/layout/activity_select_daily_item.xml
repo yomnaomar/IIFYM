@@ -69,7 +69,6 @@
         fab:menu_buttonSpacing="0dp"
         fab:menu_colorNormal="@color/colorPrimary"
         fab:menu_colorPressed="@color/fabWhitePressed"
-        fab:menu_colorRipple="#99FFFFFF"
         fab:menu_fab_hide_animation="@anim/hide_to_bottom"
         fab:menu_fab_show_animation="@anim/show_from_bottom"
         fab:menu_fab_size="mini"
@@ -89,7 +88,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_food"
             fab:fab_colorNormal="@color/Transparent"
-            fab:fab_label="@string/toolbarCreateNewFood"
+            fab:fab_label="@string/lblNewFood"
             fab:fab_showShadow="false"
             fab:fab_size="normal"
             fab:fab_colorPressed="@color/colorPrimaryLight" />
@@ -100,7 +99,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_meal"
             fab:fab_colorNormal="@color/Transparent"
-            fab:fab_label="@string/lblCreateNewMeal"
+            fab:fab_label="@string/lblNewMeal"
             fab:fab_showShadow="false"
             fab:fab_size="normal"
             fab:fab_colorPressed="@color/colorPrimaryLight" />

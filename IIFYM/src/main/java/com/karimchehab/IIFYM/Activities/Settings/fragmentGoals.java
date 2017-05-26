@@ -172,6 +172,8 @@ public class fragmentGoals extends Fragment implements View.OnClickListener, Tex
         // Set values to User's stored preferences
         setInitialValues();
 
+        updateValues();
+
         // Set up TextWatchers and OnClickListeners after initializing values to prevent overwriting
         finalizeGUI();
 
