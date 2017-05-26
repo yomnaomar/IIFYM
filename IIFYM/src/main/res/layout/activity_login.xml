@@ -100,9 +100,6 @@
                 android:drawablePadding="10dp"
                 android:elevation="0dp"
                 android:shadowColor="@color/grey_light"
-                android:shadowDx="5dp"
-                android:shadowDy="5dp"
-                android:shadowRadius="5dp"
                 android:text="Login"
                 android:textColor="#192D5A" />
 
