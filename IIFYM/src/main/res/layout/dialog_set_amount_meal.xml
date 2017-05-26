@@ -6,9 +6,9 @@
     android:weightSum="1">
 
     <LinearLayout
-        android:layout_width="250dp"
-        android:layout_height="25dp"
-        android:layout_weight="0.18"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.07"
         android:orientation="vertical">
 
         <TextView

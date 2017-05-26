@@ -41,10 +41,11 @@
                 android:textSize="16sp" />
 
             <ImageView
-                android:id="@+id/imageView2"
+                android:id="@+id/AppLogo"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
-                app:srcCompat="@mipmap/ic_logo" />
+                android:layout_height="125dp"
+                android:layout_marginTop="5dp"
+                app:srcCompat="@drawable/iifym_logo" />
 
             <EditText
                 android:id="@+id/email_edittext"
@@ -84,24 +85,46 @@
                 app:layout_constraintTop_toBottomOf="@+id/email_edittext"
                 app:layout_constraintVertical_bias="0.0" />
 
-            <Button
-                android:id="@+id/btnLogin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical|center_horizontal|center"
-                android:layout_marginBottom="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/common_google_signin_btn_icon_light_normal_background"
-                android:drawableLeft="@mipmap/ic_mail"
-                android:drawablePadding="10dp"
-                android:elevation="0dp"
-                android:shadowColor="@color/grey_light"
-                android:text="Login"
-                android:textColor="#192D5A" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnLogin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/common_google_signin_btn_icon_light_normal_background"
+                    android:drawableLeft="@android:drawable/sym_action_email"
+                    android:drawablePadding="10dp"
+                    android:elevation="0dp"
+                    android:hint="Sign in"
+                    android:shadowColor="#6f6f6f"
+                    android:textColorHint="#6f6f6f" />
+
+                <com.google.android.gms.common.SignInButton
+                    android:id="@+id/btnGoogleSignIn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_weight="1"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHorizontal_bias="0.834"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/password_textview"
+                    app:layout_constraintVertical_bias="0.109" />
+            </LinearLayout>
 
             <Button
                 android:id="@+id/Button_Register"
@@ -144,20 +167,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/Button_Register"
                 app:layout_constraintVertical_bias="1.0" />
 
-            <com.google.android.gms.common.SignInButton
-                android:id="@+id/btnGoogleSignIn"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="16dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginTop="16dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHorizontal_bias="0.834"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/password_textview"
-                app:layout_constraintVertical_bias="0.109" />
         </LinearLayout>
     </ScrollView>
 
