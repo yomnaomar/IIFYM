@@ -2,12 +2,13 @@ package com.karimchehab.IIFYM.Activities.Settings;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextUtils;
@@ -19,22 +20,22 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.karimchehab.IIFYM.Database.SQLiteConnector;
 import com.karimchehab.IIFYM.Database.SharedPreferenceHelper;
 import com.karimchehab.IIFYM.Models.User;
 import com.karimchehab.IIFYM.R;
 import com.karimchehab.IIFYM.ViewComponents.DecimalDigitsInputFilter;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog.OnDateSetListener;
 
@@ -287,12 +288,7 @@ public class fragmentProfile extends Fragment implements View.OnClickListener, O
 
                             hideProgressDialog();
 
-                            Snackbar snackbar = Snackbar
-                                    .make(linearLayoutRoot, "Profile updated", Snackbar.LENGTH_SHORT);
-
-                            View snackBarView = snackbar.getView();
-                            snackBarView.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-                            snackbar.show();
+                            Toast.makeText(context, "Profile updated", Toast.LENGTH_SHORT).show();
                         }
                         // Error writing to database
                         else {
@@ -300,16 +296,23 @@ public class fragmentProfile extends Fragment implements View.OnClickListener, O
                     }
                 });
             }
-            else {
-                //TODO Show alertdialog indicating failed to save, replace snackbar with alert dialog
-                Snackbar snackbar = Snackbar
-                        .make(linearLayoutRoot, "Could not update profile. No internet connection.", Snackbar.LENGTH_SHORT);
-
-                View snackBarView = snackbar.getView();
-                snackBarView.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-                snackbar.show();
-            }
+        } else {
+            showNetworkDialog("No Internet Connection", "Please check your internet connection and try again.");
         }
+    }
+
+    private void showNetworkDialog(String title, String message) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle(title)
+                .setMessage(message);
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.dismiss();
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     public static boolean isNetworkStatusAvialable (Context context) {

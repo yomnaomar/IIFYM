@@ -1,4 +1,4 @@
-package com.karimchehab.IIFYM.Activities.UserLoginAuthentification;
+package com.karimchehab.IIFYM.Activities.UserLoginAuthentication;
 
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
@@ -11,14 +11,10 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;

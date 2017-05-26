@@ -190,10 +190,14 @@ public class activityCreateMeal extends AppCompatActivity implements AdapterView
                 // If User entered this activity through Add Daily, add this newly created food to daily items
                 if (isDaily){
                     DB_SQLite.createDailyItem(food.getId(), 1.0f);
-                    Intent intent = new Intent(getApplicationContext(), activityHome.class);
-                    startActivity(intent);
+                    Toast.makeText(context,"New meal created and added to log",Toast.LENGTH_SHORT).show();
                 }
-                Toast.makeText(context,"New food created",Toast.LENGTH_SHORT).show();
+                else {
+                    Toast.makeText(context,"New meal created",Toast.LENGTH_SHORT).show();
+                }
+                Intent intent = new Intent(getApplicationContext(), activityHome.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
                 finish();
             }
             else {

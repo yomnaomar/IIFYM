@@ -105,7 +105,6 @@ public class activitySelectDailyItem extends AppCompatActivity implements Adapte
         startActivity(intent);
     }
 
-    // TODO Implement fabAddNewMeal
     @Override public void onClick(View v) {
         switch (v.getId()) {
             case R.id.fabCreateNewFood:
@@ -117,15 +116,13 @@ public class activitySelectDailyItem extends AppCompatActivity implements Adapte
         }
     }
 
-    private void goToCreateNewMeal() {
-        Intent intent = new Intent(context, activtitySelectMealIngredients.class);
-        startActivity(intent);
-        finish();
-    }
-
     public void goToCreateNewFood (){
         Intent intent = new Intent(context, activityCreateFood.class);
         startActivity(intent);
-        finish();
+    }
+
+    private void goToCreateNewMeal() {
+        Intent intent = new Intent(context, activtitySelectMealIngredients.class);
+        startActivity(intent);
     }
 }

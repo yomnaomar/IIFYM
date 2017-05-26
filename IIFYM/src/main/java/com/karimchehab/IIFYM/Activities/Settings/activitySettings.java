@@ -1,15 +1,12 @@
 package com.karimchehab.IIFYM.Activities.Settings;
 
 import android.content.Context;
-import android.graphics.drawable.Icon;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.view.Menu;
 
 import com.karimchehab.IIFYM.Database.SQLiteConnector;
 import com.karimchehab.IIFYM.Database.SharedPreferenceHelper;
@@ -25,8 +22,6 @@ public class activitySettings extends ActionBarActivity implements fragmentGoals
 
     // Tab Titles & Icons
     private String[] tabs = {"Goals", "Profile", "Preferences"};
-    private int[] maleIcons = {R.drawable.ic_macro_settings, R.drawable.ic_male_user, R.drawable.ic_preferences};
-    private int[] femaleIcons = {R.drawable.ic_macro_settings, R.drawable.ic_female_user, R.drawable.ic_preferences};
 
     // Database
     private SQLiteConnector DB_SQLite;
@@ -59,9 +54,9 @@ public class activitySettings extends ActionBarActivity implements fragmentGoals
         // Adding Tabs
         for (int i = 0; i < tabs.length; i++) {
             if (user.getGender() == 0)
-                actionBar.addTab(actionBar.newTab().setText(tabs[i]).setIcon(maleIcons[i]).setTabListener(this));
+                actionBar.addTab(actionBar.newTab().setText(tabs[i]).setTabListener(this));
             else
-                actionBar.addTab(actionBar.newTab().setText(tabs[i]).setIcon(femaleIcons[i]).setTabListener(this));
+                actionBar.addTab(actionBar.newTab().setText(tabs[i]).setTabListener(this));
         }
 
         // Swiping Tabs

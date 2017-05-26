@@ -8,7 +8,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.text.Editable;
@@ -29,6 +28,7 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -341,12 +341,7 @@ public class fragmentGoals extends Fragment implements View.OnClickListener, Tex
             lblAmountTotal.setError(null);
         }
 
-        Snackbar snackbar = Snackbar
-                .make(linearLayoutRoot, "Goals reset to recommended", Snackbar.LENGTH_SHORT);
-
-        View snackBarView = snackbar.getView();
-        snackBarView.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-        snackbar.show();
+        Toast.makeText(context,"Goals reset to recommended",Toast.LENGTH_SHORT).show();
     }
 
     private void getBMR() {
@@ -663,12 +658,7 @@ public class fragmentGoals extends Fragment implements View.OnClickListener, Tex
 
                             hideProgressDialog();
 
-                            Snackbar snackbar = Snackbar
-                                    .make(linearLayoutRoot, "Goals updated", Snackbar.LENGTH_SHORT);
-
-                            View snackBarView = snackbar.getView();
-                            snackBarView.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-                            snackbar.show();
+                            Toast.makeText(context,"Goals updated",Toast.LENGTH_SHORT).show();
                         }
                         // Error writing to database
                         else {
@@ -677,14 +667,22 @@ public class fragmentGoals extends Fragment implements View.OnClickListener, Tex
                 });
             }
         } else {
-            //TODO Show alertdialog indicating failed to save, replace snackbar with alert dialog
-            Snackbar snackbar = Snackbar
-                    .make(linearLayoutRoot, "Could not update goals. No internet connection.", Snackbar.LENGTH_SHORT);
-
-            View snackBarView = snackbar.getView();
-            snackBarView.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-            snackbar.show();
+            showNetworkDialog("No Internet Connection","Please check your internet connection and try again.");
         }
+    }
+
+    private void showNetworkDialog(String title, String message) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle(title)
+                .setMessage(message);
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.dismiss();
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     public static boolean isNetworkStatusAvialable(Context context) {

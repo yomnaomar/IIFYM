@@ -19,7 +19,7 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.karimchehab.IIFYM.Activities.Settings.activitySettings;
-import com.karimchehab.IIFYM.Activities.UserLoginAuthentification.activityLogin;
+import com.karimchehab.IIFYM.Activities.UserLoginAuthentication.activityLogin;
 import com.karimchehab.IIFYM.Database.SharedPreferenceHelper;
 import com.karimchehab.IIFYM.Models.DateHelper;
 import com.karimchehab.IIFYM.R;

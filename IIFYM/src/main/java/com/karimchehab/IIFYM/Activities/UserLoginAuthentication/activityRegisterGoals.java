@@ -1,4 +1,4 @@
-package com.karimchehab.IIFYM.Activities.UserLoginAuthentification;
+package com.karimchehab.IIFYM.Activities.UserLoginAuthentication;
 
 import android.app.ProgressDialog;
 import android.content.Context;

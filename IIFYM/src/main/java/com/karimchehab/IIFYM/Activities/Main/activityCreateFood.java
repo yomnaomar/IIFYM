@@ -177,8 +177,9 @@ public class activityCreateFood extends AppCompatActivity implements AdapterView
             if (isDaily){
                 DB_SQLite.createDailyItem(food.getId(), 1.0f);
                 Intent intent = new Intent(getApplicationContext(), activityHome.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
-                Toast.makeText(context,"Food created & added to log",Toast.LENGTH_SHORT).show();
+                Toast.makeText(context,"Food created and added to log",Toast.LENGTH_SHORT).show();
                 finish();
             }
             else {
