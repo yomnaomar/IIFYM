@@ -29,8 +29,8 @@ public class activitySettings extends ActionBarActivity implements fragmentGoals
 
     // Variables
     private Context context;
-    private User    user;
-    private String  uid;
+    private User user;
+    private String uid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,34 +53,43 @@ public class activitySettings extends ActionBarActivity implements fragmentGoals
 
         // Adding Tabs
         for (int i = 0; i < tabs.length; i++) {
-            if (user.getGender() == 0)
-                actionBar.addTab(actionBar.newTab().setText(tabs[i]).setTabListener(this));
-            else
-                actionBar.addTab(actionBar.newTab().setText(tabs[i]).setTabListener(this));
+            actionBar.addTab(actionBar.newTab().setText(tabs[i]).setTabListener(this));
         }
 
         // Swiping Tabs
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 
-            @Override public void onPageSelected(int position) {
+            @Override
+            public void onPageSelected(int position) {
                 // On changing the tab, make the respected tab selected
                 actionBar.setSelectedNavigationItem(position);
             }
 
-            @Override public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {}
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            }
 
-            @Override public void onPageScrollStateChanged(int state) {}
+            @Override
+            public void onPageScrollStateChanged(int state) {
+            }
         });
     }
 
-    @Override public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
+    @Override
+    public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
         // On tab selected, show respected fragment view
         viewPager.setCurrentItem(tab.getPosition());
     }
 
-    @Override public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {}
+    @Override
+    public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
+    }
 
-    @Override public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {}
+    @Override
+    public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
+    }
 
-    @Override  public void onFragmentInteraction(Uri uri) {}
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+    }
 }

@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.karimchehab.IIFYM.Activities.Settings.activitySettings;
 import com.karimchehab.IIFYM.Activities.UserLoginAuthentication.activityLogin;
+import com.karimchehab.IIFYM.Activities.UserLoginAuthentication.activityLogin1;
 import com.karimchehab.IIFYM.Database.SharedPreferenceHelper;
 import com.karimchehab.IIFYM.Models.DateHelper;
 import com.karimchehab.IIFYM.R;
@@ -247,5 +248,8 @@ public class activityHome extends AppCompatActivity implements View.OnClickListe
     private void signOut() {
         myPrefs.addPreference("session_uid", "");
         firebaseAuth.signOut();
+        Intent intent = new Intent();
+        intent.setClass(context, activityLogin1.class);
+        startActivity(intent);
     }
 }

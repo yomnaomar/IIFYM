@@ -24,7 +24,7 @@ public class activityLauncher extends AppCompatActivity {
         if(session_uid.isEmpty()){
             // Go to activityLogin
             Intent intent = new Intent();
-            intent.setClass(context, activityLogin.class);
+            intent.setClass(context, activityLogin1.class);
             startActivity(intent);
             finish();
         }

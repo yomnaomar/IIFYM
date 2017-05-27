@@ -34,4 +34,5 @@
     <color name="fabPinkPressed">#ec407a</color>
     <color name="fabBlue">#805677fc</color>
     <color name="fabBluePressed">#80738ffe</color>
+    <color name="colorPrimaryLightDisabled">#37474747</color>
 </resources>
