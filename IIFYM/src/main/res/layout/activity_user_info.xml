@@ -322,13 +322,13 @@
                     android:textSize="14sp" />
 
                 <Spinner
+                    android:id="@+id/spinnerGoals"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/spinnerGoals"
                     android:layout_gravity="right|center_vertical"
                     android:layout_weight="0.8"
-                    android:textAlignment="textEnd"
-                    android:gravity="right|center_vertical" />
+                    android:gravity="right|center_vertical"
+                    android:textAlignment="textEnd" />
 
             </LinearLayout>
 

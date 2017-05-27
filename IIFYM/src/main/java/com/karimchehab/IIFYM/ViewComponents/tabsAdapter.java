@@ -1,8 +1,12 @@
-package com.karimchehab.IIFYM.Activities.Settings;
+package com.karimchehab.IIFYM.ViewComponents;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+
+import com.karimchehab.IIFYM.Activities.Settings.fragmentGoals;
+import com.karimchehab.IIFYM.Activities.Settings.fragmentPreferences;
+import com.karimchehab.IIFYM.Activities.Settings.fragmentProfile;
 
 /**
  * Created by Yomna on 5/26/2017.

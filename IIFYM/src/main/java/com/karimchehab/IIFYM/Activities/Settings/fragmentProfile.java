@@ -5,13 +5,14 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.text.Editable;
 import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -19,6 +20,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -46,15 +48,15 @@ import java.util.GregorianCalendar;
 import info.hoang8f.android.segmented.SegmentedGroup;
 
 
-public class fragmentProfile extends Fragment implements View.OnClickListener, OnDateSetListener {
+public class fragmentProfile extends Fragment implements View.OnClickListener, OnDateSetListener, TextWatcher, AdapterView.OnItemSelectedListener {
 
     // GUI
     private String              uid;
     private TextView            lblWeightUnit, lblHeightUnit1, lblHeightUnit2;
     private EditText            etxtName, etxtDateOfBirth, etxtWeight, etxtHeightParam1, etxtHeightParam2;
     private LinearLayout        linearlayoutHeight, linearlayoutWeight;
-    private RadioButton         rbtnGenderMale, rbtnGenderFemale, rbtnMetric, rbtnGenderImperial;
-    private SegmentedGroup      seggroupUnitSystem;
+    private RadioButton         rbtnGenderMale, rbtnGenderFemale, rbtnMetric, rbtnImperial;
+    private SegmentedGroup      seggroupUnitSystem, seggroupGender;
     private Spinner             spinnerWorkoutFreq, spinnerGoals;
     private SimpleDateFormat    dateFormatter;
     private LinearLayout        linearLayoutRoot;
@@ -73,7 +75,7 @@ public class fragmentProfile extends Fragment implements View.OnClickListener, O
     // Database
     private SharedPreferenceHelper  myPrefs;
     private SQLiteConnector         DB_SQLite;
-    private DatabaseReference firebaseDbRef;
+    private DatabaseReference       firebaseDbRef;
 
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -82,7 +84,7 @@ public class fragmentProfile extends Fragment implements View.OnClickListener, O
     private String mParam1;
     private String mParam2;
 
-    private OnFragmentInteractionListener mListener;
+    private changesMade profileChangesMade = new changesMade(false);
 
     // Required empty public constructor
     public fragmentProfile() {}
@@ -149,11 +151,12 @@ public class fragmentProfile extends Fragment implements View.OnClickListener, O
         lblHeightUnit2      = (TextView)view.findViewById(R.id.lblHeightUnit2);
         linearlayoutHeight  = (LinearLayout)view.findViewById(R.id.linearlayoutHeight);
         linearlayoutWeight  = (LinearLayout)view.findViewById(R.id.linearlayoutWeight);
-        seggroupUnitSystem  = (SegmentedGroup) view.findViewById(R.id.seggroupUnitSystem);
+        seggroupGender      = (SegmentedGroup) view.findViewById(R.id.seggroupGender);
         rbtnGenderMale      = (RadioButton)view.findViewById(R.id.rbtnGenderMale);
         rbtnGenderFemale    = (RadioButton)view.findViewById(R.id.rbtnGenderFemale);
+        seggroupUnitSystem  = (SegmentedGroup) view.findViewById(R.id.seggroupUnitSystem);
         rbtnMetric          = (RadioButton)view.findViewById(R.id.rbtnMetric);
-        rbtnGenderImperial  = (RadioButton)view.findViewById(R.id.rbtnImperial);
+        rbtnImperial        = (RadioButton)view.findViewById(R.id.rbtnImperial);
         spinnerWorkoutFreq  = (Spinner)view.findViewById(R.id.spinnerWorkoutFreq);
         spinnerGoals        = (Spinner)view.findViewById(R.id.spinnerGoals);
         linearLayoutRoot    = (LinearLayout)view.findViewById(R.id.linearLayoutRoot);
@@ -171,9 +174,26 @@ public class fragmentProfile extends Fragment implements View.OnClickListener, O
 
         etxtWeight.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(4,2)});
 
+        // Change detectors
+        etxtName.addTextChangedListener(this);
+        etxtDateOfBirth.addTextChangedListener(this);
+        etxtWeight.addTextChangedListener(this);
+        etxtHeightParam1.addTextChangedListener(this);
+        etxtHeightParam2.addTextChangedListener(this);
+
+        seggroupGender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                profileChangesMade.setChanged(true);
+                ((activitySettings) getActivity()).setChangesDetected(profileChangesMade.isChanged());
+            }
+        });
+
         seggroupUnitSystem.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
+                profileChangesMade.setChanged(true);
+                ((activitySettings) getActivity()).setChangesDetected(profileChangesMade.isChanged());
                 unitSystemChange();
             }
         });
@@ -188,6 +208,14 @@ public class fragmentProfile extends Fragment implements View.OnClickListener, O
 
         spinnerWorkoutFreq.setAdapter(adapterWorkoutFreq);
         spinnerGoals.setAdapter(adapterGoals);
+
+        profileChangesMade.setListener(new changesMade.ChangeListener() {
+            @Override
+            public void onChange() {
+                Log.d("profileChangesMade", profileChangesMade.isChanged() + "");
+            }
+        });
+
     }
 
     private void getUserData() {
@@ -216,7 +244,7 @@ public class fragmentProfile extends Fragment implements View.OnClickListener, O
         if(unitSystem == 0) // Metric
             rbtnMetric.setChecked(true);
         else
-            rbtnGenderImperial.setChecked(true); // Imperial
+            rbtnImperial.setChecked(true); // Imperial
 
         if(weight != 0)
             etxtWeight.setText(weight + "");
@@ -233,8 +261,15 @@ public class fragmentProfile extends Fragment implements View.OnClickListener, O
         else
             etxtHeightParam2.setText("");
 
-        spinnerWorkoutFreq.setSelection(workoutFreq);
-        spinnerGoals.setSelection(goal);
+        spinnerWorkoutFreq.setSelection(workoutFreq, false);
+        spinnerGoals.setSelection(goal, false);
+
+        // Item Selected Listeners
+        spinnerWorkoutFreq.setOnItemSelectedListener(this);
+        spinnerGoals.setOnItemSelectedListener(this);
+
+        profileChangesMade.setChanged(false);
+        ((activitySettings) getActivity()).setChangesDetected(profileChangesMade.isChanged());
     }
 
     @Override public void onClick(View v) {
@@ -287,6 +322,9 @@ public class fragmentProfile extends Fragment implements View.OnClickListener, O
                             DB_SQLite.updateUser(user);
 
                             hideProgressDialog();
+
+                            profileChangesMade.setChanged(false);
+                            ((activitySettings) getActivity()).setChangesDetected(profileChangesMade.isChanged());
 
                             Toast.makeText(context, "Profile updated", Toast.LENGTH_SHORT).show();
                         }
@@ -530,38 +568,7 @@ public class fragmentProfile extends Fragment implements View.OnClickListener, O
         }
     }
 
-    @Override public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    @Override public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case (R.id.menu_save_floppy):
                 updateUser();
@@ -570,10 +577,25 @@ public class fragmentProfile extends Fragment implements View.OnClickListener, O
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+    @Override public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         menu.clear();
         inflater.inflate(R.menu.menu_save_settings, menu);
     }
+
+    @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+    @Override public void onTextChanged(CharSequence s, int start, int before, int count) {
+        profileChangesMade.setChanged(true);
+        ((activitySettings) getActivity()).setChangesDetected(profileChangesMade.isChanged());
+    }
+
+    @Override public void afterTextChanged(Editable s) {}
+
+    @Override public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        profileChangesMade.setChanged(true);
+        ((activitySettings) getActivity()).setChangesDetected(profileChangesMade.isChanged());
+    }
+
+    @Override public void onNothingSelected(AdapterView<?> parent) {}
 }
