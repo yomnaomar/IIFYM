@@ -88,7 +88,7 @@ public class fragmentGoals extends Fragment implements View.OnClickListener, Tex
     private static final String ARG_PARAM2 = "param2";
     private String mParam1;
     private String mParam2;
-    private changesMade goalsChangesMade = new changesMade(false);
+    private changesSynced goalsChangesSynced = new changesSynced(false);
 
     // Required empty public constructor
     public fragmentGoals() {
@@ -209,10 +209,10 @@ public class fragmentGoals extends Fragment implements View.OnClickListener, Tex
         mExitAnimation.setDuration(600);
         mExitAnimation.setFillAfter(true);
 
-        goalsChangesMade.setListener(new changesMade.ChangeListener() {
+        goalsChangesSynced.setListener(new changesSynced.ChangeListener() {
             @Override
             public void onChange() {
-                Log.d("goalsChangesMade", goalsChangesMade.isChanged() + "");
+                Log.d("goalsChangesSynced", goalsChangesSynced.isSynced() + "");
             }
         });
     }
@@ -261,8 +261,8 @@ public class fragmentGoals extends Fragment implements View.OnClickListener, Tex
         });
 
         addTextWatchers();
-        goalsChangesMade.setChanged(false);
-        ((activitySettings) getActivity()).setChangesDetected(goalsChangesMade.isChanged());
+        goalsChangesSynced.setSynced(false);
+        ((activitySettings) getActivity()).setChangesSynced(goalsChangesSynced.isSynced());
     }
 
     private void updateGUI() {
@@ -334,6 +334,9 @@ public class fragmentGoals extends Fragment implements View.OnClickListener, Tex
             lblValueCarbs.setText("~" + Math.round(carbs * 4 * 100 / calories) + " %");
             lblValueProtein.setText("~" + Math.round(protein * 4 * 100 / calories) + " %");
             lblValueFat.setText("~" + Math.round(fat * 9 * 100 / calories) + " %");
+
+            goalsChangesSynced.setSynced(false);
+            ((activitySettings) getActivity()).setChangesSynced(goalsChangesSynced.isSynced());
 
             addTextWatchers();
         }
@@ -433,14 +436,13 @@ public class fragmentGoals extends Fragment implements View.OnClickListener, Tex
         captureOldValues();
     }
 
-    @Override
-    public void onTextChanged(CharSequence s, int start, int before, int count) {
+    @Override public void onTextChanged(CharSequence s, int start, int before, int count) {
         captureNewValues();
         compareValues();
         updateValues();
         validateFields();
-        goalsChangesMade.setChanged(true);
-        ((activitySettings) getActivity()).setChangesDetected(goalsChangesMade.isChanged());
+        goalsChangesSynced.setSynced(true);
+        ((activitySettings) getActivity()).setChangesSynced(goalsChangesSynced.isSynced());
     }
 
     private void captureOldValues() {
@@ -661,8 +663,8 @@ public class fragmentGoals extends Fragment implements View.OnClickListener, Tex
 
                             hideProgressDialog();
 
-                            goalsChangesMade.setChanged(false);
-                            ((activitySettings) getActivity()).setChangesDetected(goalsChangesMade.isChanged());
+                            goalsChangesSynced.setSynced(false);
+                            ((activitySettings) getActivity()).setChangesSynced(goalsChangesSynced.isSynced());
 
                             Toast.makeText(context,"Goals updated",Toast.LENGTH_SHORT).show();
                         }
@@ -788,8 +790,8 @@ public class fragmentGoals extends Fragment implements View.OnClickListener, Tex
         // Set values to User's stored preferences
         setInitialValues();
 
-        goalsChangesMade.setChanged(false);
-        ((activitySettings) getActivity()).setChangesDetected(goalsChangesMade.isChanged());
+        goalsChangesSynced.setSynced(false);
+        ((activitySettings) getActivity()).setChangesSynced(goalsChangesSynced.isSynced());
     }
 
     // Unused

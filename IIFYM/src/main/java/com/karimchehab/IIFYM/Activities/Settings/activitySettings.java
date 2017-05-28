@@ -6,8 +6,8 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.karimchehab.IIFYM.Database.SQLiteConnector;
@@ -16,7 +16,7 @@ import com.karimchehab.IIFYM.Models.User;
 import com.karimchehab.IIFYM.R;
 import com.karimchehab.IIFYM.ViewComponents.tabsAdapter;
 
-public class activitySettings extends ActionBarActivity implements ActionBar.TabListener {
+public class activitySettings extends AppCompatActivity implements ActionBar.TabListener {
 
     // GUI
     private ViewPager viewPager;
@@ -34,7 +34,7 @@ public class activitySettings extends ActionBarActivity implements ActionBar.Tab
     private Context context;
     private User    user;
     private String  uid;
-    private boolean changesDetected = false;
+    private boolean changesSynced = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,15 +88,15 @@ public class activitySettings extends ActionBarActivity implements ActionBar.Tab
 
     @Override public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {}
 
-    public void setChangesDetected(boolean fragementChangesDetected){
-        changesDetected = fragementChangesDetected;
-        Log.d("activityChanges", changesDetected + "");
+    public void setChangesSynced(boolean fragementChangesDetected){
+        changesSynced = fragementChangesDetected;
+        Log.d("activityChanges", changesSynced + "");
     }
 
     // Returns to activityHome without making any changes
     @Override public void onBackPressed() {
-        if (changesDetected){
-            showAlertDialog("Exit without saving changes?","Are you sure you want to exit without saving new settings?");
+        if (changesSynced){
+            showAlertDialog("Save changes?","Are you sure you want to exit without saving new settings?");
         }
         else {
             super.onBackPressed();

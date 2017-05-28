@@ -84,7 +84,7 @@ public class fragmentProfile extends Fragment implements View.OnClickListener, O
     private String mParam1;
     private String mParam2;
 
-    private changesMade profileChangesMade = new changesMade(false);
+    private changesSynced profileChangesSynced = new changesSynced(false);
 
     // Required empty public constructor
     public fragmentProfile() {}
@@ -184,16 +184,16 @@ public class fragmentProfile extends Fragment implements View.OnClickListener, O
         seggroupGender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                profileChangesMade.setChanged(true);
-                ((activitySettings) getActivity()).setChangesDetected(profileChangesMade.isChanged());
+                profileChangesSynced.setSynced(true);
+                ((activitySettings) getActivity()).setChangesSynced(profileChangesSynced.isSynced());
             }
         });
 
         seggroupUnitSystem.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                profileChangesMade.setChanged(true);
-                ((activitySettings) getActivity()).setChangesDetected(profileChangesMade.isChanged());
+                profileChangesSynced.setSynced(true);
+                ((activitySettings) getActivity()).setChangesSynced(profileChangesSynced.isSynced());
                 unitSystemChange();
             }
         });
@@ -209,10 +209,10 @@ public class fragmentProfile extends Fragment implements View.OnClickListener, O
         spinnerWorkoutFreq.setAdapter(adapterWorkoutFreq);
         spinnerGoals.setAdapter(adapterGoals);
 
-        profileChangesMade.setListener(new changesMade.ChangeListener() {
+        profileChangesSynced.setListener(new changesSynced.ChangeListener() {
             @Override
             public void onChange() {
-                Log.d("profileChangesMade", profileChangesMade.isChanged() + "");
+                Log.d("profileChangesSynced", profileChangesSynced.isSynced() + "");
             }
         });
 
@@ -268,8 +268,8 @@ public class fragmentProfile extends Fragment implements View.OnClickListener, O
         spinnerWorkoutFreq.setOnItemSelectedListener(this);
         spinnerGoals.setOnItemSelectedListener(this);
 
-        profileChangesMade.setChanged(false);
-        ((activitySettings) getActivity()).setChangesDetected(profileChangesMade.isChanged());
+        profileChangesSynced.setSynced(false);
+        ((activitySettings) getActivity()).setChangesSynced(profileChangesSynced.isSynced());
     }
 
     @Override public void onClick(View v) {
@@ -323,13 +323,14 @@ public class fragmentProfile extends Fragment implements View.OnClickListener, O
 
                             hideProgressDialog();
 
-                            profileChangesMade.setChanged(false);
-                            ((activitySettings) getActivity()).setChangesDetected(profileChangesMade.isChanged());
+                            profileChangesSynced.setSynced(false);
+                            ((activitySettings) getActivity()).setChangesSynced(profileChangesSynced.isSynced());
 
                             Toast.makeText(context, "Profile updated", Toast.LENGTH_SHORT).show();
                         }
                         // Error writing to database
                         else {
+
                         }
                     }
                 });
@@ -496,9 +497,7 @@ public class fragmentProfile extends Fragment implements View.OnClickListener, O
                 .get(Calendar.DAY_OF_MONTH)))) {
             --a;
         }
-        if(a < 0)
-            return false;
-        return true;
+        return a >= 0;
     }
 
     private void unitSystemChange() {
@@ -586,15 +585,15 @@ public class fragmentProfile extends Fragment implements View.OnClickListener, O
     @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
     @Override public void onTextChanged(CharSequence s, int start, int before, int count) {
-        profileChangesMade.setChanged(true);
-        ((activitySettings) getActivity()).setChangesDetected(profileChangesMade.isChanged());
+        profileChangesSynced.setSynced(true);
+        ((activitySettings) getActivity()).setChangesSynced(profileChangesSynced.isSynced());
     }
 
     @Override public void afterTextChanged(Editable s) {}
 
     @Override public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        profileChangesMade.setChanged(true);
-        ((activitySettings) getActivity()).setChangesDetected(profileChangesMade.isChanged());
+        profileChangesSynced.setSynced(true);
+        ((activitySettings) getActivity()).setChangesSynced(profileChangesSynced.isSynced());
     }
 
     @Override public void onNothingSelected(AdapterView<?> parent) {}
