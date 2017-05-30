@@ -1,5 +1,6 @@
 package com.karimchehab.IIFYM.Activities.Main;
 
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -14,6 +15,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RadioButton;
@@ -23,13 +27,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.karimchehab.IIFYM.Database.SQLiteConnector;
+import com.karimchehab.IIFYM.Models.DateHelper;
 import com.karimchehab.IIFYM.Models.Food;
 import com.karimchehab.IIFYM.Models.Ingredient;
 import com.karimchehab.IIFYM.Models.Weight;
 import com.karimchehab.IIFYM.R;
 import com.karimchehab.IIFYM.ViewComponents.AdapterIngredients;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Locale;
 
 import info.hoang8f.android.segmented.SegmentedGroup;
 
@@ -38,11 +46,12 @@ public class activityCreateMeal extends AppCompatActivity implements AdapterView
     // GUI
     private ListView            listviewIngredients;
     private AdapterIngredients  adapterIngredients;
-    private EditText            etxtName, etxtBrand, etxtPortionAmount;
+    private EditText            etxtName, etxtBrand, etxtPortionAmount,etxtDate;
     private TextView            lblCalories, lblCarbs, lblProtein, lblFat;
     private RadioButton         rbtnServing, rbtnWeight;
     private SegmentedGroup      seggroupPortionType;
     private Spinner             spinnerUnit;
+    private CheckBox            cbIsDaily;
 
     // Variables
     Context                     context;
@@ -50,11 +59,11 @@ public class activityCreateMeal extends AppCompatActivity implements AdapterView
     private long[]              ingredients;
     private int                 ingredientCount;
     private int                 weightUnitSelected;
+    Calendar myCalendar =       Calendar.getInstance();
 
     // Database
     private SQLiteConnector     DB_SQLite;
     private boolean             isDaily;
-
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,7 +86,6 @@ public class activityCreateMeal extends AppCompatActivity implements AdapterView
     private void initializeData() {
         // Intent
         Intent intent = getIntent();
-        isDaily = intent.getBooleanExtra("isDaily",false);
         ingredients = intent.getLongArrayExtra("ingredients"); // list of ID's of ingredients
         ingredientCount = ingredients.length;
 
@@ -111,6 +119,7 @@ public class activityCreateMeal extends AppCompatActivity implements AdapterView
         lblCarbs            = (TextView) findViewById(R.id.lblCarbs);
         lblProtein          = (TextView) findViewById(R.id.lblProtein);
         lblFat              = (TextView) findViewById(R.id.lblFat);
+        etxtDate            = (EditText) findViewById(R.id.etxtDate);
 
         // SegmentedGroup & RadioButtons
         rbtnServing = (RadioButton) findViewById(R.id.rbtnServing);
@@ -132,6 +141,39 @@ public class activityCreateMeal extends AppCompatActivity implements AdapterView
         spinnerUnit.setAdapter(Spinner_Unit_Adapter);
         spinnerUnit.setSelection(0); // default selection value
         spinnerUnit.setOnItemSelectedListener(this);
+
+        // CheckBox
+        cbIsDaily = (CheckBox) findViewById(R.id.cbIsDaily);
+        cbIsDaily.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                updateGUI();
+            }
+        });
+
+        final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                  int dayOfMonth) {
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, monthOfYear);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                updateGUI();
+            }
+
+        };
+
+        etxtDate.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                new DatePickerDialog(activityCreateMeal.this, date, myCalendar
+                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
     }
 
     private void populateGUI() {
@@ -173,6 +215,9 @@ public class activityCreateMeal extends AppCompatActivity implements AdapterView
             View radioButton = seggroupPortionType.findViewById(radioButtonID);
             int indexofPortionType = seggroupPortionType.indexOfChild(radioButton);
 
+            // CheckBox (Add to log?)
+            isDaily = cbIsDaily.isChecked();
+
             Food food = new Food(name, brand, calories, carbs, protein, fat, indexofPortionType, true);
             long mid = DB_SQLite.createMeal(food, ingredients, multipliers);
 
@@ -189,7 +234,7 @@ public class activityCreateMeal extends AppCompatActivity implements AdapterView
 
                 // If User entered this activity through Add Daily, add this newly created food to daily items
                 if (isDaily){
-                    DB_SQLite.createDailyItem(food.getId(), 1.0f);
+                    DB_SQLite.createDailyItem(food.getId(), 1.0f, DateHelper.getTodaysDate());
                     Toast.makeText(context,"New meal created and added to log",Toast.LENGTH_SHORT).show();
                 }
                 else {
@@ -226,6 +271,17 @@ public class activityCreateMeal extends AppCompatActivity implements AdapterView
         } else if (rbtnWeight.isChecked()) {
             etxtPortionAmount.setInputType(InputType.TYPE_CLASS_NUMBER);
             spinnerUnit.setVisibility(View.VISIBLE);
+        }
+
+        if(cbIsDaily.isChecked()){
+            String myFormat = DateHelper.dateformat; //In which you need put here
+            SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+
+            etxtDate.setText(sdf.format(myCalendar.getTime()));
+            etxtDate.setVisibility(View.VISIBLE);
+        }
+        else {
+            etxtDate.setVisibility(View.INVISIBLE);
         }
     }
 

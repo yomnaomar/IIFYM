@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.karimchehab.IIFYM.Database.SQLiteConnector;
+import com.karimchehab.IIFYM.Models.DateHelper;
 import com.karimchehab.IIFYM.Models.Food;
 import com.karimchehab.IIFYM.Models.Weight;
 import com.karimchehab.IIFYM.R;
@@ -170,7 +171,7 @@ public class activityAddDailyItem extends AppCompatActivity implements TextWatch
 
     // Inserts DailyItem into User's Daily Log
     private void Enter() {
-        DB_SQLite.createDailyItem(fid, portionMultiplier);
+        DB_SQLite.createDailyItem(fid, portionMultiplier, DateHelper.getTodaysDate());
         Toast.makeText(context,"Food added to daily log",Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(getBaseContext(), activityHome.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);

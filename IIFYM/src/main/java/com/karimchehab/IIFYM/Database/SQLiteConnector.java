@@ -8,7 +8,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.karimchehab.IIFYM.Models.DailyItem;
-import com.karimchehab.IIFYM.Models.DateHelper;
 import com.karimchehab.IIFYM.Models.Food;
 import com.karimchehab.IIFYM.Models.User;
 import com.karimchehab.IIFYM.Models.Weight;
@@ -486,16 +485,17 @@ public class SQLiteConnector {
      * Creates DailyItem (will not check for duplicates)
      * @param food_id
      * @param multiplier
+     * @param date
      * @return
      */
-    public boolean createDailyItem(long food_id, float multiplier) {
+    public boolean createDailyItem(long food_id, float multiplier, String date) {
 
         ContentValues newDailyItem = new ContentValues();
         newDailyItem.put("food_id", food_id);
         newDailyItem.put("multiplier", multiplier);
-        newDailyItem.put("date", DateHelper.getTodaysDate());
+        newDailyItem.put("date", date);
 
-        Log.d("createDailyItem", DateHelper.getTodaysDate());
+        Log.d("createDailyItem", date);
 
         long id = database.insert(SQLiteHelper.Table_DailyItem, null, newDailyItem);
         if (id != -1) {

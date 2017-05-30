@@ -33,17 +33,9 @@ public class activtitySelectMealIngredients extends AppCompatActivity implements
     private SQLiteConnector DB_SQLite;
     private Context context;
 
-    // Variables
-    private boolean isDaily;
-    private Intent  intent;
-
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_activtity_select_meal_ingredients);
-
-        // Intent
-        intent = getIntent();
-        isDaily = intent.getBooleanExtra("isDaily",false);
 
         // Database
         context = getApplicationContext();
@@ -107,7 +99,6 @@ public class activtitySelectMealIngredients extends AppCompatActivity implements
         }
         Intent newIntent = new Intent(getApplicationContext(), activityCreateMeal.class);
         newIntent.putExtra("ingredients", ingredients);
-        newIntent.putExtra("isDaily", isDaily);
         startActivity(newIntent);
     }
 
