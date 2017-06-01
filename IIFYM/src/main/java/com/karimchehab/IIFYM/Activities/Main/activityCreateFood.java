@@ -77,12 +77,13 @@ public class activityCreateFood extends AppCompatActivity implements AdapterView
         etxtProtein = (EditText) findViewById(R.id.etxtProtein);
         etxtFat = (EditText) findViewById(R.id.etxtFat);
         etxtPortionAmount = (EditText) findViewById(R.id.etxtPortionAmount);
+        etxtDate = (EditText) findViewById(R.id.etxtDate);
 
         // SegmentedGroup & RadioButtons
         rbtnServing = (RadioButton) findViewById(R.id.rbtnServing);
         rbtnWeight = (RadioButton) findViewById(R.id.rbtnWeight);
         seggroupPortionType = (SegmentedGroup) findViewById(R.id.seggroupPortionType);
-        etxtDate = (EditText) findViewById(R.id.etxtDate);
+
 
         etxtCarbs.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(4,1)});
         etxtProtein.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(4,1)});
@@ -163,7 +164,6 @@ public class activityCreateFood extends AppCompatActivity implements AdapterView
         else {
             etxtDate.setVisibility(View.INVISIBLE);
         }
-
     }
 
     @Override public boolean onCreateOptionsMenu(Menu menu) {

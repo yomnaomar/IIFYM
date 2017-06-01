@@ -179,5 +179,7 @@
     <string name="lblSelectedFoods">Selected Foods</string>
     <string name="toolbarCreateNewMeal">Create new meal</string>
     <string name="lblMealIngredients">Meal Ingredients</string>
+    <string name="lblKarimEmail">karimchehab94@gmail.com</string>
+    <string name="lblKarimWebsite">karim-chehab.weebly.com</string>
 
 </resources>

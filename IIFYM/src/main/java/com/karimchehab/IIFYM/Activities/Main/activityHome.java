@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.karimchehab.IIFYM.Activities.Misc.activityAbout;
 import com.karimchehab.IIFYM.Activities.Settings.activitySettings;
 import com.karimchehab.IIFYM.Activities.UserLoginAuthentication.activityLogin;
 import com.karimchehab.IIFYM.Database.SharedPreferenceHelper;
@@ -98,6 +99,10 @@ public class activityHome extends AppCompatActivity implements View.OnClickListe
                 intent = new Intent(context, activityFoodManager.class);
                 startActivity(intent);
                 return true;
+            case (R.id.menuAbout):
+                intent = new Intent(context, activityAbout.class);
+                startActivity(intent);
+                break;
             case (R.id.menuLogout):
                 signOut();
                 intent = new Intent(context, activityLogin.class);

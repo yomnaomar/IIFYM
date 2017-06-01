@@ -33,15 +33,14 @@ dependencies {
         transitive = true
     }
     compile project(':ProgressBar')
-    // MOBILE
-    compile 'com.google.firebase:firebase-auth:10.2.6'
-    compile 'com.google.firebase:firebase-database:10.2.6'
-    compile 'com.google.android.gms:play-services:10.2.6'
     // EMULATOR
 //    compile 'com.google.firebase:firebase-auth:9.6.0'
 //    compile 'com.google.firebase:firebase-database:9.6.0'
 //    compile 'com.google.android.gms:play-services:9.6.0'
-
+    // MOBILE
+    compile 'com.google.firebase:firebase-auth:10.2.6'
+    compile 'com.google.firebase:firebase-database:10.2.6'
+    compile 'com.google.android.gms:play-services:10.2.6'
     compile 'com.github.clans:fab:1.6.4'
     compile 'co.infinum:materialdatetimepicker-support:3.1.3'
     compile 'com.android.support:appcompat-v7:25.1.3'
@@ -52,7 +51,6 @@ dependencies {
     compile 'com.androidadvance:topsnackbar:1.1.1'
     compile 'info.hoang8f:android-segmented:1.0.6'
     compile 'com.getbase:floatingactionbutton:1.10.1'
-
     compile 'com.android.support.constraint:constraint-layout:1.0.0-beta5'
     testCompile 'junit:junit:4.12'
 }

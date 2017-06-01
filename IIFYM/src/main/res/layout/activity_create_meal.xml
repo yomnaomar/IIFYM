@@ -271,20 +271,20 @@
                     android:layout_height="wrap_content" />
 
                 <EditText
-                    android:layout_height="50dp"
-                    android:inputType="textPersonName"
-                    android:text="@string/dateInitial"
-                    android:ems="3"
                     android:id="@+id/etxtDate"
-                    android:textColor="?attr/colorPrimary"
-                    android:textSize="14sp"
-                    android:gravity="right|center_vertical"
+                    android:layout_width="105dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentTop="true"
                     android:layout_gravity="right|center_vertical"
                     android:drawableRight="@drawable/drawable_ic_calendar"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_width="110dp"
-                    android:focusable="false"/>
+                    android:ems="3"
+                    android:focusable="false"
+                    android:gravity="right|center_vertical"
+                    android:inputType="textPersonName"
+                    android:text="@string/dateInitial"
+                    android:textColor="?attr/colorPrimary"
+                    android:textSize="14sp" />
 
             </LinearLayout>
 

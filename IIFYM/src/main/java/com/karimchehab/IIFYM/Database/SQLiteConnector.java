@@ -9,6 +9,7 @@ import android.util.Log;
 
 import com.karimchehab.IIFYM.Models.DailyItem;
 import com.karimchehab.IIFYM.Models.Food;
+import com.karimchehab.IIFYM.Models.Ingredient;
 import com.karimchehab.IIFYM.Models.User;
 import com.karimchehab.IIFYM.Models.Weight;
 import com.karimchehab.IIFYM.Models.WeightUnit;
@@ -675,8 +676,8 @@ public class SQLiteConnector {
      * @param mid
      * @return
      */
-    public ArrayList<Food> retrieveIngredients(long mid){
-        ArrayList<Food> foods = new ArrayList<>();
+    public ArrayList<Ingredient> retrieveIngredients(long mid){
+        ArrayList<Ingredient> ingredients = new ArrayList<>();
 
         Cursor C = database.rawQuery("SELECT * FROM " + SQLiteHelper.Table_Ingredient +
                 " WHERE mid = '" + mid + "'", null);
@@ -687,11 +688,11 @@ public class SQLiteConnector {
         if (count > 0) {
             for (int i = 0; i < count; i++) {
                 C.moveToNext();
-                foods.add(instantiateFood(C));
+                ingredients.add(instantiateIngredient(C));
             }
         }
         C.close();
-        return foods;
+        return ingredients;
     }
 
     /**
@@ -724,6 +725,20 @@ public class SQLiteConnector {
      */
     public int deleteIngredients(long mid){
         return database.delete(SQLiteHelper.Table_DailyItem, "mid = '" + mid + "'", null);
+    }
+
+    /**
+     * Creates a single new instance of Ingredient from a cursor result.
+     * @param result
+     * @return
+     */
+    private Ingredient instantiateIngredient(final Cursor result) {
+        long    fid         = result.getLong(1);
+        float   multiplier  = result.getFloat(2);
+
+        Food food = retrieveFood(fid);
+        Ingredient ingredient = new Ingredient(food, multiplier);
+        return ingredient;
     }
 
 }

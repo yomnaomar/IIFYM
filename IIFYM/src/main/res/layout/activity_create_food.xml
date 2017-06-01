@@ -256,7 +256,7 @@
                 android:drawableRight="@drawable/drawable_ic_calendar"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_width="110dp"
+                android:layout_width="105dp"
                 android:focusable="false"/>
 
         </LinearLayout>

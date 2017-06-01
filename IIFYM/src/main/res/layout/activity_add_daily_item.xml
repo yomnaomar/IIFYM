@@ -11,173 +11,188 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".Activities.Main.activitySelectDailyItem">
 
-    <android.support.constraint.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true">
+    <LinearLayout
+        android:id="@+id/layoutInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/layoutInfo"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintHorizontal_bias="0.0">
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/lblName"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center_vertical"
+                android:text="@string/lblName"
+                android:textColor="@color/colorPrimary" />
+
+            <TextView
+                android:id="@+id/lblBrand"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center_vertical"
+                android:text="@string/lblBrand"
+                android:textColor="@color/colorPrimary" />
 
             <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentStart="true">
+                android:orientation="horizontal">
 
                 <TextView
-                    android:text="@string/lblName"
-                    android:layout_width="match_parent"
+                    android:id="@+id/lblCalories"
+                    android:layout_width="wrap_content"
                     android:layout_height="40dp"
-                    android:id="@+id/lblName"
                     android:gravity="center_vertical"
+                    android:text="@string/lblCalories"
                     android:textColor="@color/colorPrimary" />
 
                 <TextView
-                    android:text="@string/lblBrand"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:id="@+id/lblBrand"
-                    android:gravity="center_vertical"
-                    android:textColor="@color/colorPrimary"/>
-
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:text="@string/lblCalories"
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:id="@+id/lblCalories"
-                        android:gravity="center_vertical"
-                        android:textColor="@color/colorPrimary" />
-
-                    <TextView
-                        android:text="@string/lblkcal"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/lblkcals"
-                        android:layout_marginLeft="5dp"
-                        android:textColor="@color/CaloriesProgessColor" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:text="@string/lblCarbs"
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:id="@+id/lblCarbs"
-                        android:gravity="center_vertical"
-                        android:textColor="@color/colorPrimary"/>
-
-                    <TextView
-                        android:text="@string/lblC"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/lblc"
-                        android:layout_marginRight="20dp"
-                        android:layout_marginLeft="5dp"
-                        android:textColor="@color/CarbProgressColor" />
-
-                    <TextView
-                        android:text="@string/lblProtein"
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:id="@+id/lblProtein"
-                        android:gravity="center_vertical"
-                        android:textColor="@color/colorPrimary" />
-
-                    <TextView
-                        android:text="@string/lblp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/lblp"
-                        android:layout_marginRight="20dp"
-                        android:layout_marginLeft="5dp"
-                        android:textColor="@color/ProteinProgessColor" />
-
-                    <TextView
-                        android:text="@string/lblFat"
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:id="@+id/lblFat"
-                        android:gravity="center_vertical"
-                        android:textColor="@color/colorPrimary" />
-
-                    <TextView
-                        android:text="@string/lblf"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/lblf"
-                        android:layout_marginLeft="5dp"
-                        android:textColor="@color/FatProgessColor" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
+                    android:id="@+id/lblkcals"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:weightSum="1">
-
-                    <EditText
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:ems="4"
-                        android:id="@+id/etxtPortionAmount"
-                        android:hint="@string/hintAmount"
-                        android:gravity="center_vertical|center_horizontal|center"
-                        android:textAppearance="@android:style/TextAppearance.Material.Small"
-                        android:inputType="number"
-                        android:textAlignment="center" />
-
-                    <TextView
-                        android:text="@string/lblPortionType"
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:id="@+id/lblPortionType"
-                        android:textAlignment="textStart"
-                        android:gravity="center"
-                        android:textColor="@color/colorPrimary"/>
-
-
-                </LinearLayout>
+                    android:layout_marginLeft="5dp"
+                    android:text="@string/lblkcal"
+                    android:textColor="@color/CaloriesProgessColor" />
 
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/lblCarbs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:gravity="center_vertical"
+                    android:text="@string/lblCarbs"
+                    android:textColor="@color/colorPrimary" />
+
+                <TextView
+                    android:id="@+id/lblc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="20dp"
+                    android:text="@string/lblC"
+                    android:textColor="@color/CarbProgressColor" />
+
+                <TextView
+                    android:id="@+id/lblProtein"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:gravity="center_vertical"
+                    android:text="@string/lblProtein"
+                    android:textColor="@color/colorPrimary" />
+
+                <TextView
+                    android:id="@+id/lblp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="20dp"
+                    android:text="@string/lblp"
+                    android:textColor="@color/ProteinProgessColor" />
+
+                <TextView
+                    android:id="@+id/lblFat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:gravity="center_vertical"
+                    android:text="@string/lblFat"
+                    android:textColor="@color/colorPrimary" />
+
+                <TextView
+                    android:id="@+id/lblf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="@string/lblf"
+                    android:textColor="@color/FatProgessColor" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <EditText
+                    android:id="@+id/etxtPortionAmount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="4"
+                    android:gravity="center_vertical|center_horizontal|center"
+                    android:hint="@string/hintAmount"
+                    android:inputType="number"
+                    android:textAlignment="center"
+                    android:textAppearance="@android:style/TextAppearance.Material.Small" />
+
+                <TextView
+                    android:id="@+id/lblPortionType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:gravity="center"
+                    android:text="@string/lblPortionType"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/colorPrimary" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/etxtDate"
+                    android:layout_width="105dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_gravity="right|center_vertical"
+                    android:drawableRight="@drawable/drawable_ic_calendar"
+                    android:ems="3"
+                    android:focusable="false"
+                    android:gravity="right|center_vertical"
+                    android:inputType="textPersonName"
+                    android:text="@string/dateInitial"
+                    android:textColor="?attr/colorPrimary"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+            <ListView
+                android:id="@+id/listviewIngredients"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="16dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/layoutInfo"
+                app:layout_constraintVertical_bias="0.007" />
+
         </LinearLayout>
 
-        <ListView
-            android:layout_width="wrap_content"
-            android:layout_height="48dp"
-            app:layout_constraintTop_toBottomOf="@+id/layoutInfo"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="16dp"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintVertical_bias="0.0"
-            android:id="@+id/listviewIngredients" />
-
-    </android.support.constraint.ConstraintLayout>
+    </LinearLayout>
 
 </RelativeLayout>

@@ -38,19 +38,19 @@
                 android:layout_weight="1">
 
                 <EditText
-                    android:layout_height="50dp"
-                    android:inputType="textPersonName"
-                    android:text="@string/dateInitial"
-                    android:ems="3"
                     android:id="@+id/etxtDateOfBirth"
-                    android:textColor="?attr/colorPrimary"
-                    android:textSize="14sp"
-                    android:gravity="right|center_vertical"
+                    android:layout_width="105dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentTop="true"
                     android:layout_gravity="right|center_vertical"
                     android:drawableRight="@drawable/drawable_ic_calendar"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_width="110dp" />
+                    android:ems="3"
+                    android:gravity="right|center_vertical"
+                    android:inputType="textPersonName"
+                    android:text="@string/dateInitial"
+                    android:textColor="?attr/colorPrimary"
+                    android:textSize="14sp" />
 
                 <TextView
                     android:text="@string/dateOfBirth"
