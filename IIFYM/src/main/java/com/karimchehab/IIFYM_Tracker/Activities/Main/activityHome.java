@@ -1,4 +1,4 @@
-package com.karimchehab.IIFYM_Tracker.Activities.Main;
+package com.karimchehab.IIFYM.Activities.Main;
 
 import android.content.Context;
 import android.content.Intent;
@@ -18,12 +18,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.karimchehab.IIFYM_Tracker.Activities.Misc.activityAbout;
-import com.karimchehab.IIFYM_Tracker.Activities.Settings.activitySettings;
-import com.karimchehab.IIFYM_Tracker.Activities.UserLoginAuthentication.activityLogin;
-import com.karimchehab.IIFYM_Tracker.Database.SharedPreferenceHelper;
-import com.karimchehab.IIFYM_Tracker.Models.DateHelper;
-import com.karimchehab.IIFYM_Tracker.R;
+import com.karimchehab.IIFYM.Activities.Settings.activitySettings;
+import com.karimchehab.IIFYM.Activities.UserLoginAuthentication.activityLogin;
+import com.karimchehab.IIFYM.Activities.UserLoginAuthentication.activityLogin1;
+import com.karimchehab.IIFYM.Database.SharedPreferenceHelper;
+import com.karimchehab.IIFYM.Models.DateHelper;
+import com.karimchehab.IIFYM.R;
 
 public class activityHome extends AppCompatActivity implements View.OnClickListener{
     // GUI
@@ -99,10 +99,6 @@ public class activityHome extends AppCompatActivity implements View.OnClickListe
                 intent = new Intent(context, activityFoodManager.class);
                 startActivity(intent);
                 return true;
-            case (R.id.menuAbout):
-                intent = new Intent(context, activityAbout.class);
-                startActivity(intent);
-                break;
             case (R.id.menuLogout):
                 signOut();
                 intent = new Intent(context, activityLogin.class);
@@ -252,5 +248,8 @@ public class activityHome extends AppCompatActivity implements View.OnClickListe
     private void signOut() {
         myPrefs.addPreference("session_uid", "");
         firebaseAuth.signOut();
+        Intent intent = new Intent();
+        intent.setClass(context, activityLogin1.class);
+        startActivity(intent);
     }
 }
