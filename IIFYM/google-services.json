@@ -1,43 +1,43 @@
 {
   "project_info": {
-    "project_number": "930699920107",
-    "firebase_url": "https://iifym-tracker.firebaseio.com",
-    "project_id": "iifym-tracker",
-    "storage_bucket": "iifym-tracker.appspot.com"
+    "project_number": "533333468255",
+    "firebase_url": "https://iifym-976e8.firebaseio.com",
+    "project_id": "iifym-976e8",
+    "storage_bucket": "iifym-976e8.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:930699920107:android:af12a116b68be1bb",
+        "mobilesdk_app_id": "1:533333468255:android:0e389c29e0b9a66d",
         "android_client_info": {
           "package_name": "com.karimchehab.IIFYM"
         }
       },
       "oauth_client": [
         {
-          "client_id": "930699920107-uc08mnl6hlsma6no6171a7bhkp0j4j07.apps.googleusercontent.com",
+          "client_id": "533333468255-4u0iagetp6v4cij6cokrtrrfvkn80f69.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.karimchehab.IIFYM",
-            "certificate_hash": "5D4BDCE697CE983C80AE31F96C72118698F8DC75"
+            "certificate_hash": "bdfcb04d905b486c6360c2f36e17616c9e5c8640"
           }
         },
         {
-          "client_id": "930699920107-v0kdja7kq2bdnc74gjbsc4oklgu39lvs.apps.googleusercontent.com",
+          "client_id": "533333468255-er788vuffekskrcmf3tl0sb5jla08o6h.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.karimchehab.IIFYM",
-            "certificate_hash": "E092E17B3C48E2025788ED1F357624F5D1ABF0C5"
+            "certificate_hash": "e092e17b3c48e2025788ed1f357624f5d1abf0c5"
           }
         },
         {
-          "client_id": "930699920107-vd13bav441l7d5vlr6v3onf0b3r5htme.apps.googleusercontent.com",
+          "client_id": "533333468255-1ahmlb34ss5t71s3ule5j3fgc0ed86nb.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBhw3rAjDchHiTBB_y2Ob9qt3vM3JHLOZc"
+          "current_key": "AIzaSyDBjpkwc71qb_5U35FgZ72DipFwlw2IRUY"
         }
       ],
       "services": {
@@ -48,7 +48,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "930699920107-vd13bav441l7d5vlr6v3onf0b3r5htme.apps.googleusercontent.com",
+              "client_id": "533333468255-1ahmlb34ss5t71s3ule5j3fgc0ed86nb.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

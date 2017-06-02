@@ -68,7 +68,7 @@ public class activityLogin extends AppCompatActivity implements View.OnClickList
     private FirebaseAuth.AuthStateListener  firebaseAuthListener;
 
     private GoogleApiClient                 mGoogleApiClient;
-    private static final int                RC_SIGN_IN = 9001;
+    private static final int                RC_SIGN_IN = 0x0;
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
