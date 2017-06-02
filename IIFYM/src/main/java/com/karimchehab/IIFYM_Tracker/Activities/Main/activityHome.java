@@ -1,4 +1,4 @@
-package com.karimchehab.IIFYM.Activities.Main;
+package com.karimchehab.IIFYM_Tracker.Activities.Main;
 
 import android.content.Context;
 import android.content.Intent;
@@ -18,12 +18,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.karimchehab.IIFYM.Activities.Settings.activitySettings;
-import com.karimchehab.IIFYM.Activities.UserLoginAuthentication.activityLogin;
-import com.karimchehab.IIFYM.Activities.UserLoginAuthentication.activityLogin1;
-import com.karimchehab.IIFYM.Database.SharedPreferenceHelper;
-import com.karimchehab.IIFYM.Models.DateHelper;
-import com.karimchehab.IIFYM.R;
+import com.karimchehab.IIFYM_Tracker.Activities.Settings.activitySettings;
+import com.karimchehab.IIFYM_Tracker.Activities.UserLoginAuthentication.activitySelectAuthentication;
+import com.karimchehab.IIFYM_Tracker.Database.SharedPreferenceHelper;
+import com.karimchehab.IIFYM_Tracker.Models.DateHelper;
+import com.karimchehab.IIFYM_Tracker.R;
 
 public class activityHome extends AppCompatActivity implements View.OnClickListener{
     // GUI
@@ -45,6 +44,17 @@ public class activityHome extends AppCompatActivity implements View.OnClickListe
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         context = getApplicationContext();
+
+        myPrefs = new SharedPreferenceHelper(context);
+        String session_uid = myPrefs.getStringValue("session_uid");
+
+        if(session_uid.isEmpty()){
+            // Go to activityLogin
+            Intent intent = new Intent();
+            intent.setClass(context, activitySelectAuthentication.class);
+            startActivity(intent);
+            finish();
+        }
 
         setContentView(R.layout.content_home);
 
@@ -69,7 +79,6 @@ public class activityHome extends AppCompatActivity implements View.OnClickListe
         setupViewPager(viewPager);
 
         // Database
-        myPrefs = new SharedPreferenceHelper(context);
         firebaseAuth = FirebaseAuth.getInstance();
     }
 
@@ -101,7 +110,7 @@ public class activityHome extends AppCompatActivity implements View.OnClickListe
                 return true;
             case (R.id.menuLogout):
                 signOut();
-                intent = new Intent(context, activityLogin.class);
+                intent = new Intent(context, activitySelectAuthentication.class);
                 startActivity(intent);
                 finish();
                 break;
@@ -249,7 +258,7 @@ public class activityHome extends AppCompatActivity implements View.OnClickListe
         myPrefs.addPreference("session_uid", "");
         firebaseAuth.signOut();
         Intent intent = new Intent();
-        intent.setClass(context, activityLogin1.class);
+        intent.setClass(context, activitySelectAuthentication.class);
         startActivity(intent);
     }
 }

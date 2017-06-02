@@ -19,32 +19,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/appName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:gravity="center"
-                android:text="@string/appName"
-                android:textColor="@color/colorPrimary"
-                android:textSize="30sp" />
-
-            <TextView
-                android:id="@+id/textView9"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:gravity="center"
-                android:text="If It Fits Your Macros"
-                android:textColor="@color/colorPrimary"
-                android:textSize="18sp" />
-
-            <ImageView
-                android:id="@+id/AppLogo"
-                android:layout_width="match_parent"
-                android:layout_height="125dp"
-                app:srcCompat="@drawable/iifym_logo" />
-
             <EditText
                 android:id="@+id/email_edittext"
                 android:layout_width="match_parent"
@@ -59,15 +33,13 @@
                 android:inputType="textEmailAddress"
                 android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionMode.Subtitle"
                 android:textColor="?attr/colorPrimary"
-                android:textColorHint="?android:attr/textColorHint"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:textColorHint="?android:attr/textColorHint"/>
 
             <EditText
                 android:id="@+id/password_textview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
@@ -87,55 +59,36 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="@dimen/activity_vertical_margin"
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/btnEmailLoginIn"
+                    android:id="@+id/btnRegister"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
-                    android:layout_marginLeft="8dp"
+                    android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
                     android:layout_marginTop="16dp"
                     android:layout_weight="1"
-                    android:background="@drawable/common_google_signin_btn_icon_light_normal_background"
-                    android:drawableLeft="@drawable/ic_email_signin"
+                    android:background="@drawable/btn_iifym_disabled"
                     android:drawablePadding="16dp"
-                    android:drawingCacheQuality="high"
-                    android:hint="Sign in"
-                    android:paddingLeft="16dp"
-                    android:shadowColor="#6f6f6f"
-                    android:textColorHint="#6f6f6f"/>
-
-                <Button
-                    android:id="@+id/btnGoogleSignIn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="16dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/common_google_signin_btn_icon_light_normal_background"
-                    android:drawablePadding="16dp"
-                    android:drawingCacheQuality="high"
-                    android:hint="Sign in"
-                    android:paddingLeft="16dp"
-                    android:shadowColor="#6f6f6f"
-                    android:textColorHint="#6f6f6f" />
+                    android:hint="Register"
+                    android:textColorHint="@color/DarkerGray"
+                    android:textSize="16sp"
+                    android:visibility="visible" />
 
             </LinearLayout>
 
             <TextView
-                android:id="@+id/txtRegister"
+                android:id="@+id/txtLogin"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:layout_gravity="center_vertical|center_horizontal|center"
                 android:layout_weight="1"
                 android:gravity="center_vertical|center_horizontal|center"
-                android:text="New User? Register Here!"
+                android:text="Already a User? Login!"
                 android:textColor="@color/colorPrimary"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -145,6 +98,7 @@
                 android:gravity="center_vertical|center_horizontal|center"
                 android:text="Forgot Your Password?"
                 android:textColor="@color/colorPrimary"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
         </LinearLayout>

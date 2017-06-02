@@ -17,7 +17,12 @@
             android:name="com.karimchehab.IIFYM_Tracker.Activities.Main.activityHome"
             android:label="@string/appName"
             android:launchMode="singleInstance"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name="com.karimchehab.IIFYM_Tracker.Activities.Main.activityFoodManager"
             android:label="@string/toolbarTapOnAnItemToEdit" />
@@ -28,9 +33,6 @@
             android:name="com.karimchehab.IIFYM_Tracker.Activities.Main.activityCreateFood"
             android:label="@string/toolbarCreateNewFood" />
         <activity
-            android:name="com.karimchehab.IIFYM_Tracker.Activities.UserLoginAuthentication.activityLogin"
-            android:label="@string/appName" />
-        <activity
             android:name="com.karimchehab.IIFYM_Tracker.Activities.UserLoginAuthentication.activityRegisterProfile"
             android:label="@string/toolbarUserInfo" />
         <activity
@@ -39,15 +41,6 @@
         <activity
             android:name="com.karimchehab.IIFYM_Tracker.Activities.Main.activityAddDailyItem"
             android:label="@string/toolbarAddDailyItem" />
-        <activity
-            android:name="com.karimchehab.IIFYM_Tracker.Activities.UserLoginAuthentication.activityLauncher"
-            android:label="IIFYM">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
         <activity
             android:name="com.karimchehab.IIFYM_Tracker.Activities.Main.activitySelectDailyItem"
             android:label="@string/toolbarSelectItemToAdd" />
@@ -66,8 +59,11 @@
         <activity android:name=".Activities.UserLoginAuthentication.activityLogin1" />
         <activity android:name=".Activities.UserLoginAuthentication.activityLogin2"></activity>
         <activity android:name="com.karimchehab.IIFYM_Tracker.Activities.Main.activtitySelectMealIngredients" />
-        <activity android:name="com.karimchehab.IIFYM_Tracker.Activities.Misc.activityAbout"
+        <activity
+            android:name="com.karimchehab.IIFYM_Tracker.Activities.Misc.activityAbout"
             android:label="About" />
+        <activity android:name=".Activities.UserLoginAuthentication.activitySelectAuthentication" />
+        <activity android:name=".Activities.UserLoginAuthentication.activityLoginEmail"></activity>
     </application>
 
 </manifest>
