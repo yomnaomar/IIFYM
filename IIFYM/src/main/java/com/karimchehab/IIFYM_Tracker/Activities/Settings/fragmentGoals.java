@@ -53,7 +53,7 @@ public class fragmentGoals extends Fragment implements View.OnClickListener, Tex
     private SegmentedGroup seggroupDisplay;
     private RadioButton rbtnCalories, rbtnMacros;
     private EditText etxtCalories, etxtCarbs, etxtProtein, etxtFat;
-    private TextView lblCarbs, lblProtein, lblFat, lblTotal, lblAmountTotal, lblValueCarbs, lblValueProtein, lblValueFat;
+    private TextView lblPlus1, lblPlus2, lblUnit1, lblUnit2, lblUnit3, lblEqual, lblCarbs, lblProtein, lblFat, lblTotal, lblAmountTotal, lblValueCarbs, lblValueProtein, lblValueFat;
     private ImageButton btnReset, btnInfo;
     private Animation mEnterAnimation, mExitAnimation;
     private ProgressDialog progressDialog;
@@ -185,6 +185,12 @@ public class fragmentGoals extends Fragment implements View.OnClickListener, Tex
         etxtCarbs = (EditText) view.findViewById(R.id.etxtCarbs);
         etxtProtein = (EditText) view.findViewById(R.id.etxtProtein);
         etxtFat = (EditText) view.findViewById(R.id.etxtFat);
+        lblPlus1 = (TextView) view.findViewById(R.id.lblPlus1);
+        lblPlus2 = (TextView) view.findViewById(R.id.lblPlus2);
+        lblUnit1 = (TextView) view.findViewById(R.id.lblUnit1);
+        lblUnit2 = (TextView) view.findViewById(R.id.lblUnit2);
+        lblUnit3 = (TextView) view.findViewById(R.id.lblUnit3);
+        lblEqual = (TextView) view.findViewById(R.id.lblEqual);
         lblCarbs = (TextView) view.findViewById(R.id.lblCarbs);
         lblProtein = (TextView) view.findViewById(R.id.lblProtein);
         lblFat = (TextView) view.findViewById(R.id.lblFat);
@@ -269,21 +275,35 @@ public class fragmentGoals extends Fragment implements View.OnClickListener, Tex
         if (rbtnCalories.isChecked()) {
             etxtCalories.setEnabled(true);
 
-            lblCarbs.setText("Carbs (%)");
-            lblProtein.setText("Protein (%)");
-            lblFat.setText("Fat (%)");
+            lblCarbs.setText("Carbs");
+            lblProtein.setText("Protein");
+            lblFat.setText("Fat");
 
+            lblUnit1.setText("%");
+            lblUnit2.setText("%");
+            lblUnit3.setText("%");
+
+            lblPlus1.setVisibility(View.VISIBLE);
+            lblPlus2.setVisibility(View.VISIBLE);
+            lblEqual.setVisibility(View.VISIBLE);
             lblTotal.setVisibility(View.VISIBLE);
             lblAmountTotal.setVisibility(View.VISIBLE);
         } else {
             etxtCalories.setEnabled(false);
 
-            lblCarbs.setText("Carbs (g)");
-            lblProtein.setText("Protein (g)");
-            lblFat.setText("Fat (g)");
+            lblCarbs.setText("Carbs");
+            lblProtein.setText("Protein");
+            lblFat.setText("Fat");
 
-            lblTotal.setVisibility(View.INVISIBLE);
-            lblAmountTotal.setVisibility(View.INVISIBLE);
+            lblUnit1.setText("g");
+            lblUnit2.setText("g");
+            lblUnit3.setText("g");
+
+            lblPlus1.setVisibility(View.GONE);
+            lblPlus2.setVisibility(View.GONE);
+            lblEqual.setVisibility(View.GONE);
+            lblTotal.setVisibility(View.GONE);
+            lblAmountTotal.setVisibility(View.GONE);
         }
     }
 

@@ -50,7 +50,7 @@ public class activityRegisterGoals extends AppCompatActivity implements View.OnC
     private SegmentedGroup  seggroupDisplay;
     private RadioButton     rbtnCalories, rbtnMacros;
     private EditText        etxtCalories, etxtCarbs, etxtProtein, etxtFat;
-    private TextView        lblCarbs, lblProtein, lblFat, lblTotal, lblAmountTotal, lblValueCarbs, lblValueProtein, lblValueFat;
+    private TextView        lblPlus1, lblPlus2, lblUnit1, lblUnit2, lblUnit3, lblEqual, lblCarbs, lblProtein, lblFat, lblTotal, lblAmountTotal, lblValueCarbs, lblValueProtein, lblValueFat;
     private ImageButton     btnReset, btnInfo;
     private Animation       mEnterAnimation, mExitAnimation;
     private ProgressDialog  progressDialog;
@@ -206,6 +206,12 @@ public class activityRegisterGoals extends AppCompatActivity implements View.OnC
         etxtCarbs       = (EditText) findViewById(R.id.etxtCarbs);
         etxtProtein     = (EditText) findViewById(R.id.etxtProtein);
         etxtFat         = (EditText) findViewById(R.id.etxtFat);
+        lblPlus1        = (TextView) findViewById(R.id.lblPlus1);
+        lblPlus2        = (TextView) findViewById(R.id.lblPlus2);
+        lblUnit1        = (TextView) findViewById(R.id.lblUnit1);
+        lblUnit2        = (TextView) findViewById(R.id.lblUnit2);
+        lblUnit3        = (TextView) findViewById(R.id.lblUnit3);
+        lblEqual        = (TextView) findViewById(R.id.lblEqual);
         lblCarbs        = (TextView) findViewById(R.id.lblCarbs);
         lblProtein      = (TextView) findViewById(R.id.lblProtein);
         lblFat          = (TextView) findViewById(R.id.lblFat);
@@ -245,10 +251,17 @@ public class activityRegisterGoals extends AppCompatActivity implements View.OnC
         {
             etxtCalories.setEnabled(true);
 
-            lblCarbs.setText("Carbs (%)");
-            lblProtein.setText("Protein (%)");
-            lblFat.setText("Fat (%)");
+            lblCarbs.setText("Carbs");
+            lblProtein.setText("Protein");
+            lblFat.setText("Fat");
 
+            lblUnit1.setText("%");
+            lblUnit2.setText("%");
+            lblUnit3.setText("%");
+
+            lblPlus1.setVisibility(View.VISIBLE);
+            lblPlus2.setVisibility(View.VISIBLE);
+            lblEqual.setVisibility(View.VISIBLE);
             lblTotal.setVisibility(View.VISIBLE);
             lblAmountTotal.setVisibility(View.VISIBLE);
         }
@@ -256,10 +269,17 @@ public class activityRegisterGoals extends AppCompatActivity implements View.OnC
         {
             etxtCalories.setEnabled(false);
 
-            lblCarbs.setText("Carbs (g)");
-            lblProtein.setText("Protein (g)");
-            lblFat.setText("Fat (g)");
+            lblCarbs.setText("Carbs");
+            lblProtein.setText("Protein");
+            lblFat.setText("Fat");
 
+            lblUnit1.setText("g");
+            lblUnit2.setText("g");
+            lblUnit3.setText("g");
+
+            lblPlus1.setVisibility(View.GONE);
+            lblPlus2.setVisibility(View.GONE);
+            lblEqual.setVisibility(View.GONE);
             lblTotal.setVisibility(View.GONE);
             lblAmountTotal.setVisibility(View.GONE);
         }
