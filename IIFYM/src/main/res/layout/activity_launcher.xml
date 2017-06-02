@@ -5,7 +5,7 @@
     android:id="@+id/activity_launcher"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.karimchehab.IIFYM.Activities.UserLoginAuthentication.activityLauncher">
+    tools:context="com.karimchehab.IIFYM_Tracker.Activities.UserLoginAuthentication.activityLauncher">
 
     <ImageView
         android:id="@+id/imageView"

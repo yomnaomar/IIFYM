@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.karimchehab.IIFYM">
+    package="com.karimchehab.IIFYM_Tracker">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -14,33 +14,33 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".Activities.Main.activityHome"
+            android:name="com.karimchehab.IIFYM_Tracker.Activities.Main.activityHome"
             android:label="@string/appName"
             android:launchMode="singleInstance"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Activities.Main.activityFoodManager"
+            android:name="com.karimchehab.IIFYM_Tracker.Activities.Main.activityFoodManager"
             android:label="@string/toolbarTapOnAnItemToEdit" />
         <activity
-            android:name=".Activities.Main.activityEditFood"
+            android:name="com.karimchehab.IIFYM_Tracker.Activities.Main.activityEditFood"
             android:label="@string/toolbarEditFood" />
         <activity
-            android:name=".Activities.Main.activityCreateFood"
+            android:name="com.karimchehab.IIFYM_Tracker.Activities.Main.activityCreateFood"
             android:label="@string/toolbarCreateNewFood" />
         <activity
-            android:name=".Activities.UserLoginAuthentication.activityLogin"
+            android:name="com.karimchehab.IIFYM_Tracker.Activities.UserLoginAuthentication.activityLogin"
             android:label="@string/appName" />
         <activity
-            android:name=".Activities.UserLoginAuthentication.activityRegisterProfile"
+            android:name="com.karimchehab.IIFYM_Tracker.Activities.UserLoginAuthentication.activityRegisterProfile"
             android:label="@string/toolbarUserInfo" />
         <activity
-            android:name=".Activities.UserLoginAuthentication.activityRegisterGoals"
+            android:name="com.karimchehab.IIFYM_Tracker.Activities.UserLoginAuthentication.activityRegisterGoals"
             android:label="@string/toolbarUserMacros" />
         <activity
-            android:name=".Activities.Main.activityAddDailyItem"
+            android:name="com.karimchehab.IIFYM_Tracker.Activities.Main.activityAddDailyItem"
             android:label="@string/toolbarAddDailyItem" />
         <activity
-            android:name=".Activities.UserLoginAuthentication.activityLauncher"
+            android:name="com.karimchehab.IIFYM_Tracker.Activities.UserLoginAuthentication.activityLauncher"
             android:label="IIFYM">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -49,17 +49,17 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activities.Main.activitySelectDailyItem"
+            android:name="com.karimchehab.IIFYM_Tracker.Activities.Main.activitySelectDailyItem"
             android:label="@string/toolbarSelectItemToAdd" />
-        <activity android:name=".Activities.Main.activityViewDailyItem" />
+        <activity android:name="com.karimchehab.IIFYM_Tracker.Activities.Main.activityViewDailyItem" />
         <activity
-            android:name=".Activities.Settings.activitySettings"
+            android:name="com.karimchehab.IIFYM_Tracker.Activities.Settings.activitySettings"
             android:label="Settings" />
         <activity
-            android:name=".Activities.Main.activityCreateMeal"
+            android:name="com.karimchehab.IIFYM_Tracker.Activities.Main.activityCreateMeal"
             android:label="@string/toolbarCreateNewMeal" />
-        <activity android:name=".Activities.Main.activtitySelectMealIngredients" />
-        <activity android:name=".Activities.Misc.activityAbout"
+        <activity android:name="com.karimchehab.IIFYM_Tracker.Activities.Main.activtitySelectMealIngredients" />
+        <activity android:name="com.karimchehab.IIFYM_Tracker.Activities.Misc.activityAbout"
             android:label="About" />
     </application>
 
