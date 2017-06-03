@@ -37,6 +37,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.karimchehab.IIFYM_Tracker.Activities.Main.activityHome;
+import com.karimchehab.IIFYM_Tracker.Database.Credentials;
 import com.karimchehab.IIFYM_Tracker.Database.SQLiteConnector;
 import com.karimchehab.IIFYM_Tracker.Database.SharedPreferenceHelper;
 import com.karimchehab.IIFYM_Tracker.Models.User;
@@ -214,7 +215,7 @@ public class activitySelectAuthentication extends AppCompatActivity implements V
         // Configure sign-in to request the user's ID, email address, and basic
         // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.iifym_server_client_id))
+                .requestIdToken(Credentials.IIFYM_SERVER_CLIENT_ID)
                 .requestEmail()
                 .build();
 

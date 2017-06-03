@@ -7,7 +7,6 @@
     <!--activityLogin -->
     <string name="appName">IIFYM</string>
     <string name="appSubtitle">If It Fits Your Macros</string>
-    <string name="iifym_server_client_id">930699920107-vd13bav441l7d5vlr6v3onf0b3r5htme.apps.googleusercontent.com</string>
 
     <!--activityRegisterProfile -->
     <string name="userRegistration">User Registration</string>
