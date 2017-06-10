@@ -10,6 +10,11 @@
     <img alt="license: GPL-3.0"
       src="https://img.shields.io/github/license/karim94/iifym.svg">
   </a>
+  <br>
+  <!-- Google Play -->
+  <a href='https://play.google.com/store/apps/details?id=com.karimchehab.IIFYM&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'>
+    <img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png'/>
+  </a>
 </div>
 
 ## Prerequisites
