@@ -52,3 +52,4 @@ obj/
 
 /_windows
 IIFYM/src/main/java/com/karimchehab/IIFYM_Tracker/Database/Credentials.java
+*.keystore

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.karimchehab.IIFYM_Tracker.Activities.Main.activityHome"
+    tools:context="com.karimchehab.IIFYM.Activities.Main.activityHome"
     android:id="@+id/root_view">
 
     <android.support.design.widget.AppBarLayout

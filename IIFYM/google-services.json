@@ -8,74 +8,6 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:930699920107:android:af12a116b68be1bb",
-        "android_client_info": {
-          "package_name": "com.example.kareem.IIFYM_Tracker"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "930699920107-edmkldcsnfak9tun9u05lgtl7q3d7am1.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.kareem.IIFYM_Tracker",
-            "certificate_hash": "bdfcb04d905b486c6360c2f36e17616c9e5c8640"
-          }
-        },
-        {
-          "client_id": "930699920107-a8vt9jkalv9ms56pgcq2jruc38qk5tuu.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.kareem.IIFYM_Tracker",
-            "certificate_hash": "e092e17b3c48e2025788ed1f357624f5d1abf0c5"
-          }
-        },
-        {
-          "client_id": "930699920107-7616hn7kioau6fo12347rprm7su4uo65.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.kareem.IIFYM_Tracker",
-            "certificate_hash": "73b6f627e236739ceea2b4acc42437a9be617c42"
-          }
-        },
-        {
-          "client_id": "930699920107-uc08mnl6hlsma6no6171a7bhkp0j4j07.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.kareem.IIFYM_Tracker",
-            "certificate_hash": "5d4bdce697ce983c80ae31f96c72118698f8dc75"
-          }
-        },
-        {
-          "client_id": "930699920107-vd13bav441l7d5vlr6v3onf0b3r5htme.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyBhw3rAjDchHiTBB_y2Ob9qt3vM3JHLOZc"
-        }
-      ],
-      "services": {
-        "analytics_service": {
-          "status": 1
-        },
-        "appinvite_service": {
-          "status": 2,
-          "other_platform_oauth_client": [
-            {
-              "client_id": "930699920107-vd13bav441l7d5vlr6v3onf0b3r5htme.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        },
-        "ads_service": {
-          "status": 2
-        }
-      }
-    },
-    {
-      "client_info": {
         "mobilesdk_app_id": "1:930699920107:android:0e389c29e0b9a66d",
         "android_client_info": {
           "package_name": "com.karimchehab.IIFYM"
@@ -83,15 +15,23 @@
       },
       "oauth_client": [
         {
-          "client_id": "930699920107-c31ovh7vh8nvd2sel75irehdhb9elg0k.apps.googleusercontent.com",
+          "client_id": "930699920107-ff9ghl6l7m3ld31o2rn1cvke3tvj6dea.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.karimchehab.IIFYM",
-            "certificate_hash": "e092e17b3c48e2025788ed1f357624f5d1abf0c5"
+            "certificate_hash": "bdfcb04d905b486c6360c2f36e17616c9e5c8640"
           }
         },
         {
-          "client_id": "930699920107-vd13bav441l7d5vlr6v3onf0b3r5htme.apps.googleusercontent.com",
+          "client_id": "930699920107-1p6joi3cabiv77gt1b5l2hjtng52kfhi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.karimchehab.IIFYM",
+            "certificate_hash": "2992100e6c2eccd74db2f05165e6a9bd42b63ad0"
+          }
+        },
+        {
+          "client_id": "930699920107-5nnrfreoc6kms6paa9rattehfvf77ofc.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -108,7 +48,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "930699920107-vd13bav441l7d5vlr6v3onf0b3r5htme.apps.googleusercontent.com",
+              "client_id": "930699920107-5nnrfreoc6kms6paa9rattehfvf77ofc.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

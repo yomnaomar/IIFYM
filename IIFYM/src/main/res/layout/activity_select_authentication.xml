@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/loginLinearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -48,7 +49,7 @@
             android:id="@+id/btnEmailLoginIn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
+            android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_weight="1"
             android:background="@drawable/common_google_signin_btn_icon_light_normal_background"
@@ -62,7 +63,7 @@
 
     </LinearLayout>
 
-<!--    <LinearLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
@@ -72,19 +73,18 @@
             android:id="@+id/btnGoogleSignIn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
+            android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_weight="1"
             android:background="@drawable/common_google_signin_btn_icon_light_normal_background"
             android:drawableLeft="@drawable/ic_google_signin"
             android:drawablePadding="16dp"
-            android:hint="Sign in"
+            android:hint="Sign in with Google"
             android:paddingLeft="16dp"
             android:shadowColor="#6f6f6f"
             android:textColorHint="#6f6f6f"
             android:textSize="16sp" />
-
-    </LinearLayout>-->
+    </LinearLayout>
 
     <TextView
         android:id="@+id/lblPrivacyPolicyLink"
