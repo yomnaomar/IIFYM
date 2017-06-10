@@ -251,7 +251,10 @@ public class activitySelectAuthentication extends AppCompatActivity implements V
             } else {
                 // Google Sign In failed, update UI appropriately
                 // ...
-
+                Toast.makeText(activitySelectAuthentication.this,
+                    "Google sign in failed.",
+                    Toast.LENGTH_SHORT)
+                        .show();
                 Log.d("onActivityResult", "Failed " + result.getStatus().toString());
             }
         }
@@ -273,7 +276,7 @@ public class activitySelectAuthentication extends AppCompatActivity implements V
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w("signInWithCredential", "Failed", task.getException());
-                            Toast.makeText(activitySelectAuthentication.this, "Authentication failed.",
+                            Toast.makeText(activitySelectAuthentication.this, "Firebase authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                         }
                     }
