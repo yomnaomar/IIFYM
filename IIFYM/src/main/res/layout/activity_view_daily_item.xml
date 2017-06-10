@@ -9,7 +9,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.karimchehab.IIFYM_Tracker.Activities.Main.activityViewDailyItem">
+    tools:context="com.karimchehab.IIFYM.Activities.Main.activityViewDailyItem">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"

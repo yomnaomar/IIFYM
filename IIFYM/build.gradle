@@ -4,7 +4,7 @@ android {
     compileSdkVersion 25
     buildToolsVersion '25.0.3'
     defaultConfig {
-        applicationId 'com.karimchehab.IIFYM_Tracker'
+        applicationId 'com.karimchehab.IIFYM'
         minSdkVersion 23
         targetSdkVersion 25
         versionCode 3
