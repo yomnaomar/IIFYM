@@ -12,10 +12,6 @@ import com.karimchehab.IIFYM.Models.Ingredient;
 import com.karimchehab.IIFYM.Models.Weight;
 import com.karimchehab.IIFYM.R;
 
-/**
- * Created by Kareem on 20-May-17.
- */
-
 public class AdapterIngredients extends ArrayAdapter<Ingredient> {
     private SQLiteConnector DB_SQLite;
 

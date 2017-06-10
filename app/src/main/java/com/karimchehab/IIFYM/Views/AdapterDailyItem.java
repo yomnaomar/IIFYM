@@ -15,13 +15,10 @@ import com.karimchehab.IIFYM.R;
 
 import java.util.ArrayList;
 
-/**
- * Created by Kareem on 9/13/2016.
- */
 public class AdapterDailyItem extends ArrayAdapter<DailyItem> {
 
-    public AdapterDailyItem(Context context, ArrayList<DailyItem> dailyitems) {
-        super(context, 0, dailyitems);
+    public AdapterDailyItem(Context context, ArrayList<DailyItem> dailyItems) {
+        super(context, 0, dailyItems);
     }
 
     @Override public View getView(final int position, View convertView, ViewGroup parent) {
@@ -51,10 +48,11 @@ public class AdapterDailyItem extends ArrayAdapter<DailyItem> {
         // Populate the data into the template view using the data object
         name.setText(food.getName());
         brand.setText(food.getBrand());
-        if (food.getBrand().isEmpty())
+        if (food.getBrand().isEmpty()) {
             brand.setVisibility(View.GONE);
-        else
+        } else {
             brand.setVisibility(View.VISIBLE);
+        }
         calories.setText(String.valueOf(Math.round(food.getCalories() * multiplier)) + " kcal ");
         carbs.setText(String.valueOf(Math.round(food.getCarbs() * multiplier) + " c "));
         protein.setText(String.valueOf(Math.round(food.getProtein() * multiplier) + " p "));

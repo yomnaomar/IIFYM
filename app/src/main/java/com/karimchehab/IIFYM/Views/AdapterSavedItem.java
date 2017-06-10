@@ -12,10 +12,6 @@ import com.karimchehab.IIFYM.Models.Food;
 import com.karimchehab.IIFYM.Models.Weight;
 import com.karimchehab.IIFYM.R;
 
-/**
- * Created by Kareem on 9/13/2016.
- */
-
 public class AdapterSavedItem extends ArrayAdapter<Food> {
 
     private SQLiteConnector DB_SQLite;
