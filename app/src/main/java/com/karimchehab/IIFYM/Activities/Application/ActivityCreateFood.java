@@ -1,4 +1,4 @@
-package com.karimchehab.IIFYM.Activities.Main;
+package com.karimchehab.IIFYM.Activities.Application;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
@@ -28,7 +28,7 @@ import com.karimchehab.IIFYM.Models.DateHelper;
 import com.karimchehab.IIFYM.Models.Food;
 import com.karimchehab.IIFYM.Models.Weight;
 import com.karimchehab.IIFYM.R;
-import com.karimchehab.IIFYM.ViewComponents.DecimalDigitsInputFilter;
+import com.karimchehab.IIFYM.Views.DecimalDigitsInputFilter;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -36,7 +36,7 @@ import java.util.Locale;
 
 import info.hoang8f.android.segmented.SegmentedGroup;
 
-public class activityCreateFood extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
+public class ActivityCreateFood extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
     // GUI
     private EditText        etxtName, etxtBrand, etxtCalories, etxtCarbs, etxtProtein, etxtFat, etxtPortionAmount, etxtDate;
@@ -133,7 +133,7 @@ public class activityCreateFood extends AppCompatActivity implements AdapterView
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                new DatePickerDialog(activityCreateFood.this, date, myCalendar
+                new DatePickerDialog(ActivityCreateFood.this, date, myCalendar
                         .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                         myCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }
@@ -229,7 +229,7 @@ public class activityCreateFood extends AppCompatActivity implements AdapterView
             if (isDaily){
                 String date = etxtDate.getText().toString();
                 DB_SQLite.createDailyItem(food.getId(), 1.0f, date);
-                Intent intent = new Intent(getApplicationContext(), activityHome.class);
+                Intent intent = new Intent(getApplicationContext(), ActivityHome.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
                 Toast.makeText(context,"Food created and added to log",Toast.LENGTH_SHORT).show();
@@ -304,7 +304,7 @@ public class activityCreateFood extends AppCompatActivity implements AdapterView
         return valid;
     }
 
-    // Returns to activityHome without making any changes
+    // Returns to ActivityHome without making any changes
     @Override public void onBackPressed() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Cancel?")
@@ -324,7 +324,7 @@ public class activityCreateFood extends AppCompatActivity implements AdapterView
     }
 
     private void showAlertDialog(String title, String message){
-        AlertDialog.Builder builder = new AlertDialog.Builder(activityCreateFood.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(ActivityCreateFood.this);
         builder.setTitle(title)
                 .setMessage(message);
         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {

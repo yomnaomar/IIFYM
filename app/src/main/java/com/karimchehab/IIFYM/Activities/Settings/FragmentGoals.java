@@ -36,7 +36,7 @@ import com.karimchehab.IIFYM.Database.SQLiteConnector;
 import com.karimchehab.IIFYM.Database.SharedPreferenceHelper;
 import com.karimchehab.IIFYM.Models.User;
 import com.karimchehab.IIFYM.R;
-import com.karimchehab.IIFYM.ViewComponents.SettingsFragmentHelper;
+import com.karimchehab.IIFYM.Views.SettingsFragmentHelper;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -47,7 +47,7 @@ import tourguide.tourguide.Overlay;
 import tourguide.tourguide.Sequence;
 import tourguide.tourguide.ToolTip;
 
-public class fragmentGoals extends Fragment implements View.OnClickListener, TextWatcher, SettingsFragmentHelper {
+public class FragmentGoals extends Fragment implements View.OnClickListener, TextWatcher, SettingsFragmentHelper {
 
     // GUI
     private SegmentedGroup seggroupDisplay;
@@ -88,10 +88,10 @@ public class fragmentGoals extends Fragment implements View.OnClickListener, Tex
     private static final String ARG_PARAM2 = "param2";
     private String mParam1;
     private String mParam2;
-    private changesSynced goalsChangesSynced = new changesSynced(false);
+    private ChangesSynced goalsChangesSynced = new ChangesSynced(false);
 
     // Required empty public constructor
-    public fragmentGoals() {
+    public FragmentGoals() {
     }
 
     /**
@@ -100,10 +100,10 @@ public class fragmentGoals extends Fragment implements View.OnClickListener, Tex
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment fragmentGoals.
+     * @return A new instance of fragment FragmentGoals.
      */
-    public static fragmentGoals newInstance(String param1, String param2) {
-        fragmentGoals fragment = new fragmentGoals();
+    public static FragmentGoals newInstance(String param1, String param2) {
+        FragmentGoals fragment = new FragmentGoals();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -215,7 +215,7 @@ public class fragmentGoals extends Fragment implements View.OnClickListener, Tex
         mExitAnimation.setDuration(600);
         mExitAnimation.setFillAfter(true);
 
-        goalsChangesSynced.setListener(new changesSynced.ChangeListener() {
+        goalsChangesSynced.setListener(new ChangesSynced.ChangeListener() {
             @Override
             public void onChange() {
                 Log.d("goalsChangesSynced", goalsChangesSynced.isSynced() + "");
@@ -268,7 +268,7 @@ public class fragmentGoals extends Fragment implements View.OnClickListener, Tex
 
         addTextWatchers();
         goalsChangesSynced.setSynced(false);
-        ((activitySettings) getActivity()).setChangesSynced(goalsChangesSynced.isSynced());
+        ((ActivitySettings) getActivity()).setChangesSynced(goalsChangesSynced.isSynced());
     }
 
     private void updateGUI() {
@@ -356,7 +356,7 @@ public class fragmentGoals extends Fragment implements View.OnClickListener, Tex
             lblValueFat.setText("~" + Math.round(fat * 9 * 100 / calories) + " %");
 
             goalsChangesSynced.setSynced(false);
-            ((activitySettings) getActivity()).setChangesSynced(goalsChangesSynced.isSynced());
+            ((ActivitySettings) getActivity()).setChangesSynced(goalsChangesSynced.isSynced());
 
             addTextWatchers();
         }
@@ -462,7 +462,7 @@ public class fragmentGoals extends Fragment implements View.OnClickListener, Tex
         updateValues();
         validateFields();
         goalsChangesSynced.setSynced(true);
-        ((activitySettings) getActivity()).setChangesSynced(goalsChangesSynced.isSynced());
+        ((ActivitySettings) getActivity()).setChangesSynced(goalsChangesSynced.isSynced());
     }
 
     private void captureOldValues() {
@@ -684,7 +684,7 @@ public class fragmentGoals extends Fragment implements View.OnClickListener, Tex
                             hideProgressDialog();
 
                             goalsChangesSynced.setSynced(false);
-                            ((activitySettings) getActivity()).setChangesSynced(goalsChangesSynced.isSynced());
+                            ((ActivitySettings) getActivity()).setChangesSynced(goalsChangesSynced.isSynced());
 
                             Toast.makeText(context,"Goals updated",Toast.LENGTH_SHORT).show();
                         }
@@ -811,7 +811,7 @@ public class fragmentGoals extends Fragment implements View.OnClickListener, Tex
         setInitialValues();
 
         goalsChangesSynced.setSynced(false);
-        ((activitySettings) getActivity()).setChangesSynced(goalsChangesSynced.isSynced());
+        ((ActivitySettings) getActivity()).setChangesSynced(goalsChangesSynced.isSynced());
     }
 
     // Unused

@@ -1,4 +1,4 @@
-package com.karimchehab.IIFYM.Activities.Main;
+package com.karimchehab.IIFYM.Activities.Application;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -32,7 +32,7 @@ import com.karimchehab.IIFYM.Models.Food;
 import com.karimchehab.IIFYM.Models.Ingredient;
 import com.karimchehab.IIFYM.Models.Weight;
 import com.karimchehab.IIFYM.R;
-import com.karimchehab.IIFYM.ViewComponents.AdapterIngredients;
+import com.karimchehab.IIFYM.Views.AdapterIngredients;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -41,7 +41,7 @@ import java.util.Locale;
 
 import info.hoang8f.android.segmented.SegmentedGroup;
 
-public class activityCreateMeal extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class ActivityCreateMeal extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     // GUI
     private ListView            listviewIngredients;
@@ -169,7 +169,7 @@ public class activityCreateMeal extends AppCompatActivity implements AdapterView
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                new DatePickerDialog(activityCreateMeal.this, date, myCalendar
+                new DatePickerDialog(ActivityCreateMeal.this, date, myCalendar
                         .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                         myCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }
@@ -240,7 +240,7 @@ public class activityCreateMeal extends AppCompatActivity implements AdapterView
                 else {
                     Toast.makeText(context,"New meal created",Toast.LENGTH_SHORT).show();
                 }
-                Intent intent = new Intent(getApplicationContext(), activityHome.class);
+                Intent intent = new Intent(getApplicationContext(), ActivityHome.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
                 finish();
@@ -331,7 +331,7 @@ public class activityCreateMeal extends AppCompatActivity implements AdapterView
     }
 
     private void showAlertDialog(String title, String message){
-        AlertDialog.Builder builder = new AlertDialog.Builder(activityCreateMeal.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(ActivityCreateMeal.this);
         builder.setTitle(title)
                 .setMessage(message);
         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {

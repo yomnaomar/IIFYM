@@ -1,4 +1,4 @@
-package com.karimchehab.IIFYM.Activities.Main;
+package com.karimchehab.IIFYM.Activities.Application;
 
 import android.content.Context;
 import android.content.Intent;
@@ -18,13 +18,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.karimchehab.IIFYM.Activities.Settings.activitySettings;
-import com.karimchehab.IIFYM.Activities.UserLoginAuthentication.activitySelectAuthentication;
+import com.karimchehab.IIFYM.Activities.Settings.ActivitySettings;
+import com.karimchehab.IIFYM.Activities.Authentication.ActivitySelectAuthentication;
 import com.karimchehab.IIFYM.Database.SharedPreferenceHelper;
 import com.karimchehab.IIFYM.Models.DateHelper;
 import com.karimchehab.IIFYM.R;
 
-public class activityHome extends AppCompatActivity implements View.OnClickListener{
+public class ActivityHome extends AppCompatActivity implements View.OnClickListener{
     // GUI
     private TextView                lblSelectedDate;
     private ViewPager               viewPager;
@@ -35,7 +35,7 @@ public class activityHome extends AppCompatActivity implements View.OnClickListe
     // Variables
     private Context             context;
     private int                 selectedRelativeDay = 0; // relative to today in days
-    private fragmentDay[]       fragments;
+    private FragmentDay[]       fragments;
 
     // Database
     private SharedPreferenceHelper myPrefs;
@@ -51,7 +51,7 @@ public class activityHome extends AppCompatActivity implements View.OnClickListe
         if(session_uid.isEmpty()){
             // Go to activityLogin
             Intent intent = new Intent();
-            intent.setClass(context, activitySelectAuthentication.class);
+            intent.setClass(context, ActivitySelectAuthentication.class);
             startActivity(intent);
             finish();
         }
@@ -86,7 +86,7 @@ public class activityHome extends AppCompatActivity implements View.OnClickListe
     private void goToAddDailyItem() {
         Context context = getApplicationContext();
         Intent intent = new Intent();
-        intent.setClass(context,activitySelectDailyItem.class);
+        intent.setClass(context,ActivitySelectDailyItem.class);
         startActivity(intent);
     }
 
@@ -101,16 +101,16 @@ public class activityHome extends AppCompatActivity implements View.OnClickListe
                 goToToday();
                 return true;
             case (R.id.actionNutritionSettings):
-                intent = new Intent(context,activitySettings.class );
+                intent = new Intent(context,ActivitySettings.class );
                 startActivity(intent);
                 return true;
             case (R.id.actionFoodManager):
-                intent = new Intent(context, activityFoodManager.class);
+                intent = new Intent(context, ActivityFoodManager.class);
                 startActivity(intent);
                 return true;
             case (R.id.menuLogout):
                 signOut();
-                intent = new Intent(context, activitySelectAuthentication.class);
+                intent = new Intent(context, ActivitySelectAuthentication.class);
                 startActivity(intent);
                 finish();
                 break;
@@ -129,7 +129,7 @@ public class activityHome extends AppCompatActivity implements View.OnClickListe
      * @param viewPager
      */
     private void setupViewPager(final ViewPager viewPager) {
-       fragments = new fragmentDay[] {
+       fragments = new FragmentDay[] {
                 createFragment(selectedRelativeDay - 1),
                 createFragment(selectedRelativeDay),
                 createFragment(selectedRelativeDay + 1)
@@ -184,8 +184,8 @@ public class activityHome extends AppCompatActivity implements View.OnClickListe
      * @param relative 0 today, negative before today, positive after today.
      * @return
      */
-    private fragmentDay createFragment(int relative) {
-        fragmentDay f = new fragmentDay();
+    private FragmentDay createFragment(int relative) {
+        FragmentDay f = new FragmentDay();
         DateHelper.StringDate day = DateHelper.getDateRelativeToToday(relative);
         f.setDate(day);
         return f;
@@ -258,7 +258,7 @@ public class activityHome extends AppCompatActivity implements View.OnClickListe
         myPrefs.addPreference("session_uid", "");
         firebaseAuth.signOut();
         Intent intent = new Intent();
-        intent.setClass(context, activitySelectAuthentication.class);
+        intent.setClass(context, ActivitySelectAuthentication.class);
         startActivity(intent);
     }
 }

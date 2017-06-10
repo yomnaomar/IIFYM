@@ -14,13 +14,13 @@ import com.karimchehab.IIFYM.Database.SQLiteConnector;
 import com.karimchehab.IIFYM.Database.SharedPreferenceHelper;
 import com.karimchehab.IIFYM.Models.User;
 import com.karimchehab.IIFYM.R;
-import com.karimchehab.IIFYM.ViewComponents.tabsAdapter;
+import com.karimchehab.IIFYM.Views.AdapterTabs;
 
-public class activitySettings extends AppCompatActivity implements ActionBar.TabListener {
+public class ActivitySettings extends AppCompatActivity implements ActionBar.TabListener {
 
     // GUI
     private ViewPager viewPager;
-    private tabsAdapter myTabAdapter;
+    private AdapterTabs myTabAdapter;
     private ActionBar actionBar;
 
     // Tab Titles & Icons
@@ -51,7 +51,7 @@ public class activitySettings extends AppCompatActivity implements ActionBar.Tab
         // Tab Initialization
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         actionBar = getSupportActionBar();
-        myTabAdapter = new tabsAdapter(getSupportFragmentManager());
+        myTabAdapter = new AdapterTabs(getSupportFragmentManager());
 
         viewPager.setAdapter(myTabAdapter);
         actionBar.setHomeButtonEnabled(false);
@@ -104,7 +104,7 @@ public class activitySettings extends AppCompatActivity implements ActionBar.Tab
     }
 
     private void showAlertDialog(String title, String message){
-        AlertDialog.Builder builder = new AlertDialog.Builder(activitySettings.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(ActivitySettings.this);
         builder.setTitle(title)
                 .setMessage(message);
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {

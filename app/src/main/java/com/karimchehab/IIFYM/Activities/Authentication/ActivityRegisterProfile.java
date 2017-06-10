@@ -1,4 +1,4 @@
-package com.karimchehab.IIFYM.Activities.UserLoginAuthentication;
+package com.karimchehab.IIFYM.Activities.Authentication;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -24,7 +24,7 @@ import android.widget.TextView;
 
 import com.karimchehab.IIFYM.Database.SharedPreferenceHelper;
 import com.karimchehab.IIFYM.R;
-import com.karimchehab.IIFYM.ViewComponents.DecimalDigitsInputFilter;
+import com.karimchehab.IIFYM.Views.DecimalDigitsInputFilter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
@@ -35,7 +35,7 @@ import java.util.GregorianCalendar;
 
 import info.hoang8f.android.segmented.SegmentedGroup;
 
-public class activityRegisterProfile extends AppCompatActivity implements View.OnClickListener, com.wdullaer.materialdatetimepicker.date.DatePickerDialog.OnDateSetListener {
+public class ActivityRegisterProfile extends AppCompatActivity implements View.OnClickListener, com.wdullaer.materialdatetimepicker.date.DatePickerDialog.OnDateSetListener {
 
     // GUI
     private String              uid, email;
@@ -281,7 +281,7 @@ public class activityRegisterProfile extends AppCompatActivity implements View.O
         intent.putExtra("height2", height2);
         intent.putExtra("workoutFreq", workoutFreq);
         intent.putExtra("goal", goal);
-        intent.setClass(context, activityRegisterGoals.class);
+        intent.setClass(context, ActivityRegisterGoals.class);
         startActivity(intent);
     }
 

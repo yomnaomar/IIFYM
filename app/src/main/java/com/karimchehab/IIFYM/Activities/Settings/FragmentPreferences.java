@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 
 import com.karimchehab.IIFYM.R;
 
-public class fragmentPreferences extends Fragment {
+public class FragmentPreferences extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -23,7 +23,7 @@ public class fragmentPreferences extends Fragment {
 
     private boolean preferenceChangesMade = false;
 
-    public fragmentPreferences() {
+    public FragmentPreferences() {
         // Required empty public constructor
     }
 
@@ -33,11 +33,11 @@ public class fragmentPreferences extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment fragmentPreferences.
+     * @return A new instance of fragment FragmentPreferences.
      */
     // TODO: Rename and change types and number of parameters
-    public static fragmentPreferences newInstance(String param1, String param2) {
-        fragmentPreferences fragment = new fragmentPreferences();
+    public static FragmentPreferences newInstance(String param1, String param2) {
+        FragmentPreferences fragment = new FragmentPreferences();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);

@@ -1,4 +1,4 @@
-package com.karimchehab.IIFYM.Activities.Main;
+package com.karimchehab.IIFYM.Activities.Application;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
@@ -28,8 +28,8 @@ import com.karimchehab.IIFYM.Models.Food;
 import com.karimchehab.IIFYM.Models.Ingredient;
 import com.karimchehab.IIFYM.Models.Weight;
 import com.karimchehab.IIFYM.R;
-import com.karimchehab.IIFYM.ViewComponents.AdapterIngredients;
-import com.karimchehab.IIFYM.ViewComponents.DecimalDigitsInputFilter;
+import com.karimchehab.IIFYM.Views.AdapterIngredients;
+import com.karimchehab.IIFYM.Views.DecimalDigitsInputFilter;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
@@ -42,7 +42,7 @@ import java.util.Locale;
  * Created by Yomna on 2/28/2017.
  */
 
-public class activityAddDailyItem extends AppCompatActivity implements TextWatcher {
+public class ActivityAddDailyItem extends AppCompatActivity implements TextWatcher {
 
     //GUI
     private TextView        lblName, lblBrand, lblCalories, lblCarbs, lblProtein, lblFat, lblPortionType;
@@ -152,7 +152,7 @@ public class activityAddDailyItem extends AppCompatActivity implements TextWatch
 
             @Override
             public void onClick(View v) {
-                new DatePickerDialog(activityAddDailyItem.this, date, myCalendar
+                new DatePickerDialog(ActivityAddDailyItem.this, date, myCalendar
                         .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                         myCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }
@@ -235,13 +235,13 @@ public class activityAddDailyItem extends AppCompatActivity implements TextWatch
         String date = etxtDate.getText().toString();
         DB_SQLite.createDailyItem(fid, portionMultiplier, date);
         Toast.makeText(context,"Food added to daily log",Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(getBaseContext(), activityHome.class);
+        Intent intent = new Intent(getBaseContext(), ActivityHome.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         finish();
     }
 
-    // Returns to activityHome without making any changes
+    // Returns to ActivityHome without making any changes
     @Override public void onBackPressed() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Cancel?")

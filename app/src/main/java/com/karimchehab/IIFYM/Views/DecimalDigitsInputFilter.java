@@ -1,4 +1,4 @@
-package com.karimchehab.IIFYM.ViewComponents;
+package com.karimchehab.IIFYM.Views;
 
 import android.text.InputFilter;
 import android.text.Spanned;

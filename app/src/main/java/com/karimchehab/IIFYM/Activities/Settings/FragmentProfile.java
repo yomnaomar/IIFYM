@@ -37,7 +37,7 @@ import com.karimchehab.IIFYM.Database.SQLiteConnector;
 import com.karimchehab.IIFYM.Database.SharedPreferenceHelper;
 import com.karimchehab.IIFYM.Models.User;
 import com.karimchehab.IIFYM.R;
-import com.karimchehab.IIFYM.ViewComponents.DecimalDigitsInputFilter;
+import com.karimchehab.IIFYM.Views.DecimalDigitsInputFilter;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog.OnDateSetListener;
 
@@ -48,7 +48,7 @@ import java.util.GregorianCalendar;
 import info.hoang8f.android.segmented.SegmentedGroup;
 
 
-public class fragmentProfile extends Fragment implements View.OnClickListener, OnDateSetListener, TextWatcher, AdapterView.OnItemSelectedListener {
+public class FragmentProfile extends Fragment implements View.OnClickListener, OnDateSetListener, TextWatcher, AdapterView.OnItemSelectedListener {
 
     // GUI
     private String              uid;
@@ -84,10 +84,10 @@ public class fragmentProfile extends Fragment implements View.OnClickListener, O
     private String mParam1;
     private String mParam2;
 
-    private changesSynced profileChangesSynced = new changesSynced(false);
+    private ChangesSynced profileChangesSynced = new ChangesSynced(false);
 
     // Required empty public constructor
-    public fragmentProfile() {}
+    public FragmentProfile() {}
 
     /**
      * Use this factory method to create a new instance of
@@ -95,10 +95,10 @@ public class fragmentProfile extends Fragment implements View.OnClickListener, O
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment fragmentProfile.
+     * @return A new instance of fragment FragmentProfile.
      */
-    public static fragmentProfile newInstance(String param1, String param2) {
-        fragmentProfile fragment = new fragmentProfile();
+    public static FragmentProfile newInstance(String param1, String param2) {
+        FragmentProfile fragment = new FragmentProfile();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -185,7 +185,7 @@ public class fragmentProfile extends Fragment implements View.OnClickListener, O
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 profileChangesSynced.setSynced(true);
-                ((activitySettings) getActivity()).setChangesSynced(profileChangesSynced.isSynced());
+                ((ActivitySettings) getActivity()).setChangesSynced(profileChangesSynced.isSynced());
             }
         });
 
@@ -193,7 +193,7 @@ public class fragmentProfile extends Fragment implements View.OnClickListener, O
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 profileChangesSynced.setSynced(true);
-                ((activitySettings) getActivity()).setChangesSynced(profileChangesSynced.isSynced());
+                ((ActivitySettings) getActivity()).setChangesSynced(profileChangesSynced.isSynced());
                 unitSystemChange();
             }
         });
@@ -209,7 +209,7 @@ public class fragmentProfile extends Fragment implements View.OnClickListener, O
         spinnerWorkoutFreq.setAdapter(adapterWorkoutFreq);
         spinnerGoals.setAdapter(adapterGoals);
 
-        profileChangesSynced.setListener(new changesSynced.ChangeListener() {
+        profileChangesSynced.setListener(new ChangesSynced.ChangeListener() {
             @Override
             public void onChange() {
                 Log.d("profileChangesSynced", profileChangesSynced.isSynced() + "");
@@ -269,7 +269,7 @@ public class fragmentProfile extends Fragment implements View.OnClickListener, O
         spinnerGoals.setOnItemSelectedListener(this);
 
         profileChangesSynced.setSynced(false);
-        ((activitySettings) getActivity()).setChangesSynced(profileChangesSynced.isSynced());
+        ((ActivitySettings) getActivity()).setChangesSynced(profileChangesSynced.isSynced());
     }
 
     @Override public void onClick(View v) {
@@ -324,7 +324,7 @@ public class fragmentProfile extends Fragment implements View.OnClickListener, O
                             hideProgressDialog();
 
                             profileChangesSynced.setSynced(false);
-                            ((activitySettings) getActivity()).setChangesSynced(profileChangesSynced.isSynced());
+                            ((ActivitySettings) getActivity()).setChangesSynced(profileChangesSynced.isSynced());
 
                             Toast.makeText(context, "Profile updated", Toast.LENGTH_SHORT).show();
                         }
@@ -586,14 +586,14 @@ public class fragmentProfile extends Fragment implements View.OnClickListener, O
 
     @Override public void onTextChanged(CharSequence s, int start, int before, int count) {
         profileChangesSynced.setSynced(true);
-        ((activitySettings) getActivity()).setChangesSynced(profileChangesSynced.isSynced());
+        ((ActivitySettings) getActivity()).setChangesSynced(profileChangesSynced.isSynced());
     }
 
     @Override public void afterTextChanged(Editable s) {}
 
     @Override public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         profileChangesSynced.setSynced(true);
-        ((activitySettings) getActivity()).setChangesSynced(profileChangesSynced.isSynced());
+        ((ActivitySettings) getActivity()).setChangesSynced(profileChangesSynced.isSynced());
     }
 
     @Override public void onNothingSelected(AdapterView<?> parent) {}

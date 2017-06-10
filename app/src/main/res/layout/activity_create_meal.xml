@@ -9,7 +9,7 @@
     android:layout_marginRight="@dimen/activity_vertical_margin"
     android:layout_marginTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
-    tools:context="com.karimchehab.IIFYM.Activities.Main.activityCreateMeal"
+    tools:context="com.karimchehab.IIFYM.Activities.Application.ActivityCreateMeal"
     tools:layout_editor_absoluteX="0dp"
     tools:layout_editor_absoluteY="81dp">
 

@@ -1,4 +1,4 @@
-package com.karimchehab.IIFYM.Activities.Main;
+package com.karimchehab.IIFYM.Activities.Application;
 
 import android.content.Context;
 import android.content.Intent;
@@ -15,12 +15,12 @@ import android.widget.TextView;
 import com.karimchehab.IIFYM.Database.SQLiteConnector;
 import com.karimchehab.IIFYM.Models.Food;
 import com.karimchehab.IIFYM.R;
-import com.karimchehab.IIFYM.ViewComponents.AdapterSavedItem;
+import com.karimchehab.IIFYM.Views.AdapterSavedItem;
 import com.github.clans.fab.FloatingActionButton;
 
 import java.util.ArrayList;
 
-public class activitySelectDailyItem extends AppCompatActivity implements AdapterView.OnItemClickListener, View.OnClickListener {
+public class ActivitySelectDailyItem extends AppCompatActivity implements AdapterView.OnItemClickListener, View.OnClickListener {
 
     // GUI
     private EditText                etxtSearch;
@@ -100,7 +100,7 @@ public class activitySelectDailyItem extends AppCompatActivity implements Adapte
         Food food = (Food) parent.getItemAtPosition(position);
         long fid = food.getId();
 
-        Intent intent = new Intent(getBaseContext(), activityAddDailyItem.class);
+        Intent intent = new Intent(getBaseContext(), ActivityAddDailyItem.class);
         intent.putExtra("fid", fid);
         startActivity(intent);
     }
@@ -117,12 +117,12 @@ public class activitySelectDailyItem extends AppCompatActivity implements Adapte
     }
 
     public void goToCreateNewFood (){
-        Intent intent = new Intent(context, activityCreateFood.class);
+        Intent intent = new Intent(context, ActivityCreateFood.class);
         startActivity(intent);
     }
 
     private void goToCreateNewMeal() {
-        Intent intent = new Intent(context, activtitySelectMealIngredients.class);
+        Intent intent = new Intent(context, ActivtitySelectMealIngredients.class);
         startActivity(intent);
     }
 }

@@ -1,4 +1,4 @@
-package com.karimchehab.IIFYM.Activities.Main;
+package com.karimchehab.IIFYM.Activities.Application;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -25,11 +25,11 @@ import com.karimchehab.IIFYM.Database.SQLiteConnector;
 import com.karimchehab.IIFYM.Models.Food;
 import com.karimchehab.IIFYM.Models.Weight;
 import com.karimchehab.IIFYM.R;
-import com.karimchehab.IIFYM.ViewComponents.DecimalDigitsInputFilter;
+import com.karimchehab.IIFYM.Views.DecimalDigitsInputFilter;
 
 import info.hoang8f.android.segmented.SegmentedGroup;
 
-public class activityEditFood extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener {
+public class ActivityEditFood extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener {
 
     // GUI
     private EditText                etxtName, etxtBrand, etxtCalories, etxtCarbs, etxtProtein, etxtFat, etxtPortionAmount;
@@ -255,7 +255,7 @@ public class activityEditFood extends AppCompatActivity implements AdapterView.O
     // TODO if true, then alert user and cancel delete opertaion
     private void deleteRecords() {DB_SQLite.deleteFood(id);}
 
-    //Returns to activityHome without making any changes
+    //Returns to ActivityHome without making any changes
     @Override public void onBackPressed() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Cancel?")

@@ -4,11 +4,11 @@ package com.karimchehab.IIFYM.Activities.Settings;
  * Created by Kareem on 27-May-17.
  */
 
-public class changesSynced {
+public class ChangesSynced {
     private boolean synced = false;
     private ChangeListener listener;
 
-    public changesSynced(boolean synced) {
+    public ChangesSynced(boolean synced) {
         this.synced = synced;
     }
 

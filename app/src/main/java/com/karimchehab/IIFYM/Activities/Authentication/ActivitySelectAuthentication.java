@@ -1,4 +1,4 @@
-package com.karimchehab.IIFYM.Activities.UserLoginAuthentication;
+package com.karimchehab.IIFYM.Activities.Authentication;
 
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
@@ -36,14 +36,14 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.karimchehab.IIFYM.Activities.Main.activityHome;
-import com.karimchehab.IIFYM.Database.Credentials;
+import com.karimchehab.IIFYM.Activities.Application.ActivityHome;
+import com.karimchehab.IIFYM.Credentials;
 import com.karimchehab.IIFYM.Database.SQLiteConnector;
 import com.karimchehab.IIFYM.Database.SharedPreferenceHelper;
 import com.karimchehab.IIFYM.Models.User;
 import com.karimchehab.IIFYM.R;
 
-public class activitySelectAuthentication extends AppCompatActivity implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener {
+public class ActivitySelectAuthentication extends AppCompatActivity implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener {
 
     // GUI
     private View            loginLinearLayout;
@@ -140,20 +140,20 @@ public class activitySelectAuthentication extends AppCompatActivity implements V
                                     // Store user session in Preferences
                                     myPrefs.addPreference("session_uid", uid);
 
-                                    // Go to activityHome
+                                    // Go to ActivityHome
                                     Intent intent = new Intent();
-                                    intent.setClass(context, activityHome.class);
+                                    intent.setClass(context, ActivityHome.class);
                                     startActivity(intent);
                                     finish();
                                 }
 
                                 // User is not Registered
                                 else {
-                                    // Go to activityRegisterProfile
+                                    // Go to ActivityRegisterProfile
                                     Intent intent = new Intent();
                                     intent.putExtra("uid", uid);
                                     intent.putExtra("email", email);
-                                    intent.setClass(context, activityRegisterProfile.class);
+                                    intent.setClass(context, ActivityRegisterProfile.class);
                                     startActivity(intent);
                                 }
                             }
@@ -195,7 +195,7 @@ public class activitySelectAuthentication extends AppCompatActivity implements V
         switch (i) {
             case R.id.btnEmailLoginIn:
                 Intent emailIntent = new Intent();
-                emailIntent.setClass(context, activityLoginEmail.class);
+                emailIntent.setClass(context, ActivityLoginEmail.class);
                 startActivity(emailIntent);
                 break;
             case R.id.btnGoogleSignIn:
@@ -251,7 +251,7 @@ public class activitySelectAuthentication extends AppCompatActivity implements V
             } else {
                 // Google Sign In failed, update UI appropriately
                 // ...
-                Toast.makeText(activitySelectAuthentication.this,
+                Toast.makeText(ActivitySelectAuthentication.this,
                     "Google sign in failed.",
                     Toast.LENGTH_SHORT)
                         .show();
@@ -276,7 +276,7 @@ public class activitySelectAuthentication extends AppCompatActivity implements V
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w("signInWithCredential", "Failed", task.getException());
-                            Toast.makeText(activitySelectAuthentication.this, "Firebase authentication failed.",
+                            Toast.makeText(ActivitySelectAuthentication.this, "Firebase authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -291,7 +291,7 @@ public class activitySelectAuthentication extends AppCompatActivity implements V
     }
 
     private void showAlertDialog(String title, String message) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(activitySelectAuthentication.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(ActivitySelectAuthentication.this);
         builder.setTitle(title)
                 .setMessage(message);
         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
@@ -349,7 +349,7 @@ public class activitySelectAuthentication extends AppCompatActivity implements V
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-        Toast.makeText(activitySelectAuthentication.this, "Connection failed.",
+        Toast.makeText(ActivitySelectAuthentication.this, "Connection failed.",
                 Toast.LENGTH_SHORT).show();
     }
 

@@ -1,4 +1,4 @@
-package com.karimchehab.IIFYM.Activities.Main;
+package com.karimchehab.IIFYM.Activities.Application;
 
 import android.content.Context;
 import android.content.Intent;
@@ -24,12 +24,12 @@ import com.karimchehab.IIFYM.Models.DateHelper;
 import com.karimchehab.IIFYM.Models.Food;
 import com.karimchehab.IIFYM.Models.User;
 import com.karimchehab.IIFYM.R;
-import com.karimchehab.IIFYM.ViewComponents.AdapterDailyItem;
-import com.karimchehab.IIFYM.ViewComponents.OnListItemDeletedListener;
+import com.karimchehab.IIFYM.Views.AdapterDailyItem;
+import com.karimchehab.IIFYM.Views.OnListItemDeletedListener;
 
 import java.util.ArrayList;
 
-public class fragmentDay extends Fragment implements AdapterView.OnItemClickListener, OnListItemDeletedListener{
+public class FragmentDay extends Fragment implements AdapterView.OnItemClickListener, OnListItemDeletedListener{
 
     // GUI
     private TextView lblCaloriesCurrent, lblCarbsCurrent, lblProteinCurrent, lblFatCurrent;
@@ -59,7 +59,7 @@ public class fragmentDay extends Fragment implements AdapterView.OnItemClickList
     private User                    currentUser;
     private String                  uid;
 
-    public fragmentDay() {}
+    public FragmentDay() {}
 
     public void setDate(DateHelper.StringDate day) {
         this.date = day.date;
@@ -267,7 +267,7 @@ public class fragmentDay extends Fragment implements AdapterView.OnItemClickList
         DailyItem dailyItem = (DailyItem) parent.getItemAtPosition(position);
         int id = dailyItem.getId();
 
-        Intent intent = new Intent(activity.getBaseContext(), activityViewDailyItem.class);
+        Intent intent = new Intent(activity.getBaseContext(), ActivityViewDailyItem.class);
         intent.putExtra("id", id);
         startActivity(intent);
     }

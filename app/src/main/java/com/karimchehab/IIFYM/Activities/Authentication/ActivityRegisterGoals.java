@@ -1,4 +1,4 @@
-package com.karimchehab.IIFYM.Activities.UserLoginAuthentication;
+package com.karimchehab.IIFYM.Activities.Authentication;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -25,7 +25,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.karimchehab.IIFYM.Activities.Main.activityHome;
+import com.karimchehab.IIFYM.Activities.Application.ActivityHome;
 import com.karimchehab.IIFYM.Database.SQLiteConnector;
 import com.karimchehab.IIFYM.Database.SharedPreferenceHelper;
 import com.karimchehab.IIFYM.Models.User;
@@ -44,7 +44,7 @@ import tourguide.tourguide.Overlay;
 import tourguide.tourguide.Sequence;
 import tourguide.tourguide.ToolTip;
 
-public class activityRegisterGoals extends AppCompatActivity implements View.OnClickListener, TextWatcher {
+public class ActivityRegisterGoals extends AppCompatActivity implements View.OnClickListener, TextWatcher {
 
     // GUI
     private SegmentedGroup  seggroupDisplay;
@@ -547,7 +547,7 @@ public class activityRegisterGoals extends AppCompatActivity implements View.OnC
 
                         hideProgressDialog();
 
-                        // Go to activityHome
+                        // Go to ActivityHome
                         // Store user session in Preferences
                         myPrefs.addPreference("session_uid", uid);
                         Intent broadcastIntent = new Intent("finish_activity");
@@ -555,7 +555,7 @@ public class activityRegisterGoals extends AppCompatActivity implements View.OnC
 
                         Context context = getApplicationContext();
                         Intent intent = new Intent();
-                        intent.setClass(context, activityHome.class);
+                        intent.setClass(context, ActivityHome.class);
                         startActivity(intent);
                         finish();
                     }
@@ -734,7 +734,7 @@ public class activityRegisterGoals extends AppCompatActivity implements View.OnC
     }
 
     private void showAlertDialog(String title, String message){
-        AlertDialog.Builder builder = new AlertDialog.Builder(activityRegisterGoals.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(ActivityRegisterGoals.this);
         builder.setTitle(title)
                 .setMessage(message);
         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {

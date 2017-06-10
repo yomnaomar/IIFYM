@@ -1,4 +1,4 @@
-package com.karimchehab.IIFYM.ViewComponents;
+package com.karimchehab.IIFYM.Views;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,19 +8,18 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.karimchehab.IIFYM.Database.SQLiteConnector;
-import com.karimchehab.IIFYM.Models.Food;
+import com.karimchehab.IIFYM.Models.Ingredient;
 import com.karimchehab.IIFYM.Models.Weight;
 import com.karimchehab.IIFYM.R;
 
 /**
- * Created by Kareem on 9/13/2016.
+ * Created by Kareem on 20-May-17.
  */
 
-public class AdapterSavedItem extends ArrayAdapter<Food> {
-
+public class AdapterIngredients extends ArrayAdapter<Ingredient> {
     private SQLiteConnector DB_SQLite;
 
-    public AdapterSavedItem(Context context) {
+    public AdapterIngredients(Context context) {
         super(context, 0);
         DB_SQLite = new SQLiteConnector(getContext());
     }
@@ -28,8 +27,8 @@ public class AdapterSavedItem extends ArrayAdapter<Food> {
     @Override public View getView(int position, View convertView, ViewGroup parent) {
 
         // Get the data list_item for this position
-        Food food = getItem(position);
-        long id = food.getId();
+        Ingredient ingredient = getItem(position);
+        long id = ingredient.getId();
 
         // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
@@ -45,33 +44,37 @@ public class AdapterSavedItem extends ArrayAdapter<Food> {
         TextView portion = (TextView) convertView.findViewById(R.id.lblPortionDetails);
 
         // Populate the data into the template view using the data object
-        name.setText(food.getName());
-        brand.setText(food.getBrand());
-        if (food.getBrand().isEmpty())
+        name.setText(ingredient.getName() + "");
+        brand.setText(ingredient.getBrand() + "");
+        if (ingredient.getBrand().isEmpty())
             brand.setVisibility(View.GONE);
         else
             brand.setVisibility(View.VISIBLE);
-        calories.setText(String.valueOf(food.getCalories()) + " cals");
-        carbs.setText(String.valueOf(food.getCarbs()) + " c");
-        protein.setText(String.valueOf(food.getProtein()) + " p");
-        fat.setText(String.valueOf(food.getFat()) + " f");
 
         float   serving_number;
         Weight  weight;
 
-        if (food.getPortionType() == 0) { // Serving
+        float multiplier = ingredient.getMultiplier();
+
+        if (ingredient.getPortionType() == 0) { // Serving
             serving_number = DB_SQLite.retrieveServing(id);
-            if (serving_number == 1.0f) {
-                portion.setText(serving_number + " Serving");
+            if (serving_number * multiplier == 1.0f) {
+                portion.setText(serving_number * multiplier + " Serving");
             } else {
-                portion.setText(serving_number + " Servings");
+                portion.setText(serving_number * multiplier + " Servings");
             }
-        } else if (food.getPortionType() == 1) { // Weight
+        } else if (ingredient.getPortionType() == 1) { // Weight
             weight = DB_SQLite.retrieveWeight(id);
-            portion.setText(weight.getAmount() + " " + weight.getUnit().Abbreviate());
+            portion.setText(weight.getAmount() * multiplier + " " + weight.getUnit().Abbreviate());
         }
+
+        calories.setText(String.valueOf(ingredient.getCalories() * multiplier) + " cals");
+        carbs.setText(String.valueOf(ingredient.getCarbs() * multiplier) + " c");
+        protein.setText(String.valueOf(ingredient.getProtein() * multiplier) + " p");
+        fat.setText(String.valueOf(ingredient.getFat() * multiplier) + " f");
 
         // Return the completed view to render on screen
         return convertView;
     }
 }
+

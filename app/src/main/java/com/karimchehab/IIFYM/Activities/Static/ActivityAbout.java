@@ -1,4 +1,4 @@
-package com.karimchehab.IIFYM.Activities.Misc;
+package com.karimchehab.IIFYM.Activities.Static;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.karimchehab.IIFYM.R;
 
-public class activityAbout extends AppCompatActivity implements View.OnClickListener {
+public class ActivityAbout extends AppCompatActivity implements View.OnClickListener {
 
     TextView    lblEmailLink, lblPortfolioLink, lblGithubLink, lblPrivacyPolicyLink;
 

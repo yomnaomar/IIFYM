@@ -1,4 +1,4 @@
-package com.karimchehab.IIFYM.ViewComponents;
+package com.karimchehab.IIFYM.Views;
 
 /**
  * Created by Kareem on 12-Mar-17.

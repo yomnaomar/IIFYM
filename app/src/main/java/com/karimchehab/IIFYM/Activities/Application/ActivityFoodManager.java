@@ -1,4 +1,4 @@
-package com.karimchehab.IIFYM.Activities.Main;
+package com.karimchehab.IIFYM.Activities.Application;
 
 import android.content.Context;
 import android.content.Intent;
@@ -6,8 +6,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -17,34 +15,41 @@ import android.widget.TextView;
 import com.karimchehab.IIFYM.Database.SQLiteConnector;
 import com.karimchehab.IIFYM.Models.Food;
 import com.karimchehab.IIFYM.R;
-import com.karimchehab.IIFYM.ViewComponents.AdapterSavedItem;
+import com.karimchehab.IIFYM.Views.AdapterSavedItem;
 
 import java.util.ArrayList;
 
-public class activtitySelectMealIngredients extends AppCompatActivity implements AdapterView.OnItemClickListener {
+public class ActivityFoodManager extends AppCompatActivity implements AdapterView.OnItemClickListener{
 
     // GUI
     private EditText                etxtSearch;
     private TextView                lblFrequent;
-    private AdapterSavedItem        adapterSelectedFoods, adapterSavedItem;
-    private ListView                listviewSelectedFoods, listviewSavedItems;
+    private AdapterSavedItem        adapterSavedItem;
+    private ListView                listviewSavedItems;
 
     // Database
     private SQLiteConnector DB_SQLite;
-    private Context context;
+    private Context         context;
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_activtity_select_meal_ingredients);
+        setContentView(R.layout.activity_food_manager);
 
         // Database
         context = getApplicationContext();
         DB_SQLite = new SQLiteConnector(context);
 
-        initializeGUI();
+        // GUI
+        intializeGUI();
     }
 
-    private void initializeGUI() {
+    @Override protected void onResume() {
+        super.onResume();
+        final String search = etxtSearch.getText().toString();
+        filterSavedItems(search);
+    }
+
+    private void intializeGUI() {
         // Search Functionality
         etxtSearch = (EditText) findViewById(R.id.etxtSearch);
         etxtSearch.addTextChangedListener(new TextWatcher() {
@@ -60,52 +65,25 @@ public class activtitySelectMealIngredients extends AppCompatActivity implements
         lblFrequent = (TextView) findViewById(R.id.lblFrequent);
 
         // List View
-        adapterSelectedFoods = new AdapterSavedItem(this);
-        listviewSelectedFoods = (ListView) findViewById(R.id.listviewSelectedFoods);
-        listviewSelectedFoods.setAdapter(adapterSelectedFoods);
-        //TODO Implement Swipe to delete
-
         adapterSavedItem = new AdapterSavedItem(this);
         listviewSavedItems = (ListView) findViewById(R.id.listviewSavedItems);
         listviewSavedItems.setAdapter(adapterSavedItem);
         listviewSavedItems.setOnItemClickListener(this);
     }
 
-    @Override public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_select_meal_ingredients, menu);
-        return true;
-    }
+    // TODO implement case where Food is Meal
+    @Override public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Food food = (Food) parent.getItemAtPosition(position);
+        long fid = food.getId();
 
-    @Override public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar list_item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        if (id == R.id.menu_next) {
-            goToActivityCreateMeal();
-            return true;
+        if (!food.isMeal()) {
+            Intent intent = new Intent(getBaseContext(), ActivityEditFood.class);
+            intent.putExtra("id", fid);
+            startActivity(intent);
         }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    private void goToActivityCreateMeal() {
-        int ingredientCount = adapterSelectedFoods.getCount();
-        long[] ingredients = new long[ingredientCount];
-        for (int i = 0; i < ingredientCount; i ++){
-            ingredients[i] = adapterSelectedFoods.getItem(i).getId();
+        else if (food.isMeal()) {
+            // TODO implement case where Food is Meal
         }
-        Intent newIntent = new Intent(getApplicationContext(), activityCreateMeal.class);
-        newIntent.putExtra("ingredients", ingredients);
-        startActivity(newIntent);
-    }
-
-    @Override protected void onResume() {
-        super.onResume();
-        final String search = etxtSearch.getText().toString();
-        filterSavedItems(search);
     }
 
     // Updates adapterSavedItem and arrSavedItems to display either:
@@ -126,10 +104,5 @@ public class activtitySelectMealIngredients extends AppCompatActivity implements
         for (int i = 0; i < arrSavedItems.size(); i++) {
             adapterSavedItem.add(arrSavedItems.get(i));
         }
-    }
-
-    @Override public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Food food = (Food) parent.getItemAtPosition(position);
-        adapterSelectedFoods.add(food);
     }
 }

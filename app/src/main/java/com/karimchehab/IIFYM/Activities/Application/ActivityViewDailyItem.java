@@ -1,4 +1,4 @@
-package com.karimchehab.IIFYM.Activities.Main;
+package com.karimchehab.IIFYM.Activities.Application;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import lecho.lib.hellocharts.model.PieChartData;
 import lecho.lib.hellocharts.view.PieChartView;
 
-public class activityViewDailyItem extends AppCompatActivity implements View.OnClickListener {
+public class ActivityViewDailyItem extends AppCompatActivity implements View.OnClickListener {
 
     // GUI
     private TextView                lblName, lblBrand, lblCalories, lblCarbs, lblProtein, lblFat, lblPortionAmount, lblPortionType;

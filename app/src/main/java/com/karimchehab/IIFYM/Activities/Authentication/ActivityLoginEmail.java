@@ -1,4 +1,4 @@
-package com.karimchehab.IIFYM.Activities.UserLoginAuthentication;
+package com.karimchehab.IIFYM.Activities.Authentication;
 
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
@@ -39,13 +39,13 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.karimchehab.IIFYM.Activities.Main.activityHome;
+import com.karimchehab.IIFYM.Activities.Application.ActivityHome;
 import com.karimchehab.IIFYM.Database.SQLiteConnector;
 import com.karimchehab.IIFYM.Database.SharedPreferenceHelper;
 import com.karimchehab.IIFYM.Models.User;
 import com.karimchehab.IIFYM.R;
 
-public class activityLoginEmail extends AppCompatActivity implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener, TextWatcher {
+public class ActivityLoginEmail extends AppCompatActivity implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener, TextWatcher {
 
     // GUI
     private View loginLinearLayout;
@@ -203,20 +203,20 @@ public class activityLoginEmail extends AppCompatActivity implements View.OnClic
                                     // Store user session in Preferences
                                     myPrefs.addPreference("session_uid", uid);
 
-                                    // Go to activityHome
+                                    // Go to ActivityHome
                                     Intent intent = new Intent();
-                                    intent.setClass(context, activityHome.class);
+                                    intent.setClass(context, ActivityHome.class);
                                     startActivity(intent);
                                     finish();
                                 }
 
                                 // User is not Registered
                                 else {
-                                    // Go to activityRegisterProfile
+                                    // Go to ActivityRegisterProfile
                                     Intent intent = new Intent();
                                     intent.putExtra("uid", uid);
                                     intent.putExtra("email", email);
-                                    intent.setClass(context, activityRegisterProfile.class);
+                                    intent.setClass(context, ActivityRegisterProfile.class);
                                     startActivity(intent);
                                 }
                             } else {
@@ -397,7 +397,7 @@ public class activityLoginEmail extends AppCompatActivity implements View.OnClic
     // ---------------------------------------------------------------------------------------------
 
     private void showAlertDialog(String title, String message) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(activityLoginEmail.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(ActivityLoginEmail.this);
         builder.setTitle(title)
                 .setMessage(message);
         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
@@ -502,7 +502,7 @@ public class activityLoginEmail extends AppCompatActivity implements View.OnClic
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-        Toast.makeText(activityLoginEmail.this, "Connection failed.",
+        Toast.makeText(ActivityLoginEmail.this, "Connection failed.",
                 Toast.LENGTH_SHORT).show();
     }
 
