@@ -82,7 +82,7 @@ public class activitySelectAuthentication extends AppCompatActivity implements V
 
         // Buttons
         findViewById(R.id.btnEmailLoginIn).setOnClickListener(this);
-        //findViewById(R.id.btnGoogleSignIn).setOnClickListener(this);
+        findViewById(R.id.btnGoogleSignIn).setOnClickListener(this);
 
         // Privacy Policy
         lblPrivacyPolicyLink = (TextView) findViewById(R.id.lblPrivacyPolicyLink);
@@ -198,9 +198,9 @@ public class activitySelectAuthentication extends AppCompatActivity implements V
                 emailIntent.setClass(context, activityLoginEmail.class);
                 startActivity(emailIntent);
                 break;
-            /*case R.id.btnGoogleSignIn:
+            case R.id.btnGoogleSignIn:
                 signInGoogle();
-                break;*/
+                break;
             case R.id.lblPrivacyPolicyLink:
                 Intent privacypolicyIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://karim-chehab.weebly.com/iifym-privacy-policy.html"));
                 startActivity(privacypolicyIntent);
@@ -215,7 +215,7 @@ public class activitySelectAuthentication extends AppCompatActivity implements V
         // Configure sign-in to request the user's ID, email address, and basic
         // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(Credentials.IIFYM_SERVER_CLIENT_ID)
+//                .requestIdToken(Credentials.IIFYM_SERVER_CLIENT_ID)
                 .requestEmail()
                 .build();
 
