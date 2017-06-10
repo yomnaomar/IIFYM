@@ -8,13 +8,9 @@ import com.karimchehab.IIFYM.Activities.Settings.FragmentGoals;
 import com.karimchehab.IIFYM.Activities.Settings.FragmentPreferences;
 import com.karimchehab.IIFYM.Activities.Settings.FragmentProfile;
 
-/**
- * Created by Yomna on 5/26/2017.
- */
+public class AdapterSettingsTabs extends FragmentPagerAdapter {
 
-public class AdapterTabs extends FragmentPagerAdapter {
-
-    public AdapterTabs(FragmentManager fm) {
+    public AdapterSettingsTabs(FragmentManager fm) {
         super(fm);
     }
 

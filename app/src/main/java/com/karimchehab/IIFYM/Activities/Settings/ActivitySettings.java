@@ -14,13 +14,13 @@ import com.karimchehab.IIFYM.Database.SQLiteConnector;
 import com.karimchehab.IIFYM.Database.SharedPreferenceHelper;
 import com.karimchehab.IIFYM.Models.User;
 import com.karimchehab.IIFYM.R;
-import com.karimchehab.IIFYM.Views.AdapterTabs;
+import com.karimchehab.IIFYM.Views.AdapterSettingsTabs;
 
 public class ActivitySettings extends AppCompatActivity implements ActionBar.TabListener {
 
     // GUI
     private ViewPager viewPager;
-    private AdapterTabs myTabAdapter;
+    private AdapterSettingsTabs myTabAdapter;
     private ActionBar actionBar;
 
     // Tab Titles & Icons
@@ -51,7 +51,7 @@ public class ActivitySettings extends AppCompatActivity implements ActionBar.Tab
         // Tab Initialization
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         actionBar = getSupportActionBar();
-        myTabAdapter = new AdapterTabs(getSupportFragmentManager());
+        myTabAdapter = new AdapterSettingsTabs(getSupportFragmentManager());
 
         viewPager.setAdapter(myTabAdapter);
         actionBar.setHomeButtonEnabled(false);
