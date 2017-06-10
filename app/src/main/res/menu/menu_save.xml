@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <!--xmlns:tools="http://schemas.android.com/tools"-->
-    <!--tools:context="com.karimchehab.IIFYM.Activities.Main.activityEditFood">-->
+    <!--tools:context="com.karimchehab.IIFYM.Activities.Main.ActivityEditFood">-->
 
     <item android:title="@string/lblSave"
         android:icon="@drawable/ic_save"
