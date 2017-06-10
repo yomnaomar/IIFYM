@@ -27,7 +27,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard.cfg'
         }
     }
-    productFlavors {
+
+    lintOptions {
+        htmlReport true
+        htmlOutput file("lint-report.html")
+        abortOnError true
+        warningsAsErrors true
     }
 }
 repositories {
