@@ -14,7 +14,7 @@ gen/
 
 # Local configuration file (sdk path, etc)
 local.properties
-Credentials.java
+app/src/main/java/com/karimchehab/IIFYM/Credentials.java
 *.keystore
 
 # Windows thumbnail db
