@@ -37,11 +37,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.karimchehab.IIFYM.Activities.Application.ActivityHome;
-import com.karimchehab.IIFYM.Credentials;
+import com.karimchehab.IIFYM.Database.Credentials;
 import com.karimchehab.IIFYM.Database.SQLiteConnector;
 import com.karimchehab.IIFYM.Database.SharedPreferenceHelper;
 import com.karimchehab.IIFYM.Models.User;
 import com.karimchehab.IIFYM.R;
+
 
 public class ActivitySelectAuthentication extends AppCompatActivity implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener {
 
