@@ -261,7 +261,7 @@ public class ActivitySelectAuthentication extends AppCompatActivity implements V
         }
     }
 
-    private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
+    private void firebaseAuthWithGoogle(final GoogleSignInAccount acct) {
         Log.d("firebaseAuthWithGoogle", "Account ID " + acct.getId());
 
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
@@ -273,6 +273,7 @@ public class ActivitySelectAuthentication extends AppCompatActivity implements V
                             // Sign in success, update UI with the signed-in user's information
                             Log.d("signInWithCredential", "Success");
                             FirebaseUser user = firebaseAuth.getCurrentUser();
+                            user.updateEmail(acct.getEmail());
 
                         } else {
                             // If sign in fails, display a message to the user.
