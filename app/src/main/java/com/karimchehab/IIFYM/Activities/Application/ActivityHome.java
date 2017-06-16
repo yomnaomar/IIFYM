@@ -98,7 +98,9 @@ public class ActivityHome extends AppCompatActivity implements View.OnClickListe
         Intent intent;
         switch (id){
             case (R.id.actionToday):
-                goToToday();
+                intent = new Intent(context,ActivityFatSecretSearch.class);
+                startActivity(intent);
+                //goToToday();
                 return true;
             case (R.id.actionNutritionSettings):
                 intent = new Intent(context,ActivitySettings.class );

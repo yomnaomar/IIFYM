@@ -168,20 +168,20 @@ public class ActivityFatSecretSearch extends AppCompatActivity implements Adapte
 
     @Override public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-        if (view.getId() == R.id.listviewOfflineResults){
+        if (parent.getAdapter() instanceof AdapterSavedItem){
             MyFood food = (MyFood) parent.getItemAtPosition(position);
             long fid = food.getId();
 
-            Intent intent = new Intent(getBaseContext(), ActivityAddDailyItem.class);
+            Intent intent = new Intent(context, ActivityAddDailyItem.class);
             intent.putExtra("fid", fid);
             startActivity(intent);
         }
 
-        else if (view.getId() == R.id.listviewOnlineResults){
+        else if (parent.getAdapter() instanceof AdapterFatsecretItem){
             CompactFood compactFood = (CompactFood) parent.getItemAtPosition(position);
             long compactId = compactFood.getId();
 
-            Intent intent = new Intent(getBaseContext(), ActivityAddDailyItem.class);
+            Intent intent = new Intent(context, ActivityAddDailyItem.class);
             intent.putExtra("compactId", compactId);
             startActivity(intent);
         }

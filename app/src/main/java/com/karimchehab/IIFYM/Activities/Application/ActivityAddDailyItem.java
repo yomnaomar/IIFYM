@@ -88,18 +88,22 @@ public class ActivityAddDailyItem extends AppCompatActivity implements TextWatch
         // Else myfood is retrieved by calling FatSecret API and parsing into MyFood
         Intent intent = getIntent();
         fid = intent.getLongExtra("fid", -1);
-        isCompact = false;
 
-        if (fid == -1){
-            fid = intent.getLongExtra("compactId", -1);
+
+        if (fid != -1) {
+            isCompact = false;
+            myfood = DB_SQLite.retrieveFood(fid);
+            portionType = myfood.getPortionType();
+        }
+        else {
             isCompact = true;
+            fid = intent.getLongExtra("compactId", -1);
         }
 
         // Database
         context = getApplicationContext();
         DB_SQLite = new SQLiteConnector(context);
-        myfood = DB_SQLite.retrieveFood(fid);
-        portionType = myfood.getPortionType();
+
 
         // GUI
         initializeGUI();
@@ -126,6 +130,38 @@ public class ActivityAddDailyItem extends AppCompatActivity implements TextWatch
 
     private void populateGUI_FatSecret() {
         retrieveFoodFatSecret();
+
+        lblCarbs.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(3, 1)});
+        lblProtein.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(3, 1)});
+        lblFat.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(3, 1)});
+
+        etxtPortionAmount.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(4, 1)});
+        etxtPortionAmount.addTextChangedListener(this);
+
+        final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                  int dayOfMonth) {
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, monthOfYear);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                updateGUI();
+            }
+
+        };
+
+        etxtDate.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                new DatePickerDialog(ActivityAddDailyItem.this, date, myCalendar
+                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
+        String myFormat = DateHelper.dateformat; //In which you need put here
+        sdf = new SimpleDateFormat(myFormat, Locale.US);
     }
 
     private void retrieveFoodFatSecret() {
@@ -145,21 +181,21 @@ public class ActivityAddDailyItem extends AppCompatActivity implements TextWatch
             List<Serving> servings = food.getServings();
 
             // Keep compatible serving types
+            //TODO Run with "i"
             for (int i=0; i<servings.size(); i++) {
                 Log.d("Food Name", name);
-                Log.d("Food Name", food.getType()); // Brand vs Generic
+                Log.d("Food Type", food.getType()); // Brand vs Generic
                 Log.d("Brand Name", brand); // Only when foodtype is "Brand"
-                Log.d("Description", food.getDescription());
 
-                Log.d("Serving Description", food.getServings().get(0).getServingDescription() + "");
-                Log.d("Measurement Description", food.getServings().get(0).getMeasurementDescription() + "");
-                Log.d("Measurement Unit", food.getServings().get(0).getMetricServingUnit() + "");
-                Log.d("Serving Amount", food.getServings().get(0).getMetricServingAmount()+ "");
+                Log.d("Serving Description", food.getServings().get(i).getServingDescription() + "");
+                Log.d("Measurement Description", food.getServings().get(i).getMeasurementDescription() + "");
+                Log.d("Measurement Unit", food.getServings().get(i).getMetricServingUnit() + "");
+                Log.d("Serving Amount", food.getServings().get(i).getMetricServingAmount()+ "");
 
-                Log.d("Calories", food.getServings().get(0).getCalories() + "");
-                Log.d("Carbs", food.getServings().get(0).getCarbohydrate() + "");
-                Log.d("Protein", food.getServings().get(0).getProtein() + "");
-                Log.d("Fat", food.getServings().get(0).getFat() + "");
+                Log.d("Calories", food.getServings().get(i).getCalories() + "");
+                Log.d("Carbs", food.getServings().get(i).getCarbohydrate() + "");
+                Log.d("Protein", food.getServings().get(i).getProtein() + "");
+                Log.d("Fat", food.getServings().get(i).getFat() + "");
 
 
             }
