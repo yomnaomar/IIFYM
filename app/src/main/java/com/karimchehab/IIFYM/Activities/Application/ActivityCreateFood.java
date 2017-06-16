@@ -132,7 +132,6 @@ public class ActivityCreateFood extends AppCompatActivity implements AdapterView
 
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
                 new DatePickerDialog(ActivityCreateFood.this, date, myCalendar
                         .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                         myCalendar.get(Calendar.DAY_OF_MONTH)).show();
@@ -232,11 +231,11 @@ public class ActivityCreateFood extends AppCompatActivity implements AdapterView
                 Intent intent = new Intent(getApplicationContext(), ActivityHome.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
-                Toast.makeText(context,"MyFood created and added to log",Toast.LENGTH_SHORT).show();
+                Toast.makeText(context,"Food created and added to log",Toast.LENGTH_SHORT).show();
                 finish();
             }
             else {
-                Toast.makeText(context,"MyFood created",Toast.LENGTH_SHORT).show();
+                Toast.makeText(context,"Food created",Toast.LENGTH_SHORT).show();
                 finish();
             }
 

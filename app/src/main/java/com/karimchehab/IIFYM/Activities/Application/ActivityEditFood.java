@@ -238,7 +238,7 @@ public class ActivityEditFood extends AppCompatActivity implements AdapterView.O
                     public void onClick(DialogInterface dialog, int id) {
                         // User clicked Yes button
                         deleteRecords();
-                        Toast.makeText(context,"MyFood deleted",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context,"Food deleted",Toast.LENGTH_SHORT).show();
                         finish();
                     }
                 });

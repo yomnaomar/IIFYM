@@ -58,6 +58,7 @@ public class ActivityViewDailyItem extends AppCompatActivity implements View.OnC
         Intent intent = getIntent();
         id = intent.getIntExtra("id", -1);
 
+
         // Database
         context = getApplicationContext();
         DB_SQLite = new SQLiteConnector(context);
