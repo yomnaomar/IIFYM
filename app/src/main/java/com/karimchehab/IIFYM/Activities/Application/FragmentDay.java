@@ -21,7 +21,7 @@ import com.karimchehab.IIFYM.Database.SQLiteConnector;
 import com.karimchehab.IIFYM.Database.SharedPreferenceHelper;
 import com.karimchehab.IIFYM.Models.DailyItem;
 import com.karimchehab.IIFYM.Models.DateHelper;
-import com.karimchehab.IIFYM.Models.Food;
+import com.karimchehab.IIFYM.Models.MyFood;
 import com.karimchehab.IIFYM.Models.User;
 import com.karimchehab.IIFYM.R;
 import com.karimchehab.IIFYM.Views.AdapterDailyItem;
@@ -168,7 +168,7 @@ public class FragmentDay extends Fragment implements AdapterView.OnItemClickList
         int itemCount = adapterDailyItems.getCount();
         for (int i = 0; i < itemCount; i++) {
             DailyItem dailyItem = adapterDailyItems.getItem(i);
-            Food tempFood = DB_SQLite.retrieveFood(dailyItem.getFood_id());
+            MyFood tempFood = DB_SQLite.retrieveFood(dailyItem.getFood_id());
             DailyItem tempDailyItem = DB_SQLite.retrieveDailyItem(dailyItem.getId());
             int calories = Math.round(tempFood.getCalories() * tempDailyItem.getMultiplier());
             int carbs = Math.round(tempFood.getCarbs() * tempDailyItem.getMultiplier());

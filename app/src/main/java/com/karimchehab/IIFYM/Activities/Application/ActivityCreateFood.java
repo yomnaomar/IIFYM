@@ -25,7 +25,7 @@ import android.widget.Toast;
 
 import com.karimchehab.IIFYM.Database.SQLiteConnector;
 import com.karimchehab.IIFYM.Models.DateHelper;
-import com.karimchehab.IIFYM.Models.Food;
+import com.karimchehab.IIFYM.Models.MyFood;
 import com.karimchehab.IIFYM.Models.Weight;
 import com.karimchehab.IIFYM.R;
 import com.karimchehab.IIFYM.Views.DecimalDigitsInputFilter;
@@ -186,7 +186,7 @@ public class ActivityCreateFood extends AppCompatActivity implements AdapterView
         return super.onOptionsItemSelected(item);
     }
 
-    // Inserts Food from User input to Food table in the Database
+    // Inserts MyFood from User input to MyFood table in the Database
     private void Enter() {
         boolean fieldsOk = validateFields();
         if(fieldsOk) {
@@ -210,17 +210,17 @@ public class ActivityCreateFood extends AppCompatActivity implements AdapterView
     }
 
     private void createFood(String name, String brand, int calories, float carbs, float protein, float fat, int indexofPortionType) {
-        //Initializing Food to be inserted in Database
-        Food food = new Food(name, brand, calories, carbs, protein, fat, indexofPortionType, false);
+        //Initializing MyFood to be inserted in Database
+        MyFood food = new MyFood(name, brand, calories, carbs, protein, fat, indexofPortionType, false);
 
         food.setId(DB_SQLite.createFood(food));
         id = food.getId();
         if (food.getId() != -1){
-            if (indexofPortionType == 0) { // Food is measured by servings
+            if (indexofPortionType == 0) { // MyFood is measured by servings
                 float Serving_Number = Float.parseFloat(etxtPortionAmount.getText().toString());
                 DB_SQLite.createServing(id, Serving_Number);
             }
-            else if (indexofPortionType == 1) { // Food is measured by weight
+            else if (indexofPortionType == 1) { // MyFood is measured by weight
                 int Weight_Quantity = Integer.parseInt(etxtPortionAmount.getText().toString());
                 Weight weight = new Weight(Weight_Quantity, weightUnitSelected);
                 DB_SQLite.createWeight(id, weight);
@@ -232,11 +232,11 @@ public class ActivityCreateFood extends AppCompatActivity implements AdapterView
                 Intent intent = new Intent(getApplicationContext(), ActivityHome.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
-                Toast.makeText(context,"Food created and added to log",Toast.LENGTH_SHORT).show();
+                Toast.makeText(context,"MyFood created and added to log",Toast.LENGTH_SHORT).show();
                 finish();
             }
             else {
-                Toast.makeText(context,"Food created",Toast.LENGTH_SHORT).show();
+                Toast.makeText(context,"MyFood created",Toast.LENGTH_SHORT).show();
                 finish();
             }
 

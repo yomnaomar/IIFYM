@@ -22,7 +22,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
     // Table Names
     public static final String Table_User           = "User";
-    public static final String Table_Food           = "Food";
+    public static final String Table_Food           = "MyFood";
     public static final String Table_Weight         = "Weight";
     public static final String Table_Serving        = "Serving";
     public static final String Table_DailyItem      = "DailyItem";
@@ -83,7 +83,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
     String createTable_Ingredient = "CREATE TABLE " + Table_Ingredient + " " +
             "(mid           INTEGER, " +    // mid = Meal ID
-            "fid            INTEGER, " +    // fid = Food ID
+            "fid            INTEGER, " +    // fid = MyFood ID
             "multiplier     REAL, " +
             "CONSTRAINT composed_id_pk PRIMARY KEY(mid, fid), " +
             "CONSTRAINT meal_id_fk FOREIGN KEY(mid) REFERENCES " + Table_Food + " (id) ON DELETE CASCADE, " +

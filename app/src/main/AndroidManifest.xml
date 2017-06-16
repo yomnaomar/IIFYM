@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_INTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_INTERNAL__STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
@@ -56,6 +57,7 @@
             android:label="About" />
         <activity android:name=".Activities.Authentication.ActivitySelectAuthentication" />
         <activity android:name=".Activities.Authentication.ActivityLoginEmail"></activity>
+        <activity android:name=".Activities.Application.ActivityFatSecretSearch" />
     </application>
 
 </manifest>

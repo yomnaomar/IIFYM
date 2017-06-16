@@ -4,10 +4,10 @@ package com.karimchehab.IIFYM.Models;
  * Created by Kareem on 21-May-17.
  */
 
-public class Ingredient extends Food {
+public class Ingredient extends MyFood {
     private float multiplier;
 
-    public Ingredient(Food food, float multiplier) {
+    public Ingredient(MyFood food, float multiplier) {
         super(food.getId(), food.getName(), food.getBrand(), food.getCalories(), food.getCarbs(), food.getProtein(), food.getFat(), food.getPortionType(), food.isMeal());
         this.multiplier = multiplier;
     }

@@ -13,7 +13,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.karimchehab.IIFYM.Database.SQLiteConnector;
-import com.karimchehab.IIFYM.Models.Food;
+import com.karimchehab.IIFYM.Models.MyFood;
 import com.karimchehab.IIFYM.R;
 import com.karimchehab.IIFYM.Views.AdapterSavedItem;
 
@@ -71,9 +71,9 @@ public class ActivityFoodManager extends AppCompatActivity implements AdapterVie
         listviewSavedItems.setOnItemClickListener(this);
     }
 
-    // TODO implement case where Food is Meal
+    // TODO implement case where MyFood is Meal
     @Override public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Food food = (Food) parent.getItemAtPosition(position);
+        MyFood food = (MyFood) parent.getItemAtPosition(position);
         long fid = food.getId();
 
         if (!food.isMeal()) {
@@ -82,7 +82,7 @@ public class ActivityFoodManager extends AppCompatActivity implements AdapterVie
             startActivity(intent);
         }
         else if (food.isMeal()) {
-            // TODO implement case where Food is Meal
+            // TODO implement case where MyFood is Meal
         }
     }
 
@@ -91,7 +91,7 @@ public class ActivityFoodManager extends AppCompatActivity implements AdapterVie
     // 2. Filtered Foods when user uses the ic_google_signin functionality
     private void filterSavedItems(final String search) {
         adapterSavedItem.clear();
-        ArrayList<Food> arrSavedItems;
+        ArrayList<MyFood> arrSavedItems;
 
         if (search.isEmpty()) {
             lblFrequent.setVisibility(View.VISIBLE);

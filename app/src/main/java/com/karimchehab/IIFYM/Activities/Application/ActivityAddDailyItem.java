@@ -24,7 +24,7 @@ import android.widget.Toast;
 
 import com.karimchehab.IIFYM.Database.SQLiteConnector;
 import com.karimchehab.IIFYM.Models.DateHelper;
-import com.karimchehab.IIFYM.Models.Food;
+import com.karimchehab.IIFYM.Models.MyFood;
 import com.karimchehab.IIFYM.Models.Ingredient;
 import com.karimchehab.IIFYM.Models.Weight;
 import com.karimchehab.IIFYM.R;
@@ -55,7 +55,7 @@ public class ActivityAddDailyItem extends AppCompatActivity implements TextWatch
     // Variables
     private Context         context;
     private long            fid;
-    private Food            food;
+    private MyFood food;
     private float           initialPortionServing;
     private int             initialPortionWeight;
     private float           newPortionAmount;
@@ -234,7 +234,7 @@ public class ActivityAddDailyItem extends AppCompatActivity implements TextWatch
     private void Enter() {
         String date = etxtDate.getText().toString();
         DB_SQLite.createDailyItem(fid, portionMultiplier, date);
-        Toast.makeText(context,"Food added to daily log",Toast.LENGTH_SHORT).show();
+        Toast.makeText(context,"MyFood added to daily log",Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(getBaseContext(), ActivityHome.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);

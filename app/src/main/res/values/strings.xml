@@ -180,5 +180,7 @@
     <string name="lblMealIngredients">Meal Ingredients</string>
     <string name="lblKarimEmail">karimchehab94@gmail.com</string>
     <string name="lblKarimWebsite">karim-chehab.weebly.com</string>
+    <string name="lblOfflineResults">Offline Results</string>
+    <string name="lblOnlineResults">Online Results</string>
 
 </resources>

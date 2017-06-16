@@ -8,11 +8,11 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.karimchehab.IIFYM.Database.SQLiteConnector;
-import com.karimchehab.IIFYM.Models.Food;
+import com.karimchehab.IIFYM.Models.MyFood;
 import com.karimchehab.IIFYM.Models.Weight;
 import com.karimchehab.IIFYM.R;
 
-public class AdapterSavedItem extends ArrayAdapter<Food> {
+public class AdapterSavedItem extends ArrayAdapter<MyFood> {
 
     private SQLiteConnector DB_SQLite;
 
@@ -24,7 +24,7 @@ public class AdapterSavedItem extends ArrayAdapter<Food> {
     @Override public View getView(int position, View convertView, ViewGroup parent) {
 
         // Get the data list_item for this position
-        Food food = getItem(position);
+        MyFood food = getItem(position);
         long id = food.getId();
 
         // Check if an existing view is being reused, otherwise inflate the view

@@ -22,7 +22,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.karimchehab.IIFYM.Database.SQLiteConnector;
-import com.karimchehab.IIFYM.Models.Food;
+import com.karimchehab.IIFYM.Models.MyFood;
 import com.karimchehab.IIFYM.Models.Weight;
 import com.karimchehab.IIFYM.R;
 import com.karimchehab.IIFYM.Views.DecimalDigitsInputFilter;
@@ -41,7 +41,7 @@ public class ActivityEditFood extends AppCompatActivity implements AdapterView.O
     // Variables
     private Context context;
     private long    id;
-    private Food    food;
+    private MyFood food;
     private int     weightUnitSelected = 0;
 
     // Database
@@ -238,7 +238,7 @@ public class ActivityEditFood extends AppCompatActivity implements AdapterView.O
                     public void onClick(DialogInterface dialog, int id) {
                         // User clicked Yes button
                         deleteRecords();
-                        Toast.makeText(context,"Food deleted",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context,"MyFood deleted",Toast.LENGTH_SHORT).show();
                         finish();
                     }
                 });
@@ -251,7 +251,7 @@ public class ActivityEditFood extends AppCompatActivity implements AdapterView.O
         dialog.show();
     }
 
-    // TODO check that Food is not being used as a Meal ingredient before deleteing
+    // TODO check that MyFood is not being used as a Meal ingredient before deleteing
     // TODO if true, then alert user and cancel delete opertaion
     private void deleteRecords() {DB_SQLite.deleteFood(id);}
 

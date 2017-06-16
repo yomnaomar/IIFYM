@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 import com.karimchehab.IIFYM.Database.SQLiteConnector;
 import com.karimchehab.IIFYM.Models.DailyItem;
-import com.karimchehab.IIFYM.Models.Food;
+import com.karimchehab.IIFYM.Models.MyFood;
 import com.karimchehab.IIFYM.Models.Weight;
 import com.karimchehab.IIFYM.R;
 
@@ -33,14 +33,14 @@ public class ActivityViewDailyItem extends AppCompatActivity implements View.OnC
 
     // TODO Implement listviewIngredients
     // private adapterIngredient       adapterIngredients;
-    private ArrayList<Food>         arrIngredients;
+    private ArrayList<MyFood>         arrIngredients;
     private ListView                listviewIngredients;
 
     // Variables
     private Context     context;
     private int         id;
     private long        food_id;
-    private Food        food;
+    private MyFood food;
     private DailyItem   dailyitem;
     private float       servingAmount;
     private int         weightAmount;
@@ -129,7 +129,7 @@ public class ActivityViewDailyItem extends AppCompatActivity implements View.OnC
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int view_id) {
                         if (DB_SQLite.deleteDailyItem(id) != -1)
-                            Toast.makeText(context, "Food deleted from daily log", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "MyFood deleted from daily log", Toast.LENGTH_SHORT).show();
                         else
                             Toast.makeText(context, "Unable to delete from log", Toast.LENGTH_SHORT).show();
                         finish();

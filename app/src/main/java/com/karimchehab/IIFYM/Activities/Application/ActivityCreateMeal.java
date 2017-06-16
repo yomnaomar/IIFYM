@@ -28,7 +28,7 @@ import android.widget.Toast;
 
 import com.karimchehab.IIFYM.Database.SQLiteConnector;
 import com.karimchehab.IIFYM.Models.DateHelper;
-import com.karimchehab.IIFYM.Models.Food;
+import com.karimchehab.IIFYM.Models.MyFood;
 import com.karimchehab.IIFYM.Models.Ingredient;
 import com.karimchehab.IIFYM.Models.Weight;
 import com.karimchehab.IIFYM.R;
@@ -91,7 +91,7 @@ public class ActivityCreateMeal extends AppCompatActivity implements AdapterView
 
         arrIngredients = new ArrayList<>();
         for (int i = 0; i <ingredientCount; i++){
-            Food food = DB_SQLite.retrieveFood(ingredients[i]);
+            MyFood food = DB_SQLite.retrieveFood(ingredients[i]);
             Ingredient ingredient = new Ingredient(food, 1.0f);
             arrIngredients.add(ingredient);
         }
@@ -218,15 +218,15 @@ public class ActivityCreateMeal extends AppCompatActivity implements AdapterView
             // CheckBox (Add to log?)
             isDaily = cbIsDaily.isChecked();
 
-            Food food = new Food(name, brand, calories, carbs, protein, fat, indexofPortionType, true);
+            MyFood food = new MyFood(name, brand, calories, carbs, protein, fat, indexofPortionType, true);
             long mid = DB_SQLite.createMeal(food, ingredients, multipliers);
 
             food.setId(mid);
             if (food.getId() != -1) {
-                if (indexofPortionType == 0) { // Food is measured by servings
+                if (indexofPortionType == 0) { // MyFood is measured by servings
                     float Serving_Number = Float.parseFloat(etxtPortionAmount.getText().toString());
                     DB_SQLite.createServing(mid, Serving_Number);
-                } else if (indexofPortionType == 1) { // Food is measured by weight
+                } else if (indexofPortionType == 1) { // MyFood is measured by weight
                     int Weight_Quantity = Integer.parseInt(etxtPortionAmount.getText().toString());
                     Weight weight = new Weight(Weight_Quantity, weightUnitSelected);
                     DB_SQLite.createWeight(mid, weight);

@@ -13,7 +13,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.karimchehab.IIFYM.Database.SQLiteConnector;
-import com.karimchehab.IIFYM.Models.Food;
+import com.karimchehab.IIFYM.Models.MyFood;
 import com.karimchehab.IIFYM.R;
 import com.karimchehab.IIFYM.Views.AdapterSavedItem;
 import com.github.clans.fab.FloatingActionButton;
@@ -81,7 +81,7 @@ public class ActivitySelectDailyItem extends AppCompatActivity implements Adapte
     //Updates AdapterSavedItem and arrSavedItems
     private void filterSavedItems(final String search) {
         adapterSavedItem.clear();
-        ArrayList<Food> arrSavedItems;
+        ArrayList<MyFood> arrSavedItems;
 
         if (search.isEmpty()) {
             lblFrequent.setVisibility(View.VISIBLE);
@@ -97,7 +97,7 @@ public class ActivitySelectDailyItem extends AppCompatActivity implements Adapte
     }
 
     @Override public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Food food = (Food) parent.getItemAtPosition(position);
+        MyFood food = (MyFood) parent.getItemAtPosition(position);
         long fid = food.getId();
 
         Intent intent = new Intent(getBaseContext(), ActivityAddDailyItem.class);

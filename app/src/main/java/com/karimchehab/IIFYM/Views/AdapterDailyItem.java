@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.karimchehab.IIFYM.Database.SQLiteConnector;
 import com.karimchehab.IIFYM.Models.DailyItem;
-import com.karimchehab.IIFYM.Models.Food;
+import com.karimchehab.IIFYM.Models.MyFood;
 import com.karimchehab.IIFYM.Models.Weight;
 import com.karimchehab.IIFYM.R;
 
@@ -30,7 +30,7 @@ public class AdapterDailyItem extends ArrayAdapter<DailyItem> {
         final long food_id = dailyItem.getFood_id();
         float multiplier = dailyItem.getMultiplier();
 
-        Food food = DB_SQLite.retrieveFood(food_id);
+        MyFood food = DB_SQLite.retrieveFood(food_id);
 
         // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
