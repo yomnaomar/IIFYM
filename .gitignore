@@ -68,4 +68,5 @@ ui.lnf.xml
 usageView.xml
 vcs.xml
 web-browsers.xml
-/app/google-services.json
+google-services.json
+Credentials.java
