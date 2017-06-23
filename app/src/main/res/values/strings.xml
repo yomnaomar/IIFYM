@@ -182,5 +182,9 @@
     <string name="lblKarimWebsite">karim-chehab.weebly.com</string>
     <string name="lblOfflineResults">Offline Results</string>
     <string name="lblOnlineResults">Online Results</string>
+    <string name="hintPortionType">g, cup, oz ...</string>
+    <string name="lblSpecialThanks">Special thanks to:</string>
+    <string name="lblSpecialThanksNames">"Abdul Wahab Sahyoun\nYomna Omar\nOmar Chehab </string>
+    <string name="lblSpecialThanks2">This project would not have been possible without them.</string>
 
 </resources>

@@ -12,12 +12,13 @@ public class MyFood {
     private float carbs;
     private float protein;
     private float fat;
-    private int portionType;
+    private String portionType;
+    private float portionAmount;
     private boolean isMeal;
 
     // Constructor 1
     // isMeal is boolean
-    public MyFood(long id, String name, String brand, int calories, float carbs, float protein, float fat, int portionType, boolean isMeal) {
+    public MyFood(long id, String name, String brand, int calories, float carbs, float protein, float fat, String portionType, float portionAmount, boolean isMeal) {
         this.id = id;
         this.name = name;
         this.brand = brand;
@@ -26,12 +27,13 @@ public class MyFood {
         this.protein = protein;
         this.fat = fat;
         this.portionType = portionType;
+        this.portionAmount = portionAmount;
         this.isMeal = isMeal;
     }
 
     // Constructor 2
     // isMeal is int
-    public MyFood(long id, String name, String brand, int calories, float carbs, float protein, float fat, int portionType, int isMeal) {
+    public MyFood(long id, String name, String brand, int calories, float carbs, float protein, float fat, String portionType, float portionAmount,  int isMeal) {
         this.id = id;
         this.name = name;
         this.brand = brand;
@@ -40,6 +42,7 @@ public class MyFood {
         this.protein = protein;
         this.fat = fat;
         this.portionType = portionType;
+        this.portionAmount = portionAmount;
         if(isMeal == 0)
             this.isMeal = false;
         else
@@ -48,7 +51,7 @@ public class MyFood {
 
     // Constructor 3
     // id is not a requried parameter
-    public MyFood(String name, String brand, int calories, float carbs, float protein, float fat, int portionType, boolean isMeal) {
+    public MyFood(String name, String brand, int calories, float carbs, float protein, float fat, String portionType, float portionAmount,  boolean isMeal) {
         this.name = name;
         this.brand = brand;
         this.calories = calories;
@@ -56,6 +59,7 @@ public class MyFood {
         this.fat = fat;
         this.protein = protein;
         this.portionType = portionType;
+        this.portionAmount = portionAmount;
         this.isMeal = isMeal;
     }
 
@@ -115,13 +119,17 @@ public class MyFood {
         this.fat = fat;
     }
 
-    public int getPortionType() {
+    public String getPortionType() {
         return portionType;
     }
 
-    public void setPortionType(int portionType) {
+    public void setPortionType(String portionType) {
         this.portionType = portionType;
     }
+
+    public float getPortionAmount() { return portionAmount;}
+
+    public void setPortionAmount(float portionAmount) { this.portionAmount = portionAmount; }
 
     public boolean isMeal() {
         return isMeal;

@@ -10,7 +10,6 @@ import android.widget.TextView;
 import com.karimchehab.IIFYM.Database.SQLiteConnector;
 import com.karimchehab.IIFYM.Models.DailyItem;
 import com.karimchehab.IIFYM.Models.MyFood;
-import com.karimchehab.IIFYM.Models.Weight;
 import com.karimchehab.IIFYM.R;
 
 import java.util.ArrayList;
@@ -58,20 +57,9 @@ public class AdapterDailyItem extends ArrayAdapter<DailyItem> {
         protein.setText(String.valueOf(Math.round(food.getProtein() * multiplier) + " p "));
         fat.setText(String.valueOf(Math.round(food.getFat() * multiplier) + " f "));
 
-        if (food.getPortionType() == 0) {
-            float serving_number = DB_SQLite.retrieveServing(food_id);
-            float serving_post_multiplication = serving_number * multiplier;
-            if (serving_post_multiplication == 1.0f) {
-                portion.setText(serving_post_multiplication + " Serving");
-            } else {
-                portion.setText(serving_post_multiplication + " Servings");
-            }
-        } else if (food.getPortionType() == 1) {
-            Weight weight = DB_SQLite.retrieveWeight(food_id);
-            int weight_post_multiplication = Math.round(weight.getAmount() * multiplier);
-            weight.setAmount(weight_post_multiplication);
-            portion.setText(weight.getAmount() + " " + weight.getUnit().Abbreviate());
-        }
+        float serving_post_multiplication = food.getPortionAmount() * multiplier;
+        portion.setText(serving_post_multiplication + " " + food.getPortionType());
+
         // Return the completed view to render on screen
         return convertView;
     }

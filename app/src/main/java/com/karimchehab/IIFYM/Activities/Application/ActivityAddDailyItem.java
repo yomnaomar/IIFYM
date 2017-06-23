@@ -34,7 +34,6 @@ import com.karimchehab.IIFYM.Database.SQLiteConnector;
 import com.karimchehab.IIFYM.Models.DateHelper;
 import com.karimchehab.IIFYM.Models.MyFood;
 import com.karimchehab.IIFYM.Models.Ingredient;
-import com.karimchehab.IIFYM.Models.Weight;
 import com.karimchehab.IIFYM.R;
 import com.karimchehab.IIFYM.Views.AdapterIngredients;
 import com.karimchehab.IIFYM.Views.DecimalDigitsInputFilter;
@@ -66,11 +65,10 @@ public class ActivityAddDailyItem extends AppCompatActivity implements TextWatch
     private long            fid;
     private boolean         isCompact; //if the selected myfood is from FatSecret API
     private MyFood          myfood;
-    private float           initialPortionServing;
-    private int             initialPortionWeight;
+    private float           initialPortionAmount;
     private float           newPortionAmount;
     private float           portionMultiplier = 1.0f;
-    private int             portionType;
+    private String             portionType;
     Calendar myCalendar =   Calendar.getInstance();
     SimpleDateFormat        sdf;
 
@@ -78,6 +76,7 @@ public class ActivityAddDailyItem extends AppCompatActivity implements TextWatch
     private SQLiteConnector DB_SQLite;
     final private String    key = Credentials.FATSECRET_API_ACCESS_KEY;
     final private String    secret = Credentials.FATSECRET_SHARED_SECRET;
+    private Food            fatsecretfood;
 
     @Override protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -176,29 +175,39 @@ public class ActivityAddDailyItem extends AppCompatActivity implements TextWatch
         @Override public void onFoodResponse(Food food) {
             System.out.println("FOOD NAME: " + food.getName());
 
-            String name = food.getName();
-            String brand = food.getBrandName();
-            List<Serving> servings = food.getServings();
+            fatsecretfood = food;
+            updateGUI_FatSecret();
+        }
+    }
 
-            // Keep compatible serving types
-            //TODO Run with "i"
-            for (int i=0; i<servings.size(); i++) {
-                Log.d("Food Name", name);
-                Log.d("Food Type", food.getType()); // Brand vs Generic
-                Log.d("Brand Name", brand); // Only when foodtype is "Brand"
+    private void updateGUI_FatSecret() {
+        String name = fatsecretfood.getName();
+        String brand;
+        if (fatsecretfood.getType().matches("Brand")) {
+            brand = fatsecretfood.getBrandName();
+        }
+        else {
+            brand = "";
+        }
+        List<Serving> servings = fatsecretfood.getServings();
 
-                Log.d("Serving Description", food.getServings().get(i).getServingDescription() + "");
-                Log.d("Measurement Description", food.getServings().get(i).getMeasurementDescription() + "");
-                Log.d("Measurement Unit", food.getServings().get(i).getMetricServingUnit() + "");
-                Log.d("Serving Amount", food.getServings().get(i).getMetricServingAmount()+ "");
+        // Keep compatible serving types
+        for (int i=0; i<servings.size(); i++) {
+            //get first occurence of grams
 
-                Log.d("Calories", food.getServings().get(i).getCalories() + "");
-                Log.d("Carbs", food.getServings().get(i).getCarbohydrate() + "");
-                Log.d("Protein", food.getServings().get(i).getProtein() + "");
-                Log.d("Fat", food.getServings().get(i).getFat() + "");
+            Log.d("Food Name", name);
+            Log.d("Food Type", fatsecretfood.getType()); // Brand vs Generic
+            Log.d("Brand Name", brand); // Only when foodtype is "Brand"
 
+            Log.d("Serving Description", fatsecretfood.getServings().get(i).getServingDescription() + "");
+            Log.d("Measurement Description", fatsecretfood.getServings().get(i).getMeasurementDescription() + "");
+            Log.d("Measurement Unit", fatsecretfood.getServings().get(i).getMetricServingUnit() + "");
+            Log.d("Serving Amount", fatsecretfood.getServings().get(i).getMetricServingAmount()+ "");
 
-            }
+            Log.d("Calories", fatsecretfood.getServings().get(i).getCalories() + "");
+            Log.d("Carbs", fatsecretfood.getServings().get(i).getCarbohydrate() + "");
+            Log.d("Protein", fatsecretfood.getServings().get(i).getProtein() + "");
+            Log.d("Fat", fatsecretfood.getServings().get(i).getFat() + "");
         }
     }
 
@@ -219,29 +228,14 @@ public class ActivityAddDailyItem extends AppCompatActivity implements TextWatch
         lblProtein.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(3, 1)});
         lblFat.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(3, 1)});
 
-        if (portionType == 0) // Serving
-        {
-            initialPortionServing = DB_SQLite.retrieveServing(fid);
-            etxtPortionAmount.setText(initialPortionServing + "");
-            etxtPortionAmount.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL | InputType.TYPE_CLASS_NUMBER);
-            if (initialPortionServing != 1.0f)
-                lblPortionType.setText("Servings");
-            else
-                lblPortionType.setText("Serving");
-        } else if (portionType == 1)// Weight
-        {
-            Weight weight = DB_SQLite.retrieveWeight(fid);
-            initialPortionWeight = weight.getAmount();
-            etxtPortionAmount.setText(initialPortionWeight + "");
-            etxtPortionAmount.setInputType(InputType.TYPE_CLASS_NUMBER);
-            lblPortionType.setText(weight.getUnit().Abbreviate());
-        }
+        lblPortionType.setText(myfood.getPortionType() + "");
 
+        etxtPortionAmount.setText(myfood.getPortionAmount() + "");
+        etxtPortionAmount.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL | InputType.TYPE_CLASS_NUMBER);
         etxtPortionAmount.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(4, 1)});
         etxtPortionAmount.addTextChangedListener(this);
 
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
-
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear,
                                   int dayOfMonth) {
@@ -299,19 +293,12 @@ public class ActivityAddDailyItem extends AppCompatActivity implements TextWatch
             newPortionAmount = 0;
         }
 
-        if(portionType == 0) // Serving
-        {
-            float servingNum = DB_SQLite.retrieveServing(fid);
-            portionMultiplier = newPortionAmount / servingNum;
-        }
-        else // Weight
-        {
-            Weight weight = DB_SQLite.retrieveWeight(fid);
-            portionMultiplier = newPortionAmount / weight.getAmount();
-        }
+        float portionAmount = myfood.getPortionAmount();
+        portionMultiplier = newPortionAmount / portionAmount;
 
         DecimalFormat df = new DecimalFormat("#.##");
         df.setRoundingMode(RoundingMode.HALF_EVEN);
+
         lblCalories.setText(df.format(myfood.getCalories() * portionMultiplier) + "");
         lblCarbs.setText(df.format(myfood.getCarbs() * portionMultiplier) + "");
         lblProtein.setText(df.format(myfood.getProtein() * portionMultiplier) + "");

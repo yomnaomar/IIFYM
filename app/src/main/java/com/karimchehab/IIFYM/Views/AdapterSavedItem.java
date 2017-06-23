@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import com.karimchehab.IIFYM.Database.SQLiteConnector;
 import com.karimchehab.IIFYM.Models.MyFood;
-import com.karimchehab.IIFYM.Models.Weight;
 import com.karimchehab.IIFYM.R;
 
 public class AdapterSavedItem extends ArrayAdapter<MyFood> {
@@ -52,20 +51,7 @@ public class AdapterSavedItem extends ArrayAdapter<MyFood> {
         protein.setText(String.valueOf(food.getProtein()) + " p");
         fat.setText(String.valueOf(food.getFat()) + " f");
 
-        float   serving_number;
-        Weight  weight;
-
-        if (food.getPortionType() == 0) { // Serving
-            serving_number = DB_SQLite.retrieveServing(id);
-            if (serving_number == 1.0f) {
-                portion.setText(serving_number + " Serving");
-            } else {
-                portion.setText(serving_number + " Servings");
-            }
-        } else if (food.getPortionType() == 1) { // Weight
-            weight = DB_SQLite.retrieveWeight(id);
-            portion.setText(weight.getAmount() + " " + weight.getUnit().Abbreviate());
-        }
+        portion.setText(food.getPortionAmount() + " " + food.getPortionType());
 
         // Return the completed view to render on screen
         return convertView;

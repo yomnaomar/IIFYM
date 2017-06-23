@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import com.karimchehab.IIFYM.Database.SQLiteConnector;
 import com.karimchehab.IIFYM.Models.Ingredient;
-import com.karimchehab.IIFYM.Models.Weight;
 import com.karimchehab.IIFYM.R;
 
 public class AdapterIngredients extends ArrayAdapter<Ingredient> {
@@ -47,22 +46,8 @@ public class AdapterIngredients extends ArrayAdapter<Ingredient> {
         else
             brand.setVisibility(View.VISIBLE);
 
-        float   serving_number;
-        Weight  weight;
-
         float multiplier = ingredient.getMultiplier();
-
-        if (ingredient.getPortionType() == 0) { // Serving
-            serving_number = DB_SQLite.retrieveServing(id);
-            if (serving_number * multiplier == 1.0f) {
-                portion.setText(serving_number * multiplier + " Serving");
-            } else {
-                portion.setText(serving_number * multiplier + " Servings");
-            }
-        } else if (ingredient.getPortionType() == 1) { // Weight
-            weight = DB_SQLite.retrieveWeight(id);
-            portion.setText(weight.getAmount() * multiplier + " " + weight.getUnit().Abbreviate());
-        }
+        portion.setText(ingredient.getPortionAmount() * multiplier + " " + ingredient.getPortionType());
 
         calories.setText(String.valueOf(ingredient.getCalories() * multiplier) + " cals");
         carbs.setText(String.valueOf(ingredient.getCarbs() * multiplier) + " c");

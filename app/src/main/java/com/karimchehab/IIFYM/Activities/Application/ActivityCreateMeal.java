@@ -30,9 +30,10 @@ import com.karimchehab.IIFYM.Database.SQLiteConnector;
 import com.karimchehab.IIFYM.Models.DateHelper;
 import com.karimchehab.IIFYM.Models.MyFood;
 import com.karimchehab.IIFYM.Models.Ingredient;
-import com.karimchehab.IIFYM.Models.Weight;
 import com.karimchehab.IIFYM.R;
 import com.karimchehab.IIFYM.Views.AdapterIngredients;
+
+import org.w3c.dom.Text;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -41,16 +42,13 @@ import java.util.Locale;
 
 import info.hoang8f.android.segmented.SegmentedGroup;
 
-public class ActivityCreateMeal extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class ActivityCreateMeal extends AppCompatActivity{
 
     // GUI
     private ListView            listviewIngredients;
     private AdapterIngredients  adapterIngredients;
-    private EditText            etxtName, etxtBrand, etxtPortionAmount,etxtDate;
+    private EditText            etxtName, etxtBrand, etxtPortionAmount, etxtPortionType, etxtDate;
     private TextView            lblCalories, lblCarbs, lblProtein, lblFat;
-    private RadioButton         rbtnServing, rbtnWeight;
-    private SegmentedGroup      seggroupPortionType;
-    private Spinner             spinnerUnit;
     private CheckBox            cbIsDaily;
 
     // Variables
@@ -58,7 +56,6 @@ public class ActivityCreateMeal extends AppCompatActivity implements AdapterView
     ArrayList<Ingredient>       arrIngredients;
     private long[]              ingredients;
     private int                 ingredientCount;
-    private int                 weightUnitSelected;
     Calendar myCalendar =       Calendar.getInstance();
 
     // Database
@@ -115,32 +112,12 @@ public class ActivityCreateMeal extends AppCompatActivity implements AdapterView
         etxtName            = (EditText)findViewById(R.id.etxtName);
         etxtBrand           = (EditText)findViewById(R.id.etxtBrand);
         etxtPortionAmount   = (EditText) findViewById(R.id.etxtPortionAmount);
+        etxtPortionType     = (EditText) findViewById(R.id.etxtPortionType);
         lblCalories         = (TextView) findViewById(R.id.lblCalories);
         lblCarbs            = (TextView) findViewById(R.id.lblCarbs);
         lblProtein          = (TextView) findViewById(R.id.lblProtein);
         lblFat              = (TextView) findViewById(R.id.lblFat);
         etxtDate            = (EditText) findViewById(R.id.etxtDate);
-
-        // SegmentedGroup & RadioButtons
-        rbtnServing = (RadioButton) findViewById(R.id.rbtnServing);
-        rbtnWeight = (RadioButton) findViewById(R.id.rbtnWeight);
-        seggroupPortionType = (SegmentedGroup) findViewById(R.id.seggroupPortionType);
-
-        seggroupPortionType.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
-        {
-            @Override public void onCheckedChanged(RadioGroup group, int checkedId) {
-                etxtPortionAmount.setText("");
-                updateGUI();
-            }
-        });
-
-        // Spinner
-        spinnerUnit = (Spinner) findViewById(R.id.spinnerUnit);
-        ArrayAdapter<CharSequence> Spinner_Unit_Adapter = ArrayAdapter.createFromResource(this, R.array.weight_units_array, android.R.layout.simple_spinner_item);
-        Spinner_Unit_Adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerUnit.setAdapter(Spinner_Unit_Adapter);
-        spinnerUnit.setSelection(0); // default selection value
-        spinnerUnit.setOnItemSelectedListener(this);
 
         // CheckBox
         cbIsDaily = (CheckBox) findViewById(R.id.cbIsDaily);
@@ -208,29 +185,17 @@ public class ActivityCreateMeal extends AppCompatActivity implements AdapterView
             float carbs = Float.parseFloat(lblCarbs.getText().toString());
             float protein = Float.parseFloat(lblProtein.getText().toString());
             float fat = Float.parseFloat(lblFat.getText().toString());
-
-            // Get PortionType
-            int radioButtonID = seggroupPortionType.getCheckedRadioButtonId();
-            View radioButton = seggroupPortionType.findViewById(radioButtonID);
-            int indexofPortionType = seggroupPortionType.indexOfChild(radioButton);
+            float portionAmount = Float.parseFloat(etxtPortionAmount.getText().toString());
+            String portionType = etxtPortionAmount.getText().toString();
 
             // CheckBox (Add to log?)
             isDaily = cbIsDaily.isChecked();
 
-            MyFood food = new MyFood(name, brand, calories, carbs, protein, fat, indexofPortionType, true);
+            MyFood food = new MyFood(name, brand, calories, carbs, protein, fat, portionType, portionAmount, true);
             long mid = DB_SQLite.createMeal(food, ingredients, multipliers);
 
             food.setId(mid);
             if (food.getId() != -1) {
-                if (indexofPortionType == 0) { // MyFood is measured by servings
-                    float Serving_Number = Float.parseFloat(etxtPortionAmount.getText().toString());
-                    DB_SQLite.createServing(mid, Serving_Number);
-                } else if (indexofPortionType == 1) { // MyFood is measured by weight
-                    int Weight_Quantity = Integer.parseInt(etxtPortionAmount.getText().toString());
-                    Weight weight = new Weight(Weight_Quantity, weightUnitSelected);
-                    DB_SQLite.createWeight(mid, weight);
-                }
-
                 // If User entered this activity through Add Daily, add this newly created food to daily items
                 if (isDaily){
                     DB_SQLite.createDailyItem(food.getId(), 1.0f, DateHelper.getTodaysDate());
@@ -264,14 +229,6 @@ public class ActivityCreateMeal extends AppCompatActivity implements AdapterView
     }
 
     private void updateGUI() {
-        if (rbtnServing.isChecked()) {
-            etxtPortionAmount.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL | InputType.TYPE_CLASS_NUMBER);
-            spinnerUnit.setVisibility(View.GONE);
-        } else if (rbtnWeight.isChecked()) {
-            etxtPortionAmount.setInputType(InputType.TYPE_CLASS_NUMBER);
-            spinnerUnit.setVisibility(View.VISIBLE);
-        }
-
         if(cbIsDaily.isChecked()){
             String myFormat = DateHelper.dateformat; //In which you need put here
             SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
@@ -312,19 +269,23 @@ public class ActivityCreateMeal extends AppCompatActivity implements AdapterView
         } else
             etxtName.setError(null);
 
-        if (rbtnServing.isChecked()) {
-            if (etxtPortionAmount.getText().toString().isEmpty()) {
-                etxtPortionAmount.setError("Required");
-                valid = false;
-            } else
-                etxtPortionAmount.setError(null);
-        } else {
-            if (etxtPortionAmount.getText().toString().isEmpty()) {
-                etxtPortionAmount.setError("Required");
-                valid = false;
-            } else {
-                etxtPortionAmount.setError(null);
-            }
+        if (etxtPortionAmount.getText().toString().isEmpty())
+        {
+            etxtPortionAmount.setError("Required");
+            valid = false;
+        }
+        else
+        {
+            etxtPortionAmount.setError(null);
+        }
+        if (etxtPortionType.getText().toString().isEmpty())
+        {
+            etxtPortionType.setError("Required");
+            valid = false;
+        }
+        else
+        {
+            etxtPortionType.setError(null);
         }
         return valid;
     }
@@ -356,21 +317,15 @@ public class ActivityCreateMeal extends AppCompatActivity implements AdapterView
                     public void onClick(DialogInterface dialog, int id) {
                         // Update multiplier
                         Ingredient ingredient = adapterIngredients.getItem(position);
+
+                        TextView lblSetAmount = (TextView) view.findViewById(R.id.lblSetAmount);
+                        lblSetAmount.setText("Set Amount (" + ingredient.getPortionType() + ")");
+
                         EditText etxtAmount = (EditText) view.findViewById(R.id.etxtAmount);
                         float amount = Float.parseFloat(etxtAmount.getText().toString());
-                        int portionType = ingredient.getPortionType();
-                        if (portionType == 0 ) // Serving
-                        {
-                            float serving = DB_SQLite.retrieveServing(ingredient.getId());
-                            float multiplier = amount / serving ;
-                            arrIngredients.get(position).setMultiplier(multiplier);
-                        }
-                        else if (portionType == 1 ) // Weight
-                        {
-                            float weight = DB_SQLite.retrieveWeight(ingredient.getId()).getAmount();
-                            float multiplier = amount / weight;
-                            arrIngredients.get(position).setMultiplier(multiplier);
-                        }
+                        float portionAmount = ingredient.getPortionAmount();
+                        float multiplier = amount / portionAmount;
+                        arrIngredients.get(position).setMultiplier(multiplier);
                         adapterIngredients.notifyDataSetChanged();
                         populateGUI();
                     }
@@ -383,20 +338,4 @@ public class ActivityCreateMeal extends AppCompatActivity implements AdapterView
                 });
         return builder.create();
     }
-
-    @Override public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-        switch (position) {
-            case (0):
-                weightUnitSelected = 0;
-                break;
-            case (1):
-                weightUnitSelected = 1;
-                break;
-            case (2):
-                weightUnitSelected = 2;
-                break;
-        }
-    }
-
-    @Override public void onNothingSelected(AdapterView<?> adapterView) {}
 }

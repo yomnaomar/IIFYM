@@ -15,7 +15,6 @@ import android.widget.Toast;
 import com.karimchehab.IIFYM.Database.SQLiteConnector;
 import com.karimchehab.IIFYM.Models.DailyItem;
 import com.karimchehab.IIFYM.Models.MyFood;
-import com.karimchehab.IIFYM.Models.Weight;
 import com.karimchehab.IIFYM.R;
 
 import java.util.ArrayList;
@@ -85,9 +84,6 @@ public class ActivityViewDailyItem extends AppCompatActivity implements View.OnC
         fabDelete = (FloatingActionButton) findViewById(R.id.fabDelete);
         fabDelete.setOnClickListener(this);
 
-        // chart = (PieChartView)findViewById(R.id.piechartMacros);
-        // generatePieChartData();
-
         lblName.setText(food.getName());
         if(food.getBrand().isEmpty())
             lblBrand.setVisibility(View.GONE);
@@ -101,19 +97,10 @@ public class ActivityViewDailyItem extends AppCompatActivity implements View.OnC
         lblProtein.setText(Math.round(food.getProtein() * portionMultiplier) + "");
         lblFat.setText(Math.round(food.getFat() * portionMultiplier) + "");
 
-        if (food.getPortionType() == 0) { // Serving
-            servingAmount = DB_SQLite.retrieveServing(food_id) * portionMultiplier;
-            lblPortionAmount.setText(servingAmount + "");
-            if (servingAmount != 1.0f)
-                lblPortionType.setText("servings");
-            else
-                lblPortionType.setText("serving");
-        } else { // Weight
-            Weight weight = DB_SQLite.retrieveWeight(food_id);
-            weightAmount = Math.round(weight.getAmount() * portionMultiplier);
-            lblPortionAmount.setText(weightAmount + "");
-            lblPortionType.setText(weight.getUnit().Abbreviate());
-        }
+        float portionAmount = Math.round(food.getPortionAmount() * portionMultiplier);
+        lblPortionAmount.setText(portionAmount + "");
+
+        lblPortionType.setText(food.getPortionType());
     }
 
     @Override public void onClick(View v) {
@@ -130,7 +117,7 @@ public class ActivityViewDailyItem extends AppCompatActivity implements View.OnC
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int view_id) {
                         if (DB_SQLite.deleteDailyItem(id) != -1)
-                            Toast.makeText(context, "MyFood deleted from daily log", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "Food deleted from daily log", Toast.LENGTH_SHORT).show();
                         else
                             Toast.makeText(context, "Unable to delete from log", Toast.LENGTH_SHORT).show();
                         finish();

@@ -23,26 +23,21 @@ import android.widget.Toast;
 
 import com.karimchehab.IIFYM.Database.SQLiteConnector;
 import com.karimchehab.IIFYM.Models.MyFood;
-import com.karimchehab.IIFYM.Models.Weight;
 import com.karimchehab.IIFYM.R;
 import com.karimchehab.IIFYM.Views.DecimalDigitsInputFilter;
 
 import info.hoang8f.android.segmented.SegmentedGroup;
 
-public class ActivityEditFood extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener {
+public class ActivityEditFood extends AppCompatActivity implements View.OnClickListener {
 
     // GUI
-    private EditText                etxtName, etxtBrand, etxtCalories, etxtCarbs, etxtProtein, etxtFat, etxtPortionAmount;
-    private RadioButton             rbtnServing, rbtnWeight;
-    private SegmentedGroup          seggroupPortionType;
-    private Spinner                 spinnerUnit;
+    private EditText                etxtName, etxtBrand, etxtCalories, etxtCarbs, etxtProtein, etxtFat, etxtPortionAmount, etxtPortionType;
     private FloatingActionButton    fabDelete;
 
     // Variables
     private Context context;
     private long    id;
     private MyFood food;
-    private int     weightUnitSelected = 0;
 
     // Database
     private SQLiteConnector DB_SQLite;
@@ -67,13 +62,14 @@ public class ActivityEditFood extends AppCompatActivity implements AdapterView.O
 
     private void initializeGUI(){
         // EditText
-        etxtName = (EditText) findViewById(R.id.etxtName);
-        etxtBrand = (EditText) findViewById(R.id.etxtBrand);
-        etxtCalories = (EditText) findViewById(R.id.etxtCalories);
-        etxtCarbs = (EditText) findViewById(R.id.etxtCarbs);
-        etxtProtein = (EditText) findViewById(R.id.etxtProtein);
-        etxtFat = (EditText) findViewById(R.id.etxtFat);
-        etxtPortionAmount = (EditText) findViewById(R.id.etxtPortionAmount);
+        etxtName            = (EditText) findViewById(R.id.etxtName);
+        etxtBrand           = (EditText) findViewById(R.id.etxtBrand);
+        etxtCalories        = (EditText) findViewById(R.id.etxtCalories);
+        etxtCarbs           = (EditText) findViewById(R.id.etxtCarbs);
+        etxtProtein         = (EditText) findViewById(R.id.etxtProtein);
+        etxtFat             = (EditText) findViewById(R.id.etxtFat);
+        etxtPortionAmount   = (EditText) findViewById(R.id.etxtPortionAmount);
+        etxtPortionType     = (EditText) findViewById(R.id.etxtPortionType);
 
         etxtCarbs.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(4,1)});
         etxtProtein.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(4,1)});
@@ -83,27 +79,6 @@ public class ActivityEditFood extends AppCompatActivity implements AdapterView.O
         etxtName.requestFocus();
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.showSoftInput(etxtName, InputMethodManager.SHOW_IMPLICIT);
-
-        // SegmentedGroup & RadioButtons
-        rbtnServing = (RadioButton) findViewById(R.id.rbtnServing);
-        rbtnWeight = (RadioButton) findViewById(R.id.rbtnWeight);
-        seggroupPortionType = (SegmentedGroup) findViewById(R.id.seggroupPortionType);
-
-        seggroupPortionType.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
-        {
-            @Override public void onCheckedChanged(RadioGroup group, int checkedId) {
-                etxtPortionAmount.setText("");
-                updateGUI();
-            }
-        });
-
-        // Spinner
-        spinnerUnit = (Spinner) findViewById(R.id.spinnerUnit);
-        ArrayAdapter<CharSequence> Spinner_Unit_Adapter = ArrayAdapter.createFromResource(this, R.array.weight_units_array, android.R.layout.simple_spinner_item);
-        Spinner_Unit_Adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerUnit.setAdapter(Spinner_Unit_Adapter);
-        spinnerUnit.setSelection(0); // default selection value
-        spinnerUnit.setOnItemSelectedListener(this);
 
         // Floating Action Button
         fabDelete = (FloatingActionButton) findViewById(R.id.fabDelete);
@@ -119,31 +94,8 @@ public class ActivityEditFood extends AppCompatActivity implements AdapterView.O
         etxtProtein.setText(food.getProtein() + "");
         etxtFat.setText(food.getFat() + "");
 
-        if (food.getPortionType() == 0) { // Serving
-            rbtnServing.setChecked(true);
-            float servingNum = DB_SQLite.retrieveServing(id);
-            etxtPortionAmount.setText(servingNum + "");
-        } else if (food.getPortionType() == 1) { // Weight
-            rbtnWeight.setChecked(true);
-            Weight weight = DB_SQLite.retrieveWeight(id);
-            etxtPortionAmount.setText(weight.getAmount() + "");
-            spinnerUnit.setSelection(weight.getUnit().getWeightInt());
-        }
-    }
-
-    @Override protected void onResume() {
-        super.onResume();
-        updateGUI();
-    }
-
-    private void updateGUI() {
-        if (rbtnServing.isChecked()) {
-            etxtPortionAmount.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL | InputType.TYPE_CLASS_NUMBER);
-            spinnerUnit.setVisibility(View.GONE);
-        } else if (rbtnWeight.isChecked()) {
-            etxtPortionAmount.setInputType(InputType.TYPE_CLASS_NUMBER);
-            spinnerUnit.setVisibility(View.VISIBLE);
-        }
+        etxtPortionAmount.setText(food.getPortionAmount() + "");
+        etxtPortionType.setText(food.getPortionType());
     }
 
     @Override public boolean onCreateOptionsMenu(Menu menu) {
@@ -195,31 +147,9 @@ public class ActivityEditFood extends AppCompatActivity implements AdapterView.O
         food.setCarbs(Float.parseFloat(etxtCarbs.getText().toString()));
         food.setProtein(Float.parseFloat(etxtProtein.getText().toString()));
         food.setFat(Float.parseFloat(etxtFat.getText().toString()));
-        if (rbtnServing.isChecked())
-            food.setPortionType(0);
-        else if (rbtnWeight.isChecked())
-            food.setPortionType(1);
+        food.setPortionAmount(Float.parseFloat(etxtPortionAmount.getText().toString()));
+        food.setPortionType(etxtPortionType.getText().toString());
 
-        // To check if user changed portionType
-        // Try update existing portion
-        // If success, then portionType was not changed
-        // Else create a new one and delete the other
-        switch (food.getPortionType()) {
-            case (0): // Serving
-                float newServing = Float.parseFloat(etxtPortionAmount.getText().toString());
-                if (!DB_SQLite.updateServing(id, newServing)) {
-                    DB_SQLite.deleteWeight(id);
-                    DB_SQLite.createServing(id, newServing);
-                }
-                break;
-            case (1): // Weight
-                Weight newWeight = new Weight(Integer.parseInt(etxtPortionAmount.getText().toString()), weightUnitSelected);
-                if (!DB_SQLite.updateWeight(food, newWeight)) {
-                    DB_SQLite.deleteServing(id);
-                    DB_SQLite.createWeight(id, newWeight);
-                }
-                break;
-        }
         DB_SQLite.updateFood(food);
     }
 
@@ -251,11 +181,9 @@ public class ActivityEditFood extends AppCompatActivity implements AdapterView.O
         dialog.show();
     }
 
-    // TODO check that MyFood is not being used as a Meal ingredient before deleteing
-    // TODO if true, then alert user and cancel delete opertaion
     private void deleteRecords() {DB_SQLite.deleteFood(id);}
 
-    //Returns to ActivityHome without making any changes
+    // Returns to ActivityHome without making any changes
     @Override public void onBackPressed() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Cancel?")
@@ -306,45 +234,26 @@ public class ActivityEditFood extends AppCompatActivity implements AdapterView.O
         } else
             etxtFat.setError(null);
 
-        if (rbtnServing.isChecked())
+        if (etxtPortionAmount.getText().toString().isEmpty())
         {
-            if (etxtPortionAmount.getText().toString().isEmpty())
-            {
-                etxtPortionAmount.setError("Required");
-                valid = false;
-            }
-            else
-                etxtPortionAmount.setError(null);
+            etxtPortionAmount.setError("Required");
+            valid = false;
         }
         else
         {
-            if (etxtPortionAmount.getText().toString().isEmpty())
-            {
-                etxtPortionAmount.setError("Required");
-                valid = false;
-            }
-            else
-            {
-                etxtPortionAmount.setError(null);
-            }
+            etxtPortionAmount.setError(null);
         }
+
+        if (etxtPortionType.getText().toString().isEmpty())
+        {
+            etxtPortionType.setError("Required");
+            valid = false;
+        }
+        else
+        {
+            etxtPortionType.setError(null);
+        }
+
         return valid;
     }
-
-    @Override public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-        switch (position) {
-            case (0):
-                weightUnitSelected = 0;
-                break;
-            case (1):
-                weightUnitSelected = 1;
-                break;
-            case (2):
-                weightUnitSelected = 2;
-
-        }
-    }
-
-    // Unused
-    @Override public void onNothingSelected(AdapterView<?> adapterView) {}
 }
