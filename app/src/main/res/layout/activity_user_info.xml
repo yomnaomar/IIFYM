@@ -39,11 +39,12 @@
 
                 <EditText
                     android:id="@+id/etxtDateOfBirth"
-                    android:layout_width="105dp"
+                    android:layout_width="120dp"
                     android:layout_height="50dp"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentTop="true"
                     android:layout_gravity="right|center_vertical"
+                    android:drawablePadding="5dp"
                     android:drawableRight="@drawable/drawable_ic_calendar"
                     android:ems="3"
                     android:gravity="right|center_vertical"

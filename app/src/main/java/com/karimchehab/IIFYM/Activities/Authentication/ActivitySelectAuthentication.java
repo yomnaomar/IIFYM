@@ -49,7 +49,6 @@ public class ActivitySelectAuthentication extends AppCompatActivity implements V
     // GUI
     private View            loginLinearLayout;
     private ProgressDialog  progressDialog;
-    TextView                lblPrivacyPolicyLink;
 
     // Variables
     private boolean isRegistered;
@@ -84,10 +83,6 @@ public class ActivitySelectAuthentication extends AppCompatActivity implements V
         // Buttons
         findViewById(R.id.btnEmailLoginIn).setOnClickListener(this);
         findViewById(R.id.btnGoogleSignIn).setOnClickListener(this);
-
-        // Privacy Policy
-        lblPrivacyPolicyLink = (TextView) findViewById(R.id.lblPrivacyPolicyLink);
-        lblPrivacyPolicyLink.setOnClickListener(this);
     }
 
     /**
