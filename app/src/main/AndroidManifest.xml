@@ -42,9 +42,6 @@
         <activity
             android:name="com.karimchehab.IIFYM.Activities.Application.ActivityAddDailyItem"
             android:label="@string/toolbarAddDailyItem" />
-        <activity
-            android:name="com.karimchehab.IIFYM.Activities.Application.ActivitySelectDailyItem"
-            android:label="@string/toolbarSelectItemToAdd" />
         <activity android:name=".Activities.Application.ActivityViewDailyItem" />
         <activity
             android:name=".Activities.Settings.ActivitySettings"
