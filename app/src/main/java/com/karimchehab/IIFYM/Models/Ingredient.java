@@ -19,4 +19,15 @@ public class Ingredient extends MyFood {
     public void setMultiplier(float multiplier) {
         this.multiplier = multiplier;
     }
+
+    public String getDescription(float multiplier){
+        StringBuilder description = new StringBuilder();
+        description.append("Per ");
+        description.append(Math.round(getPortionAmount() * multiplier) + " " + getPortionType() + " - ");
+        description.append("Calories: " + Math.round(getCalories()  * multiplier) + "kcal\n");
+        description.append("Fat: " + Math.round(getFat() * multiplier) + "g | ");
+        description.append("Carbs: " + Math.round(getCarbs() * multiplier)  + "g | ");
+        description.append("Protein: " + Math.round(getProtein() * multiplier) + "g");
+        return description.toString();
+    }
 }

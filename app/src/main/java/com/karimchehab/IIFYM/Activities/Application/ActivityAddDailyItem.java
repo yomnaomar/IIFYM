@@ -21,6 +21,7 @@ import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -55,8 +56,9 @@ import java.util.Locale;
 public class ActivityAddDailyItem extends AppCompatActivity implements TextWatcher {
 
     //GUI
-    private TextView        lblName, lblBrand, lblCalories, lblCarbs, lblProtein, lblFat, lblPortionType;
+    private TextView        lblName, lblBrand, lblCalories, lblCarbs, lblProtein, lblFat, lblkcal, lblc, lblp, lblf, lblPortionType;
     private EditText        etxtPortionAmount, etxtDate;
+    private ProgressBar     progressBarFatFood;
 
     private AdapterIngredients      adapterIngredients;
     private ArrayList<Ingredient>   arrIngredients;
@@ -114,9 +116,31 @@ public class ActivityAddDailyItem extends AppCompatActivity implements TextWatch
         lblCarbs = (TextView) findViewById(R.id.lblCarbs);
         lblProtein = (TextView) findViewById(R.id.lblProtein);
         lblFat = (TextView) findViewById(R.id.lblFat);
+        lblkcal = (TextView) findViewById(R.id.lblkcal);
+        lblc = (TextView) findViewById(R.id.lblc);
+        lblp = (TextView) findViewById(R.id.lblp);
+        lblf = (TextView) findViewById(R.id.lblf);
         lblPortionType = (TextView) findViewById(R.id.lblPortionType);
         etxtPortionAmount = (EditText) findViewById(R.id.etxtPortionAmount);
         etxtDate = (EditText) findViewById(R.id.etxtDate);
+        progressBarFatFood = (ProgressBar) findViewById(R.id.progressBarFatFood);
+
+        if (isCompact) {
+            lblName.setVisibility(View.INVISIBLE);
+            lblBrand.setVisibility(View.INVISIBLE);
+            lblCalories.setVisibility(View.INVISIBLE);
+            lblCarbs.setVisibility(View.INVISIBLE);
+            lblProtein.setVisibility(View.INVISIBLE);
+            lblFat.setVisibility(View.INVISIBLE);
+            lblkcal.setVisibility(View.INVISIBLE);
+            lblc.setVisibility(View.INVISIBLE);
+            lblp.setVisibility(View.INVISIBLE);
+            lblf.setVisibility(View.INVISIBLE);
+            lblPortionType.setVisibility(View.INVISIBLE);
+            etxtPortionAmount.setVisibility(View.INVISIBLE);
+            etxtDate.setVisibility(View.INVISIBLE);
+        }
+        progressBarFatFood.setVisibility(View.GONE);
 
         lblCarbs.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(3, 1)});
         lblProtein.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(3, 1)});
@@ -146,7 +170,7 @@ public class ActivityAddDailyItem extends AppCompatActivity implements TextWatch
     }
 
     private void populateGUI_FatSecret() {
-        //TODO show progress icon
+        progressBarFatFood.setVisibility(View.VISIBLE);
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         Listener listener = new Listener();
 
@@ -156,8 +180,9 @@ public class ActivityAddDailyItem extends AppCompatActivity implements TextWatch
 
     class Listener implements ResponseListener {
         @Override public void onFoodResponse(Food food) {
-            //TODO hide progress icon
+            progressBarFatFood.setVisibility(View.GONE);
             fatsecretfood = food;
+
             updateGUI_FatSecret();
         }
     }
@@ -165,11 +190,29 @@ public class ActivityAddDailyItem extends AppCompatActivity implements TextWatch
     private void updateGUI_FatSecret() {
         parseFatFoodtoMyFood();
 
+        lblName.setVisibility(View.VISIBLE);
+        lblCalories.setVisibility(View.VISIBLE);
+        lblCarbs.setVisibility(View.VISIBLE);
+        lblProtein.setVisibility(View.VISIBLE);
+        lblFat.setVisibility(View.VISIBLE);
+        lblkcal.setVisibility(View.VISIBLE);
+        lblc.setVisibility(View.VISIBLE);
+        lblp.setVisibility(View.VISIBLE);
+        lblf.setVisibility(View.VISIBLE);
+        lblPortionType.setVisibility(View.VISIBLE);
+        etxtPortionAmount.setVisibility(View.VISIBLE);
+        etxtDate.setVisibility(View.VISIBLE);
+
         // Name
         lblName.setText(myFatFood.getName());
 
-        // Brand
-        lblBrand.setText(myFatFood.getBrand());
+        //Brand
+        if (myFatFood.getBrand().isEmpty())
+            lblBrand.setVisibility(View.GONE);
+        else {
+            lblBrand.setVisibility(View.VISIBLE);
+            lblBrand.setText(myFatFood.getBrand());
+        }
 
         // Nutrition
         lblCalories.setText(myFatFood.getCalories() + "");
@@ -309,20 +352,20 @@ public class ActivityAddDailyItem extends AppCompatActivity implements TextWatch
         }
 
         if (!isCompact) {
-            baseAmount = myFatFood.getPortionAmount();
-            portionMultiplier = newPortionAmount / baseAmount;
-            lblCalories.setText(df.format(myFatFood.getCalories() * portionMultiplier) + "");
-            lblCarbs.setText(df.format(myFatFood.getCarbs() * portionMultiplier) + "");
-            lblProtein.setText(df.format(myFatFood.getProtein() * portionMultiplier) + "");
-            lblFat.setText(df.format(myFatFood.getFat() * portionMultiplier) + "");
-        }
-        else {
             baseAmount = myfood.getPortionAmount();
             portionMultiplier = newPortionAmount / baseAmount;
             lblCalories.setText(df.format(myfood.getCalories() * portionMultiplier) + "");
             lblCarbs.setText(df.format(myfood.getCarbs() * portionMultiplier) + "");
             lblProtein.setText(df.format(myfood.getProtein() * portionMultiplier) + "");
             lblFat.setText(df.format(myfood.getFat() * portionMultiplier) + "");
+        }
+        else {
+            baseAmount = myFatFood.getPortionAmount();
+            portionMultiplier = newPortionAmount / baseAmount;
+            lblCalories.setText(df.format(myFatFood.getCalories() * portionMultiplier) + "");
+            lblCarbs.setText(df.format(myFatFood.getCarbs() * portionMultiplier) + "");
+            lblProtein.setText(df.format(myFatFood.getProtein() * portionMultiplier) + "");
+            lblFat.setText(df.format(myFatFood.getFat() * portionMultiplier) + "");
         }
     }
 
@@ -332,7 +375,7 @@ public class ActivityAddDailyItem extends AppCompatActivity implements TextWatch
 
         if (isCompact){
             long fid = DB_SQLite.createFood(myFatFood);
-            DB_SQLite.createDailyItem(fid, 1.0f, date);
+            DB_SQLite.createDailyItem(fid, portionMultiplier, date);
         }
         else {
             DB_SQLite.createDailyItem(fid, portionMultiplier, date);

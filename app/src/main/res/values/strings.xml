@@ -147,7 +147,7 @@
     <string name="lblf">f</string>
     <string name="lblkcal">kcal</string>
     <string name="toolbarSelectItemToAdd">Select an item to add to daily log</string>
-    <string name="toolbarTapOnAnItemToEdit">Tap on an item to edit</string>
+    <string name="toolbarManageYourFood">Manage Your Saved Foods and Meals</string>
     <string name="lblDeleteFromDaily">Delete from daily log?</string>
     <string name="lblDeleteFromDatabase">Delete from database?</string>
     <string name="toolbarCreateNewFood">Create new food</string>

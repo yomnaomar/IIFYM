@@ -12,18 +12,15 @@ import com.karimchehab.IIFYM.Models.Ingredient;
 import com.karimchehab.IIFYM.R;
 
 public class AdapterIngredients extends ArrayAdapter<Ingredient> {
-    private SQLiteConnector DB_SQLite;
 
     public AdapterIngredients(Context context) {
         super(context, 0);
-        DB_SQLite = new SQLiteConnector(getContext());
     }
 
     @Override public View getView(int position, View convertView, ViewGroup parent) {
 
         // Get the data list_item for this position
         Ingredient ingredient = getItem(position);
-        long id = ingredient.getId();
 
         // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
@@ -31,28 +28,12 @@ public class AdapterIngredients extends ArrayAdapter<Ingredient> {
         }
         // Lookup view for data population
         TextView name = (TextView) convertView.findViewById(R.id.lblName);
-        TextView brand = (TextView) convertView.findViewById(R.id.lblBrand);
-        TextView calories = (TextView) convertView.findViewById(R.id.lblCalories);
-        TextView carbs = (TextView) convertView.findViewById(R.id.lblCarbs);
-        TextView protein = (TextView) convertView.findViewById(R.id.lblProtein);
-        TextView fat = (TextView) convertView.findViewById(R.id.lblFat);
-        TextView portion = (TextView) convertView.findViewById(R.id.lblPortionDetails);
+        TextView description = (TextView) convertView.findViewById(R.id.lblDescription);
+
 
         // Populate the data into the template view using the data object
         name.setText(ingredient.getName() + "");
-        brand.setText(ingredient.getBrand() + "");
-        if (ingredient.getBrand().isEmpty())
-            brand.setVisibility(View.GONE);
-        else
-            brand.setVisibility(View.VISIBLE);
-
-        float multiplier = ingredient.getMultiplier();
-        portion.setText(ingredient.getPortionAmount() * multiplier + " " + ingredient.getPortionType());
-
-        calories.setText(String.valueOf(ingredient.getCalories() * multiplier) + " cals");
-        carbs.setText(String.valueOf(ingredient.getCarbs() * multiplier) + " c");
-        protein.setText(String.valueOf(ingredient.getProtein() * multiplier) + " p");
-        fat.setText(String.valueOf(ingredient.getFat() * multiplier) + " f");
+        description.setText(ingredient.getDescription());
 
         // Return the completed view to render on screen
         return convertView;

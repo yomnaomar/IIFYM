@@ -37,28 +37,12 @@ public class AdapterDailyItem extends ArrayAdapter<DailyItem> {
         }
         // Lookup view for data population
         TextView name = (TextView) convertView.findViewById(R.id.lblName);
-        TextView brand = (TextView) convertView.findViewById(R.id.lblBrand);
-        TextView calories = (TextView) convertView.findViewById(R.id.lblCalories);
-        TextView carbs = (TextView) convertView.findViewById(R.id.lblCarbs);
-        TextView protein = (TextView) convertView.findViewById(R.id.lblProtein);
-        TextView fat = (TextView) convertView.findViewById(R.id.lblFat);
-        TextView portion = (TextView) convertView.findViewById(R.id.lblPortionDetails);
+        TextView description = (TextView) convertView.findViewById(R.id.lblDescription);
+
 
         // Populate the data into the template view using the data object
-        name.setText(food.getName());
-        brand.setText(food.getBrand());
-        if (food.getBrand().isEmpty()) {
-            brand.setVisibility(View.GONE);
-        } else {
-            brand.setVisibility(View.VISIBLE);
-        }
-        calories.setText(String.valueOf(Math.round(food.getCalories() * multiplier)) + " kcal ");
-        carbs.setText(String.valueOf(Math.round(food.getCarbs() * multiplier) + " c "));
-        protein.setText(String.valueOf(Math.round(food.getProtein() * multiplier) + " p "));
-        fat.setText(String.valueOf(Math.round(food.getFat() * multiplier) + " f "));
-
-        float serving_post_multiplication = food.getPortionAmount() * multiplier;
-        portion.setText(serving_post_multiplication + " " + food.getPortionType());
+        name.setText(food.getName() + "");
+        description.setText(food.getDescriptionWithMultiplier(multiplier));
 
         // Return the completed view to render on screen
         return convertView;

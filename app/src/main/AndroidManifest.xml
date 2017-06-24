@@ -26,7 +26,7 @@
         </activity>
         <activity
             android:name="com.karimchehab.IIFYM.Activities.Application.ActivityFoodManager"
-            android:label="@string/toolbarTapOnAnItemToEdit" />
+            android:label="@string/toolbarManageYourFood" />
         <activity
             android:name="com.karimchehab.IIFYM.Activities.Application.ActivityEditFood"
             android:label="@string/toolbarEditFood" />
@@ -57,7 +57,7 @@
             android:label="About" />
         <activity android:name=".Activities.Authentication.ActivitySelectAuthentication" />
         <activity android:name=".Activities.Authentication.ActivityLoginEmail"></activity>
-        <activity android:name=".Activities.Application.ActivityFatSecretSearch" />
+        <activity android:name=".Activities.Application.ActivityFoodSearch" />
     </application>
 
 </manifest>

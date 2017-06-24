@@ -33,7 +33,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class ActivityFatSecretSearch extends AppCompatActivity implements AdapterView.OnItemClickListener, View.OnClickListener, TextWatcher {
+public class ActivityFoodSearch extends AppCompatActivity implements AdapterView.OnItemClickListener, View.OnClickListener, TextWatcher {
 
     // GUI
     private EditText                etxtSearch;

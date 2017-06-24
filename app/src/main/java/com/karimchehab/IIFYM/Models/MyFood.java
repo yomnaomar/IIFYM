@@ -145,4 +145,25 @@ public class MyFood {
         else
             isMeal = true;
     }
+
+    public String getDescription(){
+        StringBuilder description = new StringBuilder();
+        description.append("Per ");
+        description.append(Math.round(portionAmount) + " " + portionType + " - ");
+        description.append("Calories: " + Math.round(calories) + " kcal\n");
+        description.append("Fat: " + Math.round(fat) + " g | ");
+        description.append("Carbs: " + Math.round(carbs)  + " g | ");
+        description.append("Protein: " + Math.round(protein) + " g");
+        return description.toString();
+    }
+
+    public String getDescriptionWithMultiplier(float multiplier){
+        StringBuilder description = new StringBuilder();
+        description.append(Math.round(portionAmount * multiplier) + " " + portionType + " - ");
+        description.append("Calories: " + Math.round(calories  * multiplier) + "kcal\n");
+        description.append("Fat: " + Math.round(fat * multiplier) + "g | ");
+        description.append("Carbs: " + Math.round(carbs * multiplier)  + "g | ");
+        description.append("Protein: " + Math.round(protein * multiplier) + "g");
+        return description.toString();
+    }
 }

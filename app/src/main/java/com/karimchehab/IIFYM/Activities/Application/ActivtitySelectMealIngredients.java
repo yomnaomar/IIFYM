@@ -35,7 +35,7 @@ public class ActivtitySelectMealIngredients extends AppCompatActivity implements
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_activtity_select_meal_ingredients);
+        setContentView(R.layout.activity_select_meal_ingredients);
 
         // Database
         context = getApplicationContext();

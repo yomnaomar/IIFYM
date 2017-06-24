@@ -4,9 +4,7 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="1dp"
     android:layout_marginTop="1dp"
-    android:orientation="vertical"
-    android:paddingLeft="10dp"
-    android:paddingRight="10dp">
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -37,82 +35,15 @@
         android:weightSum="1">
 
         <TextView
-            android:id="@+id/lblBrand"
+            android:id="@+id/lblDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Brand"
+            android:text="Description"
+            android:textAppearance="@android:style/TextAppearance.Material.Medium"
             android:textColor="@color/colorPrimary"
             android:textSize="15sp" />
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/lblCalories"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Calories"
-            android:textColor="@color/CaloriesProgessColor"
-            android:textSize="15sp" />
-
-        <TextView
-            android:id="@+id/lblPortionDetails"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_weight="1"
-            android:text="0.0 Servings"
-            android:textAlignment="textEnd"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@color/colorPrimary"
-            android:textSize="15sp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="1dp"
-        android:layout_marginTop="1dp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/lblCarbs"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Carbs"
-            android:textAlignment="textStart"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@color/CarbProgressColor"
-            android:textSize="15sp" />
-
-        <TextView
-            android:id="@+id/lblProtein"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Protein"
-            android:textAlignment="center"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@color/ProteinProgessColor"
-            android:textSize="15sp" />
-
-        <TextView
-            android:id="@+id/lblFat"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Fat"
-            android:textAlignment="textEnd"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@color/FatProgessColor"
-            android:textSize="15sp" />
-
-    </LinearLayout>
 </LinearLayout>
