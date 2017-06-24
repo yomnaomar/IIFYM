@@ -183,8 +183,8 @@
     <string name="lblOfflineResults">Offline Results</string>
     <string name="lblOnlineResults">Online Results</string>
     <string name="hintPortionType">g, cup, oz ...</string>
-    <string name="lblSpecialThanks">Special thanks to:</string>
-    <string name="lblSpecialThanksNames">"Abdul Wahab Sahyoun\nYomna Omar\nOmar Chehab </string>
+    <string name="lblSpecialThanks">Special Thanks to:</string>
+    <string name="lblSpecialThanksNames">Abdul Wahab Sahyoun\nYomna Omar\nOmar Chehab</string>
     <string name="lblSpecialThanks2">This project would not have been possible without them.</string>
-
+    <string name="iconDesigners">Dave Gandy\nDinosoftLabs\nEleonor Wang\nEucalyp\nFreepik\nGoogle\nIcomoon\nLucy G\nMadebyoliver\nNikita Golubev\nPixel Buddha\nVectors Market</string>
 </resources>

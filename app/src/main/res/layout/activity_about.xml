@@ -101,14 +101,45 @@
         app:layout_constraintTop_toBottomOf="@+id/lblSpecialThanksNames" />
 
     <TextView
-        android:id="@+id/lblPrivacyPolicyLink"
+        android:id="@+id/lblIconDesigners"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
+        android:text="Icon Designers:"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblSpecialThanks2" />
+
+    <TextView
+        android:id="@+id/lblIconDesignersNames"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="0dp"
+        android:text="@string/iconDesigners"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblIconDesigners" />
+
+    <TextView
+        android:id="@+id/lblPrivacyPolicy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:text="IIFYM's Privacy Policy:"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblIconDesignersNames" />
+
+    <TextView
+        android:id="@+id/lblPrivacyPolicyLink"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="0dp"
         android:text="Privacy Policy"
         android:textColor="@color/colorPrimary"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lblSpecialThanks2" />
+        app:layout_constraintTop_toBottomOf="@+id/lblPrivacyPolicy" />
 
 </android.support.constraint.ConstraintLayout>
