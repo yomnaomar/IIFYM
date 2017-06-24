@@ -8,11 +8,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.karimchehab.IIFYM.Models.DailyItem;
-import com.karimchehab.IIFYM.Models.Food;
+import com.karimchehab.IIFYM.Models.MyFood;
 import com.karimchehab.IIFYM.Models.Ingredient;
 import com.karimchehab.IIFYM.Models.User;
-import com.karimchehab.IIFYM.Models.Weight;
-import com.karimchehab.IIFYM.Models.WeightUnit;
 
 import java.util.ArrayList;
 
@@ -157,9 +155,9 @@ public class SQLiteConnector {
         }
     }
 
-    // ----------    SQLiteHelper.Table_Food = "Food"    ----------------
+    // ----------    SQLiteHelper.Table_Food = "MyFood"    ----------------
 
-    // Returns True if Food with name found
+    // Returns True if MyFood with name found
     // Returns False otherwise
     public boolean isExistingFood (long id){
         Cursor C = database.rawQuery("SELECT * FROM " + SQLiteHelper.Table_Food + " WHERE id = '" + id + "'", null);
@@ -172,9 +170,9 @@ public class SQLiteConnector {
         return false;
     }
 
-    // Returns ID of created Food
+    // Returns ID of created MyFood
     // Returns -1 otherwise
-    public long createFood(Food f) {
+    public long createFood(MyFood f) {
         ContentValues newFood = new ContentValues();
         newFood.put("name", f.getName());
         newFood.put("brand", f.getBrand());
@@ -183,17 +181,18 @@ public class SQLiteConnector {
         newFood.put("protein", f.getProtein());
         newFood.put("fat", f.getFat());
         newFood.put("portionType", f.getPortionType());
+        newFood.put("portionAmount", f.getPortionAmount());
         newFood.put("isMeal", f.isMeal());
         newFood.put("frequency", 0);
         return database.insert(SQLiteHelper.Table_Food, null, newFood);
     }
 
-    // Returns Food with id if found
+    // Returns MyFood with id if found
     // Returns null otherwise
-    public Food retrieveFood(long id) {
+    public MyFood retrieveFood(long id) {
         final String query = "SELECT * FROM " + SQLiteHelper.Table_Food + " WHERE id = '" + id + "'";
         Cursor results = database.rawQuery(query, null);
-        Food food = null;
+        MyFood food = null;
         if (results.moveToFirst() && results != null) {
             food = instantiateFood(results);
         }
@@ -201,9 +200,9 @@ public class SQLiteConnector {
         return food;
     }
 
-    // Returns True if Food with name = f.getName was found and updated successfully
+    // Returns True if MyFood with name = f.getName was found and updated successfully
     // Returns False otherwise
-    public boolean updateFood(Food f) {
+    public boolean updateFood(MyFood f) {
         if (isExistingFood(f.getId())) {
             ContentValues updateFood = new ContentValues();
             updateFood.put("name",          f.getName());
@@ -213,6 +212,7 @@ public class SQLiteConnector {
             updateFood.put("protein",       f.getProtein());
             updateFood.put("fat",           f.getFat());
             updateFood.put("portionType",   f.getPortionType());
+            updateFood.put("portionAmount",  f.getPortionAmount());
             updateFood.put("isMeal",        f.isMeal());
             database.update(SQLiteHelper.Table_Food, updateFood, "id = '" + f.getId() + "'", null);
             return true;
@@ -223,7 +223,7 @@ public class SQLiteConnector {
     }
 
     /**
-     * Returns true if Food with name was found and deleted
+     * Returns true if MyFood with name was found and deleted
      * Also deletes food usages from other tables (trigger statements)
      * Returns false otherwise
      * @param id
@@ -248,12 +248,12 @@ public class SQLiteConnector {
     }
 
     /**
-     * Searches for Food by their name and brand given a ic_google_signin query.
+     * Searches for MyFood by their name and brand given a ic_google_signin query.
      * @param search    Search query to filter results by
      * @param count     Maximum number of results to return
      * @return
      */
-    public ArrayList<Food> searchFood(String search, final int count) {
+    public ArrayList<MyFood> searchFood(String search, final int count) {
         search = "%" + search.replace(" ", "%") + "%";
         final String escSearch = DatabaseUtils.sqlEscapeString(search);
         final String query = "SELECT *" +
@@ -266,11 +266,11 @@ public class SQLiteConnector {
     }
 
     /**
-     * Searches for Food and sorts by frequency (descending).
+     * Searches for MyFood and sorts by frequency (descending).
      * @param count     Maximum number of results to return
      * @return
      */
-    public ArrayList<Food> retrieveFrequentFood(final int count) {
+    public ArrayList<MyFood> retrieveFrequentFood(final int count) {
         final String query = "SELECT * " +
                 " FROM " + SQLiteHelper.Table_Food +
                 " WHERE frequency > 0" +
@@ -281,18 +281,18 @@ public class SQLiteConnector {
     }
 
     /**
-     * Creates an ArrayList of new instances of Food from a cursor result set.
+     * Creates an ArrayList of new instances of MyFood from a cursor result set.
      * @param results
      * @return
      */
-    private ArrayList<Food> instantiateFoodList(final Cursor results) {
+    private ArrayList<MyFood> instantiateFoodList(final Cursor results) {
         int count = results.getCount();
-        ArrayList<Food> arrFood = new ArrayList();
+        ArrayList<MyFood> arrFood = new ArrayList();
 
         if (count > 0) {
             for (int i = 0; i < count; i++) {
                 results.moveToNext();
-                final Food food = instantiateFood(results);
+                final MyFood food = instantiateFood(results);
                 arrFood.add(food);
             }
         }
@@ -301,164 +301,25 @@ public class SQLiteConnector {
     }
 
     /**
-     * Creates a single new instance of Food from a cursor result.
+     * Creates a single new instance of MyFood from a cursor result.
      * @param result
      * @return
      */
-    private Food instantiateFood(final Cursor result) {
-        int     id          = result.getInt(0);
-        String  name        = result.getString(1);
-        String  brand       = result.getString(2);
-        int     calories    = result.getInt(3);
-        float   carbs       = result.getFloat(4);
-        float   protein     = result.getFloat(5);
-        float   fat         = result.getFloat(6);
-        int     portionType = result.getInt(7);
-        int     isMeal      = result.getInt(8);
-        int     frequency   = result.getInt(9);
+    private MyFood instantiateFood(final Cursor result) {
+        int     id              = result.getInt(0);
+        String  name            = result.getString(1);
+        String  brand           = result.getString(2);
+        int     calories        = result.getInt(3);
+        float   carbs           = result.getFloat(4);
+        float   protein         = result.getFloat(5);
+        float   fat             = result.getFloat(6);
+        String  portionType     = result.getString(7);
+        float   portionAmount   = result.getFloat(8);
+        int     isMeal          = result.getInt(9);
+//        int     frequency       = result.getInt(10);
 
-        Food food = new Food(id, name, brand, calories, carbs, protein, fat, portionType, isMeal);
+        MyFood food = new MyFood(id, name, brand, calories, carbs, protein, fat, portionType, portionAmount, isMeal);
         return food;
-    }
-
-    
-    // ----------    SQLiteHelper.Table_Weight = "Weight"    ----------------
-
-    // Returns True if Weight with id found
-    // Returns False otherwise
-    public boolean isExistingWeight (long id){
-        Cursor C = database.rawQuery("SELECT * FROM " + SQLiteHelper.Table_Weight + " WHERE id = " + id, null);
-        C.moveToFirst();
-        if (C.getCount() != 0) {
-            C.close();
-            return true;
-        }
-        C.close();
-        return false;
-    }
-
-    // Returns True if Weight was successfully inserted
-    // Returns False otherwise
-    public boolean createWeight(long id, Weight w) {
-        if (!isExistingWeight(id)) {
-            ContentValues newWeight = new ContentValues();
-            newWeight.put("id",               id);
-            newWeight.put("amount",           w.getAmount());
-            newWeight.put("unit",             w.getUnit().getWeightInt());
-
-            database.insert(SQLiteHelper.Table_Weight, null, newWeight);
-            return true;
-        }
-        return false;
-    }
-
-    // Returns Weight with id = fid if found
-    // Returns null otherwise
-    public Weight retrieveWeight(long id) {
-        Cursor C = database.rawQuery("SELECT * FROM " + SQLiteHelper.Table_Weight + " WHERE id = " + id, null);
-        if (C.moveToFirst() && C != null) {
-            WeightUnit w = WeightUnit.Grams;
-            Weight weight = new Weight(C.getInt(1),
-                                    w.fromInteger(C.getInt(2)));
-            C.close();
-            return weight;
-        }
-        else {
-            C.close();
-            return null;
-        }
-    }
-
-    // Returns True if Weight with id = f.getFood_id was found and updated successfully
-    // Returns False otherwise
-    public boolean updateWeight(Food f, Weight w) {
-        if (isExistingWeight(f.getId())) {
-            ContentValues updateWeight = new ContentValues();
-            updateWeight.put("amount",        w.getAmount());
-            updateWeight.put("unit",          w.getUnit().getWeightInt());
-            database.update(SQLiteHelper.Table_Weight, updateWeight, "id = " + f.getId(), null);
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
-
-    // Returns True if Weight with id was found and deleted
-    // Returns False otherwise
-    public boolean deleteWeight(long id) {
-        if (isExistingWeight(id)){
-            database.delete(SQLiteHelper.Table_Weight, "id = " + id, null);
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
-
-    // ----------    SQLiteHelper.Table_Serving = "Serving"    ----------------
-
-    // Returns True if meal with id = m.getFood_id has seving
-    // Returns False otherwise
-    public boolean isExistingServing (long id){
-        Cursor C = database.rawQuery("SELECT * FROM " + SQLiteHelper.Table_Serving + " WHERE id = " + id, null);
-        C.moveToFirst();
-        if (C.getCount() != 0) {
-            C.close();
-            return true;
-        }
-        C.close();
-        return false;
-    }
-
-    // Returns True if Serving was successfully inserted
-    // Returns False otherwise
-    public boolean createServing (long id, float sn) {
-        if (!isExistingServing(id)) {
-            ContentValues newServing = new ContentValues();
-            newServing.put("id", id);
-            newServing.put("servingNum", sn);
-
-            database.insert(SQLiteHelper.Table_Serving, null, newServing);
-            return true;
-        }
-        return false;
-    }
-
-    // Returns Serving of Food with id = fid if found
-    // Returns 0 otherwise
-    public float retrieveServing (long id) {
-        Cursor C = database.rawQuery("SELECT * FROM " + SQLiteHelper.Table_Serving + " WHERE id = " + id, null);
-        if (C != null && C.moveToFirst()) {
-            float servingNum = C.getFloat(1); //serving_number
-            C.close();
-            return servingNum;
-        }
-        C.close();
-        return 0;
-    }
-
-    // Returns True if Serving with id = f.getFood_id was found and updated successfully
-    // Returns False otherwise
-    public boolean updateServing(long id, float sn) {
-        if(isExistingServing(id)) {
-            ContentValues updateServing = new ContentValues();
-            updateServing.put("servingNum", sn);
-
-            database.update(SQLiteHelper.Table_Serving, updateServing, "id = " + id, null);
-            return true;
-        }
-        return false;
-    }
-
-    // Returns True if User with UID = uid was found and deleted
-    // Returns False otherwise
-    public boolean deleteServing(long id) {
-        if (isExistingServing(id)) {
-            database.delete(SQLiteHelper.Table_Serving, "id = " + id, null);
-            return true;
-        }
-        return false;
     }
 
     // ----------    SQLiteHelper.Table_DailyItem = "DailyItem"    ----------------
@@ -617,13 +478,13 @@ public class SQLiteConnector {
     //----------    SQLiteHelper.Table_Ingredient = "Ingredient"    ----------------
 
     /**
-     * Returns an ArrayList<Food> which contains food which match the id's from the input parameter
+     * Returns an ArrayList<MyFood> which contains food which match the id's from the input parameter
      * @param id
      * @return
      */
-    public ArrayList<Food> retrieveFoods(long[] id) {
+    public ArrayList<MyFood> retrieveFoods(long[] id) {
 
-        ArrayList<Food> foods = new ArrayList<>();
+        ArrayList<MyFood> foods = new ArrayList<>();
         StringBuilder query = new StringBuilder("SELECT * FROM " + SQLiteHelper.Table_Food + " WHERE id IN (");
         for (int i = 0; i<id.length; i++) {
             query.append(id[i] + ",");
@@ -642,13 +503,13 @@ public class SQLiteConnector {
     }
 
     /**
-     * Creates a Meal by creating a Food and adding its Ingredients to the database
-     * Requires params Food to be created, list of ID's of its ingredients and a corresponding list of multipliers of the Ingredients
-     * Returns ID of the Food created
+     * Creates a Meal by creating a MyFood and adding its Ingredients to the database
+     * Requires params MyFood to be created, list of ID's of its ingredients and a corresponding list of multipliers of the Ingredients
+     * Returns ID of the MyFood created
      * @param food, id
      * @return
      */
-    public long createMeal (Food food, long[] id, float[] multipliers){
+    public long createMeal (MyFood food, long[] id, float[] multipliers){
         long mid = createFood(food);
         for (int i = 0; i < id.length; i++) {
             long fid = id[i];
@@ -659,7 +520,7 @@ public class SQLiteConnector {
     }
 
     /**
-     // Adds an ingredient with Meal ID = mid and Food ID = fid
+     // Adds an ingredient with Meal ID = mid and MyFood ID = fid
      * @param mid, fid
      * @return
      */
@@ -672,7 +533,7 @@ public class SQLiteConnector {
     }
 
     /**
-     * Returns an array of Food which are Ingredients of the Meal with ID = mid
+     * Returns an array of MyFood which are Ingredients of the Meal with ID = mid
      * @param mid
      * @return
      */
@@ -736,7 +597,7 @@ public class SQLiteConnector {
         long    fid         = result.getLong(1);
         float   multiplier  = result.getFloat(2);
 
-        Food food = retrieveFood(fid);
+        MyFood food = retrieveFood(fid);
         Ingredient ingredient = new Ingredient(food, multiplier);
         return ingredient;
     }

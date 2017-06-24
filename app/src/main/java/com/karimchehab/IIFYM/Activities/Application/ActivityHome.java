@@ -71,7 +71,7 @@ public class ActivityHome extends AppCompatActivity implements View.OnClickListe
         fabAddDailyItem = (FloatingActionButton) findViewById(R.id.fabAddDailyItem);
         fabAddDailyItem.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                goToAddDailyItem();
+                goToFoodSearch();
             }
         });
 
@@ -83,10 +83,9 @@ public class ActivityHome extends AppCompatActivity implements View.OnClickListe
     }
 
     // Called by clicking FAB (declared in OnCreate)
-    private void goToAddDailyItem() {
+    private void goToFoodSearch() {
         Context context = getApplicationContext();
-        Intent intent = new Intent();
-        intent.setClass(context,ActivitySelectDailyItem.class);
+        Intent intent = new Intent(context, ActivityFoodSearch.class);
         startActivity(intent);
     }
 
@@ -101,7 +100,7 @@ public class ActivityHome extends AppCompatActivity implements View.OnClickListe
                 goToToday();
                 return true;
             case (R.id.actionNutritionSettings):
-                intent = new Intent(context,ActivitySettings.class );
+                intent = new Intent(context, ActivitySettings.class );
                 startActivity(intent);
                 return true;
             case (R.id.actionFoodManager):

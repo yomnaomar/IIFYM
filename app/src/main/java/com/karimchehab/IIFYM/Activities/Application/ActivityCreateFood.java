@@ -25,8 +25,7 @@ import android.widget.Toast;
 
 import com.karimchehab.IIFYM.Database.SQLiteConnector;
 import com.karimchehab.IIFYM.Models.DateHelper;
-import com.karimchehab.IIFYM.Models.Food;
-import com.karimchehab.IIFYM.Models.Weight;
+import com.karimchehab.IIFYM.Models.MyFood;
 import com.karimchehab.IIFYM.R;
 import com.karimchehab.IIFYM.Views.DecimalDigitsInputFilter;
 
@@ -36,20 +35,15 @@ import java.util.Locale;
 
 import info.hoang8f.android.segmented.SegmentedGroup;
 
-public class ActivityCreateFood extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
+public class ActivityCreateFood extends AppCompatActivity{
 
     // GUI
-    private EditText        etxtName, etxtBrand, etxtCalories, etxtCarbs, etxtProtein, etxtFat, etxtPortionAmount, etxtDate;
-    private RadioButton     rbtnServing, rbtnWeight;
-    private SegmentedGroup  seggroupPortionType;
-    private Spinner         spinnerUnit;
+    private EditText        etxtName, etxtBrand, etxtCalories, etxtCarbs, etxtProtein, etxtFat, etxtPortionAmount, etxtPortionType, etxtDate;
     private CheckBox        cbIsDaily;
 
     // Variables
-    private long                id;
     private boolean             isDaily;
     private Context             context;
-    private int                 weightUnitSelected = 0;
     Calendar myCalendar =       Calendar.getInstance();
 
     // Database
@@ -77,34 +71,14 @@ public class ActivityCreateFood extends AppCompatActivity implements AdapterView
         etxtProtein = (EditText) findViewById(R.id.etxtProtein);
         etxtFat = (EditText) findViewById(R.id.etxtFat);
         etxtPortionAmount = (EditText) findViewById(R.id.etxtPortionAmount);
+        etxtPortionType = (EditText) findViewById(R.id.etxtPortionType);
         etxtDate = (EditText) findViewById(R.id.etxtDate);
-
-        // SegmentedGroup & RadioButtons
-        rbtnServing = (RadioButton) findViewById(R.id.rbtnServing);
-        rbtnWeight = (RadioButton) findViewById(R.id.rbtnWeight);
-        seggroupPortionType = (SegmentedGroup) findViewById(R.id.seggroupPortionType);
 
 
         etxtCarbs.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(4,1)});
         etxtProtein.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(4,1)});
         etxtFat.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(4,1)});
         etxtPortionAmount.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(4,1)});
-
-        seggroupPortionType.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
-        {
-            @Override public void onCheckedChanged(RadioGroup group, int checkedId) {
-                etxtPortionAmount.setText("");
-                updateGUI();
-            }
-        });
-
-        // Spinner
-        spinnerUnit = (Spinner) findViewById(R.id.spinnerUnit);
-        ArrayAdapter<CharSequence> Spinner_Unit_Adapter = ArrayAdapter.createFromResource(this, R.array.weight_units_array, android.R.layout.simple_spinner_item);
-        Spinner_Unit_Adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerUnit.setAdapter(Spinner_Unit_Adapter);
-        spinnerUnit.setSelection(0); // default selection value
-        spinnerUnit.setOnItemSelectedListener(this);
 
         // CheckBox
         cbIsDaily = (CheckBox) findViewById(R.id.cbIsDaily);
@@ -132,7 +106,6 @@ public class ActivityCreateFood extends AppCompatActivity implements AdapterView
 
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
                 new DatePickerDialog(ActivityCreateFood.this, date, myCalendar
                         .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                         myCalendar.get(Calendar.DAY_OF_MONTH)).show();
@@ -146,14 +119,6 @@ public class ActivityCreateFood extends AppCompatActivity implements AdapterView
     }
 
     private void updateGUI() {
-        if (rbtnServing.isChecked()) {
-            etxtPortionAmount.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL | InputType.TYPE_CLASS_NUMBER);
-            spinnerUnit.setVisibility(View.GONE);
-        } else if (rbtnWeight.isChecked()) {
-            etxtPortionAmount.setInputType(InputType.TYPE_CLASS_NUMBER);
-            spinnerUnit.setVisibility(View.VISIBLE);
-        }
-
         if(cbIsDaily.isChecked()){
             String myFormat = DateHelper.dateformat; //In which you need put here
             SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
@@ -186,7 +151,7 @@ public class ActivityCreateFood extends AppCompatActivity implements AdapterView
         return super.onOptionsItemSelected(item);
     }
 
-    // Inserts Food from User input to Food table in the Database
+    // Inserts MyFood from User input to MyFood table in the Database
     private void Enter() {
         boolean fieldsOk = validateFields();
         if(fieldsOk) {
@@ -196,35 +161,21 @@ public class ActivityCreateFood extends AppCompatActivity implements AdapterView
             float carbs = Float.parseFloat(etxtCarbs.getText().toString());
             float protein = Float.parseFloat(etxtProtein.getText().toString());
             float fat = Float.parseFloat(etxtFat.getText().toString());
-
-            // Get PortionType
-            int radioButtonID = seggroupPortionType.getCheckedRadioButtonId();
-            View radioButton = seggroupPortionType.findViewById(radioButtonID);
-            int indexofPortionType = seggroupPortionType.indexOfChild(radioButton);
+            float portionAmount = Float.parseFloat(etxtPortionAmount.getText().toString());
+            String portionType = etxtPortionType.getText().toString();
 
             // CheckBox (Add to log?)
             isDaily = cbIsDaily.isChecked();
 
-            createFood(name, brand, calories, carbs, protein, fat, indexofPortionType);
+            createFood(name, brand, calories, carbs, protein, fat, portionAmount, portionType);
         }
     }
 
-    private void createFood(String name, String brand, int calories, float carbs, float protein, float fat, int indexofPortionType) {
-        //Initializing Food to be inserted in Database
-        Food food = new Food(name, brand, calories, carbs, protein, fat, indexofPortionType, false);
-
+    private void createFood(String name, String brand, int calories, float carbs, float protein, float fat, float portionAmount, String portionType) {
+        //Initializing MyFood to be inserted in Database
+        MyFood food = new MyFood(name, brand, calories, carbs, protein, fat, portionType, portionAmount, false);
         food.setId(DB_SQLite.createFood(food));
-        id = food.getId();
         if (food.getId() != -1){
-            if (indexofPortionType == 0) { // Food is measured by servings
-                float Serving_Number = Float.parseFloat(etxtPortionAmount.getText().toString());
-                DB_SQLite.createServing(id, Serving_Number);
-            }
-            else if (indexofPortionType == 1) { // Food is measured by weight
-                int Weight_Quantity = Integer.parseInt(etxtPortionAmount.getText().toString());
-                Weight weight = new Weight(Weight_Quantity, weightUnitSelected);
-                DB_SQLite.createWeight(id, weight);
-            }
             // If User entered this activity through Add Daily, add this newly created food to daily items
             if (isDaily){
                 String date = etxtDate.getText().toString();
@@ -279,28 +230,25 @@ public class ActivityCreateFood extends AppCompatActivity implements AdapterView
         } else
             etxtFat.setError(null);
 
-        if (rbtnServing.isChecked())
+        if (etxtPortionAmount.getText().toString().isEmpty())
         {
-            if (etxtPortionAmount.getText().toString().isEmpty())
-            {
-                etxtPortionAmount.setError("Required");
-                valid = false;
-            }
-            else
-                etxtPortionAmount.setError(null);
+            etxtPortionAmount.setError("Required");
+            valid = false;
         }
         else
         {
-            if (etxtPortionAmount.getText().toString().isEmpty())
-            {
-                etxtPortionAmount.setError("Required");
-                valid = false;
-            }
-            else
-            {
-                etxtPortionAmount.setError(null);
-            }
+            etxtPortionAmount.setError(null);
         }
+        if (etxtPortionType.getText().toString().isEmpty())
+        {
+            etxtPortionType.setError("Required");
+            valid = false;
+        }
+        else
+        {
+            etxtPortionType.setError(null);
+        }
+
         return valid;
     }
 
@@ -336,21 +284,4 @@ public class ActivityCreateFood extends AppCompatActivity implements AdapterView
         AlertDialog dialog = builder.create();
         dialog.show();
     }
-
-    @Override public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-        switch (position) {
-            case (0):
-                weightUnitSelected = 0;
-                break;
-            case (1):
-                weightUnitSelected = 1;
-                break;
-            case (2):
-                weightUnitSelected = 2;
-                break;
-        }
-    }
-
-    // Used
-    @Override public void onNothingSelected(AdapterView<?> adapterView) {}
 }

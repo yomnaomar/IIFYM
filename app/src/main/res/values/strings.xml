@@ -147,7 +147,7 @@
     <string name="lblf">f</string>
     <string name="lblkcal">kcal</string>
     <string name="toolbarSelectItemToAdd">Select an item to add to daily log</string>
-    <string name="toolbarTapOnAnItemToEdit">Tap on an item to edit</string>
+    <string name="toolbarManageYourFood">Manage Your Saved Foods and Meals</string>
     <string name="lblDeleteFromDaily">Delete from daily log?</string>
     <string name="lblDeleteFromDatabase">Delete from database?</string>
     <string name="toolbarCreateNewFood">Create new food</string>
@@ -180,5 +180,11 @@
     <string name="lblMealIngredients">Meal Ingredients</string>
     <string name="lblKarimEmail">karimchehab94@gmail.com</string>
     <string name="lblKarimWebsite">karim-chehab.weebly.com</string>
+    <string name="lblOfflineResults">Offline Results</string>
+    <string name="lblOnlineResults">Online Results</string>
+    <string name="hintPortionType">g, cup, oz ...</string>
+    <string name="lblSpecialThanks">Special thanks to:</string>
+    <string name="lblSpecialThanksNames">"Abdul Wahab Sahyoun\nYomna Omar\nOmar Chehab </string>
+    <string name="lblSpecialThanks2">This project would not have been possible without them.</string>
 
 </resources>

@@ -15,7 +15,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.karimchehab.IIFYM.Database.SQLiteConnector;
-import com.karimchehab.IIFYM.Models.Food;
+import com.karimchehab.IIFYM.Models.MyFood;
 import com.karimchehab.IIFYM.R;
 import com.karimchehab.IIFYM.Views.AdapterSavedItem;
 
@@ -35,7 +35,7 @@ public class ActivtitySelectMealIngredients extends AppCompatActivity implements
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_activtity_select_meal_ingredients);
+        setContentView(R.layout.activity_select_meal_ingredients);
 
         // Database
         context = getApplicationContext();
@@ -113,7 +113,7 @@ public class ActivtitySelectMealIngredients extends AppCompatActivity implements
     // 2. Filtered Foods when user uses the ic_google_signin functionality
     private void filterSavedItems(final String search) {
         adapterSavedItem.clear();
-        ArrayList<Food> arrSavedItems;
+        ArrayList<MyFood> arrSavedItems;
 
         if (search.isEmpty()) {
             lblFrequent.setVisibility(View.VISIBLE);
@@ -129,7 +129,7 @@ public class ActivtitySelectMealIngredients extends AppCompatActivity implements
     }
 
     @Override public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Food food = (Food) parent.getItemAtPosition(position);
+        MyFood food = (MyFood) parent.getItemAtPosition(position);
         adapterSelectedFoods.add(food);
     }
 }

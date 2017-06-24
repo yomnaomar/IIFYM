@@ -70,6 +70,37 @@
         app:layout_constraintTop_toBottomOf="@+id/lblGithub" />
 
     <TextView
+        android:id="@+id/lblSpecialThanks"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/lblSpecialThanks"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblGithubLink" />
+
+    <TextView
+        android:id="@+id/lblSpecialThanksNames"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="0dp"
+        android:text="@string/lblSpecialThanksNames"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblSpecialThanks" />
+
+    <TextView
+        android:id="@+id/lblSpecialThanks2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="-4dp"
+        android:text="@string/lblSpecialThanks2"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblSpecialThanksNames" />
+
+    <TextView
         android:id="@+id/lblPrivacyPolicyLink"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -78,6 +109,6 @@
         android:text="Privacy Policy"
         android:textColor="@color/colorPrimary"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lblGithubLink" />
+        app:layout_constraintTop_toBottomOf="@+id/lblSpecialThanks2" />
 
 </android.support.constraint.ConstraintLayout>

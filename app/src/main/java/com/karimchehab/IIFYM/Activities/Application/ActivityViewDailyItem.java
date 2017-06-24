@@ -14,8 +14,7 @@ import android.widget.Toast;
 
 import com.karimchehab.IIFYM.Database.SQLiteConnector;
 import com.karimchehab.IIFYM.Models.DailyItem;
-import com.karimchehab.IIFYM.Models.Food;
-import com.karimchehab.IIFYM.Models.Weight;
+import com.karimchehab.IIFYM.Models.MyFood;
 import com.karimchehab.IIFYM.R;
 
 import java.util.ArrayList;
@@ -33,14 +32,14 @@ public class ActivityViewDailyItem extends AppCompatActivity implements View.OnC
 
     // TODO Implement listviewIngredients
     // private adapterIngredient       adapterIngredients;
-    private ArrayList<Food>         arrIngredients;
+    private ArrayList<MyFood>         arrIngredients;
     private ListView                listviewIngredients;
 
     // Variables
     private Context     context;
     private int         id;
     private long        food_id;
-    private Food        food;
+    private MyFood food;
     private DailyItem   dailyitem;
     private float       servingAmount;
     private int         weightAmount;
@@ -57,6 +56,7 @@ public class ActivityViewDailyItem extends AppCompatActivity implements View.OnC
         // Intent
         Intent intent = getIntent();
         id = intent.getIntExtra("id", -1);
+
 
         // Database
         context = getApplicationContext();
@@ -84,9 +84,6 @@ public class ActivityViewDailyItem extends AppCompatActivity implements View.OnC
         fabDelete = (FloatingActionButton) findViewById(R.id.fabDelete);
         fabDelete.setOnClickListener(this);
 
-        // chart = (PieChartView)findViewById(R.id.piechartMacros);
-        // generatePieChartData();
-
         lblName.setText(food.getName());
         if(food.getBrand().isEmpty())
             lblBrand.setVisibility(View.GONE);
@@ -100,19 +97,10 @@ public class ActivityViewDailyItem extends AppCompatActivity implements View.OnC
         lblProtein.setText(Math.round(food.getProtein() * portionMultiplier) + "");
         lblFat.setText(Math.round(food.getFat() * portionMultiplier) + "");
 
-        if (food.getPortionType() == 0) { // Serving
-            servingAmount = DB_SQLite.retrieveServing(food_id) * portionMultiplier;
-            lblPortionAmount.setText(servingAmount + "");
-            if (servingAmount != 1.0f)
-                lblPortionType.setText("servings");
-            else
-                lblPortionType.setText("serving");
-        } else { // Weight
-            Weight weight = DB_SQLite.retrieveWeight(food_id);
-            weightAmount = Math.round(weight.getAmount() * portionMultiplier);
-            lblPortionAmount.setText(weightAmount + "");
-            lblPortionType.setText(weight.getUnit().Abbreviate());
-        }
+        float portionAmount = Math.round(food.getPortionAmount() * portionMultiplier);
+        lblPortionAmount.setText(portionAmount + "");
+
+        lblPortionType.setText(food.getPortionType());
     }
 
     @Override public void onClick(View v) {

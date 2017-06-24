@@ -14,7 +14,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
     // Database Names
     private static final String DATABASE_NAME       = "DB_IIFYM";
-    private static final int DATABASE_VERSION       = 2;
+    private static final int DATABASE_VERSION       = 3;
 
     // Variables
     private static SQLiteHelper sInstance;
@@ -22,11 +22,13 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
     // Table Names
     public static final String Table_User           = "User";
-    public static final String Table_Food           = "Food";
-    public static final String Table_Weight         = "Weight";
-    public static final String Table_Serving        = "Serving";
+    public static final String Table_Food           = "MyFood";
     public static final String Table_DailyItem      = "DailyItem";
     public static final String Table_Ingredient     = "Ingredient";
+
+    // Old Tables
+    public static final String Table_Weight         = "Weight";
+    public static final String Table_Serving        = "Serving";
 
     // Table Create Queries
 
@@ -57,22 +59,11 @@ public class SQLiteHelper extends SQLiteOpenHelper {
             "carbs         REAL, " +
             "protein       REAL, " +
             "fat           REAL, " +
-            "portionType   INTEGER, " +     // 0 - Serving, 1 - Weight, 2 - None
+            "portionType   Text, " +     // g , cup, oz, fl oz, etc ...
+            "portionAmount REAL, " +     // 1, 100, 2.56
             "isMeal        INTEGER, " +
             "frequency     INTEGER DEFAULT 0);";
 
-    String createTable_Weight = "CREATE TABLE " + Table_Weight + " " +
-            "(id            INTEGER PRIMARY KEY, " +
-            "amount         INTEGER, " +
-            "unit           INTEGER, " +
-            "CONSTRAINT food_id_fk FOREIGN KEY(id) REFERENCES " + Table_Food + " (id) ON DELETE CASCADE);";
-    //ON UPDATE is not needed because the id will never be updated, it is hidden from the user
-
-    String createTable_Serving = "CREATE TABLE " + Table_Serving + " " +
-            "(id            INTEGER PRIMARY KEY, " +
-            "servingNum     REAL, " +
-            "CONSTRAINT food_id_fk FOREIGN KEY(id) REFERENCES " + Table_Food + " (id) ON DELETE CASCADE);";
-    //ON UPDATE is not needed because the id will never be updated, it is hidden from the user
 
     String createTable_DailyItem = "CREATE TABLE " + Table_DailyItem + " " +
             "(id            INTEGER PRIMARY KEY autoincrement, " +
@@ -83,7 +74,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
     String createTable_Ingredient = "CREATE TABLE " + Table_Ingredient + " " +
             "(mid           INTEGER, " +    // mid = Meal ID
-            "fid            INTEGER, " +    // fid = Food ID
+            "fid            INTEGER, " +    // fid = MyFood ID
             "multiplier     REAL, " +
             "CONSTRAINT composed_id_pk PRIMARY KEY(mid, fid), " +
             "CONSTRAINT meal_id_fk FOREIGN KEY(mid) REFERENCES " + Table_Food + " (id) ON DELETE CASCADE, " +
@@ -106,26 +97,18 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         //Create tables
         db.execSQL(createTable_User);
         db.execSQL(createTable_Food);
-        db.execSQL(createTable_Weight);
-        db.execSQL(createTable_Serving);
         db.execSQL(createTable_DailyItem);
         db.execSQL(createTable_Ingredient);
     }
 
     @Override public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // Version 2: Removed USDA Database, requires reset of DB contents
-        if (oldVersion < 2){
-            db.execSQL("DROP TABLE IF EXISTS " + Table_Ingredient);
-            db.execSQL("DROP TABLE IF EXISTS " + Table_DailyItem);
+        // Version 3: Removed Serving and Weight and made them an attribute in myFood
+        if (oldVersion < 3){
+            db.execSQL("DROP TABLE IF EXISTS " + Table_Food);
             db.execSQL("DROP TABLE IF EXISTS " + Table_Serving);
             db.execSQL("DROP TABLE IF EXISTS " + Table_Weight);
-            db.execSQL("DROP TABLE IF EXISTS " + Table_Food);
 
             db.execSQL(createTable_Food);
-            db.execSQL(createTable_Weight);
-            db.execSQL(createTable_Serving);
-            db.execSQL(createTable_DailyItem);
-            db.execSQL(createTable_Ingredient);
         }
     }
 
