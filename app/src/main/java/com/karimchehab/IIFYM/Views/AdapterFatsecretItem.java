@@ -45,7 +45,16 @@ public class AdapterFatsecretItem extends ArrayAdapter<CompactFood> {
             brand.setText(food.getBrandName());
             brand.setVisibility(View.VISIBLE);
         }
-        description.setText(String.valueOf(food.getDescription()));
+
+        String[] temp = food.getDescription().split("\\|");
+        StringBuilder tempBuilder = new StringBuilder();
+        tempBuilder.append(temp[0].trim());
+        tempBuilder.append("\n");
+        tempBuilder.append(temp[1].trim() + " | ");
+        tempBuilder.append(temp[2].trim() + " | ");
+        tempBuilder.append(temp[3].trim());
+
+        description.setText(tempBuilder.toString());
 
         // Return the completed view to render on screen
         return convertView;
