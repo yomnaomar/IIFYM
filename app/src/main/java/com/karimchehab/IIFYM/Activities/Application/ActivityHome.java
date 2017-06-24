@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.karimchehab.IIFYM.Activities.Settings.ActivitySettings;
 import com.karimchehab.IIFYM.Activities.Authentication.ActivitySelectAuthentication;
+import com.karimchehab.IIFYM.Activities.Static.ActivityAbout;
 import com.karimchehab.IIFYM.Database.SharedPreferenceHelper;
 import com.karimchehab.IIFYM.Models.DateHelper;
 import com.karimchehab.IIFYM.R;
@@ -112,7 +113,11 @@ public class ActivityHome extends AppCompatActivity implements View.OnClickListe
                 intent = new Intent(context, ActivitySelectAuthentication.class);
                 startActivity(intent);
                 finish();
-                break;
+                return true;
+            case (R.id.menuAbout):
+                intent = new Intent(context, ActivityAbout.class);
+                startActivity(intent);
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }

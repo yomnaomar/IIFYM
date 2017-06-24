@@ -20,6 +20,7 @@ import com.github.clans.fab.FloatingActionButton;
 
 import java.util.ArrayList;
 
+//TODO DELETE THIS FILE
 public class ActivitySelectDailyItem extends AppCompatActivity implements AdapterView.OnItemClickListener, View.OnClickListener {
 
     // GUI

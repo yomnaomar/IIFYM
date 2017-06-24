@@ -151,9 +151,9 @@ public class MyFood {
         description.append("Per ");
         description.append(portionAmount + " " + portionType + " - ");
         description.append("Calories: " + calories + " kcal\n");
-        description.append("Fat: " + fat + " g | ");
         description.append("Carbs: " + carbs  + " g | ");
-        description.append("Protein: " + protein + " g");
+        description.append("Protein: " + protein + " g | ");
+        description.append("Fat: " + fat + " g");
         return description.toString();
     }
 
@@ -161,9 +161,9 @@ public class MyFood {
         StringBuilder description = new StringBuilder();
         description.append(portionAmount * multiplier + " " + portionType + " - ");
         description.append("Calories: " + calories  * multiplier + "kcal\n");
-        description.append("Fat: " + fat * multiplier + "g | ");
         description.append("Carbs: " + carbs * multiplier  + "g | ");
-        description.append("Protein: " + protein * multiplier + "g");
+        description.append("Protein: " + protein * multiplier + "g | ");
+        description.append("Fat: " + fat * multiplier + "g");
         return description.toString();
     }
 }
