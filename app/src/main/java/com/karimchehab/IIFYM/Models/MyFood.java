@@ -149,21 +149,21 @@ public class MyFood {
     public String getDescription(){
         StringBuilder description = new StringBuilder();
         description.append("Per ");
-        description.append(Math.round(portionAmount) + " " + portionType + " - ");
-        description.append("Calories: " + Math.round(calories) + " kcal\n");
-        description.append("Fat: " + Math.round(fat) + " g | ");
-        description.append("Carbs: " + Math.round(carbs)  + " g | ");
-        description.append("Protein: " + Math.round(protein) + " g");
+        description.append(portionAmount + " " + portionType + " - ");
+        description.append("Calories: " + calories + " kcal\n");
+        description.append("Fat: " + fat + " g | ");
+        description.append("Carbs: " + carbs  + " g | ");
+        description.append("Protein: " + protein + " g");
         return description.toString();
     }
 
     public String getDescriptionWithMultiplier(float multiplier){
         StringBuilder description = new StringBuilder();
-        description.append(Math.round(portionAmount * multiplier) + " " + portionType + " - ");
-        description.append("Calories: " + Math.round(calories  * multiplier) + "kcal\n");
-        description.append("Fat: " + Math.round(fat * multiplier) + "g | ");
-        description.append("Carbs: " + Math.round(carbs * multiplier)  + "g | ");
-        description.append("Protein: " + Math.round(protein * multiplier) + "g");
+        description.append(portionAmount * multiplier + " " + portionType + " - ");
+        description.append("Calories: " + calories  * multiplier + "kcal\n");
+        description.append("Fat: " + fat * multiplier + "g | ");
+        description.append("Carbs: " + carbs * multiplier  + "g | ");
+        description.append("Protein: " + protein * multiplier + "g");
         return description.toString();
     }
 }

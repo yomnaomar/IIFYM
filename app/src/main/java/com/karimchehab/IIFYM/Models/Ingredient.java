@@ -23,11 +23,11 @@ public class Ingredient extends MyFood {
     public String getDescription(float multiplier){
         StringBuilder description = new StringBuilder();
         description.append("Per ");
-        description.append(Math.round(getPortionAmount() * multiplier) + " " + getPortionType() + " - ");
-        description.append("Calories: " + Math.round(getCalories()  * multiplier) + "kcal\n");
-        description.append("Fat: " + Math.round(getFat() * multiplier) + "g | ");
-        description.append("Carbs: " + Math.round(getCarbs() * multiplier)  + "g | ");
-        description.append("Protein: " + Math.round(getProtein() * multiplier) + "g");
+        description.append(getPortionAmount() * multiplier + " " + getPortionType() + " - ");
+        description.append("Calories: " + getCalories()  * multiplier + "kcal\n");
+        description.append("Fat: " + getFat() * multiplier + "g | ");
+        description.append("Carbs: " + getCarbs() * multiplier  + "g | ");
+        description.append("Protein: " + getProtein() * multiplier + "g");
         return description.toString();
     }
 }
