@@ -9,5 +9,5 @@ public class Credentials {
 
 
     public static final String FATSECRET_API_ACCESS_KEY = "f902675ae3414fba96c95d80fe9670a3";
-    public static final String FATSECRET_SHARED_SECRET = "e0efbac0231d4a6295367a5da9dc577f";
+    public static final String FATSECRET_SHARED_SECRET = "f847ad12ea6a46338399891a751e6177";
 }

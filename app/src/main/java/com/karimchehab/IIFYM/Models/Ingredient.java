@@ -25,9 +25,9 @@ public class Ingredient extends MyFood {
         description.append("Per ");
         description.append(getPortionAmount() * multiplier + " " + getPortionType() + " - ");
         description.append("Calories: " + getCalories()  * multiplier + "kcal\n");
-        description.append("Fat: " + getFat() * multiplier + "g | ");
         description.append("Carbs: " + getCarbs() * multiplier  + "g | ");
-        description.append("Protein: " + getProtein() * multiplier + "g");
+        description.append("Protein: " + getProtein() * multiplier + "g | ");
+        description.append("Fat: " + getFat() * multiplier + "g");
         return description.toString();
     }
 }
