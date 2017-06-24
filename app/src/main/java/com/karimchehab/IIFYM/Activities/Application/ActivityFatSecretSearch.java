@@ -155,7 +155,6 @@ public class ActivityFatSecretSearch extends AppCompatActivity implements Adapte
                 System.out.println("=========FOODS============");
                 for (CompactFood food : foods) {
                     System.out.println(food.getName());
-
                     adapterOnline.add(food);
                 }
             }
@@ -174,6 +173,7 @@ public class ActivityFatSecretSearch extends AppCompatActivity implements Adapte
 
             Intent intent = new Intent(context, ActivityAddDailyItem.class);
             intent.putExtra("fid", fid);
+            Log.d("fid Intent", fid + "");
             startActivity(intent);
         }
 

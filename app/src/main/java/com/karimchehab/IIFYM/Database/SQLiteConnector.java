@@ -316,7 +316,7 @@ public class SQLiteConnector {
         String  portionType     = result.getString(7);
         float   portionAmount   = result.getFloat(8);
         int     isMeal          = result.getInt(9);
-        int     frequency       = result.getInt(10);
+//        int     frequency       = result.getInt(10);
 
         MyFood food = new MyFood(id, name, brand, calories, carbs, protein, fat, portionType, portionAmount, isMeal);
         return food;

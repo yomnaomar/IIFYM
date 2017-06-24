@@ -14,7 +14,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
     // Database Names
     private static final String DATABASE_NAME       = "DB_IIFYM";
-    private static final int DATABASE_VERSION       = 1;
+    private static final int DATABASE_VERSION       = 3;
 
     // Variables
     private static SQLiteHelper sInstance;
@@ -25,6 +25,10 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     public static final String Table_Food           = "MyFood";
     public static final String Table_DailyItem      = "DailyItem";
     public static final String Table_Ingredient     = "Ingredient";
+
+    // Old Tables
+    public static final String Table_Weight         = "Weight";
+    public static final String Table_Serving        = "Serving";
 
     // Table Create Queries
 
@@ -97,7 +101,16 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         db.execSQL(createTable_Ingredient);
     }
 
-    @Override public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {}
+    @Override public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        // Version 3: Removed Serving and Weight and made them an attribute in myFood
+        if (oldVersion < 3){
+            db.execSQL("DROP TABLE IF EXISTS " + Table_Food);
+            db.execSQL("DROP TABLE IF EXISTS " + Table_Serving);
+            db.execSQL("DROP TABLE IF EXISTS " + Table_Weight);
+
+            db.execSQL(createTable_Food);
+        }
+    }
 
     @Override public void onOpen(SQLiteDatabase db) {
         super.onOpen(db);

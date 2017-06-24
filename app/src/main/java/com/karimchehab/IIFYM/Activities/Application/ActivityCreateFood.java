@@ -162,7 +162,7 @@ public class ActivityCreateFood extends AppCompatActivity{
             float protein = Float.parseFloat(etxtProtein.getText().toString());
             float fat = Float.parseFloat(etxtFat.getText().toString());
             float portionAmount = Float.parseFloat(etxtPortionAmount.getText().toString());
-            String portionType = etxtPortionAmount.getText().toString();
+            String portionType = etxtPortionType.getText().toString();
 
             // CheckBox (Add to log?)
             isDaily = cbIsDaily.isChecked();

@@ -8,7 +8,7 @@ public class Ingredient extends MyFood {
     private float multiplier;
 
     public Ingredient(MyFood food, float multiplier) {
-        super(food.getId(), food.getName(), food.getBrand(), food.getCalories(), food.getCarbs(), food.getProtein(), food.getFat(), food.getPortionType(), food.isMeal());
+        super(food.getId(), food.getName(), food.getBrand(), food.getCalories(), food.getCarbs(), food.getProtein(), food.getFat(), food.getPortionType(), food.getPortionAmount(), food.isMeal());
         this.multiplier = multiplier;
     }
 
