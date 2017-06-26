@@ -1,5 +1,7 @@
 package com.karimchehab.IIFYM.Models;
 
+import java.text.DecimalFormat;
+
 /**
  * Created by Yomna on 2/18/2017.
  */
@@ -15,6 +17,8 @@ public class MyFood {
     private String portionType;
     private float portionAmount;
     private boolean isMeal;
+
+    private DecimalFormat df = new DecimalFormat("#.##");
 
     // Constructor 1
     // isMeal is boolean
@@ -149,21 +153,21 @@ public class MyFood {
     public String getDescription(){
         StringBuilder description = new StringBuilder();
         description.append("Per ");
-        description.append(portionAmount + " " + portionType + " - ");
-        description.append("Calories: " + calories + " kcal\n");
-        description.append("Carbs: " + carbs  + " g | ");
-        description.append("Protein: " + protein + " g | ");
-        description.append("Fat: " + fat + " g");
+        description.append(df.format(portionAmount) + " " + portionType + " - ");
+        description.append("Calories: " + df.format(calories) + " kcal\n");
+        description.append("Carbs: " + df.format(carbs)  + " g | ");
+        description.append("Protein: " + df.format(protein) + " g | ");
+        description.append("Fat: " + df.format(fat) + " g");
         return description.toString();
     }
 
     public String getDescriptionWithMultiplier(float multiplier){
         StringBuilder description = new StringBuilder();
-        description.append(portionAmount * multiplier + " " + portionType + " - ");
-        description.append("Calories: " + calories  * multiplier + "kcal\n");
-        description.append("Carbs: " + carbs * multiplier  + "g | ");
-        description.append("Protein: " + protein * multiplier + "g | ");
-        description.append("Fat: " + fat * multiplier + "g");
+        description.append(df.format(portionAmount * multiplier) + " " + portionType + " - ");
+        description.append("Calories: " + df.format(calories  * multiplier) + " kcal\n");
+        description.append("Carbs: " + df.format(carbs * multiplier)  + " g | ");
+        description.append("Protein: " + df.format(protein * multiplier) + " g | ");
+        description.append("Fat: " + df.format(fat * multiplier) + " g");
         return description.toString();
     }
 }
