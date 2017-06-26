@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -23,7 +24,6 @@ public class ActivityFoodManager extends AppCompatActivity implements AdapterVie
 
     // GUI
     private EditText                etxtSearch;
-    private TextView                lblFrequent;
     private AdapterSavedItem        adapterSavedItem;
     private ListView                listviewSavedItems;
 
@@ -43,32 +43,34 @@ public class ActivityFoodManager extends AppCompatActivity implements AdapterVie
         intializeGUI();
     }
 
-    @Override protected void onResume() {
-        super.onResume();
-        final String search = etxtSearch.getText().toString();
-        filterSavedItems(search);
-    }
-
     private void intializeGUI() {
         // Search Functionality
         etxtSearch = (EditText) findViewById(R.id.etxtSearch);
-        etxtSearch.addTextChangedListener(new TextWatcher() {
-            @Override public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
-                filterSavedItems(cs.toString());
+        etxtSearch.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                Search();
+                return true;
             }
-
-            @Override public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {}
-
-            @Override public void afterTextChanged(Editable arg0) {}
+            return false;
         });
-
-        lblFrequent = (TextView) findViewById(R.id.lblFrequent);
 
         // List View
         adapterSavedItem = new AdapterSavedItem(this);
         listviewSavedItems = (ListView) findViewById(R.id.listviewSavedItems);
         listviewSavedItems.setAdapter(adapterSavedItem);
         listviewSavedItems.setOnItemClickListener(this);
+    }
+
+    private void Search() {
+        adapterSavedItem.clear();
+        ArrayList<MyFood> arrSavedItems;
+        String search = etxtSearch.getText().toString();
+
+        arrSavedItems = DB_SQLite.searchFood(search);
+
+        for (int i = 0; i < arrSavedItems.size(); i++) {
+            adapterSavedItem.add(arrSavedItems.get(i));
+        }
     }
 
     // TODO implement case where MyFood is Meal
@@ -83,26 +85,6 @@ public class ActivityFoodManager extends AppCompatActivity implements AdapterVie
         }
         else if (food.isMeal()) {
             // TODO implement case where MyFood is Meal
-        }
-    }
-
-    // Updates adapterSavedItem and arrSavedItems to display either:
-    // 1. Frequent Foods when ic_google_signin is empty
-    // 2. Filtered Foods when user uses the ic_google_signin functionality
-    private void filterSavedItems(final String search) {
-        adapterSavedItem.clear();
-        ArrayList<MyFood> arrSavedItems;
-
-        if (search.isEmpty()) {
-            lblFrequent.setVisibility(View.VISIBLE);
-            arrSavedItems = DB_SQLite.retrieveFrequentFood(20);
-        } else {
-            lblFrequent.setVisibility(View.GONE);
-            arrSavedItems = DB_SQLite.searchFood(search, 20);
-        }
-
-        for (int i = 0; i < arrSavedItems.size(); i++) {
-            adapterSavedItem.add(arrSavedItems.get(i));
         }
     }
 }

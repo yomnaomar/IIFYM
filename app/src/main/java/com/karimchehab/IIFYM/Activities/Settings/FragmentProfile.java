@@ -37,7 +37,6 @@ import com.karimchehab.IIFYM.Database.SQLiteConnector;
 import com.karimchehab.IIFYM.Database.SharedPreferenceHelper;
 import com.karimchehab.IIFYM.Models.User;
 import com.karimchehab.IIFYM.R;
-import com.karimchehab.IIFYM.Views.DecimalDigitsInputFilter;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog.OnDateSetListener;
 
@@ -171,8 +170,6 @@ public class FragmentProfile extends Fragment implements View.OnClickListener, O
         dateFormatter = new SimpleDateFormat("dd-MM-yyyy");
         etxtDateOfBirth.setInputType(InputType.TYPE_NULL);
         etxtDateOfBirth.setOnClickListener(this);
-
-        etxtWeight.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(4,2)});
 
         // Change detectors
         etxtName.addTextChangedListener(this);

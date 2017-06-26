@@ -248,7 +248,7 @@ public class SQLiteConnector {
     }
 
     /**
-     * Searches for MyFood by their name and brand given a ic_google_signin query.
+     * Searches for MyFood by their name and brand given a query.
      * @param search    Search query to filter results by
      * @param count     Maximum number of results to return
      * @return
@@ -261,6 +261,22 @@ public class SQLiteConnector {
                 " WHERE name || ' ' || brand LIKE " + escSearch +
                 " OR brand || ' ' || name LIKE " + escSearch +
                 " LIMIT " + count;
+        Cursor results = database.rawQuery(query, null);
+        return instantiateFoodList(results);
+    }
+
+    /**
+     * Searches for MyFood by their name and brand given a query.
+     * @param search    Search query to filter results by
+     * @return
+     */
+    public ArrayList<MyFood> searchFood(String search) {
+        search = "%" + search.replace(" ", "%") + "%";
+        final String escSearch = DatabaseUtils.sqlEscapeString(search);
+        final String query = "SELECT *" +
+                " FROM " + SQLiteHelper.Table_Food +
+                " WHERE name || ' ' || brand LIKE " + escSearch +
+                " OR brand || ' ' || name LIKE " + escSearch;
         Cursor results = database.rawQuery(query, null);
         return instantiateFoodList(results);
     }

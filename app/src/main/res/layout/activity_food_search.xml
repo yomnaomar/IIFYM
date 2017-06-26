@@ -39,7 +39,8 @@
                 android:hint="Search for a food"
                 android:inputType="textCapSentences"
                 tools:layout_editor_absoluteX="0dp"
-                tools:layout_editor_absoluteY="0dp" />
+                tools:layout_editor_absoluteY="0dp"
+                android:imeOptions="actionSearch"/>
 
         </LinearLayout>
 
@@ -64,6 +65,14 @@
             android:layout_height="wrap_content"
             android:paddingTop="5dp"
             android:text="@string/lblOnlineResults" />
+
+        <ProgressBar
+            android:id="@+id/progressBarSearchFood"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:indeterminate="true" />
 
         <ListView
             android:id="@+id/listviewOnlineResults"

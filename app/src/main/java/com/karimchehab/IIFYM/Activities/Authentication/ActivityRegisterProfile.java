@@ -24,7 +24,6 @@ import android.widget.TextView;
 
 import com.karimchehab.IIFYM.Database.SharedPreferenceHelper;
 import com.karimchehab.IIFYM.R;
-import com.karimchehab.IIFYM.Views.DecimalDigitsInputFilter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
@@ -109,8 +108,6 @@ public class ActivityRegisterProfile extends AppCompatActivity implements View.O
         etxtDateOfBirth.setInputType(InputType.TYPE_NULL);
         etxtDateOfBirth.setText(dateFormatter.format(new Date()));
         etxtDateOfBirth.setOnClickListener(this);
-
-        etxtWeight.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(4,2)});
 
         seggroupUnitSystem.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override

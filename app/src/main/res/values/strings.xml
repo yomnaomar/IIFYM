@@ -127,8 +127,7 @@
     <string name="emailpassword_status_fmt">Email User: %s</string>
     <string name="firebase_status_fmt">Firebase User: %s</string>
     <string name="UserFocus">I want to focus on ...</string>
-    <string name="UserMacrosTitle">Daily Nutritional Goals</string>
-    <string name="MacroSettingsTitle">Change your Daily Nutritional Goals</string>
+    <string name="UserMacrosTitle">Set Daily Nutrition Goals</string>
     <string name="hintCalories">Calories (kcal)</string>
     <string name="hintBrand">Brand (optional)</string>
     <string name="hintName">Food Name (required)</string>
@@ -147,7 +146,7 @@
     <string name="lblf">f</string>
     <string name="lblkcal">kcal</string>
     <string name="toolbarSelectItemToAdd">Select an item to add to daily log</string>
-    <string name="toolbarManageYourFood">Manage Your Saved Foods and Meals</string>
+    <string name="toolbarManageSavedFood">Manage Custom Food</string>
     <string name="lblDeleteFromDaily">Delete from daily log?</string>
     <string name="lblDeleteFromDatabase">Delete from database?</string>
     <string name="toolbarCreateNewFood">Create new food</string>
@@ -178,6 +177,7 @@
     <string name="lblSelectedFoods">Selected Foods</string>
     <string name="toolbarCreateNewMeal">Create new meal</string>
     <string name="lblMealIngredients">Meal Ingredients</string>
+
     <string name="lblKarimEmail">karimchehab94@gmail.com</string>
     <string name="lblKarimWebsite">karim-chehab.weebly.com</string>
     <string name="lblOfflineResults">Offline Results</string>

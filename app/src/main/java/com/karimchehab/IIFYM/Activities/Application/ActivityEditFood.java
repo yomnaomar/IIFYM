@@ -8,25 +8,16 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputFilter;
-import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.karimchehab.IIFYM.Database.SQLiteConnector;
 import com.karimchehab.IIFYM.Models.MyFood;
 import com.karimchehab.IIFYM.R;
-import com.karimchehab.IIFYM.Views.DecimalDigitsInputFilter;
-
-import info.hoang8f.android.segmented.SegmentedGroup;
 
 public class ActivityEditFood extends AppCompatActivity implements View.OnClickListener {
 
@@ -70,11 +61,6 @@ public class ActivityEditFood extends AppCompatActivity implements View.OnClickL
         etxtFat             = (EditText) findViewById(R.id.etxtFat);
         etxtPortionAmount   = (EditText) findViewById(R.id.etxtPortionAmount);
         etxtPortionType     = (EditText) findViewById(R.id.etxtPortionType);
-
-        etxtCarbs.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(4,1)});
-        etxtProtein.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(4,1)});
-        etxtFat.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(4,1)});
-        etxtPortionAmount.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(4,1)});
 
         etxtName.requestFocus();
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);

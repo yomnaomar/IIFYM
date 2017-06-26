@@ -71,7 +71,8 @@
                     android:hint="Search ..."
                     android:inputType="textCapSentences"
                     tools:layout_editor_absoluteX="0dp"
-                    tools:layout_editor_absoluteY="0dp" />
+                    tools:layout_editor_absoluteY="0dp"
+                    android:imeOptions="actionSearch"/>
 
             </LinearLayout>
 
@@ -86,14 +87,6 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical"
                     android:weightSum="1">
-
-                    <TextView
-                        android:id="@+id/lblFrequent"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="3dp"
-                        android:layout_marginTop="3dp"
-                        android:text="@string/lblFrequent" />
 
                     <ListView
                         android:id="@+id/listviewSavedItems"

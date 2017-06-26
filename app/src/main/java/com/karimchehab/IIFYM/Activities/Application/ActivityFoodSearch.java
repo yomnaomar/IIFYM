@@ -8,10 +8,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
@@ -33,7 +36,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class ActivityFoodSearch extends AppCompatActivity implements AdapterView.OnItemClickListener, View.OnClickListener, TextWatcher {
+public class ActivityFoodSearch extends AppCompatActivity implements AdapterView.OnItemClickListener, View.OnClickListener{
 
     // GUI
     private EditText                etxtSearch;
@@ -42,20 +45,19 @@ public class ActivityFoodSearch extends AppCompatActivity implements AdapterView
     private AdapterFatsecretItem    adapterOnline;
     private ListView                listviewOfflineResults, listviewOnlineResults;
     private FloatingActionButton    fabCreateFood, fabCreateMeal;
+    private ProgressBar             progressBarSearchFood;
 
     // Database
     private SQLiteConnector DB_SQLite;
     private Context context;
 
     //Variables
-    private Runnable        runnable;
-    private Handler         handler;
     final private String    key = Credentials.FATSECRET_API_ACCESS_KEY;
     final private String    secret = Credentials.FATSECRET_SHARED_SECRET;
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fat_secret_search);
+        setContentView(R.layout.activity_food_search);
 
         // Database
         context = getApplicationContext();
@@ -63,20 +65,18 @@ public class ActivityFoodSearch extends AppCompatActivity implements AdapterView
 
         // GUI
         initializeGUI();
-
-        runnable = () -> {
-                String search = etxtSearch.getText().toString();
-                filterOfflineItems(search);
-                filterOnlineItems(search);
-                Log.d("runnable", "timeout on etxtSearch");
-        };
-        handler = new Handler();
     }
 
     private void initializeGUI() {
         // Search Functionality
         etxtSearch = (EditText) findViewById(R.id.etxtSearch);
-        etxtSearch.addTextChangedListener(this);
+        etxtSearch.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                Search();
+                return true;
+            }
+            return false;
+        });
 
         // Labels
         lblOfflineResults = (TextView) findViewById(R.id.lblOfflineResults);
@@ -100,11 +100,15 @@ public class ActivityFoodSearch extends AppCompatActivity implements AdapterView
         fabCreateFood.setOnClickListener(this);
         fabCreateMeal = (FloatingActionButton) findViewById(R.id.fabCreateNewMeal);
         fabCreateMeal.setOnClickListener(this);
+
+        progressBarSearchFood = (ProgressBar)findViewById(R.id.progressBarSearchFood);
+        progressBarSearchFood.setVisibility(View.GONE);
     }
 
-    @Override public void afterTextChanged(Editable s) {
-        handler.removeCallbacks(runnable);
-        handler.postDelayed(runnable, 500);
+    private void Search() {
+        String search = etxtSearch.getText().toString();
+        filterOfflineItems(search);
+        filterOnlineItems(search);
     }
 
     private void filterOfflineItems(final String search) {
@@ -127,13 +131,17 @@ public class ActivityFoodSearch extends AppCompatActivity implements AdapterView
     }
 
     private void filterOnlineItems(final String search) {
+        progressBarSearchFood.setVisibility(View.VISIBLE);
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         Listener listener = new Listener();
-
         Request req = new Request(key, secret, listener);
 
         adapterOnline.clear();
-        req.getFoods(requestQueue,search, 0); // Calls Response Listener when result is fetched
+        try {
+            req.getFoods(requestQueue, search, 0); // Calls Response Listener when result is fetched
+        } catch (Error E){
+            // Do something
+        }
     }
 
     class Listener implements ResponseListener {
@@ -158,6 +166,7 @@ public class ActivityFoodSearch extends AppCompatActivity implements AdapterView
                     adapterOnline.add(food);
                 }
             }
+            progressBarSearchFood.setVisibility(View.GONE);
         }
 
         @Override public void onFoodResponse(Food food) {
@@ -207,8 +216,4 @@ public class ActivityFoodSearch extends AppCompatActivity implements AdapterView
                 break;
         }
     }
-
-    @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-
-    @Override public void onTextChanged(CharSequence s, int start, int before, int count) {}
 }

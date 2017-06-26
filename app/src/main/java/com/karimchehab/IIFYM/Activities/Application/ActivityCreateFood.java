@@ -8,32 +8,23 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputFilter;
-import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.karimchehab.IIFYM.Database.SQLiteConnector;
 import com.karimchehab.IIFYM.Models.DateHelper;
 import com.karimchehab.IIFYM.Models.MyFood;
 import com.karimchehab.IIFYM.R;
-import com.karimchehab.IIFYM.Views.DecimalDigitsInputFilter;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
-
-import info.hoang8f.android.segmented.SegmentedGroup;
 
 public class ActivityCreateFood extends AppCompatActivity{
 
@@ -73,12 +64,6 @@ public class ActivityCreateFood extends AppCompatActivity{
         etxtPortionAmount = (EditText) findViewById(R.id.etxtPortionAmount);
         etxtPortionType = (EditText) findViewById(R.id.etxtPortionType);
         etxtDate = (EditText) findViewById(R.id.etxtDate);
-
-
-        etxtCarbs.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(4,1)});
-        etxtProtein.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(4,1)});
-        etxtFat.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(4,1)});
-        etxtPortionAmount.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(4,1)});
 
         // CheckBox
         cbIsDaily = (CheckBox) findViewById(R.id.cbIsDaily);

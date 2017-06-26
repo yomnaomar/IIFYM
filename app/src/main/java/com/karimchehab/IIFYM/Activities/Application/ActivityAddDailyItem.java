@@ -16,13 +16,9 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,7 +35,6 @@ import com.karimchehab.IIFYM.Models.MyFood;
 import com.karimchehab.IIFYM.Models.Ingredient;
 import com.karimchehab.IIFYM.R;
 import com.karimchehab.IIFYM.Views.AdapterIngredients;
-import com.karimchehab.IIFYM.Views.DecimalDigitsInputFilter;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
@@ -142,10 +137,6 @@ public class ActivityAddDailyItem extends AppCompatActivity implements TextWatch
         }
         progressBarFatFood.setVisibility(View.GONE);
 
-        lblCarbs.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(3, 1)});
-        lblProtein.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(3, 1)});
-        lblFat.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(3, 1)});
-        etxtPortionAmount.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(4, 1)});
         etxtPortionAmount.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL | InputType.TYPE_CLASS_NUMBER);
 
         final DatePickerDialog.OnDateSetListener date = (view, year, monthOfYear, dayOfMonth) -> {

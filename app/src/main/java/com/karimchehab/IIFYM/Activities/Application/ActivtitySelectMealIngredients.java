@@ -9,6 +9,7 @@ import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -25,7 +26,6 @@ public class ActivtitySelectMealIngredients extends AppCompatActivity implements
 
     // GUI
     private EditText                etxtSearch;
-    private TextView                lblFrequent;
     private AdapterSavedItem        adapterSelectedFoods, adapterSavedItem;
     private ListView                listviewSelectedFoods, listviewSavedItems;
 
@@ -47,17 +47,13 @@ public class ActivtitySelectMealIngredients extends AppCompatActivity implements
     private void initializeGUI() {
         // Search Functionality
         etxtSearch = (EditText) findViewById(R.id.etxtSearch);
-        etxtSearch.addTextChangedListener(new TextWatcher() {
-            @Override public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
-                filterSavedItems(cs.toString());
+        etxtSearch.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                Search();
+                return true;
             }
-
-            @Override public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {}
-
-            @Override public void afterTextChanged(Editable arg0) {}
+            return false;
         });
-
-        lblFrequent = (TextView) findViewById(R.id.lblFrequent);
 
         // List View
         adapterSelectedFoods = new AdapterSavedItem(this);
@@ -102,26 +98,12 @@ public class ActivtitySelectMealIngredients extends AppCompatActivity implements
         startActivity(newIntent);
     }
 
-    @Override protected void onResume() {
-        super.onResume();
-        final String search = etxtSearch.getText().toString();
-        filterSavedItems(search);
-    }
-
-    // Updates adapterSavedItem and arrSavedItems to display either:
-    // 1. Frequent Foods when ic_google_signin is empty
-    // 2. Filtered Foods when user uses the ic_google_signin functionality
-    private void filterSavedItems(final String search) {
+    private void Search() {
         adapterSavedItem.clear();
         ArrayList<MyFood> arrSavedItems;
+        String search = etxtSearch.getText().toString();
 
-        if (search.isEmpty()) {
-            lblFrequent.setVisibility(View.VISIBLE);
-            arrSavedItems = DB_SQLite.retrieveFrequentFood(20);
-        } else {
-            lblFrequent.setVisibility(View.GONE);
-            arrSavedItems = DB_SQLite.searchFood(search, 20);
-        }
+        arrSavedItems = DB_SQLite.searchFood(search);
 
         for (int i = 0; i < arrSavedItems.size(); i++) {
             adapterSavedItem.add(arrSavedItems.get(i));
