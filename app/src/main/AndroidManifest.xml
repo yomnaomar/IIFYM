@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_INTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_INTERNAL__STORAGE" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -16,8 +16,10 @@
         android:theme="@style/AppTheme">
         <activity
             android:name="com.karimchehab.IIFYM.Activities.Application.ActivityHome"
+            android:configChanges="orientation"
             android:label="@string/appName"
             android:launchMode="singleInstance"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,35 +28,69 @@
         </activity>
         <activity
             android:name="com.karimchehab.IIFYM.Activities.Application.ActivityFoodManager"
-            android:label="@string/toolbarManageYourFood" />
+            android:configChanges="orientation"
+            android:label="@string/toolbarManageYourFood"
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.karimchehab.IIFYM.Activities.Application.ActivityEditFood"
-            android:label="@string/toolbarEditFood" />
+            android:configChanges="orientation"
+            android:label="@string/toolbarEditFood"
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.karimchehab.IIFYM.Activities.Application.ActivityCreateFood"
-            android:label="@string/toolbarCreateNewFood" />
+            android:configChanges="orientation"
+            android:label="@string/toolbarCreateNewFood"
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.karimchehab.IIFYM.Activities.Authentication.ActivityRegisterProfile"
-            android:label="@string/toolbarUserInfo" />
+            android:configChanges="orientation"
+            android:label="@string/toolbarUserInfo"
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.karimchehab.IIFYM.Activities.Authentication.ActivityRegisterGoals"
-            android:label="@string/toolbarUserMacros" />
+            android:configChanges="orientation"
+            android:label="@string/toolbarUserMacros"
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.karimchehab.IIFYM.Activities.Application.ActivityAddDailyItem"
-            android:label="@string/toolbarAddDailyItem" />
-        <activity android:name=".Activities.Application.ActivityViewDailyItem" />
+            android:configChanges="orientation"
+            android:label="@string/toolbarAddDailyItem"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.Application.ActivityViewDailyItem"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Activities.Settings.ActivitySettings"
-            android:label="Settings" />
-            android:name="com.karimchehab.IIFYM.Activities.Main.activityCreateMeal"
-            android:label="@string/toolbarCreateNewMeal" />
-        <activity android:name=".Activities.Application.ActivtitySelectMealIngredients" />
+            android:configChanges="orientation"
+            android:label="Settings"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.karimchehab.IIFYM.Activities.Application.ActivityCreateMeal"
+            android:configChanges="orientation"
+            android:label="@string/toolbarCreateNewMeal"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.Application.ActivtitySelectMealIngredients"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.karimchehab.IIFYM.Activities.Static.ActivityAbout"
-            android:label="About" />
-        <activity android:name=".Activities.Authentication.ActivitySelectAuthentication" />
-        <activity android:name=".Activities.Authentication.ActivityLoginEmail"></activity>
-        <activity android:name=".Activities.Application.ActivityFoodSearch" />
+            android:configChanges="orientation"
+            android:label="About"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.Authentication.ActivitySelectAuthentication"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.Authentication.ActivityLoginEmail"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".Activities.Application.ActivityFoodSearch"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
