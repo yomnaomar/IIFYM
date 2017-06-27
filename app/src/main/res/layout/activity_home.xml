@@ -18,7 +18,7 @@
         android:layout_marginRight="30dp"
         android:baselineAlignBottom="false"
         android:clickable="true"
-        app:elevation="3dp"
+        app:elevation="5dp"
         app:fabSize="mini"
         app:rippleColor="?attr/colorButtonNormal"
         app:srcCompat="@drawable/ic_add" />
