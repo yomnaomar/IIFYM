@@ -47,4 +47,10 @@
         <item name="android:textColor">@color/colorPrimary</item>
     </style>
 
+    <style name="ActionButtonStyle">
+        <item name="android:minWidth">30dp</item>
+        <item name="android:maxWidth">48dp</item>
+        <item name="android:width">38dp</item>
+    </style>
+
 </resources>
