@@ -136,7 +136,7 @@ public class ActivityFoodSearch extends AppCompatActivity implements AdapterView
         req.getFoods(requestQueue,search, 0); // Calls Response Listener when result is fetched
     }
 
-    class Listener implements ResponseListener {
+    private class Listener implements ResponseListener {
         @Override public void onFoodListRespone(Response<CompactFood> response) {
             System.out.println("TOTAL FOOD ITEMS: " + response.getTotalResults());
 

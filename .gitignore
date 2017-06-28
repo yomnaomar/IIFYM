@@ -68,5 +68,6 @@ ui.lnf.xml
 usageView.xml
 vcs.xml
 web-browsers.xml
+debug.keystore
 google-services.json
 Credentials.java
