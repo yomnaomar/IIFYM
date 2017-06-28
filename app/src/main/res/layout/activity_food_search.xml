@@ -82,12 +82,13 @@
 
     </LinearLayout>
 
-        <com.github.clans.fab.FloatingActionMenu
+    <com.github.clans.fab.FloatingActionMenu
         android:id="@+id/fabCreateNew"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
+        android:elevation="0dp"
         fab:menu_animationDelayPerItem="50"
         fab:menu_backgroundColor="#c8fcfcfc"
         fab:menu_buttonSpacing="0dp"
@@ -101,8 +102,7 @@
         fab:menu_labels_style="@style/menu_labels_style"
         fab:menu_openDirection="up"
         fab:menu_shadowColor="#66000000"
-        fab:menu_shadowRadius="2dp"
-        fab:menu_shadowXOffset="1dp"
+        fab:menu_shadowRadius="1dp"
         fab:menu_shadowYOffset="1dp"
         fab:menu_showShadow="true">
 
@@ -112,10 +112,10 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_food"
             fab:fab_colorNormal="@color/Transparent"
+            fab:fab_colorPressed="@color/colorPrimaryLight"
             fab:fab_label="@string/lblNewFood"
             fab:fab_showShadow="false"
-            fab:fab_size="normal"
-            fab:fab_colorPressed="@color/colorPrimaryLight" />
+            fab:fab_size="normal" />
 
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/fabCreateNewMeal"
@@ -123,10 +123,10 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_meal"
             fab:fab_colorNormal="@color/Transparent"
+            fab:fab_colorPressed="@color/colorPrimaryLight"
             fab:fab_label="@string/lblNewMeal"
             fab:fab_showShadow="false"
-            fab:fab_size="normal"
-            fab:fab_colorPressed="@color/colorPrimaryLight" />
+            fab:fab_size="normal" />
 
     </com.github.clans.fab.FloatingActionMenu>
 
