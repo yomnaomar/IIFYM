@@ -79,6 +79,13 @@
                 android:hint="@string/hintCalories"
                 android:maxLength="5" />
 
+            <TextView
+                android:id="@+id/lblCalcCalories"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/lblCalcCalories"
+                android:textColor="@color/colorPrimary" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -170,15 +177,15 @@
                 android:hint="@string/hintAmount" />
 
             <EditText
+                android:id="@+id/etxtPortionType"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="7"
-                android:id="@+id/etxtPortionType"
+                android:hint="@string/hintPortionType"
+                android:inputType="text"
                 android:textAlignment="center"
-                android:inputType="textCapWords"
                 android:textColor="?attr/colorPrimary"
-                android:textSize="14sp"
-                android:hint="@string/hintPortionType" />
+                android:textSize="14sp" />
 
         </LinearLayout>
 

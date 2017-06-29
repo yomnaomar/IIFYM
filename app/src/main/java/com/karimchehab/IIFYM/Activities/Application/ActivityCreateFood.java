@@ -7,7 +7,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
 import android.text.InputFilter;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,6 +17,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.karimchehab.IIFYM.Database.SQLiteConnector;
@@ -22,14 +25,19 @@ import com.karimchehab.IIFYM.Models.DateHelper;
 import com.karimchehab.IIFYM.Models.MyFood;
 import com.karimchehab.IIFYM.R;
 
+import org.w3c.dom.Text;
+
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-public class ActivityCreateFood extends AppCompatActivity{
+public class ActivityCreateFood extends AppCompatActivity implements View.OnClickListener, TextWatcher {
 
     // GUI
     private EditText        etxtName, etxtBrand, etxtCalories, etxtCarbs, etxtProtein, etxtFat, etxtPortionAmount, etxtPortionType, etxtDate;
+    private TextView        lblCalcCalories;
     private CheckBox        cbIsDaily;
 
     // Variables
@@ -58,12 +66,23 @@ public class ActivityCreateFood extends AppCompatActivity{
         etxtName = (EditText) findViewById(R.id.etxtName);
         etxtBrand = (EditText)findViewById(R.id.etxtBrand);
         etxtCalories = (EditText) findViewById(R.id.etxtCalories);
+        lblCalcCalories = (TextView) findViewById(R.id.lblCalcCalories);
         etxtCarbs = (EditText) findViewById(R.id.etxtCarbs);
         etxtProtein = (EditText) findViewById(R.id.etxtProtein);
         etxtFat = (EditText) findViewById(R.id.etxtFat);
         etxtPortionAmount = (EditText) findViewById(R.id.etxtPortionAmount);
         etxtPortionType = (EditText) findViewById(R.id.etxtPortionType);
         etxtDate = (EditText) findViewById(R.id.etxtDate);
+
+        // Clickable Label
+        lblCalcCalories.setVisibility(View.GONE);
+        lblCalcCalories.setOnClickListener(this);
+
+        // Text Watchers for AutoFill Calories
+        etxtCalories.addTextChangedListener(this);
+        etxtCarbs.addTextChangedListener(this);
+        etxtProtein.addTextChangedListener(this);
+        etxtFat.addTextChangedListener(this);
 
         // CheckBox
         cbIsDaily = (CheckBox) findViewById(R.id.cbIsDaily);
@@ -268,5 +287,99 @@ public class ActivityCreateFood extends AppCompatActivity{
         });
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.lblCalcCalories:
+                AutofillCalories();
+                break;
+        }
+    }
+
+    private void AutofillCalories() {
+        float carbs, protein, fat, calories;
+        if (etxtCarbs.getText().toString() != null) {
+            carbs = Float.parseFloat(etxtCarbs.getText().toString());
+        } else {
+            carbs = 0;
+            etxtCarbs.setText(0);
+        }
+        if (etxtProtein.getText().toString() != null) {
+            protein = Float.parseFloat(etxtProtein.getText().toString());
+        } else {
+            protein = 0;
+            etxtProtein.setText(0);
+        }
+        if (etxtFat.getText().toString() != null) {
+            fat = Float.parseFloat(etxtFat.getText().toString());
+        } else {
+            fat = 0;
+            etxtFat.setText(0);
+        }
+
+        calories = carbs *4 + protein * 4 + fat * 9;
+
+        DecimalFormat df = new DecimalFormat("#.##");
+        df.setRoundingMode(RoundingMode.HALF_EVEN);
+
+        etxtCalories.setText(df.format(calories) + "");
+    }
+
+    /*
+    Checks if macros add up to calories, if not shows autofill label
+     */
+    private void CheckMacros(){
+        float carbs, protein, fat, calories, caloriesFromMacros;
+        float tolerance = 4; // tolerance value for rough equality
+
+        if (etxtCarbs.getText().toString().isEmpty()) {
+            carbs = 0;
+        } else {
+            carbs = Float.parseFloat(etxtCarbs.getText().toString());
+        }
+        if (etxtProtein.getText().toString().isEmpty()) {
+            protein = 0;
+        } else {
+            protein = Float.parseFloat(etxtProtein.getText().toString());
+        }
+        if (etxtFat.getText().toString().isEmpty()) {
+            fat = 0;
+        } else {
+            fat = Float.parseFloat(etxtFat.getText().toString());
+        }
+
+        if (etxtCalories.getText().toString().isEmpty()) {
+            calories = 0;
+        } else {
+            calories = Float.parseFloat(etxtCalories.getText().toString());
+        }
+        caloriesFromMacros = carbs *4 + protein * 4 + fat * 9;
+
+        // if tolerance exceeded AND all macro edittexts are not empty
+        if (Math.abs(calories - caloriesFromMacros) >= tolerance &&
+                !etxtCarbs.getText().toString().isEmpty()        &&
+                !etxtProtein.getText().toString().isEmpty()      &&
+                !etxtFat.getText().toString().isEmpty()) {
+            lblCalcCalories.setVisibility(View.VISIBLE);
+        } else {
+            lblCalcCalories.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
+        CheckMacros();
     }
 }

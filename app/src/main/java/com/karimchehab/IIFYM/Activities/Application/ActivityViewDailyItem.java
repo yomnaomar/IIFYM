@@ -39,7 +39,7 @@ public class ActivityViewDailyItem extends AppCompatActivity implements View.OnC
     private Context     context;
     private int         id;
     private long        food_id;
-    private MyFood food;
+    private MyFood      food;
     private DailyItem   dailyitem;
     private float       servingAmount;
     private int         weightAmount;

@@ -154,6 +154,7 @@
     <string name="toolbarUserMacros">Nutrition Goals</string>
     <string name="toolbarEditFood">Edit food</string>
     <string name="lblNewFood">New Food</string>
+    <string name="lblCalcCalories"><u>Autofill calories?</u></string>
     <string name="lblNewMeal">New Meal</string>
     <string name="lblDailyLog">Daily Log:</string>
     <string name="menuSettings">Settings</string>
