@@ -1,11 +1,9 @@
 package com.karimchehab.IIFYM.Activities.Authentication;
 
 import android.app.ProgressDialog;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -56,7 +54,6 @@ public class ActivityLoginEmail extends AppCompatActivity implements View.OnClic
     // Variables
     private boolean isRegistered, emailEmpty = true, passEmpty = true;
     private Context context;
-    BroadcastReceiver broadcast_reciever;
 
     // Database
     private SharedPreferenceHelper myPrefs;
@@ -474,18 +471,6 @@ public class ActivityLoginEmail extends AppCompatActivity implements View.OnClic
     @Override
     protected void onResume() {
         super.onResume();
-        broadcast_reciever = new BroadcastReceiver() {
-
-            @Override
-            public void onReceive(Context arg0, Intent intent) {
-                String action = intent.getAction();
-                if (action.equals("finish_activity")) {
-                    unregisterReceiver(this);
-                    finish();
-                }
-            }
-        };
-        registerReceiver(broadcast_reciever, new IntentFilter("finish_activity"));
         etxtEmail.setText(myPrefs.getStringValue("temp_email_login"));
     }
 

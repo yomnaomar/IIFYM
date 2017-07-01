@@ -1,6 +1,5 @@
 package com.karimchehab.IIFYM.Activities.Authentication;
 
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -58,7 +57,6 @@ public class ActivityRegisterProfile extends AppCompatActivity implements View.O
     // Database
     private SharedPreferenceHelper  myPrefs;
     private FirebaseAuth            firebaseAuth;
-    private BroadcastReceiver       broadcast_reciever;
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -351,22 +349,6 @@ public class ActivityRegisterProfile extends AppCompatActivity implements View.O
     @Override protected void onPause() {
         signOut();
         super.onPause();
-    }
-
-    @Override protected void onResume() {
-        super.onResume();
-        broadcast_reciever = new BroadcastReceiver() {
-
-            @Override
-            public void onReceive(Context arg0, Intent intent) {
-                String action = intent.getAction();
-                if (action.equals("finish_activity")) {
-                    unregisterReceiver(this);
-                    finish();
-                }
-            }
-        };
-        registerReceiver(broadcast_reciever, new IntentFilter("finish_activity"));
     }
 
     private boolean verifyAge(){

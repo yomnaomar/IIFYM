@@ -81,6 +81,7 @@ public class ActivityFoodManager extends AppCompatActivity implements AdapterVie
         if (!food.isMeal()) {
             Intent intent = new Intent(getBaseContext(), ActivityEditFood.class);
             intent.putExtra("id", fid);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
         }
         else if (food.isMeal()) {

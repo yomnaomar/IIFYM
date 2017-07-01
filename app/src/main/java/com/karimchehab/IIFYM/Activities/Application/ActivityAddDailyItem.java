@@ -373,7 +373,7 @@ public class ActivityAddDailyItem extends AppCompatActivity implements TextWatch
         }
         Toast.makeText(context, "Food added to daily log", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(getBaseContext(), ActivityHome.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         finish();
     }

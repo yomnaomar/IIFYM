@@ -185,7 +185,7 @@ public class ActivityCreateFood extends AppCompatActivity implements View.OnClic
                 String date = etxtDate.getText().toString();
                 DB_SQLite.createDailyItem(food.getId(), 1.0f, date);
                 Intent intent = new Intent(getApplicationContext(), ActivityHome.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 Toast.makeText(context,"Food created and added to log",Toast.LENGTH_SHORT).show();
                 finish();

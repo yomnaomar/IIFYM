@@ -550,12 +550,11 @@ public class ActivityRegisterGoals extends AppCompatActivity implements View.OnC
                         // Go to ActivityHome
                         // Store user session in Preferences
                         myPrefs.addPreference("session_uid", uid);
-                        Intent broadcastIntent = new Intent("finish_activity");
-                        sendBroadcast(broadcastIntent);
 
                         Context context = getApplicationContext();
                         Intent intent = new Intent();
                         intent.setClass(context, ActivityHome.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
                         finish();
                     }

@@ -205,7 +205,7 @@ public class ActivityCreateMeal extends AppCompatActivity{
                     Toast.makeText(context,"New meal created",Toast.LENGTH_SHORT).show();
                 }
                 Intent intent = new Intent(getApplicationContext(), ActivityHome.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 finish();
             }
