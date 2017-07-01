@@ -367,7 +367,7 @@ public class FragmentGoals extends Fragment implements View.OnClickListener, Tex
             lblAmountTotal.setError(null);
         }
 
-        Toast.makeText(context,"Goals reset to recommended",Toast.LENGTH_SHORT).show();
+        Toast.makeText(context,R.string.lblShowingRecommended,Toast.LENGTH_SHORT).show();
     }
 
     private void getBMR() {

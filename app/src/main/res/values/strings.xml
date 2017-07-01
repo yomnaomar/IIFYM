@@ -41,7 +41,7 @@
     </string-array>
 
     <string name="userMacros_FeelFree">Feel free to change your macros to your liking\n(But make sure they add up!)</string>
-    <string name="userMacros_MacroRecommendation">If you are unsure of what your daily intake should be, IIFYM gives you a good starting point specific to your body!</string>
+    <string name="userMacros_MacroRecommendation">If you are not sure of what your daily intake should be, IIFYM gives you a good starting point specific to your body!</string>
     <string name="lblCalories">Calories (kcal)</string>
     <string name="lblCarbs">Carbs (%)</string>
     <string name="lblProtein">Protein (%)</string>
@@ -56,6 +56,7 @@
     <string name="radioBtnCalories">Calories</string>
     <string name="radioBtnMacros">Macros</string>
     <string name="btnReset">Reset</string>
+    <string name="lblShowingRecommended">Showing recommended goals</string>
 
     <!--    &lt;!&ndash; Example settings for Data & Sync &ndash;&gt;
         <string name="pref_header_data_sync">Data &amp; sync</string>

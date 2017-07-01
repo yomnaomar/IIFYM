@@ -68,6 +68,7 @@ public class ActivityAddDailyItem extends AppCompatActivity implements TextWatch
 
     Calendar myCalendar =   Calendar.getInstance();
     SimpleDateFormat        sdf;
+    DecimalFormat           df;
 
     // Database
     private SQLiteConnector DB_SQLite;
@@ -138,6 +139,8 @@ public class ActivityAddDailyItem extends AppCompatActivity implements TextWatch
         progressBarFatFood.setVisibility(View.GONE);
 
         etxtPortionAmount.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL | InputType.TYPE_CLASS_NUMBER);
+        df = new DecimalFormat("#.##");
+        df.setRoundingMode(RoundingMode.HALF_EVEN);
 
         final DatePickerDialog.OnDateSetListener date = (view, year, monthOfYear, dayOfMonth) -> {
             myCalendar.set(Calendar.YEAR, year);
@@ -213,7 +216,7 @@ public class ActivityAddDailyItem extends AppCompatActivity implements TextWatch
 
         // Portion
         lblPortionType.setText(myFatFood.getPortionType() + "");
-        etxtPortionAmount.setText(myFatFood.getPortionAmount() + "");
+        etxtPortionAmount.setText(df.format(myFatFood.getPortionAmount()) + "");
 
         etxtPortionAmount.addTextChangedListener(this);
     }
@@ -306,7 +309,7 @@ public class ActivityAddDailyItem extends AppCompatActivity implements TextWatch
 
         // Portion
         lblPortionType.setText(myfood.getPortionType() + "");
-        etxtPortionAmount.setText(myfood.getPortionAmount() + "");
+        etxtPortionAmount.setText(df.format(myfood.getPortionAmount()) + "");
         etxtPortionAmount.addTextChangedListener(this);
 
         //ArrayList

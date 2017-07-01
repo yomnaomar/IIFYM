@@ -337,7 +337,7 @@ public class ActivityRegisterGoals extends AppCompatActivity implements View.OnC
         } else {
             lblAmountTotal.setError(null);
         }
-        Toast.makeText(context, "Goals reset to recommended", Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, R.string.lblShowingRecommended, Toast.LENGTH_SHORT).show();
     }
 
     @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -621,7 +621,7 @@ public class ActivityRegisterGoals extends AppCompatActivity implements View.OnC
         ChainTourGuide tourGuide3 = ChainTourGuide.init(this)
                 .setToolTip(new ToolTip()
                         .setTitle("Reset")
-                        .setDescription("Press the reset button to return the values back to recommended")
+                        .setDescription("Press the reset button to show recommended goals")
                         .setGravity(Gravity.BOTTOM)
                 )
                 .setOverlay(overlay)
