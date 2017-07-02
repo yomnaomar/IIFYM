@@ -176,8 +176,8 @@
     <string name="btnOk">Ok</string>
     <string name="btnCancel">Cancel</string>
 
-    <string name="lblSelectedFoods">Selected Foods</string>
-    <string name="toolbarCreateNewMeal">Create new meal</string>
+    <string name="lblSelectIngredients">Select Ingredients</string>
+    <string name="toolbarCreateNewMeal">Create New Meal</string>
     <string name="lblMealIngredients">Meal Ingredients</string>
 
     <string name="lblKarimEmail">karimchehab94@gmail.com</string>

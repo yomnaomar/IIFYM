@@ -22,45 +22,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:layout_editor_absoluteX="115dp"
-                tools:layout_editor_absoluteY="42dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/lblMealIngredients"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/lblMealIngredients"
-                        android:textAppearance="@android:style/TextAppearance.Material.Medium"
-                        android:textColor="?attr/colorPrimary"
-                        android:textStyle="bold" />
-
-                    <ListView
-                        android:id="@+id/listviewIngredients"
-                        android:layout_width="match_parent"
-                        android:layout_height="150dp"
-                        tools:layout_editor_absoluteX="0dp"></ListView>
-
-                </LinearLayout>
-            </ScrollView>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="5dp"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp"
-                android:background="@color/colorPrimary"
-                android:orientation="horizontal">
-
-            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -200,15 +161,15 @@
                     android:textSize="14sp" />
 
                 <EditText
+                    android:id="@+id/etxtPortionType"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="7"
-                    android:id="@+id/etxtPortionType"
-                    android:textAlignment="center"
+                    android:hint="@string/hintPortionType"
                     android:inputType="textCapWords"
+                    android:textAlignment="center"
                     android:textColor="?attr/colorPrimary"
-                    android:textSize="14sp"
-                    android:hint="@string/hintPortionType" />
+                    android:textSize="14sp" />
 
             </LinearLayout>
 
@@ -216,6 +177,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
+
                 <CheckBox
                     android:id="@+id/cbIsDaily"
                     android:layout_width="wrap_content"
@@ -252,6 +214,36 @@
                     android:text="@string/dateInitial"
                     android:textColor="?attr/colorPrimary"
                     android:textSize="14sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/colorPrimary"
+                android:orientation="horizontal">
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/lblMealIngredients"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/lblMealIngredients"
+                    android:textAppearance="@android:style/TextAppearance.Material.Small" />
+
+                <ListView
+                    android:id="@+id/listviewIngredients"
+                    android:layout_width="match_parent"
+                    android:layout_height="350dp"
+                    tools:layout_editor_absoluteX="0dp"></ListView>
 
             </LinearLayout>
 

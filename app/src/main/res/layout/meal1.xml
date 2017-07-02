@@ -7,53 +7,26 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:paddingLeft="@dimen/activity_vertical_margin"
-    android:paddingRight="@dimen/activity_vertical_margin">
+    android:paddingRight="@dimen/activity_vertical_margin"
+    android:paddingTop="@dimen/activity_vertical_margin">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/etxtName"
+        <TextView
+            android:id="@+id/lblSelectedIngredients"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-
-            android:ems="15"
-            android:hint="Meal Name"
-            android:inputType="textCapWords"
-            android:textAlignment="textStart"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="?attr/colorPrimary"
-            android:textSize="14sp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:layout_constraintLeft_creator="1"
-            tools:layout_constraintRight_creator="1"
-            tools:layout_constraintTop_creator="1" />
-
-        <EditText
-            android:id="@+id/etxtBrand"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-
-            android:ems="15"
-            android:hint="Brand"
-            android:inputType="textCapWords"
-            android:textAlignment="textStart"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="?attr/colorPrimary"
-            android:textSize="14sp"
-            app:layout_constraintBottom_toTopOf="@+id/separator"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginBottom="8dp"
+            android:text="@string/lblSelectIngredients"
+            android:textAppearance="@android:style/TextAppearance.Material.Small"
+            android:textColor="@color/colorPrimary"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+            app:layout_constraintLeft_toLeftOf="@+id/separator"
+            app:layout_constraintRight_toRightOf="@+id/separator"
             tools:layout_constraintBottom_creator="1"
             tools:layout_constraintLeft_creator="1"
             tools:layout_constraintRight_creator="1" />
@@ -62,10 +35,9 @@
             android:id="@+id/separator"
             android:layout_width="match_parent"
             android:layout_height="3dp"
-            android:layout_marginBottom="10dp"
             android:background="@color/colorPrimary"
             android:orientation="horizontal"
-            app:layout_constraintBottom_toTopOf="@+id/lblSelectedFoods"
+            app:layout_constraintBottom_toTopOf="@+id/lblSelectedIngredients"
             app:layout_constraintLeft_toLeftOf="@+id/etxtBrand"
             app:layout_constraintRight_toRightOf="@+id/etxtBrand"
             tools:layout_constraintBottom_creator="1"
@@ -74,30 +46,15 @@
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/lblSelectedFoods"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:text="@string/lblSelectedFoods"
-            android:textAppearance="@android:style/TextAppearance.Material.Medium"
-            android:textColor="?attr/colorPrimary"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
-            app:layout_constraintLeft_toLeftOf="@+id/separator"
-            app:layout_constraintRight_toRightOf="@+id/separator"
-            tools:layout_constraintBottom_creator="1"
-            tools:layout_constraintLeft_creator="1"
-            tools:layout_constraintRight_creator="1" />
-
         <ListView
             android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="23dp"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:layout_marginTop="3dp"
             app:layout_constraintBottom_toTopOf="@+id/floatingActionButton"
-            app:layout_constraintLeft_toLeftOf="@+id/lblSelectedFoods"
-            app:layout_constraintRight_toRightOf="@+id/lblSelectedFoods"
+            app:layout_constraintLeft_toLeftOf="@+id/lblSelectedIngredients"
+            app:layout_constraintRight_toRightOf="@+id/lblSelectedIngredients"
             tools:layout_constraintBottom_creator="1"
             tools:layout_constraintLeft_creator="1"
             tools:layout_constraintRight_creator="1" />
@@ -114,7 +71,6 @@
         app:menu_fab_size="mini"
         fab:menu_colorNormal="@color/colorPrimary"
         fab:menu_colorPressed="@color/fabWhitePressed"
-        fab:menu_fab_size="mini"
         fab:menu_labels_style="@style/menu_labels_style"
         fab:menu_shadowColor="#66000000"
         fab:menu_shadowRadius="1dp"
