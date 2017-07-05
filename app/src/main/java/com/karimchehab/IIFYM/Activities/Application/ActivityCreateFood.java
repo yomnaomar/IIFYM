@@ -321,10 +321,7 @@ public class ActivityCreateFood extends AppCompatActivity implements View.OnClic
 
         calories = carbs *4 + protein * 4 + fat * 9;
 
-        DecimalFormat df = new DecimalFormat("#.##");
-        df.setRoundingMode(RoundingMode.HALF_EVEN);
-
-        etxtCalories.setText(df.format(calories) + "");
+        etxtCalories.setText(Math.round(calories) + "");
     }
 
     /*
